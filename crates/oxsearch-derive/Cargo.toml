@@ -1,0 +1,22 @@
+[package]
+name = "oxsearch-derive"
+description = "Derive macros for oxsearch's typed document layer"
+readme = "../../README.md"
+keywords = ["elasticsearch", "derive", "document"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+
+[lints]
+workspace = true

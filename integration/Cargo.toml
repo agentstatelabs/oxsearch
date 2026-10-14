@@ -1,0 +1,14 @@
+[package]
+name = "oxsearch-integration"
+description = "Integration tests that run oxsearch against a real Elasticsearch"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+serde_json = "1"
+ureq = { version = "3.4", default-features = false, features = ["json"] }
+
+[lints]
+workspace = true

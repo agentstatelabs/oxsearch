@@ -1,0 +1,18 @@
+[package]
+name = "xtask"
+description = "The oxsearch generator and the workspace's development tasks"
+version = "0.0.0"
+edition.workspace = true
+license.workspace = true
+publish = false
+
+[dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+serde_path_to_error = "0.1.20"
+sha2 = "0.11"
+toml = "1"
+ureq = "3.4"
+
+[lints]
+workspace = true

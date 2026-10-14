@@ -1,0 +1,19 @@
+[package]
+name = "oxsearch-core"
+description = "The core of oxsearch: the transport and endpoint traits, errors, and the common types, query DSL, retrievers and kNN generated from the Elasticsearch specification"
+readme = "../../README.md"
+keywords = ["elasticsearch", "search", "client"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[dependencies]
+
+[lints]
+workspace = true

@@ -1,0 +1,9 @@
+# The elasticsearch-specification commit oxsearch is generated from, on the
+# branch for one Elasticsearch minor. Move it with
+# `cargo run -p xtask -- spec pin <branch> [<commit>]`, which records the
+# checksum; `cargo run -p xtask -- spec check` verifies it.
+repository = "elastic/elasticsearch-specification"
+branch = "9.5"
+commit = "84bf510a907bae62ffe29af35f516af287a79eab"
+# The SHA-256 of output/schema/schema.json at that commit.
+schema_sha256 = "0d83f6afb219fcb573461f2a7ca02caf40b1943e13f61a307331b513cc30b8ee"

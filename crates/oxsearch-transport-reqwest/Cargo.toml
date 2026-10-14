@@ -1,0 +1,20 @@
+[package]
+name = "oxsearch-transport-reqwest"
+description = "The default HTTP transport for oxsearch, on reqwest"
+readme = "../../README.md"
+keywords = ["elasticsearch", "client", "http", "reqwest"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[dependencies]
+oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
+
+[lints]
+workspace = true

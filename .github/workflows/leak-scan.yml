@@ -1,0 +1,53 @@
+name: Leak scan
+
+# Nothing private reaches this repository: home-directory paths, private keys
+# and tokens (the generic patterns in scripts/leak-scan.sh), and the
+# organisation's own terms from the LEAKSCAN_LOCAL secret. Pull requests from
+# forks don't get the secret, so they are scanned with the generic patterns
+# only.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Load the organisation's patterns
+        shell: bash
+        env:
+          LEAKSCAN_LOCAL: ${{ secrets.LEAKSCAN_LOCAL }}
+        run: |
+          if [ -n "${LEAKSCAN_LOCAL}" ]; then
+            printf '%s\n' "${LEAKSCAN_LOCAL}" > .leakscan.local
+          else
+            echo "::warning::LEAKSCAN_LOCAL isn't set: scanning with the generic patterns only"
+          fi
+      - name: The tree
+        run: scripts/leak-scan.sh --tree
+      - name: Every commit in the pull request
+        if: github.event_name == 'pull_request'
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: scripts/leak-scan.sh --range "${BASE}..${HEAD}"
+      - name: Every commit pushed
+        if: github.event_name == 'push'
+        shell: bash
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          # A first push has no "before": scan everything.
+          if [ "${BEFORE}" = 0000000000000000000000000000000000000000 ]; then
+            scripts/leak-scan.sh --history
+          else
+            scripts/leak-scan.sh --range "${BEFORE}..${AFTER}"
+          fi

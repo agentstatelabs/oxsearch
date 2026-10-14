@@ -1,0 +1,20 @@
+[package]
+name = "oxsearch-docs"
+description = "Document APIs for oxsearch (index, get, multi-get, update, delete, bulk), generated from the Elasticsearch specification"
+readme = "../../README.md"
+keywords = ["elasticsearch", "search", "client"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[dependencies]
+oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
+
+[lints]
+workspace = true

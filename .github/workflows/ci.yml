@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets
+      # Features the workspace build leaves off.
+      - run: cargo clippy -p oxsearch --all-targets --all-features
+      - run: cargo test --workspace
+      - run: cargo doc --workspace --no-deps
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@1.94
+      - run: cargo check --workspace
+
+  # The specification oxsearch is generated from: the pinned schema.json is
+  # downloaded, checked against its SHA-256, and read with the generator's
+  # model, which rejects anything it doesn't know. The test fixture must run
+  # the same Elasticsearch minor. Then the crate placement and the shape
+  # inventory are computed again from it, and must match the committed
+  # reports.
+  spec:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo run -p xtask -- spec check
+      - run: cargo run -p xtask -- placement
+      - run: cargo run -p xtask -- shapes
+      - name: The committed reports are current
+        run: git diff --exit-code spec/placement.md spec/shapes.md
+
+  # The integration tests, against Elasticsearch in Docker (see
+  # scripts/es-fixture.sh): once on the Basic license, once on a trial.
+  integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        license: [basic, trial]
+    env:
+      OXSEARCH_TEST_LICENSE: ${{ matrix.license }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build the integration tests
+        run: cargo test -p oxsearch-integration --no-run
+      - name: Start Elasticsearch on the ${{ matrix.license }} license
+        run: scripts/es-fixture.sh up "${OXSEARCH_TEST_LICENSE}"
+      - name: Integration tests
+        run: cargo test -p oxsearch-integration -- --ignored
+      - name: Elasticsearch logs
+        if: failure()
+        run: scripts/es-fixture.sh logs | tail -200

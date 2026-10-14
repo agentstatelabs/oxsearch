@@ -1,0 +1,28 @@
+# The Elasticsearch fixture for the integration tests. Start and stop it with
+# scripts/es-fixture.sh, which also picks the license.
+#
+# The version is on the same minor as the specification pin (spec/pin.toml);
+# `cargo run -p xtask -- spec check` fails if they drift apart.
+name: oxsearch-fixture
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION:-9.5.5}
+    environment:
+      discovery.type: single-node
+      # The tests talk plain HTTP with no credentials.
+      xpack.security.enabled: "false"
+      # Every node starts on Basic; the fixture script starts a trial when
+      # asked to.
+      xpack.license.self_generated.type: basic
+      # CI runners' disks are small and fill up; the watermarks would stop
+      # shards from allocating.
+      cluster.routing.allocation.disk.threshold_enabled: "false"
+      ES_JAVA_OPTS: -Xms1g -Xmx1g
+    ports:
+      - "127.0.0.1:${OXSEARCH_TEST_PORT:-9200}:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=1s' >/dev/null"]
+      interval: 2s
+      timeout: 5s
+      retries: 90

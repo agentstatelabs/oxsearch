@@ -1,0 +1,52 @@
+[package]
+name = "oxsearch"
+description = "A typed Rust client for Elasticsearch, generated from its specification, with typed AI search: retrievers, semantic and kNN queries, and inference"
+readme = "../../README.md"
+keywords = ["elasticsearch", "search", "client", "vector", "rag"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[features]
+# The AI-search set.
+default = ["search", "docs", "mapping", "inference"]
+search = ["dep:oxsearch-search"]
+docs = ["dep:oxsearch-docs"]
+mapping = ["dep:oxsearch-mapping"]
+inference = ["dep:oxsearch-inference"]
+# The other API areas.
+aggs = ["dep:oxsearch-aggs"]
+analysis = ["dep:oxsearch-analysis"]
+esql = ["dep:oxsearch-esql"]
+admin = ["dep:oxsearch-admin"]
+# `#[derive(Document)]` for the typed document layer.
+derive = ["dep:oxsearch-derive"]
+# The default HTTP transport. Whether it is on by default is still open
+# (DESIGN.md, open question 5).
+transport-reqwest = ["dep:oxsearch-transport-reqwest"]
+
+[dependencies]
+oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
+oxsearch-search = { path = "../oxsearch-search", version = "0.0.1", optional = true }
+oxsearch-docs = { path = "../oxsearch-docs", version = "0.0.1", optional = true }
+oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.0.1", optional = true }
+oxsearch-inference = { path = "../oxsearch-inference", version = "0.0.1", optional = true }
+oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.0.1", optional = true }
+oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.0.1", optional = true }
+oxsearch-esql = { path = "../oxsearch-esql", version = "0.0.1", optional = true }
+oxsearch-admin = { path = "../oxsearch-admin", version = "0.0.1", optional = true }
+oxsearch-derive = { path = "../oxsearch-derive", version = "0.0.1", optional = true }
+oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.0.1", optional = true }
+
+[package.metadata.docs.rs]
+# Document the APIs behind features too.
+all-features = true
+
+[lints]
+workspace = true

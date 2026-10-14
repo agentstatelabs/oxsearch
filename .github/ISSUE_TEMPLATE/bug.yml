@@ -1,0 +1,27 @@
+name: Bug report
+description: Something in oxsearch doesn't work as documented, or doesn't match what Elasticsearch accepts or returns.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The smallest code that shows it, and the request and response if you have them.
+      render: rust
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: oxsearch crates, Rust, OS, and the Elasticsearch version and license.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: "Security issues: please don't file them here. Use [private vulnerability reporting](https://github.com/agentstatelabs/oxsearch/security/advisories/new)."

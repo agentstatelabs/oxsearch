@@ -1,0 +1,19 @@
+[package]
+name = "oxsearch-rig"
+description = "A rig vector store on Elasticsearch, through oxsearch"
+readme = "../../README.md"
+keywords = ["elasticsearch", "rig", "vector-store", "rag"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[dependencies]
+
+[lints]
+workspace = true
