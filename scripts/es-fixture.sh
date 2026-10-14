@@ -30,6 +30,13 @@ up() {
 
   "${compose[@]}" up -d --wait --wait-timeout 300
 
+  # A new node installs its Basic license a moment after the cluster turns
+  # yellow; until then, GET /_license is a 404.
+  for _ in $(seq 1 60); do
+    curl -fsS -o /dev/null "${url}/_license" 2>/dev/null && break
+    sleep 1
+  done
+
   if [ "$license" = trial ]; then
     # The same call a demo-day trial uses. A node can start one trial in its
     # life, so a second `up trial` on a running fixture finds it already on.
