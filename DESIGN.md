@@ -16,7 +16,7 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 
 1. **Generated, not hand-written.** Every request, response and type comes from the specification, pinned per Elasticsearch minor version and regenerated, never edited by hand. Hand-written code only adds convenience on top.
 2. **Depend only on what you use.** The code is split into crates by how the types actually depend on each other, so an app that only searches doesn't compile aggregations or machine learning.
-3. **Never block a developer.** Every layer has an escape hatch: user-defined endpoints, raw variants in every open enum, a raw call, and middleware.
+3. **Never block a developer.** Every layer has an escape hatch: user-defined endpoints, raw variants in every enum, container and tagged union, a raw call, and middleware.
 4. **Typed where it pays, open where it doesn't.** The user's documents and aggregation results are type parameters, defaulting to raw JSON.
 5. **Features only add.** Generated structs are `#[non_exhaustive]` and built through builders, so enabling a feature anywhere in a build can't break code elsewhere.
 6. **Proven against real Elasticsearch.** Integration tests run against Elasticsearch in Docker, on both the free Basic license and a trial license. An API area counts as supported only once it has tests.
@@ -96,7 +96,7 @@ The default features are the AI-search set: search, docs, mapping, inference. `f
   - **Externally tagged unions** (3 / 1: aggregation results and suggestions) are requested with `typed_keys` and read from keys such as `sterms#by_tag`.
   - **Untagged unions with an untyped fallback** (3 / 3: `range`, `distance_feature` and decay functions) are always read as the untyped variant, which keeps every field; the typed variants are for building requests.
   - **Other unions** (373 / 121): `T` or `T[]` (178) becomes a one-or-many type that writes back the form it read. Members told apart by JSON kind (168) are dispatched on it, without buffering. Members that share a primitive kind (14, such as an enum or a string) try the narrower one first. Only 8 unions have two or more object members (7 in the first slice, such as `GeoLocation` and `RRFRetrieverEntry`); the generator tells them apart by a property only one member has, and msearch's header and body lines by position.
-  - **Enums** (390) all get a `Raw(String)` variant, not only the 27 the specification marks open, so a value added in a later Elasticsearch minor doesn't break reading a response.
+  - **Enums** (390) all get a `Raw(String)` variant, not only the 27 the specification marks open, so a value added in a later Elasticsearch minor doesn't break reading a response (decided with the user, 2026-10-14).
   - **Recursive types** are boxed where a loop of references closes (`spec/placement.md` counts them per crate).
 - **Round-trip tests from the specification's own request and response examples**, so every generated type is exercised.
 - **Availability becomes features and docs.** Beta and experimental endpoints sit behind `beta` and `experimental` features (24 and 73 endpoints on the analysis date). Stack and serverless availability appear in the docs. Endpoints the specification excludes from code generation are skipped.
@@ -122,7 +122,7 @@ The default features are the AI-search set: search, docs, mapping, inference. `f
 ### 4.5 Escape hatches
 
 1. **An `Endpoint` trait.** Generated endpoints implement it; users implement it for anything not yet covered and get the same transport, middleware and telemetry.
-2. **Raw variants in every open enum**, such as `Query::Raw(json!(...))` and `Retriever::Raw(...)`, so new Elasticsearch features work before a regeneration.
+2. **Raw variants in every enum, container and tagged union**, such as `Query::Raw(json!(...))`, `Retriever::Raw(...)` and `SortOrder::Raw("...")`, so new Elasticsearch features work before a regeneration, and values a newer Elasticsearch returns still parse.
 3. **A raw call**, `client.send(method, path, body)`.
 4. **Middleware**, as above.
 
