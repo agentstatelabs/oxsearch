@@ -17,7 +17,7 @@ impl Explanation {
     pub fn new(
         description: impl ::core::convert::Into<::std::string::String>,
         details: impl ::core::convert::Into<::std::vec::Vec<crate::explain::ExplanationDetail>>,
-        value: impl ::core::convert::Into<f32>,
+        value: f32,
     ) -> Self {
         Self {
             description: ::core::option::Option::Some(description.into()),
@@ -40,10 +40,7 @@ pub struct ExplanationDetail {
 
 impl ExplanationDetail {
     /// A `ExplanationDetail` with its required properties set.
-    pub fn new(
-        description: impl ::core::convert::Into<::std::string::String>,
-        value: impl ::core::convert::Into<f32>,
-    ) -> Self {
+    pub fn new(description: impl ::core::convert::Into<::std::string::String>, value: f32) -> Self {
         Self {
             description: ::core::option::Option::Some(description.into()),
             details: ::core::option::Option::None,
@@ -175,7 +172,7 @@ impl Request {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
@@ -193,7 +190,7 @@ impl Request {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -282,7 +279,7 @@ impl<TDocument> Response<TDocument> {
     pub fn new(
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
-        matched: impl ::core::convert::Into<bool>,
+        matched: bool,
     ) -> Self {
         Self {
             index: ::core::option::Option::Some(index.into()),

@@ -35,7 +35,7 @@ pub struct AcknowledgedResponseBase {
 
 impl AcknowledgedResponseBase {
     /// A `AcknowledgedResponseBase` with its required properties set.
-    pub fn new(acknowledged: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(acknowledged: bool) -> Self {
         Self {
             acknowledged: ::core::option::Option::Some(acknowledged.into()),
         }
@@ -65,7 +65,7 @@ impl BulkIndexByScrollFailure {
         cause: impl ::core::convert::Into<crate::ErrorCause>,
         id: impl ::core::convert::Into<crate::Id>,
         index: impl ::core::convert::Into<crate::IndexName>,
-        status: impl ::core::convert::Into<i32>,
+        status: i32,
     ) -> Self {
         Self {
             cause: ::core::option::Option::Some(cause.into()),
@@ -97,11 +97,11 @@ pub struct BulkStats {
 impl BulkStats {
     /// A `BulkStats` with its required properties set.
     pub fn new(
-        total_operations: impl ::core::convert::Into<i64>,
+        total_operations: i64,
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        total_size_in_bytes: impl ::core::convert::Into<i64>,
+        total_size_in_bytes: i64,
         avg_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        avg_size_in_bytes: impl ::core::convert::Into<i64>,
+        avg_size_in_bytes: i64,
     ) -> Self {
         Self {
             total_operations: total_operations.into(),
@@ -264,7 +264,7 @@ pub struct CartesianPoint {
 
 impl CartesianPoint {
     /// A `CartesianPoint` with its required properties set.
-    pub fn new(x: impl ::core::convert::Into<f64>, y: impl ::core::convert::Into<f64>) -> Self {
+    pub fn new(x: f64, y: f64) -> Self {
         Self {
             x: x.into(),
             y: y.into(),
@@ -294,7 +294,7 @@ impl ChunkRescorer {
         }
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -335,7 +335,7 @@ impl ClusterDetails {
     pub fn new(
         status: impl ::core::convert::Into<crate::ClusterSearchStatus>,
         indices: impl ::core::convert::Into<::std::string::String>,
-        timed_out: impl ::core::convert::Into<bool>,
+        timed_out: bool,
     ) -> Self {
         Self {
             status: ::core::option::Option::Some(status.into()),
@@ -519,12 +519,12 @@ pub struct ClusterStatistics {
 impl ClusterStatistics {
     /// A `ClusterStatistics` with its required properties set.
     pub fn new(
-        skipped: impl ::core::convert::Into<i32>,
-        successful: impl ::core::convert::Into<i32>,
-        total: impl ::core::convert::Into<i32>,
-        running: impl ::core::convert::Into<i32>,
-        partial: impl ::core::convert::Into<i32>,
-        failed: impl ::core::convert::Into<i32>,
+        skipped: i32,
+        successful: i32,
+        total: i32,
+        running: i32,
+        partial: i32,
+        failed: i32,
     ) -> Self {
         Self {
             skipped: ::core::option::Option::Some(skipped.into()),
@@ -701,7 +701,7 @@ pub struct CompletionStats {
 
 impl CompletionStats {
     /// A `CompletionStats` with its required properties set.
-    pub fn new(size_in_bytes: impl ::core::convert::Into<i64>) -> Self {
+    pub fn new(size_in_bytes: i64) -> Self {
         Self {
             size_in_bytes: size_in_bytes.into(),
             size: ::core::option::Option::None,
@@ -788,12 +788,7 @@ pub struct CoordsGeoBounds {
 
 impl CoordsGeoBounds {
     /// A `CoordsGeoBounds` with its required properties set.
-    pub fn new(
-        top: impl ::core::convert::Into<f64>,
-        bottom: impl ::core::convert::Into<f64>,
-        left: impl ::core::convert::Into<f64>,
-        right: impl ::core::convert::Into<f64>,
-    ) -> Self {
+    pub fn new(top: f64, bottom: f64, left: f64, right: f64) -> Self {
         Self {
             top: ::core::option::Option::Some(top.into()),
             bottom: ::core::option::Option::Some(bottom.into()),
@@ -1206,7 +1201,7 @@ impl DiversifyRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -1216,12 +1211,12 @@ impl DiversifyRetriever {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_window_size(mut self, value: i32) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -1239,7 +1234,7 @@ impl DiversifyRetriever {
         self
     }
     /// Sets `lambda`.
-    pub fn lambda(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn lambda(mut self, value: f32) -> Self {
         self.lambda = ::core::option::Option::Some(value.into());
         self
     }
@@ -1314,10 +1309,7 @@ pub struct DocStats {
 
 impl DocStats {
     /// A `DocStats` with its required properties set.
-    pub fn new(
-        count: impl ::core::convert::Into<i64>,
-        total_size_in_bytes: impl ::core::convert::Into<i64>,
-    ) -> Self {
+    pub fn new(count: i64, total_size_in_bytes: i64) -> Self {
         Self {
             count: count.into(),
             deleted: ::core::option::Option::None,
@@ -1326,7 +1318,7 @@ impl DocStats {
         }
     }
     /// Sets `deleted`.
-    pub fn deleted(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn deleted(mut self, value: i64) -> Self {
         self.deleted = ::core::option::Option::Some(value.into());
         self
     }
@@ -1450,7 +1442,7 @@ impl ElasticsearchVersionInfo {
         build_date: impl ::core::convert::Into<crate::DateTime>,
         build_flavor: impl ::core::convert::Into<::std::string::String>,
         build_hash: impl ::core::convert::Into<::std::string::String>,
-        build_snapshot: impl ::core::convert::Into<bool>,
+        build_snapshot: bool,
         build_type: impl ::core::convert::Into<::std::string::String>,
         lucene_version: impl ::core::convert::Into<crate::VersionString>,
         minimum_index_compatibility_version: impl ::core::convert::Into<crate::VersionString>,
@@ -1684,10 +1676,7 @@ pub struct ErrorResponseBase {
 
 impl ErrorResponseBase {
     /// A `ErrorResponseBase` with its required properties set.
-    pub fn new(
-        error: impl ::core::convert::Into<crate::ErrorCause>,
-        status: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(error: impl ::core::convert::Into<crate::ErrorCause>, status: i32) -> Self {
         Self {
             error: ::core::option::Option::Some(error.into()),
             status: ::core::option::Option::Some(status.into()),
@@ -1774,7 +1763,7 @@ pub struct FieldMemoryUsage {
 
 impl FieldMemoryUsage {
     /// A `FieldMemoryUsage` with its required properties set.
-    pub fn new(memory_size_in_bytes: impl ::core::convert::Into<i64>) -> Self {
+    pub fn new(memory_size_in_bytes: i64) -> Self {
         Self {
             memory_size: ::core::option::Option::None,
             memory_size_in_bytes: memory_size_in_bytes.into(),
@@ -1797,7 +1786,7 @@ pub struct FieldSizeUsage {
 
 impl FieldSizeUsage {
     /// A `FieldSizeUsage` with its required properties set.
-    pub fn new(size_in_bytes: impl ::core::convert::Into<i64>) -> Self {
+    pub fn new(size_in_bytes: i64) -> Self {
         Self {
             size: ::core::option::Option::None,
             size_in_bytes: size_in_bytes.into(),
@@ -2098,7 +2087,7 @@ pub struct FielddataStats {
 impl FielddataStats {
     /// A `FielddataStats` with its required properties set.
     pub fn new(
-        memory_size_in_bytes: impl ::core::convert::Into<i64>,
+        memory_size_in_bytes: i64,
         global_ordinals: impl ::core::convert::Into<crate::GlobalOrdinalsStats>,
     ) -> Self {
         Self {
@@ -2110,7 +2099,7 @@ impl FielddataStats {
         }
     }
     /// Sets `evictions`.
-    pub fn evictions(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn evictions(mut self, value: i64) -> Self {
         self.evictions = ::core::option::Option::Some(value.into());
         self
     }
@@ -2147,8 +2136,8 @@ pub struct FlushStats {
 impl FlushStats {
     /// A `FlushStats` with its required properties set.
     pub fn new(
-        periodic: impl ::core::convert::Into<i64>,
-        total: impl ::core::convert::Into<i64>,
+        periodic: i64,
+        total: i64,
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
         total_time_excluding_waiting_on_lock_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
@@ -2458,7 +2447,7 @@ impl GeoDistanceSort {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -2866,13 +2855,13 @@ pub struct GetStats {
 impl GetStats {
     /// A `GetStats` with its required properties set.
     pub fn new(
-        current: impl ::core::convert::Into<i64>,
+        current: i64,
         exists_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        exists_total: impl ::core::convert::Into<i64>,
+        exists_total: i64,
         missing_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        missing_total: impl ::core::convert::Into<i64>,
+        missing_total: i64,
         time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        total: impl ::core::convert::Into<i64>,
+        total: i64,
     ) -> Self {
         Self {
             current: current.into(),
@@ -2917,7 +2906,7 @@ impl GlobalOrdinalFieldStats {
     /// A `GlobalOrdinalFieldStats` with its required properties set.
     pub fn new(
         build_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        shard_max_value_count: impl ::core::convert::Into<i64>,
+        shard_max_value_count: i64,
     ) -> Self {
         Self {
             build_time_in_millis: build_time_in_millis.into(),
@@ -3188,17 +3177,17 @@ pub struct IndexingStats {
 impl IndexingStats {
     /// A `IndexingStats` with its required properties set.
     pub fn new(
-        index_current: impl ::core::convert::Into<i64>,
-        delete_current: impl ::core::convert::Into<i64>,
+        index_current: i64,
+        delete_current: i64,
         delete_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        delete_total: impl ::core::convert::Into<i64>,
-        is_throttled: impl ::core::convert::Into<bool>,
-        noop_update_total: impl ::core::convert::Into<i64>,
+        delete_total: i64,
+        is_throttled: bool,
+        noop_update_total: i64,
         throttle_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
         index_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        index_total: impl ::core::convert::Into<i64>,
-        index_failed: impl ::core::convert::Into<i64>,
-        index_failed_due_to_version_conflict: impl ::core::convert::Into<i64>,
+        index_total: i64,
+        index_failed: i64,
+        index_failed_due_to_version_conflict: i64,
     ) -> Self {
         Self {
             index_current: index_current.into(),
@@ -3247,17 +3236,17 @@ impl IndexingStats {
         self
     }
     /// Sets `write_load`.
-    pub fn write_load(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn write_load(mut self, value: f64) -> Self {
         self.write_load = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `recent_write_load`.
-    pub fn recent_write_load(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn recent_write_load(mut self, value: f64) -> Self {
         self.recent_write_load = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `peak_write_load`.
-    pub fn peak_write_load(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn peak_write_load(mut self, value: f64) -> Self {
         self.peak_write_load = ::core::option::Option::Some(value.into());
         self
     }
@@ -3304,7 +3293,7 @@ impl IndicesOptions {
         }
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -3317,12 +3306,12 @@ impl IndicesOptions {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
@@ -3342,7 +3331,7 @@ pub struct IndicesResponseBase {
 
 impl IndicesResponseBase {
     /// A `IndicesResponseBase` with its required properties set.
-    pub fn new(acknowledged: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(acknowledged: bool) -> Self {
         Self {
             acknowledged: acknowledged.into(),
             shards: ::core::option::Option::None,
@@ -3477,7 +3466,7 @@ pub struct InlineGet<TDocument = ::serde_json::Value> {
 
 impl<TDocument> InlineGet<TDocument> {
     /// A `InlineGet` with its required properties set.
-    pub fn new(found: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(found: bool) -> Self {
         Self {
             fields: ::core::option::Option::None,
             found: ::core::option::Option::Some(found.into()),
@@ -3504,7 +3493,7 @@ impl<TDocument> InlineGet<TDocument> {
         self
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -3547,7 +3536,7 @@ impl InnerRetriever {
         }
     }
     /// Sets `weight`.
-    pub fn weight(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn weight(mut self, value: f32) -> Self {
         self.weight = ::core::option::Option::Some(value.into());
         self
     }
@@ -3682,7 +3671,7 @@ impl KnnQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3705,17 +3694,17 @@ impl KnnQuery {
         self
     }
     /// Sets `num_candidates`.
-    pub fn num_candidates(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn num_candidates(mut self, value: i32) -> Self {
         self.num_candidates = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `visit_percentage`.
-    pub fn visit_percentage(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn visit_percentage(mut self, value: f32) -> Self {
         self.visit_percentage = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
@@ -3730,7 +3719,7 @@ impl KnnQuery {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn similarity(mut self, value: f32) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -3789,10 +3778,7 @@ pub struct KnnRetriever {
 
 impl KnnRetriever {
     /// A `KnnRetriever` with its required properties set.
-    pub fn new(
-        field: impl ::core::convert::Into<::std::string::String>,
-        k: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(field: impl ::core::convert::Into<::std::string::String>, k: i32) -> Self {
         Self {
             filter: ::core::option::Option::None,
             min_score: ::core::option::Option::None,
@@ -3818,7 +3804,7 @@ impl KnnRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -3841,17 +3827,17 @@ impl KnnRetriever {
         self
     }
     /// Sets `num_candidates`.
-    pub fn num_candidates(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn num_candidates(mut self, value: i32) -> Self {
         self.num_candidates = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `visit_percentage`.
-    pub fn visit_percentage(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn visit_percentage(mut self, value: f32) -> Self {
         self.visit_percentage = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn similarity(mut self, value: f32) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -3942,22 +3928,22 @@ impl KnnSearch {
         self
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `num_candidates`.
-    pub fn num_candidates(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn num_candidates(mut self, value: i32) -> Self {
         self.num_candidates = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `visit_percentage`.
-    pub fn visit_percentage(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn visit_percentage(mut self, value: f32) -> Self {
         self.visit_percentage = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3972,7 +3958,7 @@ impl KnnSearch {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn similarity(mut self, value: f32) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -4012,7 +3998,7 @@ pub struct LatLonGeoLocation {
 
 impl LatLonGeoLocation {
     /// A `LatLonGeoLocation` with its required properties set.
-    pub fn new(lat: impl ::core::convert::Into<f64>, lon: impl ::core::convert::Into<f64>) -> Self {
+    pub fn new(lat: f64, lon: f64) -> Self {
         Self {
             lat: ::core::option::Option::Some(lat.into()),
             lon: ::core::option::Option::Some(lon.into()),
@@ -4185,7 +4171,7 @@ impl LinearRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -4203,7 +4189,7 @@ impl LinearRetriever {
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_window_size(mut self, value: i32) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4297,13 +4283,13 @@ pub struct MergesStats {
 impl MergesStats {
     /// A `MergesStats` with its required properties set.
     pub fn new(
-        current: impl ::core::convert::Into<i64>,
-        current_docs: impl ::core::convert::Into<i64>,
-        current_size_in_bytes: impl ::core::convert::Into<i64>,
-        total: impl ::core::convert::Into<i64>,
-        total_auto_throttle_in_bytes: impl ::core::convert::Into<i64>,
-        total_docs: impl ::core::convert::Into<i64>,
-        total_size_in_bytes: impl ::core::convert::Into<i64>,
+        current: i64,
+        current_docs: i64,
+        current_size_in_bytes: i64,
+        total: i64,
+        total_auto_throttle_in_bytes: i64,
+        total_docs: i64,
+        total_size_in_bytes: i64,
         total_stopped_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
         total_throttled_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
@@ -4467,7 +4453,7 @@ impl NestedSortValue {
         self
     }
     /// Sets `max_children`.
-    pub fn max_children(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_children(mut self, value: i32) -> Self {
         self.max_children = ::core::option::Option::Some(value.into());
         self
     }
@@ -4710,8 +4696,8 @@ impl NodeShard {
     /// A `NodeShard` with its required properties set.
     pub fn new(
         state: impl ::core::convert::Into<crate::indices::stats::ShardRoutingState>,
-        primary: impl ::core::convert::Into<bool>,
-        shard: impl ::core::convert::Into<i32>,
+        primary: bool,
+        shard: i32,
         index: impl ::core::convert::Into<crate::IndexName>,
     ) -> Self {
         Self {
@@ -4790,11 +4776,7 @@ pub struct NodeStatistics {
 
 impl NodeStatistics {
     /// A `NodeStatistics` with its required properties set.
-    pub fn new(
-        total: impl ::core::convert::Into<i32>,
-        successful: impl ::core::convert::Into<i32>,
-        failed: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(total: i32, successful: i32, failed: i32) -> Self {
         Self {
             failures: ::core::option::Option::None,
             total: total.into(),
@@ -5088,7 +5070,7 @@ impl PinnedRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -5114,7 +5096,7 @@ impl PinnedRetriever {
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_window_size(mut self, value: i32) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -5143,11 +5125,11 @@ impl PluginStats {
         description: impl ::core::convert::Into<::std::string::String>,
         elasticsearch_version: impl ::core::convert::Into<crate::VersionString>,
         extended_plugins: impl ::core::convert::Into<::std::vec::Vec<::std::string::String>>,
-        has_native_controller: impl ::core::convert::Into<bool>,
+        has_native_controller: bool,
         java_version: impl ::core::convert::Into<crate::VersionString>,
         name: impl ::core::convert::Into<crate::Name>,
         version: impl ::core::convert::Into<crate::VersionString>,
-        licensed: impl ::core::convert::Into<bool>,
+        licensed: bool,
     ) -> Self {
         Self {
             classname: classname.into(),
@@ -5193,13 +5175,13 @@ pub struct QueryCacheStats {
 impl QueryCacheStats {
     /// A `QueryCacheStats` with its required properties set.
     pub fn new(
-        cache_count: impl ::core::convert::Into<i64>,
-        cache_size: impl ::core::convert::Into<i64>,
-        evictions: impl ::core::convert::Into<i64>,
-        hit_count: impl ::core::convert::Into<i64>,
-        memory_size_in_bytes: impl ::core::convert::Into<i64>,
-        miss_count: impl ::core::convert::Into<i64>,
-        total_count: impl ::core::convert::Into<i64>,
+        cache_count: i64,
+        cache_size: i64,
+        evictions: i64,
+        hit_count: i64,
+        memory_size_in_bytes: i64,
+        miss_count: i64,
+        total_count: i64,
     ) -> Self {
         Self {
             cache_count: cache_count.into(),
@@ -5363,7 +5345,7 @@ impl RRFRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -5373,12 +5355,12 @@ impl RRFRetriever {
         self
     }
     /// Sets `rank_constant`.
-    pub fn rank_constant(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_constant(mut self, value: i32) -> Self {
         self.rank_constant = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_window_size(mut self, value: i32) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -5418,7 +5400,7 @@ impl RRFRetrieverComponent {
         }
     }
     /// Sets `weight`.
-    pub fn weight(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn weight(mut self, value: f32) -> Self {
         self.weight = ::core::option::Option::Some(value.into());
         self
     }
@@ -5604,8 +5586,8 @@ pub struct RecoveryStats {
 impl RecoveryStats {
     /// A `RecoveryStats` with its required properties set.
     pub fn new(
-        current_as_source: impl ::core::convert::Into<i64>,
-        current_as_target: impl ::core::convert::Into<i64>,
+        current_as_source: i64,
+        current_as_target: i64,
         throttle_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
@@ -5620,22 +5602,22 @@ impl RecoveryStats {
         }
     }
     /// Sets `current_as_source_queued`.
-    pub fn current_as_source_queued(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn current_as_source_queued(mut self, value: i64) -> Self {
         self.current_as_source_queued = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `current_as_target_queued`.
-    pub fn current_as_target_queued(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn current_as_target_queued(mut self, value: i64) -> Self {
         self.current_as_target_queued = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `current_from_store`.
-    pub fn current_from_store(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn current_from_store(mut self, value: i64) -> Self {
         self.current_from_store = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `current_from_store_queued`.
-    pub fn current_from_store_queued(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn current_from_store_queued(mut self, value: i64) -> Self {
         self.current_from_store_queued = ::core::option::Option::Some(value.into());
         self
     }
@@ -5717,10 +5699,10 @@ pub struct RefreshStats {
 impl RefreshStats {
     /// A `RefreshStats` with its required properties set.
     pub fn new(
-        external_total: impl ::core::convert::Into<i64>,
+        external_total: i64,
         external_total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        listeners: impl ::core::convert::Into<i64>,
-        total: impl ::core::convert::Into<i64>,
+        listeners: i64,
+        total: i64,
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
@@ -5800,15 +5782,15 @@ pub struct ReindexStatus {
 impl ReindexStatus {
     /// A `ReindexStatus` with its required properties set.
     pub fn new(
-        batches: impl ::core::convert::Into<i64>,
-        deleted: impl ::core::convert::Into<i64>,
-        noops: impl ::core::convert::Into<i64>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        batches: i64,
+        deleted: i64,
+        noops: i64,
+        requests_per_second: f32,
         retries: impl ::core::convert::Into<crate::Retries>,
         throttled_millis: impl ::core::convert::Into<crate::UnitMillis>,
         throttled_until_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        total: impl ::core::convert::Into<i64>,
-        version_conflicts: impl ::core::convert::Into<i64>,
+        total: i64,
+        version_conflicts: i64,
     ) -> Self {
         Self {
             slice_id: ::core::option::Option::None,
@@ -5829,12 +5811,12 @@ impl ReindexStatus {
         }
     }
     /// Sets `slice_id`.
-    pub fn slice_id(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slice_id(mut self, value: i32) -> Self {
         self.slice_id = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `created`.
-    pub fn created(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn created(mut self, value: i64) -> Self {
         self.created = ::core::option::Option::Some(value.into());
         self
     }
@@ -5849,7 +5831,7 @@ impl ReindexStatus {
         self
     }
     /// Sets `updated`.
-    pub fn updated(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn updated(mut self, value: i64) -> Self {
         self.updated = ::core::option::Option::Some(value.into());
         self
     }
@@ -5898,7 +5880,7 @@ impl ReindexTaskInfo {
         id: impl ::core::convert::Into<crate::TaskId>,
         start_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
         running_time_in_nanos: impl ::core::convert::Into<crate::UnitNanos>,
-        cancelled: impl ::core::convert::Into<bool>,
+        cancelled: bool,
     ) -> Self {
         Self {
             id: ::core::option::Option::Some(id.into()),
@@ -6003,17 +5985,17 @@ impl ReindexTaskResult {
         }
     }
     /// Sets `batches`.
-    pub fn batches(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn batches(mut self, value: i64) -> Self {
         self.batches = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `created`.
-    pub fn created(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn created(mut self, value: i64) -> Self {
         self.created = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `deleted`.
-    pub fn deleted(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn deleted(mut self, value: i64) -> Self {
         self.deleted = ::core::option::Option::Some(value.into());
         self
     }
@@ -6026,12 +6008,12 @@ impl ReindexTaskResult {
         self
     }
     /// Sets `noops`.
-    pub fn noops(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn noops(mut self, value: i64) -> Self {
         self.noops = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `requests_per_second`.
-    pub fn requests_per_second(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn requests_per_second(mut self, value: f32) -> Self {
         self.requests_per_second = ::core::option::Option::Some(value.into());
         self
     }
@@ -6057,7 +6039,7 @@ impl ReindexTaskResult {
         self
     }
     /// Sets `timed_out`.
-    pub fn timed_out(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn timed_out(mut self, value: bool) -> Self {
         self.timed_out = ::core::option::Option::Some(value.into());
         self
     }
@@ -6067,17 +6049,17 @@ impl ReindexTaskResult {
         self
     }
     /// Sets `total`.
-    pub fn total(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn total(mut self, value: i64) -> Self {
         self.total = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `updated`.
-    pub fn updated(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn updated(mut self, value: i64) -> Self {
         self.updated = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version_conflicts`.
-    pub fn version_conflicts(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn version_conflicts(mut self, value: i64) -> Self {
         self.version_conflicts = ::core::option::Option::Some(value.into());
         self
     }
@@ -6094,7 +6076,7 @@ pub struct RelocationFailureInfo {
 
 impl RelocationFailureInfo {
     /// A `RelocationFailureInfo` with its required properties set.
-    pub fn new(failed_attempts: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(failed_attempts: i32) -> Self {
         Self {
             failed_attempts: ::core::option::Option::Some(failed_attempts.into()),
         }
@@ -6125,12 +6107,7 @@ pub struct RequestCacheStats {
 
 impl RequestCacheStats {
     /// A `RequestCacheStats` with its required properties set.
-    pub fn new(
-        evictions: impl ::core::convert::Into<i64>,
-        hit_count: impl ::core::convert::Into<i64>,
-        memory_size_in_bytes: impl ::core::convert::Into<i64>,
-        miss_count: impl ::core::convert::Into<i64>,
-    ) -> Self {
+    pub fn new(evictions: i64, hit_count: i64, memory_size_in_bytes: i64, miss_count: i64) -> Self {
         Self {
             evictions: evictions.into(),
             hit_count: hit_count.into(),
@@ -6156,7 +6133,7 @@ pub struct RescoreVector {
 
 impl RescoreVector {
     /// A `RescoreVector` with its required properties set.
-    pub fn new(oversample: impl ::core::convert::Into<f32>) -> Self {
+    pub fn new(oversample: f32) -> Self {
         Self {
             oversample: ::core::option::Option::Some(oversample.into()),
         }
@@ -6212,7 +6189,7 @@ impl RescorerRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -6298,10 +6275,7 @@ pub struct Retries {
 
 impl Retries {
     /// A `Retries` with its required properties set.
-    pub fn new(
-        bulk: impl ::core::convert::Into<i64>,
-        search: impl ::core::convert::Into<i64>,
-    ) -> Self {
+    pub fn new(bulk: i64, search: i64) -> Self {
         Self {
             bulk: ::core::option::Option::Some(bulk.into()),
             search: ::core::option::Option::Some(search.into()),
@@ -6348,7 +6322,7 @@ impl RetrieverBase {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -6513,12 +6487,12 @@ impl RrfRank {
         }
     }
     /// Sets `rank_constant`.
-    pub fn rank_constant(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn rank_constant(mut self, value: i64) -> Self {
         self.rank_constant = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn rank_window_size(mut self, value: i64) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -6583,7 +6557,7 @@ impl RuleRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -6593,7 +6567,7 @@ impl RuleRetriever {
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_window_size(mut self, value: i32) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -6890,7 +6864,7 @@ impl ScriptField {
         }
     }
     /// Sets `ignore_failure`.
-    pub fn ignore_failure(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_failure(mut self, value: bool) -> Self {
         self.ignore_failure = ::core::option::Option::Some(value.into());
         self
     }
@@ -7271,20 +7245,20 @@ pub struct SearchStats {
 impl SearchStats {
     /// A `SearchStats` with its required properties set.
     pub fn new(
-        fetch_current: impl ::core::convert::Into<i64>,
+        fetch_current: i64,
         fetch_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        fetch_total: impl ::core::convert::Into<i64>,
-        fetch_failure: impl ::core::convert::Into<i64>,
-        query_current: impl ::core::convert::Into<i64>,
+        fetch_total: i64,
+        fetch_failure: i64,
+        query_current: i64,
         query_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        query_total: impl ::core::convert::Into<i64>,
-        query_failure: impl ::core::convert::Into<i64>,
-        scroll_current: impl ::core::convert::Into<i64>,
+        query_total: i64,
+        query_failure: i64,
+        scroll_current: i64,
         scroll_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        scroll_total: impl ::core::convert::Into<i64>,
-        suggest_current: impl ::core::convert::Into<i64>,
+        scroll_total: i64,
+        suggest_current: i64,
         suggest_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
-        suggest_total: impl ::core::convert::Into<i64>,
+        suggest_total: i64,
     ) -> Self {
         Self {
             fetch_current: fetch_current.into(),
@@ -7316,7 +7290,7 @@ impl SearchStats {
         self
     }
     /// Sets `open_contexts`.
-    pub fn open_contexts(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn open_contexts(mut self, value: i64) -> Self {
         self.open_contexts = ::core::option::Option::Some(value.into());
         self
     }
@@ -7336,7 +7310,7 @@ impl SearchStats {
         self
     }
     /// Sets `recent_search_load`.
-    pub fn recent_search_load(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn recent_search_load(mut self, value: f64) -> Self {
         self.recent_search_load = ::core::option::Option::Some(value.into());
         self
     }
@@ -7492,21 +7466,21 @@ pub struct SegmentsStats {
 impl SegmentsStats {
     /// A `SegmentsStats` with its required properties set.
     pub fn new(
-        count: impl ::core::convert::Into<i32>,
-        doc_values_memory_in_bytes: impl ::core::convert::Into<i64>,
+        count: i32,
+        doc_values_memory_in_bytes: i64,
         file_sizes: impl ::core::convert::Into<
             ::indexmap::IndexMap<::std::string::String, crate::indices::stats::ShardFileSizeInfo>,
         >,
-        fixed_bit_set_memory_in_bytes: impl ::core::convert::Into<i64>,
-        index_writer_memory_in_bytes: impl ::core::convert::Into<i64>,
-        max_unsafe_auto_id_timestamp: impl ::core::convert::Into<i64>,
-        memory_in_bytes: impl ::core::convert::Into<i64>,
-        norms_memory_in_bytes: impl ::core::convert::Into<i64>,
-        points_memory_in_bytes: impl ::core::convert::Into<i64>,
-        stored_fields_memory_in_bytes: impl ::core::convert::Into<i64>,
-        terms_memory_in_bytes: impl ::core::convert::Into<i64>,
-        term_vectors_memory_in_bytes: impl ::core::convert::Into<i64>,
-        version_map_memory_in_bytes: impl ::core::convert::Into<i64>,
+        fixed_bit_set_memory_in_bytes: i64,
+        index_writer_memory_in_bytes: i64,
+        max_unsafe_auto_id_timestamp: i64,
+        memory_in_bytes: i64,
+        norms_memory_in_bytes: i64,
+        points_memory_in_bytes: i64,
+        stored_fields_memory_in_bytes: i64,
+        terms_memory_in_bytes: i64,
+        term_vectors_memory_in_bytes: i64,
+        version_map_memory_in_bytes: i64,
     ) -> Self {
         Self {
             count: count.into(),
@@ -7651,7 +7625,7 @@ impl ShardFailure {
         self
     }
     /// Sets `shard`.
-    pub fn shard(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn shard(mut self, value: i32) -> Self {
         self.shard = ::core::option::Option::Some(value.into());
         self
     }
@@ -7661,7 +7635,7 @@ impl ShardFailure {
         self
     }
     /// Sets `primary`.
-    pub fn primary(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn primary(mut self, value: bool) -> Self {
         self.primary = ::core::option::Option::Some(value.into());
         self
     }
@@ -7687,11 +7661,7 @@ pub struct ShardStatistics {
 
 impl ShardStatistics {
     /// A `ShardStatistics` with its required properties set.
-    pub fn new(
-        failed: impl ::core::convert::Into<u32>,
-        successful: impl ::core::convert::Into<u32>,
-        total: impl ::core::convert::Into<u32>,
-    ) -> Self {
+    pub fn new(failed: u32, successful: u32, total: u32) -> Self {
         Self {
             failed: ::core::option::Option::Some(failed.into()),
             successful: ::core::option::Option::Some(successful.into()),
@@ -7709,7 +7679,7 @@ impl ShardStatistics {
         self
     }
     /// Sets `skipped`.
-    pub fn skipped(mut self, value: impl ::core::convert::Into<u32>) -> Self {
+    pub fn skipped(mut self, value: u32) -> Self {
         self.skipped = ::core::option::Option::Some(value.into());
         self
     }
@@ -7752,10 +7722,7 @@ pub struct SlicedScroll {
 
 impl SlicedScroll {
     /// A `SlicedScroll` with its required properties set.
-    pub fn new(
-        id: impl ::core::convert::Into<crate::Id>,
-        max: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(id: impl ::core::convert::Into<crate::Id>, max: i32) -> Self {
         Self {
             field: ::core::option::Option::None,
             id: ::core::option::Option::Some(id.into()),
@@ -8213,7 +8180,7 @@ impl StandardRetriever {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -8236,7 +8203,7 @@ impl StandardRetriever {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn terminate_after(mut self, value: i32) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -8280,10 +8247,7 @@ pub struct StoreStats {
 
 impl StoreStats {
     /// A `StoreStats` with its required properties set.
-    pub fn new(
-        size_in_bytes: impl ::core::convert::Into<i64>,
-        reserved_in_bytes: impl ::core::convert::Into<i64>,
-    ) -> Self {
+    pub fn new(size_in_bytes: i64, reserved_in_bytes: i64) -> Self {
         Self {
             size: ::core::option::Option::None,
             size_in_bytes: size_in_bytes.into(),
@@ -8312,7 +8276,7 @@ impl StoreStats {
         self
     }
     /// Sets `total_data_set_size_in_bytes`.
-    pub fn total_data_set_size_in_bytes(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn total_data_set_size_in_bytes(mut self, value: i64) -> Self {
         self.total_data_set_size_in_bytes = ::core::option::Option::Some(value.into());
         self
     }
@@ -8432,7 +8396,7 @@ pub struct TaskFailure {
 impl TaskFailure {
     /// A `TaskFailure` with its required properties set.
     pub fn new(
-        task_id: impl ::core::convert::Into<i64>,
+        task_id: i64,
         node_id: impl ::core::convert::Into<crate::NodeId>,
         status: impl ::core::convert::Into<::std::string::String>,
         reason: impl ::core::convert::Into<crate::ErrorCause>,
@@ -8542,7 +8506,7 @@ impl TextSimilarityReranker {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -8552,7 +8516,7 @@ impl TextSimilarityReranker {
         self
     }
     /// Sets `rank_window_size`.
-    pub fn rank_window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank_window_size(mut self, value: i32) -> Self {
         self.rank_window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -8735,17 +8699,17 @@ impl TokenPruningConfig {
         }
     }
     /// Sets `tokens_freq_ratio_threshold`.
-    pub fn tokens_freq_ratio_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn tokens_freq_ratio_threshold(mut self, value: i32) -> Self {
         self.tokens_freq_ratio_threshold = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `tokens_weight_threshold`.
-    pub fn tokens_weight_threshold(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn tokens_weight_threshold(mut self, value: f32) -> Self {
         self.tokens_weight_threshold = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_score_pruned_tokens`.
-    pub fn only_score_pruned_tokens(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_score_pruned_tokens(mut self, value: bool) -> Self {
         self.only_score_pruned_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -8893,11 +8857,11 @@ pub struct TranslogStats {
 impl TranslogStats {
     /// A `TranslogStats` with its required properties set.
     pub fn new(
-        earliest_last_modified_age: impl ::core::convert::Into<i64>,
-        operations: impl ::core::convert::Into<i64>,
-        size_in_bytes: impl ::core::convert::Into<i64>,
-        uncommitted_operations: impl ::core::convert::Into<i32>,
-        uncommitted_size_in_bytes: impl ::core::convert::Into<i64>,
+        earliest_last_modified_age: i64,
+        operations: i64,
+        size_in_bytes: i64,
+        uncommitted_operations: i32,
+        uncommitted_size_in_bytes: i64,
     ) -> Self {
         Self {
             earliest_last_modified_age: earliest_last_modified_age.into(),
@@ -9190,8 +9154,8 @@ pub struct WarmerStats {
 impl WarmerStats {
     /// A `WarmerStats` with its required properties set.
     pub fn new(
-        current: impl ::core::convert::Into<i64>,
-        total: impl ::core::convert::Into<i64>,
+        current: i64,
+        total: i64,
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
@@ -9296,7 +9260,7 @@ impl WriteResponseBase {
         }
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -9314,7 +9278,7 @@ impl WriteResponseBase {
         self
     }
     /// Sets `forced_refresh`.
-    pub fn forced_refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn forced_refresh(mut self, value: bool) -> Self {
         self.forced_refresh = ::core::option::Option::Some(value.into());
         self
     }

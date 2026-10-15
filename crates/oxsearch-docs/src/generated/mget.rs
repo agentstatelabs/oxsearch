@@ -235,7 +235,7 @@ impl Request {
         self
     }
     /// Sets `force_synthetic_source`.
-    pub fn force_synthetic_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_synthetic_source(mut self, value: bool) -> Self {
         self.force_synthetic_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -245,12 +245,12 @@ impl Request {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `refresh`.
-    pub fn refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
         self
     }

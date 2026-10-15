@@ -55,15 +55,15 @@ pub struct ParentReindexStatus {
 impl ParentReindexStatus {
     /// A `ParentReindexStatus` with its required properties set.
     pub fn new(
-        batches: impl ::core::convert::Into<i64>,
-        deleted: impl ::core::convert::Into<i64>,
-        noops: impl ::core::convert::Into<i64>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        batches: i64,
+        deleted: i64,
+        noops: i64,
+        requests_per_second: f32,
         retries: impl ::core::convert::Into<::oxsearch_core::Retries>,
         throttled_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
         throttled_until_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
-        total: impl ::core::convert::Into<i64>,
-        version_conflicts: impl ::core::convert::Into<i64>,
+        total: i64,
+        version_conflicts: i64,
     ) -> Self {
         Self {
             slices: ::core::option::Option::None,
@@ -93,12 +93,12 @@ impl ParentReindexStatus {
         self
     }
     /// Sets `slice_id`.
-    pub fn slice_id(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slice_id(mut self, value: i32) -> Self {
         self.slice_id = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `created`.
-    pub fn created(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn created(mut self, value: i64) -> Self {
         self.created = ::core::option::Option::Some(value.into());
         self
     }
@@ -119,7 +119,7 @@ impl ParentReindexStatus {
         self
     }
     /// Sets `updated`.
-    pub fn updated(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn updated(mut self, value: i64) -> Self {
         self.updated = ::core::option::Option::Some(value.into());
         self
     }
@@ -163,10 +163,10 @@ impl ParentReindexTask {
     /// A `ParentReindexTask` with its required properties set.
     pub fn new(
         action: impl ::core::convert::Into<::std::string::String>,
-        cancellable: impl ::core::convert::Into<bool>,
-        cancelled: impl ::core::convert::Into<bool>,
+        cancellable: bool,
+        cancelled: bool,
         description: impl ::core::convert::Into<::std::string::String>,
-        id: impl ::core::convert::Into<i64>,
+        id: i64,
         node: impl ::core::convert::Into<::oxsearch_core::Name>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
@@ -281,10 +281,10 @@ impl ReindexTask {
     /// A `ReindexTask` with its required properties set.
     pub fn new(
         action: impl ::core::convert::Into<::std::string::String>,
-        cancellable: impl ::core::convert::Into<bool>,
-        cancelled: impl ::core::convert::Into<bool>,
+        cancellable: bool,
+        cancelled: bool,
         description: impl ::core::convert::Into<::std::string::String>,
-        id: impl ::core::convert::Into<i64>,
+        id: i64,
         node: impl ::core::convert::Into<::oxsearch_core::Name>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
@@ -411,7 +411,7 @@ impl Request {
     /// A `Request` with its required properties set.
     pub fn new(
         task_id: impl ::core::convert::Into<::oxsearch_core::Id>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        requests_per_second: f32,
     ) -> Self {
         Self {
             task_id: task_id.into(),

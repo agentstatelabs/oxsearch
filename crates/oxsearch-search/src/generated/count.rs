@@ -214,7 +214,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -224,7 +224,7 @@ impl Request {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
@@ -250,22 +250,22 @@ impl Request {
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn min_score(mut self, value: f64) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -290,7 +290,7 @@ impl Request {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn terminate_after(mut self, value: i64) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -321,7 +321,7 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        count: impl ::core::convert::Into<i64>,
+        count: i64,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
     ) -> Self {
         Self {

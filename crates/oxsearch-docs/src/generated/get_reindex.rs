@@ -42,7 +42,7 @@ impl Request {
         }
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
@@ -96,11 +96,11 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        completed: impl ::core::convert::Into<bool>,
+        completed: bool,
         id: impl ::core::convert::Into<::oxsearch_core::TaskId>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
-        cancelled: impl ::core::convert::Into<bool>,
+        cancelled: bool,
     ) -> Self {
         Self {
             completed: ::core::option::Option::Some(completed.into()),

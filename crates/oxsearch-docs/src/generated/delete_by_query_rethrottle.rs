@@ -21,7 +21,7 @@ impl Request {
     /// A `Request` with its required properties set.
     pub fn new(
         task_id: impl ::core::convert::Into<::oxsearch_core::TaskId>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        requests_per_second: f32,
     ) -> Self {
         Self {
             task_id: task_id.into(),

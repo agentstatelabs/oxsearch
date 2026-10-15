@@ -19,7 +19,7 @@ impl DocumentRating {
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        rating: impl ::core::convert::Into<i32>,
+        rating: i32,
     ) -> Self {
         Self {
             id: id.into(),
@@ -54,7 +54,7 @@ impl RankEvalHit {
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        score: impl ::core::convert::Into<f64>,
+        score: f64,
     ) -> Self {
         Self {
             id: ::core::option::Option::Some(id.into()),
@@ -230,7 +230,7 @@ impl RankEvalMetricBase {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
@@ -259,7 +259,7 @@ pub struct RankEvalMetricDetail {
 impl RankEvalMetricDetail {
     /// A `RankEvalMetricDetail` with its required properties set.
     pub fn new(
-        metric_score: impl ::core::convert::Into<f64>,
+        metric_score: f64,
         unrated_docs: impl ::core::convert::Into<::std::vec::Vec<crate::rank_eval::UnratedDocument>>,
         hits: impl ::core::convert::Into<::std::vec::Vec<crate::rank_eval::RankEvalHitItem>>,
         metric_details: impl ::core::convert::Into<
@@ -299,12 +299,12 @@ impl RankEvalMetricDiscountedCumulativeGain {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `normalize`.
-    pub fn normalize(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn normalize(mut self, value: bool) -> Self {
         self.normalize = ::core::option::Option::Some(value.into());
         self
     }
@@ -323,14 +323,14 @@ pub struct RankEvalMetricExpectedReciprocalRank {
 
 impl RankEvalMetricExpectedReciprocalRank {
     /// A `RankEvalMetricExpectedReciprocalRank` with its required properties set.
-    pub fn new(maximum_relevance: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(maximum_relevance: i32) -> Self {
         Self {
             k: ::core::option::Option::None,
             maximum_relevance: maximum_relevance.into(),
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
@@ -357,12 +357,12 @@ impl RankEvalMetricMeanReciprocalRank {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
@@ -393,17 +393,17 @@ impl RankEvalMetricPrecision {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unlabeled`.
-    pub fn ignore_unlabeled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unlabeled(mut self, value: bool) -> Self {
         self.ignore_unlabeled = ::core::option::Option::Some(value.into());
         self
     }
@@ -429,12 +429,12 @@ impl RankEvalMetricRatingTreshold {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
@@ -461,12 +461,12 @@ impl RankEvalMetricRecall {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
@@ -490,7 +490,7 @@ impl RankEvalQuery {
         }
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -674,7 +674,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -687,7 +687,7 @@ impl Request {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -725,7 +725,7 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        metric_score: impl ::core::convert::Into<f64>,
+        metric_score: f64,
         details: impl ::core::convert::Into<
             ::indexmap::IndexMap<::oxsearch_core::Id, crate::rank_eval::RankEvalMetricDetail>,
         >,

@@ -491,14 +491,19 @@ impl Emitter<'_> {
     }
 
     /// A constructor's or setter's argument type: anything that converts
-    /// into the field's type, except where the type mentions a generic
-    /// parameter, which the argument must name for the caller's type to be
-    /// inferred.
+    /// into the field's type, except for numbers and booleans, which take
+    /// their own type so literals such as `2.0` infer as it, and types that
+    /// mention a generic parameter, which the argument must name for the
+    /// caller's type to be inferred.
     fn argument(&self, ty: &Ty, rendered: &str) -> String {
-        if params_in(ty).is_empty() {
-            format!("impl ::core::convert::Into<{rendered}>")
-        } else {
+        let primitive = matches!(
+            ty,
+            Ty::Prim("bool" | "f32" | "f64" | "i8" | "i16" | "i32" | "i64" | "u32" | "u64")
+        );
+        if primitive || !params_in(ty).is_empty() {
             rendered.to_owned()
+        } else {
+            format!("impl ::core::convert::Into<{rendered}>")
         }
     }
 

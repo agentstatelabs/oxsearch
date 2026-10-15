@@ -91,7 +91,7 @@ impl Request {
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }

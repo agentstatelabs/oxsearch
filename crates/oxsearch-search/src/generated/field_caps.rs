@@ -54,8 +54,8 @@ pub struct FieldCapability {
 impl FieldCapability {
     /// A `FieldCapability` with its required properties set.
     pub fn new(
-        aggregatable: impl ::core::convert::Into<bool>,
-        searchable: impl ::core::convert::Into<bool>,
+        aggregatable: bool,
+        searchable: bool,
         r#type: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
@@ -102,7 +102,7 @@ impl FieldCapability {
         self
     }
     /// Sets `inference`.
-    pub fn inference(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn inference(mut self, value: bool) -> Self {
         self.inference = ::core::option::Option::Some(value.into());
         self
     }
@@ -115,12 +115,12 @@ impl FieldCapability {
         self
     }
     /// Sets `metadata_field`.
-    pub fn metadata_field(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn metadata_field(mut self, value: bool) -> Self {
         self.metadata_field = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -286,7 +286,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -304,12 +304,12 @@ impl Request {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `include_unmapped`.
-    pub fn include_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_unmapped(mut self, value: bool) -> Self {
         self.include_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -330,7 +330,7 @@ impl Request {
         self
     }
     /// Sets `include_empty_fields`.
-    pub fn include_empty_fields(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_empty_fields(mut self, value: bool) -> Self {
         self.include_empty_fields = ::core::option::Option::Some(value.into());
         self
     }

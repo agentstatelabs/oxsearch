@@ -66,7 +66,7 @@ impl<TDocument> GetResult<TDocument> {
     /// A `GetResult` with its required properties set.
     pub fn new(
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        found: impl ::core::convert::Into<bool>,
+        found: bool,
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
     ) -> Self {
         Self {
@@ -101,7 +101,7 @@ impl<TDocument> GetResult<TDocument> {
         self
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -275,7 +275,7 @@ impl Request {
         }
     }
     /// Sets `force_synthetic_source`.
-    pub fn force_synthetic_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_synthetic_source(mut self, value: bool) -> Self {
         self.force_synthetic_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -285,12 +285,12 @@ impl Request {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `refresh`.
-    pub fn refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
         self
     }
@@ -321,7 +321,7 @@ impl Request {
         self
     }
     /// Sets `source_exclude_vectors`.
-    pub fn source_exclude_vectors(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn source_exclude_vectors(mut self, value: bool) -> Self {
         self.source_exclude_vectors = ::core::option::Option::Some(value.into());
         self
     }

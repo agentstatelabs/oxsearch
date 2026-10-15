@@ -52,7 +52,7 @@ impl RequestBody {
         }
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
@@ -72,7 +72,7 @@ impl RequestBody {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }
@@ -172,12 +172,12 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ccs_minimize_roundtrips`.
-    pub fn ccs_minimize_roundtrips(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ccs_minimize_roundtrips(mut self, value: bool) -> Self {
         self.ccs_minimize_roundtrips = ::core::option::Option::Some(value.into());
         self
     }
@@ -190,17 +190,17 @@ impl Request {
         self
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -210,7 +210,7 @@ impl Request {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }
@@ -233,12 +233,12 @@ impl Request {
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `typed_keys`.
-    pub fn typed_keys(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn typed_keys(mut self, value: bool) -> Self {
         self.typed_keys = ::core::option::Option::Some(value.into());
         self
     }
@@ -302,8 +302,8 @@ pub struct Response<TDocument = ::serde_json::Value> {
 impl<TDocument> Response<TDocument> {
     /// A `Response` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        timed_out: impl ::core::convert::Into<bool>,
+        took: i64,
+        timed_out: bool,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
         hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
@@ -353,12 +353,12 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `num_reduce_phases`.
-    pub fn num_reduce_phases(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn num_reduce_phases(mut self, value: i64) -> Self {
         self.num_reduce_phases = ::core::option::Option::Some(value.into());
         self
     }
@@ -391,7 +391,7 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `terminated_early`.
-    pub fn terminated_early(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn terminated_early(mut self, value: bool) -> Self {
         self.terminated_early = ::core::option::Option::Some(value.into());
         self
     }

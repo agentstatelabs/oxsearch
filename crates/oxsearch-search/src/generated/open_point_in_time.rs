@@ -134,7 +134,7 @@ impl Request {
         }
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -157,12 +157,12 @@ impl Request {
         self
     }
     /// Sets `allow_partial_search_results`.
-    pub fn allow_partial_search_results(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_partial_search_results(mut self, value: bool) -> Self {
         self.allow_partial_search_results = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_concurrent_shard_requests`.
-    pub fn max_concurrent_shard_requests(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_concurrent_shard_requests(mut self, value: i32) -> Self {
         self.max_concurrent_shard_requests = ::core::option::Option::Some(value.into());
         self
     }

@@ -83,10 +83,7 @@ pub struct Response {
 
 impl Response {
     /// A `Response` with its required properties set.
-    pub fn new(
-        succeeded: impl ::core::convert::Into<bool>,
-        num_freed: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(succeeded: bool, num_freed: i32) -> Self {
         Self {
             succeeded: ::core::option::Option::Some(succeeded.into()),
             num_freed: ::core::option::Option::Some(num_freed.into()),

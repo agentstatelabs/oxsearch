@@ -40,7 +40,7 @@ impl Request {
         }
     }
     /// Sets `force`.
-    pub fn force(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force(mut self, value: bool) -> Self {
         self.force = ::core::option::Option::Some(value.into());
         self
     }

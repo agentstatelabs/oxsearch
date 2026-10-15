@@ -58,7 +58,7 @@ impl RequestBody {
         }
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -68,7 +68,7 @@ impl RequestBody {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -161,7 +161,7 @@ impl Response {
     pub fn new(
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
         terms: impl ::core::convert::Into<::std::vec::Vec<::std::string::String>>,
-        complete: impl ::core::convert::Into<bool>,
+        complete: bool,
     ) -> Self {
         Self {
             shards: ::core::option::Option::Some(shards.into()),

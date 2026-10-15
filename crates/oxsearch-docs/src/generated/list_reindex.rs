@@ -23,7 +23,7 @@ impl Request {
         }
     }
     /// Sets `detailed`.
-    pub fn detailed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn detailed(mut self, value: bool) -> Self {
         self.detailed = ::core::option::Option::Some(value.into());
         self
     }

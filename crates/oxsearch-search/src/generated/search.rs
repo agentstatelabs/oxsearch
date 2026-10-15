@@ -286,7 +286,7 @@ impl RequestBody {
         self
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
@@ -301,7 +301,7 @@ impl RequestBody {
         self
     }
     /// Sets `from`.
-    pub fn from(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn from(mut self, value: i32) -> Self {
         self.from = ::core::option::Option::Some(value.into());
         self
     }
@@ -358,7 +358,7 @@ impl RequestBody {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn min_score(mut self, value: f64) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -371,7 +371,7 @@ impl RequestBody {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }
@@ -420,7 +420,7 @@ impl RequestBody {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -459,7 +459,7 @@ impl RequestBody {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn terminate_after(mut self, value: i64) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -469,17 +469,17 @@ impl RequestBody {
         self
     }
     /// Sets `track_scores`.
-    pub fn track_scores(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn track_scores(mut self, value: bool) -> Self {
         self.track_scores = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version`.
-    pub fn version(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn version(mut self, value: bool) -> Self {
         self.version = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `seq_no_primary_term`.
-    pub fn seq_no_primary_term(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn seq_no_primary_term(mut self, value: bool) -> Self {
         self.seq_no_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -792,12 +792,12 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `allow_partial_search_results`.
-    pub fn allow_partial_search_results(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_partial_search_results(mut self, value: bool) -> Self {
         self.allow_partial_search_results = ::core::option::Option::Some(value.into());
         self
     }
@@ -807,17 +807,17 @@ impl Request {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `batched_reduce_size`.
-    pub fn batched_reduce_size(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn batched_reduce_size(mut self, value: i64) -> Self {
         self.batched_reduce_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ccs_minimize_roundtrips`.
-    pub fn ccs_minimize_roundtrips(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ccs_minimize_roundtrips(mut self, value: bool) -> Self {
         self.ccs_minimize_roundtrips = ::core::option::Option::Some(value.into());
         self
     }
@@ -851,32 +851,32 @@ impl Request {
         self
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `include_named_queries_score`.
-    pub fn include_named_queries_score(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_named_queries_score(mut self, value: bool) -> Self {
         self.include_named_queries_score = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_concurrent_shard_requests`.
-    pub fn max_concurrent_shard_requests(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_concurrent_shard_requests(mut self, value: i32) -> Self {
         self.max_concurrent_shard_requests = ::core::option::Option::Some(value.into());
         self
     }
@@ -886,12 +886,12 @@ impl Request {
         self
     }
     /// Sets `pre_filter_shard_size`.
-    pub fn pre_filter_shard_size(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn pre_filter_shard_size(mut self, value: i64) -> Self {
         self.pre_filter_shard_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `request_cache`.
-    pub fn request_cache(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn request_cache(mut self, value: bool) -> Self {
         self.request_cache = ::core::option::Option::Some(value.into());
         self
     }
@@ -948,7 +948,7 @@ impl Request {
         self
     }
     /// Sets `suggest_size`.
-    pub fn suggest_size(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn suggest_size(mut self, value: i64) -> Self {
         self.suggest_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -961,7 +961,7 @@ impl Request {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn terminate_after(mut self, value: i64) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -979,22 +979,22 @@ impl Request {
         self
     }
     /// Sets `track_scores`.
-    pub fn track_scores(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn track_scores(mut self, value: bool) -> Self {
         self.track_scores = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `typed_keys`.
-    pub fn typed_keys(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn typed_keys(mut self, value: bool) -> Self {
         self.typed_keys = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version`.
-    pub fn version(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn version(mut self, value: bool) -> Self {
         self.version = ::core::option::Option::Some(value.into());
         self
     }
@@ -1015,7 +1015,7 @@ impl Request {
         self
     }
     /// Sets `source_exclude_vectors`.
-    pub fn source_exclude_vectors(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn source_exclude_vectors(mut self, value: bool) -> Self {
         self.source_exclude_vectors = ::core::option::Option::Some(value.into());
         self
     }
@@ -1028,7 +1028,7 @@ impl Request {
         self
     }
     /// Sets `seq_no_primary_term`.
-    pub fn seq_no_primary_term(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn seq_no_primary_term(mut self, value: bool) -> Self {
         self.seq_no_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1038,12 +1038,12 @@ impl Request {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `from`.
-    pub fn from(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn from(mut self, value: i32) -> Self {
         self.from = ::core::option::Option::Some(value.into());
         self
     }
@@ -1056,7 +1056,7 @@ impl Request {
         self
     }
     /// Sets `force_synthetic_source`.
-    pub fn force_synthetic_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_synthetic_source(mut self, value: bool) -> Self {
         self.force_synthetic_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -1153,8 +1153,8 @@ pub struct ResponseBody<TDocument = ::serde_json::Value> {
 impl<TDocument> ResponseBody<TDocument> {
     /// A `ResponseBody` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        timed_out: impl ::core::convert::Into<bool>,
+        took: i64,
+        timed_out: bool,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
         hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
@@ -1204,12 +1204,12 @@ impl<TDocument> ResponseBody<TDocument> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `num_reduce_phases`.
-    pub fn num_reduce_phases(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn num_reduce_phases(mut self, value: i64) -> Self {
         self.num_reduce_phases = ::core::option::Option::Some(value.into());
         self
     }
@@ -1242,7 +1242,7 @@ impl<TDocument> ResponseBody<TDocument> {
         self
     }
     /// Sets `terminated_early`.
-    pub fn terminated_early(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn terminated_early(mut self, value: bool) -> Self {
         self.terminated_early = ::core::option::Option::Some(value.into());
         self
     }
@@ -1280,16 +1280,16 @@ pub struct AggregationBreakdown {
 impl AggregationBreakdown {
     /// A `AggregationBreakdown` with its required properties set.
     pub fn new(
-        build_aggregation: impl ::core::convert::Into<i64>,
-        build_aggregation_count: impl ::core::convert::Into<i64>,
-        build_leaf_collector: impl ::core::convert::Into<i64>,
-        build_leaf_collector_count: impl ::core::convert::Into<i64>,
-        collect: impl ::core::convert::Into<i64>,
-        collect_count: impl ::core::convert::Into<i64>,
-        initialize: impl ::core::convert::Into<i64>,
-        initialize_count: impl ::core::convert::Into<i64>,
-        reduce: impl ::core::convert::Into<i64>,
-        reduce_count: impl ::core::convert::Into<i64>,
+        build_aggregation: i64,
+        build_aggregation_count: i64,
+        build_leaf_collector: i64,
+        build_leaf_collector_count: i64,
+        collect: i64,
+        collect_count: i64,
+        initialize: i64,
+        initialize_count: i64,
+        reduce: i64,
+        reduce_count: i64,
     ) -> Self {
         Self {
             build_aggregation: ::core::option::Option::Some(build_aggregation.into()),
@@ -1309,12 +1309,12 @@ impl AggregationBreakdown {
         }
     }
     /// Sets `post_collection`.
-    pub fn post_collection(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn post_collection(mut self, value: i64) -> Self {
         self.post_collection = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `post_collection_count`.
-    pub fn post_collection_count(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn post_collection_count(mut self, value: i64) -> Self {
         self.post_collection_count = ::core::option::Option::Some(value.into());
         self
     }
@@ -1483,10 +1483,7 @@ impl AggregationProfileDebug {
         }
     }
     /// Sets `segments_with_multi_valued_ords`.
-    pub fn segments_with_multi_valued_ords(
-        mut self,
-        value: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn segments_with_multi_valued_ords(mut self, value: i32) -> Self {
         self.segments_with_multi_valued_ords = ::core::option::Option::Some(value.into());
         self
     }
@@ -1499,20 +1496,17 @@ impl AggregationProfileDebug {
         self
     }
     /// Sets `segments_with_single_valued_ords`.
-    pub fn segments_with_single_valued_ords(
-        mut self,
-        value: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn segments_with_single_valued_ords(mut self, value: i32) -> Self {
         self.segments_with_single_valued_ords = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `total_buckets`.
-    pub fn total_buckets(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn total_buckets(mut self, value: i32) -> Self {
         self.total_buckets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `built_buckets`.
-    pub fn built_buckets(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn built_buckets(mut self, value: i32) -> Self {
         self.built_buckets = ::core::option::Option::Some(value.into());
         self
     }
@@ -1525,7 +1519,7 @@ impl AggregationProfileDebug {
         self
     }
     /// Sets `has_filter`.
-    pub fn has_filter(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn has_filter(mut self, value: bool) -> Self {
         self.has_filter = ::core::option::Option::Some(value.into());
         self
     }
@@ -1543,68 +1537,62 @@ impl AggregationProfileDebug {
         self
     }
     /// Sets `chars_fetched`.
-    pub fn chars_fetched(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn chars_fetched(mut self, value: i32) -> Self {
         self.chars_fetched = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `extract_count`.
-    pub fn extract_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn extract_count(mut self, value: i32) -> Self {
         self.extract_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `extract_ns`.
-    pub fn extract_ns(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn extract_ns(mut self, value: i32) -> Self {
         self.extract_ns = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `values_fetched`.
-    pub fn values_fetched(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn values_fetched(mut self, value: i32) -> Self {
         self.values_fetched = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `collect_analyzed_ns`.
-    pub fn collect_analyzed_ns(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn collect_analyzed_ns(mut self, value: i32) -> Self {
         self.collect_analyzed_ns = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `collect_analyzed_count`.
-    pub fn collect_analyzed_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn collect_analyzed_count(mut self, value: i32) -> Self {
         self.collect_analyzed_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `surviving_buckets`.
-    pub fn surviving_buckets(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn surviving_buckets(mut self, value: i32) -> Self {
         self.surviving_buckets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ordinals_collectors_used`.
-    pub fn ordinals_collectors_used(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ordinals_collectors_used(mut self, value: i32) -> Self {
         self.ordinals_collectors_used = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ordinals_collectors_overhead_too_high`.
-    pub fn ordinals_collectors_overhead_too_high(
-        mut self,
-        value: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn ordinals_collectors_overhead_too_high(mut self, value: i32) -> Self {
         self.ordinals_collectors_overhead_too_high = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `string_hashing_collectors_used`.
-    pub fn string_hashing_collectors_used(
-        mut self,
-        value: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn string_hashing_collectors_used(mut self, value: i32) -> Self {
         self.string_hashing_collectors_used = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `numeric_collectors_used`.
-    pub fn numeric_collectors_used(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn numeric_collectors_used(mut self, value: i32) -> Self {
         self.numeric_collectors_used = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `empty_collectors_used`.
-    pub fn empty_collectors_used(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn empty_collectors_used(mut self, value: i32) -> Self {
         self.empty_collectors_used = ::core::option::Option::Some(value.into());
         self
     }
@@ -1617,12 +1605,12 @@ impl AggregationProfileDebug {
         self
     }
     /// Sets `segments_with_doc_count_field`.
-    pub fn segments_with_doc_count_field(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn segments_with_doc_count_field(mut self, value: i32) -> Self {
         self.segments_with_doc_count_field = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `segments_with_deleted_docs`.
-    pub fn segments_with_deleted_docs(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn segments_with_deleted_docs(mut self, value: i32) -> Self {
         self.segments_with_deleted_docs = ::core::option::Option::Some(value.into());
         self
     }
@@ -1637,12 +1625,12 @@ impl AggregationProfileDebug {
         self
     }
     /// Sets `segments_counted`.
-    pub fn segments_counted(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn segments_counted(mut self, value: i32) -> Self {
         self.segments_counted = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `segments_collected`.
-    pub fn segments_collected(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn segments_collected(mut self, value: i32) -> Self {
         self.segments_collected = ::core::option::Option::Some(value.into());
         self
     }
@@ -1652,22 +1640,22 @@ impl AggregationProfileDebug {
         self
     }
     /// Sets `brute_force_used`.
-    pub fn brute_force_used(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn brute_force_used(mut self, value: i32) -> Self {
         self.brute_force_used = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `dynamic_pruning_attempted`.
-    pub fn dynamic_pruning_attempted(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dynamic_pruning_attempted(mut self, value: i32) -> Self {
         self.dynamic_pruning_attempted = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `dynamic_pruning_used`.
-    pub fn dynamic_pruning_used(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dynamic_pruning_used(mut self, value: i32) -> Self {
         self.dynamic_pruning_used = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `skipped_due_to_no_data`.
-    pub fn skipped_due_to_no_data(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn skipped_due_to_no_data(mut self, value: i32) -> Self {
         self.skipped_due_to_no_data = ::core::option::Option::Some(value.into());
         self
     }
@@ -1697,7 +1685,7 @@ impl AggregationProfileDelegateDebugFilter {
         }
     }
     /// Sets `results_from_metadata`.
-    pub fn results_from_metadata(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn results_from_metadata(mut self, value: i32) -> Self {
         self.results_from_metadata = ::core::option::Option::Some(value.into());
         self
     }
@@ -1715,10 +1703,7 @@ impl AggregationProfileDelegateDebugFilter {
         self
     }
     /// Sets `segments_counted_in_constant_time`.
-    pub fn segments_counted_in_constant_time(
-        mut self,
-        value: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn segments_counted_in_constant_time(mut self, value: i32) -> Self {
         self.segments_counted_in_constant_time = ::core::option::Option::Some(value.into());
         self
     }
@@ -1793,7 +1778,7 @@ impl CompletionContext {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1814,7 +1799,7 @@ impl CompletionContext {
         self
     }
     /// Sets `prefix`.
-    pub fn prefix(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn prefix(mut self, value: bool) -> Self {
         self.prefix = ::core::option::Option::Some(value.into());
         self
     }
@@ -1898,8 +1883,8 @@ pub struct CompletionSuggest<TDocument = ::serde_json::Value> {
 impl<TDocument> CompletionSuggest<TDocument> {
     /// A `CompletionSuggest` with its required properties set.
     pub fn new(
-        length: impl ::core::convert::Into<i32>,
-        offset: impl ::core::convert::Into<i32>,
+        length: i32,
+        offset: i32,
         text: impl ::core::convert::Into<::std::string::String>,
         options: ::oxsearch_core::shapes::OneOrMany<
             crate::search::CompletionSuggestOption<TDocument>,
@@ -1977,7 +1962,7 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
         }
     }
     /// Sets `collate_match`.
-    pub fn collate_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn collate_match(mut self, value: bool) -> Self {
         self.collate_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -2017,7 +2002,7 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
         self
     }
     /// Sets `score`.
-    pub fn score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn score(mut self, value: f64) -> Self {
         self.score = ::core::option::Option::Some(value.into());
         self
     }
@@ -2027,7 +2012,7 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
         self
     }
     /// Sets `score2`.
-    pub fn score2(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn score2(mut self, value: f64) -> Self {
         self.score2 = ::core::option::Option::Some(value.into());
         self
     }
@@ -2155,7 +2140,7 @@ impl CompletionSuggester {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -2186,7 +2171,7 @@ impl CompletionSuggester {
         self
     }
     /// Sets `skip_duplicates`.
-    pub fn skip_duplicates(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn skip_duplicates(mut self, value: bool) -> Self {
         self.skip_duplicates = ::core::option::Option::Some(value.into());
         self
     }
@@ -2275,7 +2260,7 @@ impl DfsKnnProfile {
     /// A `DfsKnnProfile` with its required properties set.
     pub fn new(
         query: impl ::core::convert::Into<::std::vec::Vec<crate::search::KnnQueryProfileResult>>,
-        rewrite_time: impl ::core::convert::Into<i64>,
+        rewrite_time: i64,
         collector: impl ::core::convert::Into<::std::vec::Vec<crate::search::KnnCollectorResult>>,
     ) -> Self {
         Self {
@@ -2286,7 +2271,7 @@ impl DfsKnnProfile {
         }
     }
     /// Sets `vector_operations_count`.
-    pub fn vector_operations_count(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn vector_operations_count(mut self, value: i64) -> Self {
         self.vector_operations_count = ::core::option::Option::Some(value.into());
         self
     }
@@ -2351,14 +2336,14 @@ pub struct DfsStatisticsBreakdown {
 impl DfsStatisticsBreakdown {
     /// A `DfsStatisticsBreakdown` with its required properties set.
     pub fn new(
-        collection_statistics: impl ::core::convert::Into<i64>,
-        collection_statistics_count: impl ::core::convert::Into<i64>,
-        create_weight: impl ::core::convert::Into<i64>,
-        create_weight_count: impl ::core::convert::Into<i64>,
-        rewrite: impl ::core::convert::Into<i64>,
-        rewrite_count: impl ::core::convert::Into<i64>,
-        term_statistics: impl ::core::convert::Into<i64>,
-        term_statistics_count: impl ::core::convert::Into<i64>,
+        collection_statistics: i64,
+        collection_statistics_count: i64,
+        create_weight: i64,
+        create_weight_count: i64,
+        rewrite: i64,
+        rewrite_count: i64,
+        term_statistics: i64,
+        term_statistics_count: i64,
     ) -> Self {
         Self {
             collection_statistics: ::core::option::Option::Some(collection_statistics.into()),
@@ -2505,27 +2490,27 @@ impl DirectGenerator {
         }
     }
     /// Sets `max_edits`.
-    pub fn max_edits(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_edits(mut self, value: i32) -> Self {
         self.max_edits = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_inspections`.
-    pub fn max_inspections(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn max_inspections(mut self, value: f32) -> Self {
         self.max_inspections = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_term_freq`.
-    pub fn max_term_freq(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn max_term_freq(mut self, value: f32) -> Self {
         self.max_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_doc_freq`.
-    pub fn min_doc_freq(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_doc_freq(mut self, value: f32) -> Self {
         self.min_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_length`.
-    pub fn min_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_length(mut self, value: i32) -> Self {
         self.min_word_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -2540,12 +2525,12 @@ impl DirectGenerator {
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -2647,42 +2632,42 @@ impl FetchProfileBreakdown {
         }
     }
     /// Sets `load_source`.
-    pub fn load_source(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn load_source(mut self, value: i32) -> Self {
         self.load_source = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `load_source_count`.
-    pub fn load_source_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn load_source_count(mut self, value: i32) -> Self {
         self.load_source_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `load_stored_fields`.
-    pub fn load_stored_fields(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn load_stored_fields(mut self, value: i32) -> Self {
         self.load_stored_fields = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `load_stored_fields_count`.
-    pub fn load_stored_fields_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn load_stored_fields_count(mut self, value: i32) -> Self {
         self.load_stored_fields_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `next_reader`.
-    pub fn next_reader(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn next_reader(mut self, value: i32) -> Self {
         self.next_reader = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `next_reader_count`.
-    pub fn next_reader_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn next_reader_count(mut self, value: i32) -> Self {
         self.next_reader_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `process_count`.
-    pub fn process_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn process_count(mut self, value: i32) -> Self {
         self.process_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `process`.
-    pub fn process(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn process(mut self, value: i32) -> Self {
         self.process = ::core::option::Option::Some(value.into());
         self
     }
@@ -2714,7 +2699,7 @@ impl FetchProfileDebug {
         self
     }
     /// Sets `fast_path`.
-    pub fn fast_path(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fast_path(mut self, value: i32) -> Self {
         self.fast_path = ::core::option::Option::Some(value.into());
         self
     }
@@ -3263,7 +3248,7 @@ impl<TDocument> Hit<TDocument> {
         self
     }
     /// Sets `rank`.
-    pub fn rank(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn rank(mut self, value: i32) -> Self {
         self.rank = ::core::option::Option::Some(value.into());
         self
     }
@@ -3276,7 +3261,7 @@ impl<TDocument> Hit<TDocument> {
         self
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -3551,26 +3536,26 @@ pub struct KnnQueryProfileBreakdown {
 impl KnnQueryProfileBreakdown {
     /// A `KnnQueryProfileBreakdown` with its required properties set.
     pub fn new(
-        advance: impl ::core::convert::Into<i64>,
-        advance_count: impl ::core::convert::Into<i64>,
-        build_scorer: impl ::core::convert::Into<i64>,
-        build_scorer_count: impl ::core::convert::Into<i64>,
-        compute_max_score: impl ::core::convert::Into<i64>,
-        compute_max_score_count: impl ::core::convert::Into<i64>,
-        count_weight: impl ::core::convert::Into<i64>,
-        count_weight_count: impl ::core::convert::Into<i64>,
-        create_weight: impl ::core::convert::Into<i64>,
-        create_weight_count: impl ::core::convert::Into<i64>,
-        r#match: impl ::core::convert::Into<i64>,
-        match_count: impl ::core::convert::Into<i64>,
-        next_doc: impl ::core::convert::Into<i64>,
-        next_doc_count: impl ::core::convert::Into<i64>,
-        score: impl ::core::convert::Into<i64>,
-        score_count: impl ::core::convert::Into<i64>,
-        set_min_competitive_score: impl ::core::convert::Into<i64>,
-        set_min_competitive_score_count: impl ::core::convert::Into<i64>,
-        shallow_advance: impl ::core::convert::Into<i64>,
-        shallow_advance_count: impl ::core::convert::Into<i64>,
+        advance: i64,
+        advance_count: i64,
+        build_scorer: i64,
+        build_scorer_count: i64,
+        compute_max_score: i64,
+        compute_max_score_count: i64,
+        count_weight: i64,
+        count_weight_count: i64,
+        create_weight: i64,
+        create_weight_count: i64,
+        r#match: i64,
+        match_count: i64,
+        next_doc: i64,
+        next_doc_count: i64,
+        score: i64,
+        score_count: i64,
+        set_min_competitive_score: i64,
+        set_min_competitive_score_count: i64,
+        shallow_advance: i64,
+        shallow_advance_count: i64,
     ) -> Self {
         Self {
             advance: ::core::option::Option::Some(advance.into()),
@@ -3674,7 +3659,7 @@ pub struct LaplaceSmoothingModel {
 
 impl LaplaceSmoothingModel {
     /// A `LaplaceSmoothingModel` with its required properties set.
-    pub fn new(alpha: impl ::core::convert::Into<f64>) -> Self {
+    pub fn new(alpha: f64) -> Self {
         Self {
             alpha: ::core::option::Option::Some(alpha.into()),
         }
@@ -3694,11 +3679,7 @@ pub struct LinearInterpolationSmoothingModel {
 
 impl LinearInterpolationSmoothingModel {
     /// A `LinearInterpolationSmoothingModel` with its required properties set.
-    pub fn new(
-        bigram_lambda: impl ::core::convert::Into<f64>,
-        trigram_lambda: impl ::core::convert::Into<f64>,
-        unigram_lambda: impl ::core::convert::Into<f64>,
-    ) -> Self {
+    pub fn new(bigram_lambda: f64, trigram_lambda: f64, unigram_lambda: f64) -> Self {
         Self {
             bigram_lambda: ::core::option::Option::Some(bigram_lambda.into()),
             trigram_lambda: ::core::option::Option::Some(trigram_lambda.into()),
@@ -3723,10 +3704,7 @@ pub struct NestedIdentity {
 
 impl NestedIdentity {
     /// A `NestedIdentity` with its required properties set.
-    pub fn new(
-        field: impl ::core::convert::Into<::oxsearch_core::Field>,
-        offset: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>, offset: i32) -> Self {
         Self {
             field: ::core::option::Option::Some(field.into()),
             offset: ::core::option::Option::Some(offset.into()),
@@ -3761,8 +3739,8 @@ pub struct PhraseSuggest {
 impl PhraseSuggest {
     /// A `PhraseSuggest` with its required properties set.
     pub fn new(
-        length: impl ::core::convert::Into<i32>,
-        offset: impl ::core::convert::Into<i32>,
+        length: i32,
+        offset: i32,
         text: impl ::core::convert::Into<::std::string::String>,
         options: impl ::core::convert::Into<
             ::oxsearch_core::shapes::OneOrMany<crate::search::PhraseSuggestOption>,
@@ -3814,7 +3792,7 @@ impl PhraseSuggestCollate {
         self
     }
     /// Sets `prune`.
-    pub fn prune(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn prune(mut self, value: bool) -> Self {
         self.prune = ::core::option::Option::Some(value.into());
         self
     }
@@ -3893,10 +3871,7 @@ pub struct PhraseSuggestOption {
 
 impl PhraseSuggestOption {
     /// A `PhraseSuggestOption` with its required properties set.
-    pub fn new(
-        text: impl ::core::convert::Into<::std::string::String>,
-        score: impl ::core::convert::Into<f64>,
-    ) -> Self {
+    pub fn new(text: impl ::core::convert::Into<::std::string::String>, score: f64) -> Self {
         Self {
             text: ::core::option::Option::Some(text.into()),
             score: ::core::option::Option::Some(score.into()),
@@ -3910,7 +3885,7 @@ impl PhraseSuggestOption {
         self
     }
     /// Sets `collate_match`.
-    pub fn collate_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn collate_match(mut self, value: bool) -> Self {
         self.collate_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -4000,7 +3975,7 @@ impl PhraseSuggester {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4013,7 +3988,7 @@ impl PhraseSuggester {
         self
     }
     /// Sets `confidence`.
-    pub fn confidence(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn confidence(mut self, value: f64) -> Self {
         self.confidence = ::core::option::Option::Some(value.into());
         self
     }
@@ -4026,12 +4001,12 @@ impl PhraseSuggester {
         self
     }
     /// Sets `force_unigrams`.
-    pub fn force_unigrams(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_unigrams(mut self, value: bool) -> Self {
         self.force_unigrams = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `gram_size`.
-    pub fn gram_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn gram_size(mut self, value: i32) -> Self {
         self.gram_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4044,12 +4019,12 @@ impl PhraseSuggester {
         self
     }
     /// Sets `max_errors`.
-    pub fn max_errors(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_errors(mut self, value: f64) -> Self {
         self.max_errors = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `real_word_error_likelihood`.
-    pub fn real_word_error_likelihood(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn real_word_error_likelihood(mut self, value: f64) -> Self {
         self.real_word_error_likelihood = ::core::option::Option::Some(value.into());
         self
     }
@@ -4059,7 +4034,7 @@ impl PhraseSuggester {
         self
     }
     /// Sets `shard_size`.
-    pub fn shard_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn shard_size(mut self, value: i32) -> Self {
         self.shard_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4072,7 +4047,7 @@ impl PhraseSuggester {
         self
     }
     /// Sets `token_limit`.
-    pub fn token_limit(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn token_limit(mut self, value: i32) -> Self {
         self.token_limit = ::core::option::Option::Some(value.into());
         self
     }
@@ -4183,26 +4158,26 @@ pub struct QueryBreakdown {
 impl QueryBreakdown {
     /// A `QueryBreakdown` with its required properties set.
     pub fn new(
-        advance: impl ::core::convert::Into<i64>,
-        advance_count: impl ::core::convert::Into<i64>,
-        build_scorer: impl ::core::convert::Into<i64>,
-        build_scorer_count: impl ::core::convert::Into<i64>,
-        create_weight: impl ::core::convert::Into<i64>,
-        create_weight_count: impl ::core::convert::Into<i64>,
-        r#match: impl ::core::convert::Into<i64>,
-        match_count: impl ::core::convert::Into<i64>,
-        shallow_advance: impl ::core::convert::Into<i64>,
-        shallow_advance_count: impl ::core::convert::Into<i64>,
-        next_doc: impl ::core::convert::Into<i64>,
-        next_doc_count: impl ::core::convert::Into<i64>,
-        score: impl ::core::convert::Into<i64>,
-        score_count: impl ::core::convert::Into<i64>,
-        compute_max_score: impl ::core::convert::Into<i64>,
-        compute_max_score_count: impl ::core::convert::Into<i64>,
-        count_weight: impl ::core::convert::Into<i64>,
-        count_weight_count: impl ::core::convert::Into<i64>,
-        set_min_competitive_score: impl ::core::convert::Into<i64>,
-        set_min_competitive_score_count: impl ::core::convert::Into<i64>,
+        advance: i64,
+        advance_count: i64,
+        build_scorer: i64,
+        build_scorer_count: i64,
+        create_weight: i64,
+        create_weight_count: i64,
+        r#match: i64,
+        match_count: i64,
+        shallow_advance: i64,
+        shallow_advance_count: i64,
+        next_doc: i64,
+        next_doc_count: i64,
+        score: i64,
+        score_count: i64,
+        compute_max_score: i64,
+        compute_max_score_count: i64,
+        count_weight: i64,
+        count_weight_count: i64,
+        set_min_competitive_score: i64,
+        set_min_competitive_score_count: i64,
     ) -> Self {
         Self {
             advance: ::core::option::Option::Some(advance.into()),
@@ -4355,7 +4330,7 @@ impl RegexOptions {
         self
     }
     /// Sets `max_determinized_states`.
-    pub fn max_determinized_states(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_determinized_states(mut self, value: i32) -> Self {
         self.max_determinized_states = ::core::option::Option::Some(value.into());
         self
     }
@@ -4377,7 +4352,7 @@ impl SearchProfile {
     pub fn new(
         collector: impl ::core::convert::Into<::std::vec::Vec<crate::search::Collector>>,
         query: impl ::core::convert::Into<::std::vec::Vec<crate::search::QueryProfile>>,
-        rewrite_time: impl ::core::convert::Into<i64>,
+        rewrite_time: i64,
     ) -> Self {
         Self {
             collector: collector.into(),
@@ -4605,7 +4580,7 @@ impl SearchRequestBody {
         self
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
@@ -4620,7 +4595,7 @@ impl SearchRequestBody {
         self
     }
     /// Sets `from`.
-    pub fn from(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn from(mut self, value: i32) -> Self {
         self.from = ::core::option::Option::Some(value.into());
         self
     }
@@ -4677,7 +4652,7 @@ impl SearchRequestBody {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn min_score(mut self, value: f64) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -4690,7 +4665,7 @@ impl SearchRequestBody {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }
@@ -4739,7 +4714,7 @@ impl SearchRequestBody {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4778,7 +4753,7 @@ impl SearchRequestBody {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn terminate_after(mut self, value: i64) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -4788,17 +4763,17 @@ impl SearchRequestBody {
         self
     }
     /// Sets `track_scores`.
-    pub fn track_scores(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn track_scores(mut self, value: bool) -> Self {
         self.track_scores = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version`.
-    pub fn version(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn version(mut self, value: bool) -> Self {
         self.version = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `seq_no_primary_term`.
-    pub fn seq_no_primary_term(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn seq_no_primary_term(mut self, value: bool) -> Self {
         self.seq_no_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -4907,7 +4882,7 @@ impl ShardProfile {
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
         node_id: impl ::core::convert::Into<::oxsearch_core::NodeId>,
         searches: impl ::core::convert::Into<::std::vec::Vec<crate::search::SearchProfile>>,
-        shard_id: impl ::core::convert::Into<i32>,
+        shard_id: i32,
     ) -> Self {
         Self {
             aggregations: aggregations.into(),
@@ -5093,7 +5068,7 @@ pub struct StupidBackoffSmoothingModel {
 
 impl StupidBackoffSmoothingModel {
     /// A `StupidBackoffSmoothingModel` with its required properties set.
-    pub fn new(discount: impl ::core::convert::Into<f64>) -> Self {
+    pub fn new(discount: f64) -> Self {
         Self {
             discount: ::core::option::Option::Some(discount.into()),
         }
@@ -5190,8 +5165,8 @@ pub struct SuggestBase {
 impl SuggestBase {
     /// A `SuggestBase` with its required properties set.
     pub fn new(
-        length: impl ::core::convert::Into<i32>,
-        offset: impl ::core::convert::Into<i32>,
+        length: i32,
+        offset: i32,
         text: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
@@ -5243,22 +5218,22 @@ impl SuggestFuzziness {
         self
     }
     /// Sets `min_length`.
-    pub fn min_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_length(mut self, value: i32) -> Self {
         self.min_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `transpositions`.
-    pub fn transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn transpositions(mut self, value: bool) -> Self {
         self.transpositions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `unicode_aware`.
-    pub fn unicode_aware(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn unicode_aware(mut self, value: bool) -> Self {
         self.unicode_aware = ::core::option::Option::Some(value.into());
         self
     }
@@ -5370,7 +5345,7 @@ impl SuggesterBase {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -5394,8 +5369,8 @@ pub struct TermSuggest {
 impl TermSuggest {
     /// A `TermSuggest` with its required properties set.
     pub fn new(
-        length: impl ::core::convert::Into<i32>,
-        offset: impl ::core::convert::Into<i32>,
+        length: i32,
+        offset: i32,
         text: impl ::core::convert::Into<::std::string::String>,
         options: impl ::core::convert::Into<
             ::oxsearch_core::shapes::OneOrMany<crate::search::TermSuggestOption>,
@@ -5429,8 +5404,8 @@ impl TermSuggestOption {
     /// A `TermSuggestOption` with its required properties set.
     pub fn new(
         text: impl ::core::convert::Into<::std::string::String>,
-        score: impl ::core::convert::Into<f64>,
-        freq: impl ::core::convert::Into<i64>,
+        score: f64,
+        freq: i64,
     ) -> Self {
         Self {
             text: ::core::option::Option::Some(text.into()),
@@ -5446,7 +5421,7 @@ impl TermSuggestOption {
         self
     }
     /// Sets `collate_match`.
-    pub fn collate_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn collate_match(mut self, value: bool) -> Self {
         self.collate_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -5534,47 +5509,47 @@ impl TermSuggester {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lowercase_terms`.
-    pub fn lowercase_terms(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lowercase_terms(mut self, value: bool) -> Self {
         self.lowercase_terms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_edits`.
-    pub fn max_edits(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_edits(mut self, value: i32) -> Self {
         self.max_edits = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_inspections`.
-    pub fn max_inspections(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_inspections(mut self, value: i32) -> Self {
         self.max_inspections = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_term_freq`.
-    pub fn max_term_freq(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn max_term_freq(mut self, value: f32) -> Self {
         self.max_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_doc_freq`.
-    pub fn min_doc_freq(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_doc_freq(mut self, value: f32) -> Self {
         self.min_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_length`.
-    pub fn min_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_length(mut self, value: i32) -> Self {
         self.min_word_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `shard_size`.
-    pub fn shard_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn shard_size(mut self, value: i32) -> Self {
         self.shard_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -5614,7 +5589,7 @@ impl TotalHits {
     /// A `TotalHits` with its required properties set.
     pub fn new(
         relation: impl ::core::convert::Into<crate::search::TotalHitsRelation>,
-        value: impl ::core::convert::Into<i64>,
+        value: i64,
     ) -> Self {
         Self {
             relation: ::core::option::Option::Some(relation.into()),

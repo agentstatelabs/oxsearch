@@ -137,17 +137,17 @@ impl RequestBody {
         self
     }
     /// Sets `buffer`.
-    pub fn buffer(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn buffer(mut self, value: i32) -> Self {
         self.buffer = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `exact_bounds`.
-    pub fn exact_bounds(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn exact_bounds(mut self, value: bool) -> Self {
         self.exact_bounds = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `extent`.
-    pub fn extent(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn extent(mut self, value: i32) -> Self {
         self.extent = ::core::option::Option::Some(value.into());
         self
     }
@@ -165,7 +165,7 @@ impl RequestBody {
         self
     }
     /// Sets `grid_precision`.
-    pub fn grid_precision(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn grid_precision(mut self, value: i32) -> Self {
         self.grid_precision = ::core::option::Option::Some(value.into());
         self
     }
@@ -194,7 +194,7 @@ impl RequestBody {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -212,7 +212,7 @@ impl RequestBody {
         self
     }
     /// Sets `with_labels`.
-    pub fn with_labels(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn with_labels(mut self, value: bool) -> Self {
         self.with_labels = ::core::option::Option::Some(value.into());
         self
     }
@@ -407,12 +407,12 @@ impl Request {
         }
     }
     /// Sets `exact_bounds`.
-    pub fn exact_bounds(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn exact_bounds(mut self, value: bool) -> Self {
         self.exact_bounds = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `extent`.
-    pub fn extent(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn extent(mut self, value: i32) -> Self {
         self.extent = ::core::option::Option::Some(value.into());
         self
     }
@@ -425,7 +425,7 @@ impl Request {
         self
     }
     /// Sets `grid_precision`.
-    pub fn grid_precision(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn grid_precision(mut self, value: i32) -> Self {
         self.grid_precision = ::core::option::Option::Some(value.into());
         self
     }
@@ -438,7 +438,7 @@ impl Request {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -451,7 +451,7 @@ impl Request {
         self
     }
     /// Sets `with_labels`.
-    pub fn with_labels(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn with_labels(mut self, value: bool) -> Self {
         self.with_labels = ::core::option::Option::Some(value.into());
         self
     }

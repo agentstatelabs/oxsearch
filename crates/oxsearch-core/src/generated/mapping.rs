@@ -52,7 +52,7 @@ pub struct ChunkRescorerChunkingSettings {
 
 impl ChunkRescorerChunkingSettings {
     /// A `ChunkRescorerChunkingSettings` with its required properties set.
-    pub fn new(max_chunk_size: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(max_chunk_size: i32) -> Self {
         Self {
             max_chunk_size: ::core::option::Option::Some(max_chunk_size.into()),
             overlap: ::core::option::Option::None,
@@ -63,12 +63,12 @@ impl ChunkRescorerChunkingSettings {
         }
     }
     /// Sets `overlap`.
-    pub fn overlap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn overlap(mut self, value: i32) -> Self {
         self.overlap = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `sentence_overlap`.
-    pub fn sentence_overlap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn sentence_overlap(mut self, value: i32) -> Self {
         self.sentence_overlap = ::core::option::Option::Some(value.into());
         self
     }

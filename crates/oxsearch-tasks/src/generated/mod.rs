@@ -214,11 +214,11 @@ impl ParentTaskInfo {
     /// A `ParentTaskInfo` with its required properties set.
     pub fn new(
         action: impl ::core::convert::Into<::std::string::String>,
-        cancellable: impl ::core::convert::Into<bool>,
+        cancellable: bool,
         headers: impl ::core::convert::Into<
             ::indexmap::IndexMap<::std::string::String, ::std::string::String>,
         >,
-        id: impl ::core::convert::Into<i64>,
+        id: i64,
         node: impl ::core::convert::Into<::oxsearch_core::NodeId>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
@@ -245,7 +245,7 @@ impl ParentTaskInfo {
         }
     }
     /// Sets `cancelled`.
-    pub fn cancelled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn cancelled(mut self, value: bool) -> Self {
         self.cancelled = ::core::option::Option::Some(value.into());
         self
     }
@@ -362,11 +362,11 @@ impl TaskInfo {
     /// A `TaskInfo` with its required properties set.
     pub fn new(
         action: impl ::core::convert::Into<::std::string::String>,
-        cancellable: impl ::core::convert::Into<bool>,
+        cancellable: bool,
         headers: impl ::core::convert::Into<
             ::indexmap::IndexMap<::std::string::String, ::std::string::String>,
         >,
-        id: impl ::core::convert::Into<i64>,
+        id: i64,
         node: impl ::core::convert::Into<::oxsearch_core::NodeId>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
@@ -392,7 +392,7 @@ impl TaskInfo {
         }
     }
     /// Sets `cancelled`.
-    pub fn cancelled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn cancelled(mut self, value: bool) -> Self {
         self.cancelled = ::core::option::Option::Some(value.into());
         self
     }

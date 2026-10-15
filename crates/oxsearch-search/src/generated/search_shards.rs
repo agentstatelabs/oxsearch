@@ -72,7 +72,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -85,12 +85,12 @@ impl Request {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `local`.
-    pub fn local(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn local(mut self, value: bool) -> Self {
         self.local = ::core::option::Option::Some(value.into());
         self
     }
@@ -195,8 +195,8 @@ impl SearchShardsNodeAttributes {
         >,
         roles: impl ::core::convert::Into<::oxsearch_core::NodeRoles>,
         version: impl ::core::convert::Into<::oxsearch_core::VersionString>,
-        min_index_version: impl ::core::convert::Into<i32>,
-        max_index_version: impl ::core::convert::Into<i32>,
+        min_index_version: i32,
+        max_index_version: i32,
     ) -> Self {
         Self {
             name: ::core::option::Option::Some(name.into()),

@@ -20,7 +20,7 @@ impl ShardFileSizeInfo {
     /// A `ShardFileSizeInfo` with its required properties set.
     pub fn new(
         description: impl ::core::convert::Into<::std::string::String>,
-        size_in_bytes: impl ::core::convert::Into<i64>,
+        size_in_bytes: i64,
     ) -> Self {
         Self {
             description: description.into(),
@@ -32,22 +32,22 @@ impl ShardFileSizeInfo {
         }
     }
     /// Sets `min_size_in_bytes`.
-    pub fn min_size_in_bytes(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn min_size_in_bytes(mut self, value: i64) -> Self {
         self.min_size_in_bytes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_size_in_bytes`.
-    pub fn max_size_in_bytes(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn max_size_in_bytes(mut self, value: i64) -> Self {
         self.max_size_in_bytes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `average_size_in_bytes`.
-    pub fn average_size_in_bytes(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn average_size_in_bytes(mut self, value: i64) -> Self {
         self.average_size_in_bytes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `count`.
-    pub fn count(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn count(mut self, value: i64) -> Self {
         self.count = ::core::option::Option::Some(value.into());
         self
     }

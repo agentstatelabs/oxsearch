@@ -45,12 +45,12 @@ impl Request {
         self
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `follow_relocations`.
-    pub fn follow_relocations(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn follow_relocations(mut self, value: bool) -> Self {
         self.follow_relocations = ::core::option::Option::Some(value.into());
         self
     }
@@ -71,10 +71,7 @@ pub struct Response {
 
 impl Response {
     /// A `Response` with its required properties set.
-    pub fn new(
-        completed: impl ::core::convert::Into<bool>,
-        task: impl ::core::convert::Into<crate::TaskInfo>,
-    ) -> Self {
+    pub fn new(completed: bool, task: impl ::core::convert::Into<crate::TaskInfo>) -> Self {
         Self {
             completed: ::core::option::Option::Some(completed.into()),
             task: ::core::option::Option::Some(task.into()),

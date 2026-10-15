@@ -56,7 +56,7 @@ impl BoolQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -143,7 +143,7 @@ pub struct BoostingQuery {
 impl BoostingQuery {
     /// A `BoostingQuery` with its required properties set.
     pub fn new(
-        negative_boost: impl ::core::convert::Into<f64>,
+        negative_boost: f64,
         negative: impl ::core::convert::Into<crate::query_dsl::QueryContainer>,
         positive: impl ::core::convert::Into<crate::query_dsl::QueryContainer>,
     ) -> Self {
@@ -156,7 +156,7 @@ impl BoostingQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -336,7 +336,7 @@ impl CombinedFieldsQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -346,10 +346,7 @@ impl CombinedFieldsQuery {
         self
     }
     /// Sets `auto_generate_synonyms_phrase_query`.
-    pub fn auto_generate_synonyms_phrase_query(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn auto_generate_synonyms_phrase_query(mut self, value: bool) -> Self {
         self.auto_generate_synonyms_phrase_query = ::core::option::Option::Some(value.into());
         self
     }
@@ -463,7 +460,7 @@ impl CommonTermsQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -478,7 +475,7 @@ impl CommonTermsQuery {
         self
     }
     /// Sets `cutoff_frequency`.
-    pub fn cutoff_frequency(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn cutoff_frequency(mut self, value: f64) -> Self {
         self.cutoff_frequency = ::core::option::Option::Some(value.into());
         self
     }
@@ -617,7 +614,7 @@ impl ConstantScoreQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -755,7 +752,7 @@ impl DateDistanceFeatureQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -819,7 +816,7 @@ impl DateRangeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1018,7 +1015,7 @@ impl<TOrigin, TScale> DecayPlacement<TOrigin, TScale> {
         }
     }
     /// Sets `decay`.
-    pub fn decay(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn decay(mut self, value: f64) -> Self {
         self.decay = ::core::option::Option::Some(value.into());
         self
     }
@@ -1076,7 +1073,7 @@ impl DisMaxQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1086,7 +1083,7 @@ impl DisMaxQuery {
         self
     }
     /// Sets `tie_breaker`.
-    pub fn tie_breaker(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn tie_breaker(mut self, value: f64) -> Self {
         self.tie_breaker = ::core::option::Option::Some(value.into());
         self
     }
@@ -1171,7 +1168,7 @@ impl<TOrigin, TDistance> DistanceFeatureQueryBase<TOrigin, TDistance> {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1211,7 +1208,7 @@ impl ExistsQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1248,7 +1245,7 @@ impl FieldAndFormat {
         self
     }
     /// Sets `include_unmapped`.
-    pub fn include_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_unmapped(mut self, value: bool) -> Self {
         self.include_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -1465,12 +1462,12 @@ impl FieldValueFactorScoreFunction {
         }
     }
     /// Sets `factor`.
-    pub fn factor(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn factor(mut self, value: f64) -> Self {
         self.factor = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `missing`.
-    pub fn missing(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn missing(mut self, value: f64) -> Self {
         self.missing = ::core::option::Option::Some(value.into());
         self
     }
@@ -1693,7 +1690,7 @@ impl FunctionScoreContainer {
         self
     }
     /// Sets `weight`.
-    pub fn weight(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn weight(mut self, value: f64) -> Self {
         self.weight = ::core::option::Option::Some(value.into());
         self
     }
@@ -1892,7 +1889,7 @@ impl FunctionScoreQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1918,12 +1915,12 @@ impl FunctionScoreQuery {
         self
     }
     /// Sets `max_boost`.
-    pub fn max_boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_boost(mut self, value: f64) -> Self {
         self.max_boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn min_score(mut self, value: f64) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -2127,7 +2124,7 @@ impl FuzzyQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -2137,12 +2134,12 @@ impl FuzzyQuery {
         self
     }
     /// Sets `max_expansions`.
-    pub fn max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_expansions(mut self, value: i32) -> Self {
         self.max_expansions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -2155,7 +2152,7 @@ impl FuzzyQuery {
         self
     }
     /// Sets `transpositions`.
-    pub fn transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn transpositions(mut self, value: bool) -> Self {
         self.transpositions = ::core::option::Option::Some(value.into());
         self
     }
@@ -2298,7 +2295,7 @@ impl GeoBoundingBoxQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -2324,7 +2321,7 @@ impl GeoBoundingBoxQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -2522,7 +2519,7 @@ impl GeoDistanceFeatureQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -2589,7 +2586,7 @@ impl GeoDistanceQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -2615,7 +2612,7 @@ impl GeoDistanceQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -2849,7 +2846,7 @@ impl GeoGridQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -2993,7 +2990,7 @@ impl GeoPolygonQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3011,7 +3008,7 @@ impl GeoPolygonQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -3156,7 +3153,7 @@ impl GeoShapeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3166,7 +3163,7 @@ impl GeoShapeQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -3342,7 +3339,7 @@ impl HasChildQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3352,7 +3349,7 @@ impl HasChildQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -3365,12 +3362,12 @@ impl HasChildQuery {
         self
     }
     /// Sets `max_children`.
-    pub fn max_children(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_children(mut self, value: i32) -> Self {
         self.max_children = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_children`.
-    pub fn min_children(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_children(mut self, value: i32) -> Self {
         self.min_children = ::core::option::Option::Some(value.into());
         self
     }
@@ -3434,7 +3431,7 @@ impl HasParentQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3444,7 +3441,7 @@ impl HasParentQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -3457,7 +3454,7 @@ impl HasParentQuery {
         self
     }
     /// Sets `score`.
-    pub fn score(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn score(mut self, value: bool) -> Self {
         self.score = ::core::option::Option::Some(value.into());
         self
     }
@@ -3492,7 +3489,7 @@ impl IdsQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -3539,12 +3536,12 @@ impl IntervalsAllOf {
         }
     }
     /// Sets `max_gaps`.
-    pub fn max_gaps(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gaps(mut self, value: i32) -> Self {
         self.max_gaps = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ordered`.
-    pub fn ordered(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ordered(mut self, value: bool) -> Self {
         self.ordered = ::core::option::Option::Some(value.into());
         self
     }
@@ -3880,12 +3877,12 @@ impl IntervalsFuzzy {
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `transpositions`.
-    pub fn transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn transpositions(mut self, value: bool) -> Self {
         self.transpositions = ::core::option::Option::Some(value.into());
         self
     }
@@ -3939,12 +3936,12 @@ impl IntervalsMatch {
         self
     }
     /// Sets `max_gaps`.
-    pub fn max_gaps(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gaps(mut self, value: i32) -> Self {
         self.max_gaps = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ordered`.
-    pub fn ordered(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ordered(mut self, value: bool) -> Self {
         self.ordered = ::core::option::Option::Some(value.into());
         self
     }
@@ -4140,7 +4137,7 @@ impl IntervalsQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4415,7 +4412,7 @@ impl KqlQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4425,7 +4422,7 @@ impl KqlQuery {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -4634,7 +4631,7 @@ impl LongNumberRangeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4652,22 +4649,22 @@ impl LongNumberRangeQuery {
         self
     }
     /// Sets `gt`.
-    pub fn gt(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn gt(mut self, value: i64) -> Self {
         self.gt = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `gte`.
-    pub fn gte(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn gte(mut self, value: i64) -> Self {
         self.gte = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lt`.
-    pub fn lt(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn lt(mut self, value: i64) -> Self {
         self.lt = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lte`.
-    pub fn lte(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn lte(mut self, value: i64) -> Self {
         self.lte = ::core::option::Option::Some(value.into());
         self
     }
@@ -4698,7 +4695,7 @@ impl MatchAllQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4764,7 +4761,7 @@ impl MatchBoolPrefixQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4792,12 +4789,12 @@ impl MatchBoolPrefixQuery {
         self
     }
     /// Sets `fuzzy_transpositions`.
-    pub fn fuzzy_transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fuzzy_transpositions(mut self, value: bool) -> Self {
         self.fuzzy_transpositions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_expansions`.
-    pub fn max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_expansions(mut self, value: i32) -> Self {
         self.max_expansions = ::core::option::Option::Some(value.into());
         self
     }
@@ -4818,7 +4815,7 @@ impl MatchBoolPrefixQuery {
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -4956,7 +4953,7 @@ impl MatchNoneQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -5002,7 +4999,7 @@ impl MatchPhrasePrefixQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -5017,12 +5014,12 @@ impl MatchPhrasePrefixQuery {
         self
     }
     /// Sets `max_expansions`.
-    pub fn max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_expansions(mut self, value: i32) -> Self {
         self.max_expansions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `slop`.
-    pub fn slop(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slop(mut self, value: i32) -> Self {
         self.slop = ::core::option::Option::Some(value.into());
         self
     }
@@ -5147,7 +5144,7 @@ impl MatchPhraseQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -5162,7 +5159,7 @@ impl MatchPhraseQuery {
         self
     }
     /// Sets `slop`.
-    pub fn slop(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slop(mut self, value: i32) -> Self {
         self.slop = ::core::option::Option::Some(value.into());
         self
     }
@@ -5368,7 +5365,7 @@ impl MatchQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -5383,15 +5380,12 @@ impl MatchQuery {
         self
     }
     /// Sets `auto_generate_synonyms_phrase_query`.
-    pub fn auto_generate_synonyms_phrase_query(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn auto_generate_synonyms_phrase_query(mut self, value: bool) -> Self {
         self.auto_generate_synonyms_phrase_query = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `cutoff_frequency`.
-    pub fn cutoff_frequency(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn cutoff_frequency(mut self, value: f64) -> Self {
         self.cutoff_frequency = ::core::option::Option::Some(value.into());
         self
     }
@@ -5409,17 +5403,17 @@ impl MatchQuery {
         self
     }
     /// Sets `fuzzy_transpositions`.
-    pub fn fuzzy_transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fuzzy_transpositions(mut self, value: bool) -> Self {
         self.fuzzy_transpositions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_expansions`.
-    pub fn max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_expansions(mut self, value: i32) -> Self {
         self.max_expansions = ::core::option::Option::Some(value.into());
         self
     }
@@ -5440,7 +5434,7 @@ impl MatchQuery {
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -5674,7 +5668,7 @@ impl MoreLikeThisQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -5689,12 +5683,12 @@ impl MoreLikeThisQuery {
         self
     }
     /// Sets `boost_terms`.
-    pub fn boost_terms(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost_terms(mut self, value: f64) -> Self {
         self.boost_terms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `fail_on_unsupported_field`.
-    pub fn fail_on_unsupported_field(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fail_on_unsupported_field(mut self, value: bool) -> Self {
         self.fail_on_unsupported_field = ::core::option::Option::Some(value.into());
         self
     }
@@ -5707,27 +5701,27 @@ impl MoreLikeThisQuery {
         self
     }
     /// Sets `include`.
-    pub fn include(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include(mut self, value: bool) -> Self {
         self.include = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_doc_freq`.
-    pub fn max_doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_doc_freq(mut self, value: i32) -> Self {
         self.max_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_query_terms`.
-    pub fn max_query_terms(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_query_terms(mut self, value: i32) -> Self {
         self.max_query_terms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_word_length`.
-    pub fn max_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_word_length(mut self, value: i32) -> Self {
         self.max_word_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_doc_freq`.
-    pub fn min_doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_doc_freq(mut self, value: i32) -> Self {
         self.min_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
@@ -5740,12 +5734,12 @@ impl MoreLikeThisQuery {
         self
     }
     /// Sets `min_term_freq`.
-    pub fn min_term_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_term_freq(mut self, value: i32) -> Self {
         self.min_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_length`.
-    pub fn min_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_length(mut self, value: i32) -> Self {
         self.min_word_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -5876,7 +5870,7 @@ impl MultiMatchQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -5891,15 +5885,12 @@ impl MultiMatchQuery {
         self
     }
     /// Sets `auto_generate_synonyms_phrase_query`.
-    pub fn auto_generate_synonyms_phrase_query(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn auto_generate_synonyms_phrase_query(mut self, value: bool) -> Self {
         self.auto_generate_synonyms_phrase_query = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `cutoff_frequency`.
-    pub fn cutoff_frequency(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn cutoff_frequency(mut self, value: f64) -> Self {
         self.cutoff_frequency = ::core::option::Option::Some(value.into());
         self
     }
@@ -5922,17 +5913,17 @@ impl MultiMatchQuery {
         self
     }
     /// Sets `fuzzy_transpositions`.
-    pub fn fuzzy_transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fuzzy_transpositions(mut self, value: bool) -> Self {
         self.fuzzy_transpositions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_expansions`.
-    pub fn max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_expansions(mut self, value: i32) -> Self {
         self.max_expansions = ::core::option::Option::Some(value.into());
         self
     }
@@ -5953,17 +5944,17 @@ impl MultiMatchQuery {
         self
     }
     /// Sets `prefix_length`.
-    pub fn prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn prefix_length(mut self, value: i32) -> Self {
         self.prefix_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `slop`.
-    pub fn slop(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slop(mut self, value: i32) -> Self {
         self.slop = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `tie_breaker`.
-    pub fn tie_breaker(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn tie_breaker(mut self, value: f64) -> Self {
         self.tie_breaker = ::core::option::Option::Some(value.into());
         self
     }
@@ -6093,7 +6084,7 @@ impl NestedQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -6103,7 +6094,7 @@ impl NestedQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -6170,7 +6161,7 @@ impl NumberRangeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -6188,22 +6179,22 @@ impl NumberRangeQuery {
         self
     }
     /// Sets `gt`.
-    pub fn gt(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn gt(mut self, value: f64) -> Self {
         self.gt = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `gte`.
-    pub fn gte(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn gte(mut self, value: f64) -> Self {
         self.gte = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lt`.
-    pub fn lt(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn lt(mut self, value: f64) -> Self {
         self.lt = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lte`.
-    pub fn lte(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn lte(mut self, value: f64) -> Self {
         self.lte = ::core::option::Option::Some(value.into());
         self
     }
@@ -6373,7 +6364,7 @@ impl ParentIdQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -6388,7 +6379,7 @@ impl ParentIdQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -6463,7 +6454,7 @@ impl PercolateQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -6655,7 +6646,7 @@ impl PinnedQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -6778,7 +6769,7 @@ impl PrefixQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -6796,7 +6787,7 @@ impl PrefixQuery {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -6897,7 +6888,7 @@ impl QueryBase {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -7565,7 +7556,7 @@ impl QueryStringQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -7575,7 +7566,7 @@ impl QueryStringQuery {
         self
     }
     /// Sets `allow_leading_wildcard`.
-    pub fn allow_leading_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_leading_wildcard(mut self, value: bool) -> Self {
         self.allow_leading_wildcard = ::core::option::Option::Some(value.into());
         self
     }
@@ -7585,15 +7576,12 @@ impl QueryStringQuery {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `auto_generate_synonyms_phrase_query`.
-    pub fn auto_generate_synonyms_phrase_query(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn auto_generate_synonyms_phrase_query(mut self, value: bool) -> Self {
         self.auto_generate_synonyms_phrase_query = ::core::option::Option::Some(value.into());
         self
     }
@@ -7611,12 +7599,12 @@ impl QueryStringQuery {
         self
     }
     /// Sets `enable_position_increments`.
-    pub fn enable_position_increments(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enable_position_increments(mut self, value: bool) -> Self {
         self.enable_position_increments = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `escape`.
-    pub fn escape(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn escape(mut self, value: bool) -> Self {
         self.escape = ::core::option::Option::Some(value.into());
         self
     }
@@ -7634,12 +7622,12 @@ impl QueryStringQuery {
         self
     }
     /// Sets `fuzzy_max_expansions`.
-    pub fn fuzzy_max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fuzzy_max_expansions(mut self, value: i32) -> Self {
         self.fuzzy_max_expansions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `fuzzy_prefix_length`.
-    pub fn fuzzy_prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fuzzy_prefix_length(mut self, value: i32) -> Self {
         self.fuzzy_prefix_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -7652,17 +7640,17 @@ impl QueryStringQuery {
         self
     }
     /// Sets `fuzzy_transpositions`.
-    pub fn fuzzy_transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fuzzy_transpositions(mut self, value: bool) -> Self {
         self.fuzzy_transpositions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_determinized_states`.
-    pub fn max_determinized_states(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_determinized_states(mut self, value: i32) -> Self {
         self.max_determinized_states = ::core::option::Option::Some(value.into());
         self
     }
@@ -7675,7 +7663,7 @@ impl QueryStringQuery {
         self
     }
     /// Sets `phrase_slop`.
-    pub fn phrase_slop(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn phrase_slop(mut self, value: f64) -> Self {
         self.phrase_slop = ::core::option::Option::Some(value.into());
         self
     }
@@ -7704,7 +7692,7 @@ impl QueryStringQuery {
         self
     }
     /// Sets `tie_breaker`.
-    pub fn tie_breaker(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn tie_breaker(mut self, value: f64) -> Self {
         self.tie_breaker = ::core::option::Option::Some(value.into());
         self
     }
@@ -7892,7 +7880,7 @@ impl<T> RangeQueryBase<T> {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8019,7 +8007,7 @@ pub struct RankFeatureFunctionLogarithm {
 
 impl RankFeatureFunctionLogarithm {
     /// A `RankFeatureFunctionLogarithm` with its required properties set.
-    pub fn new(scaling_factor: impl ::core::convert::Into<f32>) -> Self {
+    pub fn new(scaling_factor: f32) -> Self {
         Self {
             scaling_factor: ::core::option::Option::Some(scaling_factor.into()),
         }
@@ -8042,7 +8030,7 @@ impl RankFeatureFunctionSaturation {
         }
     }
     /// Sets `pivot`.
-    pub fn pivot(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn pivot(mut self, value: f32) -> Self {
         self.pivot = ::core::option::Option::Some(value.into());
         self
     }
@@ -8061,10 +8049,7 @@ pub struct RankFeatureFunctionSigmoid {
 
 impl RankFeatureFunctionSigmoid {
     /// A `RankFeatureFunctionSigmoid` with its required properties set.
-    pub fn new(
-        pivot: impl ::core::convert::Into<f32>,
-        exponent: impl ::core::convert::Into<f32>,
-    ) -> Self {
+    pub fn new(pivot: f32, exponent: f32) -> Self {
         Self {
             pivot: ::core::option::Option::Some(pivot.into()),
             exponent: ::core::option::Option::Some(exponent.into()),
@@ -8117,7 +8102,7 @@ impl RankFeatureQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8196,7 +8181,7 @@ impl RegexpQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8206,7 +8191,7 @@ impl RegexpQuery {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -8216,7 +8201,7 @@ impl RegexpQuery {
         self
     }
     /// Sets `max_determinized_states`.
-    pub fn max_determinized_states(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_determinized_states(mut self, value: i32) -> Self {
         self.max_determinized_states = ::core::option::Option::Some(value.into());
         self
     }
@@ -8350,7 +8335,7 @@ impl RuleQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8404,7 +8389,7 @@ impl ScriptQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8473,7 +8458,7 @@ impl ScriptScoreQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8483,7 +8468,7 @@ impl ScriptScoreQuery {
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn min_score(mut self, value: f32) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -8525,7 +8510,7 @@ impl SemanticQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8618,7 +8603,7 @@ impl ShapeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8628,7 +8613,7 @@ impl ShapeQuery {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -8870,7 +8855,7 @@ impl SimpleQueryStringQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -8885,15 +8870,12 @@ impl SimpleQueryStringQuery {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `auto_generate_synonyms_phrase_query`.
-    pub fn auto_generate_synonyms_phrase_query(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn auto_generate_synonyms_phrase_query(mut self, value: bool) -> Self {
         self.auto_generate_synonyms_phrase_query = ::core::option::Option::Some(value.into());
         self
     }
@@ -8922,22 +8904,22 @@ impl SimpleQueryStringQuery {
         self
     }
     /// Sets `fuzzy_max_expansions`.
-    pub fn fuzzy_max_expansions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fuzzy_max_expansions(mut self, value: i32) -> Self {
         self.fuzzy_max_expansions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `fuzzy_prefix_length`.
-    pub fn fuzzy_prefix_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fuzzy_prefix_length(mut self, value: i32) -> Self {
         self.fuzzy_prefix_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `fuzzy_transpositions`.
-    pub fn fuzzy_transpositions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fuzzy_transpositions(mut self, value: bool) -> Self {
         self.fuzzy_transpositions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -8997,7 +8979,7 @@ impl SpanContainingQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9042,7 +9024,7 @@ impl SpanFieldMaskingQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9077,10 +9059,7 @@ pub struct SpanFirstQuery {
 
 impl SpanFirstQuery {
     /// A `SpanFirstQuery` with its required properties set.
-    pub fn new(
-        end: impl ::core::convert::Into<i32>,
-        r#match: impl ::core::convert::Into<crate::query_dsl::SpanQuery>,
-    ) -> Self {
+    pub fn new(end: i32, r#match: impl ::core::convert::Into<crate::query_dsl::SpanQuery>) -> Self {
         Self {
             boost: ::core::option::Option::None,
             name: ::core::option::Option::None,
@@ -9089,7 +9068,7 @@ impl SpanFirstQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9132,7 +9111,7 @@ impl SpanMultiTermQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9182,7 +9161,7 @@ impl SpanNearQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9192,12 +9171,12 @@ impl SpanNearQuery {
         self
     }
     /// Sets `in_order`.
-    pub fn in_order(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn in_order(mut self, value: bool) -> Self {
         self.in_order = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `slop`.
-    pub fn slop(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slop(mut self, value: i32) -> Self {
         self.slop = ::core::option::Option::Some(value.into());
         self
     }
@@ -9252,7 +9231,7 @@ impl SpanNotQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9262,17 +9241,17 @@ impl SpanNotQuery {
         self
     }
     /// Sets `dist`.
-    pub fn dist(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dist(mut self, value: i32) -> Self {
         self.dist = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `post`.
-    pub fn post(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn post(mut self, value: i32) -> Self {
         self.post = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `pre`.
-    pub fn pre(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn pre(mut self, value: i32) -> Self {
         self.pre = ::core::option::Option::Some(value.into());
         self
     }
@@ -9309,7 +9288,7 @@ impl SpanOrQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9476,7 +9455,7 @@ impl SpanTermQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9584,7 +9563,7 @@ impl SpanWithinQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9720,7 +9699,7 @@ impl SparseVectorQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9735,7 +9714,7 @@ impl SparseVectorQuery {
         self
     }
     /// Sets `prune`.
-    pub fn prune(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn prune(mut self, value: bool) -> Self {
         self.prune = ::core::option::Option::Some(value.into());
         self
     }
@@ -9877,7 +9856,7 @@ impl TermQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -9887,7 +9866,7 @@ impl TermQuery {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -10001,7 +9980,7 @@ impl TermRangeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10109,7 +10088,7 @@ impl TermsQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10265,7 +10244,7 @@ impl TermsSetQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10340,7 +10319,7 @@ impl TextExpansionQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10456,7 +10435,7 @@ impl TypeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10597,7 +10576,7 @@ impl UntypedDistanceFeatureQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10661,7 +10640,7 @@ impl UntypedRangeQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10749,7 +10728,7 @@ impl WeightedTokensQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10800,7 +10779,7 @@ impl WildcardQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -10810,7 +10789,7 @@ impl WildcardQuery {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -10938,7 +10917,7 @@ impl WrapperQuery {
         }
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }

@@ -102,7 +102,7 @@ impl Request {
         }
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }

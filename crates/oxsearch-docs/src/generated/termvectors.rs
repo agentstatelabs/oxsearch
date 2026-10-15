@@ -14,11 +14,7 @@ pub struct FieldStatistics {
 
 impl FieldStatistics {
     /// A `FieldStatistics` with its required properties set.
-    pub fn new(
-        doc_count: impl ::core::convert::Into<i32>,
-        sum_doc_freq: impl ::core::convert::Into<i64>,
-        sum_ttf: impl ::core::convert::Into<i64>,
-    ) -> Self {
+    pub fn new(doc_count: i32, sum_doc_freq: i64, sum_ttf: i64) -> Self {
         Self {
             doc_count: ::core::option::Option::Some(doc_count.into()),
             sum_doc_freq: ::core::option::Option::Some(sum_doc_freq.into()),
@@ -70,37 +66,37 @@ impl Filter {
         }
     }
     /// Sets `max_doc_freq`.
-    pub fn max_doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_doc_freq(mut self, value: i32) -> Self {
         self.max_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_num_terms`.
-    pub fn max_num_terms(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_num_terms(mut self, value: i32) -> Self {
         self.max_num_terms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_term_freq`.
-    pub fn max_term_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_term_freq(mut self, value: i32) -> Self {
         self.max_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_word_length`.
-    pub fn max_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_word_length(mut self, value: i32) -> Self {
         self.max_word_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_doc_freq`.
-    pub fn min_doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_doc_freq(mut self, value: i32) -> Self {
         self.min_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_term_freq`.
-    pub fn min_term_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_term_freq(mut self, value: i32) -> Self {
         self.min_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_length`.
-    pub fn min_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_length(mut self, value: i32) -> Self {
         self.min_word_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -210,27 +206,27 @@ impl<TDocument> RequestBody<TDocument> {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -382,22 +378,22 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
@@ -407,7 +403,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
@@ -422,7 +418,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -480,9 +476,9 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        found: impl ::core::convert::Into<bool>,
+        found: bool,
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        took: impl ::core::convert::Into<i64>,
+        took: i64,
         version: impl ::core::convert::Into<::oxsearch_core::VersionNumber>,
     ) -> Self {
         Self {
@@ -528,7 +524,7 @@ pub struct Term {
 
 impl Term {
     /// A `Term` with its required properties set.
-    pub fn new(term_freq: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(term_freq: i32) -> Self {
         Self {
             doc_freq: ::core::option::Option::None,
             score: ::core::option::Option::None,
@@ -538,12 +534,12 @@ impl Term {
         }
     }
     /// Sets `doc_freq`.
-    pub fn doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn doc_freq(mut self, value: i32) -> Self {
         self.doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `score`.
-    pub fn score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn score(mut self, value: f64) -> Self {
         self.score = ::core::option::Option::Some(value.into());
         self
     }
@@ -556,7 +552,7 @@ impl Term {
         self
     }
     /// Sets `ttf`.
-    pub fn ttf(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ttf(mut self, value: i32) -> Self {
         self.ttf = ::core::option::Option::Some(value.into());
         self
     }
@@ -608,7 +604,7 @@ pub struct Token {
 
 impl Token {
     /// A `Token` with its required properties set.
-    pub fn new(position: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(position: i32) -> Self {
         Self {
             end_offset: ::core::option::Option::None,
             payload: ::core::option::Option::None,
@@ -617,7 +613,7 @@ impl Token {
         }
     }
     /// Sets `end_offset`.
-    pub fn end_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn end_offset(mut self, value: i32) -> Self {
         self.end_offset = ::core::option::Option::Some(value.into());
         self
     }
@@ -627,7 +623,7 @@ impl Token {
         self
     }
     /// Sets `start_offset`.
-    pub fn start_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn start_offset(mut self, value: i32) -> Self {
         self.start_offset = ::core::option::Option::Some(value.into());
         self
     }

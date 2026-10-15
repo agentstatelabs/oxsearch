@@ -146,7 +146,7 @@ impl<TDocument> Request<TDocument> {
         }
     }
     /// Sets `include_source_on_error`.
-    pub fn include_source_on_error(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_source_on_error(mut self, value: bool) -> Self {
         self.include_source_on_error = ::core::option::Option::Some(value.into());
         self
     }
@@ -161,12 +161,12 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `require_data_stream`.
-    pub fn require_data_stream(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_data_stream(mut self, value: bool) -> Self {
         self.require_data_stream = ::core::option::Option::Some(value.into());
         self
     }

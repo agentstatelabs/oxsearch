@@ -114,7 +114,7 @@ impl Request {
         self
     }
     /// Sets `detailed`.
-    pub fn detailed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn detailed(mut self, value: bool) -> Self {
         self.detailed = ::core::option::Option::Some(value.into());
         self
     }
@@ -142,7 +142,7 @@ impl Request {
         self
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }

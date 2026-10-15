@@ -92,7 +92,7 @@ impl Operation {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -102,17 +102,17 @@ impl Operation {
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
@@ -122,7 +122,7 @@ impl Operation {
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -276,22 +276,22 @@ impl Request {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
@@ -301,7 +301,7 @@ impl Request {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
@@ -316,7 +316,7 @@ impl Request {
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -419,12 +419,12 @@ impl TermVectorsResult {
         self
     }
     /// Sets `took`.
-    pub fn took(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn took(mut self, value: i64) -> Self {
         self.took = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `found`.
-    pub fn found(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn found(mut self, value: bool) -> Self {
         self.found = ::core::option::Option::Some(value.into());
         self
     }

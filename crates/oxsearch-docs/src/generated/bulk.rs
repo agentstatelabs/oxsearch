@@ -76,7 +76,7 @@ impl CreateOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -120,7 +120,7 @@ impl CreateOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
@@ -183,7 +183,7 @@ impl DeleteOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -288,7 +288,7 @@ impl IndexOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -332,7 +332,7 @@ impl IndexOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
@@ -395,7 +395,7 @@ impl OperationBase {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -899,12 +899,12 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `include_source_on_error`.
-    pub fn include_source_on_error(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_source_on_error(mut self, value: bool) -> Self {
         self.include_source_on_error = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `list_executed_pipelines`.
-    pub fn list_executed_pipelines(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn list_executed_pipelines(mut self, value: bool) -> Self {
         self.list_executed_pipelines = ::core::option::Option::Some(value.into());
         self
     }
@@ -966,12 +966,12 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `require_data_stream`.
-    pub fn require_data_stream(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_data_stream(mut self, value: bool) -> Self {
         self.require_data_stream = ::core::option::Option::Some(value.into());
         self
     }
@@ -1006,7 +1006,7 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        errors: impl ::core::convert::Into<bool>,
+        errors: bool,
         items: impl ::core::convert::Into<
             ::std::vec::Vec<
                 ::oxsearch_core::shapes::SingleKey<
@@ -1015,7 +1015,7 @@ impl Response {
                 >,
             >,
         >,
-        took: impl ::core::convert::Into<i64>,
+        took: i64,
     ) -> Self {
         Self {
             errors: ::core::option::Option::Some(errors.into()),
@@ -1025,7 +1025,7 @@ impl Response {
         }
     }
     /// Sets `ingest_took`.
-    pub fn ingest_took(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn ingest_took(mut self, value: i64) -> Self {
         self.ingest_took = ::core::option::Option::Some(value.into());
         self
     }
@@ -1152,10 +1152,7 @@ pub struct ResponseItem {
 
 impl ResponseItem {
     /// A `ResponseItem` with its required properties set.
-    pub fn new(
-        index: impl ::core::convert::Into<::std::string::String>,
-        status: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(index: impl ::core::convert::Into<::std::string::String>, status: i32) -> Self {
         Self {
             id: ::core::option::Option::None,
             index: ::core::option::Option::Some(index.into()),
@@ -1190,7 +1187,7 @@ impl ResponseItem {
         self
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1224,7 +1221,7 @@ impl ResponseItem {
         self
     }
     /// Sets `forced_refresh`.
-    pub fn forced_refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn forced_refresh(mut self, value: bool) -> Self {
         self.forced_refresh = ::core::option::Option::Some(value.into());
         self
     }
@@ -1289,7 +1286,7 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         }
     }
     /// Sets `detect_noop`.
-    pub fn detect_noop(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn detect_noop(mut self, value: bool) -> Self {
         self.detect_noop = ::core::option::Option::Some(value.into());
         self
     }
@@ -1299,7 +1296,7 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         self
     }
     /// Sets `doc_as_upsert`.
-    pub fn doc_as_upsert(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn doc_as_upsert(mut self, value: bool) -> Self {
         self.doc_as_upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -1309,7 +1306,7 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         self
     }
     /// Sets `scripted_upsert`.
-    pub fn scripted_upsert(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn scripted_upsert(mut self, value: bool) -> Self {
         self.scripted_upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -1393,7 +1390,7 @@ impl UpdateOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1422,12 +1419,12 @@ impl UpdateOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `retry_on_conflict`.
-    pub fn retry_on_conflict(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn retry_on_conflict(mut self, value: i32) -> Self {
         self.retry_on_conflict = ::core::option::Option::Some(value.into());
         self
     }
@@ -1508,7 +1505,7 @@ impl WriteOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1552,7 +1549,7 @@ impl WriteOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }

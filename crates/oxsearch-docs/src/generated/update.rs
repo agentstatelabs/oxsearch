@@ -49,7 +49,7 @@ impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
         }
     }
     /// Sets `detect_noop`.
-    pub fn detect_noop(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn detect_noop(mut self, value: bool) -> Self {
         self.detect_noop = ::core::option::Option::Some(value.into());
         self
     }
@@ -59,7 +59,7 @@ impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
         self
     }
     /// Sets `doc_as_upsert`.
-    pub fn doc_as_upsert(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn doc_as_upsert(mut self, value: bool) -> Self {
         self.doc_as_upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -69,7 +69,7 @@ impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
         self
     }
     /// Sets `scripted_upsert`.
-    pub fn scripted_upsert(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn scripted_upsert(mut self, value: bool) -> Self {
         self.scripted_upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -187,7 +187,7 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         }
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -200,7 +200,7 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `include_source_on_error`.
-    pub fn include_source_on_error(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_source_on_error(mut self, value: bool) -> Self {
         self.include_source_on_error = ::core::option::Option::Some(value.into());
         self
     }
@@ -215,12 +215,12 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `retry_on_conflict`.
-    pub fn retry_on_conflict(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn retry_on_conflict(mut self, value: i32) -> Self {
         self.retry_on_conflict = ::core::option::Option::Some(value.into());
         self
     }
@@ -372,7 +372,7 @@ impl<TDocument> UpdateWriteResponseBase<TDocument> {
         }
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -393,7 +393,7 @@ impl<TDocument> UpdateWriteResponseBase<TDocument> {
         self
     }
     /// Sets `forced_refresh`.
-    pub fn forced_refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn forced_refresh(mut self, value: bool) -> Self {
         self.forced_refresh = ::core::option::Option::Some(value.into());
         self
     }

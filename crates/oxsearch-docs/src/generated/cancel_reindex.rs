@@ -54,7 +54,7 @@ impl Request {
         }
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
@@ -121,12 +121,12 @@ impl Response {
         }
     }
     /// Sets `acknowledged`.
-    pub fn acknowledged(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn acknowledged(mut self, value: bool) -> Self {
         self.acknowledged = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `completed`.
-    pub fn completed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn completed(mut self, value: bool) -> Self {
         self.completed = ::core::option::Option::Some(value.into());
         self
     }
@@ -170,7 +170,7 @@ impl Response {
         self
     }
     /// Sets `cancelled`.
-    pub fn cancelled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn cancelled(mut self, value: bool) -> Self {
         self.cancelled = ::core::option::Option::Some(value.into());
         self
     }

@@ -30,7 +30,7 @@ impl RequestBody {
         }
     }
     /// Sets `max_docs`.
-    pub fn max_docs(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn max_docs(mut self, value: i64) -> Self {
         self.max_docs = ::core::option::Option::Some(value.into());
         self
     }
@@ -285,7 +285,7 @@ impl Request {
         }
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -295,7 +295,7 @@ impl Request {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
@@ -329,22 +329,22 @@ impl Request {
         self
     }
     /// Sets `from`.
-    pub fn from(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn from(mut self, value: i64) -> Self {
         self.from = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_docs`.
-    pub fn max_docs(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn max_docs(mut self, value: i64) -> Self {
         self.max_docs = ::core::option::Option::Some(value.into());
         self
     }
@@ -354,17 +354,17 @@ impl Request {
         self
     }
     /// Sets `refresh`.
-    pub fn refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `request_cache`.
-    pub fn request_cache(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn request_cache(mut self, value: bool) -> Self {
         self.request_cache = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `requests_per_second`.
-    pub fn requests_per_second(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn requests_per_second(mut self, value: f32) -> Self {
         self.requests_per_second = ::core::option::Option::Some(value.into());
         self
     }
@@ -389,7 +389,7 @@ impl Request {
         self
     }
     /// Sets `scroll_size`.
-    pub fn scroll_size(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn scroll_size(mut self, value: i64) -> Self {
         self.scroll_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -431,7 +431,7 @@ impl Request {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn terminate_after(mut self, value: i64) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -441,7 +441,7 @@ impl Request {
         self
     }
     /// Sets `version`.
-    pub fn version(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn version(mut self, value: bool) -> Self {
         self.version = ::core::option::Option::Some(value.into());
         self
     }
@@ -454,7 +454,7 @@ impl Request {
         self
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
@@ -552,12 +552,12 @@ impl Response {
         }
     }
     /// Sets `batches`.
-    pub fn batches(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn batches(mut self, value: i64) -> Self {
         self.batches = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `deleted`.
-    pub fn deleted(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn deleted(mut self, value: i64) -> Self {
         self.deleted = ::core::option::Option::Some(value.into());
         self
     }
@@ -570,12 +570,12 @@ impl Response {
         self
     }
     /// Sets `noops`.
-    pub fn noops(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn noops(mut self, value: i64) -> Self {
         self.noops = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `requests_per_second`.
-    pub fn requests_per_second(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn requests_per_second(mut self, value: f32) -> Self {
         self.requests_per_second = ::core::option::Option::Some(value.into());
         self
     }
@@ -585,7 +585,7 @@ impl Response {
         self
     }
     /// Sets `slice_id`.
-    pub fn slice_id(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slice_id(mut self, value: i32) -> Self {
         self.slice_id = ::core::option::Option::Some(value.into());
         self
     }
@@ -635,7 +635,7 @@ impl Response {
         self
     }
     /// Sets `timed_out`.
-    pub fn timed_out(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn timed_out(mut self, value: bool) -> Self {
         self.timed_out = ::core::option::Option::Some(value.into());
         self
     }
@@ -645,12 +645,12 @@ impl Response {
         self
     }
     /// Sets `total`.
-    pub fn total(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn total(mut self, value: i64) -> Self {
         self.total = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version_conflicts`.
-    pub fn version_conflicts(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn version_conflicts(mut self, value: i64) -> Self {
         self.version_conflicts = ::core::option::Option::Some(value.into());
         self
     }

@@ -35,12 +35,12 @@ impl Request {
         self
     }
     /// Sets `dry_run`.
-    pub fn dry_run(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn dry_run(mut self, value: bool) -> Self {
         self.dry_run = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `force`.
-    pub fn force(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force(mut self, value: bool) -> Self {
         self.force = ::core::option::Option::Some(value.into());
         self
     }

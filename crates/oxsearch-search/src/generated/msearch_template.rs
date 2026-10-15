@@ -69,12 +69,12 @@ impl Request {
         self
     }
     /// Sets `ccs_minimize_roundtrips`.
-    pub fn ccs_minimize_roundtrips(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ccs_minimize_roundtrips(mut self, value: bool) -> Self {
         self.ccs_minimize_roundtrips = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_concurrent_searches`.
-    pub fn max_concurrent_searches(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn max_concurrent_searches(mut self, value: i64) -> Self {
         self.max_concurrent_searches = ::core::option::Option::Some(value.into());
         self
     }
@@ -95,12 +95,12 @@ impl Request {
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `typed_keys`.
-    pub fn typed_keys(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn typed_keys(mut self, value: bool) -> Self {
         self.typed_keys = ::core::option::Option::Some(value.into());
         self
     }
@@ -257,7 +257,7 @@ impl TemplateConfig {
         }
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
@@ -277,7 +277,7 @@ impl TemplateConfig {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }

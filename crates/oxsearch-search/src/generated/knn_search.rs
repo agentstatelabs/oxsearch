@@ -167,8 +167,8 @@ pub struct Response<TDocument = ::serde_json::Value> {
 impl<TDocument> Response<TDocument> {
     /// A `Response` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        timed_out: impl ::core::convert::Into<bool>,
+        took: i64,
+        timed_out: bool,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
         hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
@@ -192,7 +192,7 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -216,8 +216,8 @@ impl KnnSearchQuery {
     pub fn new(
         field: impl ::core::convert::Into<::oxsearch_core::Field>,
         query_vector: impl ::core::convert::Into<::oxsearch_core::QueryVector>,
-        k: impl ::core::convert::Into<i32>,
-        num_candidates: impl ::core::convert::Into<i32>,
+        k: i32,
+        num_candidates: i32,
     ) -> Self {
         Self {
             field: field.into(),

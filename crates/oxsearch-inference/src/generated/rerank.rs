@@ -91,12 +91,12 @@ impl RequestBody {
         }
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }

@@ -1116,7 +1116,7 @@ impl CharGroupTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -1291,7 +1291,7 @@ impl CjkBigramTokenFilter {
         self
     }
     /// Sets `output_unigrams`.
-    pub fn output_unigrams(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn output_unigrams(mut self, value: bool) -> Self {
         self.output_unigrams = ::core::option::Option::Some(value.into());
         self
     }
@@ -1371,7 +1371,7 @@ impl ClassicTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -1438,12 +1438,12 @@ impl CommonGramsTokenFilter {
         self
     }
     /// Sets `ignore_case`.
-    pub fn ignore_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_case(mut self, value: bool) -> Self {
         self.ignore_case = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `query_mode`.
-    pub fn query_mode(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn query_mode(mut self, value: bool) -> Self {
         self.query_mode = ::core::option::Option::Some(value.into());
         self
     }
@@ -1499,22 +1499,22 @@ impl CompoundWordTokenFilterBase {
         self
     }
     /// Sets `max_subword_size`.
-    pub fn max_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_subword_size(mut self, value: i32) -> Self {
         self.max_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_subword_size`.
-    pub fn min_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_subword_size(mut self, value: i32) -> Self {
         self.min_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_size`.
-    pub fn min_word_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_size(mut self, value: i32) -> Self {
         self.min_word_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_longest_match`.
-    pub fn only_longest_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_longest_match(mut self, value: bool) -> Self {
         self.only_longest_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -1612,12 +1612,12 @@ impl CustomAnalyzer {
         self
     }
     /// Sets `position_increment_gap`.
-    pub fn position_increment_gap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn position_increment_gap(mut self, value: i32) -> Self {
         self.position_increment_gap = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `position_offset_gap`.
-    pub fn position_offset_gap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn position_offset_gap(mut self, value: i32) -> Self {
         self.position_offset_gap = ::core::option::Option::Some(value.into());
         self
     }
@@ -1938,22 +1938,22 @@ impl DictionaryDecompounderTokenFilter {
         self
     }
     /// Sets `max_subword_size`.
-    pub fn max_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_subword_size(mut self, value: i32) -> Self {
         self.max_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_subword_size`.
-    pub fn min_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_subword_size(mut self, value: i32) -> Self {
         self.min_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_size`.
-    pub fn min_word_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_size(mut self, value: i32) -> Self {
         self.min_word_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_longest_match`.
-    pub fn only_longest_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_longest_match(mut self, value: bool) -> Self {
         self.only_longest_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -2136,12 +2136,12 @@ impl EdgeNGramTokenFilter {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -2203,12 +2203,12 @@ impl EdgeNGramTokenizer {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -2410,7 +2410,7 @@ impl FingerprintAnalyzer {
         self
     }
     /// Sets `max_output_size`.
-    pub fn max_output_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_output_size(mut self, value: i32) -> Self {
         self.max_output_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -2468,7 +2468,7 @@ impl FingerprintTokenFilter {
         self
     }
     /// Sets `max_output_size`.
-    pub fn max_output_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_output_size(mut self, value: i32) -> Self {
         self.max_output_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -2985,7 +2985,7 @@ impl HunspellTokenFilter {
         self
     }
     /// Sets `dedup`.
-    pub fn dedup(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn dedup(mut self, value: bool) -> Self {
         self.dedup = ::core::option::Option::Some(value.into());
         self
     }
@@ -2995,7 +2995,7 @@ impl HunspellTokenFilter {
         self
     }
     /// Sets `longest_only`.
-    pub fn longest_only(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn longest_only(mut self, value: bool) -> Self {
         self.longest_only = ::core::option::Option::Some(value.into());
         self
     }
@@ -3065,22 +3065,22 @@ impl HyphenationDecompounderTokenFilter {
         self
     }
     /// Sets `max_subword_size`.
-    pub fn max_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_subword_size(mut self, value: i32) -> Self {
         self.max_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_subword_size`.
-    pub fn min_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_subword_size(mut self, value: i32) -> Self {
         self.min_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_size`.
-    pub fn min_word_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_size(mut self, value: i32) -> Self {
         self.min_word_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_longest_match`.
-    pub fn only_longest_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_longest_match(mut self, value: bool) -> Self {
         self.only_longest_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -3101,12 +3101,12 @@ impl HyphenationDecompounderTokenFilter {
         self
     }
     /// Sets `no_sub_matches`.
-    pub fn no_sub_matches(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn no_sub_matches(mut self, value: bool) -> Self {
         self.no_sub_matches = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `no_overlapping_matches`.
-    pub fn no_overlapping_matches(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn no_overlapping_matches(mut self, value: bool) -> Self {
         self.no_overlapping_matches = ::core::option::Option::Some(value.into());
         self
     }
@@ -3439,7 +3439,7 @@ impl IcuCollationTokenFilter {
         self
     }
     /// Sets `case_level`.
-    pub fn case_level(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_level(mut self, value: bool) -> Self {
         self.case_level = ::core::option::Option::Some(value.into());
         self
     }
@@ -3457,7 +3457,7 @@ impl IcuCollationTokenFilter {
         self
     }
     /// Sets `hiragana_quaternary_mode`.
-    pub fn hiragana_quaternary_mode(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn hiragana_quaternary_mode(mut self, value: bool) -> Self {
         self.hiragana_quaternary_mode = ::core::option::Option::Some(value.into());
         self
     }
@@ -3467,7 +3467,7 @@ impl IcuCollationTokenFilter {
         self
     }
     /// Sets `numeric`.
-    pub fn numeric(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn numeric(mut self, value: bool) -> Self {
         self.numeric = ::core::option::Option::Some(value.into());
         self
     }
@@ -4177,7 +4177,7 @@ impl KeepWordsTokenFilter {
         self
     }
     /// Sets `keep_words_case`.
-    pub fn keep_words_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn keep_words_case(mut self, value: bool) -> Self {
         self.keep_words_case = ::core::option::Option::Some(value.into());
         self
     }
@@ -4258,7 +4258,7 @@ impl KeywordMarkerTokenFilter {
         self
     }
     /// Sets `ignore_case`.
-    pub fn ignore_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_case(mut self, value: bool) -> Self {
         self.ignore_case = ::core::option::Option::Some(value.into());
         self
     }
@@ -4338,7 +4338,7 @@ impl KeywordTokenizer {
         self
     }
     /// Sets `buffer_size`.
-    pub fn buffer_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn buffer_size(mut self, value: i32) -> Self {
         self.buffer_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4390,10 +4390,7 @@ pub struct KuromojiIterationMarkCharFilter {
 
 impl KuromojiIterationMarkCharFilter {
     /// A `KuromojiIterationMarkCharFilter` with its required properties set.
-    pub fn new(
-        normalize_kana: impl ::core::convert::Into<bool>,
-        normalize_kanji: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn new(normalize_kana: bool, normalize_kanji: bool) -> Self {
         Self {
             version: ::core::option::Option::None,
             normalize_kana: normalize_kana.into(),
@@ -4448,7 +4445,7 @@ pub struct KuromojiReadingFormTokenFilter {
 
 impl KuromojiReadingFormTokenFilter {
     /// A `KuromojiReadingFormTokenFilter` with its required properties set.
-    pub fn new(use_romaji: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(use_romaji: bool) -> Self {
         Self {
             version: ::core::option::Option::None,
             use_romaji: use_romaji.into(),
@@ -4474,7 +4471,7 @@ pub struct KuromojiStemmerTokenFilter {
 
 impl KuromojiStemmerTokenFilter {
     /// A `KuromojiStemmerTokenFilter` with its required properties set.
-    pub fn new(minimum_length: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(minimum_length: i32) -> Self {
         Self {
             version: ::core::option::Option::None,
             minimum_length: minimum_length.into(),
@@ -4589,12 +4586,12 @@ impl KuromojiTokenizer {
         self
     }
     /// Sets `discard_punctuation`.
-    pub fn discard_punctuation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn discard_punctuation(mut self, value: bool) -> Self {
         self.discard_punctuation = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `nbest_cost`.
-    pub fn nbest_cost(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn nbest_cost(mut self, value: i32) -> Self {
         self.nbest_cost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4623,7 +4620,7 @@ impl KuromojiTokenizer {
         self
     }
     /// Sets `discard_compound_token`.
-    pub fn discard_compound_token(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn discard_compound_token(mut self, value: bool) -> Self {
         self.discard_compound_token = ::core::option::Option::Some(value.into());
         self
     }
@@ -4706,12 +4703,12 @@ impl LengthTokenFilter {
         self
     }
     /// Sets `max`.
-    pub fn max(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max(mut self, value: i32) -> Self {
         self.max = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min`.
-    pub fn min(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min(mut self, value: i32) -> Self {
         self.min = ::core::option::Option::Some(value.into());
         self
     }
@@ -4772,7 +4769,7 @@ impl LimitTokenCountTokenFilter {
         self
     }
     /// Sets `consume_all_tokens`.
-    pub fn consume_all_tokens(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn consume_all_tokens(mut self, value: bool) -> Self {
         self.consume_all_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -5045,22 +5042,22 @@ impl MinHashTokenFilter {
         self
     }
     /// Sets `bucket_count`.
-    pub fn bucket_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn bucket_count(mut self, value: i32) -> Self {
         self.bucket_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `hash_count`.
-    pub fn hash_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn hash_count(mut self, value: i32) -> Self {
         self.hash_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `hash_set_size`.
-    pub fn hash_set_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn hash_set_size(mut self, value: i32) -> Self {
         self.hash_set_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `with_rotation`.
-    pub fn with_rotation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn with_rotation(mut self, value: bool) -> Self {
         self.with_rotation = ::core::option::Option::Some(value.into());
         self
     }
@@ -5142,12 +5139,12 @@ impl NGramTokenFilter {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -5204,12 +5201,12 @@ impl NGramTokenizer {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -5415,7 +5412,7 @@ impl NoriTokenizer {
         self
     }
     /// Sets `discard_punctuation`.
-    pub fn discard_punctuation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn discard_punctuation(mut self, value: bool) -> Self {
         self.discard_punctuation = ::core::option::Option::Some(value.into());
         self
     }
@@ -5657,7 +5654,7 @@ impl PatternAnalyzer {
         self
     }
     /// Sets `lowercase`.
-    pub fn lowercase(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lowercase(mut self, value: bool) -> Self {
         self.lowercase = ::core::option::Option::Some(value.into());
         self
     }
@@ -5804,7 +5801,7 @@ impl PatternReplaceTokenFilter {
         self
     }
     /// Sets `all`.
-    pub fn all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn all(mut self, value: bool) -> Self {
         self.all = ::core::option::Option::Some(value.into());
         self
     }
@@ -5857,7 +5854,7 @@ impl PatternTokenizer {
         self
     }
     /// Sets `group`.
-    pub fn group(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn group(mut self, value: i32) -> Self {
         self.group = ::core::option::Option::Some(value.into());
         self
     }
@@ -6292,7 +6289,7 @@ impl PhoneticTokenFilter {
         self
     }
     /// Sets `max_code_len`.
-    pub fn max_code_len(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_code_len(mut self, value: i32) -> Self {
         self.max_code_len = ::core::option::Option::Some(value.into());
         self
     }
@@ -6302,7 +6299,7 @@ impl PhoneticTokenFilter {
         self
     }
     /// Sets `replace`.
-    pub fn replace(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn replace(mut self, value: bool) -> Self {
         self.replace = ::core::option::Option::Some(value.into());
         self
     }
@@ -6763,15 +6760,12 @@ impl ShingleTokenFilter {
         self
     }
     /// Sets `output_unigrams`.
-    pub fn output_unigrams(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn output_unigrams(mut self, value: bool) -> Self {
         self.output_unigrams = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `output_unigrams_if_no_shingles`.
-    pub fn output_unigrams_if_no_shingles(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn output_unigrams_if_no_shingles(mut self, value: bool) -> Self {
         self.output_unigrams_if_no_shingles = ::core::option::Option::Some(value.into());
         self
     }
@@ -7237,7 +7231,7 @@ impl StandardAnalyzer {
         }
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -7285,7 +7279,7 @@ impl StandardTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -7460,12 +7454,12 @@ impl StopTokenFilter {
         self
     }
     /// Sets `ignore_case`.
-    pub fn ignore_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_case(mut self, value: bool) -> Self {
         self.ignore_case = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `remove_trailing`.
-    pub fn remove_trailing(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn remove_trailing(mut self, value: bool) -> Self {
         self.remove_trailing = ::core::option::Option::Some(value.into());
         self
     }
@@ -7641,7 +7635,7 @@ impl SynonymGraphTokenFilter {
         self
     }
     /// Sets `expand`.
-    pub fn expand(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn expand(mut self, value: bool) -> Self {
         self.expand = ::core::option::Option::Some(value.into());
         self
     }
@@ -7651,7 +7645,7 @@ impl SynonymGraphTokenFilter {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -7685,7 +7679,7 @@ impl SynonymGraphTokenFilter {
         self
     }
     /// Sets `updateable`.
-    pub fn updateable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn updateable(mut self, value: bool) -> Self {
         self.updateable = ::core::option::Option::Some(value.into());
         self
     }
@@ -7747,7 +7741,7 @@ impl SynonymTokenFilter {
         self
     }
     /// Sets `expand`.
-    pub fn expand(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn expand(mut self, value: bool) -> Self {
         self.expand = ::core::option::Option::Some(value.into());
         self
     }
@@ -7757,7 +7751,7 @@ impl SynonymTokenFilter {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -7791,7 +7785,7 @@ impl SynonymTokenFilter {
         self
     }
     /// Sets `updateable`.
-    pub fn updateable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn updateable(mut self, value: bool) -> Self {
         self.updateable = ::core::option::Option::Some(value.into());
         self
     }
@@ -7853,7 +7847,7 @@ impl SynonymTokenFilterBase {
         self
     }
     /// Sets `expand`.
-    pub fn expand(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn expand(mut self, value: bool) -> Self {
         self.expand = ::core::option::Option::Some(value.into());
         self
     }
@@ -7863,7 +7857,7 @@ impl SynonymTokenFilterBase {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -7897,7 +7891,7 @@ impl SynonymTokenFilterBase {
         self
     }
     /// Sets `updateable`.
-    pub fn updateable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn updateable(mut self, value: bool) -> Self {
         self.updateable = ::core::option::Option::Some(value.into());
         self
     }
@@ -9217,7 +9211,7 @@ impl TruncateTokenFilter {
         self
     }
     /// Sets `length`.
-    pub fn length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn length(mut self, value: i32) -> Self {
         self.length = ::core::option::Option::Some(value.into());
         self
     }
@@ -9295,7 +9289,7 @@ impl UaxEmailUrlTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -9328,7 +9322,7 @@ impl UniqueTokenFilter {
         self
     }
     /// Sets `only_on_same_position`.
-    pub fn only_on_same_position(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_on_same_position(mut self, value: bool) -> Self {
         self.only_on_same_position = ::core::option::Option::Some(value.into());
         self
     }
@@ -9408,7 +9402,7 @@ impl WhitespaceTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -9498,27 +9492,27 @@ impl WordDelimiterGraphTokenFilter {
         self
     }
     /// Sets `catenate_all`.
-    pub fn catenate_all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_all(mut self, value: bool) -> Self {
         self.catenate_all = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_numbers`.
-    pub fn catenate_numbers(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_numbers(mut self, value: bool) -> Self {
         self.catenate_numbers = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_words`.
-    pub fn catenate_words(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_words(mut self, value: bool) -> Self {
         self.catenate_words = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_number_parts`.
-    pub fn generate_number_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_number_parts(mut self, value: bool) -> Self {
         self.generate_number_parts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_word_parts`.
-    pub fn generate_word_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_word_parts(mut self, value: bool) -> Self {
         self.generate_word_parts = ::core::option::Option::Some(value.into());
         self
     }
@@ -9547,17 +9541,17 @@ impl WordDelimiterGraphTokenFilter {
         self
     }
     /// Sets `split_on_case_change`.
-    pub fn split_on_case_change(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_case_change(mut self, value: bool) -> Self {
         self.split_on_case_change = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_on_numerics`.
-    pub fn split_on_numerics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_numerics(mut self, value: bool) -> Self {
         self.split_on_numerics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `stem_english_possessive`.
-    pub fn stem_english_possessive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn stem_english_possessive(mut self, value: bool) -> Self {
         self.stem_english_possessive = ::core::option::Option::Some(value.into());
         self
     }
@@ -9578,12 +9572,12 @@ impl WordDelimiterGraphTokenFilter {
         self
     }
     /// Sets `adjust_offsets`.
-    pub fn adjust_offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn adjust_offsets(mut self, value: bool) -> Self {
         self.adjust_offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_keywords`.
-    pub fn ignore_keywords(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_keywords(mut self, value: bool) -> Self {
         self.ignore_keywords = ::core::option::Option::Some(value.into());
         self
     }
@@ -9665,27 +9659,27 @@ impl WordDelimiterTokenFilter {
         self
     }
     /// Sets `catenate_all`.
-    pub fn catenate_all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_all(mut self, value: bool) -> Self {
         self.catenate_all = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_numbers`.
-    pub fn catenate_numbers(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_numbers(mut self, value: bool) -> Self {
         self.catenate_numbers = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_words`.
-    pub fn catenate_words(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_words(mut self, value: bool) -> Self {
         self.catenate_words = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_number_parts`.
-    pub fn generate_number_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_number_parts(mut self, value: bool) -> Self {
         self.generate_number_parts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_word_parts`.
-    pub fn generate_word_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_word_parts(mut self, value: bool) -> Self {
         self.generate_word_parts = ::core::option::Option::Some(value.into());
         self
     }
@@ -9714,17 +9708,17 @@ impl WordDelimiterTokenFilter {
         self
     }
     /// Sets `split_on_case_change`.
-    pub fn split_on_case_change(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_case_change(mut self, value: bool) -> Self {
         self.split_on_case_change = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_on_numerics`.
-    pub fn split_on_numerics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_numerics(mut self, value: bool) -> Self {
         self.split_on_numerics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `stem_english_possessive`.
-    pub fn stem_english_possessive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn stem_english_possessive(mut self, value: bool) -> Self {
         self.stem_english_possessive = ::core::option::Option::Some(value.into());
         self
     }
@@ -9822,27 +9816,27 @@ impl WordDelimiterTokenFilterBase {
         self
     }
     /// Sets `catenate_all`.
-    pub fn catenate_all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_all(mut self, value: bool) -> Self {
         self.catenate_all = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_numbers`.
-    pub fn catenate_numbers(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_numbers(mut self, value: bool) -> Self {
         self.catenate_numbers = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_words`.
-    pub fn catenate_words(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_words(mut self, value: bool) -> Self {
         self.catenate_words = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_number_parts`.
-    pub fn generate_number_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_number_parts(mut self, value: bool) -> Self {
         self.generate_number_parts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_word_parts`.
-    pub fn generate_word_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_word_parts(mut self, value: bool) -> Self {
         self.generate_word_parts = ::core::option::Option::Some(value.into());
         self
     }
@@ -9871,17 +9865,17 @@ impl WordDelimiterTokenFilterBase {
         self
     }
     /// Sets `split_on_case_change`.
-    pub fn split_on_case_change(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_case_change(mut self, value: bool) -> Self {
         self.split_on_case_change = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_on_numerics`.
-    pub fn split_on_numerics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_numerics(mut self, value: bool) -> Self {
         self.split_on_numerics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `stem_english_possessive`.
-    pub fn stem_english_possessive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn stem_english_possessive(mut self, value: bool) -> Self {
         self.stem_english_possessive = ::core::option::Option::Some(value.into());
         self
     }
