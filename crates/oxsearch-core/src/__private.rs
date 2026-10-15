@@ -347,19 +347,12 @@ pub fn query_param<T: Serialize + ?Sized>(name: &str, value: &T) -> Result<Strin
 
 /// A JSON body.
 pub fn json_body<T: Serialize + ?Sized>(body: &T) -> Result<crate::Body, crate::Error> {
-    serde_json::to_vec(body)
-        .map(crate::Body::Json)
-        .map_err(crate::Error::Encode)
+    crate::Body::json(body)
 }
 
 /// A newline-delimited JSON body: one line per item.
 pub fn ndjson_body<T: Serialize>(lines: &[T]) -> Result<crate::Body, crate::Error> {
-    let mut out = Vec::new();
-    for line in lines {
-        serde_json::to_writer(&mut out, line).map_err(crate::Error::Encode)?;
-        out.push(b'\n');
-    }
-    Ok(crate::Body::Ndjson(out))
+    crate::Body::ndjson(lines)
 }
 
 /// The error for a request whose parameters fit none of its URLs.

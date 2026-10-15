@@ -123,10 +123,12 @@ The default features are the AI-search set: search, docs, mapping, inference. `f
 
 ### 4.5 Escape hatches
 
-1. **An `Endpoint` trait.** Generated endpoints implement it; users implement it for anything not yet covered and get the same transport, middleware and telemetry.
-2. **Raw variants in every enum, container and tagged union**, such as `Query::Raw(json!(...))`, `Retriever::Raw(...)` and `SortOrder::Raw("...")`, so new Elasticsearch features work before a regeneration, and values a newer Elasticsearch returns still parse.
-3. **A raw call**, `client.send(method, path, body)`.
+1. **An `Endpoint` trait.** Generated endpoints implement it; users implement it for anything not yet covered and get the same transport, middleware and telemetry. `Route::segments` percent-encodes a path's segments, and `Body::json` and `Body::ndjson` write a body.
+2. **Raw variants in every enum, container and tagged union**, such as `QueryContainer::Raw(json!(...))`, `RetrieverContainer::Raw(...)` and `SortOrder::Raw("...")`, so new Elasticsearch features work before a regeneration, and values a newer Elasticsearch returns still parse.
+3. **A raw call**, `client.send_raw(method, path, body)`, with JSON in and out.
 4. **Middleware**, as above.
+
+`crates/oxsearch/examples/escape_hatches.rs` shows the first three against the fixture, and CI runs it on both licenses.
 
 ### 4.6 The typed document layer
 

@@ -70,6 +70,10 @@ futures-util = { version = "0.3.31", default-features = false, features = ["std"
 name = "rag"
 required-features = ["transport-reqwest"]
 
+[[example]]
+name = "escape_hatches"
+required-features = ["transport-reqwest"]
+
 [package.metadata.docs.rs]
 # Document the APIs behind features too.
 all-features = true
