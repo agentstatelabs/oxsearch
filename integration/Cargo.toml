@@ -7,6 +7,7 @@ license.workspace = true
 publish = false
 
 [dependencies]
+oxsearch = { path = "../crates/oxsearch", features = ["derive"] }
 oxsearch-core = { path = "../crates/oxsearch-core" }
 oxsearch-docs = { path = "../crates/oxsearch-docs" }
 oxsearch-inference = { path = "../crates/oxsearch-inference" }

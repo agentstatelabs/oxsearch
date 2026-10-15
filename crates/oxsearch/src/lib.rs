@@ -14,8 +14,14 @@
 //! include the `rrf` and `linear` retrievers. Retries, failover, authentication and
 //! telemetry are still to come; see DESIGN.md in the repository.
 
+// The derive macros' code names this crate `::oxsearch`, in its own tests too.
+extern crate self as oxsearch;
+
 mod generated;
 pub use generated::*;
+
+#[cfg(all(feature = "docs", feature = "search", feature = "mapping"))]
+pub mod document;
 
 /// The crate under every area. Its common types are re-exported here at
 /// the root, and its other types in their area's module; through it are

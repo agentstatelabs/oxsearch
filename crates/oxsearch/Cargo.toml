@@ -26,8 +26,9 @@ analysis = ["dep:oxsearch-analysis"]
 esql = ["dep:oxsearch-esql"]
 admin = ["dep:oxsearch-admin"]
 tasks = ["dep:oxsearch-tasks"]
-# `#[derive(Document)]` for the typed document layer.
-derive = ["dep:oxsearch-derive"]
+# `#[derive(Document)]` for the typed document layer, which needs the
+# docs, search and mapping areas.
+derive = ["dep:oxsearch-derive", "docs", "search", "mapping"]
 # The default HTTP transport. Whether it is on by default is still open
 # (DESIGN.md, open question 5).
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
@@ -49,8 +50,12 @@ oxsearch-admin = { path = "../oxsearch-admin", version = "0.0.1", optional = tru
 oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.0.1", optional = true }
 oxsearch-derive = { path = "../oxsearch-derive", version = "0.0.1", optional = true }
 oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.0.1", optional = true }
+serde = "1.0.228"
+serde_json = "1.0.149"
 
 [dev-dependencies]
+# The tests cover the document layer's derive macro too.
+oxsearch = { path = ".", features = ["derive"] }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1.53", features = ["macros", "rt"] }

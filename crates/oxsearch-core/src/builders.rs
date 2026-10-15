@@ -152,7 +152,15 @@ fn keyed<V>(field: impl Into<String>, value: V) -> SingleKey<String, V> {
     SingleKey::new(field, value)
 }
 
-/// Builders for retrievers. Each returns a [`RetrieverContainer`].
+/// A query is a standard retriever: wherever a retriever goes, a query can.
+impl From<QueryContainer> for RetrieverContainer {
+    fn from(query: QueryContainer) -> RetrieverContainer {
+        Retriever::standard(query)
+    }
+}
+
+/// Builders for retrievers. Each returns a [`RetrieverContainer`], and
+/// those that combine retrievers take queries too.
 pub struct Retriever;
 
 impl Retriever {
@@ -175,75 +183,80 @@ impl Retriever {
             .into()
     }
 
-    /// Reciprocal rank fusion of the retrievers' results. Needs a license
-    /// above Basic on the server; see `oxsearch::fusion` to fuse on the
-    /// client instead.
-    pub fn rrf(retrievers: impl IntoIterator<Item = RetrieverContainer>) -> RetrieverContainer {
-        let entries: Vec<RRFRetrieverEntry> = retrievers.into_iter().map(Into::into).collect();
+    /// Reciprocal rank fusion of the retrievers' results, or queries'. Needs
+    /// a license above Basic on the server; see `oxsearch::fusion` to fuse
+    /// on the client instead.
+    pub fn rrf<R: Into<RetrieverContainer>>(
+        retrievers: impl IntoIterator<Item = R>,
+    ) -> RetrieverContainer {
+        let entries: Vec<RRFRetrieverEntry> = retrievers
+            .into_iter()
+            .map(|retriever| retriever.into().into())
+            .collect();
         RRFRetriever::new(entries).into()
     }
 
     /// A weighted sum of the retrievers' scores. Needs a license above
     /// Basic on the server.
-    pub fn linear(
-        retrievers: impl IntoIterator<Item = (RetrieverContainer, f32)>,
+    pub fn linear<R: Into<RetrieverContainer>>(
+        retrievers: impl IntoIterator<Item = (R, f32)>,
     ) -> RetrieverContainer {
         let inner: Vec<InnerRetriever> = retrievers
             .into_iter()
-            .map(|(retriever, weight)| InnerRetriever::new(retriever).weight(weight))
+            .map(|(retriever, weight)| InnerRetriever::new(retriever.into()).weight(weight))
             .collect();
         LinearRetriever::new().retrievers(inner).into()
     }
 
     /// `retriever`'s results with these documents first.
     pub fn pinned<I: Into<String>>(
-        retriever: RetrieverContainer,
+        retriever: impl Into<RetrieverContainer>,
         ids: impl IntoIterator<Item = I>,
     ) -> RetrieverContainer {
         let ids: Vec<String> = ids.into_iter().map(Into::into).collect();
-        PinnedRetriever::new(retriever).ids(ids).into()
+        PinnedRetriever::new(retriever.into()).ids(ids).into()
     }
 
     /// `retriever`'s top `window_size` results, rescored by `query`.
     pub fn rescorer(
-        retriever: RetrieverContainer,
+        retriever: impl Into<RetrieverContainer>,
         query: impl Into<QueryContainer>,
         window_size: i32,
     ) -> RetrieverContainer {
         let rescore = Rescore::new()
             .window_size(window_size)
             .variant(RescoreVariant::Query(RescoreQuery::new(query)));
-        RescorerRetriever::new(retriever, rescore).into()
+        RescorerRetriever::new(retriever.into(), rescore).into()
     }
 
     /// `retriever`'s results, reranked by how well `field` answers `text`,
     /// with a reranking model. Needs a license above Basic.
     pub fn rerank(
-        retriever: RetrieverContainer,
+        retriever: impl Into<RetrieverContainer>,
         field: impl Into<String>,
         text: impl Into<String>,
     ) -> RetrieverContainer {
-        TextSimilarityReranker::new(retriever, text, field).into()
+        TextSimilarityReranker::new(retriever.into(), text, field).into()
     }
 
     /// `retriever`'s results with the query rules in `ruleset` applied, for
     /// the criteria in `match_criteria`. Needs a license above Basic.
     pub fn rule(
-        retriever: RetrieverContainer,
+        retriever: impl Into<RetrieverContainer>,
         ruleset: impl Into<String>,
         match_criteria: Value,
     ) -> RetrieverContainer {
-        RuleRetriever::new(ruleset.into(), match_criteria, retriever).into()
+        RuleRetriever::new(ruleset.into(), match_criteria, retriever.into()).into()
     }
 
     /// `retriever`'s results, made diverse by maximal marginal relevance on
     /// a `dense_vector` field, relative to `vector`.
     pub fn diversify(
-        retriever: RetrieverContainer,
+        retriever: impl Into<RetrieverContainer>,
         field: impl Into<String>,
         vector: Vec<f32>,
     ) -> RetrieverContainer {
-        DiversifyRetriever::new(DiversifyRetrieverTypes::Mmr, field, retriever)
+        DiversifyRetriever::new(DiversifyRetrieverTypes::Mmr, field, retriever.into())
             .query_vector(vector)
             .into()
     }
@@ -304,7 +317,7 @@ mod tests {
                 {"knn": {"field": "embedding", "k": 5, "query_vector": [1.0, 0.0], "num_candidates": 50}}
             ]}})
         );
-        let linear = Retriever::linear([(Retriever::standard(Query::match_all()), 2.0)]);
+        let linear = Retriever::linear([(Query::match_all(), 2.0)]);
         assert_eq!(
             json(&linear),
             json!({"linear": {"retrievers": [{"retriever": {"standard": {"query": {"match_all": {}}}}, "weight": 2.0}]}})

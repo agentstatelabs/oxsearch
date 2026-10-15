@@ -676,6 +676,7 @@ checksum = "7c87def4c32ab89d880effc9e097653c8da5d6ef28e6b539d313baaacfbafcbe"
 name = "oxsearch"
 version = "0.0.1"
 dependencies = [
+ "oxsearch",
  "oxsearch-admin",
  "oxsearch-aggs",
  "oxsearch-analysis",
@@ -733,6 +734,11 @@ dependencies = [
 [[package]]
 name = "oxsearch-derive"
 version = "0.0.1"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
+]
 
 [[package]]
 name = "oxsearch-docs"
@@ -771,6 +777,7 @@ dependencies = [
 name = "oxsearch-integration"
 version = "0.0.0"
 dependencies = [
+ "oxsearch",
  "oxsearch-core",
  "oxsearch-docs",
  "oxsearch-inference",
