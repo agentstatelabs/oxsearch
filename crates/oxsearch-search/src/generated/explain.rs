@@ -27,6 +27,8 @@ impl Explanation {
     }
 }
 
+impl Explanation {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ExplanationDetail {
@@ -47,6 +49,9 @@ impl ExplanationDetail {
             value: ::core::option::Option::Some(value.into()),
         }
     }
+}
+
+impl ExplanationDetail {
     /// Sets `details`.
     pub fn details(
         mut self,
@@ -73,6 +78,9 @@ impl RequestBody {
             query: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `query`.
     pub fn query(
         mut self,
@@ -166,6 +174,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -274,7 +285,7 @@ pub struct Response<TDocument = ::serde_json::Value> {
     pub get: ::core::option::Option<::oxsearch_core::InlineGet<TDocument>>,
 }
 
-impl<TDocument> Response<TDocument> {
+impl Response<::serde_json::Value> {
     /// A `Response` with its required properties set.
     pub fn new(
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
@@ -289,6 +300,9 @@ impl<TDocument> Response<TDocument> {
             get: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> Response<TDocument> {
     /// Sets `explanation`.
     pub fn explanation(
         mut self,
@@ -298,9 +312,17 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `get`.
-    pub fn get(mut self, value: ::oxsearch_core::InlineGet<TDocument>) -> Self {
-        self.get = ::core::option::Option::Some(value.into());
-        self
+    pub fn get<TDocument2>(
+        self,
+        value: ::oxsearch_core::InlineGet<TDocument2>,
+    ) -> Response<TDocument2> {
+        Response {
+            index: self.index,
+            id: self.id,
+            matched: self.matched,
+            explanation: self.explanation,
+            get: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 

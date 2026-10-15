@@ -102,6 +102,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `query`.
     pub fn query(
         mut self,
@@ -226,6 +229,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -348,6 +354,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::count::Response;

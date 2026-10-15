@@ -51,6 +51,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `explain`.
     pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
@@ -166,6 +169,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -297,7 +303,7 @@ pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_
     pub terminated_early: ::core::option::Option<bool>,
 }
 
-impl<TDocument, TAggregations> Response<TDocument, TAggregations> {
+impl<TDocument> Response<TDocument, ::oxsearch_core::RawAggs> {
     /// A `Response` with its required properties set.
     pub fn new(
         took: i64,
@@ -322,10 +328,30 @@ impl<TDocument, TAggregations> Response<TDocument, TAggregations> {
             terminated_early: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument, TAggregations> Response<TDocument, TAggregations> {
     /// Sets `aggregations`.
-    pub fn aggregations(mut self, value: TAggregations) -> Self {
-        self.aggregations = ::core::option::Option::Some(value.into());
-        self
+    pub fn aggregations<TAggregations2>(
+        self,
+        value: TAggregations2,
+    ) -> Response<TDocument, TAggregations2> {
+        Response {
+            took: self.took,
+            timed_out: self.timed_out,
+            shards: self.shards,
+            hits: self.hits,
+            clusters: self.clusters,
+            fields: self.fields,
+            max_score: self.max_score,
+            num_reduce_phases: self.num_reduce_phases,
+            profile: self.profile,
+            pit_id: self.pit_id,
+            scroll_id: self.scroll_id,
+            suggest: self.suggest,
+            terminated_early: self.terminated_early,
+            aggregations: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `clusters`.
     pub fn clusters(

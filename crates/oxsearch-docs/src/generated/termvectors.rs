@@ -23,6 +23,8 @@ impl FieldStatistics {
     }
 }
 
+impl FieldStatistics {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Filter {
@@ -65,6 +67,9 @@ impl Filter {
             min_word_length: ::core::option::Option::None,
         }
     }
+}
+
+impl Filter {
     /// Sets `max_doc_freq`.
     pub fn max_doc_freq(mut self, value: i32) -> Self {
         self.max_doc_freq = ::core::option::Option::Some(value.into());
@@ -159,7 +164,7 @@ pub struct RequestBody<TDocument = ::serde_json::Value> {
     pub version_type: ::core::option::Option<::oxsearch_core::VersionType>,
 }
 
-impl<TDocument> RequestBody<TDocument> {
+impl RequestBody<::serde_json::Value> {
     /// A `RequestBody` with its required properties set.
     pub fn new() -> Self {
         Self {
@@ -177,10 +182,25 @@ impl<TDocument> RequestBody<TDocument> {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> RequestBody<TDocument> {
     /// Sets `doc`.
-    pub fn doc(mut self, value: TDocument) -> Self {
-        self.doc = ::core::option::Option::Some(value.into());
-        self
+    pub fn doc<TDocument2>(self, value: TDocument2) -> RequestBody<TDocument2> {
+        RequestBody {
+            filter: self.filter,
+            per_field_analyzer: self.per_field_analyzer,
+            fields: self.fields,
+            field_statistics: self.field_statistics,
+            offsets: self.offsets,
+            payloads: self.payloads,
+            positions: self.positions,
+            term_statistics: self.term_statistics,
+            routing: self.routing,
+            version: self.version,
+            version_type: self.version_type,
+            doc: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `filter`.
     pub fn filter(mut self, value: impl ::core::convert::Into<crate::termvectors::Filter>) -> Self {
@@ -346,7 +366,7 @@ pub struct Request<TDocument = ::serde_json::Value> {
     pub body: ::core::option::Option<crate::termvectors::RequestBody<TDocument>>,
 }
 
-impl<TDocument> Request<TDocument> {
+impl Request<::serde_json::Value> {
     /// A `Request` with its required properties set.
     pub fn new(index: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         Self {
@@ -367,6 +387,9 @@ impl<TDocument> Request<TDocument> {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> Request<TDocument> {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -439,9 +462,27 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: crate::termvectors::RequestBody<TDocument>) -> Self {
-        self.body = ::core::option::Option::Some(value.into());
-        self
+    pub fn body<TDocument2>(
+        self,
+        value: crate::termvectors::RequestBody<TDocument2>,
+    ) -> Request<TDocument2> {
+        Request {
+            index: self.index,
+            id: self.id,
+            fields: self.fields,
+            field_statistics: self.field_statistics,
+            offsets: self.offsets,
+            payloads: self.payloads,
+            positions: self.positions,
+            preference: self.preference,
+            realtime: self.realtime,
+            routing: self.routing,
+            slice: self.slice,
+            term_statistics: self.term_statistics,
+            version: self.version,
+            version_type: self.version_type,
+            body: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -490,6 +531,9 @@ impl Response {
             version: ::core::option::Option::Some(version.into()),
         }
     }
+}
+
+impl Response {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -533,6 +577,9 @@ impl Term {
             ttf: ::core::option::Option::None,
         }
     }
+}
+
+impl Term {
     /// Sets `doc_freq`.
     pub fn doc_freq(mut self, value: i32) -> Self {
         self.doc_freq = ::core::option::Option::Some(value.into());
@@ -579,6 +626,9 @@ impl TermVector {
             terms: terms.into(),
         }
     }
+}
+
+impl TermVector {
     /// Sets `field_statistics`.
     pub fn field_statistics(
         mut self,
@@ -612,6 +662,9 @@ impl Token {
             start_offset: ::core::option::Option::None,
         }
     }
+}
+
+impl Token {
     /// Sets `end_offset`.
     pub fn end_offset(mut self, value: i32) -> Self {
         self.end_offset = ::core::option::Option::Some(value.into());

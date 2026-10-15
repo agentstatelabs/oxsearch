@@ -52,6 +52,9 @@ impl RequestBody {
             knn: knn.into(),
         }
     }
+}
+
+impl RequestBody {
     /// Sets `source`.
     pub fn source(
         mut self,
@@ -119,6 +122,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `routing`.
     pub fn routing(mut self, value: impl ::core::convert::Into<::oxsearch_core::Routing>) -> Self {
         self.routing = ::core::option::Option::Some(value.into());
@@ -181,6 +187,9 @@ impl<TDocument> Response<TDocument> {
             max_score: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> Response<TDocument> {
     /// Sets `fields`.
     pub fn fields(
         mut self,
@@ -227,6 +236,8 @@ impl KnnSearchQuery {
         }
     }
 }
+
+impl KnnSearchQuery {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::knn_search::Response;

@@ -186,7 +186,7 @@ pub struct Request<TDocument = ::serde_json::Value> {
     pub body: ::core::option::Option<TDocument>,
 }
 
-impl<TDocument> Request<TDocument> {
+impl Request<::serde_json::Value> {
     /// A `Request` with its required properties set.
     pub fn new(index: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         Self {
@@ -209,6 +209,9 @@ impl<TDocument> Request<TDocument> {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> Request<TDocument> {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -297,9 +300,26 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: TDocument) -> Self {
-        self.body = ::core::option::Option::Some(value.into());
-        self
+    pub fn body<TDocument2>(self, value: TDocument2) -> Request<TDocument2> {
+        Request {
+            id: self.id,
+            index: self.index,
+            if_primary_term: self.if_primary_term,
+            if_seq_no: self.if_seq_no,
+            include_source_on_error: self.include_source_on_error,
+            op_type: self.op_type,
+            pipeline: self.pipeline,
+            refresh: self.refresh,
+            routing: self.routing,
+            slice: self.slice,
+            timeout: self.timeout,
+            version: self.version,
+            version_type: self.version_type,
+            wait_for_active_shards: self.wait_for_active_shards,
+            require_alias: self.require_alias,
+            require_data_stream: self.require_data_stream,
+            body: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 

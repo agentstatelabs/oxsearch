@@ -84,6 +84,9 @@ impl ParentReindexStatus {
             cancelled: ::core::option::Option::None,
         }
     }
+}
+
+impl ParentReindexStatus {
     /// Sets `slices`.
     pub fn slices(
         mut self,
@@ -189,6 +192,9 @@ impl ParentReindexTask {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl ParentReindexTask {
     /// Sets `children`.
     pub fn children(
         mut self,
@@ -243,6 +249,9 @@ impl ReindexNode {
             tasks: tasks.into(),
         }
     }
+}
+
+impl ReindexNode {
     /// Sets `roles`.
     pub fn roles(mut self, value: impl ::core::convert::Into<::oxsearch_core::NodeRoles>) -> Self {
         self.roles = ::core::option::Option::Some(value.into());
@@ -307,6 +316,8 @@ impl ReindexTask {
         }
     }
 }
+
+impl ReindexTask {}
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
@@ -442,6 +453,9 @@ impl Request {
             group_by: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `group_by`.
     pub fn group_by(
         mut self,
@@ -491,6 +505,9 @@ impl Response {
             tasks: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `node_failures`.
     pub fn node_failures(
         mut self,

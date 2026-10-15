@@ -33,6 +33,9 @@ impl BaseNode {
             transport_address: transport_address.into(),
         }
     }
+}
+
+impl BaseNode {
     /// Sets `roles`.
     pub fn roles(mut self, value: impl ::core::convert::Into<crate::NodeRoles>) -> Self {
         self.roles = ::core::option::Option::Some(value.into());

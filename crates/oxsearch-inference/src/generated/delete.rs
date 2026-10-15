@@ -29,6 +29,9 @@ impl Request {
             force: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `task_type`.
     pub fn task_type(mut self, value: impl ::core::convert::Into<crate::TaskType>) -> Self {
         self.task_type = ::core::option::Option::Some(value.into());

@@ -309,14 +309,7 @@ impl Emitter<'_> {
             // a map of `Value`s.
             let params: Vec<String> = params
                 .iter()
-                .map(|p| {
-                    let default = if p == super::ir::AGGREGATIONS {
-                        "::oxsearch_core::RawAggs"
-                    } else {
-                        VALUE
-                    };
-                    format!("{p} = {default}")
-                })
+                .map(|p| format!("{p} = {}", default_of(p)))
                 .collect();
             format!("<{}>", params.join(", "))
         }
@@ -576,11 +569,87 @@ impl Emitter<'_> {
         if !unused.is_empty() {
             inits.push("_marker: ::core::marker::PhantomData".to_owned());
         }
-        let _ = writeln!(out, "impl{} {} {{", self.generics(), self.self_ty());
+        // The constructor's arguments name some generic parameters; the rest
+        // take their defaults, so a call naming none still infers, and the
+        // setters below change them.
+        let generics = &self.item.generics;
+        let mut argument_types: Vec<&Ty> = s
+            .fields
+            .iter()
+            .filter(|f| f.required)
+            .map(|f| &f.ty)
+            .collect();
+        if let Some((_, _, k, v)) = &s.keyed {
+            argument_types.push(k);
+            argument_types.push(v);
+        }
+        let named: BTreeSet<String> = super::ir::params_in_all(argument_types.into_iter())
+            .into_iter()
+            .collect();
+        let constructor_generics: Vec<&str> = generics
+            .iter()
+            .filter(|g| named.contains(*g))
+            .map(String::as_str)
+            .collect();
+        let constructor_generics = if constructor_generics.is_empty() {
+            String::new()
+        } else {
+            format!("<{}>", constructor_generics.join(", "))
+        };
+        let constructed = if generics.is_empty() {
+            ident.clone()
+        } else {
+            let args: Vec<&str> = generics
+                .iter()
+                .map(|g| {
+                    if named.contains(g) {
+                        g.as_str()
+                    } else {
+                        default_of(g)
+                    }
+                })
+                .collect();
+            format!("{ident}<{}>", args.join(", "))
+        };
+        let _ = writeln!(out, "impl{constructor_generics} {constructed} {{");
         let _ = writeln!(out, "    /// A `{ident}` with its required properties set.");
         let _ = writeln!(out, "    pub fn new({}) -> Self {{", params.join(", "));
         let _ = writeln!(out, "        Self {{ {} }}", inits.join(", "));
-        out.push_str("    }\n");
+        out.push_str("    }\n}\n\n");
+        let _ = writeln!(out, "impl{} {} {{", self.generics(), self.self_ty());
+        // Each field's generic parameters, to find those a setter can change:
+        // the ones no other field names.
+        let mut mentions: Vec<(&str, BTreeSet<String>)> = s
+            .fields
+            .iter()
+            .map(|f| {
+                let named = super::ir::params_in(&f.ty).into_iter().collect();
+                (f.ident.as_str(), named)
+            })
+            .collect();
+        if let Some((name, k, v)) = &s.extra {
+            let named = super::ir::params_in_all([k, v].into_iter())
+                .into_iter()
+                .collect();
+            mentions.push((name.as_str(), named));
+        }
+        if let Some((key, value, k, v)) = &s.keyed {
+            mentions.push((key.as_str(), super::ir::params_in(k).into_iter().collect()));
+            mentions.push((
+                value.as_str(),
+                super::ir::params_in(v).into_iter().collect(),
+            ));
+        }
+        let mut moved: Vec<String> = mentions
+            .iter()
+            .map(|(field, _)| format!("{field}: self.{field}"))
+            .collect();
+        if let Some((field, _)) = &s.variant {
+            moved.push(format!("{field}: self.{field}"));
+        }
+        if !unused.is_empty() {
+            moved.push("_marker: ::core::marker::PhantomData".to_owned());
+        }
         let mut setters: Vec<(&str, &Ty)> = s
             .fields
             .iter()
@@ -610,10 +679,51 @@ impl Emitter<'_> {
             } else {
                 "value.into()"
             };
-            let argument = self.argument(ty, inner);
+            let changes: BTreeSet<String> = super::ir::params_in(ty).into_iter().collect();
+            let shared = mentions
+                .iter()
+                .any(|(other, named)| *other != field && !named.is_disjoint(&changes));
+            if changes.is_empty() || shared {
+                let argument = self.argument(ty, inner);
+                let _ = writeln!(
+                    out,
+                    "    pub fn {name}(mut self, value: {argument}) -> Self {{ self.{field} = {OPTION}::Some({value}); self }}"
+                );
+                continue;
+            }
+            // The field alone names these parameters: setting it gives them
+            // the value's types, `Request<Value>` becoming `Request<Article>`.
+            let renamed = rename_params(ty, &changes);
+            let rendered = self.ty(&renamed, Position::Field);
+            let (inner, _) = unbox(&rendered);
+            let argument = self.argument(&renamed, inner);
+            let new_params: Vec<String> = generics
+                .iter()
+                .filter(|g| changes.contains(*g))
+                .map(|g| format!("{g}2"))
+                .collect();
+            let target: Vec<String> = generics
+                .iter()
+                .map(|g| {
+                    if changes.contains(g) {
+                        format!("{g}2")
+                    } else {
+                        g.clone()
+                    }
+                })
+                .collect();
+            let fields: Vec<&String> = moved
+                .iter()
+                .filter(|m| !m.starts_with(&format!("{field}: ")))
+                .collect();
+            let fields: Vec<&str> = fields.iter().map(|m| m.as_str()).collect();
             let _ = writeln!(
                 out,
-                "    pub fn {name}(mut self, value: {argument}) -> Self {{ self.{field} = {OPTION}::Some({value}); self }}"
+                "    pub fn {name}<{}>(self, value: {argument}) -> {ident}<{}> {{ {ident} {{ {}{}{field}: {OPTION}::Some({value}) }} }}",
+                new_params.join(", "),
+                target.join(", "),
+                fields.join(", "),
+                if fields.is_empty() { "" } else { ", " },
             );
         }
         out.push_str("}\n\n");
@@ -1699,6 +1809,48 @@ impl Emitter<'_> {
             "impl{generics} ::core::ops::DerefMut for {ident}{generics} {{\n    fn deref_mut(&mut self) -> &mut {inner} {{ &mut self.0 }}\n}}\n"
         );
     }
+}
+
+/// A generic parameter's default: raw JSON for documents, a map of raw
+/// JSON for aggregation results.
+fn default_of(param: &str) -> &'static str {
+    if param == super::ir::AGGREGATIONS {
+        "::oxsearch_core::RawAggs"
+    } else {
+        VALUE
+    }
+}
+
+/// The type with the parameters in `renamed` renamed `{name}2`, for a
+/// setter that changes them.
+fn rename_params(ty: &Ty, renamed: &BTreeSet<String>) -> Ty {
+    fn visit(ty: &mut Ty, renamed: &BTreeSet<String>) {
+        match ty {
+            Ty::Param(p) => {
+                if renamed.contains(p.as_str()) {
+                    p.push('2');
+                }
+            }
+            Ty::Named { args, .. } | Ty::Inline { args, .. } => {
+                args.iter_mut().for_each(|a| visit(a, renamed))
+            }
+            Ty::Vec(t)
+            | Ty::OneOrMany(t)
+            | Ty::Stringified(t)
+            | Ty::WithNull(t)
+            | Ty::Flags(t)
+            | Ty::Opt(t)
+            | Ty::TypedKeys(t) => visit(t, renamed),
+            Ty::Map(k, v) | Ty::SingleKey(k, v) => {
+                visit(k, renamed);
+                visit(v, renamed);
+            }
+            Ty::Prim(_) | Ty::Unit | Ty::Json => {}
+        }
+    }
+    let mut ty = ty.clone();
+    visit(&mut ty, renamed);
+    ty
 }
 
 /// `Box<T>` as (`T`, true), anything else as (it, false).

@@ -45,6 +45,9 @@ impl Request {
             wait_for_completion: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `task_id`.
     pub fn task_id(mut self, value: impl ::core::convert::Into<::oxsearch_core::TaskId>) -> Self {
         self.task_id = ::core::option::Option::Some(value.into());

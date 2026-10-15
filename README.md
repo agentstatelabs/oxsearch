@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.1 is being prepared.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL and the administration APIs come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.1, the first release.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL and the administration APIs come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 

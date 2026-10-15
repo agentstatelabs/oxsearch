@@ -62,6 +62,9 @@ impl ChunkRescorerChunkingSettings {
             strategy: ::core::option::Option::None,
         }
     }
+}
+
+impl ChunkRescorerChunkingSettings {
     /// Sets `overlap`.
     pub fn overlap(mut self, value: i32) -> Self {
         self.overlap = ::core::option::Option::Some(value.into());

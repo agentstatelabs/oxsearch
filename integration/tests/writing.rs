@@ -73,7 +73,7 @@ async fn create_check_read_and_update() {
 
     let updated = client
         .send(
-            &update::Request::<Article>::new("10", test.name())
+            &update::Request::new("10", test.name())
                 .refresh(Refresh::True)
                 .body(update::RequestBody::new().doc(json!({"tag": "updated"}))),
         )
@@ -88,7 +88,7 @@ async fn create_check_read_and_update() {
 
     let vectors = client
         .send(
-            &termvectors::Request::<Article>::new(test.name())
+            &termvectors::Request::new(test.name())
                 .id("1")
                 .fields("title"),
         )

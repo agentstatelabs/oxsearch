@@ -28,6 +28,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `index_filter`.
     pub fn index_filter(
         mut self,
@@ -133,6 +136,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `ignore_unavailable`.
     pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
@@ -208,6 +214,9 @@ impl Response {
             clusters: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `clusters`.
     pub fn clusters(
         mut self,

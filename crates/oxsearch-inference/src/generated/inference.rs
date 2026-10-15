@@ -45,6 +45,9 @@ impl RequestBody {
             task_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `query`.
     pub fn query(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.query = ::core::option::Option::Some(value.into());
@@ -97,6 +100,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `task_type`.
     pub fn task_type(mut self, value: impl ::core::convert::Into<crate::TaskType>) -> Self {
         self.task_type = ::core::option::Option::Some(value.into());

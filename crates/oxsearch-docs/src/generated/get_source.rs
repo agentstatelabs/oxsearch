@@ -67,6 +67,9 @@ impl Request {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `preference`.
     pub fn preference(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.preference = ::core::option::Option::Some(value.into());

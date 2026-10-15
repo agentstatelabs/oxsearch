@@ -39,6 +39,9 @@ impl UnassignedInformation {
             allocation_status: ::core::option::Option::None,
         }
     }
+}
+
+impl UnassignedInformation {
     /// Sets `last_allocation_status`.
     pub fn last_allocation_status(
         mut self,

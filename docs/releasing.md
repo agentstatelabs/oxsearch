@@ -5,8 +5,8 @@ steps, as for oxtel:
 
 1. On a branch, set the workspace version in `Cargo.toml` and the versions in
    the crates' path dependencies, and move the changelog's `Unreleased`
-   section under the new version. Add the release's specification branch to
-   the README's version table.
+   section under the new version, dated the day you'll publish. Add the
+   release's specification branch to the README's version table.
 2. Check that every crate packages and builds as it would from crates.io:
 
    ```bash
@@ -22,7 +22,7 @@ steps, as for oxtel:
    ```
 
 6. Create the GitHub release from the tag, with the changelog's section for
-   the version as its notes, and give the changelog section its date.
+   the version as its notes.
 
 The crates still empty (`oxsearch-admin`, `oxsearch-aggs`, `oxsearch-esql`)
 have `publish = false` until they're generated.

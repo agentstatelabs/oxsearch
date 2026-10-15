@@ -60,6 +60,9 @@ impl CreateOperation {
             require_alias: ::core::option::Option::None,
         }
     }
+}
+
+impl CreateOperation {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -167,6 +170,9 @@ impl DeleteOperation {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl DeleteOperation {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -272,6 +278,9 @@ impl IndexOperation {
             require_alias: ::core::option::Option::None,
         }
     }
+}
+
+impl IndexOperation {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -379,6 +388,9 @@ impl OperationBase {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl OperationBase {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -913,7 +925,7 @@ pub struct Request<TDocument = ::serde_json::Value, TPartialDocument = ::serde_j
     >,
 }
 
-impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
+impl Request<::serde_json::Value, ::serde_json::Value> {
     /// A `Request` with its required properties set.
     pub fn new() -> Self {
         Self {
@@ -934,6 +946,9 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -1017,12 +1032,27 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(
-        mut self,
-        value: ::std::vec::Vec<crate::bulk::RequestBody<TDocument, TPartialDocument>>,
-    ) -> Self {
-        self.body = ::core::option::Option::Some(value.into());
-        self
+    pub fn body<TDocument2, TPartialDocument2>(
+        self,
+        value: ::std::vec::Vec<crate::bulk::RequestBody<TDocument2, TPartialDocument2>>,
+    ) -> Request<TDocument2, TPartialDocument2> {
+        Request {
+            index: self.index,
+            include_source_on_error: self.include_source_on_error,
+            list_executed_pipelines: self.list_executed_pipelines,
+            pipeline: self.pipeline,
+            refresh: self.refresh,
+            routing: self.routing,
+            slice: self.slice,
+            source: self.source,
+            source_excludes: self.source_excludes,
+            source_includes: self.source_includes,
+            timeout: self.timeout,
+            wait_for_active_shards: self.wait_for_active_shards,
+            require_alias: self.require_alias,
+            require_data_stream: self.require_data_stream,
+            body: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -1065,6 +1095,9 @@ impl Response {
             ingest_took: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `ingest_took`.
     pub fn ingest_took(mut self, value: i64) -> Self {
         self.ingest_took = ::core::option::Option::Some(value.into());
@@ -1157,6 +1190,9 @@ impl ResponseItem {
             get: ::core::option::Option::None,
         }
     }
+}
+
+impl ResponseItem {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -1261,7 +1297,7 @@ pub struct UpdateAction<TDocument = ::serde_json::Value, TPartialDocument = ::se
     pub upsert: ::core::option::Option<TDocument>,
 }
 
-impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
+impl UpdateAction<::serde_json::Value, ::serde_json::Value> {
     /// A `UpdateAction` with its required properties set.
     pub fn new() -> Self {
         Self {
@@ -1274,15 +1310,28 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
             upsert: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
     /// Sets `detect_noop`.
     pub fn detect_noop(mut self, value: bool) -> Self {
         self.detect_noop = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `doc`.
-    pub fn doc(mut self, value: TPartialDocument) -> Self {
-        self.doc = ::core::option::Option::Some(value.into());
-        self
+    pub fn doc<TPartialDocument2>(
+        self,
+        value: TPartialDocument2,
+    ) -> UpdateAction<TDocument, TPartialDocument2> {
+        UpdateAction {
+            detect_noop: self.detect_noop,
+            doc_as_upsert: self.doc_as_upsert,
+            script: self.script,
+            scripted_upsert: self.scripted_upsert,
+            source: self.source,
+            upsert: self.upsert,
+            doc: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `doc_as_upsert`.
     pub fn doc_as_upsert(mut self, value: bool) -> Self {
@@ -1308,9 +1357,19 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         self
     }
     /// Sets `upsert`.
-    pub fn upsert(mut self, value: TDocument) -> Self {
-        self.upsert = ::core::option::Option::Some(value.into());
-        self
+    pub fn upsert<TDocument2>(
+        self,
+        value: TDocument2,
+    ) -> UpdateAction<TDocument2, TPartialDocument> {
+        UpdateAction {
+            detect_noop: self.detect_noop,
+            doc: self.doc,
+            doc_as_upsert: self.doc_as_upsert,
+            script: self.script,
+            scripted_upsert: self.scripted_upsert,
+            source: self.source,
+            upsert: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -1363,6 +1422,9 @@ impl UpdateOperation {
             retry_on_conflict: ::core::option::Option::None,
         }
     }
+}
+
+impl UpdateOperation {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -1478,6 +1540,9 @@ impl WriteOperation {
             require_alias: ::core::option::Option::None,
         }
     }
+}
+
+impl WriteOperation {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());

@@ -70,7 +70,7 @@ pub struct MultiSearchItem<
     pub status: ::core::option::Option<i32>,
 }
 
-impl<TDocument, TAggregations> MultiSearchItem<TDocument, TAggregations> {
+impl<TDocument> MultiSearchItem<TDocument, ::oxsearch_core::RawAggs> {
     /// A `MultiSearchItem` with its required properties set.
     pub fn new(
         took: i64,
@@ -96,10 +96,31 @@ impl<TDocument, TAggregations> MultiSearchItem<TDocument, TAggregations> {
             status: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument, TAggregations> MultiSearchItem<TDocument, TAggregations> {
     /// Sets `aggregations`.
-    pub fn aggregations(mut self, value: TAggregations) -> Self {
-        self.aggregations = ::core::option::Option::Some(value.into());
-        self
+    pub fn aggregations<TAggregations2>(
+        self,
+        value: TAggregations2,
+    ) -> MultiSearchItem<TDocument, TAggregations2> {
+        MultiSearchItem {
+            took: self.took,
+            timed_out: self.timed_out,
+            shards: self.shards,
+            hits: self.hits,
+            clusters: self.clusters,
+            fields: self.fields,
+            max_score: self.max_score,
+            num_reduce_phases: self.num_reduce_phases,
+            profile: self.profile,
+            pit_id: self.pit_id,
+            scroll_id: self.scroll_id,
+            suggest: self.suggest,
+            terminated_early: self.terminated_early,
+            status: self.status,
+            aggregations: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `clusters`.
     pub fn clusters(
@@ -194,6 +215,8 @@ impl<TDocument, TAggregations> MultiSearchResult<TDocument, TAggregations> {
     }
 }
 
+impl<TDocument, TAggregations> MultiSearchResult<TDocument, TAggregations> {}
+
 /// Contains parameters used to limit or change the subsequent search body request.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -262,6 +285,9 @@ impl MultisearchHeader {
             slice: ::core::option::Option::None,
         }
     }
+}
+
+impl MultisearchHeader {
     /// Sets `allow_no_indices`.
     pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
@@ -446,6 +472,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());

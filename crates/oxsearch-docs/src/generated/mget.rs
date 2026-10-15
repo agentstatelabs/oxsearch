@@ -33,6 +33,8 @@ impl MultiGetError {
     }
 }
 
+impl MultiGetError {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Operation {
@@ -76,6 +78,9 @@ impl Operation {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl Operation {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -140,6 +145,9 @@ impl RequestBody {
             ids: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `docs`.
     pub fn docs(
         mut self,
@@ -229,6 +237,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -319,6 +330,8 @@ impl<TDocument> Response<TDocument> {
         Self { docs: docs.into() }
     }
 }
+
+impl<TDocument> Response<TDocument> {}
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]

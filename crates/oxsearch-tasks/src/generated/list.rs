@@ -105,6 +105,9 @@ impl Request {
             wait_for_completion: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `actions`.
     pub fn actions(
         mut self,

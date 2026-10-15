@@ -20,6 +20,9 @@ impl RequestBody {
             scroll_id: scroll_id.into(),
         }
     }
+}
+
+impl RequestBody {
     /// Sets `scroll`.
     pub fn scroll(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.scroll = ::core::option::Option::Some(value.into());
@@ -69,6 +72,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `scroll_id`.
     pub fn scroll_id(
         mut self,

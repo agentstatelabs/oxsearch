@@ -36,6 +36,9 @@ impl RequestBody {
             source: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -88,6 +91,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -122,6 +128,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::render_search_template::Response;

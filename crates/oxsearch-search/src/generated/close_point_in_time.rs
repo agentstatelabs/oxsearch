@@ -16,6 +16,8 @@ impl RequestBody {
     }
 }
 
+impl RequestBody {}
+
 /// Close a point in time.
 ///
 /// A point in time must be opened explicitly before being used in search requests.
@@ -36,6 +38,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `body`.
     pub fn body(
         mut self,
@@ -66,6 +71,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::close_point_in_time::Response;

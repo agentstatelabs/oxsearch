@@ -71,6 +71,9 @@ impl Operation {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl Operation {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -164,6 +167,9 @@ impl RequestBody {
             ids: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `docs`.
     pub fn docs(
         mut self,
@@ -257,6 +263,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -362,6 +371,8 @@ impl Response {
     }
 }
 
+impl Response {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TermVectorsResult {
@@ -405,6 +416,9 @@ impl TermVectorsResult {
             error: ::core::option::Option::None,
         }
     }
+}
+
+impl TermVectorsResult {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());

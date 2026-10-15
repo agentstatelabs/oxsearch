@@ -13,6 +13,8 @@ impl Request {
     }
 }
 
+impl Request {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response(pub crate::RegionPolicyDoc);

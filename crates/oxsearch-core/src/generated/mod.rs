@@ -42,6 +42,8 @@ impl AcknowledgedResponseBase {
     }
 }
 
+impl AcknowledgedResponseBase {}
+
 /// The aggregation name as returned from the server. Depending whether typed_keys is specified this could come back
 /// in the form of `name#type` instead of simply `name`
 pub type AggregateName = ::std::string::String;
@@ -75,6 +77,8 @@ impl BulkIndexByScrollFailure {
         }
     }
 }
+
+impl BulkIndexByScrollFailure {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -115,6 +119,9 @@ impl BulkStats {
             avg_size_in_bytes: avg_size_in_bytes.into(),
         }
     }
+}
+
+impl BulkStats {
     /// Sets `total_time`.
     pub fn total_time(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.total_time = ::core::option::Option::Some(value.into());
@@ -290,6 +297,8 @@ impl CartesianPoint {
     }
 }
 
+impl CartesianPoint {}
+
 pub type CategoryId = i64;
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
@@ -311,6 +320,9 @@ impl ChunkRescorer {
             chunking_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl ChunkRescorer {
     /// Sets `size`.
     pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -364,6 +376,9 @@ impl ClusterDetails {
             failures: ::core::option::Option::None,
         }
     }
+}
+
+impl ClusterDetails {
     /// Sets `took`.
     pub fn took(mut self, value: impl ::core::convert::Into<crate::UnitMillis>) -> Self {
         self.took = ::core::option::Option::Some(value.into());
@@ -554,6 +569,9 @@ impl ClusterStatistics {
             details: ::core::option::Option::None,
         }
     }
+}
+
+impl ClusterStatistics {
     /// Sets `details`.
     pub fn details(
         mut self,
@@ -726,6 +744,9 @@ impl CompletionStats {
             fields: ::core::option::Option::None,
         }
     }
+}
+
+impl CompletionStats {
     /// Sets `size`.
     pub fn size(mut self, value: impl ::core::convert::Into<crate::ByteSize>) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -815,6 +836,8 @@ impl CoordsGeoBounds {
         }
     }
 }
+
+impl CoordsGeoBounds {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
@@ -1226,6 +1249,9 @@ impl DiversifyRetriever {
             lambda: ::core::option::Option::None,
         }
     }
+}
+
+impl DiversifyRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -1353,6 +1379,9 @@ impl DocStats {
             total_size: ::core::option::Option::None,
         }
     }
+}
+
+impl DocStats {
     /// Sets `deleted`.
     pub fn deleted(mut self, value: i64) -> Self {
         self.deleted = ::core::option::Option::Some(value.into());
@@ -1515,6 +1544,8 @@ impl ElasticsearchVersionInfo {
     }
 }
 
+impl ElasticsearchVersionInfo {}
+
 /// Reduced (minimal) info ElasticsearchVersion
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -1542,6 +1573,8 @@ impl ElasticsearchVersionMinInfo {
     }
 }
 
+impl ElasticsearchVersionMinInfo {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Embedding {
@@ -1562,6 +1595,9 @@ impl Embedding {
             timeout: ::core::option::Option::None,
         }
     }
+}
+
+impl Embedding {
     /// Sets `inference_id`.
     pub fn inference_id(
         mut self,
@@ -1588,6 +1624,8 @@ impl EmptyObject {
         Self {}
     }
 }
+
+impl EmptyObject {}
 
 /// Cause and details about a request failure. This class defines the properties common to all error types.
 /// Additional details are also provided, that depend on the error type.
@@ -1627,6 +1665,9 @@ impl ErrorCause {
             metadata: ::indexmap::IndexMap::new(),
         }
     }
+}
+
+impl ErrorCause {
     /// Sets `reason`.
     pub fn reason(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.reason = ::core::option::Option::Some(value.into());
@@ -1679,6 +1720,8 @@ impl ErrorResponseBase {
         }
     }
 }
+
+impl ErrorResponseBase {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
@@ -1765,6 +1808,9 @@ impl FieldMemoryUsage {
             memory_size_in_bytes: memory_size_in_bytes.into(),
         }
     }
+}
+
+impl FieldMemoryUsage {
     /// Sets `memory_size`.
     pub fn memory_size(mut self, value: impl ::core::convert::Into<crate::ByteSize>) -> Self {
         self.memory_size = ::core::option::Option::Some(value.into());
@@ -1788,6 +1834,9 @@ impl FieldSizeUsage {
             size_in_bytes: size_in_bytes.into(),
         }
     }
+}
+
+impl FieldSizeUsage {
     /// Sets `size`.
     pub fn size(mut self, value: impl ::core::convert::Into<crate::ByteSize>) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -1820,6 +1869,9 @@ impl FieldSort {
             format: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldSort {
     /// Sets `missing`.
     pub fn missing(
         mut self,
@@ -2124,6 +2176,9 @@ impl FielddataStats {
             global_ordinals: global_ordinals.into(),
         }
     }
+}
+
+impl FielddataStats {
     /// Sets `evictions`.
     pub fn evictions(mut self, value: i64) -> Self {
         self.evictions = ::core::option::Option::Some(value.into());
@@ -2177,6 +2232,9 @@ impl FlushStats {
                 total_time_excluding_waiting_on_lock_in_millis.into(),
         }
     }
+}
+
+impl FlushStats {
     /// Sets `total_time`.
     pub fn total_time(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.total_time = ::core::option::Option::Some(value.into());
@@ -2513,6 +2571,9 @@ impl GeoDistanceSort {
             location: location.into(),
         }
     }
+}
+
+impl GeoDistanceSort {
     /// Sets `mode`.
     pub fn mode(mut self, value: impl ::core::convert::Into<crate::SortMode>) -> Self {
         self.mode = ::core::option::Option::Some(value.into());
@@ -2676,6 +2737,8 @@ impl GeoHashLocation {
     }
 }
 
+impl GeoHashLocation {}
+
 /// A precision that can be expressed as a geohash length between 1 and 12, or a distance measure like "1km", "10m".
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
@@ -2773,6 +2836,8 @@ impl GeoLine {
         }
     }
 }
+
+impl GeoLine {}
 
 /// A latitude/longitude as a 2 dimensional point. It can be represented in various ways:
 /// - as a `{lat, long}` object
@@ -3004,6 +3069,9 @@ impl GetStats {
             total: total.into(),
         }
     }
+}
+
+impl GetStats {
     /// Sets `exists_time`.
     pub fn exists_time(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.exists_time = ::core::option::Option::Some(value.into());
@@ -3042,6 +3110,9 @@ impl GlobalOrdinalFieldStats {
             shard_max_value_count: shard_max_value_count.into(),
         }
     }
+}
+
+impl GlobalOrdinalFieldStats {
     /// Sets `build_time`.
     pub fn build_time(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.build_time = ::core::option::Option::Some(value.into());
@@ -3069,6 +3140,9 @@ impl GlobalOrdinalsStats {
             fields: ::core::option::Option::None,
         }
     }
+}
+
+impl GlobalOrdinalsStats {
     /// Sets `build_time`.
     pub fn build_time(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.build_time = ::core::option::Option::Some(value.into());
@@ -3338,6 +3412,9 @@ impl IndexingStats {
             peak_write_load: ::core::option::Option::None,
         }
     }
+}
+
+impl IndexingStats {
     /// Sets `delete_time`.
     pub fn delete_time(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.delete_time = ::core::option::Option::Some(value.into());
@@ -3420,6 +3497,9 @@ impl IndicesOptions {
             ignore_throttled: ::core::option::Option::None,
         }
     }
+}
+
+impl IndicesOptions {
     /// Sets `allow_no_indices`.
     pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
@@ -3465,6 +3545,9 @@ impl IndicesResponseBase {
             shards: ::core::option::Option::None,
         }
     }
+}
+
+impl IndicesResponseBase {
     /// Sets `shards`.
     pub fn shards(mut self, value: impl ::core::convert::Into<crate::ShardStatistics>) -> Self {
         self.shards = ::core::option::Option::Some(value.into());
@@ -3498,6 +3581,9 @@ impl InferenceString {
             value: ::core::option::Option::Some(value.into()),
         }
     }
+}
+
+impl InferenceString {
     /// Sets `format`.
     pub fn format(
         mut self,
@@ -3543,7 +3629,7 @@ pub struct InlineGet<TDocument = ::serde_json::Value> {
     pub metadata: ::indexmap::IndexMap<::std::string::String, ::serde_json::Value>,
 }
 
-impl<TDocument> InlineGet<TDocument> {
+impl InlineGet<::serde_json::Value> {
     /// A `InlineGet` with its required properties set.
     pub fn new(found: bool) -> Self {
         Self {
@@ -3556,6 +3642,9 @@ impl<TDocument> InlineGet<TDocument> {
             metadata: ::indexmap::IndexMap::new(),
         }
     }
+}
+
+impl<TDocument> InlineGet<TDocument> {
     /// Sets `fields`.
     pub fn fields(
         mut self,
@@ -3582,9 +3671,16 @@ impl<TDocument> InlineGet<TDocument> {
         self
     }
     /// Sets `source`.
-    pub fn source(mut self, value: TDocument) -> Self {
-        self.source = ::core::option::Option::Some(value.into());
-        self
+    pub fn source<TDocument2>(self, value: TDocument2) -> InlineGet<TDocument2> {
+        InlineGet {
+            fields: self.fields,
+            found: self.found,
+            seq_no: self.seq_no,
+            primary_term: self.primary_term,
+            routing: self.routing,
+            metadata: self.metadata,
+            source: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -3614,6 +3710,9 @@ impl InnerRetriever {
             normalizer: ::core::option::Option::None,
         }
     }
+}
+
+impl InnerRetriever {
     /// Sets `weight`.
     pub fn weight(mut self, value: f32) -> Self {
         self.weight = ::core::option::Option::Some(value.into());
@@ -3767,6 +3866,9 @@ impl KnnQuery {
             rescore_vector: ::core::option::Option::None,
         }
     }
+}
+
+impl KnnQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3890,6 +3992,9 @@ impl KnnRetriever {
             rescore_vector: ::core::option::Option::None,
         }
     }
+}
+
+impl KnnRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -4011,6 +4116,9 @@ impl KnnSearch {
             name: ::core::option::Option::None,
         }
     }
+}
+
+impl KnnSearch {
     /// Sets `query_vector`.
     pub fn query_vector(mut self, value: impl ::core::convert::Into<crate::QueryVector>) -> Self {
         self.query_vector = ::core::option::Option::Some(value.into());
@@ -4102,6 +4210,8 @@ impl LatLonGeoLocation {
         }
     }
 }
+
+impl LatLonGeoLocation {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
@@ -4257,6 +4367,9 @@ impl LinearRetriever {
             normalizer: ::core::option::Option::None,
         }
     }
+}
+
+impl LinearRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -4341,6 +4454,9 @@ impl LookupQueryVectorBuilder {
             routing: ::core::option::Option::None,
         }
     }
+}
+
+impl LookupQueryVectorBuilder {
     /// Sets `routing`.
     pub fn routing(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.routing = ::core::option::Option::Some(value.into());
@@ -4410,6 +4526,9 @@ impl MergesStats {
             total_time_in_millis: total_time_in_millis.into(),
         }
     }
+}
+
+impl MergesStats {
     /// Sets `current_size`.
     pub fn current_size(
         mut self,
@@ -4559,6 +4678,9 @@ impl NestedSortValue {
             path: ::core::option::Option::Some(path.into()),
         }
     }
+}
+
+impl NestedSortValue {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -4613,6 +4735,9 @@ impl NodeAttributes {
             transport_address: transport_address.into(),
         }
     }
+}
+
+impl NodeAttributes {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<crate::NodeId>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -4775,6 +4900,9 @@ impl NodeShard {
             relocation_failure_info: ::core::option::Option::None,
         }
     }
+}
+
+impl NodeShard {
     /// Sets `node`.
     pub fn node(mut self, value: impl ::core::convert::Into<crate::NodeName>) -> Self {
         self.node = ::core::option::Option::Some(value.into());
@@ -4843,6 +4971,9 @@ impl NodeStatistics {
             failed: failed.into(),
         }
     }
+}
+
+impl NodeStatistics {
     /// Sets `failures`.
     pub fn failures(
         mut self,
@@ -5136,6 +5267,9 @@ impl PinnedRetriever {
             rank_window_size: ::core::option::Option::None,
         }
     }
+}
+
+impl PinnedRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -5222,6 +5356,8 @@ impl PluginStats {
     }
 }
 
+impl PluginStats {}
+
 pub type ProjectRouting = ::std::string::String;
 
 pub type PropertyName = ::std::string::String;
@@ -5271,6 +5407,9 @@ impl QueryCacheStats {
             total_count: total_count.into(),
         }
     }
+}
+
+impl QueryCacheStats {
     /// Sets `memory_size`.
     pub fn memory_size(mut self, value: impl ::core::convert::Into<crate::ByteSize>) -> Self {
         self.memory_size = ::core::option::Option::Some(value.into());
@@ -5429,6 +5568,9 @@ impl RRFRetriever {
             fields: ::core::option::Option::None,
         }
     }
+}
+
+impl RRFRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -5494,6 +5636,9 @@ impl RRFRetrieverComponent {
             weight: ::core::option::Option::None,
         }
     }
+}
+
+impl RRFRetrieverComponent {
     /// Sets `weight`.
     pub fn weight(mut self, value: f32) -> Self {
         self.weight = ::core::option::Option::Some(value.into());
@@ -5601,6 +5746,8 @@ impl RankBase {
         Self {}
     }
 }
+
+impl RankBase {}
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
@@ -5714,6 +5861,9 @@ impl RecoveryStats {
             throttle_time_in_millis: throttle_time_in_millis.into(),
         }
     }
+}
+
+impl RecoveryStats {
     /// Sets `current_as_source_queued`.
     pub fn current_as_source_queued(mut self, value: i64) -> Self {
         self.current_as_source_queued = ::core::option::Option::Some(value.into());
@@ -5828,6 +5978,9 @@ impl RefreshStats {
             total_time_in_millis: total_time_in_millis.into(),
         }
     }
+}
+
+impl RefreshStats {
     /// Sets `external_total_time`.
     pub fn external_total_time(
         mut self,
@@ -5923,6 +6076,9 @@ impl ReindexStatus {
             cancelled: ::core::option::Option::None,
         }
     }
+}
+
+impl ReindexStatus {
     /// Sets `slice_id`.
     pub fn slice_id(mut self, value: i32) -> Self {
         self.slice_id = ::core::option::Option::Some(value.into());
@@ -6006,6 +6162,9 @@ impl ReindexTaskInfo {
             status: ::core::option::Option::None,
         }
     }
+}
+
+impl ReindexTaskInfo {
     /// Sets `description`.
     pub fn description(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.description = ::core::option::Option::Some(value.into());
@@ -6097,6 +6256,9 @@ impl ReindexTaskResult {
             version_conflicts: ::core::option::Option::None,
         }
     }
+}
+
+impl ReindexTaskResult {
     /// Sets `batches`.
     pub fn batches(mut self, value: i64) -> Self {
         self.batches = ::core::option::Option::Some(value.into());
@@ -6196,6 +6358,8 @@ impl RelocationFailureInfo {
     }
 }
 
+impl RelocationFailureInfo {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RequestBase {}
@@ -6206,6 +6370,8 @@ impl RequestBase {
         Self {}
     }
 }
+
+impl RequestBase {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -6229,6 +6395,9 @@ impl RequestCacheStats {
             miss_count: miss_count.into(),
         }
     }
+}
+
+impl RequestCacheStats {
     /// Sets `memory_size`.
     pub fn memory_size(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.memory_size = ::core::option::Option::Some(value.into());
@@ -6252,6 +6421,8 @@ impl RescoreVector {
         }
     }
 }
+
+impl RescoreVector {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -6291,6 +6462,9 @@ impl RescorerRetriever {
             rescore: ::core::option::Option::Some(rescore.into()),
         }
     }
+}
+
+impl RescorerRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -6396,6 +6570,8 @@ impl Retries {
     }
 }
 
+impl Retries {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RetrieverBase {
@@ -6424,6 +6600,9 @@ impl RetrieverBase {
             name: ::core::option::Option::None,
         }
     }
+}
+
+impl RetrieverBase {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -6653,6 +6832,9 @@ impl RrfRank {
             rank_window_size: ::core::option::Option::None,
         }
     }
+}
+
+impl RrfRank {
     /// Sets `rank_constant`.
     pub fn rank_constant(mut self, value: i64) -> Self {
         self.rank_constant = ::core::option::Option::Some(value.into());
@@ -6713,6 +6895,9 @@ impl RuleRetriever {
             rank_window_size: ::core::option::Option::None,
         }
     }
+}
+
+impl RuleRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -6914,6 +7099,9 @@ impl ScoreSort {
             order: ::core::option::Option::None,
         }
     }
+}
+
+impl ScoreSort {
     /// Sets `order`.
     pub fn order(mut self, value: impl ::core::convert::Into<crate::SortOrder>) -> Self {
         self.order = ::core::option::Option::Some(value.into());
@@ -6949,6 +7137,9 @@ impl Script {
             options: ::core::option::Option::None,
         }
     }
+}
+
+impl Script {
     /// Sets `source`.
     pub fn source(mut self, value: impl ::core::convert::Into<crate::ScriptSource>) -> Self {
         self.source = ::core::option::Option::Some(value.into());
@@ -7060,6 +7251,9 @@ impl ScriptField {
             ignore_failure: ::core::option::Option::None,
         }
     }
+}
+
+impl ScriptField {
     /// Sets `ignore_failure`.
     pub fn ignore_failure(mut self, value: bool) -> Self {
         self.ignore_failure = ::core::option::Option::Some(value.into());
@@ -7153,6 +7347,9 @@ impl ScriptSort {
             nested: ::core::option::Option::None,
         }
     }
+}
+
+impl ScriptSort {
     /// Sets `order`.
     pub fn order(mut self, value: impl ::core::convert::Into<crate::SortOrder>) -> Self {
         self.order = ::core::option::Option::Some(value.into());
@@ -7344,6 +7541,9 @@ impl ScriptTransform {
             id: ::core::option::Option::None,
         }
     }
+}
+
+impl ScriptTransform {
     /// Sets `lang`.
     pub fn lang(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.lang = ::core::option::Option::Some(value.into());
@@ -7499,6 +7699,9 @@ impl SearchStats {
             groups: ::core::option::Option::None,
         }
     }
+}
+
+impl SearchStats {
     /// Sets `fetch_time`.
     pub fn fetch_time(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.fetch_time = ::core::option::Option::Some(value.into());
@@ -7557,6 +7760,9 @@ impl SearchTransform {
             timeout: ::core::option::Option::None,
         }
     }
+}
+
+impl SearchTransform {
     /// Sets `timeout`.
     pub fn timeout(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.timeout = ::core::option::Option::Some(value.into());
@@ -7723,6 +7929,9 @@ impl SegmentsStats {
             version_map_memory_in_bytes: version_map_memory_in_bytes.into(),
         }
     }
+}
+
+impl SegmentsStats {
     /// Sets `doc_values_memory`.
     pub fn doc_values_memory(mut self, value: impl ::core::convert::Into<crate::ByteSize>) -> Self {
         self.doc_values_memory = ::core::option::Option::Some(value.into());
@@ -7829,6 +8038,9 @@ impl ShardFailure {
             primary: ::core::option::Option::None,
         }
     }
+}
+
+impl ShardFailure {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<crate::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -7885,6 +8097,9 @@ impl ShardStatistics {
             skipped: ::core::option::Option::None,
         }
     }
+}
+
+impl ShardStatistics {
     /// Sets `failures`.
     pub fn failures(
         mut self,
@@ -7917,6 +8132,9 @@ impl ShardsOperationResponseBase {
             shards: ::core::option::Option::None,
         }
     }
+}
+
+impl ShardsOperationResponseBase {
     /// Sets `shards`.
     pub fn shards(mut self, value: impl ::core::convert::Into<crate::ShardStatistics>) -> Self {
         self.shards = ::core::option::Option::Some(value.into());
@@ -7944,6 +8162,9 @@ impl SlicedScroll {
             max: ::core::option::Option::Some(max.into()),
         }
     }
+}
+
+impl SlicedScroll {
     /// Sets `field`.
     pub fn field(mut self, value: impl ::core::convert::Into<crate::Field>) -> Self {
         self.field = ::core::option::Option::Some(value.into());
@@ -8371,6 +8592,9 @@ impl SpecifiedDocument {
             id: ::core::option::Option::Some(id.into()),
         }
     }
+}
+
+impl SpecifiedDocument {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<crate::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -8426,6 +8650,9 @@ impl StandardRetriever {
             collapse: ::core::option::Option::None,
         }
     }
+}
+
+impl StandardRetriever {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -8514,6 +8741,9 @@ impl StoreStats {
             total_data_set_size_in_bytes: ::core::option::Option::None,
         }
     }
+}
+
+impl StoreStats {
     /// Sets `size`.
     pub fn size(mut self, value: impl ::core::convert::Into<crate::ByteSize>) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -8565,6 +8795,9 @@ impl StoredScript {
             source: source.into(),
         }
     }
+}
+
+impl StoredScript {
     /// Sets `options`.
     pub fn options(
         mut self,
@@ -8667,6 +8900,8 @@ impl TaskFailure {
     }
 }
 
+impl TaskFailure {}
+
 pub type TaskId = ::std::string::String;
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
@@ -8689,6 +8924,9 @@ impl TextEmbedding {
             model_text: ::core::option::Option::Some(model_text.into()),
         }
     }
+}
+
+impl TextEmbedding {
     /// Sets `model_id`.
     pub fn model_id(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.model_id = ::core::option::Option::Some(value.into());
@@ -8752,6 +8990,9 @@ impl TextSimilarityReranker {
             chunk_rescorer: ::core::option::Option::None,
         }
     }
+}
+
+impl TextSimilarityReranker {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -8955,6 +9196,9 @@ impl TokenPruningConfig {
             only_score_pruned_tokens: ::core::option::Option::None,
         }
     }
+}
+
+impl TokenPruningConfig {
     /// Sets `tokens_freq_ratio_threshold`.
     pub fn tokens_freq_ratio_threshold(mut self, value: i32) -> Self {
         self.tokens_freq_ratio_threshold = ::core::option::Option::Some(value.into());
@@ -8994,6 +9238,8 @@ impl TopLeftBottomRightGeoBounds {
     }
 }
 
+impl TopLeftBottomRightGeoBounds {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TopRightBottomLeftGeoBounds {
@@ -9015,6 +9261,8 @@ impl TopRightBottomLeftGeoBounds {
         }
     }
 }
+
+impl TopRightBottomLeftGeoBounds {}
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
@@ -9148,6 +9396,9 @@ impl TranslogStats {
             uncommitted_size_in_bytes: uncommitted_size_in_bytes.into(),
         }
     }
+}
+
+impl TranslogStats {
     /// Sets `size`.
     pub fn size(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -9452,6 +9703,9 @@ impl WarmerStats {
             total_time_in_millis: total_time_in_millis.into(),
         }
     }
+}
+
+impl WarmerStats {
     /// Sets `total_time`.
     pub fn total_time(mut self, value: impl ::core::convert::Into<crate::Duration>) -> Self {
         self.total_time = ::core::option::Option::Some(value.into());
@@ -9474,6 +9728,8 @@ impl WktGeoBounds {
         }
     }
 }
+
+impl WktGeoBounds {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -9546,6 +9802,9 @@ impl WriteResponseBase {
             forced_refresh: ::core::option::Option::None,
         }
     }
+}
+
+impl WriteResponseBase {
     /// Sets `primary_term`.
     pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());

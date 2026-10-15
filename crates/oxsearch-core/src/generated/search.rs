@@ -91,6 +91,9 @@ impl FieldCollapse {
             collapse: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldCollapse {
     /// Sets `inner_hits`.
     pub fn inner_hits(
         mut self,
@@ -243,6 +246,9 @@ impl Highlight {
             fields: ::core::option::Option::Some(fields.into()),
         }
     }
+}
+
+impl Highlight {
     /// Sets `type`.
     pub fn r#type(
         mut self,
@@ -504,6 +510,9 @@ impl HighlightBase {
             tags_schema: ::core::option::Option::None,
         }
     }
+}
+
+impl HighlightBase {
     /// Sets `type`.
     pub fn r#type(
         mut self,
@@ -763,6 +772,9 @@ impl HighlightField {
             matched_fields: ::core::option::Option::None,
         }
     }
+}
+
+impl HighlightField {
     /// Sets `type`.
     pub fn r#type(
         mut self,
@@ -1243,6 +1255,9 @@ impl InnerHits {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl InnerHits {
     /// Sets `name`.
     pub fn name(mut self, value: impl ::core::convert::Into<crate::Name>) -> Self {
         self.name = ::core::option::Option::Some(value.into());
@@ -1371,6 +1386,9 @@ impl LearningToRank {
             params: ::core::option::Option::None,
         }
     }
+}
+
+impl LearningToRank {
     /// Sets `params`.
     pub fn params(
         mut self,
@@ -1499,6 +1517,9 @@ impl Rescore {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl Rescore {
     /// Sets `window_size`.
     pub fn window_size(mut self, value: i32) -> Self {
         self.window_size = ::core::option::Option::Some(value.into());
@@ -1609,6 +1630,9 @@ impl RescoreQuery {
             score_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl RescoreQuery {
     /// Sets `query_weight`.
     pub fn query_weight(mut self, value: f64) -> Self {
         self.query_weight = ::core::option::Option::Some(value.into());
@@ -1707,6 +1731,8 @@ impl ScriptRescore {
         }
     }
 }
+
+impl ScriptRescore {}
 
 /// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
 #[derive(Clone, Debug, PartialEq)]
@@ -1875,6 +1901,9 @@ impl SourceFilter {
             includes: ::core::option::Option::None,
         }
     }
+}
+
+impl SourceFilter {
     /// Sets `exclude_vectors`.
     pub fn exclude_vectors(mut self, value: bool) -> Self {
         self.exclude_vectors = ::core::option::Option::Some(value.into());

@@ -88,6 +88,9 @@ impl Request {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `preference`.
     pub fn preference(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.preference = ::core::option::Option::Some(value.into());
@@ -168,6 +171,8 @@ impl Response {
         Self {}
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::exists::Response;

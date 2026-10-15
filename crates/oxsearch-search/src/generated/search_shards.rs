@@ -66,6 +66,9 @@ impl Request {
             slice: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -156,6 +159,8 @@ impl Response {
     }
 }
 
+impl Response {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SearchShardsNodeAttributes {
@@ -212,6 +217,8 @@ impl SearchShardsNodeAttributes {
     }
 }
 
+impl SearchShardsNodeAttributes {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ShardStoreIndex {
@@ -229,6 +236,9 @@ impl ShardStoreIndex {
             filter: ::core::option::Option::None,
         }
     }
+}
+
+impl ShardStoreIndex {
     /// Sets `aliases`.
     pub fn aliases(
         mut self,
