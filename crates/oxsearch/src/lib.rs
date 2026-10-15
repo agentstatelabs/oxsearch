@@ -1,6 +1,10 @@
 //! A typed Rust client for Elasticsearch, generated from the Elasticsearch
 //! specification.
 //!
+//! The README's quick start (`examples/quickstart.rs`) does semantic search
+//! over your own documents in a dozen lines; `examples/rag.rs` is the
+//! retrieval half of a RAG application on any license.
+//!
 //! This crate re-exports the others behind features. The defaults are the
 //! AI-search set: `search`, `docs`, `mapping` and `inference`. The other API
 //! areas are `aggs`, `analysis`, `esql`, `admin` and `tasks`. `derive` adds
@@ -26,6 +30,13 @@
 //! a layer of your own is a [`Transport`] that wraps another. [`telemetry`]
 //! records a span per request and its duration through the `tracing` and
 //! `metrics` facades, for oxtel or any other exporter.
+//!
+//! Every API is generated whatever the cluster's license. A request for a
+//! feature the license doesn't include, such as the `rrf` retriever or
+//! ELSER on Basic, fails with [`Error::License`].
+//!
+//! oxsearch is not affiliated with or endorsed by Elastic. Elasticsearch is
+//! a trademark of Elasticsearch B.V.
 
 // The derive macros' code names this crate `::oxsearch`, in its own tests too.
 extern crate self as oxsearch;

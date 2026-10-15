@@ -223,7 +223,7 @@ Built in Phase 1 (`oxsearch_core::telemetry`):
 
 Elasticsearch's free Basic license includes kNN and the standard, knn, pinned and rescorer retrievers. Server-side RRF, linear, rule and rerank retrievers, and Elastic's managed inference, need a paid license or a trial. (Elastic's subscription matrix should be checked against each release; the tiers have moved before.)
 
-- Every API is generated regardless of license. Docs note features that need a paid license.
+- Every API is generated regardless of license. Docs note features that need a paid license; the README has a table from what the integration tests show.
 - License failures come back as a typed error.
 - Client-side fusion gives Basic clusters hybrid search.
 - CI runs the integration tests twice: once on Basic, once on a trial license.

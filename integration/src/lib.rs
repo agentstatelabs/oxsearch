@@ -27,7 +27,36 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 
 /// The client the tests use.
-pub type TestClient = Client<ReqwestTransport>;
+pub type TestClient = Client<Recorded<ReqwestTransport>>;
+
+/// A transport that records each request's method and path in the file
+/// `OXSEARCH_COVERAGE` names, for the coverage report
+/// (`cargo run -p xtask -- coverage`).
+#[derive(Clone, Debug)]
+pub struct Recorded<T>(pub T);
+
+impl<T: oxsearch_core::Transport> oxsearch_core::Transport for Recorded<T> {
+    async fn send(
+        &self,
+        request: oxsearch_core::HttpRequest,
+    ) -> Result<oxsearch_core::HttpResponse, oxsearch_core::TransportError> {
+        if let Some(file) = std::env::var_os("OXSEARCH_COVERAGE") {
+            use std::io::Write;
+            let path = request.path_and_query.split('?').next().unwrap_or_default();
+            let line = format!("{} {path}\n", request.method.as_str());
+            if let Ok(mut file) = std::fs::OpenOptions::new()
+                .create(true)
+                .append(true)
+                .open(file)
+            {
+                // One write per line, so lines from tests running at once
+                // don't interleave.
+                let _ = file.write_all(line.as_bytes());
+            }
+        }
+        self.0.send(request).await
+    }
+}
 
 /// The license the tests expect the cluster to run.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -62,7 +91,9 @@ impl License {
 pub fn client() -> TestClient {
     let url =
         std::env::var("OXSEARCH_TEST_URL").unwrap_or_else(|_| "http://127.0.0.1:9200".to_owned());
-    Client::new(ReqwestTransport::new(&url).expect("OXSEARCH_TEST_URL is an http URL"))
+    Client::new(Recorded(
+        ReqwestTransport::new(&url).expect("OXSEARCH_TEST_URL is an http URL"),
+    ))
 }
 
 /// A document the tests index: text, a keyword, a dense vector and sparse

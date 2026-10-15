@@ -2,6 +2,7 @@
 //! command line; this library is what it runs, so each step can be tested.
 
 pub mod codegen;
+pub mod coverage;
 pub mod graph;
 pub mod placement;
 pub mod shapes;

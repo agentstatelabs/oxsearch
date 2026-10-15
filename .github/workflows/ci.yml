@@ -120,6 +120,8 @@ jobs:
           done
           echo "the Collector didn't become healthy"; docker logs otelcol; exit 1
       - name: Integration tests
+        env:
+          OXSEARCH_COVERAGE: ${{ github.workspace }}/target/coverage.txt
         run: cargo test -p oxsearch-integration -- --ignored
       - name: The examples run
         env:
@@ -127,6 +129,13 @@ jobs:
         run: |
           cargo run -p oxsearch --example rag --features transport-reqwest
           cargo run -p oxsearch --example escape_hatches --features transport-reqwest
+          # semantic_text's default model, ELSER, needs a trial.
+          if [ "${OXSEARCH_TEST_LICENSE}" = trial ]; then
+            cargo run -p oxsearch --example quickstart --features derive,transport-reqwest
+          fi
+      - name: Endpoint coverage
+        if: always()
+        run: cargo run -q -p xtask -- coverage target/coverage.txt >> "$GITHUB_STEP_SUMMARY"
       - name: Elasticsearch logs
         if: failure()
         run: scripts/es-fixture.sh logs | tail -200
