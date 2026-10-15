@@ -19,15 +19,21 @@ pub const REPORT_FILE: &str = "spec/shapes.md";
 pub const SLICE: &[&str] = &["core", "mapping", "search", "inference", "docs"];
 
 /// The JSON kinds a value may take, as a set of bits.
-type Kinds = u8;
-const STRING: Kinds = 1;
-const NUMBER: Kinds = 2;
-const BOOLEAN: Kinds = 4;
-const NULL: Kinds = 8;
-const ARRAY: Kinds = 16;
-const OBJECT: Kinds = 32;
+pub type Kinds = u8;
+/// A string.
+pub const STRING: Kinds = 1;
+/// A number.
+pub const NUMBER: Kinds = 2;
+/// `true` or `false`.
+pub const BOOLEAN: Kinds = 4;
+/// `null`.
+pub const NULL: Kinds = 8;
+/// An array.
+pub const ARRAY: Kinds = 16;
+/// An object.
+pub const OBJECT: Kinds = 32;
 /// Anything: a generic parameter or a user-defined value.
-const ANY: Kinds = 63;
+pub const ANY: Kinds = 63;
 
 /// How a union's members are told apart.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
@@ -292,7 +298,7 @@ fn classify(items: &[ValueOf], kinds: &[Kinds]) -> UnionKind {
 /// The JSON kinds a value may take. `bound` gives the kinds of the generic
 /// parameters bound so far; any other generic parameter may be anything.
 /// `depth` stops runaway recursion through aliases.
-fn json_kinds(
+pub fn json_kinds(
     graph: &Graph<'_>,
     value: &ValueOf,
     bound: &[(&TypeName, Kinds)],

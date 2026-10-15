@@ -14,6 +14,8 @@
 //!   rules in `placement.rs`, and writes the report to `spec/placement.md`.
 //! - `cargo run -p xtask -- shapes` counts the shapes the generator maps to
 //!   serde, and writes the report to `spec/shapes.md`.
+//! - `cargo run -p xtask -- generate` writes the Rust types for the
+//!   generated crates into each one's `src/generated`, and formats them.
 
 use std::process::ExitCode;
 
@@ -31,9 +33,10 @@ fn main() -> ExitCode {
         ["spec", "pin", branch, commit] => ("spec pin", spec_pin(branch, Some(commit))),
         ["placement"] => ("placement", placement()),
         ["shapes"] => ("shapes", shapes()),
+        ["generate"] => ("generate", generate()),
         _ => {
             eprintln!(
-                "usage: cargo run -p xtask -- spec check | spec fetch | spec pin <branch> [<commit>] | placement | shapes"
+                "usage: cargo run -p xtask -- spec check | spec fetch | spec pin <branch> [<commit>] | placement | shapes | generate"
             );
             return ExitCode::from(2);
         }
@@ -114,5 +117,42 @@ fn shapes() -> Result<(), Error> {
         inventory.unions.len(),
         xtask::shapes::REPORT_FILE
     );
+    Ok(())
+}
+
+fn generate() -> Result<(), Error> {
+    let pin = Pin::read()?;
+    let schema = spec::load(&spec::fetch(&pin)?)?;
+    let graph = Graph::new(&schema)?;
+    let placement = placement::place(&graph)?;
+    let files = xtask::codegen::generate(&graph, &placement, &schema.endpoints, &pin)?;
+    let root = workspace_root();
+    for krate in xtask::codegen::CRATES {
+        let dir = root
+            .join(format!("crates/oxsearch-{krate}/src"))
+            .join(xtask::codegen::DIR);
+        if dir.exists() {
+            std::fs::remove_dir_all(&dir)?;
+        }
+        let tests = root.join(format!("crates/oxsearch-{krate}/tests/examples.rs"));
+        if tests.exists() {
+            std::fs::remove_file(&tests)?;
+        }
+    }
+    let mut lines = 0;
+    for (path, source) in &files {
+        let path = root.join(path);
+        std::fs::create_dir_all(path.parent().expect("files are in a directory"))?;
+        std::fs::write(&path, source)?;
+        lines += source.lines().count();
+    }
+    let status = std::process::Command::new("rustfmt")
+        .args(["--edition", "2024"])
+        .args(files.keys().map(|p| root.join(p)))
+        .status()?;
+    if !status.success() {
+        return Err("rustfmt failed on the generated code".into());
+    }
+    println!("{} files, {lines} lines before formatting", files.len());
     Ok(())
 }

@@ -1,0 +1,153 @@
+133 exact, 7 normalized, 12 failing
+inference.chat_completion_unified request PostChatCompletionRequestExample1: exact
+inference.chat_completion_unified request PostChatCompletionRequestExample2: exact
+inference.chat_completion_unified request PostChatCompletionRequestExample3: fails: reading messages[0].content[0]: missing field `image_url`
+inference.chat_completion_unified request PostChatCompletionRequestExample4: fails: reading messages[0].content[0]: missing field `image_url`
+inference.chat_completion_unified request PostChatCompletionRequestExample5: fails: reading messages[0].content[0]: missing field `image_url`
+inference.completion request CompletionRequestExample1: exact
+inference.completion response CompletionResponseExample1: exact
+inference.delete_region_policy response DeleteRegionPolicyResponseExample1: exact
+inference.embedding request EmbeddingRequestExample1: exact
+inference.embedding request EmbeddingRequestExample2: exact
+inference.embedding request EmbeddingRequestExample3: exact
+inference.embedding response EmbeddingResponseExample1: normalized at /embeddings/0/embedding/0
+inference.embedding response EmbeddingResponseExample2: normalized at /embeddings/0/embedding/0
+inference.get_region_policy response GetRegionPolicyResponseExample1: exact
+inference.put request InferencePutExample1: exact
+inference.put_ai21 request PutAi21RequestExample1: exact
+inference.put_ai21 request PutAi21RequestExample2: exact
+inference.put_alibabacloud request PutAlibabaCloudRequestExample1: exact
+inference.put_alibabacloud request PutAlibabaCloudRequestExample2: exact
+inference.put_alibabacloud request PutAlibabaCloudRequestExample3: exact
+inference.put_alibabacloud request PutAlibabaCloudRequestExample4: exact
+inference.put_amazonbedrock request PutAmazonBedrockRequestExample1: exact
+inference.put_amazonbedrock request PutAmazonBedrockRequestExample2: exact
+inference.put_amazonbedrock request PutAmazonBedrockRequestExample3: exact
+inference.put_amazonsagemaker request PutAmazonSageMakerRequestExample1: exact
+inference.put_amazonsagemaker request PutAmazonSageMakerRequestExample2: exact
+inference.put_amazonsagemaker request PutAmazonSageMakerRequestExample3: exact
+inference.put_amazonsagemaker request PutAmazonSageMakerRequestExample4: exact
+inference.put_amazonsagemaker request PutAmazonSageMakerRequestExample5: exact
+inference.put_anthropic request PutAnthropicChatCompletionRequestExample1: exact
+inference.put_anthropic request PutAnthropicRequestExample1: exact
+inference.put_azureaistudio request PutAzureAiStudioRequestExample1: exact
+inference.put_azureaistudio request PutAzureAiStudioRequestExample2: exact
+inference.put_azureaistudio request PutAzureAiStudioRequestExample3: exact
+inference.put_azureopenai request PutAzureOpenAiRequestExample1: exact
+inference.put_azureopenai request PutAzureOpenAiRequestExample2: exact
+inference.put_azureopenai request PutAzureOpenAiRequestExample3: exact
+inference.put_azureopenai request PutAzureOpenAiRequestExample4: exact
+inference.put_azureopenai response PutAzureOpenAiResponseExample1: exact
+inference.put_azureopenai response PutAzureOpenAiResponseExample2: exact
+inference.put_azureopenai response PutAzureOpenAiResponseExample3: exact
+inference.put_cohere request PutCohereRequestExample1: exact
+inference.put_cohere request PutCohereRequestExample2: fails: reading task_settings: missing field `input_type`
+inference.put_cohere request PutCohereRequestExample3: exact
+inference.put_contextualai request PutContextualAiRequestExample1: exact
+inference.put_custom request PutCustomRequestExample1: fails: reading service_settings.request: invalid type: string "{\"input\": ${input}, \"model\": \"text-embedding-3-small\"}", expected struct CustomRequestParams
+inference.put_custom request PutCustomRequestExample2: fails: reading service_settings.request: invalid type: string "{\"documents\": ${input}, \"query\": ${query}, \"model\": \"rerank-v3.5\"}", expected struct CustomReque
+inference.put_custom request PutCustomRequestExample3: fails: reading service_settings.input_type.translation: invalid type: map, expected a string
+inference.put_custom request PutCustomRequestExample4: fails: reading service_settings.request: invalid type: string "{\"model\": \"jina-reranker-v2-base-multilingual\",\"query\": ${query},\"documents\":${input}}", expecte
+inference.put_custom request PutCustomRequestExample5: fails: reading service_settings.request: invalid type: string "{\"input\": ${input}}", expected struct CustomRequestParams
+inference.put_elasticsearch request PutElasticsearchRequestExample1: exact
+inference.put_elasticsearch request PutElasticsearchRequestExample2: exact
+inference.put_elasticsearch request PutElasticsearchRequestExample3: exact
+inference.put_elasticsearch request PutElasticsearchRequestExample4: exact
+inference.put_elasticsearch request PutElasticsearchRequestExample5: exact
+inference.put_elasticsearch request PutElasticsearchRequestExample6: fails: reading service_settings: missing field `model_id`
+inference.put_elasticsearch response PutElasticsearchResponseExample1: exact
+inference.put_elser request PutElserRequestExample1: exact
+inference.put_elser request PutElserRequestExample2: fails: reading service_settings: missing field `num_allocations`
+inference.put_elser response PutElserResponseExample1: exact
+inference.put_fireworksai request PutFireworksAiRequestExample1: exact
+inference.put_fireworksai request PutFireworksAiRequestExample2: exact
+inference.put_fireworksai request PutFireworksAiRequestExample3: exact
+inference.put_fireworksai request PutFireworksAiRequestExample4: exact
+inference.put_fireworksai response PutFireworksAiResponseExample1: exact
+inference.put_fireworksai response PutFireworksAiResponseExample2: exact
+inference.put_googleaistudio request PutGoogleAiStudioRequestExample1: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample1: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample10: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample11: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample12: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample13: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample14: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample15: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample16: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample17: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample18: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample19: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample2: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample20: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample21: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample22: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample23: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample3: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample4: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample5: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample6: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample7: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample8: exact
+inference.put_googlevertexai request PutGoogleVertexAiRequestExample9: exact
+inference.put_groq request PutGroqRequestExample1: exact
+inference.put_hugging_face request PutHuggingFaceRequestExample1: exact
+inference.put_hugging_face request PutHuggingFaceRequestExample2: exact
+inference.put_jinaai request PutJinaAiRequestExample1: exact
+inference.put_jinaai request PutJinaAiRequestExample2: exact
+inference.put_jinaai request PutJinaAiRequestExample3: exact
+inference.put_jinaai request PutJinaAiRequestExample4: exact
+inference.put_jinaai response PutJinaAiResponseExample1: exact
+inference.put_jinaai response PutJinaAiResponseExample2: exact
+inference.put_jinaai response PutJinaAiResponseExample3: exact
+inference.put_jinaai response PutJinaAiResponseExample4: exact
+inference.put_llama request PutLlamaRequestExample1: normalized at /service_settings/dimensions (dropped)
+inference.put_llama request PutLlamaRequestExample2: exact
+inference.put_llama request PutLlamaRequestExample3: exact
+inference.put_mistral request PutMistralRequestExample1: exact
+inference.put_nvidia request PutNvidiaRequestExample1: exact
+inference.put_nvidia request PutNvidiaRequestExample2: exact
+inference.put_nvidia request PutNvidiaRequestExample3: exact
+inference.put_nvidia request PutNvidiaRequestExample4: exact
+inference.put_nvidia request PutNvidiaRequestExample5: exact
+inference.put_nvidia request PutNvidiaRequestExample6: exact
+inference.put_nvidia request PutNvidiaRequestExample7: exact
+inference.put_nvidia request PutNvidiaRequestExample8: exact
+inference.put_nvidia response PutNvidiaResponseExample1: exact
+inference.put_nvidia response PutNvidiaResponseExample2: exact
+inference.put_nvidia response PutNvidiaResponseExample3: exact
+inference.put_nvidia response PutNvidiaResponseExample4: exact
+inference.put_nvidia response PutNvidiaResponseExample5: exact
+inference.put_nvidia response PutNvidiaResponseExample6: exact
+inference.put_nvidia response PutNvidiaResponseExample7: exact
+inference.put_nvidia response PutNvidiaResponseExample8: exact
+inference.put_openai request PutOpenAiRequestExample1: exact
+inference.put_openai request PutOpenAiRequestExample2: exact
+inference.put_openai request PutOpenAiRequestExample3: exact
+inference.put_openshift_ai request PutOpenShiftAiRequestExample1: exact
+inference.put_openshift_ai request PutOpenShiftAiRequestExample2: exact
+inference.put_openshift_ai request PutOpenShiftAiRequestExample3: exact
+inference.put_openshift_ai request PutOpenShiftAiRequestExample4: exact
+inference.put_openshift_ai request PutOpenShiftAiRequestExample5: exact
+inference.put_openshift_ai response PutOpenShiftAiResponseExample1: exact
+inference.put_openshift_ai response PutOpenShiftAiResponseExample2: exact
+inference.put_openshift_ai response PutOpenShiftAiResponseExample3: exact
+inference.put_openshift_ai response PutOpenShiftAiResponseExample4: exact
+inference.put_openshift_ai response PutOpenShiftAiResponseExample5: exact
+inference.put_region_policy request PutRegionPolicyRequestExample1: exact
+inference.put_region_policy request PutRegionPolicyRequestExample2: exact
+inference.put_region_policy response PutRegionPolicyResponseExample1: exact
+inference.put_voyageai request PutVoyageAIRequestExample1: exact
+inference.put_voyageai request PutVoyageAIRequestExample2: exact
+inference.put_watsonx request PutWatsonxRequestExample1: exact
+inference.rerank request RerankRequestExample1: exact
+inference.rerank request RerankRequestExample2: exact
+inference.rerank request RerankRequestExample3: exact
+inference.rerank response RerankResponseExample1: fails: reading rerank[0].index: invalid type: string "2", expected i32
+inference.rerank response RerankResponseExample2: normalized at /rerank/0/relevance_score
+inference.rerank response RerankResponseExample3: normalized at /rerank/0/relevance_score
+inference.sparse_embedding request SparseEmbeddingRequestExample1: exact
+inference.sparse_embedding response SparseEmbeddingResponseExample1: normalized at /sparse_embedding/0/embedding/above
+inference.stream_completion request StreamInferenceRequestExample1: exact
+inference.text_embedding request TextEmbeddingRequestExample1: exact
+inference.text_embedding response TextEmbeddingResponseExample1: normalized at /text_embedding/0/embedding/0
+inference.update request InferenceUpdateExample1: exact

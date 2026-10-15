@@ -3,12 +3,13 @@
 //!
 //! This crate re-exports the others behind features. The defaults are the
 //! AI-search set: `search`, `docs`, `mapping` and `inference`. The other API
-//! areas are `aggs`, `analysis`, `esql` and `admin`; `derive` adds the typed
-//! document layer's derive macros, and `transport-reqwest` the default HTTP
-//! transport.
+//! areas are `aggs`, `analysis`, `esql`, `admin` and `tasks`; `derive` adds
+//! the typed document layer's derive macros, and `transport-reqwest` the
+//! default HTTP transport.
 //!
-//! Nothing is generated yet. The generator that fills these crates is being
-//! built; see DESIGN.md in the repository.
+//! The generated types for search, docs, mapping and inference exist; the
+//! client that sends them is still to come. See DESIGN.md in the
+//! repository.
 
 // oxsearch-core's traits and shared types will be re-exported at the root
 // once there are any.
@@ -31,5 +32,7 @@ pub use oxsearch_inference as inference;
 pub use oxsearch_mapping as mapping;
 #[cfg(feature = "search")]
 pub use oxsearch_search as search;
+#[cfg(feature = "tasks")]
+pub use oxsearch_tasks as tasks;
 #[cfg(feature = "transport-reqwest")]
 pub use oxsearch_transport_reqwest as transport_reqwest;

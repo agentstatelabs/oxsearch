@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings and the inference API.
 
-**Status: early.** Nothing is generated yet; the generator is being built (Phase 0 in [DESIGN.md](DESIGN.md)). The crates exist so the layout and CI can be built and checked; they contain no API.
+**Status: early.** The generator works for the first slice: the types for search, documents, mappings and inference, and the foundation crates they need, are generated and tested against the specification's own examples. There is no client to send them yet (Phase 0 in [DESIGN.md](DESIGN.md)).
 
 ## Design
 
@@ -18,6 +18,12 @@ The generator reads the specification's `schema.json` from the commit pinned in 
 
 ```bash
 cargo run -p xtask -- spec check
+```
+
+The generated code in each crate's `src/generated` comes from that pin, and is never edited by hand. This writes it again, with round-trip tests from the specification's examples in each crate's `tests/examples.rs`:
+
+```bash
+cargo run -p xtask -- generate
 ```
 
 The integration tests run against Elasticsearch in Docker, on the Basic license or a trial license:

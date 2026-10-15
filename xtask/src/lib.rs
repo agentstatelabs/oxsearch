@@ -1,6 +1,7 @@
 //! The oxsearch generator and its development tasks. `main.rs` is the
 //! command line; this library is what it runs, so each step can be tested.
 
+pub mod codegen;
 pub mod graph;
 pub mod placement;
 pub mod shapes;

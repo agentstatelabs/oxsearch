@@ -1,0 +1,3 @@
+1 exact, 0 normalized, 1 failing
+_global.info response RootNodeInfoResponseExample1: fails: reading version.build_hash: invalid type: integer `0`, expected a string
+_global.info response RootNodeInfoResponseExample2: exact

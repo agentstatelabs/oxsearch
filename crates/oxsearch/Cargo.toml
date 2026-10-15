@@ -25,6 +25,7 @@ aggs = ["dep:oxsearch-aggs"]
 analysis = ["dep:oxsearch-analysis"]
 esql = ["dep:oxsearch-esql"]
 admin = ["dep:oxsearch-admin"]
+tasks = ["dep:oxsearch-tasks"]
 # `#[derive(Document)]` for the typed document layer.
 derive = ["dep:oxsearch-derive"]
 # The default HTTP transport. Whether it is on by default is still open
@@ -41,6 +42,7 @@ oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.0.1", optional = true 
 oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.0.1", optional = true }
 oxsearch-esql = { path = "../oxsearch-esql", version = "0.0.1", optional = true }
 oxsearch-admin = { path = "../oxsearch-admin", version = "0.0.1", optional = true }
+oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.0.1", optional = true }
 oxsearch-derive = { path = "../oxsearch-derive", version = "0.0.1", optional = true }
 oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.0.1", optional = true }
 

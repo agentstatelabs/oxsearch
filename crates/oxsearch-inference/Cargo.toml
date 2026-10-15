@@ -13,8 +13,19 @@ homepage.workspace = true
 authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
 
+[lib]
+# The generated documentation quotes Elasticsearch's own, which isn't Rust.
+doctest = false
+
 [dependencies]
+indexmap = { version = "2.14", features = ["serde"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
 oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
+
+[dev-dependencies]
+# The generated example tests report where an example doesn't fit.
+serde_path_to_error = "0.1.20"
 
 [lints]
 workspace = true
