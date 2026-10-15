@@ -7,7 +7,7 @@ specification it's generated from.
 
 ## [Unreleased]
 
-## [0.1.0]
+## [0.1.0] - 2026-10-15
 
 The first release: a typed Rust client for Elasticsearch 9, generated from
 the Elasticsearch specification's 9.5 branch (commit `84bf510a`) and tested
