@@ -1,6 +1,6 @@
 //! The retrieval half of a RAG application: index passages with their
-//! embeddings, then find the ones that answer a question, fusing a keyword
-//! match with nearest neighbours, and count them by topic.
+//! embeddings, find the ones that answer a question by fusing a keyword
+//! match with nearest neighbours, and count the passages by topic.
 //!
 //! It runs against Elasticsearch at `OXSEARCH_URL` (default
 //! `http://localhost:9200`), such as the test fixture:
@@ -10,23 +10,21 @@
 //! cargo run -p oxsearch --example rag --features transport-reqwest
 //! ```
 //!
-//! On the Basic license, which doesn't include server-side RRF, it falls
-//! back to nearest neighbours alone. The embeddings are a toy stand-in for
-//! an embedding model, so the example needs nothing but Elasticsearch.
+//! On the Basic license, which doesn't include server-side RRF, the fusion
+//! runs on the client instead. The embeddings are a toy stand-in for an
+//! embedding model, so the example needs nothing but Elasticsearch.
 
 use oxsearch::docs::bulk;
+use oxsearch::fusion::Fusion;
 use oxsearch::mapping::{
     DenseVectorProperty, DenseVectorSimilarity, KeywordProperty, Property, TextProperty,
     TypeMapping,
 };
-use oxsearch::oxsearch_core::{
-    KnnRetriever, RRFRetriever, RRFRetrieverEntry, Refresh, RetrieverContainer, StandardRetriever,
-};
-use oxsearch::query_dsl::{MatchQuery, MatchQueryQuery, QueryContainer};
+use oxsearch::oxsearch_core::Refresh;
 use oxsearch::search::search;
-use oxsearch::shapes::{IndexMap, SingleKey};
+use oxsearch::shapes::IndexMap;
 use oxsearch::transport_reqwest::ReqwestTransport;
-use oxsearch::{Client, Error, Method};
+use oxsearch::{Client, Method, Query, Retriever};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
@@ -143,45 +141,21 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         .await?;
     println!("indexed {} passages", indexed.items.len());
 
-    // Retrieve for a question: keyword match and nearest neighbours, fused
-    // with RRF, and the hits counted by topic.
+    // Retrieve for a question: a keyword match and nearest neighbours,
+    // fused with RRF, on the server if its license includes it.
     let question = "How do vector indexes find nearest neighbours?";
-    let keywords = RetrieverContainer::Standard(StandardRetriever::new().query(
-        QueryContainer::Match(SingleKey::new(
-            "text",
-            MatchQuery::new(MatchQueryQuery::String(question.to_owned())),
-        )),
-    ));
-    let neighbours = || {
-        RetrieverContainer::Knn(
-            KnnRetriever::new("embedding", 3)
-                .query_vector(embed(question))
-                .num_candidates(10),
-        )
-    };
-    let fused = RetrieverContainer::Rrf(RRFRetriever::new(vec![
-        RRFRetrieverEntry::Retriever(keywords),
-        RRFRetrieverEntry::Retriever(neighbours()),
-    ]));
-    let search = |retriever: RetrieverContainer| {
-        search::Request::new().index(INDEX).body(
-            search::RequestBody::new()
-                .retriever(retriever)
-                .size(3)
-                .aggregations(json!({ "by_topic": { "terms": { "field": "topic" } } })),
-        )
-    };
-    let response: search::Response<Passage, Topics> = match client.send_as(&search(fused)).await {
-        Ok(response) => response,
-        Err(Error::License(e)) => {
-            println!("{e}: falling back to nearest neighbours alone");
-            client.send_as(&search(neighbours())).await?
-        }
-        Err(e) => return Err(e.into()),
-    };
-
+    let fused = Fusion::rrf([
+        Retriever::standard(Query::r#match("text", question)),
+        Retriever::knn("embedding", embed(question), 3, 10),
+    ])
+    .size(3)
+    .search::<Passage, _>(&client, INDEX)
+    .await?;
+    if let Some(why) = &fused.fallback {
+        println!("{why}: fused on the client");
+    }
     println!("\n{question}");
-    for hit in &response.hits.as_ref().ok_or("no hits")?.hits {
+    for hit in &fused.hits {
         if let Some(passage) = &hit.source {
             println!(
                 "  {:.3}  [{}] {}",
@@ -191,6 +165,14 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             );
         }
     }
+
+    // Count the passages by topic.
+    let count = search::Request::new().index(INDEX).body(
+        search::RequestBody::new()
+            .size(0)
+            .aggregations(json!({ "by_topic": { "terms": { "field": "topic" } } })),
+    );
+    let response: search::Response<Passage, Topics> = client.send_as(&count).await?;
     if let Some(topics) = &response.aggregations {
         let counts: Vec<String> = topics
             .by_topic

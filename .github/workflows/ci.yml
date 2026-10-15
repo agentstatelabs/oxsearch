@@ -70,7 +70,7 @@ jobs:
   compile-time:
     runs-on: ubuntu-latest
     env:
-      BUDGET_SECONDS: 150
+      BUDGET_SECONDS: 60
     steps:
       - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable

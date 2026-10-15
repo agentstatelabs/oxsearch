@@ -168,7 +168,11 @@ let hits = articles                         // Vec<Hit<Article>>
   - It has a concurrency limit and flushes by document count, bytes and interval.
   - It backs off on 429 responses.
   - It returns results item by item, and the first fatal error cancels the pipeline.
-- **Client-side fusion.** RRF and linear fusion over a multi-search, for clusters whose license doesn't include server-side fusion. It uses the same retriever builders as the server-side path.
+- **Query and retriever builders.** `Query` and `Retriever` in oxsearch-core build the common queries and every retriever in one call each, over the generated types: `Retriever::rrf([Retriever::standard(Query::r#match("title", text)), Retriever::knn("embedding", vector, 10, 100)])`. For an option a builder doesn't take, build the generated type and convert it with `.into()`: the generator emits a `From` for each union member with a type of its own, and `From<&str>` where one member is a string.
+- **Client-side fusion.** `oxsearch::fusion::Fusion` fuses retrievers' results by RRF (weighted or not) or a linear combination (no normalizer, min-max or L2), over one multi-search.
+  - `Fusion::search` tries the server's `rrf` or `linear` retriever first and fuses on the client when the license refuses it; `on_server` and `on_client` pick one, and `fuse` combines result lists you fetched yourself.
+  - It follows Elasticsearch's formulas, normalizers and size rules (`rank_window_size` at least `size`). The integration tests check that the client's scores match the server's on a trial, for each method.
+  - Documents with equal scores may come back in another order: Elasticsearch breaks ties by internal document ids, which the client can't see.
 
 Rules for every pipeline: no locks shared between producer and consumer, end of stream is a channel closing rather than a flag, errors travel with the data as `Result`s, and work is handled in completion order.
 

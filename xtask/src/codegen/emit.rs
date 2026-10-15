@@ -62,6 +62,115 @@ impl Emitter<'_> {
             ItemKind::Request(r) => self.request(r, out),
             ItemKind::Newtype(ty) => self.newtype(ty, out),
         }
+        self.conversions(out);
+    }
+
+    /// `From` each member's payload into a container or union, where no
+    /// other member has the same type, so a payload converts wherever the
+    /// union is expected: `KnnRetriever` into `RetrieverContainer`. Also
+    /// `From<&str>` when one member is a string.
+    fn conversions(&self, out: &mut String) {
+        let members: Vec<(&str, &Ty)> = match &self.item.kind {
+            ItemKind::Container(c) => c
+                .variants
+                .iter()
+                .map(|v| (v.ident.as_str(), &v.ty))
+                .collect(),
+            ItemKind::Union(members) => members
+                .iter()
+                .filter_map(|m| m.ty.as_ref().map(|ty| (m.ident.as_str(), ty)))
+                .collect(),
+            ItemKind::Tagged { members, .. }
+            | ItemKind::External(members)
+            | ItemKind::Untagged { members, .. } => {
+                members.iter().map(|v| (v.ident.as_str(), &v.ty)).collect()
+            }
+            _ => return,
+        };
+        // A bare generic parameter would overlap every other conversion.
+        let convertible: Vec<(&str, &Ty, String)> = members
+            .into_iter()
+            .filter(|(_, ty)| !matches!(ty, Ty::Unit | Ty::Param(_)))
+            .map(|(variant, ty)| (variant, ty, self.canonical(ty)))
+            .collect();
+        let mut counts: BTreeMap<&str, usize> = BTreeMap::new();
+        for (_, _, key) in &convertible {
+            *counts.entry(key.as_str()).or_default() += 1;
+        }
+        let ident = &self.item.ident;
+        let generics = self.generics();
+        for (variant, ty, key) in &convertible {
+            if counts[key.as_str()] > 1 {
+                continue;
+            }
+            let rendered = self.ty(ty, Position::Variant);
+            let (inner, boxed) = unbox(&rendered);
+            let value = if boxed {
+                "::std::boxed::Box::new(value)"
+            } else {
+                "value"
+            };
+            let _ = writeln!(
+                out,
+                "impl{generics} ::core::convert::From<{inner}> for {ident}{generics} {{\n    fn from(value: {inner}) -> Self {{ Self::{variant}({value}) }}\n}}\n"
+            );
+        }
+        let strings: Vec<&&str> = convertible
+            .iter()
+            .filter(|(_, _, key)| key == "::std::string::String")
+            .map(|(variant, _, _)| variant)
+            .collect();
+        if let [variant] = strings[..] {
+            let _ = writeln!(
+                out,
+                "impl{generics} ::core::convert::From<&str> for {ident}{generics} {{\n    fn from(value: &str) -> Self {{ Self::{variant}(::std::borrow::ToOwned::to_owned(value)) }}\n}}\n"
+            );
+        }
+    }
+
+    /// A type as Rust, looking through aliases and ignoring boxes, to tell
+    /// whether two members have the same type.
+    fn canonical(&self, ty: &Ty) -> String {
+        let args = |args: &[Ty]| -> String {
+            if args.is_empty() {
+                String::new()
+            } else {
+                format!(
+                    "<{}>",
+                    args.iter()
+                        .map(|a| self.canonical(a))
+                        .collect::<Vec<_>>()
+                        .join(", ")
+                )
+            }
+        };
+        match ty {
+            Ty::Named { target, args: a } => {
+                if a.is_empty()
+                    && let Some(&item) = self.ir.item_of.get(target)
+                    && let ItemKind::Alias(inner) = &self.ir.items[item].kind
+                {
+                    return self.canonical(inner);
+                }
+                format!("{}{}", self.path(ty), args(a))
+            }
+            Ty::Inline { args: a, .. } => format!("{}{}", self.path(ty), args(a)),
+            Ty::Prim(p) => (*p).to_owned(),
+            Ty::Unit => "()".to_owned(),
+            Ty::Json => VALUE.to_owned(),
+            Ty::Param(p) => p.clone(),
+            Ty::Vec(t) => format!("Vec<{}>", self.canonical(t)),
+            Ty::Map(k, v) => format!("Map<{}, {}>", self.canonical(k), self.canonical(v)),
+            Ty::SingleKey(k, v) => {
+                format!("SingleKey<{}, {}>", self.canonical(k), self.canonical(v))
+            }
+            Ty::OneOrMany(t) => format!("OneOrMany<{}>", self.canonical(t)),
+            Ty::Stringified(t) => format!("Stringified<{}>", self.canonical(t)),
+            Ty::WithNull(t) => format!("WithNull<{}>", self.canonical(t)),
+            Ty::Flags(t) => format!("Flags<{}>", self.canonical(t)),
+            Ty::TypedKeys(t) => format!("TypedKeys<{}>", self.canonical(t)),
+            Ty::Opt(t) => format!("Option<{}>", self.canonical(t)),
+        }
     }
 
     // --- types ---

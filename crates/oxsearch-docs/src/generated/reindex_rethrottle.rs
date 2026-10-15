@@ -368,6 +368,29 @@ impl<'de> ::serde::Deserialize<'de> for ReindexTasks {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<crate::reindex_rethrottle::ReindexTask>>
+    for ReindexTasks
+{
+    fn from(value: ::std::vec::Vec<crate::reindex_rethrottle::ReindexTask>) -> Self {
+        Self::Flat(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::indexmap::IndexMap<::std::string::String, crate::reindex_rethrottle::ParentReindexTask>,
+    > for ReindexTasks
+{
+    fn from(
+        value: ::indexmap::IndexMap<
+            ::std::string::String,
+            crate::reindex_rethrottle::ParentReindexTask,
+        >,
+    ) -> Self {
+        Self::Grouped(value)
+    }
+}
+
 /// Throttle a reindex operation.
 ///
 /// Change the maximum number of documents to index per second for a particular reindex operation.

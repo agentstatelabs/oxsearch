@@ -1465,6 +1465,24 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for RescoreVariant {
     }
 }
 
+impl ::core::convert::From<crate::search::RescoreQuery> for RescoreVariant {
+    fn from(value: crate::search::RescoreQuery) -> Self {
+        Self::Query(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::LearningToRank> for RescoreVariant {
+    fn from(value: crate::search::LearningToRank) -> Self {
+        Self::LearningToRank(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::ScriptRescore> for RescoreVariant {
+    fn from(value: crate::search::ScriptRescore) -> Self {
+        Self::Script(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Rescore {
@@ -1751,6 +1769,18 @@ impl<'de> ::serde::Deserialize<'de> for SourceConfig {
     }
 }
 
+impl ::core::convert::From<bool> for SourceConfig {
+    fn from(value: bool) -> Self {
+        Self::Fetch(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::SourceFilter> for SourceConfig {
+    fn from(value: crate::search::SourceFilter) -> Self {
+        Self::Filter(value)
+    }
+}
+
 /// Defines how to fetch a source. Fetching can be disabled entirely, or the source can be filtered.
 /// Used as a query parameter along with the `_source_includes` and `_source_excludes` parameters.
 #[derive(Clone, Debug, PartialEq)]
@@ -1807,6 +1837,18 @@ impl<'de> ::serde::Deserialize<'de> for SourceConfigParam {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<bool> for SourceConfigParam {
+    fn from(value: bool) -> Self {
+        Self::Fetch(value)
+    }
+}
+
+impl ::core::convert::From<crate::Fields> for SourceConfigParam {
+    fn from(value: crate::Fields) -> Self {
+        Self::Fields(value)
     }
 }
 

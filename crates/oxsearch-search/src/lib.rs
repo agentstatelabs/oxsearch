@@ -3,3 +3,6 @@
 
 mod generated;
 pub use generated::*;
+
+pub mod fusion;
+mod hits;

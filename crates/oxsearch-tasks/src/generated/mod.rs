@@ -506,6 +506,20 @@ impl<'de> ::serde::Deserialize<'de> for TaskInfos {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<crate::TaskInfo>> for TaskInfos {
+    fn from(value: ::std::vec::Vec<crate::TaskInfo>) -> Self {
+        Self::Flat(value)
+    }
+}
+
+impl ::core::convert::From<::indexmap::IndexMap<::std::string::String, crate::ParentTaskInfo>>
+    for TaskInfos
+{
+    fn from(value: ::indexmap::IndexMap<::std::string::String, crate::ParentTaskInfo>) -> Self {
+        Self::Grouped(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TaskListResponseBase {

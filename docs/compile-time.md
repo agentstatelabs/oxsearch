@@ -8,7 +8,7 @@ These are clean dev builds of `oxsearch` with its default features, on the 9.5 s
 
 | | M-series Mac, 14 cores | CI (`ubuntu-latest`, 4 cores) |
 |---|--:|--:|
-| Clean build | 13.8 s | see the `compile-time` job |
+| Clean build | 13.8 s | 37 s |
 | After a change to oxsearch-core | 3.1 s | |
 | After a change to oxsearch-search | 0.7 s | |
 | Adding `transport-reqwest` (reqwest with rustls) | +14.8 s | |
@@ -31,4 +31,4 @@ The rest of the build is serde, serde_json and indexmap.
 
 ## The budget
 
-The CI job `compile-time` runs `cargo build -p oxsearch --timings` from a clean target directory. It fails if the build takes longer than `BUDGET_SECONDS`, and keeps `cargo-timing.html` as an artifact. The budget allows for the variance of shared runners, about 1.5 times what CI measures. Raise it only on purpose, with the reason in the commit.
+The CI job `compile-time` runs `cargo build -p oxsearch --timings` from a clean target directory. It fails if the build takes longer than `BUDGET_SECONDS`, and keeps `cargo-timing.html` as an artifact. The budget is 60 s, about 1.5 times the 37 s CI measured on 2026-10-15, which allows for the variance of shared runners. Raise it only on purpose, with the reason in the commit.

@@ -252,3 +252,15 @@ impl<'de> ::serde::Deserialize<'de> for StopWords {
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
     }
 }
+
+impl ::core::convert::From<crate::analysis::StopWordLanguage> for StopWords {
+    fn from(value: crate::analysis::StopWordLanguage) -> Self {
+        Self::StopWordLanguage(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<::std::string::String>> for StopWords {
+    fn from(value: ::std::vec::Vec<::std::string::String>) -> Self {
+        Self::StringList(value)
+    }
+}

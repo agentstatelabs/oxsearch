@@ -100,6 +100,14 @@ impl<K, V> SingleKey<K, V> {
             value: value.into(),
         }
     }
+
+    /// The object with its value changed: `query.map(|q| q.boost(2.0))`.
+    pub fn map(self, f: impl FnOnce(V) -> V) -> Self {
+        SingleKey {
+            key: self.key,
+            value: f(self.value),
+        }
+    }
 }
 
 impl<K: Serialize, V: Serialize> Serialize for SingleKey<K, V> {

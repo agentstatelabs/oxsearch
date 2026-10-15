@@ -523,6 +523,30 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for OperationContainer {
     }
 }
 
+impl ::core::convert::From<crate::bulk::IndexOperation> for OperationContainer {
+    fn from(value: crate::bulk::IndexOperation) -> Self {
+        Self::Index(value)
+    }
+}
+
+impl ::core::convert::From<crate::bulk::CreateOperation> for OperationContainer {
+    fn from(value: crate::bulk::CreateOperation) -> Self {
+        Self::Create(value)
+    }
+}
+
+impl ::core::convert::From<crate::bulk::UpdateOperation> for OperationContainer {
+    fn from(value: crate::bulk::UpdateOperation) -> Self {
+        Self::Update(value)
+    }
+}
+
+impl ::core::convert::From<crate::bulk::DeleteOperation> for OperationContainer {
+    fn from(value: crate::bulk::DeleteOperation) -> Self {
+        Self::Delete(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum OperationType {
@@ -697,6 +721,23 @@ impl<'de, TDocument: ::serde::Deserialize<'de>, TPartialDocument: ::serde::Deser
             deserializer,
             Shape(::core::marker::PhantomData),
         )
+    }
+}
+
+impl<TDocument, TPartialDocument> ::core::convert::From<crate::bulk::OperationContainer>
+    for RequestBody<TDocument, TPartialDocument>
+{
+    fn from(value: crate::bulk::OperationContainer) -> Self {
+        Self::OperationContainer(value)
+    }
+}
+
+impl<TDocument, TPartialDocument>
+    ::core::convert::From<crate::bulk::UpdateAction<TDocument, TPartialDocument>>
+    for RequestBody<TDocument, TPartialDocument>
+{
+    fn from(value: crate::bulk::UpdateAction<TDocument, TPartialDocument>) -> Self {
+        Self::UpdateAction(value)
     }
 }
 
