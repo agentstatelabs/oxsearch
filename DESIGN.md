@@ -166,14 +166,16 @@ Built in Phase 1 (`oxsearch::document`, behind the `derive` feature for the macr
 
 ### 4.7 Helpers
 
-- **Point-in-time stream.** An async stream of `Hit<T>` over point-in-time and `search_after`.
-  - It splits into slices for parallel reads.
-  - It renews a short keep-alive with each page, ends at the first empty page (no exact total needed), and closes the point-in-time when it finishes.
-- **Bulk-loading helper.**
-  - Bounded channels give backpressure.
-  - It has a concurrency limit and flushes by document count, bytes and interval.
-  - It backs off on 429 responses.
-  - It returns results item by item, and the first fatal error cancels the pipeline.
+Both are in `oxsearch::helpers`, behind the `helpers` feature, which brings in Tokio.
+
+- **Point-in-time stream** (`Scan`). An async stream of `Hit<T>` over point-in-time and `search_after`, sorted by `_shard_doc`.
+  - It splits into slices for parallel reads, merged as pages arrive.
+  - It renews a short keep-alive with each page and always uses the latest point-in-time id. It ends at the first empty page (no exact total needed) and closes the point-in-time when it finishes or fails. A stream dropped early leaves the point-in-time to expire.
+- **Bulk-loading helper** (`BulkLoader`). `start()` returns a sender and a stream of results.
+  - Bounded channels give backpressure: `send` waits while the loader is behind, and the loader waits while results aren't read. Actions are written to NDJSON as they're sent, so documents needn't be `Send`.
+  - It has a concurrency limit and flushes by action count, bytes and interval.
+  - It backs off exponentially on 429s, for a whole batch or for the actions in it that were refused.
+  - It returns results action by action, in completion order. A refused action (a document that doesn't fit the mapping) is an outcome with an error. The first fatal error (transport, a refused batch) is the last result: it aborts the batches in flight, and senders fail from then on.
 - **Query and retriever builders.** `Query` and `Retriever` in oxsearch-core build the common queries and every retriever in one call each, over the generated types: `Retriever::rrf([Retriever::standard(Query::r#match("title", text)), Retriever::knn("embedding", vector, 10, 100)])`. For an option a builder doesn't take, build the generated type and convert it with `.into()`: the generator emits a `From` for each union member with a type of its own, and `From<&str>` where one member is a string.
 - **Client-side fusion.** `oxsearch::fusion::Fusion` fuses retrievers' results by RRF (weighted or not) or a linear combination (no normalizer, min-max or L2), over one multi-search.
   - `Fusion::search` tries the server's `rrf` or `linear` retriever first and fuses on the client when the license refuses it; `on_server` and `on_client` pick one, and `fuse` combines result lists you fetched yourself.

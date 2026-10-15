@@ -7,7 +7,7 @@ license.workspace = true
 publish = false
 
 [dependencies]
-oxsearch = { path = "../crates/oxsearch", features = ["derive"] }
+oxsearch = { path = "../crates/oxsearch", features = ["derive", "helpers"] }
 oxsearch-core = { path = "../crates/oxsearch-core" }
 oxsearch-docs = { path = "../crates/oxsearch-docs" }
 oxsearch-inference = { path = "../crates/oxsearch-inference" }
@@ -17,6 +17,7 @@ oxsearch-transport-reqwest = { path = "../crates/oxsearch-transport-reqwest", de
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1.53", features = ["macros", "rt"] }
+futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
 
 [lints]
 workspace = true

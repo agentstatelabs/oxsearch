@@ -676,6 +676,8 @@ checksum = "7c87def4c32ab89d880effc9e097653c8da5d6ef28e6b539d313baaacfbafcbe"
 name = "oxsearch"
 version = "0.0.1"
 dependencies = [
+ "futures-core",
+ "futures-util",
  "oxsearch",
  "oxsearch-admin",
  "oxsearch-aggs",
@@ -777,6 +779,7 @@ dependencies = [
 name = "oxsearch-integration"
 version = "0.0.0"
 dependencies = [
+ "futures-util",
  "oxsearch",
  "oxsearch-core",
  "oxsearch-docs",
