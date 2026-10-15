@@ -75,6 +75,10 @@ required-features = ["transport-reqwest"]
 name = "escape_hatches"
 required-features = ["transport-reqwest"]
 
+[[example]]
+name = "quickstart"
+required-features = ["derive", "transport-reqwest"]
+
 [package.metadata.docs.rs]
 # Document the APIs behind features too.
 all-features = true

@@ -107,7 +107,8 @@ impl Query {
     }
 
     /// Documents whose `semantic_text` field means something close to
-    /// `text`.
+    /// `text`. The field's inference endpoint embeds `text`; Elastic's
+    /// default, ELSER, needs a license above Basic.
     pub fn semantic(field: impl Into<String>, text: impl Into<String>) -> QueryContainer {
         SemanticQuery::new(field, text).into()
     }

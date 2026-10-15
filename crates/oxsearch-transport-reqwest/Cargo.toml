@@ -35,5 +35,9 @@ oxsearch-transport-reqwest = { path = ".", features = ["gzip"] }
 tokio = { version = "1.53", features = ["macros", "rt", "net", "io-util", "time"] }
 serde_json = "1.0.149"
 
+[package.metadata.docs.rs]
+# Document compression too.
+all-features = true
+
 [lints]
 workspace = true

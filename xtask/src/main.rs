@@ -16,6 +16,9 @@
 //!   serde, and writes the report to `spec/shapes.md`.
 //! - `cargo run -p xtask -- generate` writes the Rust types for the
 //!   generated crates into each one's `src/generated`, and formats them.
+//! - `cargo run -p xtask -- coverage <file>...` prints the endpoint
+//!   coverage report, from the requests the integration tests recorded in
+//!   those files (`OXSEARCH_COVERAGE`).
 
 use std::process::ExitCode;
 
@@ -34,9 +37,10 @@ fn main() -> ExitCode {
         ["placement"] => ("placement", placement()),
         ["shapes"] => ("shapes", shapes()),
         ["generate"] => ("generate", generate()),
+        ["coverage", files @ ..] => ("coverage", coverage(files)),
         _ => {
             eprintln!(
-                "usage: cargo run -p xtask -- spec check | spec fetch | spec pin <branch> [<commit>] | placement | shapes | generate"
+                "usage: cargo run -p xtask -- spec check | spec fetch | spec pin <branch> [<commit>] | placement | shapes | generate | coverage <file>..."
             );
             return ExitCode::from(2);
         }
@@ -64,6 +68,25 @@ fn spec_check() -> Result<(), Error> {
     );
     println!("{}", spec::summary(&schema));
     println!("the fixture runs Elasticsearch {fixture}");
+    Ok(())
+}
+
+fn coverage(files: &[&str]) -> Result<(), Error> {
+    let pin = Pin::read()?;
+    let schema = spec::load(&spec::fetch(&pin)?)?;
+    let graph = Graph::new(&schema)?;
+    let placement = placement::place(&graph)?;
+    let mut recorded = Vec::new();
+    for file in files {
+        // A job that recorded nothing leaves no file.
+        if let Ok(text) = std::fs::read_to_string(file) {
+            recorded.extend(text.lines().map(str::to_owned));
+        }
+    }
+    print!(
+        "{}",
+        xtask::coverage::report(&graph, &placement, &schema.endpoints, &recorded)
+    );
     Ok(())
 }
 
