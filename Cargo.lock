@@ -1011,19 +1011,16 @@ dependencies = [
 
 [[package]]
 name = "oxsearch"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "futures-core",
  "futures-util",
  "metrics",
  "oxsearch",
- "oxsearch-admin",
- "oxsearch-aggs",
  "oxsearch-analysis",
  "oxsearch-core",
  "oxsearch-derive",
  "oxsearch-docs",
- "oxsearch-esql",
  "oxsearch-inference",
  "oxsearch-mapping",
  "oxsearch-search",
@@ -1036,21 +1033,21 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-admin"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "oxsearch-core",
 ]
 
 [[package]]
 name = "oxsearch-aggs"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "oxsearch-core",
 ]
 
 [[package]]
 name = "oxsearch-analysis"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "oxsearch-analysis",
@@ -1062,7 +1059,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-core"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "metrics",
@@ -1079,7 +1076,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-derive"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1088,7 +1085,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-docs"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1102,14 +1099,14 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-esql"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "oxsearch-core",
 ]
 
 [[package]]
 name = "oxsearch-inference"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1145,7 +1142,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-mapping"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "oxsearch-analysis",
@@ -1158,7 +1155,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-rig"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "oxsearch-core",
  "oxsearch-docs",
@@ -1170,7 +1167,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-search"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1183,7 +1180,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-tasks"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1195,7 +1192,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-transport-reqwest"
-version = "0.0.1"
+version = "0.1.0"
 dependencies = [
  "bytes",
  "flate2",

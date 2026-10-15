@@ -27,8 +27,8 @@ experimental = []
 indexmap = { version = "2.14", features = ["serde"] }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0.149"
-oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
-oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.0.1" }
+oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
+oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0" }
 
 [dev-dependencies]
 # The tests cover the endpoints behind features too.

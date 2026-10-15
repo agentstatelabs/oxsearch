@@ -4,40 +4,39 @@ The endpoints generated in each crate, and those the integration tests send to E
 
 | Crate | Generated | Integration-tested |
 |---|---:|---:|
-| `oxsearch-core` | 2 | 1 (50%) |
-| `oxsearch-tasks` | 3 | 0 (0%) |
-| `oxsearch-inference` | 41 | 1 (2%) |
-| `oxsearch-search` | 17 | 4 (23%) |
-| `oxsearch-docs` | 21 | 5 (23%) |
-| all | 84 | 11 (13%) |
+| `oxsearch-core` | 2 | 2 (100%) |
+| `oxsearch-tasks` | 3 | 3 (100%) |
+| `oxsearch-inference` | 41 | 6 (14%) |
+| `oxsearch-search` | 17 | 15 (88%) |
+| `oxsearch-docs` | 21 | 21 (100%) |
+| all | 84 | 47 (55%) |
 
 ## `oxsearch-core`
 
-Tested: `info`.
+Tested: `info`, `ping`.
 
-Not tested yet: `ping`.
 
 ## `oxsearch-tasks`
 
-Not tested yet: `tasks.cancel`, `tasks.get`, `tasks.list`.
+Tested: `tasks.cancel`, `tasks.get`, `tasks.list`.
+
 
 ## `oxsearch-inference`
 
-Tested: `inference.get`.
+Tested: `inference.delete`, `inference.get`, `inference.inference`, `inference.put`, `inference.rerank`, `inference.sparse_embedding`.
 
-Not tested yet: `inference.chat_completion_unified`, `inference.completion`, `inference.delete`, `inference.delete_region_policy`, `inference.embedding`, `inference.get_region_policy`, `inference.inference`, `inference.put`, `inference.put_ai21`, `inference.put_alibabacloud`, `inference.put_amazonbedrock`, `inference.put_amazonsagemaker`, `inference.put_anthropic`, `inference.put_azureaistudio`, `inference.put_azureopenai`, `inference.put_cohere`, `inference.put_contextualai`, `inference.put_custom`, `inference.put_deepseek`, `inference.put_elasticsearch`, `inference.put_elser`, `inference.put_fireworksai`, `inference.put_googleaistudio`, `inference.put_googlevertexai`, `inference.put_groq`, `inference.put_hugging_face`, `inference.put_jinaai`, `inference.put_llama`, `inference.put_mistral`, `inference.put_nvidia`, `inference.put_openai`, `inference.put_openshift_ai`, `inference.put_region_policy`, `inference.put_voyageai`, `inference.put_watsonx`, `inference.rerank`, `inference.sparse_embedding`, `inference.stream_completion`, `inference.text_embedding`, `inference.update`.
+Not tested yet: `inference.chat_completion_unified`, `inference.completion`, `inference.delete_region_policy`, `inference.embedding`, `inference.get_region_policy`, `inference.put_ai21`, `inference.put_alibabacloud`, `inference.put_amazonbedrock`, `inference.put_amazonsagemaker`, `inference.put_anthropic`, `inference.put_azureaistudio`, `inference.put_azureopenai`, `inference.put_cohere`, `inference.put_contextualai`, `inference.put_custom`, `inference.put_deepseek`, `inference.put_elasticsearch`, `inference.put_elser`, `inference.put_fireworksai`, `inference.put_googleaistudio`, `inference.put_googlevertexai`, `inference.put_groq`, `inference.put_hugging_face`, `inference.put_jinaai`, `inference.put_llama`, `inference.put_mistral`, `inference.put_nvidia`, `inference.put_openai`, `inference.put_openshift_ai`, `inference.put_region_policy`, `inference.put_voyageai`, `inference.put_watsonx`, `inference.stream_completion`, `inference.text_embedding`, `inference.update`.
 
 ## `oxsearch-search`
 
-Tested: `close_point_in_time`, `msearch`, `open_point_in_time`, `search`.
+Tested: `clear_scroll`, `close_point_in_time`, `count`, `explain`, `field_caps`, `msearch`, `msearch_template`, `open_point_in_time`, `rank_eval`, `render_search_template`, `scroll`, `search`, `search_shards`, `search_template`, `terms_enum`.
 
-Not tested yet: `clear_scroll`, `count`, `explain`, `field_caps`, `knn_search`, `msearch_template`, `rank_eval`, `render_search_template`, `scroll`, `search_mvt`, `search_shards`, `search_template`, `terms_enum`.
+Not tested yet: `knn_search`, `search_mvt`.
 
 ## `oxsearch-docs`
 
-Tested: `bulk`, `delete`, `get`, `index`, `mget`.
+Tested: `bulk`, `cancel_reindex`, `create`, `delete`, `delete_by_query`, `delete_by_query_rethrottle`, `exists`, `exists_source`, `get`, `get_reindex`, `get_source`, `index`, `list_reindex`, `mget`, `mtermvectors`, `reindex`, `reindex_rethrottle`, `termvectors`, `update`, `update_by_query`, `update_by_query_rethrottle`.
 
-Not tested yet: `cancel_reindex`, `create`, `delete_by_query`, `delete_by_query_rethrottle`, `exists`, `exists_source`, `get_reindex`, `get_source`, `list_reindex`, `mtermvectors`, `reindex`, `reindex_rethrottle`, `termvectors`, `update`, `update_by_query`, `update_by_query_rethrottle`.
 
 ## APIs not generated yet
 

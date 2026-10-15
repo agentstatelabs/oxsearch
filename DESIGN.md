@@ -70,7 +70,7 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
-The default features are the AI-search set: search, docs, mapping, inference. `features = ["aggs", "esql"]` adds more. Libraries depend on the specific crates they need.
+The default features are the AI-search set: search, docs, mapping, inference. `features = ["analysis", "tasks"]` adds more; aggregations, ES|QL and administration come in Phase 2, and until then their crates aren't published. Libraries depend on the specific crates they need.
 
 **Why crates and not only feature flags:** Cargo compiles crates in parallel and caches each one separately; feature flags inside one huge crate get neither benefit.
 
@@ -268,7 +268,7 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 
 ## 11. Open questions
 
-1. **Version numbers.** Follow Elasticsearch's (9.x) like the official clients, or 0.N with the specification branch recorded?
+1. ~~**Version numbers.**~~ Decided: 0.N, with the specification branch each release is generated from recorded in the README and the changelog (the user, 2026-10-15). 0.1 is generated from the 9.5 branch.
 2. ~~**The specification model.** Reuse `clients_schema` from the specification repository, or read `schema.json` with our own model?~~ Decided in Phase 0: our own model (§4.2).
 3. **The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?
 4. **Serverless.** Generate a serverless profile from `schema-serverless.json`, or only document availability?
