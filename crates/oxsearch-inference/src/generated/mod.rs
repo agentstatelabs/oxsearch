@@ -12234,3 +12234,6 @@ impl<'de> ::serde::Deserialize<'de> for WatsonxTaskType {
         )
     }
 }
+
+/// Types placement moved down to `oxsearch-core`, which uses them.
+pub use ::oxsearch_core::inference::{EmbeddingContentFormat, EmbeddingContentType};

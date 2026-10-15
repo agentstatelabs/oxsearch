@@ -10838,3 +10838,6 @@ impl WordDelimiterTokenFilterBase {
         self
     }
 }
+
+/// Types placement moved down to `oxsearch-core`, which uses them.
+pub use ::oxsearch_core::analysis::{StopWordLanguage, StopWords};

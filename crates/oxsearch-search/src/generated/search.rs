@@ -6070,3 +6070,11 @@ impl ::oxsearch_core::Endpoint for Request {
             .transpose()
     }
 }
+
+/// Types placement moved down to `oxsearch-core`, which uses them.
+pub use ::oxsearch_core::search::{
+    BoundaryScanner, FieldCollapse, Highlight, HighlightBase, HighlightField, HighlighterEncoder,
+    HighlighterFragmenter, HighlighterOrder, HighlighterTagsSchema, HighlighterType, InnerHits,
+    LearningToRank, Rescore, RescoreQuery, RescoreVariant, ScoreMode, ScriptRescore, SourceConfig,
+    SourceConfigParam, SourceFilter,
+};

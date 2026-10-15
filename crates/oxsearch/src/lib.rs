@@ -14,12 +14,16 @@
 //! include the `rrf` and `linear` retrievers. Retries, failover, authentication and
 //! telemetry are still to come; see DESIGN.md in the repository.
 
-/// The types every area shares: common types, retrievers and kNN.
+mod generated;
+pub use generated::*;
+
+/// The crate under every area. Its common types are re-exported here at
+/// the root, and its other types in their area's module; through it are
+/// the types of areas not generated yet, such as `indices`.
 pub use oxsearch_core;
 pub use oxsearch_core::{
     AggsBody, Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse,
-    LicenseError, Method, Query, RawAggs, Retriever, RetrieverContainer, Route, Transport,
-    TransportError, query_dsl, shapes,
+    LicenseError, Method, Query, RawAggs, Retriever, Route, Transport, TransportError, shapes,
 };
 
 #[cfg(feature = "admin")]
