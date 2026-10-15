@@ -46,7 +46,12 @@ use tokio::time::{Instant, sleep, sleep_until};
 ///   as a transport error, is the last result: the loader stops, and
 ///   `send` fails from then on.
 ///
-/// It runs on the Tokio runtime `start` is called from.
+/// It runs on the Tokio runtime `start` is called from, and records
+/// metrics through the `metrics` facade: `oxsearch.bulk.queued` (actions
+/// waiting) and `oxsearch.bulk.in_flight` (batches) as gauges, and
+/// `oxsearch.bulk.actions` (by `result`, `ok` or `failed`),
+/// `oxsearch.bulk.bytes` and `oxsearch.bulk.requests` as counters, whose
+/// rates are documents and bytes per second.
 #[derive(Clone, Debug)]
 pub struct BulkLoader<Tr> {
     client: Client<Tr>,
@@ -156,11 +161,15 @@ impl<Tr: Transport + Clone + 'static> BulkLoader<Tr> {
             let room = in_flight.len() < self.concurrency;
             if !batch.is_empty() && (full || due || !open) && room {
                 let lines = std::mem::take(&mut batch);
+                metrics::counter!("oxsearch.bulk.bytes").increment(bytes as u64);
+                metrics::counter!("oxsearch.bulk.requests").increment(1);
                 bytes = 0;
                 deadline = None;
                 in_flight.spawn(self.clone().send(lines));
                 continue;
             }
+            metrics::gauge!("oxsearch.bulk.in_flight").set(in_flight.len() as f64);
+            metrics::gauge!("oxsearch.bulk.queued").set((batch.len() + input.len()) as f64);
             if !open && batch.is_empty() && in_flight.is_empty() {
                 return;
             }
@@ -185,6 +194,8 @@ impl<Tr: Transport + Clone + 'static> BulkLoader<Tr> {
                     match outcomes {
                         Ok(outcomes) => {
                             for outcome in outcomes {
+                                let result = if outcome.is_ok() { "ok" } else { "failed" };
+                                metrics::counter!("oxsearch.bulk.actions", "result" => result).increment(1);
                                 // Nobody reads the results any more: stop.
                                 if output.send(Ok(outcome)).await.is_err() {
                                     return;

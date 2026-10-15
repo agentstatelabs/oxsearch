@@ -180,6 +180,14 @@ impl ReqwestTransport {
         }
         let response = builder.send().await?;
         let status = response.status().as_u16();
+        // Elastic Cloud names the instance that handled the request.
+        if let Some(instance) = response
+            .headers()
+            .get("x-found-handling-instance")
+            .and_then(|v| v.to_str().ok())
+        {
+            tracing::Span::current().record("elasticsearch.node.name", instance);
+        }
         let body = response.bytes().await?.to_vec();
         Ok(HttpResponse::new(status, body))
     }
@@ -217,6 +225,7 @@ impl ReqwestTransport {
                 }
             }
         }
+        tracing::debug!(target: "oxsearch", "sniffing the nodes");
         let mut sniffing = Sniffing(self, None);
         // The first node that answers lists them; one that can't rests.
         for node in nodes {
@@ -272,16 +281,19 @@ impl Transport for ReqwestTransport {
         let mut attempt = 0;
         loop {
             let node = self.state().pool.pick(Instant::now());
+            record_node(&node, &request.path_and_query);
             let outcome = self.send_to(&node, &request, body.as_ref()).await;
             let last = attempt >= settings.retries;
             let now = Instant::now();
             // Whether to go again, and whether to wait first.
             let wait = match outcome {
                 Ok(response) if matches!(response.status, 502..=504) && !last => {
+                    tracing::info!(target: "oxsearch", node = %node, status = response.status, attempt, "retrying on another node");
                     self.failed(&node, now);
                     false
                 }
                 Ok(response) if response.status == 429 && !last => {
+                    tracing::info!(target: "oxsearch", node = %node, attempt, backoff_ms = backoff.as_millis() as u64, "backing off after 429");
                     self.state().pool.answered(&node);
                     true
                 }
@@ -299,6 +311,7 @@ impl Transport for ReqwestTransport {
                     if last || !retry {
                         return Err(Box::new(error));
                     }
+                    tracing::info!(target: "oxsearch", node = %node, error = %error, attempt, "retrying on another node");
                     false
                 }
             };
@@ -311,9 +324,28 @@ impl Transport for ReqwestTransport {
     }
 }
 
+/// Records where a request goes on the client span: the conventions'
+/// `url.full`, `server.address` and `server.port`.
+fn record_node(node: &str, path_and_query: &str) {
+    let span = tracing::Span::current();
+    if span.is_disabled() {
+        return;
+    }
+    span.record("url.full", format!("{node}{path_and_query}").as_str());
+    if let Ok(url) = reqwest::Url::parse(node) {
+        if let Some(host) = url.host_str() {
+            span.record("server.address", host);
+        }
+        if let Some(port) = url.port_or_known_default() {
+            span.record("server.port", port);
+        }
+    }
+}
+
 impl ReqwestTransport {
     /// A node failed: it rests, and the nodes are sniffed again if asked.
     fn failed(&self, node: &str, now: Instant) {
+        tracing::warn!(target: "oxsearch", node = %node, "node failed; it rests");
         let mut state = self.state();
         state.pool.failed(node, now);
         if self.shared.settings.sniff_on_failure {

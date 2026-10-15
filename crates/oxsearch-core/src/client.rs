@@ -1,10 +1,14 @@
 //! The client: sends endpoints over a transport and reads their responses.
 
+use std::time::Instant;
+
 use serde::de::DeserializeOwned;
 use serde_json::Value;
+use tracing::Instrument;
 
-use crate::endpoint::{Body, Endpoint, HttpRequest, Method, Transport};
+use crate::endpoint::{Body, Endpoint, HttpRequest, HttpResponse, Method, Transport};
 use crate::error::Error;
+use crate::telemetry;
 
 /// Sends calls to a cluster over a [`Transport`].
 #[derive(Clone, Debug)]
@@ -46,26 +50,17 @@ impl<T: Transport> Client<T> {
             path_and_query.push_str(&crate::__private::encode(value));
         }
         let request = HttpRequest::new(route.method, path_and_query, endpoint.body()?);
-        let response = self
-            .transport
-            .send(request)
-            .await
-            .map_err(Error::Transport)?;
-        if !(200..300).contains(&response.status) {
-            return Err(Error::from_response(response.status, &response.body));
-        }
-        // Calls that answer with no body, such as HEAD requests, read as an
-        // empty object.
-        let body: &[u8] = if response.body.is_empty() {
-            b"{}"
-        } else {
-            &response.body
-        };
-        serde_json::from_slice(body).map_err(|source| Error::Decode {
-            status: response.status,
-            source,
-            body: String::from_utf8_lossy(&body[..body.len().min(512)]).into_owned(),
+        self.call(Some(endpoint.name()), request, |response| {
+            // Calls that answer with no body, such as HEAD requests, read as
+            // an empty object.
+            let body: &[u8] = if response.body.is_empty() {
+                b"{}"
+            } else {
+                &response.body
+            };
+            serde_json::from_slice(body).map_err(|source| decode(response.status, body, source))
         })
+        .await
     }
 
     /// Sends any request, for APIs oxsearch doesn't cover yet: a path,
@@ -81,22 +76,55 @@ impl<T: Transport> Client<T> {
             None => None,
         };
         let request = HttpRequest::new(method, path_and_query, body);
+        self.call(None, request, |response| {
+            if response.body.is_empty() {
+                return Ok(Value::Null);
+            }
+            serde_json::from_slice(&response.body)
+                .map_err(|source| decode(response.status, &response.body, source))
+        })
+        .await
+    }
+
+    /// Sends a request in a client span, and reads a successful response.
+    async fn call<R>(
+        &self,
+        name: Option<&'static str>,
+        request: HttpRequest,
+        read: impl FnOnce(&HttpResponse) -> Result<R, Error>,
+    ) -> Result<R, Error> {
+        let span = telemetry::span(name, &request);
+        let started = Instant::now();
         let response = self
             .transport
             .send(request)
+            .instrument(span.clone())
             .await
-            .map_err(Error::Transport)?;
-        if !(200..300).contains(&response.status) {
-            return Err(Error::from_response(response.status, &response.body));
-        }
-        if response.body.is_empty() {
-            return Ok(Value::Null);
-        }
-        serde_json::from_slice(&response.body).map_err(|source| Error::Decode {
-            status: response.status,
-            source,
-            body: String::from_utf8_lossy(&response.body[..response.body.len().min(512)])
-                .into_owned(),
-        })
+            .map_err(Error::Transport);
+        let status = response.as_ref().ok().map(|r| r.status);
+        let outcome = response.and_then(|response| {
+            if (200..300).contains(&response.status) {
+                read(&response)
+            } else {
+                Err(Error::from_response(response.status, &response.body))
+            }
+        });
+        telemetry::finish(
+            &span,
+            name,
+            status,
+            outcome.as_ref().err(),
+            started.elapsed(),
+        );
+        outcome
+    }
+}
+
+/// A response that didn't fit the type it was read into.
+fn decode(status: u16, body: &[u8], source: serde_json::Error) -> Error {
+    Error::Decode {
+        status,
+        source,
+        body: String::from_utf8_lossy(&body[..body.len().min(512)]).into_owned(),
     }
 }

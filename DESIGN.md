@@ -202,11 +202,22 @@ Rules for every pipeline: no locks shared between producer and consumer, end of 
 
 ### 4.8 Telemetry
 
-- One client span per request, named and attributed per the OpenTelemetry database conventions for Elasticsearch (`db.system.name`, operation name, sanitized query text off by default, server address and port, node name), plus a request-duration metric.
+- One client span per request, named and attributed per the OpenTelemetry database conventions for Elasticsearch (`db.system.name`, operation name, sanitized query text, server address and port, node name), plus a request-duration metric.
 - Inference calls (embeddings, rerank, completion) also get GenAI attributes.
 - Retries and failover appear as span events, so a slow request shows why it was slow.
 - Bulk and point-in-time helpers report queue depth, requests in flight, and documents and bytes per second.
 - Library crates use `tracing` and `metrics` only. Attribute names come from `oxtel-semconv`'s generated constants, a light dependency with no runtime.
+
+Built in Phase 1 (`oxsearch_core::telemetry`):
+
+- **The client span.** `Client` opens it around each request.
+  - It's named by the endpoint (`search`); a raw call is named `elasticsearch`.
+  - It records `db.system.name`, `db.operation.name`, `db.collection.name` (a single index), `http.request.method`, `db.response.status_code`, and `error.type` with an error status on failure.
+  - The reqwest transport adds `url.full`, `server.address`, `server.port`, and `elasticsearch.node.name` (from Elastic Cloud's `X-Found-Handling-Instance` header). Retries, failover and node failures are events in the span.
+- **Query text.** `db.query.text` is recorded by default for search-type endpoints, sanitized: every value becomes `?` and a list of values (such as a vector) one `?`, so only field names and the query's shape remain. This matches oxtel-sql, which records sanitized SQL by default. `telemetry::record_query_text(false)` turns it off for the process.
+- **GenAI.** `gen_ai.operation.name` is `embeddings`, `chat`, `text_completion` or `rerank` for inference calls.
+- **Metrics.** `db.client.operation.duration` (seconds) is recorded by operation, with `error.type` and the status on failure; `telemetry::describe_metrics` gives its unit. The helpers record `oxsearch.bulk.{queued,in_flight}` gauges, `oxsearch.bulk.{actions,bytes,requests}` and `oxsearch.scan.{pages,documents}` counters.
+- **Tests.** Field names follow the literal-then-check pattern of oxtel-sql: the `tracing` macros need literals, and a test checks them against `oxtel-semconv`'s constants. `integration/tests/collector.rs` exports a search's span and duration through oxtel to a real OpenTelemetry Collector, and checks what it decoded. CI's integration jobs run it.
 
 ## 5. Licenses
 

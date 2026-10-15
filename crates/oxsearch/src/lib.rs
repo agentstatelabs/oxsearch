@@ -23,8 +23,9 @@
 //! The transport's layers are opt-in: `transport_reqwest`'s builder adds
 //! several nodes with failover, retries, sniffing, credentials and
 //! compression, [`auth`] signs requests with credentials that refresh, and
-//! a layer of your own is a [`Transport`] that wraps another. Telemetry is
-//! still to come; see DESIGN.md in the repository.
+//! a layer of your own is a [`Transport`] that wraps another. [`telemetry`]
+//! records a span per request and its duration through the `tracing` and
+//! `metrics` facades, for oxtel or any other exporter.
 
 // The derive macros' code names this crate `::oxsearch`, in its own tests too.
 extern crate self as oxsearch;
@@ -41,11 +42,11 @@ pub mod helpers;
 /// the root, and its other types in their area's module; through it are
 /// the types of areas not generated yet, such as `indices`.
 pub use oxsearch_core;
-pub use oxsearch_core::auth;
 pub use oxsearch_core::{
     AggsBody, Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse,
     LicenseError, Method, Query, RawAggs, Retriever, Route, Transport, TransportError, shapes,
 };
+pub use oxsearch_core::{auth, telemetry};
 
 #[cfg(feature = "admin")]
 pub use oxsearch_admin as admin;

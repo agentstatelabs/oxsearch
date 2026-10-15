@@ -298,6 +298,7 @@ const CORE_NAMES: &[&str] = &[
     "Transport",
     "TransportError",
     "shapes",
+    "telemetry",
     "__private",
 ];
 
