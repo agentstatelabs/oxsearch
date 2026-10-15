@@ -16,6 +16,9 @@ pub mod chat_completion_unified;
 pub mod completion;
 pub mod delete;
 pub mod delete_region_policy;
+/// An endpoint Elasticsearch marks experimental: it may change or go away in any
+/// release. Behind the `experimental` feature.
+#[cfg(feature = "experimental")]
 pub mod embedding;
 pub mod get;
 pub mod get_region_policy;

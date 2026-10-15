@@ -31,6 +31,10 @@ derive = ["dep:oxsearch-derive"]
 # The default HTTP transport. Whether it is on by default is still open
 # (DESIGN.md, open question 5).
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
+# Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
+# they may change or go away in any Elasticsearch release.
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }

@@ -17,6 +17,9 @@ pub mod close_point_in_time;
 pub mod count;
 pub mod explain;
 pub mod field_caps;
+/// An endpoint Elasticsearch marks experimental: it may change or go away in any
+/// release. Behind the `experimental` feature.
+#[cfg(feature = "experimental")]
 pub mod knn_search;
 pub mod msearch;
 pub mod msearch_template;

@@ -1231,16 +1231,7 @@ impl<'g> Ir<'g> {
             if std::mem::replace(&mut seen[id], true) {
                 continue;
             }
-            let mut targets = Vec::new();
-            for ty in self.item_types(id) {
-                self.all_targets(ty, &mut targets);
-            }
-            if let ItemKind::Struct(s) = &self.items[id].kind
-                && let Some((_, variant)) = &s.variant
-            {
-                targets.push(*variant);
-            }
-            stack.extend(targets.into_iter().filter(|&t| !seen[t]));
+            stack.extend(self.references(id).into_iter().filter(|&t| !seen[t]));
         }
         for (id, item) in self.items.iter_mut().enumerate() {
             if !seen[id] {
@@ -1256,6 +1247,20 @@ impl<'g> Ir<'g> {
                 }
             }
         }
+    }
+
+    /// Every generated item an item refers to.
+    pub fn references(&self, id: ItemId) -> Vec<ItemId> {
+        let mut out = Vec::new();
+        for ty in self.item_types(id) {
+            self.all_targets(ty, &mut out);
+        }
+        if let ItemKind::Struct(s) = &self.items[id].kind
+            && let Some((_, variant)) = &s.variant
+        {
+            out.push(*variant);
+        }
+        out
     }
 
     /// Every type an item mentions.
