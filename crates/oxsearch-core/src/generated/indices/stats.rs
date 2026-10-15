@@ -31,6 +31,9 @@ impl ShardFileSizeInfo {
             count: ::core::option::Option::None,
         }
     }
+}
+
+impl ShardFileSizeInfo {
     /// Sets `min_size_in_bytes`.
     pub fn min_size_in_bytes(mut self, value: i64) -> Self {
         self.min_size_in_bytes = ::core::option::Option::Some(value.into());

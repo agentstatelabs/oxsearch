@@ -18,6 +18,8 @@ impl RequestBody {
     }
 }
 
+impl RequestBody {}
+
 /// Create or update the inference region policy.
 ///
 /// The region policy restricts inference to a set of allowed geographic areas or cloud service provider regions.
@@ -39,6 +41,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `force`.
     pub fn force(mut self, value: bool) -> Self {
         self.force = ::core::option::Option::Some(value.into());

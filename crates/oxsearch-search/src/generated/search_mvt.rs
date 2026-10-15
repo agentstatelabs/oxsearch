@@ -125,6 +125,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `aggs`.
     pub fn aggs(mut self, value: impl ::core::convert::Into<::oxsearch_core::AggsBody>) -> Self {
         self.aggs = ::core::option::Option::Some(value.into());
@@ -400,6 +403,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `exact_bounds`.
     pub fn exact_bounds(mut self, value: bool) -> Self {
         self.exact_bounds = ::core::option::Option::Some(value.into());

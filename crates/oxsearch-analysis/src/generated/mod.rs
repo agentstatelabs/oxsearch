@@ -764,6 +764,9 @@ impl ApostropheTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ApostropheTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -794,6 +797,9 @@ impl ArabicAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl ArabicAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -834,6 +840,9 @@ impl ArabicNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ArabicNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -858,6 +867,9 @@ impl ArabicStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ArabicStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -888,6 +900,9 @@ impl ArmenianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl ArmenianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -932,6 +947,9 @@ impl AsciiFoldingTokenFilter {
             preserve_original: ::core::option::Option::None,
         }
     }
+}
+
+impl AsciiFoldingTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -970,6 +988,9 @@ impl BasqueAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl BasqueAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1016,6 +1037,9 @@ impl BengaliAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl BengaliAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1056,6 +1080,9 @@ impl BengaliNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl BengaliNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1083,6 +1110,9 @@ impl BrazilianAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl BrazilianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1115,6 +1145,9 @@ impl BrazilianStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl BrazilianStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1145,6 +1178,9 @@ impl BulgarianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl BulgarianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1191,6 +1227,9 @@ impl CatalanAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl CatalanAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1302,6 +1341,9 @@ impl CharFilterBase {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl CharFilterBase {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1449,6 +1491,9 @@ impl CharGroupTokenizer {
             max_token_length: ::core::option::Option::None,
         }
     }
+}
+
+impl CharGroupTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1481,6 +1526,9 @@ impl ChineseAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl ChineseAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1516,6 +1564,9 @@ impl CjkAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl CjkAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -1616,6 +1667,9 @@ impl CjkBigramTokenFilter {
             output_unigrams: ::core::option::Option::None,
         }
     }
+}
+
+impl CjkBigramTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1653,6 +1707,9 @@ impl CjkWidthTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl CjkWidthTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1677,6 +1734,9 @@ impl ClassicTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ClassicTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1704,6 +1764,9 @@ impl ClassicTokenizer {
             max_token_length: ::core::option::Option::None,
         }
     }
+}
+
+impl ClassicTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1755,6 +1818,9 @@ impl CommonGramsTokenFilter {
             query_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl CommonGramsTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1832,6 +1898,9 @@ impl CompoundWordTokenFilterBase {
             word_list_path: ::core::option::Option::None,
         }
     }
+}
+
+impl CompoundWordTokenFilterBase {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1901,6 +1970,9 @@ impl ConditionTokenFilter {
             script: script.into(),
         }
     }
+}
+
+impl ConditionTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -1937,6 +2009,9 @@ impl CustomAnalyzer {
             tokenizer: tokenizer.into(),
         }
     }
+}
+
+impl CustomAnalyzer {
     /// Sets `char_filter`.
     pub fn char_filter(
         mut self,
@@ -1982,6 +2057,9 @@ impl CustomNormalizer {
             filter: ::core::option::Option::None,
         }
     }
+}
+
+impl CustomNormalizer {
     /// Sets `char_filter`.
     pub fn char_filter(
         mut self,
@@ -2020,6 +2098,9 @@ impl CzechAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl CzechAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2060,6 +2141,9 @@ impl CzechStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl CzechStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2087,6 +2171,9 @@ impl DanishAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl DanishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2119,6 +2206,9 @@ impl DecimalDigitTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl DecimalDigitTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2207,6 +2297,9 @@ impl DelimitedPayloadTokenFilter {
             encoding: ::core::option::Option::None,
         }
     }
+}
+
+impl DelimitedPayloadTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2271,6 +2364,9 @@ impl DictionaryDecompounderTokenFilter {
             word_list_path: ::core::option::Option::None,
         }
     }
+}
+
+impl DictionaryDecompounderTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2337,6 +2433,9 @@ impl DutchAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl DutchAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2377,6 +2476,9 @@ impl DutchStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl DutchStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2469,6 +2571,9 @@ impl EdgeNGramTokenFilter {
             preserve_original: ::core::option::Option::None,
         }
     }
+}
+
+impl EdgeNGramTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2528,6 +2633,9 @@ impl EdgeNGramTokenizer {
             token_chars: ::core::option::Option::None,
         }
     }
+}
+
+impl EdgeNGramTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2595,6 +2703,9 @@ impl ElisionTokenFilter {
             articles_case: ::core::option::Option::None,
         }
     }
+}
+
+impl ElisionTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2649,6 +2760,9 @@ impl EnglishAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl EnglishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2692,6 +2806,9 @@ impl EstonianAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl EstonianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2743,6 +2860,9 @@ impl FingerprintAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl FingerprintAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2801,6 +2921,9 @@ impl FingerprintTokenFilter {
             separator: ::core::option::Option::None,
         }
     }
+}
+
+impl FingerprintTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2841,6 +2964,9 @@ impl FinnishAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl FinnishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2881,6 +3007,9 @@ impl FlattenGraphTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl FlattenGraphTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2911,6 +3040,9 @@ impl FrenchAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl FrenchAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -2951,6 +3083,9 @@ impl FrenchStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl FrenchStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -2981,6 +3116,9 @@ impl GalicianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl GalicianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -3027,6 +3165,9 @@ impl GermanAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl GermanAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -3067,6 +3208,9 @@ impl GermanNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl GermanNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3091,6 +3235,9 @@ impl GermanStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl GermanStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3118,6 +3265,9 @@ impl GreekAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl GreekAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -3156,6 +3306,9 @@ impl HindiAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl HindiAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -3196,6 +3349,9 @@ impl HindiNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl HindiNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3223,6 +3379,9 @@ impl HtmlStripCharFilter {
             escaped_tags: ::core::option::Option::None,
         }
     }
+}
+
+impl HtmlStripCharFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3261,6 +3420,9 @@ impl HungarianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl HungarianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -3318,6 +3480,9 @@ impl HunspellTokenFilter {
             longest_only: ::core::option::Option::None,
         }
     }
+}
+
+impl HunspellTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3398,6 +3563,9 @@ impl HyphenationDecompounderTokenFilter {
             no_overlapping_matches: ::core::option::Option::None,
         }
     }
+}
+
+impl HyphenationDecompounderTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3473,6 +3641,8 @@ impl IcuAnalyzer {
         }
     }
 }
+
+impl IcuAnalyzer {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
@@ -3756,6 +3926,9 @@ impl IcuCollationTokenFilter {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl IcuCollationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3857,6 +4030,9 @@ impl IcuFoldingTokenFilter {
             unicode_set_filter: unicode_set_filter.into(),
         }
     }
+}
+
+impl IcuFoldingTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3890,6 +4066,9 @@ impl IcuNormalizationCharFilter {
             unicode_set_filter: ::core::option::Option::None,
         }
     }
+}
+
+impl IcuNormalizationCharFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -3986,6 +4165,9 @@ impl IcuNormalizationTokenFilter {
             name: name.into(),
         }
     }
+}
+
+impl IcuNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4068,6 +4250,9 @@ impl IcuTokenizer {
             rule_files: rule_files.into(),
         }
     }
+}
+
+impl IcuTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4149,6 +4334,9 @@ impl IcuTransformTokenFilter {
             id: id.into(),
         }
     }
+}
+
+impl IcuTransformTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4178,6 +4366,9 @@ impl IndicNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl IndicNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4208,6 +4399,9 @@ impl IndonesianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl IndonesianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -4254,6 +4448,9 @@ impl IrishAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl IrishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -4300,6 +4497,9 @@ impl ItalianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl ItalianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -4343,6 +4543,9 @@ impl JaStopTokenFilter {
             stopwords: ::core::option::Option::None,
         }
     }
+}
+
+impl JaStopTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4375,6 +4578,9 @@ impl KStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl KStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4458,6 +4664,9 @@ impl KeepTypesTokenFilter {
             types: types.into(),
         }
     }
+}
+
+impl KeepTypesTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4502,6 +4711,9 @@ impl KeepWordsTokenFilter {
             keep_words_path: ::core::option::Option::None,
         }
     }
+}
+
+impl KeepWordsTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4547,6 +4759,9 @@ impl KeywordAnalyzer {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl KeywordAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4591,6 +4806,9 @@ impl KeywordMarkerTokenFilter {
             keywords_pattern: ::core::option::Option::None,
         }
     }
+}
+
+impl KeywordMarkerTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4644,6 +4862,9 @@ impl KeywordRepeatTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl KeywordRepeatTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4671,6 +4892,9 @@ impl KeywordTokenizer {
             buffer_size: ::core::option::Option::None,
         }
     }
+}
+
+impl KeywordTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4703,6 +4927,9 @@ impl KuromojiAnalyzer {
             user_dictionary: ::core::option::Option::None,
         }
     }
+}
+
+impl KuromojiAnalyzer {
     /// Sets `mode`.
     pub fn mode(
         mut self,
@@ -4739,6 +4966,9 @@ impl KuromojiIterationMarkCharFilter {
             normalize_kanji: normalize_kanji.into(),
         }
     }
+}
+
+impl KuromojiIterationMarkCharFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4767,6 +4997,9 @@ impl KuromojiPartOfSpeechTokenFilter {
             stoptags: stoptags.into(),
         }
     }
+}
+
+impl KuromojiPartOfSpeechTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4793,6 +5026,9 @@ impl KuromojiReadingFormTokenFilter {
             use_romaji: use_romaji.into(),
         }
     }
+}
+
+impl KuromojiReadingFormTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4819,6 +5055,9 @@ impl KuromojiStemmerTokenFilter {
             minimum_length: minimum_length.into(),
         }
     }
+}
+
+impl KuromojiStemmerTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4919,6 +5158,9 @@ impl KuromojiTokenizer {
             discard_compound_token: ::core::option::Option::None,
         }
     }
+}
+
+impl KuromojiTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -4988,6 +5230,9 @@ impl LatvianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl LatvianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -5036,6 +5281,9 @@ impl LengthTokenFilter {
             min: ::core::option::Option::None,
         }
     }
+}
+
+impl LengthTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5070,6 +5318,9 @@ impl LetterTokenizer {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl LetterTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5102,6 +5353,9 @@ impl LimitTokenCountTokenFilter {
             max_token_count: ::core::option::Option::None,
         }
     }
+}
+
+impl LimitTokenCountTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5145,6 +5399,9 @@ impl LithuanianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl LithuanianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -5182,6 +5439,8 @@ impl LowercaseNormalizer {
     }
 }
 
+impl LowercaseNormalizer {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct LowercaseTokenFilter {
@@ -5200,6 +5459,9 @@ impl LowercaseTokenFilter {
             language: ::core::option::Option::None,
         }
     }
+}
+
+impl LowercaseTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5288,6 +5550,9 @@ impl LowercaseTokenizer {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl LowercaseTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5318,6 +5583,9 @@ impl MappingCharFilter {
             mappings_path: ::core::option::Option::None,
         }
     }
+}
+
+impl MappingCharFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5375,6 +5643,9 @@ impl MinHashTokenFilter {
             with_rotation: ::core::option::Option::None,
         }
     }
+}
+
+impl MinHashTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5428,6 +5699,9 @@ impl MultiplexerTokenFilter {
             preserve_original: ::core::option::Option::None,
         }
     }
+}
+
+impl MultiplexerTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5472,6 +5746,9 @@ impl NGramTokenFilter {
             preserve_original: ::core::option::Option::None,
         }
     }
+}
+
+impl NGramTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5526,6 +5803,9 @@ impl NGramTokenizer {
             token_chars: ::core::option::Option::None,
         }
     }
+}
+
+impl NGramTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5585,6 +5865,9 @@ impl NoriAnalyzer {
             user_dictionary: ::core::option::Option::None,
         }
     }
+}
+
+impl NoriAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5693,6 +5976,9 @@ impl NoriPartOfSpeechTokenFilter {
             stoptags: ::core::option::Option::None,
         }
     }
+}
+
+impl NoriPartOfSpeechTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5737,6 +6023,9 @@ impl NoriTokenizer {
             user_dictionary_rules: ::core::option::Option::None,
         }
     }
+}
+
+impl NoriTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5858,6 +6147,9 @@ impl NorwegianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl NorwegianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -5913,6 +6205,9 @@ impl PathHierarchyTokenizer {
             skip: ::core::option::Option::None,
         }
     }
+}
+
+impl PathHierarchyTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -5994,6 +6289,9 @@ impl PatternAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl PatternAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6058,6 +6356,9 @@ impl PatternCaptureTokenFilter {
             preserve_original: ::core::option::Option::None,
         }
     }
+}
+
+impl PatternCaptureTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6098,6 +6399,9 @@ impl PatternReplaceCharFilter {
             replacement: ::core::option::Option::None,
         }
     }
+}
+
+impl PatternReplaceCharFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6146,6 +6450,9 @@ impl PatternReplaceTokenFilter {
             replacement: ::core::option::Option::None,
         }
     }
+}
+
+impl PatternReplaceTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6194,6 +6501,9 @@ impl PatternTokenizer {
             pattern: ::core::option::Option::None,
         }
     }
+}
+
+impl PatternTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6236,6 +6546,9 @@ impl PersianAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl PersianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -6268,6 +6581,9 @@ impl PersianNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl PersianNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6292,6 +6608,9 @@ impl PersianStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl PersianStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6626,6 +6945,9 @@ impl PhoneticTokenFilter {
             rule_type: ::core::option::Option::None,
         }
     }
+}
+
+impl PhoneticTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6678,6 +7000,9 @@ impl PorterStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl PorterStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6708,6 +7033,9 @@ impl PortugueseAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl PortugueseAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -6751,6 +7079,9 @@ impl PredicateTokenFilter {
             script: script.into(),
         }
     }
+}
+
+impl PredicateTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6775,6 +7106,9 @@ impl RemoveDuplicatesTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl RemoveDuplicatesTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6799,6 +7133,9 @@ impl ReverseTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ReverseTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6829,6 +7166,9 @@ impl RomanianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl RomanianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -6875,6 +7215,9 @@ impl RussianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl RussianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -6915,6 +7258,9 @@ impl RussianStemTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl RussianStemTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6939,6 +7285,9 @@ impl ScandinavianFoldingTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ScandinavianFoldingTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6963,6 +7312,9 @@ impl ScandinavianNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ScandinavianNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -6993,6 +7345,9 @@ impl SerbianAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl SerbianAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -7033,6 +7388,9 @@ impl SerbianNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl SerbianNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7081,6 +7439,9 @@ impl ShingleTokenFilter {
             token_separator: ::core::option::Option::None,
         }
     }
+}
+
+impl ShingleTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7147,6 +7508,9 @@ impl SimpleAnalyzer {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl SimpleAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7174,6 +7538,9 @@ impl SimplePatternSplitTokenizer {
             pattern: ::core::option::Option::None,
         }
     }
+}
+
+impl SimplePatternSplitTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7206,6 +7573,9 @@ impl SimplePatternTokenizer {
             pattern: ::core::option::Option::None,
         }
     }
+}
+
+impl SimplePatternTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7240,6 +7610,9 @@ impl SnowballAnalyzer {
             stopwords: ::core::option::Option::None,
         }
     }
+}
+
+impl SnowballAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7428,6 +7801,9 @@ impl SnowballTokenFilter {
             language: ::core::option::Option::None,
         }
     }
+}
+
+impl SnowballTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7463,6 +7839,9 @@ impl SoraniAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl SoraniAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -7503,6 +7882,9 @@ impl SoraniNormalizationTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl SoraniNormalizationTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7533,6 +7915,9 @@ impl SpanishAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl SpanishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -7584,6 +7969,9 @@ impl StandardAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl StandardAnalyzer {
     /// Sets `max_token_length`.
     pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
@@ -7624,6 +8012,9 @@ impl StandardTokenizer {
             max_token_length: ::core::option::Option::None,
         }
     }
+}
+
+impl StandardTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7661,6 +8052,9 @@ impl StemmerOverrideTokenFilter {
             rules_path: ::core::option::Option::None,
         }
     }
+}
+
+impl StemmerOverrideTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7704,6 +8098,9 @@ impl StemmerTokenFilter {
             language: ::core::option::Option::None,
         }
     }
+}
+
+impl StemmerTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7742,6 +8139,9 @@ impl StopAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl StopAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7799,6 +8199,9 @@ impl StopTokenFilter {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl StopTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -7855,6 +8258,9 @@ impl SwedishAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl SwedishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -7980,6 +8386,9 @@ impl SynonymGraphTokenFilter {
             updateable: ::core::option::Option::None,
         }
     }
+}
+
+impl SynonymGraphTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -8086,6 +8495,9 @@ impl SynonymTokenFilter {
             updateable: ::core::option::Option::None,
         }
     }
+}
+
+impl SynonymTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -8192,6 +8604,9 @@ impl SynonymTokenFilterBase {
             updateable: ::core::option::Option::None,
         }
     }
+}
+
+impl SynonymTokenFilterBase {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -8268,6 +8683,9 @@ impl ThaiAnalyzer {
             stopwords_path: ::core::option::Option::None,
         }
     }
+}
+
+impl ThaiAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -8300,6 +8718,9 @@ impl ThaiTokenizer {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl ThaiTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -8461,6 +8882,9 @@ impl TokenFilterBase {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl TokenFilterBase {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -9776,6 +10200,9 @@ impl TokenizerBase {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl TokenizerBase {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10116,6 +10543,9 @@ impl TrimTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl TrimTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10144,6 +10574,9 @@ impl TruncateTokenFilter {
             length: ::core::option::Option::None,
         }
     }
+}
+
+impl TruncateTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10179,6 +10612,9 @@ impl TurkishAnalyzer {
             stem_exclusion: ::core::option::Option::None,
         }
     }
+}
+
+impl TurkishAnalyzer {
     /// Sets `stopwords`.
     pub fn stopwords(
         mut self,
@@ -10222,6 +10658,9 @@ impl UaxEmailUrlTokenizer {
             max_token_length: ::core::option::Option::None,
         }
     }
+}
+
+impl UaxEmailUrlTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10255,6 +10694,9 @@ impl UniqueTokenFilter {
             only_on_same_position: ::core::option::Option::None,
         }
     }
+}
+
+impl UniqueTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10284,6 +10726,9 @@ impl UppercaseTokenFilter {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl UppercaseTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10308,6 +10753,9 @@ impl WhitespaceAnalyzer {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl WhitespaceAnalyzer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10335,6 +10783,9 @@ impl WhitespaceTokenizer {
             max_token_length: ::core::option::Option::None,
         }
     }
+}
+
+impl WhitespaceTokenizer {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10425,6 +10876,9 @@ impl WordDelimiterGraphTokenFilter {
             ignore_keywords: ::core::option::Option::None,
         }
     }
+}
+
+impl WordDelimiterGraphTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10592,6 +11046,9 @@ impl WordDelimiterTokenFilter {
             type_table_path: ::core::option::Option::None,
         }
     }
+}
+
+impl WordDelimiterTokenFilter {
     /// Sets `version`.
     pub fn version(
         mut self,
@@ -10749,6 +11206,9 @@ impl WordDelimiterTokenFilterBase {
             type_table_path: ::core::option::Option::None,
         }
     }
+}
+
+impl WordDelimiterTokenFilterBase {
     /// Sets `version`.
     pub fn version(
         mut self,

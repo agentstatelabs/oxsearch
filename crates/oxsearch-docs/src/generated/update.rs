@@ -35,7 +35,7 @@ pub struct RequestBody<TPartialDocument = ::serde_json::Value, TDocument = ::ser
     pub upsert: ::core::option::Option<TDocument>,
 }
 
-impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
+impl RequestBody<::serde_json::Value, ::serde_json::Value> {
     /// A `RequestBody` with its required properties set.
     pub fn new() -> Self {
         Self {
@@ -48,15 +48,28 @@ impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
             upsert: ::core::option::Option::None,
         }
     }
+}
+
+impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
     /// Sets `detect_noop`.
     pub fn detect_noop(mut self, value: bool) -> Self {
         self.detect_noop = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `doc`.
-    pub fn doc(mut self, value: TPartialDocument) -> Self {
-        self.doc = ::core::option::Option::Some(value.into());
-        self
+    pub fn doc<TPartialDocument2>(
+        self,
+        value: TPartialDocument2,
+    ) -> RequestBody<TPartialDocument2, TDocument> {
+        RequestBody {
+            detect_noop: self.detect_noop,
+            doc_as_upsert: self.doc_as_upsert,
+            script: self.script,
+            scripted_upsert: self.scripted_upsert,
+            source: self.source,
+            upsert: self.upsert,
+            doc: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `doc_as_upsert`.
     pub fn doc_as_upsert(mut self, value: bool) -> Self {
@@ -82,9 +95,19 @@ impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
         self
     }
     /// Sets `upsert`.
-    pub fn upsert(mut self, value: TDocument) -> Self {
-        self.upsert = ::core::option::Option::Some(value.into());
-        self
+    pub fn upsert<TDocument2>(
+        self,
+        value: TDocument2,
+    ) -> RequestBody<TPartialDocument, TDocument2> {
+        RequestBody {
+            detect_noop: self.detect_noop,
+            doc: self.doc,
+            doc_as_upsert: self.doc_as_upsert,
+            script: self.script,
+            scripted_upsert: self.scripted_upsert,
+            source: self.source,
+            upsert: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -160,7 +183,7 @@ pub struct Request<TDocument = ::serde_json::Value, TPartialDocument = ::serde_j
     pub body: ::core::option::Option<crate::update::RequestBody<TPartialDocument, TDocument>>,
 }
 
-impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
+impl Request<::serde_json::Value, ::serde_json::Value> {
     /// A `Request` with its required properties set.
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
@@ -186,6 +209,9 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
     /// Sets `if_primary_term`.
     pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
@@ -272,9 +298,29 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: crate::update::RequestBody<TPartialDocument, TDocument>) -> Self {
-        self.body = ::core::option::Option::Some(value.into());
-        self
+    pub fn body<TDocument2, TPartialDocument2>(
+        self,
+        value: crate::update::RequestBody<TPartialDocument2, TDocument2>,
+    ) -> Request<TDocument2, TPartialDocument2> {
+        Request {
+            id: self.id,
+            index: self.index,
+            if_primary_term: self.if_primary_term,
+            if_seq_no: self.if_seq_no,
+            include_source_on_error: self.include_source_on_error,
+            lang: self.lang,
+            refresh: self.refresh,
+            require_alias: self.require_alias,
+            retry_on_conflict: self.retry_on_conflict,
+            routing: self.routing,
+            slice: self.slice,
+            timeout: self.timeout,
+            wait_for_active_shards: self.wait_for_active_shards,
+            source: self.source,
+            source_excludes: self.source_excludes,
+            source_includes: self.source_includes,
+            body: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -349,7 +395,7 @@ pub struct UpdateWriteResponseBase<TDocument = ::serde_json::Value> {
     pub get: ::core::option::Option<::oxsearch_core::InlineGet<TDocument>>,
 }
 
-impl<TDocument> UpdateWriteResponseBase<TDocument> {
+impl UpdateWriteResponseBase<::serde_json::Value> {
     /// A `UpdateWriteResponseBase` with its required properties set.
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
@@ -371,6 +417,9 @@ impl<TDocument> UpdateWriteResponseBase<TDocument> {
             get: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> UpdateWriteResponseBase<TDocument> {
     /// Sets `primary_term`.
     pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
@@ -398,9 +447,22 @@ impl<TDocument> UpdateWriteResponseBase<TDocument> {
         self
     }
     /// Sets `get`.
-    pub fn get(mut self, value: ::oxsearch_core::InlineGet<TDocument>) -> Self {
-        self.get = ::core::option::Option::Some(value.into());
-        self
+    pub fn get<TDocument2>(
+        self,
+        value: ::oxsearch_core::InlineGet<TDocument2>,
+    ) -> UpdateWriteResponseBase<TDocument2> {
+        UpdateWriteResponseBase {
+            id: self.id,
+            index: self.index,
+            primary_term: self.primary_term,
+            result: self.result,
+            seq_no: self.seq_no,
+            shards: self.shards,
+            version: self.version,
+            failure_store: self.failure_store,
+            forced_refresh: self.forced_refresh,
+            get: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 

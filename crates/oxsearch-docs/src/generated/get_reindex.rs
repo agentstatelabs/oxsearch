@@ -41,6 +41,9 @@ impl Request {
             timeout: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `wait_for_completion`.
     pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
@@ -116,6 +119,9 @@ impl Response {
             response: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `description`.
     pub fn description(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.description = ::core::option::Option::Some(value.into());

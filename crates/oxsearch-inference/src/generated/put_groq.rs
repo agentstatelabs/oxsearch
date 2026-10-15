@@ -24,6 +24,8 @@ impl RequestBody {
     }
 }
 
+impl RequestBody {}
+
 /// Create a Groq inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `groq` service.
@@ -55,6 +57,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `timeout`.
     pub fn timeout(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.timeout = ::core::option::Option::Some(value.into());

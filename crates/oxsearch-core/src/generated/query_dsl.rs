@@ -55,6 +55,9 @@ impl BoolQuery {
             should: ::core::option::Option::None,
         }
     }
+}
+
+impl BoolQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -155,6 +158,9 @@ impl BoostingQuery {
             positive: ::core::option::Option::Some(positive.into()),
         }
     }
+}
+
+impl BoostingQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -335,6 +341,9 @@ impl CombinedFieldsQuery {
             zero_terms_query: ::core::option::Option::None,
         }
     }
+}
+
+impl CombinedFieldsQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -459,6 +468,9 @@ impl CommonTermsQuery {
             query: ::core::option::Option::Some(query.into()),
         }
     }
+}
+
+impl CommonTermsQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -613,6 +625,9 @@ impl ConstantScoreQuery {
             filter: ::core::option::Option::Some(filter.into()),
         }
     }
+}
+
+impl ConstantScoreQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -652,6 +667,9 @@ impl DateDecayFunction {
             placement: placement.into(),
         }
     }
+}
+
+impl DateDecayFunction {
     /// Sets `multi_value_mode`.
     pub fn multi_value_mode(
         mut self,
@@ -751,6 +769,9 @@ impl DateDistanceFeatureQuery {
             field: ::core::option::Option::Some(field.into()),
         }
     }
+}
+
+impl DateDistanceFeatureQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -815,6 +836,9 @@ impl DateRangeQuery {
             time_zone: ::core::option::Option::None,
         }
     }
+}
+
+impl DateRangeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -956,6 +980,9 @@ impl<TOrigin, TScale> DecayFunctionBase<TOrigin, TScale> {
             placement: placement.into(),
         }
     }
+}
+
+impl<TOrigin, TScale> DecayFunctionBase<TOrigin, TScale> {
     /// Sets `multi_value_mode`.
     pub fn multi_value_mode(
         mut self,
@@ -1028,7 +1055,7 @@ pub struct DecayPlacement<TOrigin = ::serde_json::Value, TScale = ::serde_json::
     pub origin: ::core::option::Option<TOrigin>,
 }
 
-impl<TOrigin, TScale> DecayPlacement<TOrigin, TScale> {
+impl DecayPlacement<::serde_json::Value, ::serde_json::Value> {
     /// A `DecayPlacement` with its required properties set.
     pub fn new() -> Self {
         Self {
@@ -1038,6 +1065,9 @@ impl<TOrigin, TScale> DecayPlacement<TOrigin, TScale> {
             origin: ::core::option::Option::None,
         }
     }
+}
+
+impl<TOrigin, TScale> DecayPlacement<TOrigin, TScale> {
     /// Sets `decay`.
     pub fn decay(mut self, value: f64) -> Self {
         self.decay = ::core::option::Option::Some(value.into());
@@ -1054,9 +1084,13 @@ impl<TOrigin, TScale> DecayPlacement<TOrigin, TScale> {
         self
     }
     /// Sets `origin`.
-    pub fn origin(mut self, value: TOrigin) -> Self {
-        self.origin = ::core::option::Option::Some(value.into());
-        self
+    pub fn origin<TOrigin2>(self, value: TOrigin2) -> DecayPlacement<TOrigin2, TScale> {
+        DecayPlacement {
+            decay: self.decay,
+            offset: self.offset,
+            scale: self.scale,
+            origin: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 
@@ -1096,6 +1130,9 @@ impl DisMaxQuery {
             tie_breaker: ::core::option::Option::None,
         }
     }
+}
+
+impl DisMaxQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -1209,6 +1246,9 @@ impl<TOrigin, TDistance> DistanceFeatureQueryBase<TOrigin, TDistance> {
             field: field.into(),
         }
     }
+}
+
+impl<TOrigin, TDistance> DistanceFeatureQueryBase<TOrigin, TDistance> {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -1249,6 +1289,9 @@ impl ExistsQuery {
             field: ::core::option::Option::Some(field.into()),
         }
     }
+}
+
+impl ExistsQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -1281,6 +1324,9 @@ impl FieldAndFormat {
             include_unmapped: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldAndFormat {
     /// Sets `format`.
     pub fn format(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.format = ::core::option::Option::Some(value.into());
@@ -1372,6 +1418,9 @@ impl FieldLookup {
             routing: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldLookup {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<crate::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -1503,6 +1552,9 @@ impl FieldValueFactorScoreFunction {
             modifier: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldValueFactorScoreFunction {
     /// Sets `factor`.
     pub fn factor(mut self, value: f64) -> Self {
         self.factor = ::core::option::Option::Some(value.into());
@@ -1747,6 +1799,9 @@ impl FunctionScoreContainer {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl FunctionScoreContainer {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -1954,6 +2009,9 @@ impl FunctionScoreQuery {
             score_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl FunctionScoreQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -2213,6 +2271,9 @@ impl FuzzyQuery {
             value: ::core::option::Option::Some(value.into()),
         }
     }
+}
+
+impl FuzzyQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -2384,6 +2445,9 @@ impl GeoBoundingBoxQuery {
             bounding_box: bounding_box.into(),
         }
     }
+}
+
+impl GeoBoundingBoxQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -2509,6 +2573,9 @@ impl GeoDecayFunction {
             placement: placement.into(),
         }
     }
+}
+
+impl GeoDecayFunction {
     /// Sets `multi_value_mode`.
     pub fn multi_value_mode(
         mut self,
@@ -2608,6 +2675,9 @@ impl GeoDistanceFeatureQuery {
             field: ::core::option::Option::Some(field.into()),
         }
     }
+}
+
+impl GeoDistanceFeatureQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -2675,6 +2745,9 @@ impl GeoDistanceQuery {
             location: location.into(),
         }
     }
+}
+
+impl GeoDistanceQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -2935,6 +3008,9 @@ impl GeoGridQuery {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl GeoGridQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3039,6 +3115,8 @@ impl GeoPolygonPoints {
     }
 }
 
+impl GeoPolygonPoints {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(try_from = "GeoPolygonQueryRepr", into = "GeoPolygonQueryRepr")]
 #[non_exhaustive]
@@ -3079,6 +3157,9 @@ impl GeoPolygonQuery {
             polygon: polygon.into(),
         }
     }
+}
+
+impl GeoPolygonQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3183,6 +3264,9 @@ impl GeoShapeFieldQuery {
             relation: ::core::option::Option::None,
         }
     }
+}
+
+impl GeoShapeFieldQuery {
     /// Sets `shape`.
     pub fn shape(mut self, value: impl ::core::convert::Into<crate::GeoShape>) -> Self {
         self.shape = ::core::option::Option::Some(value.into());
@@ -3242,6 +3326,9 @@ impl GeoShapeQuery {
             shape: shape.into(),
         }
     }
+}
+
+impl GeoShapeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3428,6 +3515,9 @@ impl HasChildQuery {
             r#type: ::core::option::Option::Some(r#type.into()),
         }
     }
+}
+
+impl HasChildQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3520,6 +3610,9 @@ impl HasParentQuery {
             score: ::core::option::Option::None,
         }
     }
+}
+
+impl HasParentQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3578,6 +3671,9 @@ impl IdsQuery {
             values: ::core::option::Option::None,
         }
     }
+}
+
+impl IdsQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -3625,6 +3721,9 @@ impl IntervalsAllOf {
             filter: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsAllOf {
     /// Sets `max_gaps`.
     pub fn max_gaps(mut self, value: i32) -> Self {
         self.max_gaps = ::core::option::Option::Some(value.into());
@@ -3666,6 +3765,9 @@ impl IntervalsAnyOf {
             filter: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsAnyOf {
     /// Sets `filter`.
     pub fn filter(
         mut self,
@@ -4010,6 +4112,9 @@ impl IntervalsFuzzy {
             use_field: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsFuzzy {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4074,6 +4179,9 @@ impl IntervalsMatch {
             filter: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsMatch {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4128,6 +4236,9 @@ impl IntervalsPrefix {
             use_field: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsPrefix {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4328,6 +4439,9 @@ impl IntervalsQuery {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -4455,6 +4569,9 @@ impl IntervalsRange {
             use_field: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsRange {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4511,6 +4628,9 @@ impl IntervalsRegexp {
             use_field: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsRegexp {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4548,6 +4668,9 @@ impl IntervalsWildcard {
             use_field: ::core::option::Option::None,
         }
     }
+}
+
+impl IntervalsWildcard {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4603,6 +4726,9 @@ impl KqlQuery {
             time_zone: ::core::option::Option::None,
         }
     }
+}
+
+impl KqlQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -4748,6 +4874,9 @@ impl LikeDocument {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl LikeDocument {
     /// Sets `doc`.
     pub fn doc(mut self, value: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         self.doc = ::core::option::Option::Some(value.into());
@@ -4840,6 +4969,9 @@ impl LongNumberRangeQuery {
             lte: ::core::option::Option::None,
         }
     }
+}
+
+impl LongNumberRangeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -4904,6 +5036,9 @@ impl MatchAllQuery {
             name: ::core::option::Option::None,
         }
     }
+}
+
+impl MatchAllQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -4970,6 +5105,9 @@ impl MatchBoolPrefixQuery {
             query: ::core::option::Option::Some(query.into()),
         }
     }
+}
+
+impl MatchBoolPrefixQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -5162,6 +5300,9 @@ impl MatchNoneQuery {
             name: ::core::option::Option::None,
         }
     }
+}
+
+impl MatchNoneQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -5208,6 +5349,9 @@ impl MatchPhrasePrefixQuery {
             zero_terms_query: ::core::option::Option::None,
         }
     }
+}
+
+impl MatchPhrasePrefixQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -5353,6 +5497,9 @@ impl MatchPhraseQuery {
             zero_terms_query: ::core::option::Option::None,
         }
     }
+}
+
+impl MatchPhraseQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -5598,6 +5745,9 @@ impl MatchQuery {
             zero_terms_query: ::core::option::Option::None,
         }
     }
+}
+
+impl MatchQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -5901,6 +6051,9 @@ impl MoreLikeThisQuery {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl MoreLikeThisQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -6103,6 +6256,9 @@ impl MultiMatchQuery {
             zero_terms_query: ::core::option::Option::None,
         }
     }
+}
+
+impl MultiMatchQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -6317,6 +6473,9 @@ impl NestedQuery {
             score_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl NestedQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -6394,6 +6553,9 @@ impl NumberRangeQuery {
             lte: ::core::option::Option::None,
         }
     }
+}
+
+impl NumberRangeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -6462,6 +6624,9 @@ impl NumericDecayFunction {
             placement: placement.into(),
         }
     }
+}
+
+impl NumericDecayFunction {
     /// Sets `multi_value_mode`.
     pub fn multi_value_mode(
         mut self,
@@ -6597,6 +6762,9 @@ impl ParentIdQuery {
             r#type: ::core::option::Option::None,
         }
     }
+}
+
+impl ParentIdQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -6687,6 +6855,9 @@ impl PercolateQuery {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl PercolateQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -6767,6 +6938,9 @@ impl PinnedDoc {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl PinnedDoc {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<crate::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -6891,6 +7065,9 @@ impl PinnedQuery {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl PinnedQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -7014,6 +7191,9 @@ impl PrefixQuery {
             case_insensitive: ::core::option::Option::None,
         }
     }
+}
+
+impl PrefixQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -7133,6 +7313,9 @@ impl QueryBase {
             name: ::core::option::Option::None,
         }
     }
+}
+
+impl QueryBase {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -8287,6 +8470,9 @@ impl QueryStringQuery {
             r#type: ::core::option::Option::None,
         }
     }
+}
+
+impl QueryStringQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -8531,6 +8717,9 @@ impl RandomScoreFunction {
             seed: ::core::option::Option::None,
         }
     }
+}
+
+impl RandomScoreFunction {
     /// Sets `field`.
     pub fn field(mut self, value: impl ::core::convert::Into<crate::Field>) -> Self {
         self.field = ::core::option::Option::Some(value.into());
@@ -8646,7 +8835,7 @@ pub struct RangeQueryBase<T = ::serde_json::Value> {
     pub lte: ::core::option::Option<T>,
 }
 
-impl<T> RangeQueryBase<T> {
+impl RangeQueryBase<::serde_json::Value> {
     /// A `RangeQueryBase` with its required properties set.
     pub fn new() -> Self {
         Self {
@@ -8659,6 +8848,9 @@ impl<T> RangeQueryBase<T> {
             lte: ::core::option::Option::None,
         }
     }
+}
+
+impl<T> RangeQueryBase<T> {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -8766,6 +8958,8 @@ impl RankFeatureFunction {
     }
 }
 
+impl RankFeatureFunction {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankFeatureFunctionLinear {}
@@ -8776,6 +8970,8 @@ impl RankFeatureFunctionLinear {
         Self {}
     }
 }
+
+impl RankFeatureFunctionLinear {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -8794,6 +8990,8 @@ impl RankFeatureFunctionLogarithm {
     }
 }
 
+impl RankFeatureFunctionLogarithm {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankFeatureFunctionSaturation {
@@ -8809,6 +9007,9 @@ impl RankFeatureFunctionSaturation {
             pivot: ::core::option::Option::None,
         }
     }
+}
+
+impl RankFeatureFunctionSaturation {
     /// Sets `pivot`.
     pub fn pivot(mut self, value: f32) -> Self {
         self.pivot = ::core::option::Option::Some(value.into());
@@ -8836,6 +9037,8 @@ impl RankFeatureFunctionSigmoid {
         }
     }
 }
+
+impl RankFeatureFunctionSigmoid {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -8881,6 +9084,9 @@ impl RankFeatureQuery {
             sigmoid: ::core::option::Option::None,
         }
     }
+}
+
+impl RankFeatureQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -8960,6 +9166,9 @@ impl RegexpQuery {
             value: ::core::option::Option::Some(value.into()),
         }
     }
+}
+
+impl RegexpQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9114,6 +9323,9 @@ impl RuleQuery {
             match_criteria: ::core::option::Option::Some(match_criteria.into()),
         }
     }
+}
+
+impl RuleQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9168,6 +9380,9 @@ impl ScriptQuery {
             script: ::core::option::Option::Some(script.into()),
         }
     }
+}
+
+impl ScriptQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9196,6 +9411,8 @@ impl ScriptScoreFunction {
         }
     }
 }
+
+impl ScriptScoreFunction {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -9237,6 +9454,9 @@ impl ScriptScoreQuery {
             script: ::core::option::Option::Some(script.into()),
         }
     }
+}
+
+impl ScriptScoreQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9289,6 +9509,9 @@ impl SemanticQuery {
             query: ::core::option::Option::Some(query.into()),
         }
     }
+}
+
+impl SemanticQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9324,6 +9547,9 @@ impl ShapeFieldQuery {
             shape: ::core::option::Option::None,
         }
     }
+}
+
+impl ShapeFieldQuery {
     /// Sets `indexed_shape`.
     pub fn indexed_shape(
         mut self,
@@ -9382,6 +9608,9 @@ impl ShapeQuery {
             shape: shape.into(),
         }
     }
+}
+
+impl ShapeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9634,6 +9863,9 @@ impl SimpleQueryStringQuery {
             quote_field_suffix: ::core::option::Option::None,
         }
     }
+}
+
+impl SimpleQueryStringQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9758,6 +9990,9 @@ impl SpanContainingQuery {
             little: ::core::option::Option::Some(little.into()),
         }
     }
+}
+
+impl SpanContainingQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9803,6 +10038,9 @@ impl SpanFieldMaskingQuery {
             query: ::core::option::Option::Some(query.into()),
         }
     }
+}
+
+impl SpanFieldMaskingQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9847,6 +10085,9 @@ impl SpanFirstQuery {
             r#match: ::core::option::Option::Some(r#match.into()),
         }
     }
+}
+
+impl SpanFirstQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9890,6 +10131,9 @@ impl SpanMultiTermQuery {
             r#match: ::core::option::Option::Some(r#match.into()),
         }
     }
+}
+
+impl SpanMultiTermQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -9940,6 +10184,9 @@ impl SpanNearQuery {
             slop: ::core::option::Option::None,
         }
     }
+}
+
+impl SpanNearQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10010,6 +10257,9 @@ impl SpanNotQuery {
             pre: ::core::option::Option::None,
         }
     }
+}
+
+impl SpanNotQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10067,6 +10317,9 @@ impl SpanOrQuery {
             clauses: clauses.into(),
         }
     }
+}
+
+impl SpanOrQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10300,6 +10553,9 @@ impl SpanTermQuery {
             value: ::core::option::Option::Some(value.into()),
         }
     }
+}
+
+impl SpanTermQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10408,6 +10664,9 @@ impl SpanWithinQuery {
             little: ::core::option::Option::Some(little.into()),
         }
     }
+}
+
+impl SpanWithinQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10564,6 +10823,9 @@ impl SparseVectorQuery {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl SparseVectorQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10721,6 +10983,9 @@ impl TermQuery {
             case_insensitive: ::core::option::Option::None,
         }
     }
+}
+
+impl TermQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10845,6 +11110,9 @@ impl TermRangeQuery {
             lte: ::core::option::Option::None,
         }
     }
+}
+
+impl TermRangeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -10912,6 +11180,9 @@ impl TermsLookup {
             routing: ::core::option::Option::None,
         }
     }
+}
+
+impl TermsLookup {
     /// Sets `routing`.
     pub fn routing(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.routing = ::core::option::Option::Some(value.into());
@@ -10953,6 +11224,9 @@ impl TermsQuery {
             terms: terms.into(),
         }
     }
+}
+
+impl TermsQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11121,6 +11395,9 @@ impl TermsSetQuery {
             terms: terms.into(),
         }
     }
+}
+
+impl TermsSetQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11196,6 +11473,9 @@ impl TextExpansionQuery {
             pruning_config: ::core::option::Option::None,
         }
     }
+}
+
+impl TextExpansionQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11312,6 +11592,9 @@ impl TypeQuery {
             value: ::core::option::Option::Some(value.into()),
         }
     }
+}
+
+impl TypeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11354,6 +11637,9 @@ impl UntypedDecayFunction {
             placement: placement.into(),
         }
     }
+}
+
+impl UntypedDecayFunction {
     /// Sets `multi_value_mode`.
     pub fn multi_value_mode(
         mut self,
@@ -11453,6 +11739,9 @@ impl UntypedDistanceFeatureQuery {
             field: ::core::option::Option::Some(field.into()),
         }
     }
+}
+
+impl UntypedDistanceFeatureQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11517,6 +11806,9 @@ impl UntypedRangeQuery {
             time_zone: ::core::option::Option::None,
         }
     }
+}
+
+impl UntypedRangeQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11605,6 +11897,9 @@ impl WeightedTokensQuery {
             pruning_config: ::core::option::Option::None,
         }
     }
+}
+
+impl WeightedTokensQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11656,6 +11951,9 @@ impl WildcardQuery {
             wildcard: ::core::option::Option::None,
         }
     }
+}
+
+impl WildcardQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -11794,6 +12092,9 @@ impl WrapperQuery {
             query: ::core::option::Option::Some(query.into()),
         }
     }
+}
+
+impl WrapperQuery {
     /// Sets `boost`.
     pub fn boost(mut self, value: f32) -> Self {
         self.boost = ::core::option::Option::Some(value.into());

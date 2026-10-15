@@ -63,6 +63,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -268,6 +271,9 @@ impl TemplateConfig {
             source: ::core::option::Option::None,
         }
     }
+}
+
+impl TemplateConfig {
     /// Sets `explain`.
     pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());

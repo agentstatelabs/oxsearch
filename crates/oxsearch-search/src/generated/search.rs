@@ -284,6 +284,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `aggregations`.
     pub fn aggregations(
         mut self,
@@ -801,6 +804,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -1165,7 +1171,7 @@ pub struct ResponseBody<TDocument = ::serde_json::Value, TAggregations = ::oxsea
     pub terminated_early: ::core::option::Option<bool>,
 }
 
-impl<TDocument, TAggregations> ResponseBody<TDocument, TAggregations> {
+impl<TDocument> ResponseBody<TDocument, ::oxsearch_core::RawAggs> {
     /// A `ResponseBody` with its required properties set.
     pub fn new(
         took: i64,
@@ -1190,10 +1196,30 @@ impl<TDocument, TAggregations> ResponseBody<TDocument, TAggregations> {
             terminated_early: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument, TAggregations> ResponseBody<TDocument, TAggregations> {
     /// Sets `aggregations`.
-    pub fn aggregations(mut self, value: TAggregations) -> Self {
-        self.aggregations = ::core::option::Option::Some(value.into());
-        self
+    pub fn aggregations<TAggregations2>(
+        self,
+        value: TAggregations2,
+    ) -> ResponseBody<TDocument, TAggregations2> {
+        ResponseBody {
+            took: self.took,
+            timed_out: self.timed_out,
+            shards: self.shards,
+            hits: self.hits,
+            clusters: self.clusters,
+            fields: self.fields,
+            max_score: self.max_score,
+            num_reduce_phases: self.num_reduce_phases,
+            profile: self.profile,
+            pit_id: self.pit_id,
+            scroll_id: self.scroll_id,
+            suggest: self.suggest,
+            terminated_early: self.terminated_early,
+            aggregations: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `clusters`.
     pub fn clusters(
@@ -1318,6 +1344,9 @@ impl AggregationBreakdown {
             reduce_count: ::core::option::Option::Some(reduce_count.into()),
         }
     }
+}
+
+impl AggregationBreakdown {
     /// Sets `post_collection`.
     pub fn post_collection(mut self, value: i64) -> Self {
         self.post_collection = ::core::option::Option::Some(value.into());
@@ -1364,6 +1393,9 @@ impl AggregationProfile {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl AggregationProfile {
     /// Sets `debug`.
     pub fn debug(
         mut self,
@@ -1492,6 +1524,9 @@ impl AggregationProfileDebug {
             skipped_due_to_no_data: ::core::option::Option::None,
         }
     }
+}
+
+impl AggregationProfileDebug {
     /// Sets `segments_with_multi_valued_ords`.
     pub fn segments_with_multi_valued_ords(mut self, value: i32) -> Self {
         self.segments_with_multi_valued_ords = ::core::option::Option::Some(value.into());
@@ -1694,6 +1729,9 @@ impl AggregationProfileDelegateDebugFilter {
             segments_counted_in_constant_time: ::core::option::Option::None,
         }
     }
+}
+
+impl AggregationProfileDelegateDebugFilter {
     /// Sets `results_from_metadata`.
     pub fn results_from_metadata(mut self, value: i32) -> Self {
         self.results_from_metadata = ::core::option::Option::Some(value.into());
@@ -1746,6 +1784,9 @@ impl Collector {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl Collector {
     /// Sets `children`.
     pub fn children(
         mut self,
@@ -1787,6 +1828,9 @@ impl CompletionContext {
             prefix: ::core::option::Option::None,
         }
     }
+}
+
+impl CompletionContext {
     /// Sets `boost`.
     pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
@@ -1909,6 +1953,8 @@ impl<TDocument> CompletionSuggest<TDocument> {
     }
 }
 
+impl<TDocument> CompletionSuggest<TDocument> {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct CompletionSuggestOption<TDocument = ::serde_json::Value> {
@@ -1955,7 +2001,7 @@ pub struct CompletionSuggestOption<TDocument = ::serde_json::Value> {
     pub score2: ::core::option::Option<f64>,
 }
 
-impl<TDocument> CompletionSuggestOption<TDocument> {
+impl CompletionSuggestOption<::serde_json::Value> {
     /// A `CompletionSuggestOption` with its required properties set.
     pub fn new(text: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
@@ -1971,6 +2017,9 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
             score2: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> CompletionSuggestOption<TDocument> {
     /// Sets `collate_match`.
     pub fn collate_match(mut self, value: bool) -> Self {
         self.collate_match = ::core::option::Option::Some(value.into());
@@ -2017,9 +2066,19 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
         self
     }
     /// Sets `source`.
-    pub fn source(mut self, value: TDocument) -> Self {
-        self.source = ::core::option::Option::Some(value.into());
-        self
+    pub fn source<TDocument2>(self, value: TDocument2) -> CompletionSuggestOption<TDocument2> {
+        CompletionSuggestOption {
+            collate_match: self.collate_match,
+            contexts: self.contexts,
+            fields: self.fields,
+            id: self.id,
+            index: self.index,
+            routing: self.routing,
+            score: self.score,
+            text: self.text,
+            score2: self.score2,
+            source: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `score2`.
     pub fn score2(mut self, value: f64) -> Self {
@@ -2158,6 +2217,9 @@ impl CompletionSuggester {
             skip_duplicates: ::core::option::Option::None,
         }
     }
+}
+
+impl CompletionSuggester {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -2312,6 +2374,9 @@ impl DfsKnnProfile {
             collector: collector.into(),
         }
     }
+}
+
+impl DfsKnnProfile {
     /// Sets `vector_operations_count`.
     pub fn vector_operations_count(mut self, value: i64) -> Self {
         self.vector_operations_count = ::core::option::Option::Some(value.into());
@@ -2336,6 +2401,9 @@ impl DfsProfile {
             knn: ::core::option::Option::None,
         }
     }
+}
+
+impl DfsProfile {
     /// Sets `statistics`.
     pub fn statistics(
         mut self,
@@ -2402,6 +2470,8 @@ impl DfsStatisticsBreakdown {
     }
 }
 
+impl DfsStatisticsBreakdown {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DfsStatisticsProfile {
@@ -2440,6 +2510,9 @@ impl DfsStatisticsProfile {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl DfsStatisticsProfile {
     /// Sets `time`.
     pub fn time(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.time = ::core::option::Option::Some(value.into());
@@ -2531,6 +2604,9 @@ impl DirectGenerator {
             suggest_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl DirectGenerator {
     /// Sets `max_edits`.
     pub fn max_edits(mut self, value: i32) -> Self {
         self.max_edits = ::core::option::Option::Some(value.into());
@@ -2620,6 +2696,9 @@ impl FetchProfile {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl FetchProfile {
     /// Sets `debug`.
     pub fn debug(
         mut self,
@@ -2673,6 +2752,9 @@ impl FetchProfileBreakdown {
             process: ::core::option::Option::None,
         }
     }
+}
+
+impl FetchProfileBreakdown {
     /// Sets `load_source`.
     pub fn load_source(mut self, value: i32) -> Self {
         self.load_source = ::core::option::Option::Some(value.into());
@@ -2732,6 +2814,9 @@ impl FetchProfileDebug {
             fast_path: ::core::option::Option::None,
         }
     }
+}
+
+impl FetchProfileDebug {
     /// Sets `stored_fields`.
     pub fn stored_fields(
         mut self,
@@ -2874,6 +2959,9 @@ impl FieldSuggester {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldSuggester {
     /// Sets `prefix`.
     pub fn prefix(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.prefix = ::core::option::Option::Some(value.into());
@@ -3140,7 +3228,7 @@ pub struct Hit<TDocument = ::serde_json::Value> {
     pub sort: ::core::option::Option<::oxsearch_core::SortResults>,
 }
 
-impl<TDocument> Hit<TDocument> {
+impl Hit<::serde_json::Value> {
     /// A `Hit` with its required properties set.
     pub fn new(index: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         Self {
@@ -3166,6 +3254,9 @@ impl<TDocument> Hit<TDocument> {
             sort: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> Hit<TDocument> {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -3264,9 +3355,29 @@ impl<TDocument> Hit<TDocument> {
         self
     }
     /// Sets `source`.
-    pub fn source(mut self, value: TDocument) -> Self {
-        self.source = ::core::option::Option::Some(value.into());
-        self
+    pub fn source<TDocument2>(self, value: TDocument2) -> Hit<TDocument2> {
+        Hit {
+            index: self.index,
+            id: self.id,
+            score: self.score,
+            explanation: self.explanation,
+            fields: self.fields,
+            highlight: self.highlight,
+            inner_hits: self.inner_hits,
+            matched_queries: self.matched_queries,
+            nested: self.nested,
+            ignored: self.ignored,
+            ignored_field_values: self.ignored_field_values,
+            shard: self.shard,
+            node: self.node,
+            routing: self.routing,
+            rank: self.rank,
+            seq_no: self.seq_no,
+            primary_term: self.primary_term,
+            version: self.version,
+            sort: self.sort,
+            source: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `rank`.
     pub fn rank(mut self, value: i32) -> Self {
@@ -3387,6 +3498,9 @@ impl<T> HitsMetadata<T> {
             max_score: ::core::option::Option::None,
         }
     }
+}
+
+impl<T> HitsMetadata<T> {
     /// Sets `total`.
     pub fn total(
         mut self,
@@ -3420,6 +3534,8 @@ impl InnerHitsResult {
     }
 }
 
+impl InnerHitsResult {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct KnnCollectorResult {
@@ -3450,6 +3566,9 @@ impl KnnCollectorResult {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl KnnCollectorResult {
     /// Sets `time`.
     pub fn time(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.time = ::core::option::Option::Some(value.into());
@@ -3563,6 +3682,8 @@ impl KnnQueryProfileBreakdown {
     }
 }
 
+impl KnnQueryProfileBreakdown {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct KnnQueryProfileResult {
@@ -3601,6 +3722,9 @@ impl KnnQueryProfileResult {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl KnnQueryProfileResult {
     /// Sets `time`.
     pub fn time(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.time = ::core::option::Option::Some(value.into());
@@ -3643,6 +3767,8 @@ impl LaplaceSmoothingModel {
     }
 }
 
+impl LaplaceSmoothingModel {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct LinearInterpolationSmoothingModel {
@@ -3664,6 +3790,8 @@ impl LinearInterpolationSmoothingModel {
         }
     }
 }
+
+impl LinearInterpolationSmoothingModel {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -3688,6 +3816,9 @@ impl NestedIdentity {
             nested: ::core::option::Option::None,
         }
     }
+}
+
+impl NestedIdentity {
     /// Sets `nested`.
     pub fn nested(
         mut self,
@@ -3732,6 +3863,8 @@ impl PhraseSuggest {
     }
 }
 
+impl PhraseSuggest {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct PhraseSuggestCollate {
@@ -3758,6 +3891,9 @@ impl PhraseSuggestCollate {
             query: ::core::option::Option::Some(query.into()),
         }
     }
+}
+
+impl PhraseSuggestCollate {
     /// Sets `params`.
     pub fn params(
         mut self,
@@ -3794,6 +3930,9 @@ impl PhraseSuggestCollateQuery {
             source: ::core::option::Option::None,
         }
     }
+}
+
+impl PhraseSuggestCollateQuery {
     /// Sets `id`.
     pub fn id(mut self, value: impl ::core::convert::Into<::oxsearch_core::Id>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
@@ -3833,6 +3972,8 @@ impl PhraseSuggestHighlight {
     }
 }
 
+impl PhraseSuggestHighlight {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct PhraseSuggestOption {
@@ -3856,6 +3997,9 @@ impl PhraseSuggestOption {
             collate_match: ::core::option::Option::None,
         }
     }
+}
+
+impl PhraseSuggestOption {
     /// Sets `highlighted`.
     pub fn highlighted(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.highlighted = ::core::option::Option::Some(value.into());
@@ -3946,6 +4090,9 @@ impl PhraseSuggester {
             token_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl PhraseSuggester {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -4047,6 +4194,9 @@ impl PointInTimeReference {
             keep_alive: ::core::option::Option::None,
         }
     }
+}
+
+impl PointInTimeReference {
     /// Sets `keep_alive`.
     pub fn keep_alive(
         mut self,
@@ -4077,6 +4227,9 @@ impl Profile {
             request: ::core::option::Option::None,
         }
     }
+}
+
+impl Profile {
     /// Sets `request`.
     pub fn request(
         mut self,
@@ -4185,6 +4338,8 @@ impl QueryBreakdown {
     }
 }
 
+impl QueryBreakdown {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct QueryProfile {
@@ -4216,6 +4371,9 @@ impl QueryProfile {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl QueryProfile {
     /// Sets `children`.
     pub fn children(
         mut self,
@@ -4316,6 +4474,9 @@ impl RegexOptions {
             max_determinized_states: ::core::option::Option::None,
         }
     }
+}
+
+impl RegexOptions {
     /// Sets `flags`.
     pub fn flags(
         mut self,
@@ -4356,6 +4517,8 @@ impl SearchProfile {
         }
     }
 }
+
+impl SearchProfile {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -4555,6 +4718,9 @@ impl SearchRequestBody {
             stats: ::core::option::Option::None,
         }
     }
+}
+
+impl SearchRequestBody {
     /// Sets `aggregations`.
     pub fn aggregations(
         mut self,
@@ -4824,6 +4990,9 @@ impl SearchRequestCoordinatorMetadata {
             indices: ::core::option::Option::None,
         }
     }
+}
+
+impl SearchRequestCoordinatorMetadata {
     /// Sets `source`.
     pub fn source(
         mut self,
@@ -4888,6 +5057,9 @@ impl ShardProfile {
             shard_id: ::core::option::Option::Some(shard_id.into()),
         }
     }
+}
+
+impl ShardProfile {
     /// Sets `dfs`.
     pub fn dfs(mut self, value: impl ::core::convert::Into<crate::search::DfsProfile>) -> Self {
         self.dfs = ::core::option::Option::Some(value.into());
@@ -5087,6 +5259,8 @@ impl StupidBackoffSmoothingModel {
     }
 }
 
+impl StupidBackoffSmoothingModel {}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum Suggest<TDocument = ::serde_json::Value> {
@@ -5209,6 +5383,8 @@ impl SuggestBase {
     }
 }
 
+impl SuggestBase {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SuggestFuzziness {
@@ -5241,6 +5417,9 @@ impl SuggestFuzziness {
             unicode_aware: ::core::option::Option::None,
         }
     }
+}
+
+impl SuggestFuzziness {
     /// Sets `fuzziness`.
     pub fn fuzziness(
         mut self,
@@ -5340,6 +5519,9 @@ impl Suggester {
             suggesters: ::indexmap::IndexMap::new(),
         }
     }
+}
+
+impl Suggester {
     /// Sets `text`.
     pub fn text(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.text = ::core::option::Option::Some(value.into());
@@ -5371,6 +5553,9 @@ impl SuggesterBase {
             size: ::core::option::Option::None,
         }
     }
+}
+
+impl SuggesterBase {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -5417,6 +5602,8 @@ impl TermSuggest {
     }
 }
 
+impl TermSuggest {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TermSuggestOption {
@@ -5447,6 +5634,9 @@ impl TermSuggestOption {
             collate_match: ::core::option::Option::None,
         }
     }
+}
+
+impl TermSuggestOption {
     /// Sets `highlighted`.
     pub fn highlighted(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.highlighted = ::core::option::Option::Some(value.into());
@@ -5535,6 +5725,9 @@ impl TermSuggester {
             suggest_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl TermSuggester {
     /// Sets `analyzer`.
     pub fn analyzer(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.analyzer = ::core::option::Option::Some(value.into());
@@ -5629,6 +5822,8 @@ impl TotalHits {
         }
     }
 }
+
+impl TotalHits {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]

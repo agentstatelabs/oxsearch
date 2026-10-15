@@ -29,6 +29,8 @@ impl DocumentRating {
     }
 }
 
+impl DocumentRating {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankEvalHit {
@@ -64,6 +66,8 @@ impl RankEvalHit {
     }
 }
 
+impl RankEvalHit {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankEvalHitItem {
@@ -81,6 +85,9 @@ impl RankEvalHitItem {
             rating: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalHitItem {
     /// Sets `rating`.
     pub fn rating(mut self, value: f64) -> Self {
         self.rating = ::core::option::Option::Some(value.into());
@@ -116,6 +123,9 @@ impl RankEvalMetric {
             expected_reciprocal_rank: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetric {
     /// Sets `precision`.
     pub fn precision(
         mut self,
@@ -173,6 +183,9 @@ impl RankEvalMetricBase {
             k: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetricBase {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -222,6 +235,8 @@ impl RankEvalMetricDetail {
     }
 }
 
+impl RankEvalMetricDetail {}
+
 /// Discounted cumulative gain (DCG)
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -242,6 +257,9 @@ impl RankEvalMetricDiscountedCumulativeGain {
             normalize: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetricDiscountedCumulativeGain {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -273,6 +291,9 @@ impl RankEvalMetricExpectedReciprocalRank {
             maximum_relevance: maximum_relevance.into(),
         }
     }
+}
+
+impl RankEvalMetricExpectedReciprocalRank {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -300,6 +321,9 @@ impl RankEvalMetricMeanReciprocalRank {
             relevant_rating_threshold: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetricMeanReciprocalRank {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -336,6 +360,9 @@ impl RankEvalMetricPrecision {
             ignore_unlabeled: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetricPrecision {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -372,6 +399,9 @@ impl RankEvalMetricRatingTreshold {
             relevant_rating_threshold: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetricRatingTreshold {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -404,6 +434,9 @@ impl RankEvalMetricRecall {
             relevant_rating_threshold: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalMetricRecall {
     /// Sets `k`.
     pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
@@ -433,6 +466,9 @@ impl RankEvalQuery {
             size: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalQuery {
     /// Sets `size`.
     pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -513,6 +549,9 @@ impl RankEvalRequestItem {
             params: ::core::option::Option::None,
         }
     }
+}
+
+impl RankEvalRequestItem {
     /// Sets `request`.
     pub fn request(
         mut self,
@@ -559,6 +598,9 @@ impl RequestBody {
             metric: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `metric`.
     pub fn metric(
         mut self,
@@ -612,6 +654,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -685,6 +730,8 @@ impl Response {
     }
 }
 
+impl Response {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct UnratedDocument {
@@ -712,6 +759,8 @@ impl UnratedDocument {
         }
     }
 }
+
+impl UnratedDocument {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::rank_eval::Response;

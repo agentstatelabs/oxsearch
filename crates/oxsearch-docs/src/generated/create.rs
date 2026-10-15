@@ -123,7 +123,7 @@ pub struct Request<TDocument = ::serde_json::Value> {
     pub body: ::core::option::Option<TDocument>,
 }
 
-impl<TDocument> Request<TDocument> {
+impl Request<::serde_json::Value> {
     /// A `Request` with its required properties set.
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
@@ -145,6 +145,9 @@ impl<TDocument> Request<TDocument> {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> Request<TDocument> {
     /// Sets `include_source_on_error`.
     pub fn include_source_on_error(mut self, value: bool) -> Self {
         self.include_source_on_error = ::core::option::Option::Some(value.into());
@@ -205,9 +208,22 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: TDocument) -> Self {
-        self.body = ::core::option::Option::Some(value.into());
-        self
+    pub fn body<TDocument2>(self, value: TDocument2) -> Request<TDocument2> {
+        Request {
+            id: self.id,
+            index: self.index,
+            include_source_on_error: self.include_source_on_error,
+            pipeline: self.pipeline,
+            refresh: self.refresh,
+            require_alias: self.require_alias,
+            require_data_stream: self.require_data_stream,
+            routing: self.routing,
+            timeout: self.timeout,
+            version: self.version,
+            version_type: self.version_type,
+            wait_for_active_shards: self.wait_for_active_shards,
+            body: ::core::option::Option::Some(value.into()),
+        }
     }
 }
 

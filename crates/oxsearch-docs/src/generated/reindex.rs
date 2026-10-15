@@ -46,6 +46,9 @@ impl Destination {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl Destination {
     /// Sets `op_type`.
     pub fn op_type(mut self, value: impl ::core::convert::Into<::oxsearch_core::OpType>) -> Self {
         self.op_type = ::core::option::Option::Some(value.into());
@@ -117,6 +120,9 @@ impl RemoteSource {
             socket_timeout: ::core::option::Option::None,
         }
     }
+}
+
+impl RemoteSource {
     /// Sets `connect_timeout`.
     pub fn connect_timeout(
         mut self,
@@ -203,6 +209,9 @@ impl RequestBody {
             source: source.into(),
         }
     }
+}
+
+impl RequestBody {
     /// Sets `conflicts`.
     pub fn conflicts(
         mut self,
@@ -341,6 +350,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `refresh`.
     pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
@@ -479,6 +491,9 @@ impl Response {
             version_conflicts: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `batches`.
     pub fn batches(mut self, value: i64) -> Self {
         self.batches = ::core::option::Option::Some(value.into());
@@ -641,6 +656,9 @@ impl Source {
             runtime_mappings: ::core::option::Option::None,
         }
     }
+}
+
+impl Source {
     /// Sets `query`.
     pub fn query(
         mut self,

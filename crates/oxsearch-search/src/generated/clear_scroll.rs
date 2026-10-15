@@ -18,6 +18,9 @@ impl RequestBody {
             scroll_id: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `scroll_id`.
     pub fn scroll_id(
         mut self,
@@ -51,6 +54,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `scroll_id`.
     pub fn scroll_id(
         mut self,
@@ -90,6 +96,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::clear_scroll::Response;

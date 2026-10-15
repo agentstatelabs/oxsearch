@@ -75,6 +75,9 @@ impl FieldCapability {
             metric_conflicts_indices: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldCapability {
     /// Sets `indices`.
     pub fn indices(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.indices = ::core::option::Option::Some(value.into());
@@ -190,6 +193,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `fields`.
     pub fn fields(mut self, value: impl ::core::convert::Into<::oxsearch_core::Fields>) -> Self {
         self.fields = ::core::option::Option::Some(value.into());
@@ -280,6 +286,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
@@ -374,6 +383,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::field_caps::Response;

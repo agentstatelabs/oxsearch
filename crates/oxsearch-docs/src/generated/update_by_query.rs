@@ -33,6 +33,9 @@ impl RequestBody {
             conflicts: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `max_docs`.
     pub fn max_docs(mut self, value: i64) -> Self {
         self.max_docs = ::core::option::Option::Some(value.into());
@@ -321,6 +324,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `allow_no_indices`.
     pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
@@ -599,6 +605,9 @@ impl Response {
             throttled_until_millis: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `batches`.
     pub fn batches(mut self, value: i64) -> Self {
         self.batches = ::core::option::Option::Some(value.into());

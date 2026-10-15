@@ -20,6 +20,8 @@ impl FielddataFrequencyFilter {
     }
 }
 
+impl FielddataFrequencyFilter {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct NumericFielddata {
@@ -34,6 +36,8 @@ impl NumericFielddata {
         }
     }
 }
+
+impl NumericFielddata {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]

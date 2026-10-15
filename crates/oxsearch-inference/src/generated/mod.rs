@@ -83,6 +83,9 @@ impl AdaptiveAllocations {
             min_number_of_allocations: ::core::option::Option::None,
         }
     }
+}
+
+impl AdaptiveAllocations {
     /// Sets `enabled`.
     pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
@@ -130,6 +133,9 @@ impl Ai21ServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl Ai21ServiceSettings {
     /// Sets `api_key`.
     pub fn api_key(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.api_key = ::core::option::Option::Some(value.into());
@@ -298,6 +304,9 @@ impl AlibabaCloudServiceSettings {
             workspace: workspace.into(),
         }
     }
+}
+
+impl AlibabaCloudServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -380,6 +389,9 @@ impl AlibabaCloudTaskSettings {
             return_token: ::core::option::Option::None,
         }
     }
+}
+
+impl AlibabaCloudTaskSettings {
     /// Sets `input_type`.
     pub fn input_type(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.input_type = ::core::option::Option::Some(value.into());
@@ -502,6 +514,9 @@ impl AmazonBedrockServiceSettings {
             secret_key: secret_key.into(),
         }
     }
+}
+
+impl AmazonBedrockServiceSettings {
     /// Sets `provider`.
     pub fn provider(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.provider = ::core::option::Option::Some(value.into());
@@ -598,6 +613,9 @@ impl AmazonBedrockTaskSettings {
             top_p: ::core::option::Option::None,
         }
     }
+}
+
+impl AmazonBedrockTaskSettings {
     /// Sets `max_new_tokens`.
     pub fn max_new_tokens(mut self, value: i32) -> Self {
         self.max_new_tokens = ::core::option::Option::Some(value.into());
@@ -853,6 +871,9 @@ impl AmazonSageMakerServiceSettings {
             dimensions: ::core::option::Option::None,
         }
     }
+}
+
+impl AmazonSageMakerServiceSettings {
     /// Sets `similarity`.
     pub fn similarity(
         mut self,
@@ -1043,6 +1064,9 @@ impl AmazonSageMakerTaskSettings {
             target_variant: ::core::option::Option::None,
         }
     }
+}
+
+impl AmazonSageMakerTaskSettings {
     /// Sets `custom_attributes`.
     pub fn custom_attributes(
         mut self,
@@ -1108,6 +1132,9 @@ impl AnthropicServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl AnthropicServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -1199,6 +1226,9 @@ impl AnthropicTaskSettings {
             top_p: ::core::option::Option::None,
         }
     }
+}
+
+impl AnthropicTaskSettings {
     /// Sets `temperature`.
     pub fn temperature(mut self, value: f32) -> Self {
         self.temperature = ::core::option::Option::Some(value.into());
@@ -1317,6 +1347,9 @@ impl AzureAiStudioServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl AzureAiStudioServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -1421,6 +1454,9 @@ impl AzureAiStudioTaskSettings {
             top_n: ::core::option::Option::None,
         }
     }
+}
+
+impl AzureAiStudioTaskSettings {
     /// Sets `do_sample`.
     pub fn do_sample(mut self, value: f32) -> Self {
         self.do_sample = ::core::option::Option::Some(value.into());
@@ -1603,6 +1639,9 @@ impl AzureOpenAIServiceSettings {
             tenant_id: ::core::option::Option::None,
         }
     }
+}
+
+impl AzureOpenAIServiceSettings {
     /// Sets `api_key`.
     pub fn api_key(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.api_key = ::core::option::Option::Some(value.into());
@@ -1725,6 +1764,9 @@ impl AzureOpenAITaskSettings {
             headers: ::core::option::Option::None,
         }
     }
+}
+
+impl AzureOpenAITaskSettings {
     /// Sets `user`.
     pub fn user(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.user = ::core::option::Option::Some(value.into());
@@ -1823,6 +1865,9 @@ impl BaseReasoningDetail {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl BaseReasoningDetail {
     /// Sets `format`.
     pub fn format(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.format = ::core::option::Option::Some(value.into());
@@ -2012,6 +2057,9 @@ impl CohereServiceSettings {
             similarity: ::core::option::Option::None,
         }
     }
+}
+
+impl CohereServiceSettings {
     /// Sets `embedding_type`.
     pub fn embedding_type(
         mut self,
@@ -2183,6 +2231,9 @@ impl CohereTaskSettings {
             truncate: ::core::option::Option::None,
         }
     }
+}
+
+impl CohereTaskSettings {
     /// Sets `return_documents`.
     pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
@@ -2334,6 +2385,8 @@ impl CompletionInferenceResult {
     }
 }
 
+impl CompletionInferenceResult {}
+
 /// The completion result object
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -2350,6 +2403,8 @@ impl CompletionResult {
         }
     }
 }
+
+impl CompletionResult {}
 
 /// A list of tools that the model can call.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
@@ -2374,6 +2429,8 @@ impl CompletionTool {
     }
 }
 
+impl CompletionTool {}
+
 /// Controls which tool is called by the model.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -2397,6 +2454,8 @@ impl CompletionToolChoice {
     }
 }
 
+impl CompletionToolChoice {}
+
 /// The tool choice function.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -2411,6 +2470,8 @@ impl CompletionToolChoiceFunction {
         Self { name: name.into() }
     }
 }
+
+impl CompletionToolChoiceFunction {}
 
 /// The completion tool function definition.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
@@ -2440,6 +2501,9 @@ impl CompletionToolFunction {
             strict: ::core::option::Option::None,
         }
     }
+}
+
+impl CompletionToolFunction {
     /// Sets `description`.
     pub fn description(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.description = ::core::option::Option::Some(value.into());
@@ -2560,6 +2624,8 @@ impl ContentObject {
     }
 }
 
+impl ContentObject {}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum ContentType {
@@ -2644,6 +2710,9 @@ impl ContextualAIServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl ContextualAIServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -2724,6 +2793,9 @@ impl ContextualAITaskSettings {
             top_k: ::core::option::Option::None,
         }
     }
+}
+
+impl ContextualAITaskSettings {
     /// Sets `instruction`.
     pub fn instruction(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.instruction = ::core::option::Option::Some(value.into());
@@ -2761,6 +2833,8 @@ impl CspRegion {
     }
 }
 
+impl CspRegion {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct CustomRequestParams {
@@ -2782,6 +2856,8 @@ impl CustomRequestParams {
         }
     }
 }
+
+impl CustomRequestParams {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -2953,6 +3029,8 @@ impl CustomResponseParams {
     }
 }
 
+impl CustomResponseParams {}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum CustomServiceInputType {
@@ -3106,6 +3184,9 @@ impl CustomServiceSettings {
             url: ::core::option::Option::None,
         }
     }
+}
+
+impl CustomServiceSettings {
     /// Sets `batch_size`.
     pub fn batch_size(mut self, value: i32) -> Self {
         self.batch_size = ::core::option::Option::Some(value.into());
@@ -3335,6 +3416,9 @@ impl CustomTaskSettings {
             parameters: ::core::option::Option::None,
         }
     }
+}
+
+impl CustomTaskSettings {
     /// Sets `parameters`.
     pub fn parameters(
         mut self,
@@ -3437,6 +3521,9 @@ impl DeepSeekServiceSettings {
             url: ::core::option::Option::None,
         }
     }
+}
+
+impl DeepSeekServiceSettings {
     /// Sets `url`.
     pub fn url(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.url = ::core::option::Option::Some(value.into());
@@ -3516,6 +3603,8 @@ impl DeleteInferenceEndpointResult {
     }
 }
 
+impl DeleteInferenceEndpointResult {}
+
 /// Dense Embedding results containing bytes are represented as Dense
 /// Vectors of bytes.
 pub type DenseByteVector = ::std::vec::Vec<i8>;
@@ -3537,6 +3626,8 @@ impl DenseEmbeddingByteResult {
     }
 }
 
+impl DenseEmbeddingByteResult {}
+
 /// The dense embedding result object for float representation
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -3553,6 +3644,8 @@ impl DenseEmbeddingResult {
         }
     }
 }
+
+impl DenseEmbeddingResult {}
 
 /// Dense Embedding results are represented as Dense Vectors
 /// of floats.
@@ -3620,6 +3713,9 @@ impl ElasticsearchServiceSettings {
             max_chunks_per_doc: ::core::option::Option::None,
         }
     }
+}
+
+impl ElasticsearchServiceSettings {
     /// Sets `adaptive_allocations`.
     pub fn adaptive_allocations(
         mut self,
@@ -3719,6 +3815,9 @@ impl ElasticsearchTaskSettings {
             return_documents: ::core::option::Option::None,
         }
     }
+}
+
+impl ElasticsearchTaskSettings {
     /// Sets `return_documents`.
     pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
@@ -3816,6 +3915,9 @@ impl ElserServiceSettings {
             num_threads: num_threads.into(),
         }
     }
+}
+
+impl ElserServiceSettings {
     /// Sets `adaptive_allocations`.
     pub fn adaptive_allocations(
         mut self,
@@ -3942,6 +4044,8 @@ impl EmbeddingContentObject {
     }
 }
 
+impl EmbeddingContentObject {}
+
 /// Allows specifying one or multiple items for the `embedding` task, which should result in a single embedding vector.
 /// Support for multiple items is available in Elasticsearch 9.5.0 and later.
 pub type EmbeddingContentObjectGroup =
@@ -3974,6 +4078,9 @@ impl EmbeddingContentObjectItem {
             value: value.into(),
         }
     }
+}
+
+impl EmbeddingContentObjectItem {
     /// Sets `format`.
     pub fn format(
         mut self,
@@ -4185,6 +4292,9 @@ impl EncryptedReasoningDetail {
             data: data.into(),
         }
     }
+}
+
+impl EncryptedReasoningDetail {
     /// Sets `format`.
     pub fn format(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.format = ::core::option::Option::Some(value.into());
@@ -4223,6 +4333,8 @@ impl FileContent {
         }
     }
 }
+
+impl FileContent {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -4270,6 +4382,9 @@ impl FireworksAIServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl FireworksAIServiceSettings {
     /// Sets `url`.
     pub fn url(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.url = ::core::option::Option::Some(value.into());
@@ -4430,6 +4545,9 @@ impl FireworksAITaskSettings {
             headers: ::core::option::Option::None,
         }
     }
+}
+
+impl FireworksAITaskSettings {
     /// Sets `user`.
     pub fn user(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.user = ::core::option::Option::Some(value.into());
@@ -4577,6 +4695,9 @@ impl GoogleAiStudioServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl GoogleAiStudioServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -4799,6 +4920,9 @@ impl GoogleVertexAIServiceSettings {
             max_batch_size: ::core::option::Option::None,
         }
     }
+}
+
+impl GoogleVertexAIServiceSettings {
     /// Sets `provider`.
     pub fn provider(
         mut self,
@@ -4934,6 +5058,9 @@ impl GoogleVertexAITaskSettings {
             max_tokens: ::core::option::Option::None,
         }
     }
+}
+
+impl GoogleVertexAITaskSettings {
     /// Sets `auto_truncate`.
     pub fn auto_truncate(mut self, value: bool) -> Self {
         self.auto_truncate = ::core::option::Option::Some(value.into());
@@ -5048,6 +5175,9 @@ impl GroqServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl GroqServiceSettings {
     /// Sets `api_key`.
     pub fn api_key(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.api_key = ::core::option::Option::Some(value.into());
@@ -5196,6 +5326,9 @@ impl HuggingFaceServiceSettings {
             model_id: ::core::option::Option::None,
         }
     }
+}
+
+impl HuggingFaceServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -5279,6 +5412,9 @@ impl HuggingFaceTaskSettings {
             top_n: ::core::option::Option::None,
         }
     }
+}
+
+impl HuggingFaceTaskSettings {
     /// Sets `return_documents`.
     pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
@@ -5369,6 +5505,9 @@ impl ImageUrl {
             detail: ::core::option::Option::None,
         }
     }
+}
+
+impl ImageUrl {
     /// Sets `detail`.
     pub fn detail(mut self, value: impl ::core::convert::Into<crate::ImageUrlDetail>) -> Self {
         self.detail = ::core::option::Option::Some(value.into());
@@ -5494,6 +5633,9 @@ impl InferenceChunkingSettings {
             strategy: ::core::option::Option::None,
         }
     }
+}
+
+impl InferenceChunkingSettings {
     /// Sets `max_chunk_size`.
     pub fn max_chunk_size(mut self, value: i32) -> Self {
         self.max_chunk_size = ::core::option::Option::Some(value.into());
@@ -5563,6 +5705,9 @@ impl InferenceEndpoint {
             task_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl InferenceEndpoint {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5621,6 +5766,9 @@ impl InferenceEndpointInfo {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfo {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5678,6 +5826,9 @@ impl InferenceEndpointInfoAi21 {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAi21 {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5735,6 +5886,9 @@ impl InferenceEndpointInfoAlibabaCloudAI {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAlibabaCloudAI {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5792,6 +5946,9 @@ impl InferenceEndpointInfoAmazonBedrock {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAmazonBedrock {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5849,6 +6006,9 @@ impl InferenceEndpointInfoAmazonSageMaker {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAmazonSageMaker {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5906,6 +6066,9 @@ impl InferenceEndpointInfoAnthropic {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAnthropic {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -5963,6 +6126,9 @@ impl InferenceEndpointInfoAzureAIStudio {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAzureAIStudio {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6020,6 +6186,9 @@ impl InferenceEndpointInfoAzureOpenAI {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoAzureOpenAI {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6077,6 +6246,9 @@ impl InferenceEndpointInfoCohere {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoCohere {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6134,6 +6306,9 @@ impl InferenceEndpointInfoContextualAi {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoContextualAi {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6191,6 +6366,9 @@ impl InferenceEndpointInfoCustom {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoCustom {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6248,6 +6426,9 @@ impl InferenceEndpointInfoDeepSeek {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoDeepSeek {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6305,6 +6486,9 @@ impl InferenceEndpointInfoELSER {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoELSER {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6362,6 +6546,9 @@ impl InferenceEndpointInfoElasticsearch {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoElasticsearch {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6419,6 +6606,9 @@ impl InferenceEndpointInfoFireworksAI {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoFireworksAI {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6476,6 +6666,9 @@ impl InferenceEndpointInfoGoogleAIStudio {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoGoogleAIStudio {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6533,6 +6726,9 @@ impl InferenceEndpointInfoGoogleVertexAI {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoGoogleVertexAI {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6590,6 +6786,9 @@ impl InferenceEndpointInfoGroq {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoGroq {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6647,6 +6846,9 @@ impl InferenceEndpointInfoHuggingFace {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoHuggingFace {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6704,6 +6906,9 @@ impl InferenceEndpointInfoJinaAi {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoJinaAi {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6761,6 +6966,9 @@ impl InferenceEndpointInfoLlama {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoLlama {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6818,6 +7026,9 @@ impl InferenceEndpointInfoMistral {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoMistral {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6875,6 +7086,9 @@ impl InferenceEndpointInfoNvidia {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoNvidia {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6932,6 +7146,9 @@ impl InferenceEndpointInfoOpenAI {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoOpenAI {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -6989,6 +7206,9 @@ impl InferenceEndpointInfoOpenShiftAi {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoOpenShiftAi {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -7046,6 +7266,9 @@ impl InferenceEndpointInfoVoyageAI {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoVoyageAI {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -7103,6 +7326,9 @@ impl InferenceEndpointInfoWatsonx {
             task_type: ::core::option::Option::Some(task_type.into()),
         }
     }
+}
+
+impl InferenceEndpointInfoWatsonx {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -7368,6 +7594,9 @@ impl JinaAIServiceSettings {
             multimodal_model: ::core::option::Option::None,
         }
     }
+}
+
+impl JinaAIServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,
@@ -7548,6 +7777,9 @@ impl JinaAITaskSettings {
             top_n: ::core::option::Option::None,
         }
     }
+}
+
+impl JinaAITaskSettings {
     /// Sets `return_documents`.
     pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
@@ -7729,6 +7961,9 @@ impl LlamaServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl LlamaServiceSettings {
     /// Sets `max_input_tokens`.
     pub fn max_input_tokens(mut self, value: i32) -> Self {
         self.max_input_tokens = ::core::option::Option::Some(value.into());
@@ -8012,6 +8247,9 @@ impl Message {
             reasoning_details: ::core::option::Option::None,
         }
     }
+}
+
+impl Message {
     /// Sets `content`.
     pub fn content(mut self, value: impl ::core::convert::Into<crate::MessageContent>) -> Self {
         self.content = ::core::option::Option::Some(value.into());
@@ -8152,6 +8390,9 @@ impl MistralServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl MistralServiceSettings {
     /// Sets `max_input_tokens`.
     pub fn max_input_tokens(mut self, value: i32) -> Self {
         self.max_input_tokens = ::core::option::Option::Some(value.into());
@@ -8372,6 +8613,9 @@ impl NvidiaServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl NvidiaServiceSettings {
     /// Sets `url`.
     pub fn url(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.url = ::core::option::Option::Some(value.into());
@@ -8534,6 +8778,9 @@ impl NvidiaTaskSettings {
             truncate: ::core::option::Option::None,
         }
     }
+}
+
+impl NvidiaTaskSettings {
     /// Sets `input_type`.
     pub fn input_type(mut self, value: impl ::core::convert::Into<crate::NvidiaInputType>) -> Self {
         self.input_type = ::core::option::Option::Some(value.into());
@@ -8703,6 +8950,9 @@ impl OpenAIServiceSettings {
             url: ::core::option::Option::None,
         }
     }
+}
+
+impl OpenAIServiceSettings {
     /// Sets `api_key`.
     pub fn api_key(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.api_key = ::core::option::Option::Some(value.into());
@@ -8902,6 +9152,9 @@ impl OpenAITaskSettings {
             headers: ::core::option::Option::None,
         }
     }
+}
+
+impl OpenAITaskSettings {
     /// Sets `user`.
     pub fn user(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.user = ::core::option::Option::Some(value.into());
@@ -9023,6 +9276,9 @@ impl OpenShiftAiServiceSettings {
             rate_limit: ::core::option::Option::None,
         }
     }
+}
+
+impl OpenShiftAiServiceSettings {
     /// Sets `model_id`.
     pub fn model_id(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.model_id = ::core::option::Option::Some(value.into());
@@ -9174,6 +9430,9 @@ impl OpenShiftAiTaskSettings {
             top_n: ::core::option::Option::None,
         }
     }
+}
+
+impl OpenShiftAiTaskSettings {
     /// Sets `return_documents`.
     pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
@@ -9270,6 +9529,9 @@ impl RankedDocument {
             text: ::core::option::Option::None,
         }
     }
+}
+
+impl RankedDocument {
     /// Sets `text`.
     pub fn text(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.text = ::core::option::Option::Some(value.into());
@@ -9316,6 +9578,9 @@ impl RateLimitSetting {
             requests_per_minute: ::core::option::Option::None,
         }
     }
+}
+
+impl RateLimitSetting {
     /// Sets `requests_per_minute`.
     pub fn requests_per_minute(mut self, value: i32) -> Self {
         self.requests_per_minute = ::core::option::Option::Some(value.into());
@@ -9361,6 +9626,9 @@ impl Reasoning {
             summary: ::core::option::Option::None,
         }
     }
+}
+
+impl Reasoning {
     /// Sets `effort`.
     pub fn effort(mut self, value: impl ::core::convert::Into<crate::ReasoningEffort>) -> Self {
         self.effort = ::core::option::Option::Some(value.into());
@@ -9721,6 +9989,9 @@ impl RegionPolicyDoc {
             updated_by: ::core::option::Option::None,
         }
     }
+}
+
+impl RegionPolicyDoc {
     /// Sets `created_by`.
     pub fn created_by(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.created_by = ::core::option::Option::Some(value.into());
@@ -9857,6 +10128,9 @@ impl RequestChatCompletion {
             top_p: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestChatCompletion {
     /// Sets `model`.
     pub fn model(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.model = ::core::option::Option::Some(value.into());
@@ -10000,6 +10274,9 @@ impl RequestEmbedding {
             task_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestEmbedding {
     /// Sets `input_type`.
     pub fn input_type(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.input_type = ::core::option::Option::Some(value.into());
@@ -10029,6 +10306,8 @@ impl RerankedInferenceResult {
     }
 }
 
+impl RerankedInferenceResult {}
+
 pub type ServiceSettings = ::serde_json::Value;
 
 /// The response format for the sparse embedding request.
@@ -10049,6 +10328,8 @@ impl SparseEmbeddingInferenceResult {
         }
     }
 }
+
+impl SparseEmbeddingInferenceResult {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -10072,6 +10353,8 @@ impl SparseEmbeddingResult {
         }
     }
 }
+
+impl SparseEmbeddingResult {}
 
 /// Sparse Embedding tokens are represented as a dictionary
 /// of string to double.
@@ -10106,6 +10389,9 @@ impl SummaryReasoningDetail {
             summary: summary.into(),
         }
     }
+}
+
+impl SummaryReasoningDetail {
     /// Sets `format`.
     pub fn format(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.format = ::core::option::Option::Some(value.into());
@@ -11764,6 +12050,9 @@ impl TextReasoningDetail {
             text: ::core::option::Option::None,
         }
     }
+}
+
+impl TextReasoningDetail {
     /// Sets `format`.
     pub fn format(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.format = ::core::option::Option::Some(value.into());
@@ -11806,6 +12095,9 @@ impl ThinkingConfig {
             thinking_budget: ::core::option::Option::None,
         }
     }
+}
+
+impl ThinkingConfig {
     /// Sets `thinking_budget`.
     pub fn thinking_budget(mut self, value: i32) -> Self {
         self.thinking_budget = ::core::option::Option::Some(value.into());
@@ -11840,6 +12132,8 @@ impl ToolCall {
     }
 }
 
+impl ToolCall {}
+
 /// The function that the model called.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -11862,6 +12156,8 @@ impl ToolCallFunction {
         }
     }
 }
+
+impl ToolCallFunction {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -11899,6 +12195,9 @@ impl VoyageAIServiceSettings {
             embedding_type: ::core::option::Option::None,
         }
     }
+}
+
+impl VoyageAIServiceSettings {
     /// Sets `dimensions`.
     pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
@@ -11999,6 +12298,9 @@ impl VoyageAITaskSettings {
             truncation: ::core::option::Option::None,
         }
     }
+}
+
+impl VoyageAITaskSettings {
     /// Sets `input_type`.
     pub fn input_type(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.input_type = ::core::option::Option::Some(value.into());
@@ -12117,6 +12419,9 @@ impl WatsonxServiceSettings {
             url: url.into(),
         }
     }
+}
+
+impl WatsonxServiceSettings {
     /// Sets `rate_limit`.
     pub fn rate_limit(
         mut self,

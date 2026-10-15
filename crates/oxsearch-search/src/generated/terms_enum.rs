@@ -57,6 +57,9 @@ impl RequestBody {
             project_routing: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `size`.
     pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
@@ -130,6 +133,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `body`.
     pub fn body(
         mut self,
@@ -170,6 +176,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::terms_enum::Response;

@@ -22,6 +22,9 @@ impl Request {
             detailed: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `detailed`.
     pub fn detailed(mut self, value: bool) -> Self {
         self.detailed = ::core::option::Option::Some(value.into());
@@ -56,6 +59,9 @@ impl Response {
             node_failures: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `task_failures`.
     pub fn task_failures(
         mut self,

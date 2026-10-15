@@ -62,6 +62,9 @@ impl AggregateMetricDoubleProperty {
             time_series_metric: ::core::option::Option::None,
         }
     }
+}
+
+impl AggregateMetricDoubleProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -169,6 +172,8 @@ impl AllField {
     }
 }
 
+impl AllField {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct BinaryProperty {
@@ -213,6 +218,9 @@ impl BinaryProperty {
             doc_values: ::core::option::Option::None,
         }
     }
+}
+
+impl BinaryProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -347,6 +355,9 @@ impl BooleanProperty {
             time_series_dimension: ::core::option::Option::None,
         }
     }
+}
+
+impl BooleanProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -531,6 +542,9 @@ impl ByteNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl ByteNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -709,6 +723,9 @@ impl ChunkingSettings {
             separators: ::core::option::Option::None,
         }
     }
+}
+
+impl ChunkingSettings {
     /// Sets `overlap`.
     pub fn overlap(mut self, value: i32) -> Self {
         self.overlap = ::core::option::Option::Some(value.into());
@@ -799,6 +816,9 @@ impl CompletionProperty {
             search_analyzer: ::core::option::Option::None,
         }
     }
+}
+
+impl CompletionProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -916,6 +936,8 @@ impl CompositeSubField {
     }
 }
 
+impl CompositeSubField {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ConstantKeywordProperty {
@@ -954,6 +976,9 @@ impl ConstantKeywordProperty {
             value: ::core::option::Option::None,
         }
     }
+}
+
+impl ConstantKeywordProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -1050,6 +1075,9 @@ impl CorePropertyBase {
             store: ::core::option::Option::None,
         }
     }
+}
+
+impl CorePropertyBase {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -1148,6 +1176,9 @@ impl CountedKeywordProperty {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl CountedKeywordProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -1218,6 +1249,8 @@ impl DataStreamTimestamp {
     }
 }
 
+impl DataStreamTimestamp {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DateNanosProperty {
@@ -1286,6 +1319,9 @@ impl DateNanosProperty {
             precision_step: ::core::option::Option::None,
         }
     }
+}
+
+impl DateNanosProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -1471,6 +1507,9 @@ impl DateProperty {
             locale: ::core::option::Option::None,
         }
     }
+}
+
+impl DateProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -1651,6 +1690,9 @@ impl DateRangeProperty {
             format: ::core::option::Option::None,
         }
     }
+}
+
+impl DateRangeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -1885,6 +1927,9 @@ impl DenseVectorIndexOptions {
             auto_calibrate: ::core::option::Option::None,
         }
     }
+}
+
+impl DenseVectorIndexOptions {
     /// Sets `confidence_interval`.
     pub fn confidence_interval(mut self, value: f32) -> Self {
         self.confidence_interval = ::core::option::Option::Some(value.into());
@@ -1963,6 +2008,8 @@ impl DenseVectorIndexOptionsRescoreVector {
         }
     }
 }
+
+impl DenseVectorIndexOptionsRescoreVector {}
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
@@ -2130,6 +2177,9 @@ impl DenseVectorProperty {
             similarity: ::core::option::Option::None,
         }
     }
+}
+
+impl DenseVectorProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -2393,6 +2443,9 @@ impl DocValuesConfig {
             nullability: ::core::option::Option::None,
         }
     }
+}
+
+impl DocValuesConfig {
     /// Sets `multi_value`.
     pub fn multi_value(mut self, value: bool) -> Self {
         self.multi_value = ::core::option::Option::Some(value.into());
@@ -2449,6 +2502,9 @@ impl DocValuesPropertyBase {
             doc_values: ::core::option::Option::None,
         }
     }
+}
+
+impl DocValuesPropertyBase {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -2587,6 +2643,9 @@ impl DoubleNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl DoubleNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -2756,6 +2815,9 @@ impl DoubleRangeProperty {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl DoubleRangeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -3006,6 +3068,9 @@ impl DynamicProperty {
             locale: ::core::option::Option::None,
         }
     }
+}
+
+impl DynamicProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -3322,6 +3387,9 @@ impl DynamicTemplate {
             variant: ::core::option::Option::None,
         }
     }
+}
+
+impl DynamicTemplate {
     /// Sets `match`.
     pub fn r#match(
         mut self,
@@ -3530,6 +3598,9 @@ impl ExponentialHistogramProperty {
             time_series_metric: ::core::option::Option::None,
         }
     }
+}
+
+impl ExponentialHistogramProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -3626,6 +3697,9 @@ impl FieldAliasProperty {
             path: ::core::option::Option::None,
         }
     }
+}
+
+impl FieldAliasProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -3703,6 +3777,8 @@ impl FieldMapping {
     }
 }
 
+impl FieldMapping {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FieldNamesField {
@@ -3717,6 +3793,8 @@ impl FieldNamesField {
         }
     }
 }
+
+impl FieldNamesField {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -3789,6 +3867,9 @@ impl FlattenedProperty {
             time_series_dimensions: ::core::option::Option::None,
         }
     }
+}
+
+impl FlattenedProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -3973,6 +4054,9 @@ impl FloatNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl FloatNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -4142,6 +4226,9 @@ impl FloatRangeProperty {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl FloatRangeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -4397,6 +4484,9 @@ impl GeoPointProperty {
             time_series_metric: ::core::option::Option::None,
         }
     }
+}
+
+impl GeoPointProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -4570,6 +4660,9 @@ impl GeoShapeProperty {
             strategy: ::core::option::Option::None,
         }
     }
+}
+
+impl GeoShapeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -4788,6 +4881,9 @@ impl HalfFloatNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl HalfFloatNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -4945,6 +5041,9 @@ impl HistogramProperty {
             time_series_metric: ::core::option::Option::None,
         }
     }
+}
+
+impl HistogramProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -5102,6 +5201,9 @@ impl IcuCollationProperty {
             hiragana_quaternary_mode: ::core::option::Option::None,
         }
     }
+}
+
+impl IcuCollationProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -5277,6 +5379,8 @@ impl IndexField {
     }
 }
 
+impl IndexField {}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum IndexOptions {
@@ -5408,6 +5512,9 @@ impl IntegerNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl IntegerNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -5577,6 +5684,9 @@ impl IntegerRangeProperty {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl IntegerRangeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -5723,6 +5833,9 @@ impl IpProperty {
             time_series_dimension: ::core::option::Option::None,
         }
     }
+}
+
+impl IpProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -5879,6 +5992,9 @@ impl IpRangeProperty {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl IpRangeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -6005,6 +6121,9 @@ impl JoinProperty {
             eager_global_ordinals: ::core::option::Option::None,
         }
     }
+}
+
+impl JoinProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -6154,6 +6273,9 @@ impl KeywordProperty {
             time_series_dimension: ::core::option::Option::None,
         }
     }
+}
+
+impl KeywordProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -6355,6 +6477,9 @@ impl LongNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl LongNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -6524,6 +6649,9 @@ impl LongRangeProperty {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl LongRangeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -6637,6 +6765,9 @@ impl MatchOnlyTextProperty {
             copy_to: ::core::option::Option::None,
         }
     }
+}
+
+impl MatchOnlyTextProperty {
     /// Sets `fields`.
     pub fn fields(
         mut self,
@@ -6758,6 +6889,9 @@ impl Murmur3HashProperty {
             doc_values: ::core::option::Option::None,
         }
     }
+}
+
+impl Murmur3HashProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -6873,6 +7007,9 @@ impl NestedProperty {
             include_in_root: ::core::option::Option::None,
         }
     }
+}
+
+impl NestedProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -7018,6 +7155,9 @@ impl NumberPropertyBase {
             time_series_dimension: ::core::option::Option::None,
         }
     }
+}
+
+impl NumberPropertyBase {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -7176,6 +7316,9 @@ impl ObjectProperty {
             subobjects: ::core::option::Option::None,
         }
     }
+}
+
+impl ObjectProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -7348,6 +7491,9 @@ impl PassthroughObjectProperty {
             time_series_dimension: ::core::option::Option::None,
         }
     }
+}
+
+impl PassthroughObjectProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -7458,6 +7604,9 @@ impl PercolatorProperty {
             synthetic_source_keep: ::core::option::Option::None,
         }
     }
+}
+
+impl PercolatorProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -7561,6 +7710,9 @@ impl PointProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl PointProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -8585,6 +8737,9 @@ impl PropertyBase {
             synthetic_source_keep: ::core::option::Option::None,
         }
     }
+}
+
+impl PropertyBase {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -8688,6 +8843,9 @@ impl RangePropertyBase {
             index: ::core::option::Option::None,
         }
     }
+}
+
+impl RangePropertyBase {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -8806,6 +8964,9 @@ impl RankFeatureProperty {
             positive_score_impact: ::core::option::Option::None,
         }
     }
+}
+
+impl RankFeatureProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -8899,6 +9060,9 @@ impl RankFeaturesProperty {
             positive_score_impact: ::core::option::Option::None,
         }
     }
+}
+
+impl RankFeaturesProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -9052,6 +9216,9 @@ impl RankVectorProperty {
             dims: ::core::option::Option::None,
         }
     }
+}
+
+impl RankVectorProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -9130,6 +9297,8 @@ impl RoutingField {
     }
 }
 
+impl RoutingField {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RuntimeField {
@@ -9178,6 +9347,9 @@ impl RuntimeField {
             r#type: ::core::option::Option::Some(r#type.into()),
         }
     }
+}
+
+impl RuntimeField {
     /// Sets `fields`.
     pub fn fields(
         mut self,
@@ -9255,6 +9427,9 @@ impl RuntimeFieldFetchFields {
             format: ::core::option::Option::None,
         }
     }
+}
+
+impl RuntimeFieldFetchFields {
     /// Sets `format`.
     pub fn format(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.format = ::core::option::Option::Some(value.into());
@@ -9468,6 +9643,9 @@ impl ScaledFloatNumberProperty {
             scaling_factor: ::core::option::Option::None,
         }
     }
+}
+
+impl ScaledFloatNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -9657,6 +9835,9 @@ impl SearchAsYouTypeProperty {
             term_vector: ::core::option::Option::None,
         }
     }
+}
+
+impl SearchAsYouTypeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -9788,6 +9969,9 @@ impl SemanticTextIndexOptions {
             sparse_vector: ::core::option::Option::None,
         }
     }
+}
+
+impl SemanticTextIndexOptions {
     /// Sets `dense_vector`.
     pub fn dense_vector(
         mut self,
@@ -9853,6 +10037,9 @@ impl SemanticTextProperty {
             fields: ::core::option::Option::None,
         }
     }
+}
+
+impl SemanticTextProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -9962,6 +10149,9 @@ impl ShapeProperty {
             orientation: ::core::option::Option::None,
         }
     }
+}
+
+impl ShapeProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -10120,6 +10310,9 @@ impl ShortNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl ShortNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -10251,6 +10444,8 @@ impl SizeField {
     }
 }
 
+impl SizeField {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SourceField {
@@ -10274,6 +10469,9 @@ impl SourceField {
             mode: ::core::option::Option::None,
         }
     }
+}
+
+impl SourceField {
     /// Sets `enabled`.
     pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
@@ -10387,6 +10585,9 @@ impl SparseVectorIndexOptions {
             pruning_config: ::core::option::Option::None,
         }
     }
+}
+
+impl SparseVectorIndexOptions {
     /// Sets `prune`.
     pub fn prune(mut self, value: bool) -> Self {
         self.prune = ::core::option::Option::Some(value.into());
@@ -10445,6 +10646,9 @@ impl SparseVectorProperty {
             index_options: ::core::option::Option::None,
         }
     }
+}
+
+impl SparseVectorProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -10657,6 +10861,9 @@ impl SuggestContext {
             precision: ::core::option::Option::None,
         }
     }
+}
+
+impl SuggestContext {
     /// Sets `path`.
     pub fn path(mut self, value: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         self.path = ::core::option::Option::Some(value.into());
@@ -10824,6 +11031,9 @@ impl TextIndexPrefixes {
             min_chars: ::core::option::Option::None,
         }
     }
+}
+
+impl TextIndexPrefixes {
     /// Sets `max_chars`.
     pub fn max_chars(mut self, value: i32) -> Self {
         self.max_chars = ::core::option::Option::Some(value.into());
@@ -10923,6 +11133,9 @@ impl TextProperty {
             term_vector: ::core::option::Option::None,
         }
     }
+}
+
+impl TextProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -11196,6 +11409,9 @@ impl TokenCountProperty {
             enable_position_increments: ::core::option::Option::None,
         }
     }
+}
+
+impl TokenCountProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -11373,6 +11589,9 @@ impl TypeMapping {
             data_stream_timestamp: ::core::option::Option::None,
         }
     }
+}
+
+impl TypeMapping {
     /// Sets `all_field`.
     pub fn all_field(mut self, value: impl ::core::convert::Into<crate::AllField>) -> Self {
         self.all_field = ::core::option::Option::Some(value.into());
@@ -11559,6 +11778,9 @@ impl UnsignedLongNumberProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl UnsignedLongNumberProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -11719,6 +11941,9 @@ impl VersionProperty {
             doc_values: ::core::option::Option::None,
         }
     }
+}
+
+impl VersionProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,
@@ -11831,6 +12056,9 @@ impl WildcardProperty {
             null_value: ::core::option::Option::None,
         }
     }
+}
+
+impl WildcardProperty {
     /// Sets `meta`.
     pub fn meta(
         mut self,

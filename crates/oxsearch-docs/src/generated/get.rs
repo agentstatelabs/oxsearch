@@ -62,7 +62,7 @@ pub struct GetResult<TDocument = ::serde_json::Value> {
     pub version: ::core::option::Option<::oxsearch_core::VersionNumber>,
 }
 
-impl<TDocument> GetResult<TDocument> {
+impl GetResult<::serde_json::Value> {
     /// A `GetResult` with its required properties set.
     pub fn new(
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
@@ -82,6 +82,9 @@ impl<TDocument> GetResult<TDocument> {
             version: ::core::option::Option::None,
         }
     }
+}
+
+impl<TDocument> GetResult<TDocument> {
     /// Sets `fields`.
     pub fn fields(
         mut self,
@@ -119,9 +122,19 @@ impl<TDocument> GetResult<TDocument> {
         self
     }
     /// Sets `source`.
-    pub fn source(mut self, value: TDocument) -> Self {
-        self.source = ::core::option::Option::Some(value.into());
-        self
+    pub fn source<TDocument2>(self, value: TDocument2) -> GetResult<TDocument2> {
+        GetResult {
+            index: self.index,
+            fields: self.fields,
+            ignored: self.ignored,
+            found: self.found,
+            id: self.id,
+            primary_term: self.primary_term,
+            routing: self.routing,
+            seq_no: self.seq_no,
+            version: self.version,
+            source: ::core::option::Option::Some(value.into()),
+        }
     }
     /// Sets `version`.
     pub fn version(
@@ -274,6 +287,9 @@ impl Request {
             version_type: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `force_synthetic_source`.
     pub fn force_synthetic_source(mut self, value: bool) -> Self {
         self.force_synthetic_source = ::core::option::Option::Some(value.into());

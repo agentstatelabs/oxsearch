@@ -30,6 +30,8 @@ impl Request {
     }
 }
 
+impl Request {}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Response {
@@ -55,6 +57,8 @@ impl Response {
         }
     }
 }
+
+impl Response {}
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -99,6 +103,9 @@ impl UpdateByQueryRethrottleNode {
             tasks: tasks.into(),
         }
     }
+}
+
+impl UpdateByQueryRethrottleNode {
     /// Sets `roles`.
     pub fn roles(mut self, value: impl ::core::convert::Into<::oxsearch_core::NodeRoles>) -> Self {
         self.roles = ::core::option::Option::Some(value.into());

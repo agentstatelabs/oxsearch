@@ -34,6 +34,9 @@ impl RequestBody {
             task_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -118,6 +121,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `body`.
     pub fn body(
         mut self,

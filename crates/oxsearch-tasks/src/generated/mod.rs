@@ -116,6 +116,9 @@ impl NodeTasks {
             tasks: tasks.into(),
         }
     }
+}
+
+impl NodeTasks {
     /// Sets `name`.
     pub fn name(mut self, value: impl ::core::convert::Into<::oxsearch_core::NodeId>) -> Self {
         self.name = ::core::option::Option::Some(value.into());
@@ -244,6 +247,9 @@ impl ParentTaskInfo {
             children: ::core::option::Option::None,
         }
     }
+}
+
+impl ParentTaskInfo {
     /// Sets `cancelled`.
     pub fn cancelled(mut self, value: bool) -> Self {
         self.cancelled = ::core::option::Option::Some(value.into());
@@ -391,6 +397,9 @@ impl TaskInfo {
             original_start_time: ::core::option::Option::None,
         }
     }
+}
+
+impl TaskInfo {
     /// Sets `cancelled`.
     pub fn cancelled(mut self, value: bool) -> Self {
         self.cancelled = ::core::option::Option::Some(value.into());
@@ -547,6 +556,9 @@ impl TaskListResponseBase {
             tasks: ::core::option::Option::None,
         }
     }
+}
+
+impl TaskListResponseBase {
     /// Sets `node_failures`.
     pub fn node_failures(
         mut self,

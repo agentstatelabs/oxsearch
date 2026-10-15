@@ -36,6 +36,9 @@ impl RequestBody {
             task_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `input_type`.
     pub fn input_type(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.input_type = ::core::option::Option::Some(value.into());
@@ -71,6 +74,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `timeout`.
     pub fn timeout(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.timeout = ::core::option::Option::Some(value.into());

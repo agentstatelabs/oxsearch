@@ -23,6 +23,9 @@ impl RequestBody {
             task_settings: ::core::option::Option::None,
         }
     }
+}
+
+impl RequestBody {
     /// Sets `task_settings`.
     pub fn task_settings(mut self, value: impl ::core::convert::Into<crate::TaskSettings>) -> Self {
         self.task_settings = ::core::option::Option::Some(value.into());
@@ -60,6 +63,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `timeout`.
     pub fn timeout(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.timeout = ::core::option::Option::Some(value.into());

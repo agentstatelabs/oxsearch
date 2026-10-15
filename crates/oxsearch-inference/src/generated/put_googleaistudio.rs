@@ -28,6 +28,9 @@ impl RequestBody {
             service_settings: service_settings.into(),
         }
     }
+}
+
+impl RequestBody {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
@@ -69,6 +72,9 @@ impl Request {
             body: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `timeout`.
     pub fn timeout(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.timeout = ::core::option::Option::Some(value.into());

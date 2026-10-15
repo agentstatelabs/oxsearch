@@ -39,6 +39,9 @@ impl Request {
             follow_relocations: ::core::option::Option::None,
         }
     }
+}
+
+impl Request {
     /// Sets `timeout`.
     pub fn timeout(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.timeout = ::core::option::Option::Some(value.into());
@@ -79,6 +82,9 @@ impl Response {
             error: ::core::option::Option::None,
         }
     }
+}
+
+impl Response {
     /// Sets `response`.
     pub fn response(mut self, value: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         self.response = ::core::option::Option::Some(value.into());
