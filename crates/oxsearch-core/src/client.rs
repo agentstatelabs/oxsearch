@@ -45,11 +45,7 @@ impl<T: Transport> Client<T> {
             path_and_query.push('=');
             path_and_query.push_str(&crate::__private::encode(value));
         }
-        let request = HttpRequest {
-            method: route.method,
-            path_and_query,
-            body: endpoint.body()?,
-        };
+        let request = HttpRequest::new(route.method, path_and_query, endpoint.body()?);
         let response = self
             .transport
             .send(request)
@@ -84,11 +80,7 @@ impl<T: Transport> Client<T> {
             Some(body) => Some(Body::Json(serde_json::to_vec(body).map_err(Error::Encode)?)),
             None => None,
         };
-        let request = HttpRequest {
-            method,
-            path_and_query: path_and_query.to_owned(),
-            body,
-        };
+        let request = HttpRequest::new(method, path_and_query, body);
         let response = self
             .transport
             .send(request)

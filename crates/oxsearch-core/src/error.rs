@@ -90,6 +90,15 @@ impl ElasticsearchError {
     pub fn reason(&self) -> Option<&str> {
         self.body.pointer("/error/reason").and_then(Value::as_str)
     }
+
+    /// The error and what caused it, outermost first: the chain of
+    /// `caused_by`.
+    pub fn causes(&self) -> impl Iterator<Item = &crate::ErrorCause> {
+        std::iter::successors(
+            self.response.as_ref().and_then(|r| r.error.as_ref()),
+            |cause| cause.caused_by.as_deref(),
+        )
+    }
 }
 
 impl fmt::Display for ElasticsearchError {
@@ -206,6 +215,28 @@ mod tests {
             panic!("not a license error")
         };
         assert_eq!(e.feature, "query rules");
+    }
+
+    #[test]
+    fn cause_chains() {
+        let body = json!({"error": {
+            "type": "search_phase_execution_exception",
+            "reason": "all shards failed",
+            "caused_by": {"type": "illegal_argument_exception", "reason": "bad field",
+                "caused_by": {"type": "number_format_exception", "reason": "For input string"}}
+        }, "status": 400});
+        let Error::Elasticsearch(e) = Error::from_response(400, body.to_string().as_bytes()) else {
+            panic!("not an Elasticsearch error")
+        };
+        let kinds: Vec<_> = e.causes().filter_map(|c| c.r#type.as_deref()).collect();
+        assert_eq!(
+            kinds,
+            [
+                "search_phase_execution_exception",
+                "illegal_argument_exception",
+                "number_format_exception"
+            ]
+        );
     }
 
     #[test]

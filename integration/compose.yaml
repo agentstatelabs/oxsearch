@@ -21,6 +21,10 @@ services:
       # On a trial, tests deploy machine learning models (ELSER for
       # semantic_text, a reranker); let them use the machine's memory.
       xpack.ml.use_auto_machine_memory_percent: "true"
+      # Sniffing reads the address the node publishes: make it the one the
+      # tests reach it at, not the container's own.
+      http.publish_host: 127.0.0.1
+      http.publish_port: ${OXSEARCH_TEST_PORT:-9200}
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     ports:
       - "127.0.0.1:${OXSEARCH_TEST_PORT:-9200}:9200"

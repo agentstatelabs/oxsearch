@@ -119,7 +119,21 @@ The default features are the AI-search set: search, docs, mapping, inference. `f
   - request compression;
   - telemetry.
   Users can add their own layers.
-- Errors are typed: transport failures, Elasticsearch error responses with their cause chain, and license errors (a feature the cluster's license doesn't allow) as their own variant.
+- Errors are typed: transport failures, Elasticsearch error responses with their cause chain (`ElasticsearchError::causes`), license errors (a feature the cluster's license doesn't allow) and version conflicts as their own variants.
+
+Built in Phase 1:
+
+- **Requests carry headers**, which layers add and transports send.
+- **`oxsearch_core::auth`.** `Auth` is basic, bearer or API key (encoded, or from its id and secret). `Authenticated<T, C>` is a layer that signs each request. `Credentials` is the trait for credentials that refresh: a request refused with 401 goes once more with a fresh value. `cloud_url` turns a Cloud ID into the deployment's URL.
+- **`oxsearch-transport-reqwest`'s builder**, each part opt-in:
+  - nodes (or a Cloud ID) in turn;
+  - a failed node rests for 1 minute, doubling up to 30, then is tried again; when every node rests, the one resting least is tried;
+  - retries go to the next node on connection failures and 502/503/504. A 429, or a retry with every node resting, waits a backoff (100 ms doubling to 10 s). Timeouts are retried only when asked, since the node may have acted on the request;
+  - sniffing every so often, and after a failure, from `_nodes/http`, asking each node in turn and preferring a published hostname to its address;
+  - fixed credentials on every request, sniffing included;
+  - gzip request bodies and responses (the `gzip` feature).
+  Pool state is shared between clones behind a lock held only between awaits.
+- **A layer of your own** is a `Transport` that wraps another; the `Transport` documentation shows one.
 
 ### 4.5 Escape hatches
 

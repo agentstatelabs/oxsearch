@@ -281,6 +281,7 @@ fn front(ir: &ir::Ir<'_>, homes: &Homes) -> String {
 /// would clash with.
 const CORE_NAMES: &[&str] = &[
     "AggsBody",
+    "auth",
     "Body",
     "Client",
     "ElasticsearchError",

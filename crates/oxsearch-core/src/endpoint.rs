@@ -153,8 +153,34 @@ pub struct HttpRequest {
     pub method: Method,
     /// The path and query, percent-encoded, starting with `/`.
     pub path_and_query: String,
+    /// Headers besides the body's content type, which the transport sets:
+    /// what layers add, such as `authorization`.
+    pub headers: Vec<(String, String)>,
     /// The body.
     pub body: Option<Body>,
+}
+
+impl HttpRequest {
+    /// A request without headers.
+    pub fn new(
+        method: Method,
+        path_and_query: impl Into<String>,
+        body: Option<Body>,
+    ) -> HttpRequest {
+        HttpRequest {
+            method,
+            path_and_query: path_and_query.into(),
+            headers: Vec::new(),
+            body,
+        }
+    }
+
+    /// The request with a header set, replacing any of the same name.
+    pub fn header(mut self, name: &str, value: impl Into<String>) -> HttpRequest {
+        self.headers.retain(|(n, _)| !n.eq_ignore_ascii_case(name));
+        self.headers.push((name.to_ascii_lowercase(), value.into()));
+        self
+    }
 }
 
 /// The HTTP response a transport returns.
@@ -174,9 +200,37 @@ impl HttpResponse {
     }
 }
 
+/// A transport by reference is a transport, so a layer can wrap a shared one.
+impl<T: Transport> Transport for &T {
+    fn send(
+        &self,
+        request: HttpRequest,
+    ) -> impl Future<Output = Result<HttpResponse, TransportError>> + Send {
+        (**self).send(request)
+    }
+}
+
 /// Carries requests to a cluster and brings back its responses: an HTTP
-/// client, and later the layers around one (authentication, retries,
-/// telemetry).
+/// client, or a layer around one, such as [`Authenticated`](crate::auth::Authenticated).
+///
+/// A layer of your own is a transport that wraps another:
+///
+/// ```
+/// use oxsearch_core::{HttpRequest, HttpResponse, Transport, TransportError};
+///
+/// /// Tags every request, so the cluster's slow logs and tasks show where it
+/// /// came from.
+/// struct Tagged<T> {
+///     inner: T,
+///     tag: String,
+/// }
+///
+/// impl<T: Transport> Transport for Tagged<T> {
+///     async fn send(&self, request: HttpRequest) -> Result<HttpResponse, TransportError> {
+///         self.inner.send(request.header("x-opaque-id", self.tag.as_str())).await
+///     }
+/// }
+/// ```
 pub trait Transport: Send + Sync {
     /// Sends a request.
     fn send(
