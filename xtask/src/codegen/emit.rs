@@ -126,6 +126,7 @@ impl Emitter<'_> {
                 "{CORE}::shapes::TypedKeys<{}>",
                 self.ty_in(t, position, true)
             ),
+            Ty::Opt(t) => format!("{OPTION}<{}>", self.ty_in(t, position, indirect)),
         }
     }
 
@@ -180,7 +181,9 @@ impl Emitter<'_> {
 
     fn field_ty(&self, field: &Field) -> String {
         let ty = self.ty(&field.ty, Position::Field);
-        if field.optional {
+        // A value-or-null is already an `Option`: absent and `null` both
+        // read as `None`.
+        if field.optional && !matches!(field.ty, Ty::Opt(_)) {
             format!("{OPTION}<{ty}>")
         } else {
             ty
@@ -193,7 +196,19 @@ impl Emitter<'_> {
         if params.is_empty() {
             String::new()
         } else {
-            let params: Vec<String> = params.iter().map(|p| format!("{p} = {VALUE}")).collect();
+            // Raw JSON by default: documents as `Value`, aggregation results as
+            // a map of `Value`s.
+            let params: Vec<String> = params
+                .iter()
+                .map(|p| {
+                    let default = if p == super::ir::AGGREGATIONS {
+                        "::oxsearch_core::RawAggs"
+                    } else {
+                        VALUE
+                    };
+                    format!("{p} = {default}")
+                })
+                .collect();
             format!("<{}>", params.join(", "))
         }
     }
@@ -422,7 +437,7 @@ impl Emitter<'_> {
                 } else {
                     format!("{}.into()", field.ident)
                 };
-                inits.push(if field.optional {
+                inits.push(if field.optional && !matches!(field.ty, Ty::Opt(_)) {
                     format!("{}: {OPTION}::Some({value})", field.ident)
                 } else {
                     format!("{}: {value}", field.ident)
@@ -472,6 +487,11 @@ impl Emitter<'_> {
             setters.push((field.as_str(), &variant_ty));
         }
         for (field, ty) in setters {
+            // A value-or-null field is set to a value.
+            let ty = match ty {
+                Ty::Opt(inner) => &**inner,
+                other => other,
+            };
             let rendered = self.ty(ty, Position::Field);
             let (inner, boxed) = unbox(&rendered);
             let name = if field == "new" { "new_" } else { field };

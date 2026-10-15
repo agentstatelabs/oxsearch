@@ -24,8 +24,7 @@ pub struct RequestBody {
     ///
     /// The aggregation names can't start with `_mvt_`. The `_mvt_` prefix is reserved for internal aggregations.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggs:
-        ::core::option::Option<::indexmap::IndexMap<::std::string::String, ::serde_json::Value>>,
+    pub aggs: ::core::option::Option<::oxsearch_core::AggsBody>,
     /// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
     /// to avoid outline artifacts from geometries that extend past the extent of the tile.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -127,12 +126,7 @@ impl RequestBody {
         }
     }
     /// Sets `aggs`.
-    pub fn aggs(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::std::string::String, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggs(mut self, value: impl ::core::convert::Into<::oxsearch_core::AggsBody>) -> Self {
         self.aggs = ::core::option::Option::Some(value.into());
         self
     }

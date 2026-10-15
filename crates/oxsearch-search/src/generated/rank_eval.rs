@@ -64,66 +64,13 @@ impl RankEvalHit {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum RankEvalHitItemRating {
-    /// A number.
-    Double(f64),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for RankEvalHitItemRating {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::Double(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for RankEvalHitItemRating {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = RankEvalHitItemRating;
-            const EXPECTING: &'static str = "RankEvalHitItemRating: null or number";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(RankEvalHitItemRating::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Number => {
-                        <f64 as ::serde::Deserialize>::deserialize(value)
-                            .map(RankEvalHitItemRating::Double)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("RankEvalHitItemRating can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankEvalHitItem {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hit: ::core::option::Option<crate::rank_eval::RankEvalHit>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub rating: ::core::option::Option<crate::rank_eval::RankEvalHitItemRating>,
+    pub rating: ::core::option::Option<f64>,
 }
 
 impl RankEvalHitItem {
@@ -135,10 +82,7 @@ impl RankEvalHitItem {
         }
     }
     /// Sets `rating`.
-    pub fn rating(
-        mut self,
-        value: impl ::core::convert::Into<crate::rank_eval::RankEvalHitItemRating>,
-    ) -> Self {
+    pub fn rating(mut self, value: f64) -> Self {
         self.rating = ::core::option::Option::Some(value.into());
         self
     }

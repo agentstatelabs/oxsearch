@@ -64,6 +64,31 @@ jobs:
             exit 1
           fi
 
+  # The compile-time budget (docs/compile-time.md): a clean build of the
+  # front crate's default features, which is what an application adding
+  # oxsearch compiles.
+  compile-time:
+    runs-on: ubuntu-latest
+    env:
+      BUDGET_SECONDS: 150
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo fetch
+      - name: A clean build of the default features, timed
+        shell: bash
+        run: |
+          start=$(date +%s)
+          cargo build -p oxsearch --timings
+          took=$(( $(date +%s) - start ))
+          echo "A clean build of oxsearch's default features took ${took} s (budget ${BUDGET_SECONDS} s)." | tee -a "$GITHUB_STEP_SUMMARY"
+          test "$took" -le "$BUDGET_SECONDS"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: cargo-timings
+          path: target/cargo-timings/cargo-timing.html
+
   # The integration tests, against Elasticsearch in Docker (see
   # scripts/es-fixture.sh): once on the Basic license, once on a trial.
   integration:
@@ -83,6 +108,10 @@ jobs:
         run: scripts/es-fixture.sh up "${OXSEARCH_TEST_LICENSE}"
       - name: Integration tests
         run: cargo test -p oxsearch-integration -- --ignored
+      - name: The RAG example runs
+        env:
+          OXSEARCH_URL: http://127.0.0.1:9200
+        run: cargo run -p oxsearch --example rag --features transport-reqwest
       - name: Elasticsearch logs
         if: failure()
         run: scripts/es-fixture.sh logs | tail -200

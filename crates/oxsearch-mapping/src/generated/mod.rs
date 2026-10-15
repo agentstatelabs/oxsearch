@@ -2884,59 +2884,6 @@ impl<'de> ::serde::Deserialize<'de> for DynamicMapping {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum DynamicPropertyIndexPrefixes {
-    /// A object.
-    TextIndexPrefixes(crate::TextIndexPrefixes),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for DynamicPropertyIndexPrefixes {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::TextIndexPrefixes(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for DynamicPropertyIndexPrefixes {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = DynamicPropertyIndexPrefixes;
-            const EXPECTING: &'static str = "DynamicPropertyIndexPrefixes: null or object";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(DynamicPropertyIndexPrefixes::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Object => {
-                        <crate::TextIndexPrefixes as ::serde::Deserialize>::deserialize(value)
-                            .map(DynamicPropertyIndexPrefixes::TextIndexPrefixes)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("DynamicPropertyIndexPrefixes can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DynamicProperty {
@@ -2991,7 +2938,7 @@ pub struct DynamicProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index_phrases: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub index_prefixes: ::core::option::Option<crate::DynamicPropertyIndexPrefixes>,
+    pub index_prefixes: ::core::option::Option<crate::TextIndexPrefixes>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub norms: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -3187,7 +3134,7 @@ impl DynamicProperty {
     /// Sets `index_prefixes`.
     pub fn index_prefixes(
         mut self,
-        value: impl ::core::convert::Into<crate::DynamicPropertyIndexPrefixes>,
+        value: impl ::core::convert::Into<crate::TextIndexPrefixes>,
     ) -> Self {
         self.index_prefixes = ::core::option::Option::Some(value.into());
         self
@@ -6102,59 +6049,6 @@ impl JoinProperty {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum KeywordPropertySimilarity {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for KeywordPropertySimilarity {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for KeywordPropertySimilarity {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = KeywordPropertySimilarity;
-            const EXPECTING: &'static str = "KeywordPropertySimilarity: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(KeywordPropertySimilarity::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(KeywordPropertySimilarity::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("KeywordPropertySimilarity can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct KeywordProperty {
@@ -6201,7 +6095,7 @@ pub struct KeywordProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub null_value: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub similarity: ::core::option::Option<crate::KeywordPropertySimilarity>,
+    pub similarity: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub split_queries_on_whitespace: ::core::option::Option<bool>,
     /// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -6348,10 +6242,7 @@ impl KeywordProperty {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(
-        mut self,
-        value: impl ::core::convert::Into<crate::KeywordPropertySimilarity>,
-    ) -> Self {
+    pub fn similarity(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -9356,59 +9247,6 @@ impl ScaledFloatNumberProperty {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum SearchAsYouTypePropertySimilarity {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for SearchAsYouTypePropertySimilarity {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for SearchAsYouTypePropertySimilarity {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = SearchAsYouTypePropertySimilarity;
-            const EXPECTING: &'static str = "SearchAsYouTypePropertySimilarity: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(SearchAsYouTypePropertySimilarity::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(SearchAsYouTypePropertySimilarity::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("SearchAsYouTypePropertySimilarity can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SearchAsYouTypeProperty {
@@ -9449,7 +9287,7 @@ pub struct SearchAsYouTypeProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub search_quote_analyzer: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub similarity: ::core::option::Option<crate::SearchAsYouTypePropertySimilarity>,
+    pub similarity: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub term_vector: ::core::option::Option<crate::TermVectorOption>,
 }
@@ -9577,10 +9415,7 @@ impl SearchAsYouTypeProperty {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(
-        mut self,
-        value: impl ::core::convert::Into<crate::SearchAsYouTypePropertySimilarity>,
-    ) -> Self {
+    pub fn similarity(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -9629,59 +9464,6 @@ impl SemanticTextIndexOptions {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum SemanticTextPropertyChunkingSettings {
-    /// A object.
-    ChunkingSettings(crate::ChunkingSettings),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for SemanticTextPropertyChunkingSettings {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::ChunkingSettings(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for SemanticTextPropertyChunkingSettings {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = SemanticTextPropertyChunkingSettings;
-            const EXPECTING: &'static str = "SemanticTextPropertyChunkingSettings: null or object";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(SemanticTextPropertyChunkingSettings::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Object => {
-                        <crate::ChunkingSettings as ::serde::Deserialize>::deserialize(value)
-                            .map(SemanticTextPropertyChunkingSettings::ChunkingSettings)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("SemanticTextPropertyChunkingSettings can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SemanticTextProperty {
@@ -9708,7 +9490,7 @@ pub struct SemanticTextProperty {
     /// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
     /// they will not be applied to existing documents until they are reindexed.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub chunking_settings: ::core::option::Option<crate::SemanticTextPropertyChunkingSettings>,
+    pub chunking_settings: ::core::option::Option<crate::ChunkingSettings>,
     /// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
     /// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -9763,7 +9545,7 @@ impl SemanticTextProperty {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
-        value: impl ::core::convert::Into<crate::SemanticTextPropertyChunkingSettings>,
+        value: impl ::core::convert::Into<crate::ChunkingSettings>,
     ) -> Self {
         self.chunking_settings = ::core::option::Option::Some(value.into());
         self
@@ -10694,112 +10476,6 @@ impl TextIndexPrefixes {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum TextPropertyIndexPrefixes {
-    /// A object.
-    TextIndexPrefixes(crate::TextIndexPrefixes),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for TextPropertyIndexPrefixes {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::TextIndexPrefixes(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for TextPropertyIndexPrefixes {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = TextPropertyIndexPrefixes;
-            const EXPECTING: &'static str = "TextPropertyIndexPrefixes: null or object";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertyIndexPrefixes::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Object => {
-                        <crate::TextIndexPrefixes as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertyIndexPrefixes::TextIndexPrefixes)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("TextPropertyIndexPrefixes can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum TextPropertySimilarity {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for TextPropertySimilarity {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for TextPropertySimilarity {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = TextPropertySimilarity;
-            const EXPECTING: &'static str = "TextPropertySimilarity: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertySimilarity::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertySimilarity::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("TextPropertySimilarity can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TextProperty {
@@ -10843,7 +10519,7 @@ pub struct TextProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index_phrases: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub index_prefixes: ::core::option::Option<crate::TextPropertyIndexPrefixes>,
+    pub index_prefixes: ::core::option::Option<crate::TextIndexPrefixes>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub norms: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -10853,7 +10529,7 @@ pub struct TextProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub search_quote_analyzer: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub similarity: ::core::option::Option<crate::TextPropertySimilarity>,
+    pub similarity: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub term_vector: ::core::option::Option<crate::TermVectorOption>,
 }
@@ -10991,7 +10667,7 @@ impl TextProperty {
     /// Sets `index_prefixes`.
     pub fn index_prefixes(
         mut self,
-        value: impl ::core::convert::Into<crate::TextPropertyIndexPrefixes>,
+        value: impl ::core::convert::Into<crate::TextIndexPrefixes>,
     ) -> Self {
         self.index_prefixes = ::core::option::Option::Some(value.into());
         self
@@ -11023,10 +10699,7 @@ impl TextProperty {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(
-        mut self,
-        value: impl ::core::convert::Into<crate::TextPropertySimilarity>,
-    ) -> Self {
+    pub fn similarity(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }

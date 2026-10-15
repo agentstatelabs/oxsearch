@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings and the inference API.
 
-**Status: early.** The generator works for the first slice: the types for search, documents, mappings and inference, and the foundation crates they need, are generated and tested against the specification's own examples. There is no client to send them yet (Phase 0 in [DESIGN.md](DESIGN.md)).
+**Status: early.** The generator works for the first slice: the types for search, documents, mappings and inference, and the foundation crates they need, are generated, tested against the specification's own examples, and sent to Elasticsearch 9 by a minimal client in the integration tests, on the Basic license and a trial. Retries, authentication and telemetry are still to come (Phase 1 in [DESIGN.md](DESIGN.md)).
 
 ## Design
 
@@ -32,6 +32,12 @@ The integration tests run against Elasticsearch in Docker, on the Basic license 
 scripts/es-fixture.sh up trial
 OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration -- --ignored
 scripts/es-fixture.sh down
+```
+
+With the fixture up, the RAG example indexes passages and retrieves for a question, with server-side RRF on a trial and nearest neighbours alone on Basic:
+
+```bash
+cargo run -p oxsearch --example rag --features transport-reqwest
 ```
 
 ## License

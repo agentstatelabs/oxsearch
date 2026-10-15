@@ -144,6 +144,7 @@ pub fn generate(
 /// Names oxsearch-core declares at its root, which generated types there
 /// would clash with.
 const CORE_NAMES: &[&str] = &[
+    "AggsBody",
     "Body",
     "Client",
     "ElasticsearchError",
@@ -153,6 +154,7 @@ const CORE_NAMES: &[&str] = &[
     "HttpResponse",
     "LicenseError",
     "Method",
+    "RawAggs",
     "Route",
     "Transport",
     "TransportError",

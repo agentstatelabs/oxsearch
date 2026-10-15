@@ -3,7 +3,10 @@
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct MultiSearchItem<TDocument = ::serde_json::Value> {
+pub struct MultiSearchItem<
+    TDocument = ::serde_json::Value,
+    TAggregations = ::oxsearch_core::RawAggs,
+> {
     /// The number of milliseconds it took Elasticsearch to run the request.
     /// This value is calculated by measuring the time elapsed between receipt of a request on the coordinating node and the time at which the coordinating node is ready to send the response.
     /// It includes:
@@ -32,9 +35,7 @@ pub struct MultiSearchItem<TDocument = ::serde_json::Value> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hits: ::core::option::Option<crate::search::HitsMetadata<TDocument>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggregations: ::core::option::Option<
-        ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-    >,
+    pub aggregations: ::core::option::Option<TAggregations>,
     #[serde(
         rename = "_clusters",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -69,7 +70,7 @@ pub struct MultiSearchItem<TDocument = ::serde_json::Value> {
     pub status: ::core::option::Option<i32>,
 }
 
-impl<TDocument> MultiSearchItem<TDocument> {
+impl<TDocument, TAggregations> MultiSearchItem<TDocument, TAggregations> {
     /// A `MultiSearchItem` with its required properties set.
     pub fn new(
         took: i64,
@@ -96,12 +97,7 @@ impl<TDocument> MultiSearchItem<TDocument> {
         }
     }
     /// Sets `aggregations`.
-    pub fn aggregations(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggregations(mut self, value: TAggregations) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
     }
@@ -175,18 +171,21 @@ impl<TDocument> MultiSearchItem<TDocument> {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct MultiSearchResult<TDocument = ::serde_json::Value> {
+pub struct MultiSearchResult<
+    TDocument = ::serde_json::Value,
+    TAggregations = ::oxsearch_core::RawAggs,
+> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub took: ::core::option::Option<i64>,
     #[serde(default = "::core::default::Default::default")]
-    pub responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument>>,
+    pub responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument, TAggregations>>,
 }
 
-impl<TDocument> MultiSearchResult<TDocument> {
+impl<TDocument, TAggregations> MultiSearchResult<TDocument, TAggregations> {
     /// A `MultiSearchResult` with its required properties set.
     pub fn new(
         took: i64,
-        responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument>>,
+        responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument, TAggregations>>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -669,33 +668,35 @@ impl<'de> ::serde::Deserialize<'de> for RequestItem {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
-pub struct Response<TDocument = ::serde_json::Value>(
-    pub crate::msearch::MultiSearchResult<TDocument>,
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(
+    pub crate::msearch::MultiSearchResult<TDocument, TAggregations>,
 );
 
-impl<TDocument> ::core::ops::Deref for Response<TDocument> {
-    type Target = crate::msearch::MultiSearchResult<TDocument>;
-    fn deref(&self) -> &crate::msearch::MultiSearchResult<TDocument> {
+impl<TDocument, TAggregations> ::core::ops::Deref for Response<TDocument, TAggregations> {
+    type Target = crate::msearch::MultiSearchResult<TDocument, TAggregations>;
+    fn deref(&self) -> &crate::msearch::MultiSearchResult<TDocument, TAggregations> {
         &self.0
     }
 }
 
-impl<TDocument> ::core::ops::DerefMut for Response<TDocument> {
-    fn deref_mut(&mut self) -> &mut crate::msearch::MultiSearchResult<TDocument> {
+impl<TDocument, TAggregations> ::core::ops::DerefMut for Response<TDocument, TAggregations> {
+    fn deref_mut(&mut self) -> &mut crate::msearch::MultiSearchResult<TDocument, TAggregations> {
         &mut self.0
     }
 }
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
-pub enum ResponseItem<TDocument = ::serde_json::Value> {
+pub enum ResponseItem<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs> {
     /// A object.
-    Result(crate::msearch::MultiSearchItem<TDocument>),
+    Result(crate::msearch::MultiSearchItem<TDocument, TAggregations>),
     /// A object.
     Failure(::oxsearch_core::ErrorResponseBase),
 }
 
-impl<TDocument: ::serde::Serialize> ::serde::Serialize for ResponseItem<TDocument> {
+impl<TDocument: ::serde::Serialize, TAggregations: ::serde::Serialize> ::serde::Serialize
+    for ResponseItem<TDocument, TAggregations>
+{
     fn serialize<S__: ::serde::Serializer>(
         &self,
         serializer: S__,
@@ -707,17 +708,19 @@ impl<TDocument: ::serde::Serialize> ::serde::Serialize for ResponseItem<TDocumen
     }
 }
 
-impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
-    for ResponseItem<TDocument>
+impl<'de, TDocument: ::serde::Deserialize<'de>, TAggregations: ::serde::Deserialize<'de>>
+    ::serde::Deserialize<'de> for ResponseItem<TDocument, TAggregations>
 {
     fn deserialize<D__: ::serde::Deserializer<'de>>(
         deserializer: D__,
     ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape<TDocument>(::core::marker::PhantomData<fn() -> (TDocument,)>);
-        impl<'de, TDocument: ::serde::Deserialize<'de>> ::oxsearch_core::__private::ByKind<'de>
-            for Shape<TDocument>
+        struct Shape<TDocument, TAggregations>(
+            ::core::marker::PhantomData<fn() -> (TDocument, TAggregations)>,
+        );
+        impl<'de, TDocument: ::serde::Deserialize<'de>, TAggregations: ::serde::Deserialize<'de>>
+            ::oxsearch_core::__private::ByKind<'de> for Shape<TDocument, TAggregations>
         {
-            type Value = ResponseItem<TDocument>;
+            type Value = ResponseItem<TDocument, TAggregations>;
             const EXPECTING: &'static str = "ResponseItem: object";
             fn visit<V__: ::serde::Deserializer<'de>>(
                 self,
@@ -751,7 +754,7 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
                         }
                         if let ::core::result::Result::Ok(found) =
                             ::oxsearch_core::__private::from_value::<
-                                crate::msearch::MultiSearchItem<TDocument>,
+                                crate::msearch::MultiSearchItem<TDocument, TAggregations>,
                                 V__::Error,
                             >(json.clone())
                         {

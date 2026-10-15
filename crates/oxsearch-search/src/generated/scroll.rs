@@ -104,17 +104,19 @@ impl Request {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
-pub struct Response<TDocument = ::serde_json::Value>(pub crate::search::ResponseBody<TDocument>);
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(
+    pub crate::search::ResponseBody<TDocument, TAggregations>,
+);
 
-impl<TDocument> ::core::ops::Deref for Response<TDocument> {
-    type Target = crate::search::ResponseBody<TDocument>;
-    fn deref(&self) -> &crate::search::ResponseBody<TDocument> {
+impl<TDocument, TAggregations> ::core::ops::Deref for Response<TDocument, TAggregations> {
+    type Target = crate::search::ResponseBody<TDocument, TAggregations>;
+    fn deref(&self) -> &crate::search::ResponseBody<TDocument, TAggregations> {
         &self.0
     }
 }
 
-impl<TDocument> ::core::ops::DerefMut for Response<TDocument> {
-    fn deref_mut(&mut self) -> &mut crate::search::ResponseBody<TDocument> {
+impl<TDocument, TAggregations> ::core::ops::DerefMut for Response<TDocument, TAggregations> {
+    fn deref_mut(&mut self) -> &mut crate::search::ResponseBody<TDocument, TAggregations> {
         &mut self.0
     }
 }
