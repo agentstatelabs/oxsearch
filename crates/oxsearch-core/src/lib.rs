@@ -10,6 +10,7 @@ extern crate self as oxsearch_core;
 mod generated;
 pub use generated::*;
 
+pub mod auth;
 mod builders;
 mod client;
 mod endpoint;
