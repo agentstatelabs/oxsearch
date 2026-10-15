@@ -497,7 +497,10 @@ mod tests {
         let mut report = MappingReport::default();
         let add = compare("", &expected, &live, &mut report);
         assert_eq!(report.added, ["author.email"]);
-        let drifted: Vec<&str> = report.drift.iter().map(|d| d.field.as_str()).collect();
+        // In the expected mapping's order, which serde_json's
+        // `preserve_order` feature changes: sorted to compare.
+        let mut drifted: Vec<&str> = report.drift.iter().map(|d| d.field.as_str()).collect();
+        drifted.sort();
         assert_eq!(drifted, ["embedding", "tags"]);
         assert!(!report.is_current());
         assert_eq!(

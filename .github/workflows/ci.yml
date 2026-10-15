@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@1.94
+      - uses: dtolnay/rust-toolchain@1.95
       - run: cargo check --workspace
 
   # The specification oxsearch is generated from: the pinned schema.json is
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       # The toolchain whose rustfmt formatted the committed code.
-      - uses: dtolnay/rust-toolchain@1.94
+      - uses: dtolnay/rust-toolchain@1.95
         with:
           components: rustfmt
       - run: cargo run -p xtask -- spec check
