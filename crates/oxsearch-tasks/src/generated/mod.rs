@@ -12,8 +12,17 @@
     rustdoc::all
 )]
 
+/// An endpoint Elasticsearch marks experimental: it may change or go away in any
+/// release. Behind the `experimental` feature.
+#[cfg(feature = "experimental")]
 pub mod cancel;
+/// An endpoint Elasticsearch marks experimental: it may change or go away in any
+/// release. Behind the `experimental` feature.
+#[cfg(feature = "experimental")]
 pub mod get;
+/// An endpoint Elasticsearch marks experimental: it may change or go away in any
+/// release. Behind the `experimental` feature.
+#[cfg(feature = "experimental")]
 pub mod list;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]

@@ -125,7 +125,8 @@ fn generate() -> Result<(), Error> {
     let schema = spec::load(&spec::fetch(&pin)?)?;
     let graph = Graph::new(&schema)?;
     let placement = placement::place(&graph)?;
-    let files = xtask::codegen::generate(&graph, &placement, &schema.endpoints, &pin)?;
+    let generated = xtask::codegen::generate(&graph, &placement, &schema.endpoints, &pin)?;
+    let files = &generated.files;
     let root = workspace_root();
     for krate in xtask::codegen::CRATES {
         let dir = root
@@ -140,7 +141,7 @@ fn generate() -> Result<(), Error> {
         }
     }
     let mut lines = 0;
-    for (path, source) in &files {
+    for (path, source) in files {
         let path = root.join(path);
         std::fs::create_dir_all(path.parent().expect("files are in a directory"))?;
         std::fs::write(&path, source)?;
@@ -154,5 +155,11 @@ fn generate() -> Result<(), Error> {
         return Err("rustfmt failed on the generated code".into());
     }
     println!("{} files, {lines} lines before formatting", files.len());
+    for gate in &generated.gated {
+        println!("behind a feature: {gate}");
+    }
+    for reason in &generated.ungated {
+        println!("left ungated: {reason}");
+    }
     Ok(())
 }

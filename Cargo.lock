@@ -429,6 +429,7 @@ name = "oxsearch-analysis"
 version = "0.0.1"
 dependencies = [
  "indexmap",
+ "oxsearch-analysis",
  "oxsearch-core",
  "serde",
  "serde_json",
@@ -440,6 +441,7 @@ name = "oxsearch-core"
 version = "0.0.1"
 dependencies = [
  "indexmap",
+ "oxsearch-core",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -455,6 +457,7 @@ version = "0.0.1"
 dependencies = [
  "indexmap",
  "oxsearch-core",
+ "oxsearch-docs",
  "oxsearch-mapping",
  "oxsearch-tasks",
  "serde",
@@ -475,6 +478,7 @@ version = "0.0.1"
 dependencies = [
  "indexmap",
  "oxsearch-core",
+ "oxsearch-inference",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -495,6 +499,7 @@ dependencies = [
  "indexmap",
  "oxsearch-analysis",
  "oxsearch-core",
+ "oxsearch-mapping",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -511,6 +516,7 @@ dependencies = [
  "indexmap",
  "oxsearch-core",
  "oxsearch-mapping",
+ "oxsearch-search",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -522,6 +528,7 @@ version = "0.0.1"
 dependencies = [
  "indexmap",
  "oxsearch-core",
+ "oxsearch-tasks",
  "serde",
  "serde_json",
  "serde_path_to_error",
