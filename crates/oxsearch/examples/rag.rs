@@ -20,11 +20,10 @@ use oxsearch::mapping::{
     DenseVectorProperty, DenseVectorSimilarity, KeywordProperty, Property, TextProperty,
     TypeMapping,
 };
-use oxsearch::oxsearch_core::Refresh;
 use oxsearch::search::search;
 use oxsearch::shapes::IndexMap;
 use oxsearch::transport_reqwest::ReqwestTransport;
-use oxsearch::{Client, Method, Query, Retriever};
+use oxsearch::{Client, Method, Query, Refresh, Retriever};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 

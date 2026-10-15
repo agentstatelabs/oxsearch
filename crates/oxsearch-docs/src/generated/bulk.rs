@@ -1667,3 +1667,6 @@ impl<TDocument: ::serde::Serialize, TPartialDocument: ::serde::Serialize> ::oxse
             .transpose()
     }
 }
+
+/// Types placement moved down to `oxsearch-core`, which uses them.
+pub use ::oxsearch_core::bulk::FailureStoreStatus;
