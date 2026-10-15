@@ -54,7 +54,7 @@ impl Request {
         }
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
@@ -121,12 +121,12 @@ impl Response {
         }
     }
     /// Sets `acknowledged`.
-    pub fn acknowledged(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn acknowledged(mut self, value: bool) -> Self {
         self.acknowledged = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `completed`.
-    pub fn completed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn completed(mut self, value: bool) -> Self {
         self.completed = ::core::option::Option::Some(value.into());
         self
     }
@@ -170,7 +170,7 @@ impl Response {
         self
     }
     /// Sets `cancelled`.
-    pub fn cancelled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn cancelled(mut self, value: bool) -> Self {
         self.cancelled = ::core::option::Option::Some(value.into());
         self
     }
@@ -194,5 +194,50 @@ impl Response {
     ) -> Self {
         self.response = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::cancel_reindex::Response;
+
+    fn name(&self) -> &'static str {
+        "cancel_reindex"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.task_id),)
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Post,
+                format!(
+                    "/_reindex/{}/_cancel",
+                    ::oxsearch_core::__private::path_param("task_id", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.wait_for_completion {
+            query.push((
+                "wait_for_completion",
+                ::oxsearch_core::__private::query_param("wait_for_completion", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
     }
 }

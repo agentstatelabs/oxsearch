@@ -1,12 +1,13 @@
 //! Value shapes the Elasticsearch specification uses that serde doesn't
 //! provide: a value or an array of values, an object keyed by a field name,
 //! values Elasticsearch sometimes writes as strings, and so on. The
-//! generated types are built from these.
+//! generated types are built from these, and from [`IndexMap`] for objects
+//! used as maps.
 
 use std::fmt;
 use std::marker::PhantomData;
 
-use indexmap::IndexMap;
+pub use indexmap::IndexMap;
 use serde::de::{self, DeserializeSeed, Deserializer, MapAccess, SeqAccess, Visitor};
 use serde::ser::{SerializeMap, Serializer};
 use serde::{Deserialize, Serialize};

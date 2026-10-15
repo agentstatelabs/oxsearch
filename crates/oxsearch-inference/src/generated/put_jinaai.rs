@@ -103,3 +103,67 @@ impl Request {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response(pub crate::InferenceEndpointInfoJinaAi);
+
+impl ::core::ops::Deref for Response {
+    type Target = crate::InferenceEndpointInfoJinaAi;
+    fn deref(&self) -> &crate::InferenceEndpointInfoJinaAi {
+        &self.0
+    }
+}
+
+impl ::core::ops::DerefMut for Response {
+    fn deref_mut(&mut self) -> &mut crate::InferenceEndpointInfoJinaAi {
+        &mut self.0
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::put_jinaai::Response;
+
+    fn name(&self) -> &'static str {
+        "inference.put_jinaai"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) = (
+            ::core::option::Option::Some(&self.task_type),
+            ::core::option::Option::Some(&self.jinaai_inference_id),
+        ) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Put,
+                format!(
+                    "/_inference/{}/{}",
+                    ::oxsearch_core::__private::path_param("task_type", p0)?,
+                    ::oxsearch_core::__private::path_param("jinaai_inference_id", p1)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

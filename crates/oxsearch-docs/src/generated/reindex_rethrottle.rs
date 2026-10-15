@@ -55,15 +55,15 @@ pub struct ParentReindexStatus {
 impl ParentReindexStatus {
     /// A `ParentReindexStatus` with its required properties set.
     pub fn new(
-        batches: impl ::core::convert::Into<i64>,
-        deleted: impl ::core::convert::Into<i64>,
-        noops: impl ::core::convert::Into<i64>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        batches: i64,
+        deleted: i64,
+        noops: i64,
+        requests_per_second: f32,
         retries: impl ::core::convert::Into<::oxsearch_core::Retries>,
         throttled_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
         throttled_until_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
-        total: impl ::core::convert::Into<i64>,
-        version_conflicts: impl ::core::convert::Into<i64>,
+        total: i64,
+        version_conflicts: i64,
     ) -> Self {
         Self {
             slices: ::core::option::Option::None,
@@ -93,12 +93,12 @@ impl ParentReindexStatus {
         self
     }
     /// Sets `slice_id`.
-    pub fn slice_id(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slice_id(mut self, value: i32) -> Self {
         self.slice_id = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `created`.
-    pub fn created(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn created(mut self, value: i64) -> Self {
         self.created = ::core::option::Option::Some(value.into());
         self
     }
@@ -119,7 +119,7 @@ impl ParentReindexStatus {
         self
     }
     /// Sets `updated`.
-    pub fn updated(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn updated(mut self, value: i64) -> Self {
         self.updated = ::core::option::Option::Some(value.into());
         self
     }
@@ -163,10 +163,10 @@ impl ParentReindexTask {
     /// A `ParentReindexTask` with its required properties set.
     pub fn new(
         action: impl ::core::convert::Into<::std::string::String>,
-        cancellable: impl ::core::convert::Into<bool>,
-        cancelled: impl ::core::convert::Into<bool>,
+        cancellable: bool,
+        cancelled: bool,
         description: impl ::core::convert::Into<::std::string::String>,
-        id: impl ::core::convert::Into<i64>,
+        id: i64,
         node: impl ::core::convert::Into<::oxsearch_core::Name>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
@@ -281,10 +281,10 @@ impl ReindexTask {
     /// A `ReindexTask` with its required properties set.
     pub fn new(
         action: impl ::core::convert::Into<::std::string::String>,
-        cancellable: impl ::core::convert::Into<bool>,
-        cancelled: impl ::core::convert::Into<bool>,
+        cancellable: bool,
+        cancelled: bool,
         description: impl ::core::convert::Into<::std::string::String>,
-        id: impl ::core::convert::Into<i64>,
+        id: i64,
         node: impl ::core::convert::Into<::oxsearch_core::Name>,
         running_time_in_nanos: impl ::core::convert::Into<::oxsearch_core::UnitNanos>,
         start_time_in_millis: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
@@ -411,7 +411,7 @@ impl Request {
     /// A `Request` with its required properties set.
     pub fn new(
         task_id: impl ::core::convert::Into<::oxsearch_core::Id>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        requests_per_second: f32,
     ) -> Self {
         Self {
             task_id: task_id.into(),
@@ -501,5 +501,57 @@ impl Response {
     ) -> Self {
         self.tasks = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::reindex_rethrottle::Response;
+
+    fn name(&self) -> &'static str {
+        "reindex_rethrottle"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.task_id),)
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Post,
+                format!(
+                    "/_reindex/{}/_rethrottle",
+                    ::oxsearch_core::__private::path_param("task_id", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        query.push((
+            "requests_per_second",
+            ::oxsearch_core::__private::query_param(
+                "requests_per_second",
+                &self.requests_per_second,
+            )?,
+        ));
+        if let ::core::option::Option::Some(value) = &self.group_by {
+            query.push((
+                "group_by",
+                ::oxsearch_core::__private::query_param("group_by", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
     }
 }

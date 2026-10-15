@@ -66,7 +66,7 @@ impl<TDocument> GetResult<TDocument> {
     /// A `GetResult` with its required properties set.
     pub fn new(
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        found: impl ::core::convert::Into<bool>,
+        found: bool,
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
     ) -> Self {
         Self {
@@ -101,7 +101,7 @@ impl<TDocument> GetResult<TDocument> {
         self
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -119,7 +119,7 @@ impl<TDocument> GetResult<TDocument> {
         self
     }
     /// Sets `source`.
-    pub fn source(mut self, value: impl ::core::convert::Into<TDocument>) -> Self {
+    pub fn source(mut self, value: TDocument) -> Self {
         self.source = ::core::option::Option::Some(value.into());
         self
     }
@@ -275,7 +275,7 @@ impl Request {
         }
     }
     /// Sets `force_synthetic_source`.
-    pub fn force_synthetic_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_synthetic_source(mut self, value: bool) -> Self {
         self.force_synthetic_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -285,12 +285,12 @@ impl Request {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `refresh`.
-    pub fn refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
         self
     }
@@ -321,7 +321,7 @@ impl Request {
         self
     }
     /// Sets `source_exclude_vectors`.
-    pub fn source_exclude_vectors(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn source_exclude_vectors(mut self, value: bool) -> Self {
         self.source_exclude_vectors = ::core::option::Option::Some(value.into());
         self
     }
@@ -362,3 +362,136 @@ impl Request {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response<TDocument = ::serde_json::Value>(pub crate::get::GetResult<TDocument>);
+
+impl<TDocument> ::core::ops::Deref for Response<TDocument> {
+    type Target = crate::get::GetResult<TDocument>;
+    fn deref(&self) -> &crate::get::GetResult<TDocument> {
+        &self.0
+    }
+}
+
+impl<TDocument> ::core::ops::DerefMut for Response<TDocument> {
+    fn deref_mut(&mut self) -> &mut crate::get::GetResult<TDocument> {
+        &mut self.0
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::get::Response;
+
+    fn name(&self) -> &'static str {
+        "get"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) = (
+            ::core::option::Option::Some(&self.index),
+            ::core::option::Option::Some(&self.id),
+        ) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Get,
+                format!(
+                    "/{}/_doc/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("id", p1)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.force_synthetic_source {
+            query.push((
+                "force_synthetic_source",
+                ::oxsearch_core::__private::query_param("force_synthetic_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.realtime {
+            query.push((
+                "realtime",
+                ::oxsearch_core::__private::query_param("realtime", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source {
+            query.push((
+                "_source",
+                ::oxsearch_core::__private::query_param("_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_excludes {
+            query.push((
+                "_source_excludes",
+                ::oxsearch_core::__private::query_param("_source_excludes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_exclude_vectors {
+            query.push((
+                "_source_exclude_vectors",
+                ::oxsearch_core::__private::query_param("_source_exclude_vectors", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_includes {
+            query.push((
+                "_source_includes",
+                ::oxsearch_core::__private::query_param("_source_includes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.stored_fields {
+            query.push((
+                "stored_fields",
+                ::oxsearch_core::__private::query_param("stored_fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version_type {
+            query.push((
+                "version_type",
+                ::oxsearch_core::__private::query_param("version_type", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
+    }
+}

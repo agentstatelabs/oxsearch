@@ -58,7 +58,7 @@ impl RequestBody {
         }
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -68,7 +68,7 @@ impl RequestBody {
         self
     }
     /// Sets `case_insensitive`.
-    pub fn case_insensitive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_insensitive(mut self, value: bool) -> Self {
         self.case_insensitive = ::core::option::Option::Some(value.into());
         self
     }
@@ -161,12 +161,56 @@ impl Response {
     pub fn new(
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
         terms: impl ::core::convert::Into<::std::vec::Vec<::std::string::String>>,
-        complete: impl ::core::convert::Into<bool>,
+        complete: bool,
     ) -> Self {
         Self {
             shards: ::core::option::Option::Some(shards.into()),
             terms: terms.into(),
             complete: ::core::option::Option::Some(complete.into()),
         }
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::terms_enum::Response;
+
+    fn name(&self) -> &'static str {
+        "terms_enum"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.index),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_terms_enum",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        ::core::result::Result::Ok(::std::vec::Vec::new())
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

@@ -52,3 +52,64 @@ impl Response {
         }
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::get::Response;
+
+    fn name(&self) -> &'static str {
+        "inference.get"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) =
+            (self.task_type.as_ref(), self.inference_id.as_ref())
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Get,
+                format!(
+                    "/_inference/{}/{}",
+                    ::oxsearch_core::__private::path_param("task_type", p0)?,
+                    ::oxsearch_core::__private::path_param("inference_id", p1)?
+                ),
+            ));
+        }
+        if let (::core::option::Option::Some(p0),) = (self.inference_id.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Get,
+                format!(
+                    "/_inference/{}",
+                    ::oxsearch_core::__private::path_param("inference_id", p0)?
+                ),
+            ));
+        }
+        if let (::core::option::Option::Some(p0),) = (self.task_type.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Get,
+                format!(
+                    "/_inference/{}/_all",
+                    ::oxsearch_core::__private::path_param("task_type", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Get,
+            "/_inference",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        ::core::result::Result::Ok(::std::vec::Vec::new())
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
+    }
+}

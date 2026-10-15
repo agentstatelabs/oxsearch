@@ -84,17 +84,17 @@ impl AdaptiveAllocations {
         }
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_number_of_allocations`.
-    pub fn max_number_of_allocations(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_number_of_allocations(mut self, value: i32) -> Self {
         self.max_number_of_allocations = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_number_of_allocations`.
-    pub fn min_number_of_allocations(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_number_of_allocations(mut self, value: i32) -> Self {
         self.min_number_of_allocations = ::core::option::Option::Some(value.into());
         self
     }
@@ -386,7 +386,7 @@ impl AlibabaCloudTaskSettings {
         self
     }
     /// Sets `return_token`.
-    pub fn return_token(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_token(mut self, value: bool) -> Self {
         self.return_token = ::core::option::Option::Some(value.into());
         self
     }
@@ -599,22 +599,22 @@ impl AmazonBedrockTaskSettings {
         }
     }
     /// Sets `max_new_tokens`.
-    pub fn max_new_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_new_tokens(mut self, value: i32) -> Self {
         self.max_new_tokens = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `temperature`.
-    pub fn temperature(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn temperature(mut self, value: f32) -> Self {
         self.temperature = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_k`.
-    pub fn top_k(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn top_k(mut self, value: f32) -> Self {
         self.top_k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_p`.
-    pub fn top_p(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn top_p(mut self, value: f32) -> Self {
         self.top_p = ::core::option::Option::Some(value.into());
         self
     }
@@ -894,12 +894,12 @@ impl AmazonSageMakerServiceSettings {
         self
     }
     /// Sets `batch_size`.
-    pub fn batch_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn batch_size(mut self, value: i32) -> Self {
         self.batch_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `dimensions`.
-    pub fn dimensions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
         self
     }
@@ -1191,7 +1191,7 @@ pub struct AnthropicTaskSettings {
 
 impl AnthropicTaskSettings {
     /// A `AnthropicTaskSettings` with its required properties set.
-    pub fn new(max_tokens: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(max_tokens: i32) -> Self {
         Self {
             max_tokens: max_tokens.into(),
             temperature: ::core::option::Option::None,
@@ -1200,17 +1200,17 @@ impl AnthropicTaskSettings {
         }
     }
     /// Sets `temperature`.
-    pub fn temperature(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn temperature(mut self, value: f32) -> Self {
         self.temperature = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_k`.
-    pub fn top_k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_k(mut self, value: i32) -> Self {
         self.top_k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_p`.
-    pub fn top_p(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn top_p(mut self, value: f32) -> Self {
         self.top_p = ::core::option::Option::Some(value.into());
         self
     }
@@ -1422,22 +1422,22 @@ impl AzureAiStudioTaskSettings {
         }
     }
     /// Sets `do_sample`.
-    pub fn do_sample(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn do_sample(mut self, value: f32) -> Self {
         self.do_sample = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_new_tokens`.
-    pub fn max_new_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_new_tokens(mut self, value: i32) -> Self {
         self.max_new_tokens = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `temperature`.
-    pub fn temperature(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn temperature(mut self, value: f32) -> Self {
         self.temperature = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_p`.
-    pub fn top_p(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn top_p(mut self, value: f32) -> Self {
         self.top_p = ::core::option::Option::Some(value.into());
         self
     }
@@ -1447,12 +1447,12 @@ impl AzureAiStudioTaskSettings {
         self
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }
@@ -1834,7 +1834,7 @@ impl BaseReasoningDetail {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn index(mut self, value: i32) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -2184,12 +2184,12 @@ impl CohereTaskSettings {
         }
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }
@@ -2451,7 +2451,7 @@ impl CompletionToolFunction {
         self
     }
     /// Sets `strict`.
-    pub fn strict(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn strict(mut self, value: bool) -> Self {
         self.strict = ::core::option::Option::Some(value.into());
         self
     }
@@ -2712,7 +2712,7 @@ impl ContextualAITaskSettings {
         self
     }
     /// Sets `top_k`.
-    pub fn top_k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_k(mut self, value: i32) -> Self {
         self.top_k = ::core::option::Option::Some(value.into());
         self
     }
@@ -3089,7 +3089,7 @@ impl CustomServiceSettings {
         }
     }
     /// Sets `batch_size`.
-    pub fn batch_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn batch_size(mut self, value: i32) -> Self {
         self.batch_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -3452,7 +3452,7 @@ pub struct DeleteInferenceEndpointResult {
 impl DeleteInferenceEndpointResult {
     /// A `DeleteInferenceEndpointResult` with its required properties set.
     pub fn new(
-        acknowledged: impl ::core::convert::Into<bool>,
+        acknowledged: bool,
         pipelines: impl ::core::convert::Into<::std::vec::Vec<::std::string::String>>,
     ) -> Self {
         Self {
@@ -3554,7 +3554,7 @@ impl ElasticsearchServiceSettings {
     /// A `ElasticsearchServiceSettings` with its required properties set.
     pub fn new(
         model_id: impl ::core::convert::Into<::std::string::String>,
-        num_threads: impl ::core::convert::Into<i32>,
+        num_threads: i32,
     ) -> Self {
         Self {
             adaptive_allocations: ::core::option::Option::None,
@@ -3583,7 +3583,7 @@ impl ElasticsearchServiceSettings {
         self
     }
     /// Sets `num_allocations`.
-    pub fn num_allocations(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn num_allocations(mut self, value: i32) -> Self {
         self.num_allocations = ::core::option::Option::Some(value.into());
         self
     }
@@ -3596,7 +3596,7 @@ impl ElasticsearchServiceSettings {
         self
     }
     /// Sets `max_chunks_per_doc`.
-    pub fn max_chunks_per_doc(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_chunks_per_doc(mut self, value: i32) -> Self {
         self.max_chunks_per_doc = ::core::option::Option::Some(value.into());
         self
     }
@@ -3666,7 +3666,7 @@ impl ElasticsearchTaskSettings {
         }
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
@@ -3755,10 +3755,7 @@ pub struct ElserServiceSettings {
 
 impl ElserServiceSettings {
     /// A `ElserServiceSettings` with its required properties set.
-    pub fn new(
-        num_allocations: impl ::core::convert::Into<i32>,
-        num_threads: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(num_allocations: i32, num_threads: i32) -> Self {
         Self {
             adaptive_allocations: ::core::option::Option::None,
             num_allocations: num_allocations.into(),
@@ -4125,7 +4122,7 @@ impl EncryptedReasoningDetail {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn index(mut self, value: i32) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -4205,7 +4202,7 @@ impl FireworksAIServiceSettings {
         self
     }
     /// Sets `dimensions`.
-    pub fn dimensions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
         self
     }
@@ -4773,12 +4770,12 @@ impl GoogleVertexAIServiceSettings {
         self
     }
     /// Sets `dimensions`.
-    pub fn dimensions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_batch_size`.
-    pub fn max_batch_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_batch_size(mut self, value: i32) -> Self {
         self.max_batch_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4864,12 +4861,12 @@ impl GoogleVertexAITaskSettings {
         }
     }
     /// Sets `auto_truncate`.
-    pub fn auto_truncate(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn auto_truncate(mut self, value: bool) -> Self {
         self.auto_truncate = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }
@@ -4882,7 +4879,7 @@ impl GoogleVertexAITaskSettings {
         self
     }
     /// Sets `max_tokens`.
-    pub fn max_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_tokens(mut self, value: i32) -> Self {
         self.max_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -5209,12 +5206,12 @@ impl HuggingFaceTaskSettings {
         }
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }
@@ -5424,17 +5421,17 @@ impl InferenceChunkingSettings {
         }
     }
     /// Sets `max_chunk_size`.
-    pub fn max_chunk_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_chunk_size(mut self, value: i32) -> Self {
         self.max_chunk_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `overlap`.
-    pub fn overlap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn overlap(mut self, value: i32) -> Self {
         self.overlap = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `sentence_overlap`.
-    pub fn sentence_overlap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn sentence_overlap(mut self, value: i32) -> Self {
         self.sentence_overlap = ::core::option::Option::Some(value.into());
         self
     }
@@ -7296,7 +7293,7 @@ impl JinaAIServiceSettings {
         self
     }
     /// Sets `dimensions`.
-    pub fn dimensions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
         self
     }
@@ -7309,7 +7306,7 @@ impl JinaAIServiceSettings {
         self
     }
     /// Sets `multimodal_model`.
-    pub fn multimodal_model(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn multimodal_model(mut self, value: bool) -> Self {
         self.multimodal_model = ::core::option::Option::Some(value.into());
         self
     }
@@ -7460,7 +7457,7 @@ impl JinaAITaskSettings {
         }
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
@@ -7473,12 +7470,12 @@ impl JinaAITaskSettings {
         self
     }
     /// Sets `late_chunking`.
-    pub fn late_chunking(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn late_chunking(mut self, value: bool) -> Self {
         self.late_chunking = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }
@@ -7641,7 +7638,7 @@ impl LlamaServiceSettings {
         }
     }
     /// Sets `max_input_tokens`.
-    pub fn max_input_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_input_tokens(mut self, value: i32) -> Self {
         self.max_input_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -8046,7 +8043,7 @@ impl MistralServiceSettings {
         }
     }
     /// Sets `max_input_tokens`.
-    pub fn max_input_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_input_tokens(mut self, value: i32) -> Self {
         self.max_input_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -8271,7 +8268,7 @@ impl NvidiaServiceSettings {
         self
     }
     /// Sets `max_input_tokens`.
-    pub fn max_input_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_input_tokens(mut self, value: i32) -> Self {
         self.max_input_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -8615,7 +8612,7 @@ impl OpenAIServiceSettings {
         self
     }
     /// Sets `dimensions`.
-    pub fn dimensions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
         self
     }
@@ -8922,7 +8919,7 @@ impl OpenShiftAiServiceSettings {
         self
     }
     /// Sets `max_input_tokens`.
-    pub fn max_input_tokens(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_input_tokens(mut self, value: i32) -> Self {
         self.max_input_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -9068,12 +9065,12 @@ impl OpenShiftAiTaskSettings {
         }
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_n`.
-    pub fn top_n(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_n(mut self, value: i32) -> Self {
         self.top_n = ::core::option::Option::Some(value.into());
         self
     }
@@ -9156,10 +9153,7 @@ pub struct RankedDocument {
 
 impl RankedDocument {
     /// A `RankedDocument` with its required properties set.
-    pub fn new(
-        index: impl ::core::convert::Into<i32>,
-        relevance_score: impl ::core::convert::Into<f32>,
-    ) -> Self {
+    pub fn new(index: i32, relevance_score: f32) -> Self {
         Self {
             index: ::core::option::Option::Some(index.into()),
             relevance_score: ::core::option::Option::Some(relevance_score.into()),
@@ -9213,7 +9207,7 @@ impl RateLimitSetting {
         }
     }
     /// Sets `requests_per_minute`.
-    pub fn requests_per_minute(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn requests_per_minute(mut self, value: i32) -> Self {
         self.requests_per_minute = ::core::option::Option::Some(value.into());
         self
     }
@@ -9263,12 +9257,12 @@ impl Reasoning {
         self
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `exclude`.
-    pub fn exclude(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn exclude(mut self, value: bool) -> Self {
         self.exclude = ::core::option::Option::Some(value.into());
         self
     }
@@ -9284,11 +9278,11 @@ impl Reasoning {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum ReasoningDetail {
-    /// `encrypted_reasoning_detail`.
+    /// `reasoning.encrypted`.
     Encrypted(crate::EncryptedReasoningDetail),
-    /// `summary_reasoning_detail`.
+    /// `reasoning.summary`.
     Summary(crate::SummaryReasoningDetail),
-    /// `text_reasoning_detail`.
+    /// `reasoning.text`.
     Text(crate::TextReasoningDetail),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
@@ -9303,19 +9297,19 @@ impl ::serde::Serialize for ReasoningDetail {
             Self::Encrypted(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "encrypted_reasoning_detail",
+                "reasoning.encrypted",
                 value,
             ),
             Self::Summary(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "summary_reasoning_detail",
+                "reasoning.summary",
                 value,
             ),
             Self::Text(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "text_reasoning_detail",
+                "reasoning.text",
                 value,
             ),
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
@@ -9334,13 +9328,13 @@ impl<'de> ::serde::Deserialize<'de> for ReasoningDetail {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("encrypted_reasoning_detail") => {
+            ::core::option::Option::Some("reasoning.encrypted") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Encrypted)
             }
-            ::core::option::Option::Some("summary_reasoning_detail") => {
+            ::core::option::Option::Some("reasoning.summary") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Summary)
             }
-            ::core::option::Option::Some("text_reasoning_detail") => {
+            ::core::option::Option::Some("reasoning.text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Text)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
@@ -9729,7 +9723,7 @@ impl RequestChatCompletion {
         self
     }
     /// Sets `max_completion_tokens`.
-    pub fn max_completion_tokens(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn max_completion_tokens(mut self, value: i64) -> Self {
         self.max_completion_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -9747,7 +9741,7 @@ impl RequestChatCompletion {
         self
     }
     /// Sets `temperature`.
-    pub fn temperature(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn temperature(mut self, value: f32) -> Self {
         self.temperature = ::core::option::Option::Some(value.into());
         self
     }
@@ -9768,7 +9762,7 @@ impl RequestChatCompletion {
         self
     }
     /// Sets `top_p`.
-    pub fn top_p(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn top_p(mut self, value: f32) -> Self {
         self.top_p = ::core::option::Option::Some(value.into());
         self
     }
@@ -9929,7 +9923,7 @@ pub struct SparseEmbeddingResult {
 impl SparseEmbeddingResult {
     /// A `SparseEmbeddingResult` with its required properties set.
     pub fn new(
-        is_truncated: impl ::core::convert::Into<bool>,
+        is_truncated: bool,
         embedding: impl ::core::convert::Into<crate::SparseVector>,
     ) -> Self {
         Self {
@@ -9983,7 +9977,7 @@ impl SummaryReasoningDetail {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn index(mut self, value: i32) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -11633,7 +11627,7 @@ impl TextReasoningDetail {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn index(mut self, value: i32) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -11665,7 +11659,7 @@ impl ThinkingConfig {
         }
     }
     /// Sets `thinking_budget`.
-    pub fn thinking_budget(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn thinking_budget(mut self, value: i32) -> Self {
         self.thinking_budget = ::core::option::Option::Some(value.into());
         self
     }
@@ -11758,7 +11752,7 @@ impl VoyageAIServiceSettings {
         }
     }
     /// Sets `dimensions`.
-    pub fn dimensions(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dimensions(mut self, value: i32) -> Self {
         self.dimensions = ::core::option::Option::Some(value.into());
         self
     }
@@ -11771,7 +11765,7 @@ impl VoyageAIServiceSettings {
         self
     }
     /// Sets `embedding_type`.
-    pub fn embedding_type(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn embedding_type(mut self, value: f32) -> Self {
         self.embedding_type = ::core::option::Option::Some(value.into());
         self
     }
@@ -11863,17 +11857,17 @@ impl VoyageAITaskSettings {
         self
     }
     /// Sets `return_documents`.
-    pub fn return_documents(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn return_documents(mut self, value: bool) -> Self {
         self.return_documents = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `top_k`.
-    pub fn top_k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn top_k(mut self, value: i32) -> Self {
         self.top_k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `truncation`.
-    pub fn truncation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn truncation(mut self, value: bool) -> Self {
         self.truncation = ::core::option::Option::Some(value.into());
         self
     }

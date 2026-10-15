@@ -91,7 +91,7 @@ impl Request {
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }
@@ -104,4 +104,89 @@ impl Request {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
-pub struct Response<TDocument = ::serde_json::Value>(pub crate::search::ResponseBody<TDocument>);
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(
+    pub crate::search::ResponseBody<TDocument, TAggregations>,
+);
+
+impl<TDocument, TAggregations> ::core::ops::Deref for Response<TDocument, TAggregations> {
+    type Target = crate::search::ResponseBody<TDocument, TAggregations>;
+    fn deref(&self) -> &crate::search::ResponseBody<TDocument, TAggregations> {
+        &self.0
+    }
+}
+
+impl<TDocument, TAggregations> ::core::ops::DerefMut for Response<TDocument, TAggregations> {
+    fn deref_mut(&mut self) -> &mut crate::search::ResponseBody<TDocument, TAggregations> {
+        &mut self.0
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::scroll::Response;
+
+    fn name(&self) -> &'static str {
+        "scroll"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.scroll_id.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/_search/scroll/{}",
+                    ::oxsearch_core::__private::path_param("scroll_id", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_search/scroll",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.scroll {
+            query.push((
+                "scroll",
+                ::oxsearch_core::__private::query_param("scroll", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.scroll_id2 {
+            query.push((
+                "scroll_id",
+                ::oxsearch_core::__private::query_param("scroll_id", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.rest_total_hits_as_int {
+            query.push((
+                "rest_total_hits_as_int",
+                ::oxsearch_core::__private::query_param("rest_total_hits_as_int", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

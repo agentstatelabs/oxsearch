@@ -24,8 +24,7 @@ pub struct RequestBody {
     ///
     /// The aggregation names can't start with `_mvt_`. The `_mvt_` prefix is reserved for internal aggregations.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggs:
-        ::core::option::Option<::indexmap::IndexMap<::std::string::String, ::serde_json::Value>>,
+    pub aggs: ::core::option::Option<::oxsearch_core::AggsBody>,
     /// The size, in pixels, of a clipping buffer outside the tile. This allows renderers
     /// to avoid outline artifacts from geometries that extend past the extent of the tile.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -127,27 +126,22 @@ impl RequestBody {
         }
     }
     /// Sets `aggs`.
-    pub fn aggs(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::std::string::String, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggs(mut self, value: impl ::core::convert::Into<::oxsearch_core::AggsBody>) -> Self {
         self.aggs = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `buffer`.
-    pub fn buffer(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn buffer(mut self, value: i32) -> Self {
         self.buffer = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `exact_bounds`.
-    pub fn exact_bounds(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn exact_bounds(mut self, value: bool) -> Self {
         self.exact_bounds = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `extent`.
-    pub fn extent(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn extent(mut self, value: i32) -> Self {
         self.extent = ::core::option::Option::Some(value.into());
         self
     }
@@ -165,7 +159,7 @@ impl RequestBody {
         self
     }
     /// Sets `grid_precision`.
-    pub fn grid_precision(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn grid_precision(mut self, value: i32) -> Self {
         self.grid_precision = ::core::option::Option::Some(value.into());
         self
     }
@@ -194,7 +188,7 @@ impl RequestBody {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -212,7 +206,7 @@ impl RequestBody {
         self
     }
     /// Sets `with_labels`.
-    pub fn with_labels(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn with_labels(mut self, value: bool) -> Self {
         self.with_labels = ::core::option::Option::Some(value.into());
         self
     }
@@ -407,12 +401,12 @@ impl Request {
         }
     }
     /// Sets `exact_bounds`.
-    pub fn exact_bounds(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn exact_bounds(mut self, value: bool) -> Self {
         self.exact_bounds = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `extent`.
-    pub fn extent(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn extent(mut self, value: i32) -> Self {
         self.extent = ::core::option::Option::Some(value.into());
         self
     }
@@ -425,7 +419,7 @@ impl Request {
         self
     }
     /// Sets `grid_precision`.
-    pub fn grid_precision(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn grid_precision(mut self, value: i32) -> Self {
         self.grid_precision = ::core::option::Option::Some(value.into());
         self
     }
@@ -438,7 +432,7 @@ impl Request {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -451,7 +445,7 @@ impl Request {
         self
     }
     /// Sets `with_labels`.
-    pub fn with_labels(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn with_labels(mut self, value: bool) -> Self {
         self.with_labels = ::core::option::Option::Some(value.into());
         self
     }
@@ -468,6 +462,19 @@ impl Request {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response(pub ::oxsearch_core::MapboxVectorTiles);
+
+impl ::core::ops::Deref for Response {
+    type Target = ::oxsearch_core::MapboxVectorTiles;
+    fn deref(&self) -> &::oxsearch_core::MapboxVectorTiles {
+        &self.0
+    }
+}
+
+impl ::core::ops::DerefMut for Response {
+    fn deref_mut(&mut self) -> &mut ::oxsearch_core::MapboxVectorTiles {
+        &mut self.0
+    }
+}
 
 pub type Coordinate = i32;
 
@@ -578,3 +585,112 @@ impl<'de> ::serde::Deserialize<'de> for GridType {
 }
 
 pub type ZoomLevel = i32;
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::search_mvt::Response;
+
+    fn name(&self) -> &'static str {
+        "search_mvt"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (
+            ::core::option::Option::Some(p0),
+            ::core::option::Option::Some(p1),
+            ::core::option::Option::Some(p2),
+            ::core::option::Option::Some(p3),
+            ::core::option::Option::Some(p4),
+        ) = (
+            ::core::option::Option::Some(&self.index),
+            ::core::option::Option::Some(&self.field),
+            ::core::option::Option::Some(&self.zoom),
+            ::core::option::Option::Some(&self.x),
+            ::core::option::Option::Some(&self.y),
+        ) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_mvt/{}/{}/{}/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("field", p1)?,
+                    ::oxsearch_core::__private::path_param("zoom", p2)?,
+                    ::oxsearch_core::__private::path_param("x", p3)?,
+                    ::oxsearch_core::__private::path_param("y", p4)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.exact_bounds {
+            query.push((
+                "exact_bounds",
+                ::oxsearch_core::__private::query_param("exact_bounds", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.extent {
+            query.push((
+                "extent",
+                ::oxsearch_core::__private::query_param("extent", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.grid_agg {
+            query.push((
+                "grid_agg",
+                ::oxsearch_core::__private::query_param("grid_agg", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.grid_precision {
+            query.push((
+                "grid_precision",
+                ::oxsearch_core::__private::query_param("grid_precision", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.grid_type {
+            query.push((
+                "grid_type",
+                ::oxsearch_core::__private::query_param("grid_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.size {
+            query.push((
+                "size",
+                ::oxsearch_core::__private::query_param("size", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.track_total_hits {
+            query.push((
+                "track_total_hits",
+                ::oxsearch_core::__private::query_param("track_total_hits", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.with_labels {
+            query.push((
+                "with_labels",
+                ::oxsearch_core::__private::query_param("with_labels", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

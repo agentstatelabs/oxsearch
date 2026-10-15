@@ -134,7 +134,7 @@ impl Request {
         }
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -157,12 +157,12 @@ impl Request {
         self
     }
     /// Sets `allow_partial_search_results`.
-    pub fn allow_partial_search_results(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_partial_search_results(mut self, value: bool) -> Self {
         self.allow_partial_search_results = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_concurrent_shard_requests`.
-    pub fn max_concurrent_shard_requests(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_concurrent_shard_requests(mut self, value: i32) -> Self {
         self.max_concurrent_shard_requests = ::core::option::Option::Some(value.into());
         self
     }
@@ -215,5 +215,86 @@ impl Response {
     ) -> Self {
         self.clusters = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::open_point_in_time::Response;
+
+    fn name(&self) -> &'static str {
+        "open_point_in_time"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.index),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Post,
+                format!(
+                    "/{}/_pit",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        query.push((
+            "keep_alive",
+            ::oxsearch_core::__private::query_param("keep_alive", &self.keep_alive)?,
+        ));
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.allow_partial_search_results {
+            query.push((
+                "allow_partial_search_results",
+                ::oxsearch_core::__private::query_param("allow_partial_search_results", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_concurrent_shard_requests {
+            query.push((
+                "max_concurrent_shard_requests",
+                ::oxsearch_core::__private::query_param("max_concurrent_shard_requests", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

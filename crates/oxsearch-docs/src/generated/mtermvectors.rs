@@ -92,7 +92,7 @@ impl Operation {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -102,17 +102,17 @@ impl Operation {
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
@@ -122,7 +122,7 @@ impl Operation {
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -276,22 +276,22 @@ impl Request {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
@@ -301,7 +301,7 @@ impl Request {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
@@ -316,7 +316,7 @@ impl Request {
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -419,12 +419,12 @@ impl TermVectorsResult {
         self
     }
     /// Sets `took`.
-    pub fn took(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn took(mut self, value: i64) -> Self {
         self.took = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `found`.
-    pub fn found(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn found(mut self, value: bool) -> Self {
         self.found = ::core::option::Option::Some(value.into());
         self
     }
@@ -442,5 +442,135 @@ impl TermVectorsResult {
     pub fn error(mut self, value: impl ::core::convert::Into<::oxsearch_core::ErrorCause>) -> Self {
         self.error = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::mtermvectors::Response;
+
+    fn name(&self) -> &'static str {
+        "mtermvectors"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_mtermvectors",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_mtermvectors",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.ids {
+            query.push((
+                "ids",
+                ::oxsearch_core::__private::query_param("ids", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.fields {
+            query.push((
+                "fields",
+                ::oxsearch_core::__private::query_param("fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.field_statistics {
+            query.push((
+                "field_statistics",
+                ::oxsearch_core::__private::query_param("field_statistics", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.offsets {
+            query.push((
+                "offsets",
+                ::oxsearch_core::__private::query_param("offsets", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.payloads {
+            query.push((
+                "payloads",
+                ::oxsearch_core::__private::query_param("payloads", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.positions {
+            query.push((
+                "positions",
+                ::oxsearch_core::__private::query_param("positions", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.realtime {
+            query.push((
+                "realtime",
+                ::oxsearch_core::__private::query_param("realtime", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.term_statistics {
+            query.push((
+                "term_statistics",
+                ::oxsearch_core::__private::query_param("term_statistics", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version_type {
+            query.push((
+                "version_type",
+                ::oxsearch_core::__private::query_param("version_type", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

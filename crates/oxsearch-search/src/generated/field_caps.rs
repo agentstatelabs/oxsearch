@@ -54,8 +54,8 @@ pub struct FieldCapability {
 impl FieldCapability {
     /// A `FieldCapability` with its required properties set.
     pub fn new(
-        aggregatable: impl ::core::convert::Into<bool>,
-        searchable: impl ::core::convert::Into<bool>,
+        aggregatable: bool,
+        searchable: bool,
         r#type: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
@@ -102,7 +102,7 @@ impl FieldCapability {
         self
     }
     /// Sets `inference`.
-    pub fn inference(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn inference(mut self, value: bool) -> Self {
         self.inference = ::core::option::Option::Some(value.into());
         self
     }
@@ -115,12 +115,12 @@ impl FieldCapability {
         self
     }
     /// Sets `metadata_field`.
-    pub fn metadata_field(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn metadata_field(mut self, value: bool) -> Self {
         self.metadata_field = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -286,7 +286,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -304,12 +304,12 @@ impl Request {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `include_unmapped`.
-    pub fn include_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_unmapped(mut self, value: bool) -> Self {
         self.include_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -330,7 +330,7 @@ impl Request {
         self
     }
     /// Sets `include_empty_fields`.
-    pub fn include_empty_fields(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_empty_fields(mut self, value: bool) -> Self {
         self.include_empty_fields = ::core::option::Option::Some(value.into());
         self
     }
@@ -372,5 +372,105 @@ impl Response {
             indices: ::core::option::Option::Some(indices.into()),
             fields: fields.into(),
         }
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::field_caps::Response;
+
+    fn name(&self) -> &'static str {
+        "field_caps"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_field_caps",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_field_caps",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.fields {
+            query.push((
+                "fields",
+                ::oxsearch_core::__private::query_param("fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.include_unmapped {
+            query.push((
+                "include_unmapped",
+                ::oxsearch_core::__private::query_param("include_unmapped", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.filters {
+            query.push((
+                "filters",
+                ::oxsearch_core::__private::query_param("filters", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.types {
+            query.push((
+                "types",
+                ::oxsearch_core::__private::query_param("types", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.include_empty_fields {
+            query.push((
+                "include_empty_fields",
+                ::oxsearch_core::__private::query_param("include_empty_fields", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

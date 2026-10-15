@@ -52,3 +52,34 @@ impl Response {
         }
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::info::Response;
+
+    fn name(&self) -> &'static str {
+        "info"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Get,
+            "/",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        ::core::result::Result::Ok(::std::vec::Vec::new())
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
+    }
+}

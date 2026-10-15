@@ -122,3 +122,54 @@ impl Response {
         }
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::render_search_template::Response;
+
+    fn name(&self) -> &'static str {
+        "render_search_template"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.id.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/_render/template/{}",
+                    ::oxsearch_core::__private::path_param("id", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_render/template",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        ::core::result::Result::Ok(::std::vec::Vec::new())
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

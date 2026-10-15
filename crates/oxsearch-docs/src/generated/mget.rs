@@ -235,7 +235,7 @@ impl Request {
         self
     }
     /// Sets `force_synthetic_source`.
-    pub fn force_synthetic_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_synthetic_source(mut self, value: bool) -> Self {
         self.force_synthetic_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -245,12 +245,12 @@ impl Request {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `refresh`.
-    pub fn refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
         self
     }
@@ -315,9 +315,7 @@ pub struct Response<TDocument = ::serde_json::Value> {
 
 impl<TDocument> Response<TDocument> {
     /// A `Response` with its required properties set.
-    pub fn new(
-        docs: impl ::core::convert::Into<::std::vec::Vec<crate::mget::ResponseItem<TDocument>>>,
-    ) -> Self {
+    pub fn new(docs: ::std::vec::Vec<crate::mget::ResponseItem<TDocument>>) -> Self {
         Self { docs: docs.into() }
     }
 }
@@ -399,5 +397,117 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
             deserializer,
             Shape(::core::marker::PhantomData),
         )
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::mget::Response;
+
+    fn name(&self) -> &'static str {
+        "mget"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_mget",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_mget",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.force_synthetic_source {
+            query.push((
+                "force_synthetic_source",
+                ::oxsearch_core::__private::query_param("force_synthetic_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.realtime {
+            query.push((
+                "realtime",
+                ::oxsearch_core::__private::query_param("realtime", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source {
+            query.push((
+                "_source",
+                ::oxsearch_core::__private::query_param("_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_excludes {
+            query.push((
+                "_source_excludes",
+                ::oxsearch_core::__private::query_param("_source_excludes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_includes {
+            query.push((
+                "_source_includes",
+                ::oxsearch_core::__private::query_param("_source_includes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.stored_fields {
+            query.push((
+                "stored_fields",
+                ::oxsearch_core::__private::query_param("stored_fields", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

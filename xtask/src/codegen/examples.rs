@@ -150,6 +150,7 @@ fn concrete(ty: &Ty) -> Ty {
         Ty::Stringified(t) => Ty::Stringified(boxed(t)),
         Ty::WithNull(t) => Ty::WithNull(boxed(t)),
         Ty::Flags(t) => Ty::Flags(boxed(t)),
+        Ty::Opt(t) => Ty::Opt(boxed(t)),
         Ty::TypedKeys(t) => Ty::TypedKeys(boxed(t)),
         Ty::Prim(_) | Ty::Unit | Ty::Json => ty.clone(),
     }

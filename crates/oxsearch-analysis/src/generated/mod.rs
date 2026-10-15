@@ -15,103 +15,103 @@
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum Analyzer {
-    /// `custom_analyzer`.
+    /// `custom`.
     Custom(crate::CustomAnalyzer),
-    /// `fingerprint_analyzer`.
+    /// `fingerprint`.
     Fingerprint(crate::FingerprintAnalyzer),
-    /// `keyword_analyzer`.
+    /// `keyword`.
     Keyword(crate::KeywordAnalyzer),
-    /// `nori_analyzer`.
+    /// `nori`.
     Nori(crate::NoriAnalyzer),
-    /// `pattern_analyzer`.
+    /// `pattern`.
     Pattern(crate::PatternAnalyzer),
-    /// `simple_analyzer`.
+    /// `simple`.
     Simple(crate::SimpleAnalyzer),
-    /// `standard_analyzer`.
+    /// `standard`.
     Standard(crate::StandardAnalyzer),
-    /// `stop_analyzer`.
+    /// `stop`.
     Stop(crate::StopAnalyzer),
-    /// `whitespace_analyzer`.
+    /// `whitespace`.
     Whitespace(crate::WhitespaceAnalyzer),
     /// `icu_analyzer`.
     Icu(crate::IcuAnalyzer),
-    /// `kuromoji_analyzer`.
+    /// `kuromoji`.
     Kuromoji(crate::KuromojiAnalyzer),
-    /// `snowball_analyzer`.
+    /// `snowball`.
     Snowball(crate::SnowballAnalyzer),
-    /// `arabic_analyzer`.
+    /// `arabic`.
     Arabic(crate::ArabicAnalyzer),
-    /// `armenian_analyzer`.
+    /// `armenian`.
     Armenian(crate::ArmenianAnalyzer),
-    /// `basque_analyzer`.
+    /// `basque`.
     Basque(crate::BasqueAnalyzer),
-    /// `bengali_analyzer`.
+    /// `bengali`.
     Bengali(crate::BengaliAnalyzer),
-    /// `brazilian_analyzer`.
+    /// `brazilian`.
     Brazilian(crate::BrazilianAnalyzer),
-    /// `bulgarian_analyzer`.
+    /// `bulgarian`.
     Bulgarian(crate::BulgarianAnalyzer),
-    /// `catalan_analyzer`.
+    /// `catalan`.
     Catalan(crate::CatalanAnalyzer),
-    /// `chinese_analyzer`.
+    /// `chinese`.
     Chinese(crate::ChineseAnalyzer),
-    /// `cjk_analyzer`.
+    /// `cjk`.
     Cjk(crate::CjkAnalyzer),
-    /// `czech_analyzer`.
+    /// `czech`.
     Czech(crate::CzechAnalyzer),
-    /// `danish_analyzer`.
+    /// `danish`.
     Danish(crate::DanishAnalyzer),
-    /// `dutch_analyzer`.
+    /// `dutch`.
     Dutch(crate::DutchAnalyzer),
-    /// `english_analyzer`.
+    /// `english`.
     English(crate::EnglishAnalyzer),
-    /// `estonian_analyzer`.
+    /// `estonian`.
     Estonian(crate::EstonianAnalyzer),
-    /// `finnish_analyzer`.
+    /// `finnish`.
     Finnish(crate::FinnishAnalyzer),
-    /// `french_analyzer`.
+    /// `french`.
     French(crate::FrenchAnalyzer),
-    /// `galician_analyzer`.
+    /// `galician`.
     Galician(crate::GalicianAnalyzer),
-    /// `german_analyzer`.
+    /// `german`.
     German(crate::GermanAnalyzer),
-    /// `greek_analyzer`.
+    /// `greek`.
     Greek(crate::GreekAnalyzer),
-    /// `hindi_analyzer`.
+    /// `hindi`.
     Hindi(crate::HindiAnalyzer),
-    /// `hungarian_analyzer`.
+    /// `hungarian`.
     Hungarian(crate::HungarianAnalyzer),
-    /// `indonesian_analyzer`.
+    /// `indonesian`.
     Indonesian(crate::IndonesianAnalyzer),
-    /// `irish_analyzer`.
+    /// `irish`.
     Irish(crate::IrishAnalyzer),
-    /// `italian_analyzer`.
+    /// `italian`.
     Italian(crate::ItalianAnalyzer),
-    /// `latvian_analyzer`.
+    /// `latvian`.
     Latvian(crate::LatvianAnalyzer),
-    /// `lithuanian_analyzer`.
+    /// `lithuanian`.
     Lithuanian(crate::LithuanianAnalyzer),
-    /// `norwegian_analyzer`.
+    /// `norwegian`.
     Norwegian(crate::NorwegianAnalyzer),
-    /// `persian_analyzer`.
+    /// `persian`.
     Persian(crate::PersianAnalyzer),
-    /// `portuguese_analyzer`.
+    /// `portuguese`.
     Portuguese(crate::PortugueseAnalyzer),
-    /// `romanian_analyzer`.
+    /// `romanian`.
     Romanian(crate::RomanianAnalyzer),
-    /// `russian_analyzer`.
+    /// `russian`.
     Russian(crate::RussianAnalyzer),
-    /// `serbian_analyzer`.
+    /// `serbian`.
     Serbian(crate::SerbianAnalyzer),
-    /// `sorani_analyzer`.
+    /// `sorani`.
     Sorani(crate::SoraniAnalyzer),
-    /// `spanish_analyzer`.
+    /// `spanish`.
     Spanish(crate::SpanishAnalyzer),
-    /// `swedish_analyzer`.
+    /// `swedish`.
     Swedish(crate::SwedishAnalyzer),
-    /// `turkish_analyzer`.
+    /// `turkish`.
     Turkish(crate::TurkishAnalyzer),
-    /// `thai_analyzer`.
+    /// `thai`.
     Thai(crate::ThaiAnalyzer),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
@@ -123,58 +123,37 @@ impl ::serde::Serialize for Analyzer {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Custom(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "custom_analyzer",
-                value,
-            ),
+            Self::Custom(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "custom", value)
+            }
             Self::Fingerprint(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "fingerprint_analyzer",
+                "fingerprint",
                 value,
             ),
-            Self::Keyword(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keyword_analyzer",
-                value,
-            ),
-            Self::Nori(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "nori_analyzer",
-                value,
-            ),
-            Self::Pattern(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "pattern_analyzer",
-                value,
-            ),
-            Self::Simple(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "simple_analyzer",
-                value,
-            ),
-            Self::Standard(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "standard_analyzer",
-                value,
-            ),
-            Self::Stop(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "stop_analyzer",
-                value,
-            ),
+            Self::Keyword(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "keyword", value)
+            }
+            Self::Nori(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "nori", value)
+            }
+            Self::Pattern(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "pattern", value)
+            }
+            Self::Simple(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "simple", value)
+            }
+            Self::Standard(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "standard", value)
+            }
+            Self::Stop(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "stop", value)
+            }
             Self::Whitespace(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "whitespace_analyzer",
+                "whitespace",
                 value,
             ),
             Self::Icu(value) => ::oxsearch_core::__private::serialize_tagged(
@@ -183,240 +162,132 @@ impl ::serde::Serialize for Analyzer {
                 "icu_analyzer",
                 value,
             ),
-            Self::Kuromoji(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "kuromoji_analyzer",
-                value,
-            ),
-            Self::Snowball(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "snowball_analyzer",
-                value,
-            ),
-            Self::Arabic(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "arabic_analyzer",
-                value,
-            ),
-            Self::Armenian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "armenian_analyzer",
-                value,
-            ),
-            Self::Basque(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "basque_analyzer",
-                value,
-            ),
-            Self::Bengali(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "bengali_analyzer",
-                value,
-            ),
-            Self::Brazilian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "brazilian_analyzer",
-                value,
-            ),
-            Self::Bulgarian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "bulgarian_analyzer",
-                value,
-            ),
-            Self::Catalan(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "catalan_analyzer",
-                value,
-            ),
-            Self::Chinese(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "chinese_analyzer",
-                value,
-            ),
-            Self::Cjk(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "cjk_analyzer",
-                value,
-            ),
-            Self::Czech(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "czech_analyzer",
-                value,
-            ),
-            Self::Danish(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "danish_analyzer",
-                value,
-            ),
-            Self::Dutch(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "dutch_analyzer",
-                value,
-            ),
-            Self::English(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "english_analyzer",
-                value,
-            ),
-            Self::Estonian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "estonian_analyzer",
-                value,
-            ),
-            Self::Finnish(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "finnish_analyzer",
-                value,
-            ),
-            Self::French(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "french_analyzer",
-                value,
-            ),
-            Self::Galician(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "galician_analyzer",
-                value,
-            ),
-            Self::German(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "german_analyzer",
-                value,
-            ),
-            Self::Greek(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "greek_analyzer",
-                value,
-            ),
-            Self::Hindi(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "hindi_analyzer",
-                value,
-            ),
-            Self::Hungarian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "hungarian_analyzer",
-                value,
-            ),
+            Self::Kuromoji(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "kuromoji", value)
+            }
+            Self::Snowball(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "snowball", value)
+            }
+            Self::Arabic(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "arabic", value)
+            }
+            Self::Armenian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "armenian", value)
+            }
+            Self::Basque(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "basque", value)
+            }
+            Self::Bengali(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "bengali", value)
+            }
+            Self::Brazilian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "brazilian", value)
+            }
+            Self::Bulgarian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "bulgarian", value)
+            }
+            Self::Catalan(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "catalan", value)
+            }
+            Self::Chinese(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "chinese", value)
+            }
+            Self::Cjk(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "cjk", value)
+            }
+            Self::Czech(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "czech", value)
+            }
+            Self::Danish(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "danish", value)
+            }
+            Self::Dutch(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "dutch", value)
+            }
+            Self::English(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "english", value)
+            }
+            Self::Estonian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "estonian", value)
+            }
+            Self::Finnish(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "finnish", value)
+            }
+            Self::French(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "french", value)
+            }
+            Self::Galician(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "galician", value)
+            }
+            Self::German(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "german", value)
+            }
+            Self::Greek(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "greek", value)
+            }
+            Self::Hindi(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "hindi", value)
+            }
+            Self::Hungarian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "hungarian", value)
+            }
             Self::Indonesian(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "indonesian_analyzer",
+                "indonesian",
                 value,
             ),
-            Self::Irish(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "irish_analyzer",
-                value,
-            ),
-            Self::Italian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "italian_analyzer",
-                value,
-            ),
-            Self::Latvian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "latvian_analyzer",
-                value,
-            ),
+            Self::Irish(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "irish", value)
+            }
+            Self::Italian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "italian", value)
+            }
+            Self::Latvian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "latvian", value)
+            }
             Self::Lithuanian(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "lithuanian_analyzer",
+                "lithuanian",
                 value,
             ),
-            Self::Norwegian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "norwegian_analyzer",
-                value,
-            ),
-            Self::Persian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "persian_analyzer",
-                value,
-            ),
+            Self::Norwegian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "norwegian", value)
+            }
+            Self::Persian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "persian", value)
+            }
             Self::Portuguese(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "portuguese_analyzer",
+                "portuguese",
                 value,
             ),
-            Self::Romanian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "romanian_analyzer",
-                value,
-            ),
-            Self::Russian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "russian_analyzer",
-                value,
-            ),
-            Self::Serbian(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "serbian_analyzer",
-                value,
-            ),
-            Self::Sorani(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "sorani_analyzer",
-                value,
-            ),
-            Self::Spanish(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "spanish_analyzer",
-                value,
-            ),
-            Self::Swedish(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "swedish_analyzer",
-                value,
-            ),
-            Self::Turkish(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "turkish_analyzer",
-                value,
-            ),
-            Self::Thai(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "thai_analyzer",
-                value,
-            ),
+            Self::Romanian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "romanian", value)
+            }
+            Self::Russian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "russian", value)
+            }
+            Self::Serbian(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "serbian", value)
+            }
+            Self::Sorani(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "sorani", value)
+            }
+            Self::Spanish(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "spanish", value)
+            }
+            Self::Swedish(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "swedish", value)
+            }
+            Self::Turkish(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "turkish", value)
+            }
+            Self::Thai(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "thai", value)
+            }
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
         }
     }
@@ -433,151 +304,151 @@ impl<'de> ::serde::Deserialize<'de> for Analyzer {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("custom_analyzer") => {
+            ::core::option::Option::Some("custom") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Custom)
             }
-            ::core::option::Option::Some("fingerprint_analyzer") => {
+            ::core::option::Option::Some("fingerprint") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Fingerprint)
             }
-            ::core::option::Option::Some("keyword_analyzer") => {
+            ::core::option::Option::Some("keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Keyword)
             }
-            ::core::option::Option::Some("nori_analyzer") => {
+            ::core::option::Option::Some("nori") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Nori)
             }
-            ::core::option::Option::Some("pattern_analyzer") => {
+            ::core::option::Option::Some("pattern") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Pattern)
             }
-            ::core::option::Option::Some("simple_analyzer") => {
+            ::core::option::Option::Some("simple") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Simple)
             }
-            ::core::option::Option::Some("standard_analyzer") => {
+            ::core::option::Option::Some("standard") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Standard)
             }
-            ::core::option::Option::Some("stop_analyzer") => {
+            ::core::option::Option::Some("stop") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Stop)
             }
-            ::core::option::Option::Some("whitespace_analyzer") => {
+            ::core::option::Option::Some("whitespace") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Whitespace)
             }
             ::core::option::Option::Some("icu_analyzer") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Icu)
             }
-            ::core::option::Option::Some("kuromoji_analyzer") => {
+            ::core::option::Option::Some("kuromoji") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Kuromoji)
             }
-            ::core::option::Option::Some("snowball_analyzer") => {
+            ::core::option::Option::Some("snowball") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Snowball)
             }
-            ::core::option::Option::Some("arabic_analyzer") => {
+            ::core::option::Option::Some("arabic") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Arabic)
             }
-            ::core::option::Option::Some("armenian_analyzer") => {
+            ::core::option::Option::Some("armenian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Armenian)
             }
-            ::core::option::Option::Some("basque_analyzer") => {
+            ::core::option::Option::Some("basque") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Basque)
             }
-            ::core::option::Option::Some("bengali_analyzer") => {
+            ::core::option::Option::Some("bengali") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Bengali)
             }
-            ::core::option::Option::Some("brazilian_analyzer") => {
+            ::core::option::Option::Some("brazilian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Brazilian)
             }
-            ::core::option::Option::Some("bulgarian_analyzer") => {
+            ::core::option::Option::Some("bulgarian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Bulgarian)
             }
-            ::core::option::Option::Some("catalan_analyzer") => {
+            ::core::option::Option::Some("catalan") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Catalan)
             }
-            ::core::option::Option::Some("chinese_analyzer") => {
+            ::core::option::Option::Some("chinese") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Chinese)
             }
-            ::core::option::Option::Some("cjk_analyzer") => {
+            ::core::option::Option::Some("cjk") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Cjk)
             }
-            ::core::option::Option::Some("czech_analyzer") => {
+            ::core::option::Option::Some("czech") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Czech)
             }
-            ::core::option::Option::Some("danish_analyzer") => {
+            ::core::option::Option::Some("danish") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Danish)
             }
-            ::core::option::Option::Some("dutch_analyzer") => {
+            ::core::option::Option::Some("dutch") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Dutch)
             }
-            ::core::option::Option::Some("english_analyzer") => {
+            ::core::option::Option::Some("english") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::English)
             }
-            ::core::option::Option::Some("estonian_analyzer") => {
+            ::core::option::Option::Some("estonian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Estonian)
             }
-            ::core::option::Option::Some("finnish_analyzer") => {
+            ::core::option::Option::Some("finnish") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Finnish)
             }
-            ::core::option::Option::Some("french_analyzer") => {
+            ::core::option::Option::Some("french") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::French)
             }
-            ::core::option::Option::Some("galician_analyzer") => {
+            ::core::option::Option::Some("galician") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Galician)
             }
-            ::core::option::Option::Some("german_analyzer") => {
+            ::core::option::Option::Some("german") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::German)
             }
-            ::core::option::Option::Some("greek_analyzer") => {
+            ::core::option::Option::Some("greek") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Greek)
             }
-            ::core::option::Option::Some("hindi_analyzer") => {
+            ::core::option::Option::Some("hindi") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Hindi)
             }
-            ::core::option::Option::Some("hungarian_analyzer") => {
+            ::core::option::Option::Some("hungarian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Hungarian)
             }
-            ::core::option::Option::Some("indonesian_analyzer") => {
+            ::core::option::Option::Some("indonesian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Indonesian)
             }
-            ::core::option::Option::Some("irish_analyzer") => {
+            ::core::option::Option::Some("irish") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Irish)
             }
-            ::core::option::Option::Some("italian_analyzer") => {
+            ::core::option::Option::Some("italian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Italian)
             }
-            ::core::option::Option::Some("latvian_analyzer") => {
+            ::core::option::Option::Some("latvian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Latvian)
             }
-            ::core::option::Option::Some("lithuanian_analyzer") => {
+            ::core::option::Option::Some("lithuanian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Lithuanian)
             }
-            ::core::option::Option::Some("norwegian_analyzer") => {
+            ::core::option::Option::Some("norwegian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Norwegian)
             }
-            ::core::option::Option::Some("persian_analyzer") => {
+            ::core::option::Option::Some("persian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Persian)
             }
-            ::core::option::Option::Some("portuguese_analyzer") => {
+            ::core::option::Option::Some("portuguese") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Portuguese)
             }
-            ::core::option::Option::Some("romanian_analyzer") => {
+            ::core::option::Option::Some("romanian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Romanian)
             }
-            ::core::option::Option::Some("russian_analyzer") => {
+            ::core::option::Option::Some("russian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Russian)
             }
-            ::core::option::Option::Some("serbian_analyzer") => {
+            ::core::option::Option::Some("serbian") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Serbian)
             }
-            ::core::option::Option::Some("sorani_analyzer") => {
+            ::core::option::Option::Some("sorani") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Sorani)
             }
-            ::core::option::Option::Some("spanish_analyzer") => {
+            ::core::option::Option::Some("spanish") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Spanish)
             }
-            ::core::option::Option::Some("swedish_analyzer") => {
+            ::core::option::Option::Some("swedish") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Swedish)
             }
-            ::core::option::Option::Some("turkish_analyzer") => {
+            ::core::option::Option::Some("turkish") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Turkish)
             }
-            ::core::option::Option::Some("thai_analyzer") => {
+            ::core::option::Option::Some("thai") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Thai)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
@@ -1132,16 +1003,16 @@ impl CharFilterBase {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum CharFilterDefinition {
-    /// `html_strip_char_filter`.
-    HtmlStripCharFilter(crate::HtmlStripCharFilter),
-    /// `mapping_char_filter`.
-    MappingCharFilter(crate::MappingCharFilter),
-    /// `pattern_replace_char_filter`.
-    PatternReplaceCharFilter(crate::PatternReplaceCharFilter),
-    /// `icu_normalization_char_filter`.
-    IcuNormalizationCharFilter(crate::IcuNormalizationCharFilter),
-    /// `kuromoji_iteration_mark_char_filter`.
-    KuromojiIterationMarkCharFilter(crate::KuromojiIterationMarkCharFilter),
+    /// `html_strip`.
+    HtmlStrip(crate::HtmlStripCharFilter),
+    /// `mapping`.
+    Mapping(crate::MappingCharFilter),
+    /// `pattern_replace`.
+    PatternReplace(crate::PatternReplaceCharFilter),
+    /// `icu_normalizer`.
+    IcuNormalizer(crate::IcuNormalizationCharFilter),
+    /// `kuromoji_iteration_mark`.
+    KuromojiIterationMark(crate::KuromojiIterationMarkCharFilter),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
 }
@@ -1152,40 +1023,33 @@ impl ::serde::Serialize for CharFilterDefinition {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::HtmlStripCharFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::HtmlStrip(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "html_strip_char_filter",
+                "html_strip",
                 value,
             ),
-            Self::MappingCharFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "mapping_char_filter",
-                value,
-            ),
-            Self::PatternReplaceCharFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "pattern_replace_char_filter",
-                value,
-            ),
-            Self::IcuNormalizationCharFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "icu_normalization_char_filter",
-                    value,
-                )
+            Self::Mapping(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "mapping", value)
             }
-            Self::KuromojiIterationMarkCharFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "kuromoji_iteration_mark_char_filter",
-                    value,
-                )
-            }
+            Self::PatternReplace(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "pattern_replace",
+                value,
+            ),
+            Self::IcuNormalizer(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "icu_normalizer",
+                value,
+            ),
+            Self::KuromojiIterationMark(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "kuromoji_iteration_mark",
+                value,
+            ),
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
         }
     }
@@ -1202,21 +1066,20 @@ impl<'de> ::serde::Deserialize<'de> for CharFilterDefinition {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("html_strip_char_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::HtmlStripCharFilter)
+            ::core::option::Option::Some("html_strip") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::HtmlStrip)
             }
-            ::core::option::Option::Some("mapping_char_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::MappingCharFilter)
+            ::core::option::Option::Some("mapping") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Mapping)
             }
-            ::core::option::Option::Some("pattern_replace_char_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PatternReplaceCharFilter)
+            ::core::option::Option::Some("pattern_replace") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PatternReplace)
             }
-            ::core::option::Option::Some("icu_normalization_char_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::IcuNormalizationCharFilter)
+            ::core::option::Option::Some("icu_normalizer") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::IcuNormalizer)
             }
-            ::core::option::Option::Some("kuromoji_iteration_mark_char_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::KuromojiIterationMarkCharFilter)
+            ::core::option::Option::Some("kuromoji_iteration_mark") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KuromojiIterationMark)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
         }
@@ -1253,7 +1116,7 @@ impl CharGroupTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -1428,7 +1291,7 @@ impl CjkBigramTokenFilter {
         self
     }
     /// Sets `output_unigrams`.
-    pub fn output_unigrams(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn output_unigrams(mut self, value: bool) -> Self {
         self.output_unigrams = ::core::option::Option::Some(value.into());
         self
     }
@@ -1508,7 +1371,7 @@ impl ClassicTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -1575,12 +1438,12 @@ impl CommonGramsTokenFilter {
         self
     }
     /// Sets `ignore_case`.
-    pub fn ignore_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_case(mut self, value: bool) -> Self {
         self.ignore_case = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `query_mode`.
-    pub fn query_mode(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn query_mode(mut self, value: bool) -> Self {
         self.query_mode = ::core::option::Option::Some(value.into());
         self
     }
@@ -1636,22 +1499,22 @@ impl CompoundWordTokenFilterBase {
         self
     }
     /// Sets `max_subword_size`.
-    pub fn max_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_subword_size(mut self, value: i32) -> Self {
         self.max_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_subword_size`.
-    pub fn min_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_subword_size(mut self, value: i32) -> Self {
         self.min_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_size`.
-    pub fn min_word_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_size(mut self, value: i32) -> Self {
         self.min_word_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_longest_match`.
-    pub fn only_longest_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_longest_match(mut self, value: bool) -> Self {
         self.only_longest_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -1749,12 +1612,12 @@ impl CustomAnalyzer {
         self
     }
     /// Sets `position_increment_gap`.
-    pub fn position_increment_gap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn position_increment_gap(mut self, value: i32) -> Self {
         self.position_increment_gap = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `position_offset_gap`.
-    pub fn position_offset_gap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn position_offset_gap(mut self, value: i32) -> Self {
         self.position_offset_gap = ::core::option::Option::Some(value.into());
         self
     }
@@ -2075,22 +1938,22 @@ impl DictionaryDecompounderTokenFilter {
         self
     }
     /// Sets `max_subword_size`.
-    pub fn max_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_subword_size(mut self, value: i32) -> Self {
         self.max_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_subword_size`.
-    pub fn min_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_subword_size(mut self, value: i32) -> Self {
         self.min_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_size`.
-    pub fn min_word_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_size(mut self, value: i32) -> Self {
         self.min_word_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_longest_match`.
-    pub fn only_longest_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_longest_match(mut self, value: bool) -> Self {
         self.only_longest_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -2273,12 +2136,12 @@ impl EdgeNGramTokenFilter {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -2340,12 +2203,12 @@ impl EdgeNGramTokenizer {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -2547,7 +2410,7 @@ impl FingerprintAnalyzer {
         self
     }
     /// Sets `max_output_size`.
-    pub fn max_output_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_output_size(mut self, value: i32) -> Self {
         self.max_output_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -2605,7 +2468,7 @@ impl FingerprintTokenFilter {
         self
     }
     /// Sets `max_output_size`.
-    pub fn max_output_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_output_size(mut self, value: i32) -> Self {
         self.max_output_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -3122,7 +2985,7 @@ impl HunspellTokenFilter {
         self
     }
     /// Sets `dedup`.
-    pub fn dedup(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn dedup(mut self, value: bool) -> Self {
         self.dedup = ::core::option::Option::Some(value.into());
         self
     }
@@ -3132,7 +2995,7 @@ impl HunspellTokenFilter {
         self
     }
     /// Sets `longest_only`.
-    pub fn longest_only(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn longest_only(mut self, value: bool) -> Self {
         self.longest_only = ::core::option::Option::Some(value.into());
         self
     }
@@ -3202,22 +3065,22 @@ impl HyphenationDecompounderTokenFilter {
         self
     }
     /// Sets `max_subword_size`.
-    pub fn max_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_subword_size(mut self, value: i32) -> Self {
         self.max_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_subword_size`.
-    pub fn min_subword_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_subword_size(mut self, value: i32) -> Self {
         self.min_subword_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_size`.
-    pub fn min_word_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_size(mut self, value: i32) -> Self {
         self.min_word_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `only_longest_match`.
-    pub fn only_longest_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_longest_match(mut self, value: bool) -> Self {
         self.only_longest_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -3238,12 +3101,12 @@ impl HyphenationDecompounderTokenFilter {
         self
     }
     /// Sets `no_sub_matches`.
-    pub fn no_sub_matches(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn no_sub_matches(mut self, value: bool) -> Self {
         self.no_sub_matches = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `no_overlapping_matches`.
-    pub fn no_overlapping_matches(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn no_overlapping_matches(mut self, value: bool) -> Self {
         self.no_overlapping_matches = ::core::option::Option::Some(value.into());
         self
     }
@@ -3576,7 +3439,7 @@ impl IcuCollationTokenFilter {
         self
     }
     /// Sets `case_level`.
-    pub fn case_level(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_level(mut self, value: bool) -> Self {
         self.case_level = ::core::option::Option::Some(value.into());
         self
     }
@@ -3594,7 +3457,7 @@ impl IcuCollationTokenFilter {
         self
     }
     /// Sets `hiragana_quaternary_mode`.
-    pub fn hiragana_quaternary_mode(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn hiragana_quaternary_mode(mut self, value: bool) -> Self {
         self.hiragana_quaternary_mode = ::core::option::Option::Some(value.into());
         self
     }
@@ -3604,7 +3467,7 @@ impl IcuCollationTokenFilter {
         self
     }
     /// Sets `numeric`.
-    pub fn numeric(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn numeric(mut self, value: bool) -> Self {
         self.numeric = ::core::option::Option::Some(value.into());
         self
     }
@@ -4314,7 +4177,7 @@ impl KeepWordsTokenFilter {
         self
     }
     /// Sets `keep_words_case`.
-    pub fn keep_words_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn keep_words_case(mut self, value: bool) -> Self {
         self.keep_words_case = ::core::option::Option::Some(value.into());
         self
     }
@@ -4395,7 +4258,7 @@ impl KeywordMarkerTokenFilter {
         self
     }
     /// Sets `ignore_case`.
-    pub fn ignore_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_case(mut self, value: bool) -> Self {
         self.ignore_case = ::core::option::Option::Some(value.into());
         self
     }
@@ -4475,7 +4338,7 @@ impl KeywordTokenizer {
         self
     }
     /// Sets `buffer_size`.
-    pub fn buffer_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn buffer_size(mut self, value: i32) -> Self {
         self.buffer_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -4527,10 +4390,7 @@ pub struct KuromojiIterationMarkCharFilter {
 
 impl KuromojiIterationMarkCharFilter {
     /// A `KuromojiIterationMarkCharFilter` with its required properties set.
-    pub fn new(
-        normalize_kana: impl ::core::convert::Into<bool>,
-        normalize_kanji: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn new(normalize_kana: bool, normalize_kanji: bool) -> Self {
         Self {
             version: ::core::option::Option::None,
             normalize_kana: normalize_kana.into(),
@@ -4585,7 +4445,7 @@ pub struct KuromojiReadingFormTokenFilter {
 
 impl KuromojiReadingFormTokenFilter {
     /// A `KuromojiReadingFormTokenFilter` with its required properties set.
-    pub fn new(use_romaji: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(use_romaji: bool) -> Self {
         Self {
             version: ::core::option::Option::None,
             use_romaji: use_romaji.into(),
@@ -4611,7 +4471,7 @@ pub struct KuromojiStemmerTokenFilter {
 
 impl KuromojiStemmerTokenFilter {
     /// A `KuromojiStemmerTokenFilter` with its required properties set.
-    pub fn new(minimum_length: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(minimum_length: i32) -> Self {
         Self {
             version: ::core::option::Option::None,
             minimum_length: minimum_length.into(),
@@ -4726,12 +4586,12 @@ impl KuromojiTokenizer {
         self
     }
     /// Sets `discard_punctuation`.
-    pub fn discard_punctuation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn discard_punctuation(mut self, value: bool) -> Self {
         self.discard_punctuation = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `nbest_cost`.
-    pub fn nbest_cost(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn nbest_cost(mut self, value: i32) -> Self {
         self.nbest_cost = ::core::option::Option::Some(value.into());
         self
     }
@@ -4760,7 +4620,7 @@ impl KuromojiTokenizer {
         self
     }
     /// Sets `discard_compound_token`.
-    pub fn discard_compound_token(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn discard_compound_token(mut self, value: bool) -> Self {
         self.discard_compound_token = ::core::option::Option::Some(value.into());
         self
     }
@@ -4843,12 +4703,12 @@ impl LengthTokenFilter {
         self
     }
     /// Sets `max`.
-    pub fn max(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max(mut self, value: i32) -> Self {
         self.max = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min`.
-    pub fn min(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min(mut self, value: i32) -> Self {
         self.min = ::core::option::Option::Some(value.into());
         self
     }
@@ -4909,7 +4769,7 @@ impl LimitTokenCountTokenFilter {
         self
     }
     /// Sets `consume_all_tokens`.
-    pub fn consume_all_tokens(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn consume_all_tokens(mut self, value: bool) -> Self {
         self.consume_all_tokens = ::core::option::Option::Some(value.into());
         self
     }
@@ -5182,22 +5042,22 @@ impl MinHashTokenFilter {
         self
     }
     /// Sets `bucket_count`.
-    pub fn bucket_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn bucket_count(mut self, value: i32) -> Self {
         self.bucket_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `hash_count`.
-    pub fn hash_count(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn hash_count(mut self, value: i32) -> Self {
         self.hash_count = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `hash_set_size`.
-    pub fn hash_set_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn hash_set_size(mut self, value: i32) -> Self {
         self.hash_set_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `with_rotation`.
-    pub fn with_rotation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn with_rotation(mut self, value: bool) -> Self {
         self.with_rotation = ::core::option::Option::Some(value.into());
         self
     }
@@ -5279,12 +5139,12 @@ impl NGramTokenFilter {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -5341,12 +5201,12 @@ impl NGramTokenizer {
         self
     }
     /// Sets `max_gram`.
-    pub fn max_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_gram(mut self, value: i32) -> Self {
         self.max_gram = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_gram`.
-    pub fn min_gram(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_gram(mut self, value: i32) -> Self {
         self.min_gram = ::core::option::Option::Some(value.into());
         self
     }
@@ -5552,7 +5412,7 @@ impl NoriTokenizer {
         self
     }
     /// Sets `discard_punctuation`.
-    pub fn discard_punctuation(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn discard_punctuation(mut self, value: bool) -> Self {
         self.discard_punctuation = ::core::option::Option::Some(value.into());
         self
     }
@@ -5577,9 +5437,9 @@ impl NoriTokenizer {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum Normalizer {
-    /// `lowercase_normalizer`.
+    /// `lowercase`.
     Lowercase(crate::LowercaseNormalizer),
-    /// `custom_normalizer`.
+    /// `custom`.
     Custom(crate::CustomNormalizer),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
@@ -5591,18 +5451,12 @@ impl ::serde::Serialize for Normalizer {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Lowercase(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "lowercase_normalizer",
-                value,
-            ),
-            Self::Custom(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "custom_normalizer",
-                value,
-            ),
+            Self::Lowercase(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "lowercase", value)
+            }
+            Self::Custom(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "custom", value)
+            }
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
         }
     }
@@ -5619,10 +5473,10 @@ impl<'de> ::serde::Deserialize<'de> for Normalizer {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("lowercase_normalizer") => {
+            ::core::option::Option::Some("lowercase") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Lowercase)
             }
-            ::core::option::Option::Some("custom_normalizer") => {
+            ::core::option::Option::Some("custom") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Custom)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
@@ -5800,7 +5654,7 @@ impl PatternAnalyzer {
         self
     }
     /// Sets `lowercase`.
-    pub fn lowercase(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lowercase(mut self, value: bool) -> Self {
         self.lowercase = ::core::option::Option::Some(value.into());
         self
     }
@@ -5947,7 +5801,7 @@ impl PatternReplaceTokenFilter {
         self
     }
     /// Sets `all`.
-    pub fn all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn all(mut self, value: bool) -> Self {
         self.all = ::core::option::Option::Some(value.into());
         self
     }
@@ -6000,7 +5854,7 @@ impl PatternTokenizer {
         self
     }
     /// Sets `group`.
-    pub fn group(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn group(mut self, value: i32) -> Self {
         self.group = ::core::option::Option::Some(value.into());
         self
     }
@@ -6435,7 +6289,7 @@ impl PhoneticTokenFilter {
         self
     }
     /// Sets `max_code_len`.
-    pub fn max_code_len(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_code_len(mut self, value: i32) -> Self {
         self.max_code_len = ::core::option::Option::Some(value.into());
         self
     }
@@ -6445,7 +6299,7 @@ impl PhoneticTokenFilter {
         self
     }
     /// Sets `replace`.
-    pub fn replace(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn replace(mut self, value: bool) -> Self {
         self.replace = ::core::option::Option::Some(value.into());
         self
     }
@@ -6906,15 +6760,12 @@ impl ShingleTokenFilter {
         self
     }
     /// Sets `output_unigrams`.
-    pub fn output_unigrams(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn output_unigrams(mut self, value: bool) -> Self {
         self.output_unigrams = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `output_unigrams_if_no_shingles`.
-    pub fn output_unigrams_if_no_shingles(
-        mut self,
-        value: impl ::core::convert::Into<bool>,
-    ) -> Self {
+    pub fn output_unigrams_if_no_shingles(mut self, value: bool) -> Self {
         self.output_unigrams_if_no_shingles = ::core::option::Option::Some(value.into());
         self
     }
@@ -7380,7 +7231,7 @@ impl StandardAnalyzer {
         }
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -7428,7 +7279,7 @@ impl StandardTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -7603,12 +7454,12 @@ impl StopTokenFilter {
         self
     }
     /// Sets `ignore_case`.
-    pub fn ignore_case(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_case(mut self, value: bool) -> Self {
         self.ignore_case = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `remove_trailing`.
-    pub fn remove_trailing(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn remove_trailing(mut self, value: bool) -> Self {
         self.remove_trailing = ::core::option::Option::Some(value.into());
         self
     }
@@ -7784,7 +7635,7 @@ impl SynonymGraphTokenFilter {
         self
     }
     /// Sets `expand`.
-    pub fn expand(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn expand(mut self, value: bool) -> Self {
         self.expand = ::core::option::Option::Some(value.into());
         self
     }
@@ -7794,7 +7645,7 @@ impl SynonymGraphTokenFilter {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -7828,7 +7679,7 @@ impl SynonymGraphTokenFilter {
         self
     }
     /// Sets `updateable`.
-    pub fn updateable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn updateable(mut self, value: bool) -> Self {
         self.updateable = ::core::option::Option::Some(value.into());
         self
     }
@@ -7890,7 +7741,7 @@ impl SynonymTokenFilter {
         self
     }
     /// Sets `expand`.
-    pub fn expand(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn expand(mut self, value: bool) -> Self {
         self.expand = ::core::option::Option::Some(value.into());
         self
     }
@@ -7900,7 +7751,7 @@ impl SynonymTokenFilter {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -7934,7 +7785,7 @@ impl SynonymTokenFilter {
         self
     }
     /// Sets `updateable`.
-    pub fn updateable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn updateable(mut self, value: bool) -> Self {
         self.updateable = ::core::option::Option::Some(value.into());
         self
     }
@@ -7996,7 +7847,7 @@ impl SynonymTokenFilterBase {
         self
     }
     /// Sets `expand`.
-    pub fn expand(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn expand(mut self, value: bool) -> Self {
         self.expand = ::core::option::Option::Some(value.into());
         self
     }
@@ -8006,7 +7857,7 @@ impl SynonymTokenFilterBase {
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
@@ -8040,7 +7891,7 @@ impl SynonymTokenFilterBase {
         self
     }
     /// Sets `updateable`.
-    pub fn updateable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn updateable(mut self, value: bool) -> Self {
         self.updateable = ::core::option::Option::Some(value.into());
         self
     }
@@ -8251,154 +8102,154 @@ impl TokenFilterBase {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum TokenFilterDefinition {
-    /// `apostrophe_token_filter`.
-    ApostropheTokenFilter(crate::ApostropheTokenFilter),
-    /// `arabic_stem_token_filter`.
-    ArabicStemTokenFilter(crate::ArabicStemTokenFilter),
-    /// `arabic_normalization_token_filter`.
-    ArabicNormalizationTokenFilter(crate::ArabicNormalizationTokenFilter),
-    /// `ascii_folding_token_filter`.
-    AsciiFoldingTokenFilter(crate::AsciiFoldingTokenFilter),
-    /// `bengali_normalization_token_filter`.
-    BengaliNormalizationTokenFilter(crate::BengaliNormalizationTokenFilter),
-    /// `brazilian_stem_token_filter`.
-    BrazilianStemTokenFilter(crate::BrazilianStemTokenFilter),
-    /// `cjk_bigram_token_filter`.
-    CjkBigramTokenFilter(crate::CjkBigramTokenFilter),
-    /// `cjk_width_token_filter`.
-    CjkWidthTokenFilter(crate::CjkWidthTokenFilter),
-    /// `classic_token_filter`.
-    ClassicTokenFilter(crate::ClassicTokenFilter),
-    /// `common_grams_token_filter`.
-    CommonGramsTokenFilter(crate::CommonGramsTokenFilter),
-    /// `condition_token_filter`.
-    ConditionTokenFilter(crate::ConditionTokenFilter),
-    /// `czech_stem_token_filter`.
-    CzechStemTokenFilter(crate::CzechStemTokenFilter),
-    /// `decimal_digit_token_filter`.
-    DecimalDigitTokenFilter(crate::DecimalDigitTokenFilter),
-    /// `delimited_payload_token_filter`.
-    DelimitedPayloadTokenFilter(crate::DelimitedPayloadTokenFilter),
-    /// `dutch_stem_token_filter`.
-    DutchStemTokenFilter(crate::DutchStemTokenFilter),
-    /// `edge_ngram_token_filter`.
-    EdgeNgramTokenFilter(crate::EdgeNGramTokenFilter),
-    /// `elision_token_filter`.
-    ElisionTokenFilter(crate::ElisionTokenFilter),
-    /// `fingerprint_token_filter`.
-    FingerprintTokenFilter(crate::FingerprintTokenFilter),
-    /// `flatten_graph_token_filter`.
-    FlattenGraphTokenFilter(crate::FlattenGraphTokenFilter),
-    /// `french_stem_token_filter`.
-    FrenchStemTokenFilter(crate::FrenchStemTokenFilter),
-    /// `german_normalization_token_filter`.
-    GermanNormalizationTokenFilter(crate::GermanNormalizationTokenFilter),
-    /// `german_stem_token_filter`.
-    GermanStemTokenFilter(crate::GermanStemTokenFilter),
-    /// `hindi_normalization_token_filter`.
-    HindiNormalizationTokenFilter(crate::HindiNormalizationTokenFilter),
-    /// `hunspell_token_filter`.
-    HunspellTokenFilter(crate::HunspellTokenFilter),
-    /// `hyphenation_decompounder_token_filter`.
-    HyphenationDecompounderTokenFilter(crate::HyphenationDecompounderTokenFilter),
-    /// `indic_normalization_token_filter`.
-    IndicNormalizationTokenFilter(crate::IndicNormalizationTokenFilter),
-    /// `keep_types_token_filter`.
-    KeepTypesTokenFilter(crate::KeepTypesTokenFilter),
-    /// `keep_words_token_filter`.
-    KeepWordsTokenFilter(crate::KeepWordsTokenFilter),
-    /// `keyword_marker_token_filter`.
-    KeywordMarkerTokenFilter(crate::KeywordMarkerTokenFilter),
-    /// `keyword_repeat_token_filter`.
-    KeywordRepeatTokenFilter(crate::KeywordRepeatTokenFilter),
-    /// `kstem_token_filter`.
-    KstemTokenFilter(crate::KStemTokenFilter),
-    /// `length_token_filter`.
-    LengthTokenFilter(crate::LengthTokenFilter),
-    /// `limit_token_count_token_filter`.
-    LimitTokenCountTokenFilter(crate::LimitTokenCountTokenFilter),
-    /// `lowercase_token_filter`.
-    LowercaseTokenFilter(crate::LowercaseTokenFilter),
-    /// `min_hash_token_filter`.
-    MinHashTokenFilter(crate::MinHashTokenFilter),
-    /// `multiplexer_token_filter`.
-    MultiplexerTokenFilter(crate::MultiplexerTokenFilter),
-    /// `ngram_token_filter`.
-    NgramTokenFilter(crate::NGramTokenFilter),
-    /// `nori_part_of_speech_token_filter`.
-    NoriPartOfSpeechTokenFilter(crate::NoriPartOfSpeechTokenFilter),
-    /// `pattern_capture_token_filter`.
-    PatternCaptureTokenFilter(crate::PatternCaptureTokenFilter),
-    /// `pattern_replace_token_filter`.
-    PatternReplaceTokenFilter(crate::PatternReplaceTokenFilter),
-    /// `persian_normalization_token_filter`.
-    PersianNormalizationTokenFilter(crate::PersianNormalizationTokenFilter),
-    /// `persian_stem_token_filter`.
-    PersianStemTokenFilter(crate::PersianStemTokenFilter),
-    /// `porter_stem_token_filter`.
-    PorterStemTokenFilter(crate::PorterStemTokenFilter),
+    /// `apostrophe`.
+    Apostrophe(crate::ApostropheTokenFilter),
+    /// `arabic_stem`.
+    ArabicStem(crate::ArabicStemTokenFilter),
+    /// `arabic_normalization`.
+    ArabicNormalization(crate::ArabicNormalizationTokenFilter),
+    /// `asciifolding`.
+    Asciifolding(crate::AsciiFoldingTokenFilter),
+    /// `bengali_normalization`.
+    BengaliNormalization(crate::BengaliNormalizationTokenFilter),
+    /// `brazilian_stem`.
+    BrazilianStem(crate::BrazilianStemTokenFilter),
+    /// `cjk_bigram`.
+    CjkBigram(crate::CjkBigramTokenFilter),
+    /// `cjk_width`.
+    CjkWidth(crate::CjkWidthTokenFilter),
+    /// `classic`.
+    Classic(crate::ClassicTokenFilter),
+    /// `common_grams`.
+    CommonGrams(crate::CommonGramsTokenFilter),
+    /// `condition`.
+    Condition(crate::ConditionTokenFilter),
+    /// `czech_stem`.
+    CzechStem(crate::CzechStemTokenFilter),
+    /// `decimal_digit`.
+    DecimalDigit(crate::DecimalDigitTokenFilter),
+    /// `delimited_payload`.
+    DelimitedPayload(crate::DelimitedPayloadTokenFilter),
+    /// `dutch_stem`.
+    DutchStem(crate::DutchStemTokenFilter),
+    /// `edge_ngram`.
+    EdgeNgram(crate::EdgeNGramTokenFilter),
+    /// `elision`.
+    Elision(crate::ElisionTokenFilter),
+    /// `fingerprint`.
+    Fingerprint(crate::FingerprintTokenFilter),
+    /// `flatten_graph`.
+    FlattenGraph(crate::FlattenGraphTokenFilter),
+    /// `french_stem`.
+    FrenchStem(crate::FrenchStemTokenFilter),
+    /// `german_normalization`.
+    GermanNormalization(crate::GermanNormalizationTokenFilter),
+    /// `german_stem`.
+    GermanStem(crate::GermanStemTokenFilter),
+    /// `hindi_normalization`.
+    HindiNormalization(crate::HindiNormalizationTokenFilter),
+    /// `hunspell`.
+    Hunspell(crate::HunspellTokenFilter),
+    /// `hyphenation_decompounder`.
+    HyphenationDecompounder(crate::HyphenationDecompounderTokenFilter),
+    /// `indic_normalization`.
+    IndicNormalization(crate::IndicNormalizationTokenFilter),
+    /// `keep_types`.
+    KeepTypes(crate::KeepTypesTokenFilter),
+    /// `keep`.
+    Keep(crate::KeepWordsTokenFilter),
+    /// `keyword_marker`.
+    KeywordMarker(crate::KeywordMarkerTokenFilter),
+    /// `keyword_repeat`.
+    KeywordRepeat(crate::KeywordRepeatTokenFilter),
+    /// `kstem`.
+    Kstem(crate::KStemTokenFilter),
+    /// `length`.
+    Length(crate::LengthTokenFilter),
+    /// `limit`.
+    Limit(crate::LimitTokenCountTokenFilter),
+    /// `lowercase`.
+    Lowercase(crate::LowercaseTokenFilter),
+    /// `min_hash`.
+    MinHash(crate::MinHashTokenFilter),
+    /// `multiplexer`.
+    Multiplexer(crate::MultiplexerTokenFilter),
+    /// `ngram`.
+    Ngram(crate::NGramTokenFilter),
+    /// `nori_part_of_speech`.
+    NoriPartOfSpeech(crate::NoriPartOfSpeechTokenFilter),
+    /// `pattern_capture`.
+    PatternCapture(crate::PatternCaptureTokenFilter),
+    /// `pattern_replace`.
+    PatternReplace(crate::PatternReplaceTokenFilter),
+    /// `persian_normalization`.
+    PersianNormalization(crate::PersianNormalizationTokenFilter),
+    /// `persian_stem`.
+    PersianStem(crate::PersianStemTokenFilter),
+    /// `porter_stem`.
+    PorterStem(crate::PorterStemTokenFilter),
     /// `predicate_token_filter`.
     PredicateTokenFilter(crate::PredicateTokenFilter),
-    /// `remove_duplicates_token_filter`.
-    RemoveDuplicatesTokenFilter(crate::RemoveDuplicatesTokenFilter),
-    /// `reverse_token_filter`.
-    ReverseTokenFilter(crate::ReverseTokenFilter),
-    /// `russian_stem_token_filter`.
-    RussianStemTokenFilter(crate::RussianStemTokenFilter),
-    /// `scandinavian_folding_token_filter`.
-    ScandinavianFoldingTokenFilter(crate::ScandinavianFoldingTokenFilter),
-    /// `scandinavian_normalization_token_filter`.
-    ScandinavianNormalizationTokenFilter(crate::ScandinavianNormalizationTokenFilter),
-    /// `serbian_normalization_token_filter`.
-    SerbianNormalizationTokenFilter(crate::SerbianNormalizationTokenFilter),
-    /// `shingle_token_filter`.
-    ShingleTokenFilter(crate::ShingleTokenFilter),
-    /// `snowball_token_filter`.
-    SnowballTokenFilter(crate::SnowballTokenFilter),
-    /// `sorani_normalization_token_filter`.
-    SoraniNormalizationTokenFilter(crate::SoraniNormalizationTokenFilter),
-    /// `stemmer_override_token_filter`.
-    StemmerOverrideTokenFilter(crate::StemmerOverrideTokenFilter),
-    /// `stemmer_token_filter`.
-    StemmerTokenFilter(crate::StemmerTokenFilter),
-    /// `stop_token_filter`.
-    StopTokenFilter(crate::StopTokenFilter),
-    /// `synonym_graph_token_filter`.
-    SynonymGraphTokenFilter(crate::SynonymGraphTokenFilter),
-    /// `synonym_token_filter`.
-    SynonymTokenFilter(crate::SynonymTokenFilter),
-    /// `trim_token_filter`.
-    TrimTokenFilter(crate::TrimTokenFilter),
-    /// `truncate_token_filter`.
-    TruncateTokenFilter(crate::TruncateTokenFilter),
-    /// `unique_token_filter`.
-    UniqueTokenFilter(crate::UniqueTokenFilter),
-    /// `uppercase_token_filter`.
-    UppercaseTokenFilter(crate::UppercaseTokenFilter),
-    /// `word_delimiter_graph_token_filter`.
-    WordDelimiterGraphTokenFilter(crate::WordDelimiterGraphTokenFilter),
-    /// `word_delimiter_token_filter`.
-    WordDelimiterTokenFilter(crate::WordDelimiterTokenFilter),
-    /// `ja_stop_token_filter`.
-    JaStopTokenFilter(crate::JaStopTokenFilter),
-    /// `kuromoji_stemmer_token_filter`.
-    KuromojiStemmerTokenFilter(crate::KuromojiStemmerTokenFilter),
-    /// `kuromoji_reading_form_token_filter`.
-    KuromojiReadingFormTokenFilter(crate::KuromojiReadingFormTokenFilter),
-    /// `kuromoji_part_of_speech_token_filter`.
-    KuromojiPartOfSpeechTokenFilter(crate::KuromojiPartOfSpeechTokenFilter),
-    /// `icu_collation_token_filter`.
-    IcuCollationTokenFilter(crate::IcuCollationTokenFilter),
-    /// `icu_folding_token_filter`.
-    IcuFoldingTokenFilter(crate::IcuFoldingTokenFilter),
-    /// `icu_normalization_token_filter`.
-    IcuNormalizationTokenFilter(crate::IcuNormalizationTokenFilter),
-    /// `icu_transform_token_filter`.
-    IcuTransformTokenFilter(crate::IcuTransformTokenFilter),
-    /// `phonetic_token_filter`.
-    PhoneticTokenFilter(crate::PhoneticTokenFilter),
-    /// `dictionary_decompounder_token_filter`.
-    DictionaryDecompounderTokenFilter(crate::DictionaryDecompounderTokenFilter),
+    /// `remove_duplicates`.
+    RemoveDuplicates(crate::RemoveDuplicatesTokenFilter),
+    /// `reverse`.
+    Reverse(crate::ReverseTokenFilter),
+    /// `russian_stem`.
+    RussianStem(crate::RussianStemTokenFilter),
+    /// `scandinavian_folding`.
+    ScandinavianFolding(crate::ScandinavianFoldingTokenFilter),
+    /// `scandinavian_normalization`.
+    ScandinavianNormalization(crate::ScandinavianNormalizationTokenFilter),
+    /// `serbian_normalization`.
+    SerbianNormalization(crate::SerbianNormalizationTokenFilter),
+    /// `shingle`.
+    Shingle(crate::ShingleTokenFilter),
+    /// `snowball`.
+    Snowball(crate::SnowballTokenFilter),
+    /// `sorani_normalization`.
+    SoraniNormalization(crate::SoraniNormalizationTokenFilter),
+    /// `stemmer_override`.
+    StemmerOverride(crate::StemmerOverrideTokenFilter),
+    /// `stemmer`.
+    Stemmer(crate::StemmerTokenFilter),
+    /// `stop`.
+    Stop(crate::StopTokenFilter),
+    /// `synonym_graph`.
+    SynonymGraph(crate::SynonymGraphTokenFilter),
+    /// `synonym`.
+    Synonym(crate::SynonymTokenFilter),
+    /// `trim`.
+    Trim(crate::TrimTokenFilter),
+    /// `truncate`.
+    Truncate(crate::TruncateTokenFilter),
+    /// `unique`.
+    Unique(crate::UniqueTokenFilter),
+    /// `uppercase`.
+    Uppercase(crate::UppercaseTokenFilter),
+    /// `word_delimiter_graph`.
+    WordDelimiterGraph(crate::WordDelimiterGraphTokenFilter),
+    /// `word_delimiter`.
+    WordDelimiter(crate::WordDelimiterTokenFilter),
+    /// `ja_stop`.
+    JaStop(crate::JaStopTokenFilter),
+    /// `kuromoji_stemmer`.
+    KuromojiStemmer(crate::KuromojiStemmerTokenFilter),
+    /// `kuromoji_readingform`.
+    KuromojiReadingform(crate::KuromojiReadingFormTokenFilter),
+    /// `kuromoji_part_of_speech`.
+    KuromojiPartOfSpeech(crate::KuromojiPartOfSpeechTokenFilter),
+    /// `icu_collation`.
+    IcuCollation(crate::IcuCollationTokenFilter),
+    /// `icu_folding`.
+    IcuFolding(crate::IcuFoldingTokenFilter),
+    /// `icu_normalizer`.
+    IcuNormalizer(crate::IcuNormalizationTokenFilter),
+    /// `icu_transform`.
+    IcuTransform(crate::IcuTransformTokenFilter),
+    /// `phonetic`.
+    Phonetic(crate::PhoneticTokenFilter),
+    /// `dictionary_decompounder`.
+    DictionaryDecompounder(crate::DictionaryDecompounderTokenFilter),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
 }
@@ -8409,282 +8260,226 @@ impl ::serde::Serialize for TokenFilterDefinition {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::ApostropheTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::Apostrophe(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "apostrophe_token_filter",
+                "apostrophe",
                 value,
             ),
-            Self::ArabicStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::ArabicStem(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "arabic_stem_token_filter",
+                "arabic_stem",
                 value,
             ),
-            Self::ArabicNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "arabic_normalization_token_filter",
-                    value,
-                )
+            Self::ArabicNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "arabic_normalization",
+                value,
+            ),
+            Self::Asciifolding(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "asciifolding",
+                value,
+            ),
+            Self::BengaliNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "bengali_normalization",
+                value,
+            ),
+            Self::BrazilianStem(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "brazilian_stem",
+                value,
+            ),
+            Self::CjkBigram(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "cjk_bigram",
+                value,
+            ),
+            Self::CjkWidth(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "cjk_width", value)
             }
-            Self::AsciiFoldingTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ascii_folding_token_filter",
-                value,
-            ),
-            Self::BengaliNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "bengali_normalization_token_filter",
-                    value,
-                )
+            Self::Classic(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "classic", value)
             }
-            Self::BrazilianStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::CommonGrams(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "brazilian_stem_token_filter",
+                "common_grams",
                 value,
             ),
-            Self::CjkBigramTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "cjk_bigram_token_filter",
-                value,
-            ),
-            Self::CjkWidthTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "cjk_width_token_filter",
-                value,
-            ),
-            Self::ClassicTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "classic_token_filter",
-                value,
-            ),
-            Self::CommonGramsTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "common_grams_token_filter",
-                value,
-            ),
-            Self::ConditionTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "condition_token_filter",
-                value,
-            ),
-            Self::CzechStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "czech_stem_token_filter",
-                value,
-            ),
-            Self::DecimalDigitTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "decimal_digit_token_filter",
-                value,
-            ),
-            Self::DelimitedPayloadTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "delimited_payload_token_filter",
-                    value,
-                )
+            Self::Condition(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "condition", value)
             }
-            Self::DutchStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::CzechStem(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "dutch_stem_token_filter",
+                "czech_stem",
                 value,
             ),
-            Self::EdgeNgramTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::DecimalDigit(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "edge_ngram_token_filter",
+                "decimal_digit",
                 value,
             ),
-            Self::ElisionTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::DelimitedPayload(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "elision_token_filter",
+                "delimited_payload",
                 value,
             ),
-            Self::FingerprintTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::DutchStem(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "fingerprint_token_filter",
+                "dutch_stem",
                 value,
             ),
-            Self::FlattenGraphTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::EdgeNgram(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "flatten_graph_token_filter",
+                "edge_ngram",
                 value,
             ),
-            Self::FrenchStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "french_stem_token_filter",
-                value,
-            ),
-            Self::GermanNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "german_normalization_token_filter",
-                    value,
-                )
+            Self::Elision(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "elision", value)
             }
-            Self::GermanStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::Fingerprint(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "german_stem_token_filter",
+                "fingerprint",
                 value,
             ),
-            Self::HindiNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "hindi_normalization_token_filter",
-                    value,
-                )
+            Self::FlattenGraph(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "flatten_graph",
+                value,
+            ),
+            Self::FrenchStem(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "french_stem",
+                value,
+            ),
+            Self::GermanNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "german_normalization",
+                value,
+            ),
+            Self::GermanStem(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "german_stem",
+                value,
+            ),
+            Self::HindiNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "hindi_normalization",
+                value,
+            ),
+            Self::Hunspell(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "hunspell", value)
             }
-            Self::HunspellTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::HyphenationDecompounder(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "hunspell_token_filter",
+                "hyphenation_decompounder",
                 value,
             ),
-            Self::HyphenationDecompounderTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "hyphenation_decompounder_token_filter",
-                    value,
-                )
+            Self::IndicNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "indic_normalization",
+                value,
+            ),
+            Self::KeepTypes(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "keep_types",
+                value,
+            ),
+            Self::Keep(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "keep", value)
             }
-            Self::IndicNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "indic_normalization_token_filter",
-                    value,
-                )
+            Self::KeywordMarker(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "keyword_marker",
+                value,
+            ),
+            Self::KeywordRepeat(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "keyword_repeat",
+                value,
+            ),
+            Self::Kstem(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "kstem", value)
             }
-            Self::KeepTypesTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keep_types_token_filter",
-                value,
-            ),
-            Self::KeepWordsTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keep_words_token_filter",
-                value,
-            ),
-            Self::KeywordMarkerTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keyword_marker_token_filter",
-                value,
-            ),
-            Self::KeywordRepeatTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keyword_repeat_token_filter",
-                value,
-            ),
-            Self::KstemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "kstem_token_filter",
-                value,
-            ),
-            Self::LengthTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "length_token_filter",
-                value,
-            ),
-            Self::LimitTokenCountTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "limit_token_count_token_filter",
-                    value,
-                )
+            Self::Length(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "length", value)
             }
-            Self::LowercaseTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "lowercase_token_filter",
-                value,
-            ),
-            Self::MinHashTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "min_hash_token_filter",
-                value,
-            ),
-            Self::MultiplexerTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "multiplexer_token_filter",
-                value,
-            ),
-            Self::NgramTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ngram_token_filter",
-                value,
-            ),
-            Self::NoriPartOfSpeechTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "nori_part_of_speech_token_filter",
-                    value,
-                )
+            Self::Limit(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "limit", value)
             }
-            Self::PatternCaptureTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "pattern_capture_token_filter",
-                value,
-            ),
-            Self::PatternReplaceTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "pattern_replace_token_filter",
-                value,
-            ),
-            Self::PersianNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "persian_normalization_token_filter",
-                    value,
-                )
+            Self::Lowercase(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "lowercase", value)
             }
-            Self::PersianStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::MinHash(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "min_hash", value)
+            }
+            Self::Multiplexer(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "persian_stem_token_filter",
+                "multiplexer",
                 value,
             ),
-            Self::PorterStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::Ngram(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ngram", value)
+            }
+            Self::NoriPartOfSpeech(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "porter_stem_token_filter",
+                "nori_part_of_speech",
+                value,
+            ),
+            Self::PatternCapture(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "pattern_capture",
+                value,
+            ),
+            Self::PatternReplace(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "pattern_replace",
+                value,
+            ),
+            Self::PersianNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "persian_normalization",
+                value,
+            ),
+            Self::PersianStem(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "persian_stem",
+                value,
+            ),
+            Self::PorterStem(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "porter_stem",
                 value,
             ),
             Self::PredicateTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
@@ -8693,210 +8488,150 @@ impl ::serde::Serialize for TokenFilterDefinition {
                 "predicate_token_filter",
                 value,
             ),
-            Self::RemoveDuplicatesTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "remove_duplicates_token_filter",
-                    value,
-                )
+            Self::RemoveDuplicates(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "remove_duplicates",
+                value,
+            ),
+            Self::Reverse(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "reverse", value)
             }
-            Self::ReverseTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::RussianStem(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "reverse_token_filter",
+                "russian_stem",
                 value,
             ),
-            Self::RussianStemTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::ScandinavianFolding(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "russian_stem_token_filter",
+                "scandinavian_folding",
                 value,
             ),
-            Self::ScandinavianFoldingTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "scandinavian_folding_token_filter",
-                    value,
-                )
+            Self::ScandinavianNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "scandinavian_normalization",
+                value,
+            ),
+            Self::SerbianNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "serbian_normalization",
+                value,
+            ),
+            Self::Shingle(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "shingle", value)
             }
-            Self::ScandinavianNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "scandinavian_normalization_token_filter",
-                    value,
-                )
+            Self::Snowball(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "snowball", value)
             }
-            Self::SerbianNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "serbian_normalization_token_filter",
-                    value,
-                )
+            Self::SoraniNormalization(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "sorani_normalization",
+                value,
+            ),
+            Self::StemmerOverride(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "stemmer_override",
+                value,
+            ),
+            Self::Stemmer(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "stemmer", value)
             }
-            Self::ShingleTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "shingle_token_filter",
-                value,
-            ),
-            Self::SnowballTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "snowball_token_filter",
-                value,
-            ),
-            Self::SoraniNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "sorani_normalization_token_filter",
-                    value,
-                )
+            Self::Stop(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "stop", value)
             }
-            Self::StemmerOverrideTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "stemmer_override_token_filter",
-                    value,
-                )
+            Self::SynonymGraph(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "synonym_graph",
+                value,
+            ),
+            Self::Synonym(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "synonym", value)
             }
-            Self::StemmerTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "stemmer_token_filter",
-                value,
-            ),
-            Self::StopTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "stop_token_filter",
-                value,
-            ),
-            Self::SynonymGraphTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "synonym_graph_token_filter",
-                value,
-            ),
-            Self::SynonymTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "synonym_token_filter",
-                value,
-            ),
-            Self::TrimTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "trim_token_filter",
-                value,
-            ),
-            Self::TruncateTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "truncate_token_filter",
-                value,
-            ),
-            Self::UniqueTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "unique_token_filter",
-                value,
-            ),
-            Self::UppercaseTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "uppercase_token_filter",
-                value,
-            ),
-            Self::WordDelimiterGraphTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "word_delimiter_graph_token_filter",
-                    value,
-                )
+            Self::Trim(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "trim", value)
             }
-            Self::WordDelimiterTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "word_delimiter_token_filter",
-                value,
-            ),
-            Self::JaStopTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ja_stop_token_filter",
-                value,
-            ),
-            Self::KuromojiStemmerTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "kuromoji_stemmer_token_filter",
-                    value,
-                )
+            Self::Truncate(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "truncate", value)
             }
-            Self::KuromojiReadingFormTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "kuromoji_reading_form_token_filter",
-                    value,
-                )
+            Self::Unique(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "unique", value)
             }
-            Self::KuromojiPartOfSpeechTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "kuromoji_part_of_speech_token_filter",
-                    value,
-                )
+            Self::Uppercase(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "uppercase", value)
             }
-            Self::IcuCollationTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::WordDelimiterGraph(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "icu_collation_token_filter",
+                "word_delimiter_graph",
                 value,
             ),
-            Self::IcuFoldingTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::WordDelimiter(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "icu_folding_token_filter",
+                "word_delimiter",
                 value,
             ),
-            Self::IcuNormalizationTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "icu_normalization_token_filter",
-                    value,
-                )
+            Self::JaStop(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ja_stop", value)
             }
-            Self::IcuTransformTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::KuromojiStemmer(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "icu_transform_token_filter",
+                "kuromoji_stemmer",
                 value,
             ),
-            Self::PhoneticTokenFilter(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::KuromojiReadingform(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "phonetic_token_filter",
+                "kuromoji_readingform",
                 value,
             ),
-            Self::DictionaryDecompounderTokenFilter(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "dictionary_decompounder_token_filter",
-                    value,
-                )
+            Self::KuromojiPartOfSpeech(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "kuromoji_part_of_speech",
+                value,
+            ),
+            Self::IcuCollation(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "icu_collation",
+                value,
+            ),
+            Self::IcuFolding(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "icu_folding",
+                value,
+            ),
+            Self::IcuNormalizer(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "icu_normalizer",
+                value,
+            ),
+            Self::IcuTransform(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "icu_transform",
+                value,
+            ),
+            Self::Phonetic(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "phonetic", value)
             }
+            Self::DictionaryDecompounder(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "dictionary_decompounder",
+                value,
+            ),
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
         }
     }
@@ -8913,242 +8648,227 @@ impl<'de> ::serde::Deserialize<'de> for TokenFilterDefinition {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("apostrophe_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ApostropheTokenFilter)
+            ::core::option::Option::Some("apostrophe") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Apostrophe)
             }
-            ::core::option::Option::Some("arabic_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ArabicStemTokenFilter)
+            ::core::option::Option::Some("arabic_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::ArabicStem)
             }
-            ::core::option::Option::Some("arabic_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::ArabicNormalizationTokenFilter)
+            ::core::option::Option::Some("arabic_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::ArabicNormalization)
             }
-            ::core::option::Option::Some("ascii_folding_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::AsciiFoldingTokenFilter)
+            ::core::option::Option::Some("asciifolding") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Asciifolding)
             }
-            ::core::option::Option::Some("bengali_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::BengaliNormalizationTokenFilter)
+            ::core::option::Option::Some("bengali_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::BengaliNormalization)
             }
-            ::core::option::Option::Some("brazilian_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::BrazilianStemTokenFilter)
+            ::core::option::Option::Some("brazilian_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::BrazilianStem)
             }
-            ::core::option::Option::Some("cjk_bigram_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::CjkBigramTokenFilter)
+            ::core::option::Option::Some("cjk_bigram") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::CjkBigram)
             }
-            ::core::option::Option::Some("cjk_width_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::CjkWidthTokenFilter)
+            ::core::option::Option::Some("cjk_width") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::CjkWidth)
             }
-            ::core::option::Option::Some("classic_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ClassicTokenFilter)
+            ::core::option::Option::Some("classic") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Classic)
             }
-            ::core::option::Option::Some("common_grams_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::CommonGramsTokenFilter)
+            ::core::option::Option::Some("common_grams") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::CommonGrams)
             }
-            ::core::option::Option::Some("condition_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ConditionTokenFilter)
+            ::core::option::Option::Some("condition") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Condition)
             }
-            ::core::option::Option::Some("czech_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::CzechStemTokenFilter)
+            ::core::option::Option::Some("czech_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::CzechStem)
             }
-            ::core::option::Option::Some("decimal_digit_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::DecimalDigitTokenFilter)
+            ::core::option::Option::Some("decimal_digit") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::DecimalDigit)
             }
-            ::core::option::Option::Some("delimited_payload_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::DelimitedPayloadTokenFilter)
+            ::core::option::Option::Some("delimited_payload") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::DelimitedPayload)
             }
-            ::core::option::Option::Some("dutch_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::DutchStemTokenFilter)
+            ::core::option::Option::Some("dutch_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::DutchStem)
             }
-            ::core::option::Option::Some("edge_ngram_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::EdgeNgramTokenFilter)
+            ::core::option::Option::Some("edge_ngram") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::EdgeNgram)
             }
-            ::core::option::Option::Some("elision_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ElisionTokenFilter)
+            ::core::option::Option::Some("elision") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Elision)
             }
-            ::core::option::Option::Some("fingerprint_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::FingerprintTokenFilter)
+            ::core::option::Option::Some("fingerprint") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Fingerprint)
             }
-            ::core::option::Option::Some("flatten_graph_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::FlattenGraphTokenFilter)
+            ::core::option::Option::Some("flatten_graph") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::FlattenGraph)
             }
-            ::core::option::Option::Some("french_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::FrenchStemTokenFilter)
+            ::core::option::Option::Some("french_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::FrenchStem)
             }
-            ::core::option::Option::Some("german_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::GermanNormalizationTokenFilter)
+            ::core::option::Option::Some("german_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::GermanNormalization)
             }
-            ::core::option::Option::Some("german_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::GermanStemTokenFilter)
+            ::core::option::Option::Some("german_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::GermanStem)
             }
-            ::core::option::Option::Some("hindi_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::HindiNormalizationTokenFilter)
+            ::core::option::Option::Some("hindi_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::HindiNormalization)
             }
-            ::core::option::Option::Some("hunspell_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::HunspellTokenFilter)
+            ::core::option::Option::Some("hunspell") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Hunspell)
             }
-            ::core::option::Option::Some("hyphenation_decompounder_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::HyphenationDecompounderTokenFilter)
+            ::core::option::Option::Some("hyphenation_decompounder") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::HyphenationDecompounder)
             }
-            ::core::option::Option::Some("indic_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::IndicNormalizationTokenFilter)
+            ::core::option::Option::Some("indic_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::IndicNormalization)
             }
-            ::core::option::Option::Some("keep_types_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KeepTypesTokenFilter)
+            ::core::option::Option::Some("keep_types") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KeepTypes)
             }
-            ::core::option::Option::Some("keep_words_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KeepWordsTokenFilter)
+            ::core::option::Option::Some("keep") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Keep)
             }
-            ::core::option::Option::Some("keyword_marker_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KeywordMarkerTokenFilter)
+            ::core::option::Option::Some("keyword_marker") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KeywordMarker)
             }
-            ::core::option::Option::Some("keyword_repeat_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KeywordRepeatTokenFilter)
+            ::core::option::Option::Some("keyword_repeat") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KeywordRepeat)
             }
-            ::core::option::Option::Some("kstem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KstemTokenFilter)
+            ::core::option::Option::Some("kstem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Kstem)
             }
-            ::core::option::Option::Some("length_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::LengthTokenFilter)
+            ::core::option::Option::Some("length") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Length)
             }
-            ::core::option::Option::Some("limit_token_count_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::LimitTokenCountTokenFilter)
+            ::core::option::Option::Some("limit") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Limit)
             }
-            ::core::option::Option::Some("lowercase_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::LowercaseTokenFilter)
+            ::core::option::Option::Some("lowercase") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Lowercase)
             }
-            ::core::option::Option::Some("min_hash_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::MinHashTokenFilter)
+            ::core::option::Option::Some("min_hash") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::MinHash)
             }
-            ::core::option::Option::Some("multiplexer_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::MultiplexerTokenFilter)
+            ::core::option::Option::Some("multiplexer") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Multiplexer)
             }
-            ::core::option::Option::Some("ngram_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::NgramTokenFilter)
+            ::core::option::Option::Some("ngram") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Ngram)
             }
-            ::core::option::Option::Some("nori_part_of_speech_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::NoriPartOfSpeechTokenFilter)
+            ::core::option::Option::Some("nori_part_of_speech") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::NoriPartOfSpeech)
             }
-            ::core::option::Option::Some("pattern_capture_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PatternCaptureTokenFilter)
+            ::core::option::Option::Some("pattern_capture") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PatternCapture)
             }
-            ::core::option::Option::Some("pattern_replace_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PatternReplaceTokenFilter)
+            ::core::option::Option::Some("pattern_replace") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PatternReplace)
             }
-            ::core::option::Option::Some("persian_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::PersianNormalizationTokenFilter)
+            ::core::option::Option::Some("persian_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PersianNormalization)
             }
-            ::core::option::Option::Some("persian_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PersianStemTokenFilter)
+            ::core::option::Option::Some("persian_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PersianStem)
             }
-            ::core::option::Option::Some("porter_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PorterStemTokenFilter)
+            ::core::option::Option::Some("porter_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PorterStem)
             }
             ::core::option::Option::Some("predicate_token_filter") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::PredicateTokenFilter)
             }
-            ::core::option::Option::Some("remove_duplicates_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::RemoveDuplicatesTokenFilter)
+            ::core::option::Option::Some("remove_duplicates") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::RemoveDuplicates)
             }
-            ::core::option::Option::Some("reverse_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ReverseTokenFilter)
+            ::core::option::Option::Some("reverse") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Reverse)
             }
-            ::core::option::Option::Some("russian_stem_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::RussianStemTokenFilter)
+            ::core::option::Option::Some("russian_stem") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::RussianStem)
             }
-            ::core::option::Option::Some("scandinavian_folding_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::ScandinavianFoldingTokenFilter)
+            ::core::option::Option::Some("scandinavian_folding") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::ScandinavianFolding)
             }
-            ::core::option::Option::Some("scandinavian_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::ScandinavianNormalizationTokenFilter)
+            ::core::option::Option::Some("scandinavian_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::ScandinavianNormalization)
             }
-            ::core::option::Option::Some("serbian_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::SerbianNormalizationTokenFilter)
+            ::core::option::Option::Some("serbian_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::SerbianNormalization)
             }
-            ::core::option::Option::Some("shingle_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ShingleTokenFilter)
+            ::core::option::Option::Some("shingle") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Shingle)
             }
-            ::core::option::Option::Some("snowball_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::SnowballTokenFilter)
+            ::core::option::Option::Some("snowball") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Snowball)
             }
-            ::core::option::Option::Some("sorani_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::SoraniNormalizationTokenFilter)
+            ::core::option::Option::Some("sorani_normalization") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::SoraniNormalization)
             }
-            ::core::option::Option::Some("stemmer_override_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::StemmerOverrideTokenFilter)
+            ::core::option::Option::Some("stemmer_override") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::StemmerOverride)
             }
-            ::core::option::Option::Some("stemmer_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::StemmerTokenFilter)
+            ::core::option::Option::Some("stemmer") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Stemmer)
             }
-            ::core::option::Option::Some("stop_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::StopTokenFilter)
+            ::core::option::Option::Some("stop") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Stop)
             }
-            ::core::option::Option::Some("synonym_graph_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::SynonymGraphTokenFilter)
+            ::core::option::Option::Some("synonym_graph") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::SynonymGraph)
             }
-            ::core::option::Option::Some("synonym_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::SynonymTokenFilter)
+            ::core::option::Option::Some("synonym") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Synonym)
             }
-            ::core::option::Option::Some("trim_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::TrimTokenFilter)
+            ::core::option::Option::Some("trim") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Trim)
             }
-            ::core::option::Option::Some("truncate_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::TruncateTokenFilter)
+            ::core::option::Option::Some("truncate") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Truncate)
             }
-            ::core::option::Option::Some("unique_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::UniqueTokenFilter)
+            ::core::option::Option::Some("unique") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Unique)
             }
-            ::core::option::Option::Some("uppercase_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::UppercaseTokenFilter)
+            ::core::option::Option::Some("uppercase") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Uppercase)
             }
-            ::core::option::Option::Some("word_delimiter_graph_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::WordDelimiterGraphTokenFilter)
+            ::core::option::Option::Some("word_delimiter_graph") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::WordDelimiterGraph)
             }
-            ::core::option::Option::Some("word_delimiter_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::WordDelimiterTokenFilter)
+            ::core::option::Option::Some("word_delimiter") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::WordDelimiter)
             }
-            ::core::option::Option::Some("ja_stop_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::JaStopTokenFilter)
+            ::core::option::Option::Some("ja_stop") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::JaStop)
             }
-            ::core::option::Option::Some("kuromoji_stemmer_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KuromojiStemmerTokenFilter)
+            ::core::option::Option::Some("kuromoji_stemmer") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KuromojiStemmer)
             }
-            ::core::option::Option::Some("kuromoji_reading_form_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::KuromojiReadingFormTokenFilter)
+            ::core::option::Option::Some("kuromoji_readingform") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KuromojiReadingform)
             }
-            ::core::option::Option::Some("kuromoji_part_of_speech_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::KuromojiPartOfSpeechTokenFilter)
+            ::core::option::Option::Some("kuromoji_part_of_speech") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::KuromojiPartOfSpeech)
             }
-            ::core::option::Option::Some("icu_collation_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::IcuCollationTokenFilter)
+            ::core::option::Option::Some("icu_collation") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::IcuCollation)
             }
-            ::core::option::Option::Some("icu_folding_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::IcuFoldingTokenFilter)
+            ::core::option::Option::Some("icu_folding") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::IcuFolding)
             }
-            ::core::option::Option::Some("icu_normalization_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::IcuNormalizationTokenFilter)
+            ::core::option::Option::Some("icu_normalizer") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::IcuNormalizer)
             }
-            ::core::option::Option::Some("icu_transform_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::IcuTransformTokenFilter)
+            ::core::option::Option::Some("icu_transform") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::IcuTransform)
             }
-            ::core::option::Option::Some("phonetic_token_filter") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PhoneticTokenFilter)
+            ::core::option::Option::Some("phonetic") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Phonetic)
             }
-            ::core::option::Option::Some("dictionary_decompounder_token_filter") => {
-                ::oxsearch_core::__private::from_value(json)
-                    .map(Self::DictionaryDecompounderTokenFilter)
+            ::core::option::Option::Some("dictionary_decompounder") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::DictionaryDecompounder)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
         }
@@ -9235,36 +8955,36 @@ impl TokenizerBase {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum TokenizerDefinition {
-    /// `char_group_tokenizer`.
-    CharGroupTokenizer(crate::CharGroupTokenizer),
-    /// `classic_tokenizer`.
-    ClassicTokenizer(crate::ClassicTokenizer),
-    /// `edge_ngram_tokenizer`.
-    EdgeNgramTokenizer(crate::EdgeNGramTokenizer),
-    /// `keyword_tokenizer`.
-    KeywordTokenizer(crate::KeywordTokenizer),
-    /// `letter_tokenizer`.
-    LetterTokenizer(crate::LetterTokenizer),
-    /// `lowercase_tokenizer`.
-    LowercaseTokenizer(crate::LowercaseTokenizer),
-    /// `ngram_tokenizer`.
-    NgramTokenizer(crate::NGramTokenizer),
-    /// `path_hierarchy_tokenizer`.
-    PathHierarchyTokenizer(crate::PathHierarchyTokenizer),
-    /// `pattern_tokenizer`.
-    PatternTokenizer(crate::PatternTokenizer),
-    /// `simple_pattern_tokenizer`.
-    SimplePatternTokenizer(crate::SimplePatternTokenizer),
-    /// `simple_pattern_split_tokenizer`.
-    SimplePatternSplitTokenizer(crate::SimplePatternSplitTokenizer),
-    /// `standard_tokenizer`.
-    StandardTokenizer(crate::StandardTokenizer),
-    /// `thai_tokenizer`.
-    ThaiTokenizer(crate::ThaiTokenizer),
-    /// `uax_email_url_tokenizer`.
-    UaxEmailUrlTokenizer(crate::UaxEmailUrlTokenizer),
-    /// `whitespace_tokenizer`.
-    WhitespaceTokenizer(crate::WhitespaceTokenizer),
+    /// `char_group`.
+    CharGroup(crate::CharGroupTokenizer),
+    /// `classic`.
+    Classic(crate::ClassicTokenizer),
+    /// `edge_ngram`.
+    EdgeNgram(crate::EdgeNGramTokenizer),
+    /// `keyword`.
+    Keyword(crate::KeywordTokenizer),
+    /// `letter`.
+    Letter(crate::LetterTokenizer),
+    /// `lowercase`.
+    Lowercase(crate::LowercaseTokenizer),
+    /// `ngram`.
+    Ngram(crate::NGramTokenizer),
+    /// `path_hierarchy`.
+    PathHierarchy(crate::PathHierarchyTokenizer),
+    /// `pattern`.
+    Pattern(crate::PatternTokenizer),
+    /// `simple_pattern`.
+    SimplePattern(crate::SimplePatternTokenizer),
+    /// `simple_pattern_split`.
+    SimplePatternSplit(crate::SimplePatternSplitTokenizer),
+    /// `standard`.
+    Standard(crate::StandardTokenizer),
+    /// `thai`.
+    Thai(crate::ThaiTokenizer),
+    /// `uax_url_email`.
+    UaxUrlEmail(crate::UaxEmailUrlTokenizer),
+    /// `whitespace`.
+    Whitespace(crate::WhitespaceTokenizer),
     /// `icu_tokenizer`.
     IcuTokenizer(crate::IcuTokenizer),
     /// `kuromoji_tokenizer`.
@@ -9281,96 +9001,70 @@ impl ::serde::Serialize for TokenizerDefinition {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::CharGroupTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::CharGroup(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "char_group_tokenizer",
+                "char_group",
                 value,
             ),
-            Self::ClassicTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "classic_tokenizer",
-                value,
-            ),
-            Self::EdgeNgramTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "edge_ngram_tokenizer",
-                value,
-            ),
-            Self::KeywordTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keyword_tokenizer",
-                value,
-            ),
-            Self::LetterTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "letter_tokenizer",
-                value,
-            ),
-            Self::LowercaseTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "lowercase_tokenizer",
-                value,
-            ),
-            Self::NgramTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ngram_tokenizer",
-                value,
-            ),
-            Self::PathHierarchyTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "path_hierarchy_tokenizer",
-                value,
-            ),
-            Self::PatternTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "pattern_tokenizer",
-                value,
-            ),
-            Self::SimplePatternTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "simple_pattern_tokenizer",
-                value,
-            ),
-            Self::SimplePatternSplitTokenizer(value) => {
-                ::oxsearch_core::__private::serialize_tagged(
-                    serializer,
-                    "type",
-                    "simple_pattern_split_tokenizer",
-                    value,
-                )
+            Self::Classic(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "classic", value)
             }
-            Self::StandardTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::EdgeNgram(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "standard_tokenizer",
+                "edge_ngram",
                 value,
             ),
-            Self::ThaiTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::Keyword(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "keyword", value)
+            }
+            Self::Letter(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "letter", value)
+            }
+            Self::Lowercase(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "lowercase", value)
+            }
+            Self::Ngram(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ngram", value)
+            }
+            Self::PathHierarchy(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "thai_tokenizer",
+                "path_hierarchy",
                 value,
             ),
-            Self::UaxEmailUrlTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::Pattern(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "pattern", value)
+            }
+            Self::SimplePattern(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "uax_email_url_tokenizer",
+                "simple_pattern",
                 value,
             ),
-            Self::WhitespaceTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
+            Self::SimplePatternSplit(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "whitespace_tokenizer",
+                "simple_pattern_split",
+                value,
+            ),
+            Self::Standard(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "standard", value)
+            }
+            Self::Thai(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "thai", value)
+            }
+            Self::UaxUrlEmail(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "uax_url_email",
+                value,
+            ),
+            Self::Whitespace(value) => ::oxsearch_core::__private::serialize_tagged(
+                serializer,
+                "type",
+                "whitespace",
                 value,
             ),
             Self::IcuTokenizer(value) => ::oxsearch_core::__private::serialize_tagged(
@@ -9407,50 +9101,50 @@ impl<'de> ::serde::Deserialize<'de> for TokenizerDefinition {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("char_group_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::CharGroupTokenizer)
+            ::core::option::Option::Some("char_group") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::CharGroup)
             }
-            ::core::option::Option::Some("classic_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ClassicTokenizer)
+            ::core::option::Option::Some("classic") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Classic)
             }
-            ::core::option::Option::Some("edge_ngram_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::EdgeNgramTokenizer)
+            ::core::option::Option::Some("edge_ngram") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::EdgeNgram)
             }
-            ::core::option::Option::Some("keyword_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::KeywordTokenizer)
+            ::core::option::Option::Some("keyword") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Keyword)
             }
-            ::core::option::Option::Some("letter_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::LetterTokenizer)
+            ::core::option::Option::Some("letter") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Letter)
             }
-            ::core::option::Option::Some("lowercase_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::LowercaseTokenizer)
+            ::core::option::Option::Some("lowercase") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Lowercase)
             }
-            ::core::option::Option::Some("ngram_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::NgramTokenizer)
+            ::core::option::Option::Some("ngram") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Ngram)
             }
-            ::core::option::Option::Some("path_hierarchy_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PathHierarchyTokenizer)
+            ::core::option::Option::Some("path_hierarchy") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::PathHierarchy)
             }
-            ::core::option::Option::Some("pattern_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::PatternTokenizer)
+            ::core::option::Option::Some("pattern") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Pattern)
             }
-            ::core::option::Option::Some("simple_pattern_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::SimplePatternTokenizer)
+            ::core::option::Option::Some("simple_pattern") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::SimplePattern)
             }
-            ::core::option::Option::Some("simple_pattern_split_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::SimplePatternSplitTokenizer)
+            ::core::option::Option::Some("simple_pattern_split") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::SimplePatternSplit)
             }
-            ::core::option::Option::Some("standard_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::StandardTokenizer)
+            ::core::option::Option::Some("standard") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Standard)
             }
-            ::core::option::Option::Some("thai_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::ThaiTokenizer)
+            ::core::option::Option::Some("thai") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Thai)
             }
-            ::core::option::Option::Some("uax_email_url_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::UaxEmailUrlTokenizer)
+            ::core::option::Option::Some("uax_url_email") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::UaxUrlEmail)
             }
-            ::core::option::Option::Some("whitespace_tokenizer") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::WhitespaceTokenizer)
+            ::core::option::Option::Some("whitespace") => {
+                ::oxsearch_core::__private::from_value(json).map(Self::Whitespace)
             }
             ::core::option::Option::Some("icu_tokenizer") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IcuTokenizer)
@@ -9517,7 +9211,7 @@ impl TruncateTokenFilter {
         self
     }
     /// Sets `length`.
-    pub fn length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn length(mut self, value: i32) -> Self {
         self.length = ::core::option::Option::Some(value.into());
         self
     }
@@ -9595,7 +9289,7 @@ impl UaxEmailUrlTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -9628,7 +9322,7 @@ impl UniqueTokenFilter {
         self
     }
     /// Sets `only_on_same_position`.
-    pub fn only_on_same_position(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn only_on_same_position(mut self, value: bool) -> Self {
         self.only_on_same_position = ::core::option::Option::Some(value.into());
         self
     }
@@ -9708,7 +9402,7 @@ impl WhitespaceTokenizer {
         self
     }
     /// Sets `max_token_length`.
-    pub fn max_token_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_token_length(mut self, value: i32) -> Self {
         self.max_token_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -9798,27 +9492,27 @@ impl WordDelimiterGraphTokenFilter {
         self
     }
     /// Sets `catenate_all`.
-    pub fn catenate_all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_all(mut self, value: bool) -> Self {
         self.catenate_all = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_numbers`.
-    pub fn catenate_numbers(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_numbers(mut self, value: bool) -> Self {
         self.catenate_numbers = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_words`.
-    pub fn catenate_words(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_words(mut self, value: bool) -> Self {
         self.catenate_words = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_number_parts`.
-    pub fn generate_number_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_number_parts(mut self, value: bool) -> Self {
         self.generate_number_parts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_word_parts`.
-    pub fn generate_word_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_word_parts(mut self, value: bool) -> Self {
         self.generate_word_parts = ::core::option::Option::Some(value.into());
         self
     }
@@ -9847,17 +9541,17 @@ impl WordDelimiterGraphTokenFilter {
         self
     }
     /// Sets `split_on_case_change`.
-    pub fn split_on_case_change(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_case_change(mut self, value: bool) -> Self {
         self.split_on_case_change = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_on_numerics`.
-    pub fn split_on_numerics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_numerics(mut self, value: bool) -> Self {
         self.split_on_numerics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `stem_english_possessive`.
-    pub fn stem_english_possessive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn stem_english_possessive(mut self, value: bool) -> Self {
         self.stem_english_possessive = ::core::option::Option::Some(value.into());
         self
     }
@@ -9878,12 +9572,12 @@ impl WordDelimiterGraphTokenFilter {
         self
     }
     /// Sets `adjust_offsets`.
-    pub fn adjust_offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn adjust_offsets(mut self, value: bool) -> Self {
         self.adjust_offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_keywords`.
-    pub fn ignore_keywords(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_keywords(mut self, value: bool) -> Self {
         self.ignore_keywords = ::core::option::Option::Some(value.into());
         self
     }
@@ -9965,27 +9659,27 @@ impl WordDelimiterTokenFilter {
         self
     }
     /// Sets `catenate_all`.
-    pub fn catenate_all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_all(mut self, value: bool) -> Self {
         self.catenate_all = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_numbers`.
-    pub fn catenate_numbers(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_numbers(mut self, value: bool) -> Self {
         self.catenate_numbers = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_words`.
-    pub fn catenate_words(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_words(mut self, value: bool) -> Self {
         self.catenate_words = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_number_parts`.
-    pub fn generate_number_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_number_parts(mut self, value: bool) -> Self {
         self.generate_number_parts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_word_parts`.
-    pub fn generate_word_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_word_parts(mut self, value: bool) -> Self {
         self.generate_word_parts = ::core::option::Option::Some(value.into());
         self
     }
@@ -10014,17 +9708,17 @@ impl WordDelimiterTokenFilter {
         self
     }
     /// Sets `split_on_case_change`.
-    pub fn split_on_case_change(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_case_change(mut self, value: bool) -> Self {
         self.split_on_case_change = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_on_numerics`.
-    pub fn split_on_numerics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_numerics(mut self, value: bool) -> Self {
         self.split_on_numerics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `stem_english_possessive`.
-    pub fn stem_english_possessive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn stem_english_possessive(mut self, value: bool) -> Self {
         self.stem_english_possessive = ::core::option::Option::Some(value.into());
         self
     }
@@ -10122,27 +9816,27 @@ impl WordDelimiterTokenFilterBase {
         self
     }
     /// Sets `catenate_all`.
-    pub fn catenate_all(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_all(mut self, value: bool) -> Self {
         self.catenate_all = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_numbers`.
-    pub fn catenate_numbers(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_numbers(mut self, value: bool) -> Self {
         self.catenate_numbers = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `catenate_words`.
-    pub fn catenate_words(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn catenate_words(mut self, value: bool) -> Self {
         self.catenate_words = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_number_parts`.
-    pub fn generate_number_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_number_parts(mut self, value: bool) -> Self {
         self.generate_number_parts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `generate_word_parts`.
-    pub fn generate_word_parts(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn generate_word_parts(mut self, value: bool) -> Self {
         self.generate_word_parts = ::core::option::Option::Some(value.into());
         self
     }
@@ -10171,17 +9865,17 @@ impl WordDelimiterTokenFilterBase {
         self
     }
     /// Sets `split_on_case_change`.
-    pub fn split_on_case_change(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_case_change(mut self, value: bool) -> Self {
         self.split_on_case_change = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_on_numerics`.
-    pub fn split_on_numerics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_on_numerics(mut self, value: bool) -> Self {
         self.split_on_numerics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `stem_english_possessive`.
-    pub fn stem_english_possessive(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn stem_english_possessive(mut self, value: bool) -> Self {
         self.stem_english_possessive = ::core::option::Option::Some(value.into());
         self
     }

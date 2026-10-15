@@ -21,7 +21,7 @@ impl Request {
     /// A `Request` with its required properties set.
     pub fn new(
         task_id: impl ::core::convert::Into<::oxsearch_core::TaskId>,
-        requests_per_second: impl ::core::convert::Into<f32>,
+        requests_per_second: f32,
     ) -> Self {
         Self {
             task_id: task_id.into(),
@@ -33,3 +33,62 @@ impl Request {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response(pub ::oxsearch_tasks::TaskListResponseBase);
+
+impl ::core::ops::Deref for Response {
+    type Target = ::oxsearch_tasks::TaskListResponseBase;
+    fn deref(&self) -> &::oxsearch_tasks::TaskListResponseBase {
+        &self.0
+    }
+}
+
+impl ::core::ops::DerefMut for Response {
+    fn deref_mut(&mut self) -> &mut ::oxsearch_tasks::TaskListResponseBase {
+        &mut self.0
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::delete_by_query_rethrottle::Response;
+
+    fn name(&self) -> &'static str {
+        "delete_by_query_rethrottle"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.task_id),)
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Post,
+                format!(
+                    "/_delete_by_query/{}/_rethrottle",
+                    ::oxsearch_core::__private::path_param("task_id", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        query.push((
+            "requests_per_second",
+            ::oxsearch_core::__private::query_param(
+                "requests_per_second",
+                &self.requests_per_second,
+            )?,
+        ));
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
+    }
+}

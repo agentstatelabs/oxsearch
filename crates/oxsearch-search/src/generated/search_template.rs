@@ -52,7 +52,7 @@ impl RequestBody {
         }
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
@@ -72,7 +72,7 @@ impl RequestBody {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }
@@ -172,12 +172,12 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ccs_minimize_roundtrips`.
-    pub fn ccs_minimize_roundtrips(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ccs_minimize_roundtrips(mut self, value: bool) -> Self {
         self.ccs_minimize_roundtrips = ::core::option::Option::Some(value.into());
         self
     }
@@ -190,17 +190,17 @@ impl Request {
         self
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -210,7 +210,7 @@ impl Request {
         self
     }
     /// Sets `profile`.
-    pub fn profile(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn profile(mut self, value: bool) -> Self {
         self.profile = ::core::option::Option::Some(value.into());
         self
     }
@@ -233,12 +233,12 @@ impl Request {
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `typed_keys`.
-    pub fn typed_keys(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn typed_keys(mut self, value: bool) -> Self {
         self.typed_keys = ::core::option::Option::Some(value.into());
         self
     }
@@ -254,7 +254,7 @@ impl Request {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct Response<TDocument = ::serde_json::Value> {
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub took: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -267,9 +267,7 @@ pub struct Response<TDocument = ::serde_json::Value> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hits: ::core::option::Option<crate::search::HitsMetadata<TDocument>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggregations: ::core::option::Option<
-        ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-    >,
+    pub aggregations: ::core::option::Option<TAggregations>,
     #[serde(
         rename = "_clusters",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -299,13 +297,13 @@ pub struct Response<TDocument = ::serde_json::Value> {
     pub terminated_early: ::core::option::Option<bool>,
 }
 
-impl<TDocument> Response<TDocument> {
+impl<TDocument, TAggregations> Response<TDocument, TAggregations> {
     /// A `Response` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        timed_out: impl ::core::convert::Into<bool>,
+        took: i64,
+        timed_out: bool,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
-        hits: impl ::core::convert::Into<crate::search::HitsMetadata<TDocument>>,
+        hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -325,12 +323,7 @@ impl<TDocument> Response<TDocument> {
         }
     }
     /// Sets `aggregations`.
-    pub fn aggregations(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggregations(mut self, value: TAggregations) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
     }
@@ -353,12 +346,12 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `num_reduce_phases`.
-    pub fn num_reduce_phases(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn num_reduce_phases(mut self, value: i64) -> Self {
         self.num_reduce_phases = ::core::option::Option::Some(value.into());
         self
     }
@@ -383,16 +376,146 @@ impl<TDocument> Response<TDocument> {
     /// Sets `suggest`.
     pub fn suggest(
         mut self,
-        value: impl ::core::convert::Into<
-            ::oxsearch_core::shapes::TypedKeys<::std::vec::Vec<crate::search::Suggest<TDocument>>>,
+        value: ::oxsearch_core::shapes::TypedKeys<
+            ::std::vec::Vec<crate::search::Suggest<TDocument>>,
         >,
     ) -> Self {
         self.suggest = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `terminated_early`.
-    pub fn terminated_early(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn terminated_early(mut self, value: bool) -> Self {
         self.terminated_early = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::search_template::Response;
+
+    fn name(&self) -> &'static str {
+        "search_template"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_search/template",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_search/template",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ccs_minimize_roundtrips {
+            query.push((
+                "ccs_minimize_roundtrips",
+                ::oxsearch_core::__private::query_param("ccs_minimize_roundtrips", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.explain {
+            query.push((
+                "explain",
+                ::oxsearch_core::__private::query_param("explain", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_throttled {
+            query.push((
+                "ignore_throttled",
+                ::oxsearch_core::__private::query_param("ignore_throttled", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.profile {
+            query.push((
+                "profile",
+                ::oxsearch_core::__private::query_param("profile", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.scroll {
+            query.push((
+                "scroll",
+                ::oxsearch_core::__private::query_param("scroll", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_type {
+            query.push((
+                "search_type",
+                ::oxsearch_core::__private::query_param("search_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.rest_total_hits_as_int {
+            query.push((
+                "rest_total_hits_as_int",
+                ::oxsearch_core::__private::query_param("rest_total_hits_as_int", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.typed_keys {
+            query.push((
+                "typed_keys",
+                ::oxsearch_core::__private::query_param("typed_keys", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

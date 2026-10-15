@@ -212,7 +212,7 @@ impl RequestBody {
         self
     }
     /// Sets `max_docs`.
-    pub fn max_docs(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn max_docs(mut self, value: i64) -> Self {
         self.max_docs = ::core::option::Option::Some(value.into());
         self
     }
@@ -342,12 +342,12 @@ impl Request {
         }
     }
     /// Sets `refresh`.
-    pub fn refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn refresh(mut self, value: bool) -> Self {
         self.refresh = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `requests_per_second`.
-    pub fn requests_per_second(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn requests_per_second(mut self, value: f32) -> Self {
         self.requests_per_second = ::core::option::Option::Some(value.into());
         self
     }
@@ -362,7 +362,7 @@ impl Request {
         self
     }
     /// Sets `max_docs`.
-    pub fn max_docs(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_docs(mut self, value: i32) -> Self {
         self.max_docs = ::core::option::Option::Some(value.into());
         self
     }
@@ -380,12 +380,12 @@ impl Request {
         self
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
@@ -480,17 +480,17 @@ impl Response {
         }
     }
     /// Sets `batches`.
-    pub fn batches(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn batches(mut self, value: i64) -> Self {
         self.batches = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `created`.
-    pub fn created(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn created(mut self, value: i64) -> Self {
         self.created = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `deleted`.
-    pub fn deleted(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn deleted(mut self, value: i64) -> Self {
         self.deleted = ::core::option::Option::Some(value.into());
         self
     }
@@ -503,7 +503,7 @@ impl Response {
         self
     }
     /// Sets `noops`.
-    pub fn noops(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn noops(mut self, value: i64) -> Self {
         self.noops = ::core::option::Option::Some(value.into());
         self
     }
@@ -513,12 +513,12 @@ impl Response {
         self
     }
     /// Sets `requests_per_second`.
-    pub fn requests_per_second(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn requests_per_second(mut self, value: f32) -> Self {
         self.requests_per_second = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `slice_id`.
-    pub fn slice_id(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn slice_id(mut self, value: i32) -> Self {
         self.slice_id = ::core::option::Option::Some(value.into());
         self
     }
@@ -552,7 +552,7 @@ impl Response {
         self
     }
     /// Sets `timed_out`.
-    pub fn timed_out(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn timed_out(mut self, value: bool) -> Self {
         self.timed_out = ::core::option::Option::Some(value.into());
         self
     }
@@ -562,17 +562,17 @@ impl Response {
         self
     }
     /// Sets `total`.
-    pub fn total(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn total(mut self, value: i64) -> Self {
         self.total = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `updated`.
-    pub fn updated(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn updated(mut self, value: i64) -> Self {
         self.updated = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version_conflicts`.
-    pub fn version_conflicts(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn version_conflicts(mut self, value: i64) -> Self {
         self.version_conflicts = ::core::option::Option::Some(value.into());
         self
     }
@@ -666,7 +666,7 @@ impl Source {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -698,5 +698,94 @@ impl Source {
     ) -> Self {
         self.runtime_mappings = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::reindex::Response;
+
+    fn name(&self) -> &'static str {
+        "reindex"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Post,
+            "/_reindex",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.requests_per_second {
+            query.push((
+                "requests_per_second",
+                ::oxsearch_core::__private::query_param("requests_per_second", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.scroll {
+            query.push((
+                "scroll",
+                ::oxsearch_core::__private::query_param("scroll", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slices {
+            query.push((
+                "slices",
+                ::oxsearch_core::__private::query_param("slices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_docs {
+            query.push((
+                "max_docs",
+                ::oxsearch_core::__private::query_param("max_docs", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_active_shards {
+            query.push((
+                "wait_for_active_shards",
+                ::oxsearch_core::__private::query_param("wait_for_active_shards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_completion {
+            query.push((
+                "wait_for_completion",
+                ::oxsearch_core::__private::query_param("wait_for_completion", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.require_alias {
+            query.push((
+                "require_alias",
+                ::oxsearch_core::__private::query_param("require_alias", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

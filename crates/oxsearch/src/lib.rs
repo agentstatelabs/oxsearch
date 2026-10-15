@@ -7,12 +7,16 @@
 //! the typed document layer's derive macros, and `transport-reqwest` the
 //! default HTTP transport.
 //!
-//! The generated types for search, docs, mapping and inference exist; the
-//! client that sends them is still to come. See DESIGN.md in the
-//! repository.
+//! The [`Client`] sends the generated requests over a [`Transport`], such as
+//! the one in `transport-reqwest`. Retries, failover, authentication and
+//! telemetry are still to come; see DESIGN.md in the repository.
 
-// oxsearch-core's traits and shared types will be re-exported at the root
-// once there are any.
+/// The types every area shares: common types, retrievers and kNN.
+pub use oxsearch_core;
+pub use oxsearch_core::{
+    Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse, LicenseError,
+    Method, Route, Transport, TransportError, query_dsl, shapes,
+};
 
 #[cfg(feature = "admin")]
 pub use oxsearch_admin as admin;

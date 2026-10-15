@@ -19,7 +19,7 @@ impl DocumentRating {
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        rating: impl ::core::convert::Into<i32>,
+        rating: i32,
     ) -> Self {
         Self {
             id: id.into(),
@@ -54,7 +54,7 @@ impl RankEvalHit {
     pub fn new(
         id: impl ::core::convert::Into<::oxsearch_core::Id>,
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        score: impl ::core::convert::Into<f64>,
+        score: f64,
     ) -> Self {
         Self {
             id: ::core::option::Option::Some(id.into()),
@@ -64,66 +64,13 @@ impl RankEvalHit {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum RankEvalHitItemRating {
-    /// A number.
-    Double(f64),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for RankEvalHitItemRating {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::Double(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for RankEvalHitItemRating {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = RankEvalHitItemRating;
-            const EXPECTING: &'static str = "RankEvalHitItemRating: null or number";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(RankEvalHitItemRating::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Number => {
-                        <f64 as ::serde::Deserialize>::deserialize(value)
-                            .map(RankEvalHitItemRating::Double)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("RankEvalHitItemRating can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankEvalHitItem {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hit: ::core::option::Option<crate::rank_eval::RankEvalHit>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub rating: ::core::option::Option<crate::rank_eval::RankEvalHitItemRating>,
+    pub rating: ::core::option::Option<f64>,
 }
 
 impl RankEvalHitItem {
@@ -135,10 +82,7 @@ impl RankEvalHitItem {
         }
     }
     /// Sets `rating`.
-    pub fn rating(
-        mut self,
-        value: impl ::core::convert::Into<crate::rank_eval::RankEvalHitItemRating>,
-    ) -> Self {
+    pub fn rating(mut self, value: f64) -> Self {
         self.rating = ::core::option::Option::Some(value.into());
         self
     }
@@ -230,7 +174,7 @@ impl RankEvalMetricBase {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
@@ -259,7 +203,7 @@ pub struct RankEvalMetricDetail {
 impl RankEvalMetricDetail {
     /// A `RankEvalMetricDetail` with its required properties set.
     pub fn new(
-        metric_score: impl ::core::convert::Into<f64>,
+        metric_score: f64,
         unrated_docs: impl ::core::convert::Into<::std::vec::Vec<crate::rank_eval::UnratedDocument>>,
         hits: impl ::core::convert::Into<::std::vec::Vec<crate::rank_eval::RankEvalHitItem>>,
         metric_details: impl ::core::convert::Into<
@@ -299,12 +243,12 @@ impl RankEvalMetricDiscountedCumulativeGain {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `normalize`.
-    pub fn normalize(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn normalize(mut self, value: bool) -> Self {
         self.normalize = ::core::option::Option::Some(value.into());
         self
     }
@@ -323,14 +267,14 @@ pub struct RankEvalMetricExpectedReciprocalRank {
 
 impl RankEvalMetricExpectedReciprocalRank {
     /// A `RankEvalMetricExpectedReciprocalRank` with its required properties set.
-    pub fn new(maximum_relevance: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(maximum_relevance: i32) -> Self {
         Self {
             k: ::core::option::Option::None,
             maximum_relevance: maximum_relevance.into(),
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
@@ -357,12 +301,12 @@ impl RankEvalMetricMeanReciprocalRank {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
@@ -393,17 +337,17 @@ impl RankEvalMetricPrecision {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unlabeled`.
-    pub fn ignore_unlabeled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unlabeled(mut self, value: bool) -> Self {
         self.ignore_unlabeled = ::core::option::Option::Some(value.into());
         self
     }
@@ -429,12 +373,12 @@ impl RankEvalMetricRatingTreshold {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
@@ -461,12 +405,12 @@ impl RankEvalMetricRecall {
         }
     }
     /// Sets `k`.
-    pub fn k(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn k(mut self, value: i32) -> Self {
         self.k = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `relevant_rating_threshold`.
-    pub fn relevant_rating_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn relevant_rating_threshold(mut self, value: i32) -> Self {
         self.relevant_rating_threshold = ::core::option::Option::Some(value.into());
         self
     }
@@ -490,7 +434,7 @@ impl RankEvalQuery {
         }
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
@@ -674,7 +618,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -687,7 +631,7 @@ impl Request {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -725,7 +669,7 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        metric_score: impl ::core::convert::Into<f64>,
+        metric_score: f64,
         details: impl ::core::convert::Into<
             ::indexmap::IndexMap<::oxsearch_core::Id, crate::rank_eval::RankEvalMetricDetail>,
         >,
@@ -766,5 +710,81 @@ impl UnratedDocument {
             id: ::core::option::Option::Some(id.into()),
             index: ::core::option::Option::Some(index.into()),
         }
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::rank_eval::Response;
+
+    fn name(&self) -> &'static str {
+        "rank_eval"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_rank_eval",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_rank_eval",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_type {
+            query.push((
+                "search_type",
+                ::oxsearch_core::__private::query_param("search_type", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

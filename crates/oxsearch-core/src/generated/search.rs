@@ -102,7 +102,7 @@ impl FieldCollapse {
         self
     }
     /// Sets `max_concurrent_group_searches`.
-    pub fn max_concurrent_group_searches(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_concurrent_group_searches(mut self, value: i32) -> Self {
         self.max_concurrent_group_searches = ::core::option::Option::Some(value.into());
         self
     }
@@ -260,7 +260,7 @@ impl Highlight {
         self
     }
     /// Sets `boundary_max_scan`.
-    pub fn boundary_max_scan(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn boundary_max_scan(mut self, value: i32) -> Self {
         self.boundary_max_scan = ::core::option::Option::Some(value.into());
         self
     }
@@ -281,7 +281,7 @@ impl Highlight {
         self
     }
     /// Sets `force_source`.
-    pub fn force_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_source(mut self, value: bool) -> Self {
         self.force_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -294,12 +294,12 @@ impl Highlight {
         self
     }
     /// Sets `fragment_size`.
-    pub fn fragment_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fragment_size(mut self, value: i32) -> Self {
         self.fragment_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `highlight_filter`.
-    pub fn highlight_filter(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn highlight_filter(mut self, value: bool) -> Self {
         self.highlight_filter = ::core::option::Option::Some(value.into());
         self
     }
@@ -312,22 +312,22 @@ impl Highlight {
         self
     }
     /// Sets `max_fragment_length`.
-    pub fn max_fragment_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_fragment_length(mut self, value: i32) -> Self {
         self.max_fragment_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_analyzed_offset`.
-    pub fn max_analyzed_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_analyzed_offset(mut self, value: i32) -> Self {
         self.max_analyzed_offset = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `no_match_size`.
-    pub fn no_match_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn no_match_size(mut self, value: i32) -> Self {
         self.no_match_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `number_of_fragments`.
-    pub fn number_of_fragments(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn number_of_fragments(mut self, value: i32) -> Self {
         self.number_of_fragments = ::core::option::Option::Some(value.into());
         self
     }
@@ -350,7 +350,7 @@ impl Highlight {
         self
     }
     /// Sets `phrase_limit`.
-    pub fn phrase_limit(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn phrase_limit(mut self, value: i32) -> Self {
         self.phrase_limit = ::core::option::Option::Some(value.into());
         self
     }
@@ -371,7 +371,7 @@ impl Highlight {
         self
     }
     /// Sets `require_field_match`.
-    pub fn require_field_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_field_match(mut self, value: bool) -> Self {
         self.require_field_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -521,7 +521,7 @@ impl HighlightBase {
         self
     }
     /// Sets `boundary_max_scan`.
-    pub fn boundary_max_scan(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn boundary_max_scan(mut self, value: i32) -> Self {
         self.boundary_max_scan = ::core::option::Option::Some(value.into());
         self
     }
@@ -542,7 +542,7 @@ impl HighlightBase {
         self
     }
     /// Sets `force_source`.
-    pub fn force_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_source(mut self, value: bool) -> Self {
         self.force_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -555,12 +555,12 @@ impl HighlightBase {
         self
     }
     /// Sets `fragment_size`.
-    pub fn fragment_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fragment_size(mut self, value: i32) -> Self {
         self.fragment_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `highlight_filter`.
-    pub fn highlight_filter(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn highlight_filter(mut self, value: bool) -> Self {
         self.highlight_filter = ::core::option::Option::Some(value.into());
         self
     }
@@ -573,22 +573,22 @@ impl HighlightBase {
         self
     }
     /// Sets `max_fragment_length`.
-    pub fn max_fragment_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_fragment_length(mut self, value: i32) -> Self {
         self.max_fragment_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_analyzed_offset`.
-    pub fn max_analyzed_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_analyzed_offset(mut self, value: i32) -> Self {
         self.max_analyzed_offset = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `no_match_size`.
-    pub fn no_match_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn no_match_size(mut self, value: i32) -> Self {
         self.no_match_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `number_of_fragments`.
-    pub fn number_of_fragments(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn number_of_fragments(mut self, value: i32) -> Self {
         self.number_of_fragments = ::core::option::Option::Some(value.into());
         self
     }
@@ -611,7 +611,7 @@ impl HighlightBase {
         self
     }
     /// Sets `phrase_limit`.
-    pub fn phrase_limit(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn phrase_limit(mut self, value: i32) -> Self {
         self.phrase_limit = ::core::option::Option::Some(value.into());
         self
     }
@@ -632,7 +632,7 @@ impl HighlightBase {
         self
     }
     /// Sets `require_field_match`.
-    pub fn require_field_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_field_match(mut self, value: bool) -> Self {
         self.require_field_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -780,7 +780,7 @@ impl HighlightField {
         self
     }
     /// Sets `boundary_max_scan`.
-    pub fn boundary_max_scan(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn boundary_max_scan(mut self, value: i32) -> Self {
         self.boundary_max_scan = ::core::option::Option::Some(value.into());
         self
     }
@@ -801,7 +801,7 @@ impl HighlightField {
         self
     }
     /// Sets `force_source`.
-    pub fn force_source(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn force_source(mut self, value: bool) -> Self {
         self.force_source = ::core::option::Option::Some(value.into());
         self
     }
@@ -814,12 +814,12 @@ impl HighlightField {
         self
     }
     /// Sets `fragment_size`.
-    pub fn fragment_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fragment_size(mut self, value: i32) -> Self {
         self.fragment_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `highlight_filter`.
-    pub fn highlight_filter(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn highlight_filter(mut self, value: bool) -> Self {
         self.highlight_filter = ::core::option::Option::Some(value.into());
         self
     }
@@ -832,22 +832,22 @@ impl HighlightField {
         self
     }
     /// Sets `max_fragment_length`.
-    pub fn max_fragment_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_fragment_length(mut self, value: i32) -> Self {
         self.max_fragment_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_analyzed_offset`.
-    pub fn max_analyzed_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_analyzed_offset(mut self, value: i32) -> Self {
         self.max_analyzed_offset = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `no_match_size`.
-    pub fn no_match_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn no_match_size(mut self, value: i32) -> Self {
         self.no_match_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `number_of_fragments`.
-    pub fn number_of_fragments(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn number_of_fragments(mut self, value: i32) -> Self {
         self.number_of_fragments = ::core::option::Option::Some(value.into());
         self
     }
@@ -870,7 +870,7 @@ impl HighlightField {
         self
     }
     /// Sets `phrase_limit`.
-    pub fn phrase_limit(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn phrase_limit(mut self, value: i32) -> Self {
         self.phrase_limit = ::core::option::Option::Some(value.into());
         self
     }
@@ -891,7 +891,7 @@ impl HighlightField {
         self
     }
     /// Sets `require_field_match`.
-    pub fn require_field_match(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_field_match(mut self, value: bool) -> Self {
         self.require_field_match = ::core::option::Option::Some(value.into());
         self
     }
@@ -904,7 +904,7 @@ impl HighlightField {
         self
     }
     /// Sets `fragment_offset`.
-    pub fn fragment_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn fragment_offset(mut self, value: i32) -> Self {
         self.fragment_offset = ::core::option::Option::Some(value.into());
         self
     }
@@ -1249,12 +1249,12 @@ impl InnerHits {
         self
     }
     /// Sets `size`.
-    pub fn size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn size(mut self, value: i32) -> Self {
         self.size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `from`.
-    pub fn from(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn from(mut self, value: i32) -> Self {
         self.from = ::core::option::Option::Some(value.into());
         self
     }
@@ -1275,7 +1275,7 @@ impl InnerHits {
         self
     }
     /// Sets `explain`.
-    pub fn explain(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn explain(mut self, value: bool) -> Self {
         self.explain = ::core::option::Option::Some(value.into());
         self
     }
@@ -1288,7 +1288,7 @@ impl InnerHits {
         self
     }
     /// Sets `ignore_unmapped`.
-    pub fn ignore_unmapped(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unmapped(mut self, value: bool) -> Self {
         self.ignore_unmapped = ::core::option::Option::Some(value.into());
         self
     }
@@ -1301,7 +1301,7 @@ impl InnerHits {
         self
     }
     /// Sets `seq_no_primary_term`.
-    pub fn seq_no_primary_term(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn seq_no_primary_term(mut self, value: bool) -> Self {
         self.seq_no_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1340,12 +1340,12 @@ impl InnerHits {
         self
     }
     /// Sets `track_scores`.
-    pub fn track_scores(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn track_scores(mut self, value: bool) -> Self {
         self.track_scores = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `version`.
-    pub fn version(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn version(mut self, value: bool) -> Self {
         self.version = ::core::option::Option::Some(value.into());
         self
     }
@@ -1482,7 +1482,7 @@ impl Rescore {
         }
     }
     /// Sets `window_size`.
-    pub fn window_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn window_size(mut self, value: i32) -> Self {
         self.window_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -1592,12 +1592,12 @@ impl RescoreQuery {
         }
     }
     /// Sets `query_weight`.
-    pub fn query_weight(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn query_weight(mut self, value: f64) -> Self {
         self.query_weight = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `rescore_query_weight`.
-    pub fn rescore_query_weight(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn rescore_query_weight(mut self, value: f64) -> Self {
         self.rescore_query_weight = ::core::option::Option::Some(value.into());
         self
     }
@@ -1834,7 +1834,7 @@ impl SourceFilter {
         }
     }
     /// Sets `exclude_vectors`.
-    pub fn exclude_vectors(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn exclude_vectors(mut self, value: bool) -> Self {
         self.exclude_vectors = ::core::option::Option::Some(value.into());
         self
     }

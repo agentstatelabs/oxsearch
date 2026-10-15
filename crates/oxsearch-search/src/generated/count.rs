@@ -214,7 +214,7 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -224,7 +224,7 @@ impl Request {
         self
     }
     /// Sets `analyze_wildcard`.
-    pub fn analyze_wildcard(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn analyze_wildcard(mut self, value: bool) -> Self {
         self.analyze_wildcard = ::core::option::Option::Some(value.into());
         self
     }
@@ -250,22 +250,22 @@ impl Request {
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lenient`.
-    pub fn lenient(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn lenient(mut self, value: bool) -> Self {
         self.lenient = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_score`.
-    pub fn min_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn min_score(mut self, value: f64) -> Self {
         self.min_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -290,7 +290,7 @@ impl Request {
         self
     }
     /// Sets `terminate_after`.
-    pub fn terminate_after(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn terminate_after(mut self, value: i64) -> Self {
         self.terminate_after = ::core::option::Option::Some(value.into());
         self
     }
@@ -321,12 +321,154 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        count: impl ::core::convert::Into<i64>,
+        count: i64,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
     ) -> Self {
         Self {
             count: ::core::option::Option::Some(count.into()),
             shards: ::core::option::Option::Some(shards.into()),
         }
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::count::Response;
+
+    fn name(&self) -> &'static str {
+        "count"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_count",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_count",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.analyzer {
+            query.push((
+                "analyzer",
+                ::oxsearch_core::__private::query_param("analyzer", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.analyze_wildcard {
+            query.push((
+                "analyze_wildcard",
+                ::oxsearch_core::__private::query_param("analyze_wildcard", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.default_operator {
+            query.push((
+                "default_operator",
+                ::oxsearch_core::__private::query_param("default_operator", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.df {
+            query.push(("df", ::oxsearch_core::__private::query_param("df", value)?));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_throttled {
+            query.push((
+                "ignore_throttled",
+                ::oxsearch_core::__private::query_param("ignore_throttled", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.lenient {
+            query.push((
+                "lenient",
+                ::oxsearch_core::__private::query_param("lenient", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.min_score {
+            query.push((
+                "min_score",
+                ::oxsearch_core::__private::query_param("min_score", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.stats {
+            query.push((
+                "stats",
+                ::oxsearch_core::__private::query_param("stats", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.terminate_after {
+            query.push((
+                "terminate_after",
+                ::oxsearch_core::__private::query_param("terminate_after", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.q {
+            query.push(("q", ::oxsearch_core::__private::query_param("q", value)?));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

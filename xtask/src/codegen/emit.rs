@@ -126,6 +126,7 @@ impl Emitter<'_> {
                 "{CORE}::shapes::TypedKeys<{}>",
                 self.ty_in(t, position, true)
             ),
+            Ty::Opt(t) => format!("{OPTION}<{}>", self.ty_in(t, position, indirect)),
         }
     }
 
@@ -180,7 +181,9 @@ impl Emitter<'_> {
 
     fn field_ty(&self, field: &Field) -> String {
         let ty = self.ty(&field.ty, Position::Field);
-        if field.optional {
+        // A value-or-null is already an `Option`: absent and `null` both
+        // read as `None`.
+        if field.optional && !matches!(field.ty, Ty::Opt(_)) {
             format!("{OPTION}<{ty}>")
         } else {
             ty
@@ -193,7 +196,19 @@ impl Emitter<'_> {
         if params.is_empty() {
             String::new()
         } else {
-            let params: Vec<String> = params.iter().map(|p| format!("{p} = {VALUE}")).collect();
+            // Raw JSON by default: documents as `Value`, aggregation results as
+            // a map of `Value`s.
+            let params: Vec<String> = params
+                .iter()
+                .map(|p| {
+                    let default = if p == super::ir::AGGREGATIONS {
+                        "::oxsearch_core::RawAggs"
+                    } else {
+                        VALUE
+                    };
+                    format!("{p} = {default}")
+                })
+                .collect();
             format!("<{}>", params.join(", "))
         }
     }
@@ -413,15 +428,16 @@ impl Emitter<'_> {
             let (inner, boxed) = unbox(&ty);
             if field.required {
                 params.push(format!(
-                    "{}: impl ::core::convert::Into<{inner}>",
-                    field.ident
+                    "{}: {}",
+                    field.ident,
+                    self.argument(&field.ty, inner)
                 ));
                 let value = if boxed {
                     format!("::std::boxed::Box::new({}.into())", field.ident)
                 } else {
                     format!("{}.into()", field.ident)
                 };
-                inits.push(if field.optional {
+                inits.push(if field.optional && !matches!(field.ty, Ty::Opt(_)) {
                     format!("{}: {OPTION}::Some({value})", field.ident)
                 } else {
                     format!("{}: {value}", field.ident)
@@ -471,6 +487,11 @@ impl Emitter<'_> {
             setters.push((field.as_str(), &variant_ty));
         }
         for (field, ty) in setters {
+            // A value-or-null field is set to a value.
+            let ty = match ty {
+                Ty::Opt(inner) => &**inner,
+                other => other,
+            };
             let rendered = self.ty(ty, Position::Field);
             let (inner, boxed) = unbox(&rendered);
             let name = if field == "new" { "new_" } else { field };
@@ -480,12 +501,30 @@ impl Emitter<'_> {
             } else {
                 "value.into()"
             };
+            let argument = self.argument(ty, inner);
             let _ = writeln!(
                 out,
-                "    pub fn {name}(mut self, value: impl ::core::convert::Into<{inner}>) -> Self {{ self.{field} = {OPTION}::Some({value}); self }}"
+                "    pub fn {name}(mut self, value: {argument}) -> Self {{ self.{field} = {OPTION}::Some({value}); self }}"
             );
         }
         out.push_str("}\n\n");
+    }
+
+    /// A constructor's or setter's argument type: anything that converts
+    /// into the field's type, except for numbers and booleans, which take
+    /// their own type so literals such as `2.0` infer as it, and types that
+    /// mention a generic parameter, which the argument must name for the
+    /// caller's type to be inferred.
+    fn argument(&self, ty: &Ty, rendered: &str) -> String {
+        let primitive = matches!(
+            ty,
+            Ty::Prim("bool" | "f32" | "f64" | "i8" | "i16" | "i32" | "i64" | "u32" | "u64")
+        );
+        if primitive || !params_in(ty).is_empty() {
+            rendered.to_owned()
+        } else {
+            format!("impl ::core::convert::Into<{rendered}>")
+        }
     }
 
     fn shorthand(
@@ -1533,11 +1572,22 @@ impl Emitter<'_> {
                 unused.join(", ")
             )
         };
+        let inner = self.ty(ty, Position::Field);
         let _ = writeln!(
             out,
-            "pub struct {ident}{}(pub {}{marker});\n",
+            "pub struct {ident}{}(pub {inner}{marker});\n",
             self.declare_generics(&self.item.generics),
-            self.ty(ty, Position::Field)
+        );
+        // The response reads as the type it wraps: `response.id`, not
+        // `response.0.id`.
+        let generics = self.generics();
+        let _ = writeln!(
+            out,
+            "impl{generics} ::core::ops::Deref for {ident}{generics} {{\n    type Target = {inner};\n    fn deref(&self) -> &{inner} {{ &self.0 }}\n}}\n"
+        );
+        let _ = writeln!(
+            out,
+            "impl{generics} ::core::ops::DerefMut for {ident}{generics} {{\n    fn deref_mut(&mut self) -> &mut {inner} {{ &mut self.0 }}\n}}\n"
         );
     }
 }
@@ -1599,4 +1649,218 @@ pub fn outside(ir: &Ir<'_>, ty: &Ty) -> String {
         item: &item,
     }
     .ty(ty, Position::Field)
+}
+
+/// The `Endpoint` implementation for a request.
+pub fn endpoint(
+    ir: &Ir<'_>,
+    request: ItemId,
+    response: Option<usize>,
+    endpoint: &crate::spec::model::Endpoint,
+) -> String {
+    let item = &ir.items[request];
+    let ItemKind::Request(r) = &item.kind else {
+        return String::new();
+    };
+    Emitter {
+        ir,
+        id: request,
+        item,
+    }
+    .endpoint_impl(r, response, endpoint)
+}
+
+impl Emitter<'_> {
+    fn endpoint_impl(
+        &self,
+        r: &Request,
+        response: Option<usize>,
+        endpoint: &crate::spec::model::Endpoint,
+    ) -> String {
+        let ident = &self.item.ident;
+        let generics = self.generics();
+        let bounds = if self.item.generics.is_empty() {
+            String::new()
+        } else {
+            let bounds: Vec<String> = self
+                .item
+                .generics
+                .iter()
+                .map(|g| format!("{g}: ::serde::Serialize"))
+                .collect();
+            format!("<{}>", bounds.join(", "))
+        };
+        let response = response.map_or(VALUE.to_owned(), |t| {
+            self.path(&Ty::Named {
+                target: t,
+                args: Vec::new(),
+            })
+        });
+        let mut out = String::new();
+        let _ = writeln!(
+            out,
+            "impl{bounds} {CORE}::Endpoint for {ident}{generics} {{"
+        );
+        let _ = writeln!(out, "    type Response = {response};\n");
+        let _ = writeln!(
+            out,
+            "    fn name(&self) -> &'static str {{ {} }}\n",
+            string(&endpoint.name)
+        );
+
+        // The most specific URL whose parameters are all set.
+        let _ = writeln!(
+            out,
+            "    fn route(&self) -> {RESULT}<{CORE}::Route, {CORE}::Error> {{"
+        );
+        let mut urls: Vec<&crate::spec::model::UrlTemplate> = endpoint.urls.iter().collect();
+        urls.sort_by_key(|u| std::cmp::Reverse(url_params(&u.path).len()));
+        let mut unconditional = false;
+        for url in urls {
+            let params = url_params(&url.path);
+            let fields: Option<Vec<&Field>> = params
+                .iter()
+                .map(|p| r.path.iter().find(|f| &f.wire == p))
+                .collect();
+            let Some(fields) = fields else {
+                continue;
+            };
+            let method = self.method(&url.methods, r.body.is_some());
+            if fields.is_empty() {
+                let _ = writeln!(
+                    out,
+                    "        {RESULT}::Ok({CORE}::Route::new({method}, {}))",
+                    string(&url.path)
+                );
+                unconditional = true;
+                break;
+            }
+            let bindings: Vec<String> = (0..fields.len())
+                .map(|n| format!("{OPTION}::Some(p{n})"))
+                .collect();
+            let values: Vec<String> = fields
+                .iter()
+                .map(|f| {
+                    if f.optional {
+                        format!("self.{}.as_ref()", f.ident)
+                    } else {
+                        format!("{OPTION}::Some(&self.{})", f.ident)
+                    }
+                })
+                .collect();
+            let mut template = url.path.clone();
+            for p in &params {
+                template = template.replace(&format!("{{{p}}}"), "{}");
+            }
+            let args: Vec<String> = params
+                .iter()
+                .enumerate()
+                .map(|(n, p)| format!("{CORE}::__private::path_param({}, p{n})?", string(p)))
+                .collect();
+            let _ = writeln!(
+                out,
+                "        if let ({},) = ({},) {{ return {RESULT}::Ok({CORE}::Route::new({method}, format!({}, {}))); }}",
+                bindings.join(", "),
+                values.join(", "),
+                string(&template),
+                args.join(", ")
+            );
+        }
+        if !unconditional {
+            let _ = writeln!(
+                out,
+                "        {RESULT}::Err({CORE}::__private::no_route(self.name()))"
+            );
+        }
+        out.push_str("    }\n\n");
+
+        let _ = writeln!(
+            out,
+            "    fn query(&self) -> {RESULT}<::std::vec::Vec<(&'static str, ::std::string::String)>, {CORE}::Error> {{"
+        );
+        if r.query.is_empty() {
+            let _ = writeln!(out, "        {RESULT}::Ok(::std::vec::Vec::new())");
+        } else {
+            out.push_str("        let mut query = ::std::vec::Vec::new();\n");
+            for f in &r.query {
+                let name = string(&f.wire);
+                if f.optional {
+                    let _ = writeln!(
+                        out,
+                        "        if let {OPTION}::Some(value) = &self.{} {{ query.push(({name}, {CORE}::__private::query_param({name}, value)?)); }}",
+                        f.ident
+                    );
+                } else {
+                    let _ = writeln!(
+                        out,
+                        "        query.push(({name}, {CORE}::__private::query_param({name}, &self.{})?));",
+                        f.ident
+                    );
+                }
+            }
+            let _ = writeln!(out, "        {RESULT}::Ok(query)");
+        }
+        out.push_str("    }\n\n");
+
+        let _ = writeln!(
+            out,
+            "    fn body(&self) -> {RESULT}<{OPTION}<{CORE}::Body>, {CORE}::Error> {{"
+        );
+        match &r.body {
+            None => {
+                let _ = writeln!(out, "        {RESULT}::Ok({OPTION}::None)");
+            }
+            Some(ty) => {
+                let ndjson = endpoint
+                    .request_media_type
+                    .iter()
+                    .any(|m| m == "application/x-ndjson")
+                    && matches!(ty, Ty::Vec(_));
+                let write = if ndjson { "ndjson_body" } else { "json_body" };
+                let _ = writeln!(
+                    out,
+                    "        self.body.as_ref().map(|body| {CORE}::__private::{write}(body)).transpose()"
+                );
+            }
+        }
+        out.push_str("    }\n}\n\n");
+        out
+    }
+
+    /// The method for a URL: `POST` rather than `GET` when there's a body,
+    /// otherwise the first the specification lists.
+    fn method(&self, methods: &[String], has_body: bool) -> String {
+        let variant = |m: &str| match m {
+            "GET" => "Get",
+            "POST" => "Post",
+            "PUT" => "Put",
+            "DELETE" => "Delete",
+            _ => "Head",
+        };
+        let has = |m: &str| methods.iter().any(|x| x == m);
+        if has("GET") && has("POST") && has_body {
+            return format!(
+                "if self.body.is_some() {{ {CORE}::Method::Post }} else {{ {CORE}::Method::Get }}"
+            );
+        }
+        format!(
+            "{CORE}::Method::{}",
+            variant(methods.first().map_or("GET", String::as_str))
+        )
+    }
+}
+
+/// The parameters in a URL template, in order: `{index}` and `{id}` in
+/// `/{index}/_doc/{id}`.
+fn url_params(path: &str) -> Vec<String> {
+    let mut out = Vec::new();
+    let mut rest = path;
+    while let Some(start) = rest.find('{') {
+        let Some(end) = rest[start..].find('}') else {
+            break;
+        };
+        out.push(rest[start + 1..start + end].to_owned());
+        rest = &rest[start + end + 1..];
+    }
+    out
 }

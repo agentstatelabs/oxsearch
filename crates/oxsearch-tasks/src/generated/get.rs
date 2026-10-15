@@ -45,12 +45,12 @@ impl Request {
         self
     }
     /// Sets `wait_for_completion`.
-    pub fn wait_for_completion(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn wait_for_completion(mut self, value: bool) -> Self {
         self.wait_for_completion = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `follow_relocations`.
-    pub fn follow_relocations(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn follow_relocations(mut self, value: bool) -> Self {
         self.follow_relocations = ::core::option::Option::Some(value.into());
         self
     }
@@ -71,10 +71,7 @@ pub struct Response {
 
 impl Response {
     /// A `Response` with its required properties set.
-    pub fn new(
-        completed: impl ::core::convert::Into<bool>,
-        task: impl ::core::convert::Into<crate::TaskInfo>,
-    ) -> Self {
+    pub fn new(completed: bool, task: impl ::core::convert::Into<crate::TaskInfo>) -> Self {
         Self {
             completed: ::core::option::Option::Some(completed.into()),
             task: ::core::option::Option::Some(task.into()),
@@ -91,5 +88,62 @@ impl Response {
     pub fn error(mut self, value: impl ::core::convert::Into<::oxsearch_core::ErrorCause>) -> Self {
         self.error = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::get::Response;
+
+    fn name(&self) -> &'static str {
+        "tasks.get"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.task_id),)
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Get,
+                format!(
+                    "/_tasks/{}",
+                    ::oxsearch_core::__private::path_param("task_id", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_completion {
+            query.push((
+                "wait_for_completion",
+                ::oxsearch_core::__private::query_param("wait_for_completion", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.follow_relocations {
+            query.push((
+                "follow_relocations",
+                ::oxsearch_core::__private::query_param("follow_relocations", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
     }
 }

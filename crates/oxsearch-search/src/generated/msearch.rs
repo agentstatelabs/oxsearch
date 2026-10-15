@@ -3,7 +3,10 @@
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct MultiSearchItem<TDocument = ::serde_json::Value> {
+pub struct MultiSearchItem<
+    TDocument = ::serde_json::Value,
+    TAggregations = ::oxsearch_core::RawAggs,
+> {
     /// The number of milliseconds it took Elasticsearch to run the request.
     /// This value is calculated by measuring the time elapsed between receipt of a request on the coordinating node and the time at which the coordinating node is ready to send the response.
     /// It includes:
@@ -32,9 +35,7 @@ pub struct MultiSearchItem<TDocument = ::serde_json::Value> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hits: ::core::option::Option<crate::search::HitsMetadata<TDocument>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggregations: ::core::option::Option<
-        ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-    >,
+    pub aggregations: ::core::option::Option<TAggregations>,
     #[serde(
         rename = "_clusters",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -69,13 +70,13 @@ pub struct MultiSearchItem<TDocument = ::serde_json::Value> {
     pub status: ::core::option::Option<i32>,
 }
 
-impl<TDocument> MultiSearchItem<TDocument> {
+impl<TDocument, TAggregations> MultiSearchItem<TDocument, TAggregations> {
     /// A `MultiSearchItem` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        timed_out: impl ::core::convert::Into<bool>,
+        took: i64,
+        timed_out: bool,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
-        hits: impl ::core::convert::Into<crate::search::HitsMetadata<TDocument>>,
+        hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -96,12 +97,7 @@ impl<TDocument> MultiSearchItem<TDocument> {
         }
     }
     /// Sets `aggregations`.
-    pub fn aggregations(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggregations(mut self, value: TAggregations) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
     }
@@ -124,12 +120,12 @@ impl<TDocument> MultiSearchItem<TDocument> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `num_reduce_phases`.
-    pub fn num_reduce_phases(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn num_reduce_phases(mut self, value: i64) -> Self {
         self.num_reduce_phases = ::core::option::Option::Some(value.into());
         self
     }
@@ -154,20 +150,20 @@ impl<TDocument> MultiSearchItem<TDocument> {
     /// Sets `suggest`.
     pub fn suggest(
         mut self,
-        value: impl ::core::convert::Into<
-            ::oxsearch_core::shapes::TypedKeys<::std::vec::Vec<crate::search::Suggest<TDocument>>>,
+        value: ::oxsearch_core::shapes::TypedKeys<
+            ::std::vec::Vec<crate::search::Suggest<TDocument>>,
         >,
     ) -> Self {
         self.suggest = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `terminated_early`.
-    pub fn terminated_early(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn terminated_early(mut self, value: bool) -> Self {
         self.terminated_early = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `status`.
-    pub fn status(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn status(mut self, value: i32) -> Self {
         self.status = ::core::option::Option::Some(value.into());
         self
     }
@@ -175,18 +171,21 @@ impl<TDocument> MultiSearchItem<TDocument> {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct MultiSearchResult<TDocument = ::serde_json::Value> {
+pub struct MultiSearchResult<
+    TDocument = ::serde_json::Value,
+    TAggregations = ::oxsearch_core::RawAggs,
+> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub took: ::core::option::Option<i64>,
     #[serde(default = "::core::default::Default::default")]
-    pub responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument>>,
+    pub responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument, TAggregations>>,
 }
 
-impl<TDocument> MultiSearchResult<TDocument> {
+impl<TDocument, TAggregations> MultiSearchResult<TDocument, TAggregations> {
     /// A `MultiSearchResult` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        responses: impl ::core::convert::Into<::std::vec::Vec<crate::msearch::ResponseItem<TDocument>>>,
+        took: i64,
+        responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument, TAggregations>>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -264,7 +263,7 @@ impl MultisearchHeader {
         }
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
@@ -277,7 +276,7 @@ impl MultisearchHeader {
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
@@ -300,7 +299,7 @@ impl MultisearchHeader {
         self
     }
     /// Sets `request_cache`.
-    pub fn request_cache(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn request_cache(mut self, value: bool) -> Self {
         self.request_cache = ::core::option::Option::Some(value.into());
         self
     }
@@ -318,17 +317,17 @@ impl MultisearchHeader {
         self
     }
     /// Sets `ccs_minimize_roundtrips`.
-    pub fn ccs_minimize_roundtrips(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ccs_minimize_roundtrips(mut self, value: bool) -> Self {
         self.ccs_minimize_roundtrips = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `allow_partial_search_results`.
-    pub fn allow_partial_search_results(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_partial_search_results(mut self, value: bool) -> Self {
         self.allow_partial_search_results = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
@@ -453,12 +452,12 @@ impl Request {
         self
     }
     /// Sets `allow_no_indices`.
-    pub fn allow_no_indices(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn allow_no_indices(mut self, value: bool) -> Self {
         self.allow_no_indices = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ccs_minimize_roundtrips`.
-    pub fn ccs_minimize_roundtrips(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ccs_minimize_roundtrips(mut self, value: bool) -> Self {
         self.ccs_minimize_roundtrips = ::core::option::Option::Some(value.into());
         self
     }
@@ -471,17 +470,17 @@ impl Request {
         self
     }
     /// Sets `ignore_throttled`.
-    pub fn ignore_throttled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_throttled(mut self, value: bool) -> Self {
         self.ignore_throttled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_unavailable`.
-    pub fn ignore_unavailable(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_unavailable(mut self, value: bool) -> Self {
         self.ignore_unavailable = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `include_named_queries_score`.
-    pub fn include_named_queries_score(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_named_queries_score(mut self, value: bool) -> Self {
         self.include_named_queries_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -491,17 +490,17 @@ impl Request {
         self
     }
     /// Sets `max_concurrent_searches`.
-    pub fn max_concurrent_searches(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_concurrent_searches(mut self, value: i32) -> Self {
         self.max_concurrent_searches = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_concurrent_shard_requests`.
-    pub fn max_concurrent_shard_requests(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_concurrent_shard_requests(mut self, value: i32) -> Self {
         self.max_concurrent_shard_requests = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `pre_filter_shard_size`.
-    pub fn pre_filter_shard_size(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn pre_filter_shard_size(mut self, value: i64) -> Self {
         self.pre_filter_shard_size = ::core::option::Option::Some(value.into());
         self
     }
@@ -514,7 +513,7 @@ impl Request {
         self
     }
     /// Sets `rest_total_hits_as_int`.
-    pub fn rest_total_hits_as_int(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn rest_total_hits_as_int(mut self, value: bool) -> Self {
         self.rest_total_hits_as_int = ::core::option::Option::Some(value.into());
         self
     }
@@ -537,7 +536,7 @@ impl Request {
         self
     }
     /// Sets `typed_keys`.
-    pub fn typed_keys(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn typed_keys(mut self, value: bool) -> Self {
         self.typed_keys = ::core::option::Option::Some(value.into());
         self
     }
@@ -669,20 +668,35 @@ impl<'de> ::serde::Deserialize<'de> for RequestItem {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
-pub struct Response<TDocument = ::serde_json::Value>(
-    pub crate::msearch::MultiSearchResult<TDocument>,
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(
+    pub crate::msearch::MultiSearchResult<TDocument, TAggregations>,
 );
+
+impl<TDocument, TAggregations> ::core::ops::Deref for Response<TDocument, TAggregations> {
+    type Target = crate::msearch::MultiSearchResult<TDocument, TAggregations>;
+    fn deref(&self) -> &crate::msearch::MultiSearchResult<TDocument, TAggregations> {
+        &self.0
+    }
+}
+
+impl<TDocument, TAggregations> ::core::ops::DerefMut for Response<TDocument, TAggregations> {
+    fn deref_mut(&mut self) -> &mut crate::msearch::MultiSearchResult<TDocument, TAggregations> {
+        &mut self.0
+    }
+}
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
-pub enum ResponseItem<TDocument = ::serde_json::Value> {
+pub enum ResponseItem<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs> {
     /// A object.
-    Result(crate::msearch::MultiSearchItem<TDocument>),
+    Result(crate::msearch::MultiSearchItem<TDocument, TAggregations>),
     /// A object.
     Failure(::oxsearch_core::ErrorResponseBase),
 }
 
-impl<TDocument: ::serde::Serialize> ::serde::Serialize for ResponseItem<TDocument> {
+impl<TDocument: ::serde::Serialize, TAggregations: ::serde::Serialize> ::serde::Serialize
+    for ResponseItem<TDocument, TAggregations>
+{
     fn serialize<S__: ::serde::Serializer>(
         &self,
         serializer: S__,
@@ -694,17 +708,19 @@ impl<TDocument: ::serde::Serialize> ::serde::Serialize for ResponseItem<TDocumen
     }
 }
 
-impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
-    for ResponseItem<TDocument>
+impl<'de, TDocument: ::serde::Deserialize<'de>, TAggregations: ::serde::Deserialize<'de>>
+    ::serde::Deserialize<'de> for ResponseItem<TDocument, TAggregations>
 {
     fn deserialize<D__: ::serde::Deserializer<'de>>(
         deserializer: D__,
     ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape<TDocument>(::core::marker::PhantomData<fn() -> (TDocument,)>);
-        impl<'de, TDocument: ::serde::Deserialize<'de>> ::oxsearch_core::__private::ByKind<'de>
-            for Shape<TDocument>
+        struct Shape<TDocument, TAggregations>(
+            ::core::marker::PhantomData<fn() -> (TDocument, TAggregations)>,
+        );
+        impl<'de, TDocument: ::serde::Deserialize<'de>, TAggregations: ::serde::Deserialize<'de>>
+            ::oxsearch_core::__private::ByKind<'de> for Shape<TDocument, TAggregations>
         {
-            type Value = ResponseItem<TDocument>;
+            type Value = ResponseItem<TDocument, TAggregations>;
             const EXPECTING: &'static str = "ResponseItem: object";
             fn visit<V__: ::serde::Deserializer<'de>>(
                 self,
@@ -738,7 +754,7 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
                         }
                         if let ::core::result::Result::Ok(found) =
                             ::oxsearch_core::__private::from_value::<
-                                crate::msearch::MultiSearchItem<TDocument>,
+                                crate::msearch::MultiSearchItem<TDocument, TAggregations>,
                                 V__::Error,
                             >(json.clone())
                         {
@@ -756,5 +772,153 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
             deserializer,
             Shape(::core::marker::PhantomData),
         )
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::msearch::Response;
+
+    fn name(&self) -> &'static str {
+        "msearch"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_msearch",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_msearch",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ccs_minimize_roundtrips {
+            query.push((
+                "ccs_minimize_roundtrips",
+                ::oxsearch_core::__private::query_param("ccs_minimize_roundtrips", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_throttled {
+            query.push((
+                "ignore_throttled",
+                ::oxsearch_core::__private::query_param("ignore_throttled", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.include_named_queries_score {
+            query.push((
+                "include_named_queries_score",
+                ::oxsearch_core::__private::query_param("include_named_queries_score", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.index2 {
+            query.push((
+                "index",
+                ::oxsearch_core::__private::query_param("index", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_concurrent_searches {
+            query.push((
+                "max_concurrent_searches",
+                ::oxsearch_core::__private::query_param("max_concurrent_searches", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_concurrent_shard_requests {
+            query.push((
+                "max_concurrent_shard_requests",
+                ::oxsearch_core::__private::query_param("max_concurrent_shard_requests", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.pre_filter_shard_size {
+            query.push((
+                "pre_filter_shard_size",
+                ::oxsearch_core::__private::query_param("pre_filter_shard_size", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.project_routing {
+            query.push((
+                "project_routing",
+                ::oxsearch_core::__private::query_param("project_routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.rest_total_hits_as_int {
+            query.push((
+                "rest_total_hits_as_int",
+                ::oxsearch_core::__private::query_param("rest_total_hits_as_int", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_type {
+            query.push((
+                "search_type",
+                ::oxsearch_core::__private::query_param("search_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.typed_keys {
+            query.push((
+                "typed_keys",
+                ::oxsearch_core::__private::query_param("typed_keys", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::ndjson_body(body))
+            .transpose()
     }
 }

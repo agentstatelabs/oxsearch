@@ -18,6 +18,9 @@ services:
       # CI runners' disks are small and fill up; the watermarks would stop
       # shards from allocating.
       cluster.routing.allocation.disk.threshold_enabled: "false"
+      # On a trial, tests deploy machine learning models (ELSER for
+      # semantic_text, a reranker); let them use the machine's memory.
+      xpack.ml.use_auto_machine_memory_percent: "true"
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     ports:
       - "127.0.0.1:${OXSEARCH_TEST_PORT:-9200}:9200"

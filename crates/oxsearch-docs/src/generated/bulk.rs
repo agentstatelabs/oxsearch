@@ -76,7 +76,7 @@ impl CreateOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -120,7 +120,7 @@ impl CreateOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
@@ -183,7 +183,7 @@ impl DeleteOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -288,7 +288,7 @@ impl IndexOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -332,7 +332,7 @@ impl IndexOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
@@ -395,7 +395,7 @@ impl OperationBase {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -899,12 +899,12 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `include_source_on_error`.
-    pub fn include_source_on_error(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_source_on_error(mut self, value: bool) -> Self {
         self.include_source_on_error = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `list_executed_pipelines`.
-    pub fn list_executed_pipelines(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn list_executed_pipelines(mut self, value: bool) -> Self {
         self.list_executed_pipelines = ::core::option::Option::Some(value.into());
         self
     }
@@ -966,21 +966,19 @@ impl<TDocument, TPartialDocument> Request<TDocument, TPartialDocument> {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `require_data_stream`.
-    pub fn require_data_stream(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_data_stream(mut self, value: bool) -> Self {
         self.require_data_stream = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `body`.
     pub fn body(
         mut self,
-        value: impl ::core::convert::Into<
-            ::std::vec::Vec<crate::bulk::RequestBody<TDocument, TPartialDocument>>,
-        >,
+        value: ::std::vec::Vec<crate::bulk::RequestBody<TDocument, TPartialDocument>>,
     ) -> Self {
         self.body = ::core::option::Option::Some(value.into());
         self
@@ -1008,7 +1006,7 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        errors: impl ::core::convert::Into<bool>,
+        errors: bool,
         items: impl ::core::convert::Into<
             ::std::vec::Vec<
                 ::oxsearch_core::shapes::SingleKey<
@@ -1017,7 +1015,7 @@ impl Response {
                 >,
             >,
         >,
-        took: impl ::core::convert::Into<i64>,
+        took: i64,
     ) -> Self {
         Self {
             errors: ::core::option::Option::Some(errors.into()),
@@ -1027,61 +1025,9 @@ impl Response {
         }
     }
     /// Sets `ingest_took`.
-    pub fn ingest_took(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn ingest_took(mut self, value: i64) -> Self {
         self.ingest_took = ::core::option::Option::Some(value.into());
         self
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum ResponseItemId {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for ResponseItemId {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for ResponseItemId {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = ResponseItemId;
-            const EXPECTING: &'static str = "ResponseItemId: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value).map(ResponseItemId::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(ResponseItemId::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("ResponseItemId can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
     }
 }
 
@@ -1093,7 +1039,7 @@ pub struct ResponseItem {
         rename = "_id",
         skip_serializing_if = "::core::option::Option::is_none"
     )]
-    pub id: ::core::option::Option<crate::bulk::ResponseItemId>,
+    pub id: ::core::option::Option<::std::string::String>,
     /// The name of the index associated with the operation.
     /// If the operation targeted a data stream, this is the backing index into which the document was written.
     #[serde(
@@ -1154,10 +1100,7 @@ pub struct ResponseItem {
 
 impl ResponseItem {
     /// A `ResponseItem` with its required properties set.
-    pub fn new(
-        index: impl ::core::convert::Into<::std::string::String>,
-        status: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(index: impl ::core::convert::Into<::std::string::String>, status: i32) -> Self {
         Self {
             id: ::core::option::Option::None,
             index: ::core::option::Option::Some(index.into()),
@@ -1174,7 +1117,7 @@ impl ResponseItem {
         }
     }
     /// Sets `id`.
-    pub fn id(mut self, value: impl ::core::convert::Into<crate::bulk::ResponseItemId>) -> Self {
+    pub fn id(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
         self
     }
@@ -1192,7 +1135,7 @@ impl ResponseItem {
         self
     }
     /// Sets `primary_term`.
-    pub fn primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn primary_term(mut self, value: i64) -> Self {
         self.primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1226,7 +1169,7 @@ impl ResponseItem {
         self
     }
     /// Sets `forced_refresh`.
-    pub fn forced_refresh(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn forced_refresh(mut self, value: bool) -> Self {
         self.forced_refresh = ::core::option::Option::Some(value.into());
         self
     }
@@ -1291,17 +1234,17 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         }
     }
     /// Sets `detect_noop`.
-    pub fn detect_noop(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn detect_noop(mut self, value: bool) -> Self {
         self.detect_noop = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `doc`.
-    pub fn doc(mut self, value: impl ::core::convert::Into<TPartialDocument>) -> Self {
+    pub fn doc(mut self, value: TPartialDocument) -> Self {
         self.doc = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `doc_as_upsert`.
-    pub fn doc_as_upsert(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn doc_as_upsert(mut self, value: bool) -> Self {
         self.doc_as_upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -1311,7 +1254,7 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         self
     }
     /// Sets `scripted_upsert`.
-    pub fn scripted_upsert(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn scripted_upsert(mut self, value: bool) -> Self {
         self.scripted_upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -1324,7 +1267,7 @@ impl<TDocument, TPartialDocument> UpdateAction<TDocument, TPartialDocument> {
         self
     }
     /// Sets `upsert`.
-    pub fn upsert(mut self, value: impl ::core::convert::Into<TDocument>) -> Self {
+    pub fn upsert(mut self, value: TDocument) -> Self {
         self.upsert = ::core::option::Option::Some(value.into());
         self
     }
@@ -1395,7 +1338,7 @@ impl UpdateOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1424,12 +1367,12 @@ impl UpdateOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `retry_on_conflict`.
-    pub fn retry_on_conflict(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn retry_on_conflict(mut self, value: i32) -> Self {
         self.retry_on_conflict = ::core::option::Option::Some(value.into());
         self
     }
@@ -1510,7 +1453,7 @@ impl WriteOperation {
         self
     }
     /// Sets `if_primary_term`.
-    pub fn if_primary_term(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn if_primary_term(mut self, value: i64) -> Self {
         self.if_primary_term = ::core::option::Option::Some(value.into());
         self
     }
@@ -1554,8 +1497,132 @@ impl WriteOperation {
         self
     }
     /// Sets `require_alias`.
-    pub fn require_alias(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn require_alias(mut self, value: bool) -> Self {
         self.require_alias = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl<TDocument: ::serde::Serialize, TPartialDocument: ::serde::Serialize> ::oxsearch_core::Endpoint
+    for Request<TDocument, TPartialDocument>
+{
+    type Response = crate::bulk::Response;
+
+    fn name(&self) -> &'static str {
+        "bulk"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Post,
+                format!(
+                    "/{}/_bulk",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Post,
+            "/_bulk",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.include_source_on_error {
+            query.push((
+                "include_source_on_error",
+                ::oxsearch_core::__private::query_param("include_source_on_error", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.list_executed_pipelines {
+            query.push((
+                "list_executed_pipelines",
+                ::oxsearch_core::__private::query_param("list_executed_pipelines", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.pipeline {
+            query.push((
+                "pipeline",
+                ::oxsearch_core::__private::query_param("pipeline", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source {
+            query.push((
+                "_source",
+                ::oxsearch_core::__private::query_param("_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_excludes {
+            query.push((
+                "_source_excludes",
+                ::oxsearch_core::__private::query_param("_source_excludes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_includes {
+            query.push((
+                "_source_includes",
+                ::oxsearch_core::__private::query_param("_source_includes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_active_shards {
+            query.push((
+                "wait_for_active_shards",
+                ::oxsearch_core::__private::query_param("wait_for_active_shards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.require_alias {
+            query.push((
+                "require_alias",
+                ::oxsearch_core::__private::query_param("require_alias", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.require_data_stream {
+            query.push((
+                "require_data_stream",
+                ::oxsearch_core::__private::query_param("require_data_stream", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::ndjson_body(body))
+            .transpose()
     }
 }

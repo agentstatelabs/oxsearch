@@ -53,12 +53,12 @@ impl UnassignedInformation {
         self
     }
     /// Sets `failed_allocation_attempts`.
-    pub fn failed_allocation_attempts(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn failed_allocation_attempts(mut self, value: i32) -> Self {
         self.failed_allocation_attempts = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `delayed`.
-    pub fn delayed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn delayed(mut self, value: bool) -> Self {
         self.delayed = ::core::option::Option::Some(value.into());
         self
     }

@@ -167,10 +167,10 @@ pub struct Response<TDocument = ::serde_json::Value> {
 impl<TDocument> Response<TDocument> {
     /// A `Response` with its required properties set.
     pub fn new(
-        took: impl ::core::convert::Into<i64>,
-        timed_out: impl ::core::convert::Into<bool>,
+        took: i64,
+        timed_out: bool,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
-        hits: impl ::core::convert::Into<crate::search::HitsMetadata<TDocument>>,
+        hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -192,7 +192,7 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -216,8 +216,8 @@ impl KnnSearchQuery {
     pub fn new(
         field: impl ::core::convert::Into<::oxsearch_core::Field>,
         query_vector: impl ::core::convert::Into<::oxsearch_core::QueryVector>,
-        k: impl ::core::convert::Into<i32>,
-        num_candidates: impl ::core::convert::Into<i32>,
+        k: i32,
+        num_candidates: i32,
     ) -> Self {
         Self {
             field: field.into(),
@@ -225,5 +225,56 @@ impl KnnSearchQuery {
             k: k.into(),
             num_candidates: num_candidates.into(),
         }
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::knn_search::Response;
+
+    fn name(&self) -> &'static str {
+        "knn_search"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.index),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_knn_search",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

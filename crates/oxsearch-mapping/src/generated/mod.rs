@@ -83,7 +83,7 @@ impl AggregateMetricDoubleProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -111,7 +111,7 @@ impl AggregateMetricDoubleProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
@@ -144,15 +144,15 @@ impl AllField {
     /// A `AllField` with its required properties set.
     pub fn new(
         analyzer: impl ::core::convert::Into<::std::string::String>,
-        enabled: impl ::core::convert::Into<bool>,
-        omit_norms: impl ::core::convert::Into<bool>,
+        enabled: bool,
+        omit_norms: bool,
         search_analyzer: impl ::core::convert::Into<::std::string::String>,
         similarity: impl ::core::convert::Into<::std::string::String>,
-        store: impl ::core::convert::Into<bool>,
-        store_term_vector_offsets: impl ::core::convert::Into<bool>,
-        store_term_vector_payloads: impl ::core::convert::Into<bool>,
-        store_term_vector_positions: impl ::core::convert::Into<bool>,
-        store_term_vectors: impl ::core::convert::Into<bool>,
+        store: bool,
+        store_term_vector_offsets: bool,
+        store_term_vector_payloads: bool,
+        store_term_vector_positions: bool,
+        store_term_vectors: bool,
     ) -> Self {
         Self {
             analyzer: analyzer.into(),
@@ -234,7 +234,7 @@ impl BinaryProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -267,7 +267,7 @@ impl BinaryProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -368,7 +368,7 @@ impl BooleanProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -401,7 +401,7 @@ impl BooleanProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -411,7 +411,7 @@ impl BooleanProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -424,17 +424,17 @@ impl BooleanProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn null_value(mut self, value: bool) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
@@ -452,7 +452,7 @@ impl BooleanProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -552,7 +552,7 @@ impl ByteNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -585,7 +585,7 @@ impl ByteNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -595,22 +595,22 @@ impl ByteNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -636,12 +636,12 @@ impl ByteNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<i8>) -> Self {
+    pub fn null_value(mut self, value: i8) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -698,7 +698,7 @@ impl ChunkingSettings {
     /// A `ChunkingSettings` with its required properties set.
     pub fn new(
         strategy: impl ::core::convert::Into<::std::string::String>,
-        max_chunk_size: impl ::core::convert::Into<i32>,
+        max_chunk_size: i32,
     ) -> Self {
         Self {
             strategy: strategy.into(),
@@ -710,12 +710,12 @@ impl ChunkingSettings {
         }
     }
     /// Sets `overlap`.
-    pub fn overlap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn overlap(mut self, value: i32) -> Self {
         self.overlap = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `sentence_overlap`.
-    pub fn sentence_overlap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn sentence_overlap(mut self, value: i32) -> Self {
         self.sentence_overlap = ::core::option::Option::Some(value.into());
         self
     }
@@ -820,7 +820,7 @@ impl CompletionProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -853,7 +853,7 @@ impl CompletionProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -876,17 +876,17 @@ impl CompletionProperty {
         self
     }
     /// Sets `max_input_length`.
-    pub fn max_input_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_input_length(mut self, value: i32) -> Self {
         self.max_input_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `preserve_position_increments`.
-    pub fn preserve_position_increments(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn preserve_position_increments(mut self, value: bool) -> Self {
         self.preserve_position_increments = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `preserve_separators`.
-    pub fn preserve_separators(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn preserve_separators(mut self, value: bool) -> Self {
         self.preserve_separators = ::core::option::Option::Some(value.into());
         self
     }
@@ -975,7 +975,7 @@ impl ConstantKeywordProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -1071,7 +1071,7 @@ impl CorePropertyBase {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -1104,7 +1104,7 @@ impl CorePropertyBase {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -1169,7 +1169,7 @@ impl CountedKeywordProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -1197,7 +1197,7 @@ impl CountedKeywordProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -1211,7 +1211,7 @@ pub struct DataStreamTimestamp {
 
 impl DataStreamTimestamp {
     /// A `DataStreamTimestamp` with its required properties set.
-    pub fn new(enabled: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(enabled: bool) -> Self {
         Self {
             enabled: enabled.into(),
         }
@@ -1307,7 +1307,7 @@ impl DateNanosProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -1340,7 +1340,7 @@ impl DateNanosProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -1350,7 +1350,7 @@ impl DateNanosProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1360,12 +1360,12 @@ impl DateNanosProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -1391,7 +1391,7 @@ impl DateNanosProperty {
         self
     }
     /// Sets `precision_step`.
-    pub fn precision_step(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn precision_step(mut self, value: i32) -> Self {
         self.precision_step = ::core::option::Option::Some(value.into());
         self
     }
@@ -1492,7 +1492,7 @@ impl DateProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -1525,7 +1525,7 @@ impl DateProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -1535,7 +1535,7 @@ impl DateProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
@@ -1553,12 +1553,12 @@ impl DateProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -1584,7 +1584,7 @@ impl DateProperty {
         self
     }
     /// Sets `precision_step`.
-    pub fn precision_step(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn precision_step(mut self, value: i32) -> Self {
         self.precision_step = ::core::option::Option::Some(value.into());
         self
     }
@@ -1672,7 +1672,7 @@ impl DateRangeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -1705,7 +1705,7 @@ impl DateRangeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -1715,17 +1715,17 @@ impl DateRangeProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -1886,17 +1886,17 @@ impl DenseVectorIndexOptions {
         }
     }
     /// Sets `confidence_interval`.
-    pub fn confidence_interval(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn confidence_interval(mut self, value: f32) -> Self {
         self.confidence_interval = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ef_construction`.
-    pub fn ef_construction(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ef_construction(mut self, value: i32) -> Self {
         self.ef_construction = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `m`.
-    pub fn m(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn m(mut self, value: i32) -> Self {
         self.m = ::core::option::Option::Some(value.into());
         self
     }
@@ -1909,37 +1909,37 @@ impl DenseVectorIndexOptions {
         self
     }
     /// Sets `on_disk_rescore`.
-    pub fn on_disk_rescore(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn on_disk_rescore(mut self, value: bool) -> Self {
         self.on_disk_rescore = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `flat_index_threshold`.
-    pub fn flat_index_threshold(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn flat_index_threshold(mut self, value: i32) -> Self {
         self.flat_index_threshold = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `cluster_size`.
-    pub fn cluster_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn cluster_size(mut self, value: i32) -> Self {
         self.cluster_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `default_visit_percentage`.
-    pub fn default_visit_percentage(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn default_visit_percentage(mut self, value: f32) -> Self {
         self.default_visit_percentage = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `bits`.
-    pub fn bits(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn bits(mut self, value: i32) -> Self {
         self.bits = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `precondition`.
-    pub fn precondition(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn precondition(mut self, value: bool) -> Self {
         self.precondition = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `auto_calibrate`.
-    pub fn auto_calibrate(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn auto_calibrate(mut self, value: bool) -> Self {
         self.auto_calibrate = ::core::option::Option::Some(value.into());
         self
     }
@@ -1957,7 +1957,7 @@ pub struct DenseVectorIndexOptionsRescoreVector {
 
 impl DenseVectorIndexOptionsRescoreVector {
     /// A `DenseVectorIndexOptionsRescoreVector` with its required properties set.
-    pub fn new(oversample: impl ::core::convert::Into<f32>) -> Self {
+    pub fn new(oversample: f32) -> Self {
         Self {
             oversample: oversample.into(),
         }
@@ -2151,7 +2151,7 @@ impl DenseVectorProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -2179,7 +2179,7 @@ impl DenseVectorProperty {
         self
     }
     /// Sets `dims`.
-    pub fn dims(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dims(mut self, value: i32) -> Self {
         self.dims = ::core::option::Option::Some(value.into());
         self
     }
@@ -2192,7 +2192,7 @@ impl DenseVectorProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -2382,12 +2382,12 @@ impl DocValuesConfig {
         }
     }
     /// Sets `multi_value`.
-    pub fn multi_value(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn multi_value(mut self, value: bool) -> Self {
         self.multi_value = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `nullability`.
-    pub fn nullability(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn nullability(mut self, value: bool) -> Self {
         self.nullability = ::core::option::Option::Some(value.into());
         self
     }
@@ -2458,7 +2458,7 @@ impl DocValuesPropertyBase {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -2491,7 +2491,7 @@ impl DocValuesPropertyBase {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -2596,7 +2596,7 @@ impl DoubleNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -2629,7 +2629,7 @@ impl DoubleNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -2639,22 +2639,22 @@ impl DoubleNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -2680,12 +2680,12 @@ impl DoubleNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn null_value(mut self, value: f64) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -2765,7 +2765,7 @@ impl DoubleRangeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -2798,7 +2798,7 @@ impl DoubleRangeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -2808,17 +2808,17 @@ impl DoubleRangeProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -2884,59 +2884,6 @@ impl<'de> ::serde::Deserialize<'de> for DynamicMapping {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum DynamicPropertyIndexPrefixes {
-    /// A object.
-    TextIndexPrefixes(crate::TextIndexPrefixes),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for DynamicPropertyIndexPrefixes {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::TextIndexPrefixes(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for DynamicPropertyIndexPrefixes {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = DynamicPropertyIndexPrefixes;
-            const EXPECTING: &'static str = "DynamicPropertyIndexPrefixes: null or object";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(DynamicPropertyIndexPrefixes::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Object => {
-                        <crate::TextIndexPrefixes as ::serde::Deserialize>::deserialize(value)
-                            .map(DynamicPropertyIndexPrefixes::TextIndexPrefixes)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("DynamicPropertyIndexPrefixes can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DynamicProperty {
@@ -2991,7 +2938,7 @@ pub struct DynamicProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index_phrases: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub index_prefixes: ::core::option::Option<crate::DynamicPropertyIndexPrefixes>,
+    pub index_prefixes: ::core::option::Option<crate::TextIndexPrefixes>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub norms: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -3068,7 +3015,7 @@ impl DynamicProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -3101,7 +3048,7 @@ impl DynamicProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -3111,7 +3058,7 @@ impl DynamicProperty {
         self
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
@@ -3124,12 +3071,12 @@ impl DynamicProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
@@ -3147,7 +3094,7 @@ impl DynamicProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
@@ -3165,12 +3112,12 @@ impl DynamicProperty {
         self
     }
     /// Sets `eager_global_ordinals`.
-    pub fn eager_global_ordinals(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn eager_global_ordinals(mut self, value: bool) -> Self {
         self.eager_global_ordinals = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -3180,25 +3127,25 @@ impl DynamicProperty {
         self
     }
     /// Sets `index_phrases`.
-    pub fn index_phrases(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index_phrases(mut self, value: bool) -> Self {
         self.index_phrases = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index_prefixes`.
     pub fn index_prefixes(
         mut self,
-        value: impl ::core::convert::Into<crate::DynamicPropertyIndexPrefixes>,
+        value: impl ::core::convert::Into<crate::TextIndexPrefixes>,
     ) -> Self {
         self.index_prefixes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `norms`.
-    pub fn norms(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn norms(mut self, value: bool) -> Self {
         self.norms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `position_increment_gap`.
-    pub fn position_increment_gap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn position_increment_gap(mut self, value: i32) -> Self {
         self.position_increment_gap = ::core::option::Option::Some(value.into());
         self
     }
@@ -3232,7 +3179,7 @@ impl DynamicProperty {
         self
     }
     /// Sets `precision_step`.
-    pub fn precision_step(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn precision_step(mut self, value: i32) -> Self {
         self.precision_step = ::core::option::Option::Some(value.into());
         self
     }
@@ -3580,7 +3527,7 @@ impl ExponentialHistogramProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -3676,7 +3623,7 @@ impl FieldAliasProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -3740,7 +3687,7 @@ pub struct FieldNamesField {
 
 impl FieldNamesField {
     /// A `FieldNamesField` with its required properties set.
-    pub fn new(enabled: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(enabled: bool) -> Self {
         Self {
             enabled: enabled.into(),
         }
@@ -3839,7 +3786,7 @@ impl FlattenedProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -3867,27 +3814,27 @@ impl FlattenedProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `depth_limit`.
-    pub fn depth_limit(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn depth_limit(mut self, value: i32) -> Self {
         self.depth_limit = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `doc_values`.
-    pub fn doc_values(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn doc_values(mut self, value: bool) -> Self {
         self.doc_values = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `eager_global_ordinals`.
-    pub fn eager_global_ordinals(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn eager_global_ordinals(mut self, value: bool) -> Self {
         self.eager_global_ordinals = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -3915,7 +3862,7 @@ impl FlattenedProperty {
         self
     }
     /// Sets `split_queries_on_whitespace`.
-    pub fn split_queries_on_whitespace(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_queries_on_whitespace(mut self, value: bool) -> Self {
         self.split_queries_on_whitespace = ::core::option::Option::Some(value.into());
         self
     }
@@ -4023,7 +3970,7 @@ impl FloatNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -4056,7 +4003,7 @@ impl FloatNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -4066,22 +4013,22 @@ impl FloatNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -4107,12 +4054,12 @@ impl FloatNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn null_value(mut self, value: f32) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -4192,7 +4139,7 @@ impl FloatRangeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -4225,7 +4172,7 @@ impl FloatRangeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -4235,17 +4182,17 @@ impl FloatRangeProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -4447,7 +4394,7 @@ impl GeoPointProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -4480,7 +4427,7 @@ impl GeoPointProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -4490,12 +4437,12 @@ impl GeoPointProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_z_value`.
-    pub fn ignore_z_value(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_z_value(mut self, value: bool) -> Self {
         self.ignore_z_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -4508,7 +4455,7 @@ impl GeoPointProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -4620,7 +4567,7 @@ impl GeoShapeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -4653,7 +4600,7 @@ impl GeoShapeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -4663,22 +4610,22 @@ impl GeoShapeProperty {
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_z_value`.
-    pub fn ignore_z_value(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_z_value(mut self, value: bool) -> Self {
         self.ignore_z_value = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -4838,7 +4785,7 @@ impl HalfFloatNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -4871,7 +4818,7 @@ impl HalfFloatNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -4881,22 +4828,22 @@ impl HalfFloatNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -4922,12 +4869,12 @@ impl HalfFloatNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+    pub fn null_value(mut self, value: f32) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -4995,7 +4942,7 @@ impl HistogramProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -5023,7 +4970,7 @@ impl HistogramProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
@@ -5152,7 +5099,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -5185,7 +5132,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -5195,7 +5142,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `norms`.
-    pub fn norms(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn norms(mut self, value: bool) -> Self {
         self.norms = ::core::option::Option::Some(value.into());
         self
     }
@@ -5205,7 +5152,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -5259,7 +5206,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `case_level`.
-    pub fn case_level(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn case_level(mut self, value: bool) -> Self {
         self.case_level = ::core::option::Option::Some(value.into());
         self
     }
@@ -5272,7 +5219,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `numeric`.
-    pub fn numeric(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn numeric(mut self, value: bool) -> Self {
         self.numeric = ::core::option::Option::Some(value.into());
         self
     }
@@ -5285,7 +5232,7 @@ impl IcuCollationProperty {
         self
     }
     /// Sets `hiragana_quaternary_mode`.
-    pub fn hiragana_quaternary_mode(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn hiragana_quaternary_mode(mut self, value: bool) -> Self {
         self.hiragana_quaternary_mode = ::core::option::Option::Some(value.into());
         self
     }
@@ -5299,7 +5246,7 @@ pub struct IndexField {
 
 impl IndexField {
     /// A `IndexField` with its required properties set.
-    pub fn new(enabled: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(enabled: bool) -> Self {
         Self {
             enabled: enabled.into(),
         }
@@ -5458,7 +5405,7 @@ impl IntegerNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -5491,7 +5438,7 @@ impl IntegerNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -5501,22 +5448,22 @@ impl IntegerNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -5542,12 +5489,12 @@ impl IntegerNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn null_value(mut self, value: i32) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -5627,7 +5574,7 @@ impl IntegerRangeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -5660,7 +5607,7 @@ impl IntegerRangeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -5670,17 +5617,17 @@ impl IntegerRangeProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -5773,7 +5720,7 @@ impl IpProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -5806,7 +5753,7 @@ impl IpProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -5816,17 +5763,17 @@ impl IpProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
@@ -5849,7 +5796,7 @@ impl IpProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -5929,7 +5876,7 @@ impl IpRangeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -5962,7 +5909,7 @@ impl IpRangeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -5972,17 +5919,17 @@ impl IpRangeProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -6055,7 +6002,7 @@ impl JoinProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -6096,62 +6043,9 @@ impl JoinProperty {
         self
     }
     /// Sets `eager_global_ordinals`.
-    pub fn eager_global_ordinals(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn eager_global_ordinals(mut self, value: bool) -> Self {
         self.eager_global_ordinals = ::core::option::Option::Some(value.into());
         self
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum KeywordPropertySimilarity {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for KeywordPropertySimilarity {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for KeywordPropertySimilarity {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = KeywordPropertySimilarity;
-            const EXPECTING: &'static str = "KeywordPropertySimilarity: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(KeywordPropertySimilarity::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(KeywordPropertySimilarity::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("KeywordPropertySimilarity can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
     }
 }
 
@@ -6201,7 +6095,7 @@ pub struct KeywordProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub null_value: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub similarity: ::core::option::Option<crate::KeywordPropertySimilarity>,
+    pub similarity: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub split_queries_on_whitespace: ::core::option::Option<bool>,
     /// For internal use by Elastic only. Marks the field as a time series dimension. Defaults to false.
@@ -6257,7 +6151,7 @@ impl KeywordProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -6290,7 +6184,7 @@ impl KeywordProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -6300,17 +6194,17 @@ impl KeywordProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `eager_global_ordinals`.
-    pub fn eager_global_ordinals(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn eager_global_ordinals(mut self, value: bool) -> Self {
         self.eager_global_ordinals = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -6338,7 +6232,7 @@ impl KeywordProperty {
         self
     }
     /// Sets `norms`.
-    pub fn norms(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn norms(mut self, value: bool) -> Self {
         self.norms = ::core::option::Option::Some(value.into());
         self
     }
@@ -6348,20 +6242,17 @@ impl KeywordProperty {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(
-        mut self,
-        value: impl ::core::convert::Into<crate::KeywordPropertySimilarity>,
-    ) -> Self {
+    pub fn similarity(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `split_queries_on_whitespace`.
-    pub fn split_queries_on_whitespace(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn split_queries_on_whitespace(mut self, value: bool) -> Self {
         self.split_queries_on_whitespace = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -6461,7 +6352,7 @@ impl LongNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -6494,7 +6385,7 @@ impl LongNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -6504,22 +6395,22 @@ impl LongNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -6545,12 +6436,12 @@ impl LongNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<i64>) -> Self {
+    pub fn null_value(mut self, value: i64) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -6630,7 +6521,7 @@ impl LongRangeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -6663,7 +6554,7 @@ impl LongRangeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -6673,17 +6564,17 @@ impl LongRangeProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -6864,7 +6755,7 @@ impl Murmur3HashProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -6897,7 +6788,7 @@ impl Murmur3HashProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -6979,7 +6870,7 @@ impl NestedProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -7012,22 +6903,22 @@ impl NestedProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `include_in_parent`.
-    pub fn include_in_parent(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_in_parent(mut self, value: bool) -> Self {
         self.include_in_parent = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `include_in_root`.
-    pub fn include_in_root(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn include_in_root(mut self, value: bool) -> Self {
         self.include_in_root = ::core::option::Option::Some(value.into());
         self
     }
@@ -7124,7 +7015,7 @@ impl NumberPropertyBase {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -7157,7 +7048,7 @@ impl NumberPropertyBase {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -7167,22 +7058,22 @@ impl NumberPropertyBase {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -7208,7 +7099,7 @@ impl NumberPropertyBase {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -7282,7 +7173,7 @@ impl ObjectProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -7315,12 +7206,12 @@ impl ObjectProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
@@ -7454,7 +7345,7 @@ impl PassthroughObjectProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -7487,22 +7378,22 @@ impl PassthroughObjectProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `priority`.
-    pub fn priority(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn priority(mut self, value: i32) -> Self {
         self.priority = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
@@ -7564,7 +7455,7 @@ impl PercolatorProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -7667,7 +7558,7 @@ impl PointProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -7700,7 +7591,7 @@ impl PointProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -7710,12 +7601,12 @@ impl PointProperty {
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_z_value`.
-    pub fn ignore_z_value(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_z_value(mut self, value: bool) -> Self {
         self.ignore_z_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -7781,111 +7672,111 @@ impl<'de> ::serde::Deserialize<'de> for PreserveLeafArrays {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum Property {
-    /// `binary_property`.
+    /// `binary`.
     Binary(crate::BinaryProperty),
-    /// `boolean_property`.
+    /// `boolean`.
     Boolean(crate::BooleanProperty),
-    /// `dynamic_property`.
+    /// `{dynamic_type}`.
     Dynamic(crate::DynamicProperty),
-    /// `join_property`.
+    /// `join`.
     Join(crate::JoinProperty),
-    /// `keyword_property`.
+    /// `keyword`.
     Keyword(crate::KeywordProperty),
-    /// `match_only_text_property`.
+    /// `match_only_text`.
     MatchOnlyText(crate::MatchOnlyTextProperty),
-    /// `percolator_property`.
+    /// `percolator`.
     Percolator(crate::PercolatorProperty),
-    /// `rank_feature_property`.
+    /// `rank_feature`.
     RankFeature(crate::RankFeatureProperty),
-    /// `rank_features_property`.
+    /// `rank_features`.
     RankFeatures(crate::RankFeaturesProperty),
-    /// `search_as_you_type_property`.
+    /// `search_as_you_type`.
     SearchAsYouType(crate::SearchAsYouTypeProperty),
-    /// `text_property`.
+    /// `text`.
     Text(crate::TextProperty),
-    /// `version_property`.
+    /// `version`.
     Version(crate::VersionProperty),
-    /// `wildcard_property`.
+    /// `wildcard`.
     Wildcard(crate::WildcardProperty),
-    /// `date_nanos_property`.
+    /// `date_nanos`.
     DateNanos(crate::DateNanosProperty),
-    /// `date_property`.
+    /// `date`.
     Date(crate::DateProperty),
-    /// `aggregate_metric_double_property`.
+    /// `aggregate_metric_double`.
     AggregateMetricDouble(crate::AggregateMetricDoubleProperty),
-    /// `dense_vector_property`.
+    /// `dense_vector`.
     DenseVector(crate::DenseVectorProperty),
-    /// `flattened_property`.
+    /// `flattened`.
     Flattened(crate::FlattenedProperty),
-    /// `nested_property`.
+    /// `nested`.
     Nested(crate::NestedProperty),
-    /// `object_property`.
+    /// `object`.
     Object(crate::ObjectProperty),
-    /// `passthrough_object_property`.
+    /// `passthrough`.
     PassthroughObject(crate::PassthroughObjectProperty),
-    /// `rank_vector_property`.
+    /// `rank_vectors`.
     RankVector(crate::RankVectorProperty),
-    /// `semantic_text_property`.
+    /// `semantic_text`.
     SemanticText(crate::SemanticTextProperty),
-    /// `sparse_vector_property`.
+    /// `sparse_vector`.
     SparseVector(crate::SparseVectorProperty),
-    /// `completion_property`.
+    /// `completion`.
     Completion(crate::CompletionProperty),
-    /// `constant_keyword_property`.
+    /// `constant_keyword`.
     ConstantKeyword(crate::ConstantKeywordProperty),
-    /// `counted_keyword_property`.
+    /// `counted_keyword`.
     CountedKeyword(crate::CountedKeywordProperty),
-    /// `field_alias_property`.
+    /// `alias`.
     FieldAlias(crate::FieldAliasProperty),
-    /// `histogram_property`.
+    /// `histogram`.
     Histogram(crate::HistogramProperty),
-    /// `exponential_histogram_property`.
+    /// `exponential_histogram`.
     ExponentialHistogram(crate::ExponentialHistogramProperty),
-    /// `ip_property`.
+    /// `ip`.
     Ip(crate::IpProperty),
-    /// `murmur3_hash_property`.
+    /// `murmur3`.
     Murmur3Hash(crate::Murmur3HashProperty),
-    /// `token_count_property`.
+    /// `token_count`.
     TokenCount(crate::TokenCountProperty),
-    /// `geo_point_property`.
+    /// `geo_point`.
     GeoPoint(crate::GeoPointProperty),
-    /// `geo_shape_property`.
+    /// `geo_shape`.
     GeoShape(crate::GeoShapeProperty),
-    /// `point_property`.
+    /// `point`.
     Point(crate::PointProperty),
-    /// `shape_property`.
+    /// `shape`.
     Shape(crate::ShapeProperty),
-    /// `byte_number_property`.
+    /// `byte`.
     ByteNumber(crate::ByteNumberProperty),
-    /// `double_number_property`.
+    /// `double`.
     DoubleNumber(crate::DoubleNumberProperty),
-    /// `float_number_property`.
+    /// `float`.
     FloatNumber(crate::FloatNumberProperty),
-    /// `half_float_number_property`.
+    /// `half_float`.
     HalfFloatNumber(crate::HalfFloatNumberProperty),
-    /// `integer_number_property`.
+    /// `integer`.
     IntegerNumber(crate::IntegerNumberProperty),
-    /// `long_number_property`.
+    /// `long`.
     LongNumber(crate::LongNumberProperty),
-    /// `scaled_float_number_property`.
+    /// `scaled_float`.
     ScaledFloatNumber(crate::ScaledFloatNumberProperty),
-    /// `short_number_property`.
+    /// `short`.
     ShortNumber(crate::ShortNumberProperty),
-    /// `unsigned_long_number_property`.
+    /// `unsigned_long`.
     UnsignedLongNumber(crate::UnsignedLongNumberProperty),
-    /// `date_range_property`.
+    /// `date_range`.
     DateRange(crate::DateRangeProperty),
-    /// `double_range_property`.
+    /// `double_range`.
     DoubleRange(crate::DoubleRangeProperty),
-    /// `float_range_property`.
+    /// `float_range`.
     FloatRange(crate::FloatRangeProperty),
-    /// `integer_range_property`.
+    /// `integer_range`.
     IntegerRange(crate::IntegerRangeProperty),
-    /// `ip_range_property`.
+    /// `ip_range`.
     IpRange(crate::IpRangeProperty),
-    /// `long_range_property`.
+    /// `long_range`.
     LongRange(crate::LongRangeProperty),
-    /// `icu_collation_property`.
+    /// `icu_collation_keyword`.
     IcuCollation(crate::IcuCollationProperty),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
@@ -7897,322 +7788,244 @@ impl ::serde::Serialize for Property {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Binary(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "binary_property",
-                value,
-            ),
-            Self::Boolean(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "boolean_property",
-                value,
-            ),
+            Self::Binary(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "binary", value)
+            }
+            Self::Boolean(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "boolean", value)
+            }
             Self::Dynamic(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "dynamic_property",
+                "{dynamic_type}",
                 value,
             ),
-            Self::Join(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "join_property",
-                value,
-            ),
-            Self::Keyword(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keyword_property",
-                value,
-            ),
+            Self::Join(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "join", value)
+            }
+            Self::Keyword(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "keyword", value)
+            }
             Self::MatchOnlyText(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "match_only_text_property",
+                "match_only_text",
                 value,
             ),
             Self::Percolator(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "percolator_property",
+                "percolator",
                 value,
             ),
             Self::RankFeature(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "rank_feature_property",
+                "rank_feature",
                 value,
             ),
             Self::RankFeatures(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "rank_features_property",
+                "rank_features",
                 value,
             ),
             Self::SearchAsYouType(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "search_as_you_type_property",
+                "search_as_you_type",
                 value,
             ),
-            Self::Text(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "text_property",
-                value,
-            ),
-            Self::Version(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "version_property",
-                value,
-            ),
-            Self::Wildcard(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "wildcard_property",
-                value,
-            ),
+            Self::Text(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "text", value)
+            }
+            Self::Version(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "version", value)
+            }
+            Self::Wildcard(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "wildcard", value)
+            }
             Self::DateNanos(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "date_nanos_property",
+                "date_nanos",
                 value,
             ),
-            Self::Date(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "date_property",
-                value,
-            ),
+            Self::Date(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "date", value)
+            }
             Self::AggregateMetricDouble(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "aggregate_metric_double_property",
+                "aggregate_metric_double",
                 value,
             ),
             Self::DenseVector(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "dense_vector_property",
+                "dense_vector",
                 value,
             ),
-            Self::Flattened(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "flattened_property",
-                value,
-            ),
-            Self::Nested(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "nested_property",
-                value,
-            ),
-            Self::Object(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "object_property",
-                value,
-            ),
+            Self::Flattened(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "flattened", value)
+            }
+            Self::Nested(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "nested", value)
+            }
+            Self::Object(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "object", value)
+            }
             Self::PassthroughObject(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "passthrough_object_property",
+                "passthrough",
                 value,
             ),
             Self::RankVector(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "rank_vector_property",
+                "rank_vectors",
                 value,
             ),
             Self::SemanticText(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "semantic_text_property",
+                "semantic_text",
                 value,
             ),
             Self::SparseVector(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "sparse_vector_property",
+                "sparse_vector",
                 value,
             ),
             Self::Completion(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "completion_property",
+                "completion",
                 value,
             ),
             Self::ConstantKeyword(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "constant_keyword_property",
+                "constant_keyword",
                 value,
             ),
             Self::CountedKeyword(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "counted_keyword_property",
+                "counted_keyword",
                 value,
             ),
-            Self::FieldAlias(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "field_alias_property",
-                value,
-            ),
-            Self::Histogram(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "histogram_property",
-                value,
-            ),
+            Self::FieldAlias(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "alias", value)
+            }
+            Self::Histogram(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "histogram", value)
+            }
             Self::ExponentialHistogram(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "exponential_histogram_property",
+                "exponential_histogram",
                 value,
             ),
-            Self::Ip(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ip_property",
-                value,
-            ),
-            Self::Murmur3Hash(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "murmur3_hash_property",
-                value,
-            ),
+            Self::Ip(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ip", value)
+            }
+            Self::Murmur3Hash(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "murmur3", value)
+            }
             Self::TokenCount(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "token_count_property",
+                "token_count",
                 value,
             ),
-            Self::GeoPoint(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "geo_point_property",
-                value,
-            ),
-            Self::GeoShape(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "geo_shape_property",
-                value,
-            ),
-            Self::Point(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "point_property",
-                value,
-            ),
-            Self::Shape(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "shape_property",
-                value,
-            ),
-            Self::ByteNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "byte_number_property",
-                value,
-            ),
-            Self::DoubleNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "double_number_property",
-                value,
-            ),
-            Self::FloatNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "float_number_property",
-                value,
-            ),
+            Self::GeoPoint(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "geo_point", value)
+            }
+            Self::GeoShape(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "geo_shape", value)
+            }
+            Self::Point(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "point", value)
+            }
+            Self::Shape(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "shape", value)
+            }
+            Self::ByteNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "byte", value)
+            }
+            Self::DoubleNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "double", value)
+            }
+            Self::FloatNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "float", value)
+            }
             Self::HalfFloatNumber(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "half_float_number_property",
+                "half_float",
                 value,
             ),
-            Self::IntegerNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "integer_number_property",
-                value,
-            ),
-            Self::LongNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "long_number_property",
-                value,
-            ),
+            Self::IntegerNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "integer", value)
+            }
+            Self::LongNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "long", value)
+            }
             Self::ScaledFloatNumber(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "scaled_float_number_property",
+                "scaled_float",
                 value,
             ),
-            Self::ShortNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "short_number_property",
-                value,
-            ),
+            Self::ShortNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "short", value)
+            }
             Self::UnsignedLongNumber(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "unsigned_long_number_property",
+                "unsigned_long",
                 value,
             ),
             Self::DateRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "date_range_property",
+                "date_range",
                 value,
             ),
             Self::DoubleRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "double_range_property",
+                "double_range",
                 value,
             ),
             Self::FloatRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "float_range_property",
+                "float_range",
                 value,
             ),
             Self::IntegerRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "integer_range_property",
+                "integer_range",
                 value,
             ),
-            Self::IpRange(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ip_range_property",
-                value,
-            ),
+            Self::IpRange(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ip_range", value)
+            }
             Self::LongRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "long_range_property",
+                "long_range",
                 value,
             ),
             Self::IcuCollation(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "icu_collation_property",
+                "icu_collation_keyword",
                 value,
             ),
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
@@ -8231,163 +8044,163 @@ impl<'de> ::serde::Deserialize<'de> for Property {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("binary_property") => {
+            ::core::option::Option::Some("binary") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Binary)
             }
-            ::core::option::Option::Some("boolean_property") => {
+            ::core::option::Option::Some("boolean") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Boolean)
             }
-            ::core::option::Option::Some("dynamic_property") => {
+            ::core::option::Option::Some("{dynamic_type}") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Dynamic)
             }
-            ::core::option::Option::Some("join_property") => {
+            ::core::option::Option::Some("join") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Join)
             }
-            ::core::option::Option::Some("keyword_property") => {
+            ::core::option::Option::Some("keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Keyword)
             }
-            ::core::option::Option::Some("match_only_text_property") => {
+            ::core::option::Option::Some("match_only_text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::MatchOnlyText)
             }
-            ::core::option::Option::Some("percolator_property") => {
+            ::core::option::Option::Some("percolator") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Percolator)
             }
-            ::core::option::Option::Some("rank_feature_property") => {
+            ::core::option::Option::Some("rank_feature") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::RankFeature)
             }
-            ::core::option::Option::Some("rank_features_property") => {
+            ::core::option::Option::Some("rank_features") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::RankFeatures)
             }
-            ::core::option::Option::Some("search_as_you_type_property") => {
+            ::core::option::Option::Some("search_as_you_type") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::SearchAsYouType)
             }
-            ::core::option::Option::Some("text_property") => {
+            ::core::option::Option::Some("text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Text)
             }
-            ::core::option::Option::Some("version_property") => {
+            ::core::option::Option::Some("version") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Version)
             }
-            ::core::option::Option::Some("wildcard_property") => {
+            ::core::option::Option::Some("wildcard") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Wildcard)
             }
-            ::core::option::Option::Some("date_nanos_property") => {
+            ::core::option::Option::Some("date_nanos") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DateNanos)
             }
-            ::core::option::Option::Some("date_property") => {
+            ::core::option::Option::Some("date") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Date)
             }
-            ::core::option::Option::Some("aggregate_metric_double_property") => {
+            ::core::option::Option::Some("aggregate_metric_double") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::AggregateMetricDouble)
             }
-            ::core::option::Option::Some("dense_vector_property") => {
+            ::core::option::Option::Some("dense_vector") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DenseVector)
             }
-            ::core::option::Option::Some("flattened_property") => {
+            ::core::option::Option::Some("flattened") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Flattened)
             }
-            ::core::option::Option::Some("nested_property") => {
+            ::core::option::Option::Some("nested") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Nested)
             }
-            ::core::option::Option::Some("object_property") => {
+            ::core::option::Option::Some("object") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Object)
             }
-            ::core::option::Option::Some("passthrough_object_property") => {
+            ::core::option::Option::Some("passthrough") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::PassthroughObject)
             }
-            ::core::option::Option::Some("rank_vector_property") => {
+            ::core::option::Option::Some("rank_vectors") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::RankVector)
             }
-            ::core::option::Option::Some("semantic_text_property") => {
+            ::core::option::Option::Some("semantic_text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::SemanticText)
             }
-            ::core::option::Option::Some("sparse_vector_property") => {
+            ::core::option::Option::Some("sparse_vector") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::SparseVector)
             }
-            ::core::option::Option::Some("completion_property") => {
+            ::core::option::Option::Some("completion") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Completion)
             }
-            ::core::option::Option::Some("constant_keyword_property") => {
+            ::core::option::Option::Some("constant_keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ConstantKeyword)
             }
-            ::core::option::Option::Some("counted_keyword_property") => {
+            ::core::option::Option::Some("counted_keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::CountedKeyword)
             }
-            ::core::option::Option::Some("field_alias_property") => {
+            ::core::option::Option::Some("alias") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::FieldAlias)
             }
-            ::core::option::Option::Some("histogram_property") => {
+            ::core::option::Option::Some("histogram") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Histogram)
             }
-            ::core::option::Option::Some("exponential_histogram_property") => {
+            ::core::option::Option::Some("exponential_histogram") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ExponentialHistogram)
             }
-            ::core::option::Option::Some("ip_property") => {
+            ::core::option::Option::Some("ip") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Ip)
             }
-            ::core::option::Option::Some("murmur3_hash_property") => {
+            ::core::option::Option::Some("murmur3") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Murmur3Hash)
             }
-            ::core::option::Option::Some("token_count_property") => {
+            ::core::option::Option::Some("token_count") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::TokenCount)
             }
-            ::core::option::Option::Some("geo_point_property") => {
+            ::core::option::Option::Some("geo_point") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::GeoPoint)
             }
-            ::core::option::Option::Some("geo_shape_property") => {
+            ::core::option::Option::Some("geo_shape") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::GeoShape)
             }
-            ::core::option::Option::Some("point_property") => {
+            ::core::option::Option::Some("point") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Point)
             }
-            ::core::option::Option::Some("shape_property") => {
+            ::core::option::Option::Some("shape") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Shape)
             }
-            ::core::option::Option::Some("byte_number_property") => {
+            ::core::option::Option::Some("byte") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ByteNumber)
             }
-            ::core::option::Option::Some("double_number_property") => {
+            ::core::option::Option::Some("double") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DoubleNumber)
             }
-            ::core::option::Option::Some("float_number_property") => {
+            ::core::option::Option::Some("float") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::FloatNumber)
             }
-            ::core::option::Option::Some("half_float_number_property") => {
+            ::core::option::Option::Some("half_float") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::HalfFloatNumber)
             }
-            ::core::option::Option::Some("integer_number_property") => {
+            ::core::option::Option::Some("integer") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IntegerNumber)
             }
-            ::core::option::Option::Some("long_number_property") => {
+            ::core::option::Option::Some("long") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::LongNumber)
             }
-            ::core::option::Option::Some("scaled_float_number_property") => {
+            ::core::option::Option::Some("scaled_float") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ScaledFloatNumber)
             }
-            ::core::option::Option::Some("short_number_property") => {
+            ::core::option::Option::Some("short") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ShortNumber)
             }
-            ::core::option::Option::Some("unsigned_long_number_property") => {
+            ::core::option::Option::Some("unsigned_long") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::UnsignedLongNumber)
             }
-            ::core::option::Option::Some("date_range_property") => {
+            ::core::option::Option::Some("date_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DateRange)
             }
-            ::core::option::Option::Some("double_range_property") => {
+            ::core::option::Option::Some("double_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DoubleRange)
             }
-            ::core::option::Option::Some("float_range_property") => {
+            ::core::option::Option::Some("float_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::FloatRange)
             }
-            ::core::option::Option::Some("integer_range_property") => {
+            ::core::option::Option::Some("integer_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IntegerRange)
             }
-            ::core::option::Option::Some("ip_range_property") => {
+            ::core::option::Option::Some("ip_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IpRange)
             }
-            ::core::option::Option::Some("long_range_property") => {
+            ::core::option::Option::Some("long_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::LongRange)
             }
-            ::core::option::Option::Some("icu_collation_property") => {
+            ::core::option::Option::Some("icu_collation_keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IcuCollation)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
@@ -8451,7 +8264,7 @@ impl PropertyBase {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -8554,7 +8367,7 @@ impl RangePropertyBase {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -8587,7 +8400,7 @@ impl RangePropertyBase {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -8597,17 +8410,17 @@ impl RangePropertyBase {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -8672,7 +8485,7 @@ impl RankFeatureProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -8700,7 +8513,7 @@ impl RankFeatureProperty {
         self
     }
     /// Sets `positive_score_impact`.
-    pub fn positive_score_impact(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positive_score_impact(mut self, value: bool) -> Self {
         self.positive_score_impact = ::core::option::Option::Some(value.into());
         self
     }
@@ -8765,7 +8578,7 @@ impl RankFeaturesProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -8793,7 +8606,7 @@ impl RankFeaturesProperty {
         self
     }
     /// Sets `positive_score_impact`.
-    pub fn positive_score_impact(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positive_score_impact(mut self, value: bool) -> Self {
         self.positive_score_impact = ::core::option::Option::Some(value.into());
         self
     }
@@ -8918,7 +8731,7 @@ impl RankVectorProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -8954,7 +8767,7 @@ impl RankVectorProperty {
         self
     }
     /// Sets `dims`.
-    pub fn dims(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn dims(mut self, value: i32) -> Self {
         self.dims = ::core::option::Option::Some(value.into());
         self
     }
@@ -8968,7 +8781,7 @@ pub struct RoutingField {
 
 impl RoutingField {
     /// A `RoutingField` with its required properties set.
-    pub fn new(required: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(required: bool) -> Self {
         Self {
             required: required.into(),
         }
@@ -9334,7 +9147,7 @@ impl ScaledFloatNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -9367,7 +9180,7 @@ impl ScaledFloatNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -9377,22 +9190,22 @@ impl ScaledFloatNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -9418,72 +9231,19 @@ impl ScaledFloatNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn null_value(mut self, value: f64) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `scaling_factor`.
-    pub fn scaling_factor(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn scaling_factor(mut self, value: f64) -> Self {
         self.scaling_factor = ::core::option::Option::Some(value.into());
         self
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum SearchAsYouTypePropertySimilarity {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for SearchAsYouTypePropertySimilarity {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for SearchAsYouTypePropertySimilarity {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = SearchAsYouTypePropertySimilarity;
-            const EXPECTING: &'static str = "SearchAsYouTypePropertySimilarity: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(SearchAsYouTypePropertySimilarity::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(SearchAsYouTypePropertySimilarity::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("SearchAsYouTypePropertySimilarity can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
     }
 }
 
@@ -9527,7 +9287,7 @@ pub struct SearchAsYouTypeProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub search_quote_analyzer: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub similarity: ::core::option::Option<crate::SearchAsYouTypePropertySimilarity>,
+    pub similarity: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub term_vector: ::core::option::Option<crate::TermVectorOption>,
 }
@@ -9576,7 +9336,7 @@ impl SearchAsYouTypeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -9609,7 +9369,7 @@ impl SearchAsYouTypeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -9619,7 +9379,7 @@ impl SearchAsYouTypeProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -9629,12 +9389,12 @@ impl SearchAsYouTypeProperty {
         self
     }
     /// Sets `max_shingle_size`.
-    pub fn max_shingle_size(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_shingle_size(mut self, value: i32) -> Self {
         self.max_shingle_size = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `norms`.
-    pub fn norms(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn norms(mut self, value: bool) -> Self {
         self.norms = ::core::option::Option::Some(value.into());
         self
     }
@@ -9655,10 +9415,7 @@ impl SearchAsYouTypeProperty {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(
-        mut self,
-        value: impl ::core::convert::Into<crate::SearchAsYouTypePropertySimilarity>,
-    ) -> Self {
+    pub fn similarity(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -9707,59 +9464,6 @@ impl SemanticTextIndexOptions {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum SemanticTextPropertyChunkingSettings {
-    /// A object.
-    ChunkingSettings(crate::ChunkingSettings),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for SemanticTextPropertyChunkingSettings {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::ChunkingSettings(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for SemanticTextPropertyChunkingSettings {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = SemanticTextPropertyChunkingSettings;
-            const EXPECTING: &'static str = "SemanticTextPropertyChunkingSettings: null or object";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(SemanticTextPropertyChunkingSettings::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Object => {
-                        <crate::ChunkingSettings as ::serde::Deserialize>::deserialize(value)
-                            .map(SemanticTextPropertyChunkingSettings::ChunkingSettings)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("SemanticTextPropertyChunkingSettings can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SemanticTextProperty {
@@ -9786,7 +9490,7 @@ pub struct SemanticTextProperty {
     /// chunking settings sent in the inference endpoint associated with inference_id. If chunking settings are updated,
     /// they will not be applied to existing documents until they are reindexed.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub chunking_settings: ::core::option::Option<crate::SemanticTextPropertyChunkingSettings>,
+    pub chunking_settings: ::core::option::Option<crate::ChunkingSettings>,
     /// Multi-fields allow the same string value to be indexed in multiple ways for different purposes, such as one
     /// field for search and a multi-field for sorting and aggregations, or the same string value analyzed by different analyzers.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -9841,7 +9545,7 @@ impl SemanticTextProperty {
     /// Sets `chunking_settings`.
     pub fn chunking_settings(
         mut self,
-        value: impl ::core::convert::Into<crate::SemanticTextPropertyChunkingSettings>,
+        value: impl ::core::convert::Into<crate::ChunkingSettings>,
     ) -> Self {
         self.chunking_settings = ::core::option::Option::Some(value.into());
         self
@@ -9937,7 +9641,7 @@ impl ShapeProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -9970,7 +9674,7 @@ impl ShapeProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -9980,17 +9684,17 @@ impl ShapeProperty {
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_z_value`.
-    pub fn ignore_z_value(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_z_value(mut self, value: bool) -> Self {
         self.ignore_z_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -10095,7 +9799,7 @@ impl ShortNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -10128,7 +9832,7 @@ impl ShortNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -10138,22 +9842,22 @@ impl ShortNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -10179,12 +9883,12 @@ impl ShortNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<i16>) -> Self {
+    pub fn null_value(mut self, value: i16) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -10198,7 +9902,7 @@ pub struct SizeField {
 
 impl SizeField {
     /// A `SizeField` with its required properties set.
-    pub fn new(enabled: impl ::core::convert::Into<bool>) -> Self {
+    pub fn new(enabled: bool) -> Self {
         Self {
             enabled: enabled.into(),
         }
@@ -10229,7 +9933,7 @@ impl SourceField {
         }
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
@@ -10342,7 +10046,7 @@ impl SparseVectorIndexOptions {
         }
     }
     /// Sets `prune`.
-    pub fn prune(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn prune(mut self, value: bool) -> Self {
         self.prune = ::core::option::Option::Some(value.into());
         self
     }
@@ -10420,7 +10124,7 @@ impl SparseVectorProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -10448,7 +10152,7 @@ impl SparseVectorProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -10761,120 +10465,14 @@ impl TextIndexPrefixes {
         }
     }
     /// Sets `max_chars`.
-    pub fn max_chars(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_chars(mut self, value: i32) -> Self {
         self.max_chars = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_chars`.
-    pub fn min_chars(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_chars(mut self, value: i32) -> Self {
         self.min_chars = ::core::option::Option::Some(value.into());
         self
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum TextPropertyIndexPrefixes {
-    /// A object.
-    TextIndexPrefixes(crate::TextIndexPrefixes),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for TextPropertyIndexPrefixes {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::TextIndexPrefixes(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for TextPropertyIndexPrefixes {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = TextPropertyIndexPrefixes;
-            const EXPECTING: &'static str = "TextPropertyIndexPrefixes: null or object";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertyIndexPrefixes::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Object => {
-                        <crate::TextIndexPrefixes as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertyIndexPrefixes::TextIndexPrefixes)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("TextPropertyIndexPrefixes can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum TextPropertySimilarity {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for TextPropertySimilarity {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for TextPropertySimilarity {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = TextPropertySimilarity;
-            const EXPECTING: &'static str = "TextPropertySimilarity: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertySimilarity::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(TextPropertySimilarity::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("TextPropertySimilarity can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
     }
 }
 
@@ -10921,7 +10519,7 @@ pub struct TextProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index_phrases: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub index_prefixes: ::core::option::Option<crate::TextPropertyIndexPrefixes>,
+    pub index_prefixes: ::core::option::Option<crate::TextIndexPrefixes>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub norms: ::core::option::Option<bool>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -10931,7 +10529,7 @@ pub struct TextProperty {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub search_quote_analyzer: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub similarity: ::core::option::Option<crate::TextPropertySimilarity>,
+    pub similarity: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub term_vector: ::core::option::Option<crate::TermVectorOption>,
 }
@@ -10986,7 +10584,7 @@ impl TextProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -11019,7 +10617,7 @@ impl TextProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -11029,17 +10627,17 @@ impl TextProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `eager_global_ordinals`.
-    pub fn eager_global_ordinals(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn eager_global_ordinals(mut self, value: bool) -> Self {
         self.eager_global_ordinals = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `fielddata`.
-    pub fn fielddata(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn fielddata(mut self, value: bool) -> Self {
         self.fielddata = ::core::option::Option::Some(value.into());
         self
     }
@@ -11052,7 +10650,7 @@ impl TextProperty {
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -11062,25 +10660,25 @@ impl TextProperty {
         self
     }
     /// Sets `index_phrases`.
-    pub fn index_phrases(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index_phrases(mut self, value: bool) -> Self {
         self.index_phrases = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index_prefixes`.
     pub fn index_prefixes(
         mut self,
-        value: impl ::core::convert::Into<crate::TextPropertyIndexPrefixes>,
+        value: impl ::core::convert::Into<crate::TextIndexPrefixes>,
     ) -> Self {
         self.index_prefixes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `norms`.
-    pub fn norms(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn norms(mut self, value: bool) -> Self {
         self.norms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `position_increment_gap`.
-    pub fn position_increment_gap(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn position_increment_gap(mut self, value: i32) -> Self {
         self.position_increment_gap = ::core::option::Option::Some(value.into());
         self
     }
@@ -11101,10 +10699,7 @@ impl TextProperty {
         self
     }
     /// Sets `similarity`.
-    pub fn similarity(
-        mut self,
-        value: impl ::core::convert::Into<crate::TextPropertySimilarity>,
-    ) -> Self {
+    pub fn similarity(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.similarity = ::core::option::Option::Some(value.into());
         self
     }
@@ -11262,7 +10857,7 @@ impl TokenCountProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -11295,7 +10890,7 @@ impl TokenCountProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -11310,22 +10905,22 @@ impl TokenCountProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn null_value(mut self, value: f64) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `enable_position_increments`.
-    pub fn enable_position_increments(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enable_position_increments(mut self, value: bool) -> Self {
         self.enable_position_increments = ::core::option::Option::Some(value.into());
         self
     }
@@ -11424,7 +11019,7 @@ impl TypeMapping {
         self
     }
     /// Sets `date_detection`.
-    pub fn date_detection(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn date_detection(mut self, value: bool) -> Self {
         self.date_detection = ::core::option::Option::Some(value.into());
         self
     }
@@ -11472,7 +11067,7 @@ impl TypeMapping {
         self
     }
     /// Sets `numeric_detection`.
-    pub fn numeric_detection(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn numeric_detection(mut self, value: bool) -> Self {
         self.numeric_detection = ::core::option::Option::Some(value.into());
         self
     }
@@ -11512,7 +11107,7 @@ impl TypeMapping {
         self
     }
     /// Sets `enabled`.
-    pub fn enabled(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn enabled(mut self, value: bool) -> Self {
         self.enabled = ::core::option::Option::Some(value.into());
         self
     }
@@ -11625,7 +11220,7 @@ impl UnsignedLongNumberProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -11658,7 +11253,7 @@ impl UnsignedLongNumberProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -11668,22 +11263,22 @@ impl UnsignedLongNumberProperty {
         self
     }
     /// Sets `boost`.
-    pub fn boost(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn boost(mut self, value: f64) -> Self {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `coerce`.
-    pub fn coerce(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn coerce(mut self, value: bool) -> Self {
         self.coerce = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `ignore_malformed`.
-    pub fn ignore_malformed(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn ignore_malformed(mut self, value: bool) -> Self {
         self.ignore_malformed = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `index`.
-    pub fn index(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn index(mut self, value: bool) -> Self {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
@@ -11709,12 +11304,12 @@ impl UnsignedLongNumberProperty {
         self
     }
     /// Sets `time_series_dimension`.
-    pub fn time_series_dimension(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn time_series_dimension(mut self, value: bool) -> Self {
         self.time_series_dimension = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `null_value`.
-    pub fn null_value(mut self, value: impl ::core::convert::Into<u64>) -> Self {
+    pub fn null_value(mut self, value: u64) -> Self {
         self.null_value = ::core::option::Option::Some(value.into());
         self
     }
@@ -11785,7 +11380,7 @@ impl VersionProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -11818,7 +11413,7 @@ impl VersionProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }
@@ -11897,7 +11492,7 @@ impl WildcardProperty {
         self
     }
     /// Sets `ignore_above`.
-    pub fn ignore_above(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ignore_above(mut self, value: i32) -> Self {
         self.ignore_above = ::core::option::Option::Some(value.into());
         self
     }
@@ -11930,7 +11525,7 @@ impl WildcardProperty {
         self
     }
     /// Sets `store`.
-    pub fn store(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn store(mut self, value: bool) -> Self {
         self.store = ::core::option::Option::Some(value.into());
         self
     }

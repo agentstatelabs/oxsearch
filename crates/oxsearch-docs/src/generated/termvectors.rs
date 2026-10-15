@@ -14,11 +14,7 @@ pub struct FieldStatistics {
 
 impl FieldStatistics {
     /// A `FieldStatistics` with its required properties set.
-    pub fn new(
-        doc_count: impl ::core::convert::Into<i32>,
-        sum_doc_freq: impl ::core::convert::Into<i64>,
-        sum_ttf: impl ::core::convert::Into<i64>,
-    ) -> Self {
+    pub fn new(doc_count: i32, sum_doc_freq: i64, sum_ttf: i64) -> Self {
         Self {
             doc_count: ::core::option::Option::Some(doc_count.into()),
             sum_doc_freq: ::core::option::Option::Some(sum_doc_freq.into()),
@@ -70,37 +66,37 @@ impl Filter {
         }
     }
     /// Sets `max_doc_freq`.
-    pub fn max_doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_doc_freq(mut self, value: i32) -> Self {
         self.max_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_num_terms`.
-    pub fn max_num_terms(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_num_terms(mut self, value: i32) -> Self {
         self.max_num_terms = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_term_freq`.
-    pub fn max_term_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_term_freq(mut self, value: i32) -> Self {
         self.max_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_word_length`.
-    pub fn max_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn max_word_length(mut self, value: i32) -> Self {
         self.max_word_length = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_doc_freq`.
-    pub fn min_doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_doc_freq(mut self, value: i32) -> Self {
         self.min_doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_term_freq`.
-    pub fn min_term_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_term_freq(mut self, value: i32) -> Self {
         self.min_term_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `min_word_length`.
-    pub fn min_word_length(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn min_word_length(mut self, value: i32) -> Self {
         self.min_word_length = ::core::option::Option::Some(value.into());
         self
     }
@@ -182,7 +178,7 @@ impl<TDocument> RequestBody<TDocument> {
         }
     }
     /// Sets `doc`.
-    pub fn doc(mut self, value: impl ::core::convert::Into<TDocument>) -> Self {
+    pub fn doc(mut self, value: TDocument) -> Self {
         self.doc = ::core::option::Option::Some(value.into());
         self
     }
@@ -210,27 +206,27 @@ impl<TDocument> RequestBody<TDocument> {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -382,22 +378,22 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `field_statistics`.
-    pub fn field_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn field_statistics(mut self, value: bool) -> Self {
         self.field_statistics = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `offsets`.
-    pub fn offsets(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn offsets(mut self, value: bool) -> Self {
         self.offsets = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `payloads`.
-    pub fn payloads(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn payloads(mut self, value: bool) -> Self {
         self.payloads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `positions`.
-    pub fn positions(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn positions(mut self, value: bool) -> Self {
         self.positions = ::core::option::Option::Some(value.into());
         self
     }
@@ -407,7 +403,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `realtime`.
-    pub fn realtime(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn realtime(mut self, value: bool) -> Self {
         self.realtime = ::core::option::Option::Some(value.into());
         self
     }
@@ -422,7 +418,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `term_statistics`.
-    pub fn term_statistics(mut self, value: impl ::core::convert::Into<bool>) -> Self {
+    pub fn term_statistics(mut self, value: bool) -> Self {
         self.term_statistics = ::core::option::Option::Some(value.into());
         self
     }
@@ -443,10 +439,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(
-        mut self,
-        value: impl ::core::convert::Into<crate::termvectors::RequestBody<TDocument>>,
-    ) -> Self {
+    pub fn body(mut self, value: crate::termvectors::RequestBody<TDocument>) -> Self {
         self.body = ::core::option::Option::Some(value.into());
         self
     }
@@ -483,9 +476,9 @@ pub struct Response {
 impl Response {
     /// A `Response` with its required properties set.
     pub fn new(
-        found: impl ::core::convert::Into<bool>,
+        found: bool,
         index: impl ::core::convert::Into<::oxsearch_core::IndexName>,
-        took: impl ::core::convert::Into<i64>,
+        took: i64,
         version: impl ::core::convert::Into<::oxsearch_core::VersionNumber>,
     ) -> Self {
         Self {
@@ -531,7 +524,7 @@ pub struct Term {
 
 impl Term {
     /// A `Term` with its required properties set.
-    pub fn new(term_freq: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(term_freq: i32) -> Self {
         Self {
             doc_freq: ::core::option::Option::None,
             score: ::core::option::Option::None,
@@ -541,12 +534,12 @@ impl Term {
         }
     }
     /// Sets `doc_freq`.
-    pub fn doc_freq(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn doc_freq(mut self, value: i32) -> Self {
         self.doc_freq = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `score`.
-    pub fn score(mut self, value: impl ::core::convert::Into<f64>) -> Self {
+    pub fn score(mut self, value: f64) -> Self {
         self.score = ::core::option::Option::Some(value.into());
         self
     }
@@ -559,7 +552,7 @@ impl Term {
         self
     }
     /// Sets `ttf`.
-    pub fn ttf(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn ttf(mut self, value: i32) -> Self {
         self.ttf = ::core::option::Option::Some(value.into());
         self
     }
@@ -611,7 +604,7 @@ pub struct Token {
 
 impl Token {
     /// A `Token` with its required properties set.
-    pub fn new(position: impl ::core::convert::Into<i32>) -> Self {
+    pub fn new(position: i32) -> Self {
         Self {
             end_offset: ::core::option::Option::None,
             payload: ::core::option::Option::None,
@@ -620,7 +613,7 @@ impl Token {
         }
     }
     /// Sets `end_offset`.
-    pub fn end_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn end_offset(mut self, value: i32) -> Self {
         self.end_offset = ::core::option::Option::Some(value.into());
         self
     }
@@ -630,8 +623,141 @@ impl Token {
         self
     }
     /// Sets `start_offset`.
-    pub fn start_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
+    pub fn start_offset(mut self, value: i32) -> Self {
         self.start_offset = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl<TDocument: ::serde::Serialize> ::oxsearch_core::Endpoint for Request<TDocument> {
+    type Response = crate::termvectors::Response;
+
+    fn name(&self) -> &'static str {
+        "termvectors"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) =
+            (::core::option::Option::Some(&self.index), self.id.as_ref())
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_termvectors/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("id", p1)?
+                ),
+            ));
+        }
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.index),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_termvectors",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.fields {
+            query.push((
+                "fields",
+                ::oxsearch_core::__private::query_param("fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.field_statistics {
+            query.push((
+                "field_statistics",
+                ::oxsearch_core::__private::query_param("field_statistics", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.offsets {
+            query.push((
+                "offsets",
+                ::oxsearch_core::__private::query_param("offsets", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.payloads {
+            query.push((
+                "payloads",
+                ::oxsearch_core::__private::query_param("payloads", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.positions {
+            query.push((
+                "positions",
+                ::oxsearch_core::__private::query_param("positions", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.realtime {
+            query.push((
+                "realtime",
+                ::oxsearch_core::__private::query_param("realtime", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.term_statistics {
+            query.push((
+                "term_statistics",
+                ::oxsearch_core::__private::query_param("term_statistics", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version_type {
+            query.push((
+                "version_type",
+                ::oxsearch_core::__private::query_param("version_type", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

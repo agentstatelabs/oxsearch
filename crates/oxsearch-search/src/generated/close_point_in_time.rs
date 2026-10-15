@@ -59,13 +59,44 @@ pub struct Response {
 
 impl Response {
     /// A `Response` with its required properties set.
-    pub fn new(
-        succeeded: impl ::core::convert::Into<bool>,
-        num_freed: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(succeeded: bool, num_freed: i32) -> Self {
         Self {
             succeeded: ::core::option::Option::Some(succeeded.into()),
             num_freed: ::core::option::Option::Some(num_freed.into()),
         }
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::close_point_in_time::Response;
+
+    fn name(&self) -> &'static str {
+        "close_point_in_time"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Delete,
+            "/_pit",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        ::core::result::Result::Ok(::std::vec::Vec::new())
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

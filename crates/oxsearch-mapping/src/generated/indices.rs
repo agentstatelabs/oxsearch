@@ -11,11 +11,7 @@ pub struct FielddataFrequencyFilter {
 
 impl FielddataFrequencyFilter {
     /// A `FielddataFrequencyFilter` with its required properties set.
-    pub fn new(
-        max: impl ::core::convert::Into<f64>,
-        min: impl ::core::convert::Into<f64>,
-        min_segment_size: impl ::core::convert::Into<i32>,
-    ) -> Self {
+    pub fn new(max: f64, min: f64, min_segment_size: i32) -> Self {
         Self {
             max: max.into(),
             min: min.into(),
