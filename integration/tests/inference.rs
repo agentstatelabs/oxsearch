@@ -21,6 +21,23 @@ async fn lists_inference_endpoints() {
     }
 }
 
+/// A call to one of Elastic's models, sent again while the model is still
+/// deploying: on first use, a model can take longer to start than the 30 s
+/// Elasticsearch waits for it, and the deployment goes on meanwhile.
+async fn deployed<T, F>(mut call: impl FnMut() -> F) -> T
+where
+    F: std::future::Future<Output = Result<T, oxsearch_core::Error>>,
+{
+    for _ in 0..8 {
+        match call().await {
+            Err(oxsearch_core::Error::Elasticsearch(e))
+                if e.error_type() == Some("model_deployment_timeout_exception") => {}
+            other => return other.unwrap(),
+        }
+    }
+    panic!("the model didn't deploy in 4 minutes")
+}
+
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn embeds_reranks_and_manages_endpoints() {
@@ -30,14 +47,10 @@ async fn embeds_reranks_and_manages_endpoints() {
     }
     let client = client();
 
-    let embedded = client
-        .send(
-            &sparse_embedding::Request::new(".elser-2-elasticsearch").body(
-                sparse_embedding::RequestBody::new("vector search with hnsw"),
-            ),
-        )
-        .await
-        .unwrap();
+    let embed = sparse_embedding::Request::new(".elser-2-elasticsearch").body(
+        sparse_embedding::RequestBody::new("vector search with hnsw"),
+    );
+    let embedded = deployed(|| client.send(&embed)).await;
     assert_eq!(embedded.sparse_embedding.len(), 1, "{embedded:?}");
 
     // The general call, by endpoint alone.
@@ -53,18 +66,14 @@ async fn embeds_reranks_and_manages_endpoints() {
     };
     assert_eq!(results.len(), 2);
 
-    let ranked = client
-        .send(
-            &rerank::Request::new(".rerank-v1-elasticsearch").body(rerank::RequestBody::new(
-                "how do vector indexes find neighbours?",
-                rerank::RerankStringInput::from(vec![
-                    "Shards have replicas on other nodes.".to_owned(),
-                    "HNSW graphs find nearest neighbours quickly.".to_owned(),
-                ]),
-            )),
-        )
-        .await
-        .unwrap();
+    let rank = rerank::Request::new(".rerank-v1-elasticsearch").body(rerank::RequestBody::new(
+        "how do vector indexes find neighbours?",
+        rerank::RerankStringInput::from(vec![
+            "Shards have replicas on other nodes.".to_owned(),
+            "HNSW graphs find nearest neighbours quickly.".to_owned(),
+        ]),
+    ));
+    let ranked = deployed(|| client.send(&rank)).await;
     assert_eq!(ranked.rerank[0].index, Some(1), "{ranked:?}");
 
     // An endpoint of our own, on the ELSER deployment the default one made.
