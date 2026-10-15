@@ -217,6 +217,18 @@ impl<'de> ::serde::Deserialize<'de> for RerankInput {
     }
 }
 
+impl ::core::convert::From<crate::rerank::RerankStringInput> for RerankInput {
+    fn from(value: crate::rerank::RerankStringInput) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<crate::rerank::RerankObjectInput> for RerankInput {
+    fn from(value: crate::rerank::RerankObjectInput) -> Self {
+        Self::Object(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum RerankInputFormat {
@@ -417,6 +429,24 @@ impl<'de> ::serde::Deserialize<'de> for RerankQuery {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for RerankQuery {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<crate::rerank::RerankInputObject> for RerankQuery {
+    fn from(value: crate::rerank::RerankInputObject) -> Self {
+        Self::Object(value)
+    }
+}
+
+impl ::core::convert::From<&str> for RerankQuery {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 

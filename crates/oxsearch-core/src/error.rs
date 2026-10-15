@@ -120,8 +120,10 @@ impl fmt::Display for LicenseError {
 }
 
 impl Error {
-    /// An error response from its status and body.
-    pub(crate) fn from_response(status: u16, body: &[u8]) -> Error {
+    /// The error for a response Elasticsearch failed, from its status and
+    /// body: [`Error::License`] when the cluster's license doesn't include a
+    /// feature the request uses, else [`Error::Elasticsearch`].
+    pub fn from_response(status: u16, body: &[u8]) -> Error {
         let body: Value = serde_json::from_slice(body)
             .unwrap_or_else(|_| Value::String(String::from_utf8_lossy(body).into_owned()));
         let response = serde_json::from_value(body.clone()).ok();

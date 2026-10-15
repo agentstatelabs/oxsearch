@@ -2510,6 +2510,24 @@ impl<'de> ::serde::Deserialize<'de> for CompletionToolType {
     }
 }
 
+impl ::core::convert::From<::std::string::String> for CompletionToolType {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<crate::CompletionToolChoice> for CompletionToolType {
+    fn from(value: crate::CompletionToolChoice) -> Self {
+        Self::Object(value)
+    }
+}
+
+impl ::core::convert::From<&str> for CompletionToolType {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 /// An object style representation of a single portion of a conversation.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -3249,6 +3267,42 @@ impl<'de> ::serde::Deserialize<'de> for CustomTaskParameter {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for CustomTaskParameter {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<i32> for CustomTaskParameter {
+    fn from(value: i32) -> Self {
+        Self::Integer(value)
+    }
+}
+
+impl ::core::convert::From<f64> for CustomTaskParameter {
+    fn from(value: f64) -> Self {
+        Self::Double(value)
+    }
+}
+
+impl ::core::convert::From<f32> for CustomTaskParameter {
+    fn from(value: f32) -> Self {
+        Self::Float(value)
+    }
+}
+
+impl ::core::convert::From<bool> for CustomTaskParameter {
+    fn from(value: bool) -> Self {
+        Self::Bool(value)
+    }
+}
+
+impl ::core::convert::From<&str> for CustomTaskParameter {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -4012,6 +4066,14 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for EmbeddingInferenceResul
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<crate::DenseEmbeddingResult>>
+    for EmbeddingInferenceResult
+{
+    fn from(value: ::std::vec::Vec<crate::DenseEmbeddingResult>) -> Self {
+        Self::Embeddings(value)
+    }
+}
+
 /// Inference input.
 /// Either a string, an array of strings, a `content` object, or an array of `content` objects.
 #[derive(Clone, Debug, PartialEq)]
@@ -4076,6 +4138,18 @@ impl<'de> ::serde::Deserialize<'de> for EmbeddingInput {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<crate::EmbeddingStringInput> for EmbeddingInput {
+    fn from(value: crate::EmbeddingStringInput) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<crate::EmbeddingContentInput> for EmbeddingInput {
+    fn from(value: crate::EmbeddingContentInput) -> Self {
+        Self::Content(value)
     }
 }
 
@@ -7166,6 +7240,24 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for InferenceResult {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<crate::SparseEmbeddingResult>> for InferenceResult {
+    fn from(value: ::std::vec::Vec<crate::SparseEmbeddingResult>) -> Self {
+        Self::SparseEmbedding(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::CompletionResult>> for InferenceResult {
+    fn from(value: ::std::vec::Vec<crate::CompletionResult>) -> Self {
+        Self::Completion(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::RankedDocument>> for InferenceResult {
+    fn from(value: ::std::vec::Vec<crate::RankedDocument>) -> Self {
+        Self::Rerank(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum JinaAIElementType {
@@ -8005,6 +8097,24 @@ impl<'de> ::serde::Deserialize<'de> for MessageContent {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for MessageContent {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::ContentObject>> for MessageContent {
+    fn from(value: ::std::vec::Vec<crate::ContentObject>) -> Self {
+        Self::Object(value)
+    }
+}
+
+impl ::core::convert::From<&str> for MessageContent {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -9342,6 +9452,24 @@ impl<'de> ::serde::Deserialize<'de> for ReasoningDetail {
     }
 }
 
+impl ::core::convert::From<crate::EncryptedReasoningDetail> for ReasoningDetail {
+    fn from(value: crate::EncryptedReasoningDetail) -> Self {
+        Self::Encrypted(value)
+    }
+}
+
+impl ::core::convert::From<crate::SummaryReasoningDetail> for ReasoningDetail {
+    fn from(value: crate::SummaryReasoningDetail) -> Self {
+        Self::Summary(value)
+    }
+}
+
+impl ::core::convert::From<crate::TextReasoningDetail> for ReasoningDetail {
+    fn from(value: crate::TextReasoningDetail) -> Self {
+        Self::Text(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum ReasoningEffort {
@@ -9544,6 +9672,18 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for RegionPolicy {
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<::std::string::String>> for RegionPolicy {
+    fn from(value: ::std::vec::Vec<::std::string::String>) -> Self {
+        Self::AllowedGeos(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::CspRegion>> for RegionPolicy {
+    fn from(value: ::std::vec::Vec<crate::CspRegion>) -> Self {
+        Self::AllowedRegions(value)
     }
 }
 
@@ -11578,6 +11718,14 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for TextEmbeddingInferenceR
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::DenseEmbeddingResult>>
+    for TextEmbeddingInferenceResult
+{
+    fn from(value: ::std::vec::Vec<crate::DenseEmbeddingResult>) -> Self {
+        Self::TextEmbedding(value)
     }
 }
 

@@ -67,3 +67,33 @@ impl<'de> ::serde::Deserialize<'de> for Missing {
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
     }
 }
+
+impl ::core::convert::From<::std::string::String> for Missing {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<i32> for Missing {
+    fn from(value: i32) -> Self {
+        Self::Integer(value)
+    }
+}
+
+impl ::core::convert::From<f64> for Missing {
+    fn from(value: f64) -> Self {
+        Self::Double(value)
+    }
+}
+
+impl ::core::convert::From<bool> for Missing {
+    fn from(value: bool) -> Self {
+        Self::Bool(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Missing {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}

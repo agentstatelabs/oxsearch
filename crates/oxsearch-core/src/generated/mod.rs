@@ -189,6 +189,24 @@ impl<'de> ::serde::Deserialize<'de> for ByteSize {
     }
 }
 
+impl ::core::convert::From<i64> for ByteSize {
+    fn from(value: i64) -> Self {
+        Self::Long(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for ByteSize {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for ByteSize {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum Bytes {
@@ -1046,6 +1064,24 @@ impl<'de> ::serde::Deserialize<'de> for DateTime {
     }
 }
 
+impl ::core::convert::From<::std::string::String> for DateTime {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<crate::UnitMillis> for DateTime {
+    fn from(value: crate::UnitMillis) -> Self {
+        Self::EpochTime(value)
+    }
+}
+
+impl ::core::convert::From<&str> for DateTime {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 pub type Distance = ::std::string::String;
 
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
@@ -1392,6 +1428,18 @@ impl<'de> ::serde::Deserialize<'de> for Duration {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for Duration {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Duration {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -2019,6 +2067,36 @@ impl<'de> ::serde::Deserialize<'de> for FieldValue {
     }
 }
 
+impl ::core::convert::From<i64> for FieldValue {
+    fn from(value: i64) -> Self {
+        Self::Long(value)
+    }
+}
+
+impl ::core::convert::From<f64> for FieldValue {
+    fn from(value: f64) -> Self {
+        Self::Double(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for FieldValue {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<bool> for FieldValue {
+    fn from(value: bool) -> Self {
+        Self::Boolean(value)
+    }
+}
+
+impl ::core::convert::From<&str> for FieldValue {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FielddataStats {
@@ -2166,6 +2244,24 @@ impl<'de> ::serde::Deserialize<'de> for Fuzziness {
     }
 }
 
+impl ::core::convert::From<::std::string::String> for Fuzziness {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<i32> for Fuzziness {
+    fn from(value: i32) -> Self {
+        Self::Integer(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Fuzziness {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 /// A geo bounding box. It can be represented in various ways:
 /// - as 4 top/bottom/left/right coordinates
 /// - as 2 top_left / bottom_right points
@@ -2274,6 +2370,30 @@ impl<'de> ::serde::Deserialize<'de> for GeoBounds {
     }
 }
 
+impl ::core::convert::From<crate::CoordsGeoBounds> for GeoBounds {
+    fn from(value: crate::CoordsGeoBounds) -> Self {
+        Self::Coords(value)
+    }
+}
+
+impl ::core::convert::From<crate::TopLeftBottomRightGeoBounds> for GeoBounds {
+    fn from(value: crate::TopLeftBottomRightGeoBounds) -> Self {
+        Self::Tlbr(value)
+    }
+}
+
+impl ::core::convert::From<crate::TopRightBottomLeftGeoBounds> for GeoBounds {
+    fn from(value: crate::TopRightBottomLeftGeoBounds) -> Self {
+        Self::Trbl(value)
+    }
+}
+
+impl ::core::convert::From<crate::WktGeoBounds> for GeoBounds {
+    fn from(value: crate::WktGeoBounds) -> Self {
+        Self::Wkt(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum GeoDistanceSortLocation {
@@ -2339,6 +2459,18 @@ impl<'de> ::serde::Deserialize<'de> for GeoDistanceSortLocation {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<crate::GeoLocation> for GeoDistanceSortLocation {
+    fn from(value: crate::GeoLocation) -> Self {
+        Self::GeoLocation(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::GeoLocation>> for GeoDistanceSortLocation {
+    fn from(value: ::std::vec::Vec<crate::GeoLocation>) -> Self {
+        Self::GeoLocationList(value)
     }
 }
 
@@ -2598,6 +2730,24 @@ impl<'de> ::serde::Deserialize<'de> for GeoHashPrecision {
     }
 }
 
+impl ::core::convert::From<i32> for GeoHashPrecision {
+    fn from(value: i32) -> Self {
+        Self::GeohashLength(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for GeoHashPrecision {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Distance(value)
+    }
+}
+
+impl ::core::convert::From<&str> for GeoHashPrecision {
+    fn from(value: &str) -> Self {
+        Self::Distance(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 /// A map hex cell (H3) reference
 pub type GeoHexCell = ::std::string::String;
 
@@ -2707,6 +2857,36 @@ impl<'de> ::serde::Deserialize<'de> for GeoLocation {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<crate::LatLonGeoLocation> for GeoLocation {
+    fn from(value: crate::LatLonGeoLocation) -> Self {
+        Self::Latlon(value)
+    }
+}
+
+impl ::core::convert::From<crate::GeoHashLocation> for GeoLocation {
+    fn from(value: crate::GeoHashLocation) -> Self {
+        Self::Geohash(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<f64>> for GeoLocation {
+    fn from(value: ::std::vec::Vec<f64>) -> Self {
+        Self::Coords(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for GeoLocation {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Text(value)
+    }
+}
+
+impl ::core::convert::From<&str> for GeoLocation {
+    fn from(value: &str) -> Self {
+        Self::Text(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -3504,6 +3684,24 @@ impl<'de> ::serde::Deserialize<'de> for KnnEmbeddingInput {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for KnnEmbeddingInput {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<crate::InferenceStringGroup> for KnnEmbeddingInput {
+    fn from(value: crate::InferenceStringGroup) -> Self {
+        Self::Object(value)
+    }
+}
+
+impl ::core::convert::From<&str> for KnnEmbeddingInput {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -4312,6 +4510,24 @@ impl<'de> ::serde::Deserialize<'de> for MinimumShouldMatch {
     }
 }
 
+impl ::core::convert::From<i32> for MinimumShouldMatch {
+    fn from(value: i32) -> Self {
+        Self::Integer(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for MinimumShouldMatch {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for MinimumShouldMatch {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 pub type MultiTermQueryRewrite = ::std::string::String;
 
 pub type Name = ::std::string::String;
@@ -4861,6 +5077,24 @@ impl<'de> ::serde::Deserialize<'de> for Percentage {
     }
 }
 
+impl ::core::convert::From<::std::string::String> for Percentage {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<f32> for Percentage {
+    fn from(value: f32) -> Self {
+        Self::Float(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Percentage {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct PinnedRetriever {
@@ -5129,6 +5363,24 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for QueryVectorBuilder {
     }
 }
 
+impl ::core::convert::From<crate::Embedding> for QueryVectorBuilder {
+    fn from(value: crate::Embedding) -> Self {
+        Self::Embedding(value)
+    }
+}
+
+impl ::core::convert::From<crate::TextEmbedding> for QueryVectorBuilder {
+    fn from(value: crate::TextEmbedding) -> Self {
+        Self::TextEmbedding(value)
+    }
+}
+
+impl ::core::convert::From<crate::LookupQueryVectorBuilder> for QueryVectorBuilder {
+    fn from(value: crate::LookupQueryVectorBuilder) -> Self {
+        Self::Lookup(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RRFRetriever {
@@ -5327,6 +5579,18 @@ impl<'de> ::serde::Deserialize<'de> for RRFRetrieverEntry {
     }
 }
 
+impl ::core::convert::From<crate::RetrieverContainer> for RRFRetrieverEntry {
+    fn from(value: crate::RetrieverContainer) -> Self {
+        Self::Retriever(value)
+    }
+}
+
+impl ::core::convert::From<crate::RRFRetrieverComponent> for RRFRetrieverEntry {
+    fn from(value: crate::RRFRetrieverComponent) -> Self {
+        Self::Weighted(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RankBase {}
@@ -5405,6 +5669,12 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for RankContainer {
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<crate::RrfRank> for RankContainer {
+    fn from(value: crate::RrfRank) -> Self {
+        Self::Rrf(value)
     }
 }
 
@@ -6307,6 +6577,60 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for RetrieverContainer {
     }
 }
 
+impl ::core::convert::From<crate::StandardRetriever> for RetrieverContainer {
+    fn from(value: crate::StandardRetriever) -> Self {
+        Self::Standard(value)
+    }
+}
+
+impl ::core::convert::From<crate::KnnRetriever> for RetrieverContainer {
+    fn from(value: crate::KnnRetriever) -> Self {
+        Self::Knn(value)
+    }
+}
+
+impl ::core::convert::From<crate::RRFRetriever> for RetrieverContainer {
+    fn from(value: crate::RRFRetriever) -> Self {
+        Self::Rrf(value)
+    }
+}
+
+impl ::core::convert::From<crate::TextSimilarityReranker> for RetrieverContainer {
+    fn from(value: crate::TextSimilarityReranker) -> Self {
+        Self::TextSimilarityReranker(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::RuleRetriever> for RetrieverContainer {
+    fn from(value: crate::RuleRetriever) -> Self {
+        Self::Rule(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::RescorerRetriever> for RetrieverContainer {
+    fn from(value: crate::RescorerRetriever) -> Self {
+        Self::Rescorer(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::LinearRetriever> for RetrieverContainer {
+    fn from(value: crate::LinearRetriever) -> Self {
+        Self::Linear(value)
+    }
+}
+
+impl ::core::convert::From<crate::PinnedRetriever> for RetrieverContainer {
+    fn from(value: crate::PinnedRetriever) -> Self {
+        Self::Pinned(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::DiversifyRetriever> for RetrieverContainer {
+    fn from(value: crate::DiversifyRetriever) -> Self {
+        Self::Diversify(::std::boxed::Box::new(value))
+    }
+}
+
 /// Only to be used in query and path parameters, as the array form is actually a csv
 pub type Routing = ::oxsearch_core::shapes::OneOrMany<::std::string::String>;
 
@@ -6487,6 +6811,36 @@ impl<'de> ::serde::Deserialize<'de> for ScalarValue {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<i64> for ScalarValue {
+    fn from(value: i64) -> Self {
+        Self::Long(value)
+    }
+}
+
+impl ::core::convert::From<f64> for ScalarValue {
+    fn from(value: f64) -> Self {
+        Self::Double(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for ScalarValue {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<bool> for ScalarValue {
+    fn from(value: bool) -> Self {
+        Self::Boolean(value)
+    }
+}
+
+impl ::core::convert::From<&str> for ScalarValue {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -6949,6 +7303,24 @@ impl<'de> ::serde::Deserialize<'de> for ScriptSource {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for ScriptSource {
+    fn from(value: ::std::string::String) -> Self {
+        Self::ScriptString(value)
+    }
+}
+
+impl ::core::convert::From<::serde_json::Value> for ScriptSource {
+    fn from(value: ::serde_json::Value) -> Self {
+        Self::ScriptTemplate(value)
+    }
+}
+
+impl ::core::convert::From<&str> for ScriptSource {
+    fn from(value: &str) -> Self {
+        Self::ScriptString(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -7632,6 +8004,18 @@ impl<'de> ::serde::Deserialize<'de> for Slices {
     }
 }
 
+impl ::core::convert::From<i32> for Slices {
+    fn from(value: i32) -> Self {
+        Self::Value(value)
+    }
+}
+
+impl ::core::convert::From<crate::SlicesCalculation> for Slices {
+    fn from(value: crate::SlicesCalculation) -> Self {
+        Self::Computed(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum SlicesCalculation {
@@ -7732,6 +8116,24 @@ impl<'de> ::serde::Deserialize<'de> for SortCombinations {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<crate::Field> for SortCombinations {
+    fn from(value: crate::Field) -> Self {
+        Self::Field(value)
+    }
+}
+
+impl ::core::convert::From<crate::SortOptions> for SortCombinations {
+    fn from(value: crate::SortOptions) -> Self {
+        Self::Options(value)
+    }
+}
+
+impl ::core::convert::From<&str> for SortCombinations {
+    fn from(value: &str) -> Self {
+        Self::Field(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -7885,6 +8287,18 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for SortOptions {
                 value: map.next_value()?,
             }),
         })
+    }
+}
+
+impl ::core::convert::From<crate::GeoDistanceSort> for SortOptions {
+    fn from(value: crate::GeoDistanceSort) -> Self {
+        Self::GeoDistance(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::ScriptSort> for SortOptions {
+    fn from(value: crate::ScriptSort) -> Self {
+        Self::Script(::std::boxed::Box::new(value))
     }
 }
 
@@ -8683,6 +9097,24 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for TransformContainer {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<crate::TransformContainer>> for TransformContainer {
+    fn from(value: ::std::vec::Vec<crate::TransformContainer>) -> Self {
+        Self::Chain(value)
+    }
+}
+
+impl ::core::convert::From<crate::ScriptTransform> for TransformContainer {
+    fn from(value: crate::ScriptTransform) -> Self {
+        Self::Script(value)
+    }
+}
+
+impl ::core::convert::From<crate::SearchTransform> for TransformContainer {
+    fn from(value: crate::SearchTransform) -> Self {
+        Self::Search(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TranslogStats {
@@ -8913,6 +9345,18 @@ impl<'de> ::serde::Deserialize<'de> for WaitForActiveShards {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<i32> for WaitForActiveShards {
+    fn from(value: i32) -> Self {
+        Self::Count(value)
+    }
+}
+
+impl ::core::convert::From<crate::WaitForActiveShardOptions> for WaitForActiveShards {
+    fn from(value: crate::WaitForActiveShardOptions) -> Self {
+        Self::Option(value)
     }
 }
 

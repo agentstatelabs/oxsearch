@@ -56,6 +56,24 @@ impl<'de> ::serde::Deserialize<'de> for RequestStats {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<::std::string::String>> for RequestStats {
+    fn from(value: ::std::vec::Vec<::std::string::String>) -> Self {
+        Self::StringList(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for RequestStats {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for RequestStats {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 /// The request's body.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]

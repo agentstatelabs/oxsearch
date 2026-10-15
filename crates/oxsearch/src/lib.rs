@@ -8,14 +8,18 @@
 //! default HTTP transport.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
-//! the one in `transport-reqwest`. Retries, failover, authentication and
+//! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
+//! common queries and retrievers in one call each, and `fusion` fuses
+//! retrievers' results on the client when the cluster's license doesn't
+//! include the `rrf` and `linear` retrievers. Retries, failover, authentication and
 //! telemetry are still to come; see DESIGN.md in the repository.
 
 /// The types every area shares: common types, retrievers and kNN.
 pub use oxsearch_core;
 pub use oxsearch_core::{
-    Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse, LicenseError,
-    Method, Route, Transport, TransportError, query_dsl, shapes,
+    AggsBody, Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse,
+    LicenseError, Method, Query, RawAggs, Retriever, RetrieverContainer, Route, Transport,
+    TransportError, query_dsl, shapes,
 };
 
 #[cfg(feature = "admin")]
@@ -36,6 +40,8 @@ pub use oxsearch_inference as inference;
 pub use oxsearch_mapping as mapping;
 #[cfg(feature = "search")]
 pub use oxsearch_search as search;
+#[cfg(feature = "search")]
+pub use oxsearch_search::fusion;
 #[cfg(feature = "tasks")]
 pub use oxsearch_tasks as tasks;
 #[cfg(feature = "transport-reqwest")]

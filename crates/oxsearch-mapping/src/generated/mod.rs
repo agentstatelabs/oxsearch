@@ -2355,6 +2355,18 @@ impl<'de> ::serde::Deserialize<'de> for DocValues {
     }
 }
 
+impl ::core::convert::From<bool> for DocValues {
+    fn from(value: bool) -> Self {
+        Self::Enabled(value)
+    }
+}
+
+impl ::core::convert::From<crate::DocValuesConfig> for DocValues {
+    fn from(value: crate::DocValuesConfig) -> Self {
+        Self::Config(value)
+    }
+}
+
 /// Configuration object for doc values when sub-parameters are needed.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -3263,6 +3275,18 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for DynamicTemplateVariant 
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<crate::Property> for DynamicTemplateVariant {
+    fn from(value: crate::Property) -> Self {
+        Self::Mapping(value)
+    }
+}
+
+impl ::core::convert::From<crate::RuntimeField> for DynamicTemplateVariant {
+    fn from(value: crate::RuntimeField) -> Self {
+        Self::Runtime(value)
     }
 }
 
@@ -8208,6 +8232,324 @@ impl<'de> ::serde::Deserialize<'de> for Property {
     }
 }
 
+impl ::core::convert::From<crate::BinaryProperty> for Property {
+    fn from(value: crate::BinaryProperty) -> Self {
+        Self::Binary(value)
+    }
+}
+
+impl ::core::convert::From<crate::BooleanProperty> for Property {
+    fn from(value: crate::BooleanProperty) -> Self {
+        Self::Boolean(value)
+    }
+}
+
+impl ::core::convert::From<crate::DynamicProperty> for Property {
+    fn from(value: crate::DynamicProperty) -> Self {
+        Self::Dynamic(value)
+    }
+}
+
+impl ::core::convert::From<crate::JoinProperty> for Property {
+    fn from(value: crate::JoinProperty) -> Self {
+        Self::Join(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeywordProperty> for Property {
+    fn from(value: crate::KeywordProperty) -> Self {
+        Self::Keyword(value)
+    }
+}
+
+impl ::core::convert::From<crate::MatchOnlyTextProperty> for Property {
+    fn from(value: crate::MatchOnlyTextProperty) -> Self {
+        Self::MatchOnlyText(value)
+    }
+}
+
+impl ::core::convert::From<crate::PercolatorProperty> for Property {
+    fn from(value: crate::PercolatorProperty) -> Self {
+        Self::Percolator(value)
+    }
+}
+
+impl ::core::convert::From<crate::RankFeatureProperty> for Property {
+    fn from(value: crate::RankFeatureProperty) -> Self {
+        Self::RankFeature(value)
+    }
+}
+
+impl ::core::convert::From<crate::RankFeaturesProperty> for Property {
+    fn from(value: crate::RankFeaturesProperty) -> Self {
+        Self::RankFeatures(value)
+    }
+}
+
+impl ::core::convert::From<crate::SearchAsYouTypeProperty> for Property {
+    fn from(value: crate::SearchAsYouTypeProperty) -> Self {
+        Self::SearchAsYouType(value)
+    }
+}
+
+impl ::core::convert::From<crate::TextProperty> for Property {
+    fn from(value: crate::TextProperty) -> Self {
+        Self::Text(value)
+    }
+}
+
+impl ::core::convert::From<crate::VersionProperty> for Property {
+    fn from(value: crate::VersionProperty) -> Self {
+        Self::Version(value)
+    }
+}
+
+impl ::core::convert::From<crate::WildcardProperty> for Property {
+    fn from(value: crate::WildcardProperty) -> Self {
+        Self::Wildcard(value)
+    }
+}
+
+impl ::core::convert::From<crate::DateNanosProperty> for Property {
+    fn from(value: crate::DateNanosProperty) -> Self {
+        Self::DateNanos(value)
+    }
+}
+
+impl ::core::convert::From<crate::DateProperty> for Property {
+    fn from(value: crate::DateProperty) -> Self {
+        Self::Date(value)
+    }
+}
+
+impl ::core::convert::From<crate::AggregateMetricDoubleProperty> for Property {
+    fn from(value: crate::AggregateMetricDoubleProperty) -> Self {
+        Self::AggregateMetricDouble(value)
+    }
+}
+
+impl ::core::convert::From<crate::DenseVectorProperty> for Property {
+    fn from(value: crate::DenseVectorProperty) -> Self {
+        Self::DenseVector(value)
+    }
+}
+
+impl ::core::convert::From<crate::FlattenedProperty> for Property {
+    fn from(value: crate::FlattenedProperty) -> Self {
+        Self::Flattened(value)
+    }
+}
+
+impl ::core::convert::From<crate::NestedProperty> for Property {
+    fn from(value: crate::NestedProperty) -> Self {
+        Self::Nested(value)
+    }
+}
+
+impl ::core::convert::From<crate::ObjectProperty> for Property {
+    fn from(value: crate::ObjectProperty) -> Self {
+        Self::Object(value)
+    }
+}
+
+impl ::core::convert::From<crate::PassthroughObjectProperty> for Property {
+    fn from(value: crate::PassthroughObjectProperty) -> Self {
+        Self::PassthroughObject(value)
+    }
+}
+
+impl ::core::convert::From<crate::RankVectorProperty> for Property {
+    fn from(value: crate::RankVectorProperty) -> Self {
+        Self::RankVector(value)
+    }
+}
+
+impl ::core::convert::From<crate::SemanticTextProperty> for Property {
+    fn from(value: crate::SemanticTextProperty) -> Self {
+        Self::SemanticText(value)
+    }
+}
+
+impl ::core::convert::From<crate::SparseVectorProperty> for Property {
+    fn from(value: crate::SparseVectorProperty) -> Self {
+        Self::SparseVector(value)
+    }
+}
+
+impl ::core::convert::From<crate::CompletionProperty> for Property {
+    fn from(value: crate::CompletionProperty) -> Self {
+        Self::Completion(value)
+    }
+}
+
+impl ::core::convert::From<crate::ConstantKeywordProperty> for Property {
+    fn from(value: crate::ConstantKeywordProperty) -> Self {
+        Self::ConstantKeyword(value)
+    }
+}
+
+impl ::core::convert::From<crate::CountedKeywordProperty> for Property {
+    fn from(value: crate::CountedKeywordProperty) -> Self {
+        Self::CountedKeyword(value)
+    }
+}
+
+impl ::core::convert::From<crate::FieldAliasProperty> for Property {
+    fn from(value: crate::FieldAliasProperty) -> Self {
+        Self::FieldAlias(value)
+    }
+}
+
+impl ::core::convert::From<crate::HistogramProperty> for Property {
+    fn from(value: crate::HistogramProperty) -> Self {
+        Self::Histogram(value)
+    }
+}
+
+impl ::core::convert::From<crate::ExponentialHistogramProperty> for Property {
+    fn from(value: crate::ExponentialHistogramProperty) -> Self {
+        Self::ExponentialHistogram(value)
+    }
+}
+
+impl ::core::convert::From<crate::IpProperty> for Property {
+    fn from(value: crate::IpProperty) -> Self {
+        Self::Ip(value)
+    }
+}
+
+impl ::core::convert::From<crate::Murmur3HashProperty> for Property {
+    fn from(value: crate::Murmur3HashProperty) -> Self {
+        Self::Murmur3Hash(value)
+    }
+}
+
+impl ::core::convert::From<crate::TokenCountProperty> for Property {
+    fn from(value: crate::TokenCountProperty) -> Self {
+        Self::TokenCount(value)
+    }
+}
+
+impl ::core::convert::From<crate::GeoPointProperty> for Property {
+    fn from(value: crate::GeoPointProperty) -> Self {
+        Self::GeoPoint(value)
+    }
+}
+
+impl ::core::convert::From<crate::GeoShapeProperty> for Property {
+    fn from(value: crate::GeoShapeProperty) -> Self {
+        Self::GeoShape(value)
+    }
+}
+
+impl ::core::convert::From<crate::PointProperty> for Property {
+    fn from(value: crate::PointProperty) -> Self {
+        Self::Point(value)
+    }
+}
+
+impl ::core::convert::From<crate::ShapeProperty> for Property {
+    fn from(value: crate::ShapeProperty) -> Self {
+        Self::Shape(value)
+    }
+}
+
+impl ::core::convert::From<crate::ByteNumberProperty> for Property {
+    fn from(value: crate::ByteNumberProperty) -> Self {
+        Self::ByteNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::DoubleNumberProperty> for Property {
+    fn from(value: crate::DoubleNumberProperty) -> Self {
+        Self::DoubleNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::FloatNumberProperty> for Property {
+    fn from(value: crate::FloatNumberProperty) -> Self {
+        Self::FloatNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::HalfFloatNumberProperty> for Property {
+    fn from(value: crate::HalfFloatNumberProperty) -> Self {
+        Self::HalfFloatNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::IntegerNumberProperty> for Property {
+    fn from(value: crate::IntegerNumberProperty) -> Self {
+        Self::IntegerNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::LongNumberProperty> for Property {
+    fn from(value: crate::LongNumberProperty) -> Self {
+        Self::LongNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::ScaledFloatNumberProperty> for Property {
+    fn from(value: crate::ScaledFloatNumberProperty) -> Self {
+        Self::ScaledFloatNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::ShortNumberProperty> for Property {
+    fn from(value: crate::ShortNumberProperty) -> Self {
+        Self::ShortNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::UnsignedLongNumberProperty> for Property {
+    fn from(value: crate::UnsignedLongNumberProperty) -> Self {
+        Self::UnsignedLongNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::DateRangeProperty> for Property {
+    fn from(value: crate::DateRangeProperty) -> Self {
+        Self::DateRange(value)
+    }
+}
+
+impl ::core::convert::From<crate::DoubleRangeProperty> for Property {
+    fn from(value: crate::DoubleRangeProperty) -> Self {
+        Self::DoubleRange(value)
+    }
+}
+
+impl ::core::convert::From<crate::FloatRangeProperty> for Property {
+    fn from(value: crate::FloatRangeProperty) -> Self {
+        Self::FloatRange(value)
+    }
+}
+
+impl ::core::convert::From<crate::IntegerRangeProperty> for Property {
+    fn from(value: crate::IntegerRangeProperty) -> Self {
+        Self::IntegerRange(value)
+    }
+}
+
+impl ::core::convert::From<crate::IpRangeProperty> for Property {
+    fn from(value: crate::IpRangeProperty) -> Self {
+        Self::IpRange(value)
+    }
+}
+
+impl ::core::convert::From<crate::LongRangeProperty> for Property {
+    fn from(value: crate::LongRangeProperty) -> Self {
+        Self::LongRange(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuCollationProperty> for Property {
+    fn from(value: crate::IcuCollationProperty) -> Self {
+        Self::IcuCollation(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct PropertyBase {
@@ -10270,6 +10612,24 @@ impl<'de> ::serde::Deserialize<'de> for SuggestContextPrecision {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<i32> for SuggestContextPrecision {
+    fn from(value: i32) -> Self {
+        Self::Integer(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for SuggestContextPrecision {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for SuggestContextPrecision {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 

@@ -400,6 +400,20 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
     }
 }
 
+impl<TDocument> ::core::convert::From<crate::get::GetResult<TDocument>>
+    for ResponseItem<TDocument>
+{
+    fn from(value: crate::get::GetResult<TDocument>) -> Self {
+        Self::Result(value)
+    }
+}
+
+impl<TDocument> ::core::convert::From<crate::mget::MultiGetError> for ResponseItem<TDocument> {
+    fn from(value: crate::mget::MultiGetError) -> Self {
+        Self::Failure(value)
+    }
+}
+
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::mget::Response;
 

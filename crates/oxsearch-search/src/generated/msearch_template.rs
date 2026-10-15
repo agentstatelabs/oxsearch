@@ -200,6 +200,18 @@ impl<'de> ::serde::Deserialize<'de> for RequestItem {
     }
 }
 
+impl ::core::convert::From<crate::msearch::MultisearchHeader> for RequestItem {
+    fn from(value: crate::msearch::MultisearchHeader) -> Self {
+        Self::Header(value)
+    }
+}
+
+impl ::core::convert::From<crate::msearch_template::TemplateConfig> for RequestItem {
+    fn from(value: crate::msearch_template::TemplateConfig) -> Self {
+        Self::Body(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(

@@ -666,6 +666,18 @@ impl<'de> ::serde::Deserialize<'de> for RequestItem {
     }
 }
 
+impl ::core::convert::From<crate::msearch::MultisearchHeader> for RequestItem {
+    fn from(value: crate::msearch::MultisearchHeader) -> Self {
+        Self::Header(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::SearchRequestBody> for RequestItem {
+    fn from(value: crate::search::SearchRequestBody) -> Self {
+        Self::Body(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(
@@ -772,6 +784,23 @@ impl<'de, TDocument: ::serde::Deserialize<'de>, TAggregations: ::serde::Deserial
             deserializer,
             Shape(::core::marker::PhantomData),
         )
+    }
+}
+
+impl<TDocument, TAggregations>
+    ::core::convert::From<crate::msearch::MultiSearchItem<TDocument, TAggregations>>
+    for ResponseItem<TDocument, TAggregations>
+{
+    fn from(value: crate::msearch::MultiSearchItem<TDocument, TAggregations>) -> Self {
+        Self::Result(value)
+    }
+}
+
+impl<TDocument, TAggregations> ::core::convert::From<::oxsearch_core::ErrorResponseBase>
+    for ResponseItem<TDocument, TAggregations>
+{
+    fn from(value: ::oxsearch_core::ErrorResponseBase) -> Self {
+        Self::Failure(value)
     }
 }
 

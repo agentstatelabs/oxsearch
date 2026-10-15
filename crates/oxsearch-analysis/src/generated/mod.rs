@@ -456,6 +456,300 @@ impl<'de> ::serde::Deserialize<'de> for Analyzer {
     }
 }
 
+impl ::core::convert::From<crate::CustomAnalyzer> for Analyzer {
+    fn from(value: crate::CustomAnalyzer) -> Self {
+        Self::Custom(value)
+    }
+}
+
+impl ::core::convert::From<crate::FingerprintAnalyzer> for Analyzer {
+    fn from(value: crate::FingerprintAnalyzer) -> Self {
+        Self::Fingerprint(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeywordAnalyzer> for Analyzer {
+    fn from(value: crate::KeywordAnalyzer) -> Self {
+        Self::Keyword(value)
+    }
+}
+
+impl ::core::convert::From<crate::NoriAnalyzer> for Analyzer {
+    fn from(value: crate::NoriAnalyzer) -> Self {
+        Self::Nori(value)
+    }
+}
+
+impl ::core::convert::From<crate::PatternAnalyzer> for Analyzer {
+    fn from(value: crate::PatternAnalyzer) -> Self {
+        Self::Pattern(value)
+    }
+}
+
+impl ::core::convert::From<crate::SimpleAnalyzer> for Analyzer {
+    fn from(value: crate::SimpleAnalyzer) -> Self {
+        Self::Simple(value)
+    }
+}
+
+impl ::core::convert::From<crate::StandardAnalyzer> for Analyzer {
+    fn from(value: crate::StandardAnalyzer) -> Self {
+        Self::Standard(value)
+    }
+}
+
+impl ::core::convert::From<crate::StopAnalyzer> for Analyzer {
+    fn from(value: crate::StopAnalyzer) -> Self {
+        Self::Stop(value)
+    }
+}
+
+impl ::core::convert::From<crate::WhitespaceAnalyzer> for Analyzer {
+    fn from(value: crate::WhitespaceAnalyzer) -> Self {
+        Self::Whitespace(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuAnalyzer> for Analyzer {
+    fn from(value: crate::IcuAnalyzer) -> Self {
+        Self::Icu(value)
+    }
+}
+
+impl ::core::convert::From<crate::KuromojiAnalyzer> for Analyzer {
+    fn from(value: crate::KuromojiAnalyzer) -> Self {
+        Self::Kuromoji(value)
+    }
+}
+
+impl ::core::convert::From<crate::SnowballAnalyzer> for Analyzer {
+    fn from(value: crate::SnowballAnalyzer) -> Self {
+        Self::Snowball(value)
+    }
+}
+
+impl ::core::convert::From<crate::ArabicAnalyzer> for Analyzer {
+    fn from(value: crate::ArabicAnalyzer) -> Self {
+        Self::Arabic(value)
+    }
+}
+
+impl ::core::convert::From<crate::ArmenianAnalyzer> for Analyzer {
+    fn from(value: crate::ArmenianAnalyzer) -> Self {
+        Self::Armenian(value)
+    }
+}
+
+impl ::core::convert::From<crate::BasqueAnalyzer> for Analyzer {
+    fn from(value: crate::BasqueAnalyzer) -> Self {
+        Self::Basque(value)
+    }
+}
+
+impl ::core::convert::From<crate::BengaliAnalyzer> for Analyzer {
+    fn from(value: crate::BengaliAnalyzer) -> Self {
+        Self::Bengali(value)
+    }
+}
+
+impl ::core::convert::From<crate::BrazilianAnalyzer> for Analyzer {
+    fn from(value: crate::BrazilianAnalyzer) -> Self {
+        Self::Brazilian(value)
+    }
+}
+
+impl ::core::convert::From<crate::BulgarianAnalyzer> for Analyzer {
+    fn from(value: crate::BulgarianAnalyzer) -> Self {
+        Self::Bulgarian(value)
+    }
+}
+
+impl ::core::convert::From<crate::CatalanAnalyzer> for Analyzer {
+    fn from(value: crate::CatalanAnalyzer) -> Self {
+        Self::Catalan(value)
+    }
+}
+
+impl ::core::convert::From<crate::ChineseAnalyzer> for Analyzer {
+    fn from(value: crate::ChineseAnalyzer) -> Self {
+        Self::Chinese(value)
+    }
+}
+
+impl ::core::convert::From<crate::CjkAnalyzer> for Analyzer {
+    fn from(value: crate::CjkAnalyzer) -> Self {
+        Self::Cjk(value)
+    }
+}
+
+impl ::core::convert::From<crate::CzechAnalyzer> for Analyzer {
+    fn from(value: crate::CzechAnalyzer) -> Self {
+        Self::Czech(value)
+    }
+}
+
+impl ::core::convert::From<crate::DanishAnalyzer> for Analyzer {
+    fn from(value: crate::DanishAnalyzer) -> Self {
+        Self::Danish(value)
+    }
+}
+
+impl ::core::convert::From<crate::DutchAnalyzer> for Analyzer {
+    fn from(value: crate::DutchAnalyzer) -> Self {
+        Self::Dutch(value)
+    }
+}
+
+impl ::core::convert::From<crate::EnglishAnalyzer> for Analyzer {
+    fn from(value: crate::EnglishAnalyzer) -> Self {
+        Self::English(value)
+    }
+}
+
+impl ::core::convert::From<crate::EstonianAnalyzer> for Analyzer {
+    fn from(value: crate::EstonianAnalyzer) -> Self {
+        Self::Estonian(value)
+    }
+}
+
+impl ::core::convert::From<crate::FinnishAnalyzer> for Analyzer {
+    fn from(value: crate::FinnishAnalyzer) -> Self {
+        Self::Finnish(value)
+    }
+}
+
+impl ::core::convert::From<crate::FrenchAnalyzer> for Analyzer {
+    fn from(value: crate::FrenchAnalyzer) -> Self {
+        Self::French(value)
+    }
+}
+
+impl ::core::convert::From<crate::GalicianAnalyzer> for Analyzer {
+    fn from(value: crate::GalicianAnalyzer) -> Self {
+        Self::Galician(value)
+    }
+}
+
+impl ::core::convert::From<crate::GermanAnalyzer> for Analyzer {
+    fn from(value: crate::GermanAnalyzer) -> Self {
+        Self::German(value)
+    }
+}
+
+impl ::core::convert::From<crate::GreekAnalyzer> for Analyzer {
+    fn from(value: crate::GreekAnalyzer) -> Self {
+        Self::Greek(value)
+    }
+}
+
+impl ::core::convert::From<crate::HindiAnalyzer> for Analyzer {
+    fn from(value: crate::HindiAnalyzer) -> Self {
+        Self::Hindi(value)
+    }
+}
+
+impl ::core::convert::From<crate::HungarianAnalyzer> for Analyzer {
+    fn from(value: crate::HungarianAnalyzer) -> Self {
+        Self::Hungarian(value)
+    }
+}
+
+impl ::core::convert::From<crate::IndonesianAnalyzer> for Analyzer {
+    fn from(value: crate::IndonesianAnalyzer) -> Self {
+        Self::Indonesian(value)
+    }
+}
+
+impl ::core::convert::From<crate::IrishAnalyzer> for Analyzer {
+    fn from(value: crate::IrishAnalyzer) -> Self {
+        Self::Irish(value)
+    }
+}
+
+impl ::core::convert::From<crate::ItalianAnalyzer> for Analyzer {
+    fn from(value: crate::ItalianAnalyzer) -> Self {
+        Self::Italian(value)
+    }
+}
+
+impl ::core::convert::From<crate::LatvianAnalyzer> for Analyzer {
+    fn from(value: crate::LatvianAnalyzer) -> Self {
+        Self::Latvian(value)
+    }
+}
+
+impl ::core::convert::From<crate::LithuanianAnalyzer> for Analyzer {
+    fn from(value: crate::LithuanianAnalyzer) -> Self {
+        Self::Lithuanian(value)
+    }
+}
+
+impl ::core::convert::From<crate::NorwegianAnalyzer> for Analyzer {
+    fn from(value: crate::NorwegianAnalyzer) -> Self {
+        Self::Norwegian(value)
+    }
+}
+
+impl ::core::convert::From<crate::PersianAnalyzer> for Analyzer {
+    fn from(value: crate::PersianAnalyzer) -> Self {
+        Self::Persian(value)
+    }
+}
+
+impl ::core::convert::From<crate::PortugueseAnalyzer> for Analyzer {
+    fn from(value: crate::PortugueseAnalyzer) -> Self {
+        Self::Portuguese(value)
+    }
+}
+
+impl ::core::convert::From<crate::RomanianAnalyzer> for Analyzer {
+    fn from(value: crate::RomanianAnalyzer) -> Self {
+        Self::Romanian(value)
+    }
+}
+
+impl ::core::convert::From<crate::RussianAnalyzer> for Analyzer {
+    fn from(value: crate::RussianAnalyzer) -> Self {
+        Self::Russian(value)
+    }
+}
+
+impl ::core::convert::From<crate::SerbianAnalyzer> for Analyzer {
+    fn from(value: crate::SerbianAnalyzer) -> Self {
+        Self::Serbian(value)
+    }
+}
+
+impl ::core::convert::From<crate::SoraniAnalyzer> for Analyzer {
+    fn from(value: crate::SoraniAnalyzer) -> Self {
+        Self::Sorani(value)
+    }
+}
+
+impl ::core::convert::From<crate::SpanishAnalyzer> for Analyzer {
+    fn from(value: crate::SpanishAnalyzer) -> Self {
+        Self::Spanish(value)
+    }
+}
+
+impl ::core::convert::From<crate::SwedishAnalyzer> for Analyzer {
+    fn from(value: crate::SwedishAnalyzer) -> Self {
+        Self::Swedish(value)
+    }
+}
+
+impl ::core::convert::From<crate::TurkishAnalyzer> for Analyzer {
+    fn from(value: crate::TurkishAnalyzer) -> Self {
+        Self::Turkish(value)
+    }
+}
+
+impl ::core::convert::From<crate::ThaiAnalyzer> for Analyzer {
+    fn from(value: crate::ThaiAnalyzer) -> Self {
+        Self::Thai(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ApostropheTokenFilter {
@@ -976,6 +1270,24 @@ impl<'de> ::serde::Deserialize<'de> for CharFilter {
     }
 }
 
+impl ::core::convert::From<::std::string::String> for CharFilter {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Name(value)
+    }
+}
+
+impl ::core::convert::From<crate::CharFilterDefinition> for CharFilter {
+    fn from(value: crate::CharFilterDefinition) -> Self {
+        Self::Definition(value)
+    }
+}
+
+impl ::core::convert::From<&str> for CharFilter {
+    fn from(value: &str) -> Self {
+        Self::Name(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct CharFilterBase {
@@ -1083,6 +1395,36 @@ impl<'de> ::serde::Deserialize<'de> for CharFilterDefinition {
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
         }
+    }
+}
+
+impl ::core::convert::From<crate::HtmlStripCharFilter> for CharFilterDefinition {
+    fn from(value: crate::HtmlStripCharFilter) -> Self {
+        Self::HtmlStrip(value)
+    }
+}
+
+impl ::core::convert::From<crate::MappingCharFilter> for CharFilterDefinition {
+    fn from(value: crate::MappingCharFilter) -> Self {
+        Self::Mapping(value)
+    }
+}
+
+impl ::core::convert::From<crate::PatternReplaceCharFilter> for CharFilterDefinition {
+    fn from(value: crate::PatternReplaceCharFilter) -> Self {
+        Self::PatternReplace(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuNormalizationCharFilter> for CharFilterDefinition {
+    fn from(value: crate::IcuNormalizationCharFilter) -> Self {
+        Self::IcuNormalizer(value)
+    }
+}
+
+impl ::core::convert::From<crate::KuromojiIterationMarkCharFilter> for CharFilterDefinition {
+    fn from(value: crate::KuromojiIterationMarkCharFilter) -> Self {
+        Self::KuromojiIterationMark(value)
     }
 }
 
@@ -5484,6 +5826,18 @@ impl<'de> ::serde::Deserialize<'de> for Normalizer {
     }
 }
 
+impl ::core::convert::From<crate::LowercaseNormalizer> for Normalizer {
+    fn from(value: crate::LowercaseNormalizer) -> Self {
+        Self::Lowercase(value)
+    }
+}
+
+impl ::core::convert::From<crate::CustomNormalizer> for Normalizer {
+    fn from(value: crate::CustomNormalizer) -> Self {
+        Self::Custom(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct NorwegianAnalyzer {
@@ -8075,6 +8429,24 @@ impl<'de> ::serde::Deserialize<'de> for TokenFilter {
     }
 }
 
+impl ::core::convert::From<::std::string::String> for TokenFilter {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Name(value)
+    }
+}
+
+impl ::core::convert::From<crate::TokenFilterDefinition> for TokenFilter {
+    fn from(value: crate::TokenFilterDefinition) -> Self {
+        Self::Definition(value)
+    }
+}
+
+impl ::core::convert::From<&str> for TokenFilter {
+    fn from(value: &str) -> Self {
+        Self::Name(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TokenFilterBase {
@@ -8875,6 +9247,450 @@ impl<'de> ::serde::Deserialize<'de> for TokenFilterDefinition {
     }
 }
 
+impl ::core::convert::From<crate::ApostropheTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ApostropheTokenFilter) -> Self {
+        Self::Apostrophe(value)
+    }
+}
+
+impl ::core::convert::From<crate::ArabicStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ArabicStemTokenFilter) -> Self {
+        Self::ArabicStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::ArabicNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ArabicNormalizationTokenFilter) -> Self {
+        Self::ArabicNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::AsciiFoldingTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::AsciiFoldingTokenFilter) -> Self {
+        Self::Asciifolding(value)
+    }
+}
+
+impl ::core::convert::From<crate::BengaliNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::BengaliNormalizationTokenFilter) -> Self {
+        Self::BengaliNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::BrazilianStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::BrazilianStemTokenFilter) -> Self {
+        Self::BrazilianStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::CjkBigramTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::CjkBigramTokenFilter) -> Self {
+        Self::CjkBigram(value)
+    }
+}
+
+impl ::core::convert::From<crate::CjkWidthTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::CjkWidthTokenFilter) -> Self {
+        Self::CjkWidth(value)
+    }
+}
+
+impl ::core::convert::From<crate::ClassicTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ClassicTokenFilter) -> Self {
+        Self::Classic(value)
+    }
+}
+
+impl ::core::convert::From<crate::CommonGramsTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::CommonGramsTokenFilter) -> Self {
+        Self::CommonGrams(value)
+    }
+}
+
+impl ::core::convert::From<crate::ConditionTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ConditionTokenFilter) -> Self {
+        Self::Condition(value)
+    }
+}
+
+impl ::core::convert::From<crate::CzechStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::CzechStemTokenFilter) -> Self {
+        Self::CzechStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::DecimalDigitTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::DecimalDigitTokenFilter) -> Self {
+        Self::DecimalDigit(value)
+    }
+}
+
+impl ::core::convert::From<crate::DelimitedPayloadTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::DelimitedPayloadTokenFilter) -> Self {
+        Self::DelimitedPayload(value)
+    }
+}
+
+impl ::core::convert::From<crate::DutchStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::DutchStemTokenFilter) -> Self {
+        Self::DutchStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::EdgeNGramTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::EdgeNGramTokenFilter) -> Self {
+        Self::EdgeNgram(value)
+    }
+}
+
+impl ::core::convert::From<crate::ElisionTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ElisionTokenFilter) -> Self {
+        Self::Elision(value)
+    }
+}
+
+impl ::core::convert::From<crate::FingerprintTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::FingerprintTokenFilter) -> Self {
+        Self::Fingerprint(value)
+    }
+}
+
+impl ::core::convert::From<crate::FlattenGraphTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::FlattenGraphTokenFilter) -> Self {
+        Self::FlattenGraph(value)
+    }
+}
+
+impl ::core::convert::From<crate::FrenchStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::FrenchStemTokenFilter) -> Self {
+        Self::FrenchStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::GermanNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::GermanNormalizationTokenFilter) -> Self {
+        Self::GermanNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::GermanStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::GermanStemTokenFilter) -> Self {
+        Self::GermanStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::HindiNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::HindiNormalizationTokenFilter) -> Self {
+        Self::HindiNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::HunspellTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::HunspellTokenFilter) -> Self {
+        Self::Hunspell(value)
+    }
+}
+
+impl ::core::convert::From<crate::HyphenationDecompounderTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::HyphenationDecompounderTokenFilter) -> Self {
+        Self::HyphenationDecompounder(value)
+    }
+}
+
+impl ::core::convert::From<crate::IndicNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::IndicNormalizationTokenFilter) -> Self {
+        Self::IndicNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeepTypesTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KeepTypesTokenFilter) -> Self {
+        Self::KeepTypes(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeepWordsTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KeepWordsTokenFilter) -> Self {
+        Self::Keep(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeywordMarkerTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KeywordMarkerTokenFilter) -> Self {
+        Self::KeywordMarker(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeywordRepeatTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KeywordRepeatTokenFilter) -> Self {
+        Self::KeywordRepeat(value)
+    }
+}
+
+impl ::core::convert::From<crate::KStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KStemTokenFilter) -> Self {
+        Self::Kstem(value)
+    }
+}
+
+impl ::core::convert::From<crate::LengthTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::LengthTokenFilter) -> Self {
+        Self::Length(value)
+    }
+}
+
+impl ::core::convert::From<crate::LimitTokenCountTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::LimitTokenCountTokenFilter) -> Self {
+        Self::Limit(value)
+    }
+}
+
+impl ::core::convert::From<crate::LowercaseTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::LowercaseTokenFilter) -> Self {
+        Self::Lowercase(value)
+    }
+}
+
+impl ::core::convert::From<crate::MinHashTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::MinHashTokenFilter) -> Self {
+        Self::MinHash(value)
+    }
+}
+
+impl ::core::convert::From<crate::MultiplexerTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::MultiplexerTokenFilter) -> Self {
+        Self::Multiplexer(value)
+    }
+}
+
+impl ::core::convert::From<crate::NGramTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::NGramTokenFilter) -> Self {
+        Self::Ngram(value)
+    }
+}
+
+impl ::core::convert::From<crate::NoriPartOfSpeechTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::NoriPartOfSpeechTokenFilter) -> Self {
+        Self::NoriPartOfSpeech(value)
+    }
+}
+
+impl ::core::convert::From<crate::PatternCaptureTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PatternCaptureTokenFilter) -> Self {
+        Self::PatternCapture(value)
+    }
+}
+
+impl ::core::convert::From<crate::PatternReplaceTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PatternReplaceTokenFilter) -> Self {
+        Self::PatternReplace(value)
+    }
+}
+
+impl ::core::convert::From<crate::PersianNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PersianNormalizationTokenFilter) -> Self {
+        Self::PersianNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::PersianStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PersianStemTokenFilter) -> Self {
+        Self::PersianStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::PorterStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PorterStemTokenFilter) -> Self {
+        Self::PorterStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::PredicateTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PredicateTokenFilter) -> Self {
+        Self::PredicateTokenFilter(value)
+    }
+}
+
+impl ::core::convert::From<crate::RemoveDuplicatesTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::RemoveDuplicatesTokenFilter) -> Self {
+        Self::RemoveDuplicates(value)
+    }
+}
+
+impl ::core::convert::From<crate::ReverseTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ReverseTokenFilter) -> Self {
+        Self::Reverse(value)
+    }
+}
+
+impl ::core::convert::From<crate::RussianStemTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::RussianStemTokenFilter) -> Self {
+        Self::RussianStem(value)
+    }
+}
+
+impl ::core::convert::From<crate::ScandinavianFoldingTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ScandinavianFoldingTokenFilter) -> Self {
+        Self::ScandinavianFolding(value)
+    }
+}
+
+impl ::core::convert::From<crate::ScandinavianNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ScandinavianNormalizationTokenFilter) -> Self {
+        Self::ScandinavianNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::SerbianNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::SerbianNormalizationTokenFilter) -> Self {
+        Self::SerbianNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::ShingleTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::ShingleTokenFilter) -> Self {
+        Self::Shingle(value)
+    }
+}
+
+impl ::core::convert::From<crate::SnowballTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::SnowballTokenFilter) -> Self {
+        Self::Snowball(value)
+    }
+}
+
+impl ::core::convert::From<crate::SoraniNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::SoraniNormalizationTokenFilter) -> Self {
+        Self::SoraniNormalization(value)
+    }
+}
+
+impl ::core::convert::From<crate::StemmerOverrideTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::StemmerOverrideTokenFilter) -> Self {
+        Self::StemmerOverride(value)
+    }
+}
+
+impl ::core::convert::From<crate::StemmerTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::StemmerTokenFilter) -> Self {
+        Self::Stemmer(value)
+    }
+}
+
+impl ::core::convert::From<crate::StopTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::StopTokenFilter) -> Self {
+        Self::Stop(value)
+    }
+}
+
+impl ::core::convert::From<crate::SynonymGraphTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::SynonymGraphTokenFilter) -> Self {
+        Self::SynonymGraph(value)
+    }
+}
+
+impl ::core::convert::From<crate::SynonymTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::SynonymTokenFilter) -> Self {
+        Self::Synonym(value)
+    }
+}
+
+impl ::core::convert::From<crate::TrimTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::TrimTokenFilter) -> Self {
+        Self::Trim(value)
+    }
+}
+
+impl ::core::convert::From<crate::TruncateTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::TruncateTokenFilter) -> Self {
+        Self::Truncate(value)
+    }
+}
+
+impl ::core::convert::From<crate::UniqueTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::UniqueTokenFilter) -> Self {
+        Self::Unique(value)
+    }
+}
+
+impl ::core::convert::From<crate::UppercaseTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::UppercaseTokenFilter) -> Self {
+        Self::Uppercase(value)
+    }
+}
+
+impl ::core::convert::From<crate::WordDelimiterGraphTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::WordDelimiterGraphTokenFilter) -> Self {
+        Self::WordDelimiterGraph(value)
+    }
+}
+
+impl ::core::convert::From<crate::WordDelimiterTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::WordDelimiterTokenFilter) -> Self {
+        Self::WordDelimiter(value)
+    }
+}
+
+impl ::core::convert::From<crate::JaStopTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::JaStopTokenFilter) -> Self {
+        Self::JaStop(value)
+    }
+}
+
+impl ::core::convert::From<crate::KuromojiStemmerTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KuromojiStemmerTokenFilter) -> Self {
+        Self::KuromojiStemmer(value)
+    }
+}
+
+impl ::core::convert::From<crate::KuromojiReadingFormTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KuromojiReadingFormTokenFilter) -> Self {
+        Self::KuromojiReadingform(value)
+    }
+}
+
+impl ::core::convert::From<crate::KuromojiPartOfSpeechTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::KuromojiPartOfSpeechTokenFilter) -> Self {
+        Self::KuromojiPartOfSpeech(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuCollationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::IcuCollationTokenFilter) -> Self {
+        Self::IcuCollation(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuFoldingTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::IcuFoldingTokenFilter) -> Self {
+        Self::IcuFolding(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuNormalizationTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::IcuNormalizationTokenFilter) -> Self {
+        Self::IcuNormalizer(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuTransformTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::IcuTransformTokenFilter) -> Self {
+        Self::IcuTransform(value)
+    }
+}
+
+impl ::core::convert::From<crate::PhoneticTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::PhoneticTokenFilter) -> Self {
+        Self::Phonetic(value)
+    }
+}
+
+impl ::core::convert::From<crate::DictionaryDecompounderTokenFilter> for TokenFilterDefinition {
+    fn from(value: crate::DictionaryDecompounderTokenFilter) -> Self {
+        Self::DictionaryDecompounder(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum Tokenizer {
@@ -8925,6 +9741,24 @@ impl<'de> ::serde::Deserialize<'de> for Tokenizer {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for Tokenizer {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Name(value)
+    }
+}
+
+impl ::core::convert::From<crate::TokenizerDefinition> for Tokenizer {
+    fn from(value: crate::TokenizerDefinition) -> Self {
+        Self::Definition(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Tokenizer {
+    fn from(value: &str) -> Self {
+        Self::Name(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -9157,6 +9991,114 @@ impl<'de> ::serde::Deserialize<'de> for TokenizerDefinition {
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
         }
+    }
+}
+
+impl ::core::convert::From<crate::CharGroupTokenizer> for TokenizerDefinition {
+    fn from(value: crate::CharGroupTokenizer) -> Self {
+        Self::CharGroup(value)
+    }
+}
+
+impl ::core::convert::From<crate::ClassicTokenizer> for TokenizerDefinition {
+    fn from(value: crate::ClassicTokenizer) -> Self {
+        Self::Classic(value)
+    }
+}
+
+impl ::core::convert::From<crate::EdgeNGramTokenizer> for TokenizerDefinition {
+    fn from(value: crate::EdgeNGramTokenizer) -> Self {
+        Self::EdgeNgram(value)
+    }
+}
+
+impl ::core::convert::From<crate::KeywordTokenizer> for TokenizerDefinition {
+    fn from(value: crate::KeywordTokenizer) -> Self {
+        Self::Keyword(value)
+    }
+}
+
+impl ::core::convert::From<crate::LetterTokenizer> for TokenizerDefinition {
+    fn from(value: crate::LetterTokenizer) -> Self {
+        Self::Letter(value)
+    }
+}
+
+impl ::core::convert::From<crate::LowercaseTokenizer> for TokenizerDefinition {
+    fn from(value: crate::LowercaseTokenizer) -> Self {
+        Self::Lowercase(value)
+    }
+}
+
+impl ::core::convert::From<crate::NGramTokenizer> for TokenizerDefinition {
+    fn from(value: crate::NGramTokenizer) -> Self {
+        Self::Ngram(value)
+    }
+}
+
+impl ::core::convert::From<crate::PathHierarchyTokenizer> for TokenizerDefinition {
+    fn from(value: crate::PathHierarchyTokenizer) -> Self {
+        Self::PathHierarchy(value)
+    }
+}
+
+impl ::core::convert::From<crate::PatternTokenizer> for TokenizerDefinition {
+    fn from(value: crate::PatternTokenizer) -> Self {
+        Self::Pattern(value)
+    }
+}
+
+impl ::core::convert::From<crate::SimplePatternTokenizer> for TokenizerDefinition {
+    fn from(value: crate::SimplePatternTokenizer) -> Self {
+        Self::SimplePattern(value)
+    }
+}
+
+impl ::core::convert::From<crate::SimplePatternSplitTokenizer> for TokenizerDefinition {
+    fn from(value: crate::SimplePatternSplitTokenizer) -> Self {
+        Self::SimplePatternSplit(value)
+    }
+}
+
+impl ::core::convert::From<crate::StandardTokenizer> for TokenizerDefinition {
+    fn from(value: crate::StandardTokenizer) -> Self {
+        Self::Standard(value)
+    }
+}
+
+impl ::core::convert::From<crate::ThaiTokenizer> for TokenizerDefinition {
+    fn from(value: crate::ThaiTokenizer) -> Self {
+        Self::Thai(value)
+    }
+}
+
+impl ::core::convert::From<crate::UaxEmailUrlTokenizer> for TokenizerDefinition {
+    fn from(value: crate::UaxEmailUrlTokenizer) -> Self {
+        Self::UaxUrlEmail(value)
+    }
+}
+
+impl ::core::convert::From<crate::WhitespaceTokenizer> for TokenizerDefinition {
+    fn from(value: crate::WhitespaceTokenizer) -> Self {
+        Self::Whitespace(value)
+    }
+}
+
+impl ::core::convert::From<crate::IcuTokenizer> for TokenizerDefinition {
+    fn from(value: crate::IcuTokenizer) -> Self {
+        Self::IcuTokenizer(value)
+    }
+}
+
+impl ::core::convert::From<crate::KuromojiTokenizer> for TokenizerDefinition {
+    fn from(value: crate::KuromojiTokenizer) -> Self {
+        Self::KuromojiTokenizer(value)
+    }
+}
+
+impl ::core::convert::From<crate::NoriTokenizer> for TokenizerDefinition {
+    fn from(value: crate::NoriTokenizer) -> Self {
+        Self::NoriTokenizer(value)
     }
 }
 

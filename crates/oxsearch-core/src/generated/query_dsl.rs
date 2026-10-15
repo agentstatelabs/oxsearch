@@ -901,6 +901,30 @@ impl<'de> ::serde::Deserialize<'de> for DecayFunction {
     }
 }
 
+impl ::core::convert::From<crate::query_dsl::UntypedDecayFunction> for DecayFunction {
+    fn from(value: crate::query_dsl::UntypedDecayFunction) -> Self {
+        Self::Untyped(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::DateDecayFunction> for DecayFunction {
+    fn from(value: crate::query_dsl::DateDecayFunction) -> Self {
+        Self::Date(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::NumericDecayFunction> for DecayFunction {
+    fn from(value: crate::query_dsl::NumericDecayFunction) -> Self {
+        Self::Numeric(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::GeoDecayFunction> for DecayFunction {
+    fn from(value: crate::query_dsl::GeoDecayFunction) -> Self {
+        Self::Geo(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(
     try_from = "DecayFunctionBaseRepr<TOrigin, TScale>",
@@ -1119,6 +1143,24 @@ impl<'de> ::serde::Deserialize<'de> for DistanceFeatureQuery {
         deserializer: D__,
     ) -> ::core::result::Result<Self, D__::Error> {
         ::serde::Deserialize::deserialize(deserializer).map(Self::Untyped)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::UntypedDistanceFeatureQuery> for DistanceFeatureQuery {
+    fn from(value: crate::query_dsl::UntypedDistanceFeatureQuery) -> Self {
+        Self::Untyped(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::GeoDistanceFeatureQuery> for DistanceFeatureQuery {
+    fn from(value: crate::query_dsl::GeoDistanceFeatureQuery) -> Self {
+        Self::Geo(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::DateDistanceFeatureQuery> for DistanceFeatureQuery {
+    fn from(value: crate::query_dsl::DateDistanceFeatureQuery) -> Self {
+        Self::Date(value)
     }
 }
 
@@ -1660,6 +1702,30 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for FunctionScoreContainerV
     }
 }
 
+impl ::core::convert::From<crate::query_dsl::FieldValueFactorScoreFunction>
+    for FunctionScoreContainerVariant
+{
+    fn from(value: crate::query_dsl::FieldValueFactorScoreFunction) -> Self {
+        Self::FieldValueFactor(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::RandomScoreFunction>
+    for FunctionScoreContainerVariant
+{
+    fn from(value: crate::query_dsl::RandomScoreFunction) -> Self {
+        Self::RandomScore(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ScriptScoreFunction>
+    for FunctionScoreContainerVariant
+{
+    fn from(value: crate::query_dsl::ScriptScoreFunction) -> Self {
+        Self::ScriptScore(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct FunctionScoreContainer {
@@ -2083,6 +2149,30 @@ impl<'de> ::serde::Deserialize<'de> for FuzzyQueryValue {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for FuzzyQueryValue {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<f64> for FuzzyQueryValue {
+    fn from(value: f64) -> Self {
+        Self::Double(value)
+    }
+}
+
+impl ::core::convert::From<bool> for FuzzyQueryValue {
+    fn from(value: bool) -> Self {
+        Self::Bool(value)
+    }
+}
+
+impl ::core::convert::From<&str> for FuzzyQueryValue {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -3703,6 +3793,54 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for IntervalsContainer {
     }
 }
 
+impl ::core::convert::From<crate::query_dsl::IntervalsAllOf> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsAllOf) -> Self {
+        Self::AllOf(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsAnyOf> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsAnyOf) -> Self {
+        Self::AnyOf(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsFuzzy> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsFuzzy) -> Self {
+        Self::Fuzzy(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsMatch> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsMatch) -> Self {
+        Self::Match(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsPrefix> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsPrefix) -> Self {
+        Self::Prefix(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsRange> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsRange) -> Self {
+        Self::Range(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsRegexp> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsRegexp) -> Self {
+        Self::Regexp(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsWildcard> for IntervalsContainer {
+    fn from(value: crate::query_dsl::IntervalsWildcard) -> Self {
+        Self::Wildcard(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum IntervalsFilter {
@@ -3827,6 +3965,12 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for IntervalsFilter {
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<crate::Script> for IntervalsFilter {
+    fn from(value: crate::Script) -> Self {
+        Self::Script(value)
     }
 }
 
@@ -4111,6 +4255,54 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for IntervalsQueryVariant {
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsAllOf> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsAllOf) -> Self {
+        Self::AllOf(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsAnyOf> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsAnyOf) -> Self {
+        Self::AnyOf(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsFuzzy> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsFuzzy) -> Self {
+        Self::Fuzzy(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsMatch> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsMatch) -> Self {
+        Self::Match(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsPrefix> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsPrefix) -> Self {
+        Self::Prefix(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsRange> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsRange) -> Self {
+        Self::Range(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsRegexp> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsRegexp) -> Self {
+        Self::Regexp(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IntervalsWildcard> for IntervalsQueryVariant {
+    fn from(value: crate::query_dsl::IntervalsWildcard) -> Self {
+        Self::Wildcard(value)
     }
 }
 
@@ -4489,6 +4681,24 @@ impl<'de> ::serde::Deserialize<'de> for Like {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for Like {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Text(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::LikeDocument> for Like {
+    fn from(value: crate::query_dsl::LikeDocument) -> Self {
+        Self::Document(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Like {
+    fn from(value: &str) -> Self {
+        Self::Text(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -5304,6 +5514,30 @@ impl<'de> ::serde::Deserialize<'de> for MatchQueryQuery {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for MatchQueryQuery {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<f32> for MatchQueryQuery {
+    fn from(value: f32) -> Self {
+        Self::Float(value)
+    }
+}
+
+impl ::core::convert::From<bool> for MatchQueryQuery {
+    fn from(value: bool) -> Self {
+        Self::Bool(value)
+    }
+}
+
+impl ::core::convert::From<&str> for MatchQueryQuery {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -6620,6 +6854,18 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for PinnedQueryVariant {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<crate::Id>> for PinnedQueryVariant {
+    fn from(value: ::std::vec::Vec<crate::Id>) -> Self {
+        Self::Ids(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::query_dsl::PinnedDoc>> for PinnedQueryVariant {
+    fn from(value: ::std::vec::Vec<crate::query_dsl::PinnedDoc>) -> Self {
+        Self::Docs(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct PinnedQuery {
@@ -7428,6 +7674,492 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for QueryContainer {
     }
 }
 
+impl ::core::convert::From<crate::query_dsl::BoolQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::BoolQuery) -> Self {
+        Self::Bool(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::BoostingQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::BoostingQuery) -> Self {
+        Self::Boosting(::std::boxed::Box::new(value))
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::CommonTermsQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::CommonTermsQuery>,
+    ) -> Self {
+        Self::Common(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::CombinedFieldsQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::CombinedFieldsQuery) -> Self {
+        Self::CombinedFields(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ConstantScoreQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::ConstantScoreQuery) -> Self {
+        Self::ConstantScore(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::DisMaxQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::DisMaxQuery) -> Self {
+        Self::DisMax(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::DistanceFeatureQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::DistanceFeatureQuery) -> Self {
+        Self::DistanceFeature(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ExistsQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::ExistsQuery) -> Self {
+        Self::Exists(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::FunctionScoreQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::FunctionScoreQuery) -> Self {
+        Self::FunctionScore(::std::boxed::Box::new(value))
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::FuzzyQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::FuzzyQuery>,
+    ) -> Self {
+        Self::Fuzzy(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::GeoBoundingBoxQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::GeoBoundingBoxQuery) -> Self {
+        Self::GeoBoundingBox(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::GeoDistanceQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::GeoDistanceQuery) -> Self {
+        Self::GeoDistance(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::GeoGridQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::GeoGridQuery>,
+    ) -> Self {
+        Self::GeoGrid(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::GeoPolygonQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::GeoPolygonQuery) -> Self {
+        Self::GeoPolygon(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::GeoShapeQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::GeoShapeQuery) -> Self {
+        Self::GeoShape(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::HasChildQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::HasChildQuery) -> Self {
+        Self::HasChild(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::HasParentQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::HasParentQuery) -> Self {
+        Self::HasParent(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::IdsQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::IdsQuery) -> Self {
+        Self::Ids(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::IntervalsQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::IntervalsQuery>,
+    ) -> Self {
+        Self::Intervals(value)
+    }
+}
+
+impl ::core::convert::From<crate::KnnQuery> for QueryContainer {
+    fn from(value: crate::KnnQuery) -> Self {
+        Self::Knn(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::KqlQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::KqlQuery) -> Self {
+        Self::Kql(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::MatchQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::MatchQuery>,
+    ) -> Self {
+        Self::Match(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::MatchAllQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::MatchAllQuery) -> Self {
+        Self::MatchAll(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::MatchBoolPrefixQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<
+            crate::Field,
+            crate::query_dsl::MatchBoolPrefixQuery,
+        >,
+    ) -> Self {
+        Self::MatchBoolPrefix(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::MatchNoneQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::MatchNoneQuery) -> Self {
+        Self::MatchNone(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::MatchPhraseQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::MatchPhraseQuery>,
+    ) -> Self {
+        Self::MatchPhrase(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::MatchPhrasePrefixQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<
+            crate::Field,
+            crate::query_dsl::MatchPhrasePrefixQuery,
+        >,
+    ) -> Self {
+        Self::MatchPhrasePrefix(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::MoreLikeThisQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::MoreLikeThisQuery) -> Self {
+        Self::MoreLikeThis(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::MultiMatchQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::MultiMatchQuery) -> Self {
+        Self::MultiMatch(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::NestedQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::NestedQuery) -> Self {
+        Self::Nested(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ParentIdQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::ParentIdQuery) -> Self {
+        Self::ParentId(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::PercolateQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::PercolateQuery) -> Self {
+        Self::Percolate(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::PinnedQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::PinnedQuery) -> Self {
+        Self::Pinned(::std::boxed::Box::new(value))
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::PrefixQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::PrefixQuery>,
+    ) -> Self {
+        Self::Prefix(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::QueryStringQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::QueryStringQuery) -> Self {
+        Self::QueryString(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::RangeQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::RangeQuery>,
+    ) -> Self {
+        Self::Range(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::RankFeatureQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::RankFeatureQuery) -> Self {
+        Self::RankFeature(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::RegexpQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::RegexpQuery>,
+    ) -> Self {
+        Self::Regexp(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::RuleQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::RuleQuery) -> Self {
+        Self::Rule(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ScriptQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::ScriptQuery) -> Self {
+        Self::Script(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ScriptScoreQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::ScriptScoreQuery) -> Self {
+        Self::ScriptScore(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SemanticQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SemanticQuery) -> Self {
+        Self::Semantic(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::ShapeQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::ShapeQuery) -> Self {
+        Self::Shape(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SimpleQueryStringQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SimpleQueryStringQuery) -> Self {
+        Self::SimpleQueryString(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanContainingQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanContainingQuery) -> Self {
+        Self::SpanContaining(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanFieldMaskingQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanFieldMaskingQuery) -> Self {
+        Self::SpanFieldMasking(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanFirstQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanFirstQuery) -> Self {
+        Self::SpanFirst(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanMultiTermQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanMultiTermQuery) -> Self {
+        Self::SpanMulti(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanNearQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanNearQuery) -> Self {
+        Self::SpanNear(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanNotQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanNotQuery) -> Self {
+        Self::SpanNot(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanOrQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanOrQuery) -> Self {
+        Self::SpanOr(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::SpanTermQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::SpanTermQuery>,
+    ) -> Self {
+        Self::SpanTerm(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanWithinQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SpanWithinQuery) -> Self {
+        Self::SpanWithin(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SparseVectorQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::SparseVectorQuery) -> Self {
+        Self::SparseVector(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::TermQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::TermQuery>,
+    ) -> Self {
+        Self::Term(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::TermsQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::TermsQuery) -> Self {
+        Self::Terms(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::TermsSetQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::TermsSetQuery>,
+    ) -> Self {
+        Self::TermsSet(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::TextExpansionQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<
+            crate::Field,
+            crate::query_dsl::TextExpansionQuery,
+        >,
+    ) -> Self {
+        Self::TextExpansion(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::WeightedTokensQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<
+            crate::Field,
+            crate::query_dsl::WeightedTokensQuery,
+        >,
+    ) -> Self {
+        Self::WeightedTokens(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::WildcardQuery>,
+    > for QueryContainer
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::WildcardQuery>,
+    ) -> Self {
+        Self::Wildcard(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::WrapperQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::WrapperQuery) -> Self {
+        Self::Wrapper(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::TypeQuery> for QueryContainer {
+    fn from(value: crate::query_dsl::TypeQuery) -> Self {
+        Self::Type(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct QueryStringQuery {
@@ -7764,6 +8496,24 @@ impl<'de> ::serde::Deserialize<'de> for RandomScoreFunctionSeed {
     }
 }
 
+impl ::core::convert::From<i64> for RandomScoreFunctionSeed {
+    fn from(value: i64) -> Self {
+        Self::Long(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for RandomScoreFunctionSeed {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for RandomScoreFunctionSeed {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RandomScoreFunction {
@@ -7832,6 +8582,36 @@ impl<'de> ::serde::Deserialize<'de> for RangeQuery {
         deserializer: D__,
     ) -> ::core::result::Result<Self, D__::Error> {
         ::serde::Deserialize::deserialize(deserializer).map(Self::Untyped)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::UntypedRangeQuery> for RangeQuery {
+    fn from(value: crate::query_dsl::UntypedRangeQuery) -> Self {
+        Self::Untyped(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::DateRangeQuery> for RangeQuery {
+    fn from(value: crate::query_dsl::DateRangeQuery) -> Self {
+        Self::Date(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::NumberRangeQuery> for RangeQuery {
+    fn from(value: crate::query_dsl::NumberRangeQuery) -> Self {
+        Self::Number(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::LongNumberRangeQuery> for RangeQuery {
+    fn from(value: crate::query_dsl::LongNumberRangeQuery) -> Self {
+        Self::LongNumber(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::TermRangeQuery> for RangeQuery {
+    fn from(value: crate::query_dsl::TermRangeQuery) -> Self {
+        Self::Term(value)
     }
 }
 
@@ -9433,6 +10213,72 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for SpanQuery {
     }
 }
 
+impl ::core::convert::From<crate::query_dsl::SpanContainingQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanContainingQuery) -> Self {
+        Self::SpanContaining(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanFieldMaskingQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanFieldMaskingQuery) -> Self {
+        Self::SpanFieldMasking(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanFirstQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanFirstQuery) -> Self {
+        Self::SpanFirst(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanGapQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanGapQuery) -> Self {
+        Self::SpanGap(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanMultiTermQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanMultiTermQuery) -> Self {
+        Self::SpanMulti(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanNearQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanNearQuery) -> Self {
+        Self::SpanNear(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanNotQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanNotQuery) -> Self {
+        Self::SpanNot(::std::boxed::Box::new(value))
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanOrQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanOrQuery) -> Self {
+        Self::SpanOr(value)
+    }
+}
+
+impl
+    ::core::convert::From<
+        ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::SpanTermQuery>,
+    > for SpanQuery
+{
+    fn from(
+        value: ::oxsearch_core::shapes::SingleKey<crate::Field, crate::query_dsl::SpanTermQuery>,
+    ) -> Self {
+        Self::SpanTerm(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::SpanWithinQuery> for SpanQuery {
+    fn from(value: crate::query_dsl::SpanWithinQuery) -> Self {
+        Self::SpanWithin(::std::boxed::Box::new(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct SpanTermQuery {
@@ -9654,6 +10500,26 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for SparseVectorQueryVarian
                 map.next_value()?,
             )),
         })
+    }
+}
+
+impl ::core::convert::From<::indexmap::IndexMap<::std::string::String, f32>>
+    for SparseVectorQueryVariant
+{
+    fn from(value: ::indexmap::IndexMap<::std::string::String, f32>) -> Self {
+        Self::QueryVector(value)
+    }
+}
+
+impl ::core::convert::From<crate::Id> for SparseVectorQueryVariant {
+    fn from(value: crate::Id) -> Self {
+        Self::InferenceId(value)
+    }
+}
+
+impl ::core::convert::From<&str> for SparseVectorQueryVariant {
+    fn from(value: &str) -> Self {
+        Self::InferenceId(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -10200,6 +11066,18 @@ impl<'de> ::serde::Deserialize<'de> for TermsQueryField {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::FieldValue>> for TermsQueryField {
+    fn from(value: ::std::vec::Vec<crate::FieldValue>) -> Self {
+        Self::Value(value)
+    }
+}
+
+impl ::core::convert::From<crate::query_dsl::TermsLookup> for TermsQueryField {
+    fn from(value: crate::query_dsl::TermsLookup) -> Self {
+        Self::Lookup(value)
     }
 }
 

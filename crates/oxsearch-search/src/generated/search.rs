@@ -56,6 +56,24 @@ impl<'de> ::serde::Deserialize<'de> for RequestStats {
     }
 }
 
+impl ::core::convert::From<::std::vec::Vec<::std::string::String>> for RequestStats {
+    fn from(value: ::std::vec::Vec<::std::string::String>) -> Self {
+        Self::StringList(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for RequestStats {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for RequestStats {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 /// The request's body.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
@@ -2083,6 +2101,20 @@ impl<'de> ::serde::Deserialize<'de> for CompletionSuggesterContexts {
     }
 }
 
+impl ::core::convert::From<crate::search::CompletionContext> for CompletionSuggesterContexts {
+    fn from(value: crate::search::CompletionContext) -> Self {
+        Self::CompletionContext(value)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<crate::search::CompletionContext>>
+    for CompletionSuggesterContexts
+{
+    fn from(value: ::std::vec::Vec<crate::search::CompletionContext>) -> Self {
+        Self::CompletionContextList(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct CompletionSuggester {
@@ -2232,6 +2264,24 @@ impl<'de> ::serde::Deserialize<'de> for Context {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for Context {
+    fn from(value: ::std::string::String) -> Self {
+        Self::Category(value)
+    }
+}
+
+impl ::core::convert::From<::oxsearch_core::GeoLocation> for Context {
+    fn from(value: ::oxsearch_core::GeoLocation) -> Self {
+        Self::Location(value)
+    }
+}
+
+impl ::core::convert::From<&str> for Context {
+    fn from(value: &str) -> Self {
+        Self::Category(::std::borrow::ToOwned::to_owned(value))
     }
 }
 
@@ -2782,6 +2832,24 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for FieldSuggesterVariant {
     }
 }
 
+impl ::core::convert::From<crate::search::CompletionSuggester> for FieldSuggesterVariant {
+    fn from(value: crate::search::CompletionSuggester) -> Self {
+        Self::Completion(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::PhraseSuggester> for FieldSuggesterVariant {
+    fn from(value: crate::search::PhraseSuggester) -> Self {
+        Self::Phrase(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::TermSuggester> for FieldSuggesterVariant {
+    fn from(value: crate::search::TermSuggester) -> Self {
+        Self::Term(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct FieldSuggester {
@@ -2963,6 +3031,18 @@ impl<'de> ::serde::Deserialize<'de> for HitMatchedQueries {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<::std::vec::Vec<::std::string::String>> for HitMatchedQueries {
+    fn from(value: ::std::vec::Vec<::std::string::String>) -> Self {
+        Self::StringList(value)
+    }
+}
+
+impl ::core::convert::From<::indexmap::IndexMap<::std::string::String, f64>> for HitMatchedQueries {
+    fn from(value: ::indexmap::IndexMap<::std::string::String, f64>) -> Self {
+        Self::Map(value)
     }
 }
 
@@ -3271,6 +3351,18 @@ impl<'de> ::serde::Deserialize<'de> for HitsMetadataTotal {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<crate::search::TotalHits> for HitsMetadataTotal {
+    fn from(value: crate::search::TotalHits) -> Self {
+        Self::TotalHits(value)
+    }
+}
+
+impl ::core::convert::From<i64> for HitsMetadataTotal {
+    fn from(value: i64) -> Self {
+        Self::Long(value)
     }
 }
 
@@ -4187,6 +4279,24 @@ impl<'de> ::serde::Deserialize<'de> for RegexOptionsFlags {
     }
 }
 
+impl ::core::convert::From<i32> for RegexOptionsFlags {
+    fn from(value: i32) -> Self {
+        Self::Integer(value)
+    }
+}
+
+impl ::core::convert::From<::std::string::String> for RegexOptionsFlags {
+    fn from(value: ::std::string::String) -> Self {
+        Self::String(value)
+    }
+}
+
+impl ::core::convert::From<&str> for RegexOptionsFlags {
+    fn from(value: &str) -> Self {
+        Self::String(::std::borrow::ToOwned::to_owned(value))
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RegexOptions {
@@ -4876,6 +4986,26 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for SmoothingModelContainer
     }
 }
 
+impl ::core::convert::From<crate::search::LaplaceSmoothingModel> for SmoothingModelContainer {
+    fn from(value: crate::search::LaplaceSmoothingModel) -> Self {
+        Self::Laplace(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::LinearInterpolationSmoothingModel>
+    for SmoothingModelContainer
+{
+    fn from(value: crate::search::LinearInterpolationSmoothingModel) -> Self {
+        Self::LinearInterpolation(value)
+    }
+}
+
+impl ::core::convert::From<crate::search::StupidBackoffSmoothingModel> for SmoothingModelContainer {
+    fn from(value: crate::search::StupidBackoffSmoothingModel) -> Self {
+        Self::StupidBackoff(value)
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum StringDistance {
@@ -5033,6 +5163,26 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de> for Su
             ::core::option::Option::None,
             deserializer,
         )
+    }
+}
+
+impl<TDocument> ::core::convert::From<crate::search::CompletionSuggest<TDocument>>
+    for Suggest<TDocument>
+{
+    fn from(value: crate::search::CompletionSuggest<TDocument>) -> Self {
+        Self::Completion(value)
+    }
+}
+
+impl<TDocument> ::core::convert::From<crate::search::PhraseSuggest> for Suggest<TDocument> {
+    fn from(value: crate::search::PhraseSuggest) -> Self {
+        Self::Phrase(value)
+    }
+}
+
+impl<TDocument> ::core::convert::From<crate::search::TermSuggest> for Suggest<TDocument> {
+    fn from(value: crate::search::TermSuggest) -> Self {
+        Self::Term(value)
     }
 }
 
@@ -5584,6 +5734,18 @@ impl<'de> ::serde::Deserialize<'de> for TrackHits {
             }
         }
         ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
+    }
+}
+
+impl ::core::convert::From<bool> for TrackHits {
+    fn from(value: bool) -> Self {
+        Self::Enabled(value)
+    }
+}
+
+impl ::core::convert::From<i32> for TrackHits {
+    fn from(value: i32) -> Self {
+        Self::Count(value)
     }
 }
 
