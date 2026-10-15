@@ -106,6 +106,19 @@ jobs:
         run: cargo test -p oxsearch-integration --no-run
       - name: Start Elasticsearch on the ${{ matrix.license }} license
         run: scripts/es-fixture.sh up "${OXSEARCH_TEST_LICENSE}"
+      # The telemetry test exports to it (integration/tests/collector.rs).
+      - name: Start an OpenTelemetry Collector
+        run: |
+          mkdir -p integration/collector-out && chmod 777 integration/collector-out
+          docker run -d --name otelcol -p 4318:4318 -p 13133:13133 \
+            -v "$PWD/integration/collector.yaml:/etc/otelcol-contrib/config.yaml:ro" \
+            -v "$PWD/integration/collector-out:/out" \
+            otel/opentelemetry-collector-contrib:0.161.0
+          for _ in $(seq 1 60); do
+            curl -fs http://localhost:13133/ >/dev/null && exit 0
+            sleep 2
+          done
+          echo "the Collector didn't become healthy"; docker logs otelcol; exit 1
       - name: Integration tests
         run: cargo test -p oxsearch-integration -- --ignored
       - name: The examples run
@@ -117,3 +130,6 @@ jobs:
       - name: Elasticsearch logs
         if: failure()
         run: scripts/es-fixture.sh logs | tail -200
+      - name: Collector logs
+        if: failure()
+        run: docker logs otelcol 2>&1 | tail -100

@@ -21,6 +21,9 @@ use serde::de::DeserializeOwned;
 /// }
 /// ```
 ///
+/// It counts pages and documents read through the `metrics` facade, as
+/// `oxsearch.scan.pages` and `oxsearch.scan.documents`.
+///
 /// Each page renews the point in time's short keep-alive, the stream ends
 /// at the first empty page, so no exact total is needed, and the point in
 /// time is closed when the stream ends. A stream dropped before its end
@@ -218,6 +221,8 @@ impl Scan {
                 let response: search::Response<T> = client.send_as(&request).await?;
                 let pit = response.pit_id.clone().unwrap_or(pit);
                 let hits = response.into_results();
+                metrics::counter!("oxsearch.scan.pages").increment(1);
+                metrics::counter!("oxsearch.scan.documents").increment(hits.len() as u64);
                 if hits.is_empty() {
                     // The end, with the latest id for closing.
                     return Ok(Some((Page { pit, hits }, None)));

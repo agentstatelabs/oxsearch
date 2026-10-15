@@ -17,6 +17,7 @@ mod endpoint;
 mod error;
 mod seams;
 pub mod shapes;
+pub mod telemetry;
 
 pub use builders::{Query, Retriever};
 pub use client::Client;

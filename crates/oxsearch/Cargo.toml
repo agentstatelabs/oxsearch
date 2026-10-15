@@ -30,7 +30,7 @@ tasks = ["dep:oxsearch-tasks"]
 # docs, search and mapping areas.
 derive = ["dep:oxsearch-derive", "docs", "search", "mapping"]
 # Point-in-time streams and the bulk loader, which run on Tokio.
-helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"]
+helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util", "dep:metrics"]
 # The default HTTP transport. Whether it is on by default is still open
 # (DESIGN.md, open question 5).
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
@@ -57,6 +57,7 @@ serde_json = "1.0.149"
 tokio = { version = "1.53", features = ["rt", "sync", "time", "macros"], optional = true }
 futures-core = { version = "0.3.31", optional = true }
 futures-util = { version = "0.3.31", default-features = false, features = ["std"], optional = true }
+metrics = { version = "0.24", optional = true }
 
 [dev-dependencies]
 # The tests cover the document layer's derive macro too.

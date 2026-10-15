@@ -1,0 +1,31 @@
+# The OpenTelemetry Collector the telemetry test exports to (see
+# tests/collector.rs). It writes what it decodes to /out, which the test
+# reads.
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  file/traces:
+    path: /out/traces.json
+    flush_interval: 100ms
+  file/metrics:
+    path: /out/metrics.json
+    flush_interval: 100ms
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [file/traces]
+    metrics:
+      receivers: [otlp]
+      exporters: [file/metrics]

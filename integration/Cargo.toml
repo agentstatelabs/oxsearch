@@ -16,8 +16,14 @@ oxsearch-search = { path = "../crates/oxsearch-search" }
 oxsearch-transport-reqwest = { path = "../crates/oxsearch-transport-reqwest", default-features = false }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1"
-tokio = { version = "1.53", features = ["macros", "rt"] }
+tokio = { version = "1.53", features = ["macros", "rt", "time"] }
 futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
+# The telemetry test exports through oxtel to an OpenTelemetry Collector.
+metrics = "0.24"
+oxtel-otlp = "0.3.1"
+oxtel-sdk = "0.3.1"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", default-features = false, features = ["registry", "std"] }
 
 [lints]
 workspace = true
