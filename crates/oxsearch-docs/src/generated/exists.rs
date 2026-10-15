@@ -168,3 +168,105 @@ impl Response {
         Self {}
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::exists::Response;
+
+    fn name(&self) -> &'static str {
+        "exists"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) = (
+            ::core::option::Option::Some(&self.index),
+            ::core::option::Option::Some(&self.id),
+        ) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Head,
+                format!(
+                    "/{}/_doc/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("id", p1)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.realtime {
+            query.push((
+                "realtime",
+                ::oxsearch_core::__private::query_param("realtime", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source {
+            query.push((
+                "_source",
+                ::oxsearch_core::__private::query_param("_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_excludes {
+            query.push((
+                "_source_excludes",
+                ::oxsearch_core::__private::query_param("_source_excludes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_includes {
+            query.push((
+                "_source_includes",
+                ::oxsearch_core::__private::query_param("_source_includes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.stored_fields {
+            query.push((
+                "stored_fields",
+                ::oxsearch_core::__private::query_param("stored_fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version_type {
+            query.push((
+                "version_type",
+                ::oxsearch_core::__private::query_param("version_type", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
+    }
+}

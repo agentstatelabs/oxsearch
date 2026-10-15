@@ -75,7 +75,7 @@ impl<TDocument> MultiSearchItem<TDocument> {
         took: impl ::core::convert::Into<i64>,
         timed_out: impl ::core::convert::Into<bool>,
         shards: impl ::core::convert::Into<::oxsearch_core::ShardStatistics>,
-        hits: impl ::core::convert::Into<crate::search::HitsMetadata<TDocument>>,
+        hits: crate::search::HitsMetadata<TDocument>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -154,8 +154,8 @@ impl<TDocument> MultiSearchItem<TDocument> {
     /// Sets `suggest`.
     pub fn suggest(
         mut self,
-        value: impl ::core::convert::Into<
-            ::oxsearch_core::shapes::TypedKeys<::std::vec::Vec<crate::search::Suggest<TDocument>>>,
+        value: ::oxsearch_core::shapes::TypedKeys<
+            ::std::vec::Vec<crate::search::Suggest<TDocument>>,
         >,
     ) -> Self {
         self.suggest = ::core::option::Option::Some(value.into());
@@ -186,7 +186,7 @@ impl<TDocument> MultiSearchResult<TDocument> {
     /// A `MultiSearchResult` with its required properties set.
     pub fn new(
         took: impl ::core::convert::Into<i64>,
-        responses: impl ::core::convert::Into<::std::vec::Vec<crate::msearch::ResponseItem<TDocument>>>,
+        responses: ::std::vec::Vec<crate::msearch::ResponseItem<TDocument>>,
     ) -> Self {
         Self {
             took: ::core::option::Option::Some(took.into()),
@@ -673,6 +673,19 @@ pub struct Response<TDocument = ::serde_json::Value>(
     pub crate::msearch::MultiSearchResult<TDocument>,
 );
 
+impl<TDocument> ::core::ops::Deref for Response<TDocument> {
+    type Target = crate::msearch::MultiSearchResult<TDocument>;
+    fn deref(&self) -> &crate::msearch::MultiSearchResult<TDocument> {
+        &self.0
+    }
+}
+
+impl<TDocument> ::core::ops::DerefMut for Response<TDocument> {
+    fn deref_mut(&mut self) -> &mut crate::msearch::MultiSearchResult<TDocument> {
+        &mut self.0
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum ResponseItem<TDocument = ::serde_json::Value> {
@@ -756,5 +769,153 @@ impl<'de, TDocument: ::serde::Deserialize<'de>> ::serde::Deserialize<'de>
             deserializer,
             Shape(::core::marker::PhantomData),
         )
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::msearch::Response;
+
+    fn name(&self) -> &'static str {
+        "msearch"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_msearch",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_msearch",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ccs_minimize_roundtrips {
+            query.push((
+                "ccs_minimize_roundtrips",
+                ::oxsearch_core::__private::query_param("ccs_minimize_roundtrips", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_throttled {
+            query.push((
+                "ignore_throttled",
+                ::oxsearch_core::__private::query_param("ignore_throttled", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.include_named_queries_score {
+            query.push((
+                "include_named_queries_score",
+                ::oxsearch_core::__private::query_param("include_named_queries_score", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.index2 {
+            query.push((
+                "index",
+                ::oxsearch_core::__private::query_param("index", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_concurrent_searches {
+            query.push((
+                "max_concurrent_searches",
+                ::oxsearch_core::__private::query_param("max_concurrent_searches", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_concurrent_shard_requests {
+            query.push((
+                "max_concurrent_shard_requests",
+                ::oxsearch_core::__private::query_param("max_concurrent_shard_requests", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.pre_filter_shard_size {
+            query.push((
+                "pre_filter_shard_size",
+                ::oxsearch_core::__private::query_param("pre_filter_shard_size", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.project_routing {
+            query.push((
+                "project_routing",
+                ::oxsearch_core::__private::query_param("project_routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.rest_total_hits_as_int {
+            query.push((
+                "rest_total_hits_as_int",
+                ::oxsearch_core::__private::query_param("rest_total_hits_as_int", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_type {
+            query.push((
+                "search_type",
+                ::oxsearch_core::__private::query_param("search_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.typed_keys {
+            query.push((
+                "typed_keys",
+                ::oxsearch_core::__private::query_param("typed_keys", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::ndjson_body(body))
+            .transpose()
     }
 }

@@ -301,11 +301,129 @@ impl<TDocument> Response<TDocument> {
         self
     }
     /// Sets `get`.
-    pub fn get(
-        mut self,
-        value: impl ::core::convert::Into<::oxsearch_core::InlineGet<TDocument>>,
-    ) -> Self {
+    pub fn get(mut self, value: ::oxsearch_core::InlineGet<TDocument>) -> Self {
         self.get = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::explain::Response;
+
+    fn name(&self) -> &'static str {
+        "explain"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) = (
+            ::core::option::Option::Some(&self.index),
+            ::core::option::Option::Some(&self.id),
+        ) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_explain/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("id", p1)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.analyzer {
+            query.push((
+                "analyzer",
+                ::oxsearch_core::__private::query_param("analyzer", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.analyze_wildcard {
+            query.push((
+                "analyze_wildcard",
+                ::oxsearch_core::__private::query_param("analyze_wildcard", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.default_operator {
+            query.push((
+                "default_operator",
+                ::oxsearch_core::__private::query_param("default_operator", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.df {
+            query.push(("df", ::oxsearch_core::__private::query_param("df", value)?));
+        }
+        if let ::core::option::Option::Some(value) = &self.lenient {
+            query.push((
+                "lenient",
+                ::oxsearch_core::__private::query_param("lenient", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source {
+            query.push((
+                "_source",
+                ::oxsearch_core::__private::query_param("_source", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_excludes {
+            query.push((
+                "_source_excludes",
+                ::oxsearch_core::__private::query_param("_source_excludes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.source_includes {
+            query.push((
+                "_source_includes",
+                ::oxsearch_core::__private::query_param("_source_includes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.stored_fields {
+            query.push((
+                "stored_fields",
+                ::oxsearch_core::__private::query_param("stored_fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.q {
+            query.push(("q", ::oxsearch_core::__private::query_param("q", value)?));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

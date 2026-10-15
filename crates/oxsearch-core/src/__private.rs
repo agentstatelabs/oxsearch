@@ -289,6 +289,86 @@ pub fn some<'de, D: Deserializer<'de>, T: Deserialize<'de>>(
     T::deserialize(deserializer).map(Some)
 }
 
+/// Percent-encodes text for a URL path segment or a query value: every byte
+/// but the unreserved characters, and `*` for wildcards.
+pub fn encode(text: &str) -> String {
+    let mut out = String::with_capacity(text.len());
+    for byte in text.bytes() {
+        match byte {
+            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'.' | b'_' | b'~' | b'*' => {
+                out.push(byte as char)
+            }
+            _ => {
+                out.push('%');
+                out.push(char::from(b"0123456789ABCDEF"[usize::from(byte >> 4)]));
+                out.push(char::from(b"0123456789ABCDEF"[usize::from(byte & 15)]));
+            }
+        }
+    }
+    out
+}
+
+fn scalar(name: &str, value: &Value) -> Result<String, crate::Error> {
+    match value {
+        Value::String(s) => Ok(s.clone()),
+        Value::Number(n) => Ok(n.to_string()),
+        Value::Bool(b) => Ok(b.to_string()),
+        _ => Err(crate::Error::Parameter(format!(
+            "{name} can't be written in a URL: {value}"
+        ))),
+    }
+}
+
+/// A path parameter, percent-encoded: a list's items each encoded and
+/// joined with commas.
+pub fn path_param<T: Serialize + ?Sized>(name: &str, value: &T) -> Result<String, crate::Error> {
+    match serde_json::to_value(value).map_err(crate::Error::Encode)? {
+        Value::Array(items) => Ok(items
+            .iter()
+            .map(|item| scalar(name, item).map(|s| encode(&s)))
+            .collect::<Result<Vec<_>, _>>()?
+            .join(",")),
+        other => Ok(encode(&scalar(name, &other)?)),
+    }
+}
+
+/// A query parameter's text, not yet encoded: a list's items joined with
+/// commas.
+pub fn query_param<T: Serialize + ?Sized>(name: &str, value: &T) -> Result<String, crate::Error> {
+    match serde_json::to_value(value).map_err(crate::Error::Encode)? {
+        Value::Array(items) => Ok(items
+            .iter()
+            .map(|item| scalar(name, item))
+            .collect::<Result<Vec<_>, _>>()?
+            .join(",")),
+        other => scalar(name, &other),
+    }
+}
+
+/// A JSON body.
+pub fn json_body<T: Serialize + ?Sized>(body: &T) -> Result<crate::Body, crate::Error> {
+    serde_json::to_vec(body)
+        .map(crate::Body::Json)
+        .map_err(crate::Error::Encode)
+}
+
+/// A newline-delimited JSON body: one line per item.
+pub fn ndjson_body<T: Serialize>(lines: &[T]) -> Result<crate::Body, crate::Error> {
+    let mut out = Vec::new();
+    for line in lines {
+        serde_json::to_writer(&mut out, line).map_err(crate::Error::Encode)?;
+        out.push(b'\n');
+    }
+    Ok(crate::Body::Ndjson(out))
+}
+
+/// The error for a request whose parameters fit none of its URLs.
+pub fn no_route(endpoint: &str) -> crate::Error {
+    crate::Error::Parameter(format!(
+        "{endpoint}: the parameters set fit none of its URLs"
+    ))
+}
+
 /// Whether a JSON object has a property, for telling union members apart.
 pub fn has(value: &Value, key: &str) -> bool {
     value.as_object().is_some_and(|map| map.contains_key(key))
@@ -343,6 +423,28 @@ mod tests {
         assert_eq!(read(json!("wait_for")), "wait_for");
         assert_eq!(read(json!(true)), "true");
         assert_eq!(read(json!(1)), "1");
+    }
+
+    #[test]
+    fn url_parameters() {
+        assert_eq!(encode("a b/c,d*"), "a%20b%2Fc%2Cd*");
+        assert_eq!(
+            path_param("index", &vec!["logs-*", "a,b"]).unwrap(),
+            "logs-*,a%2Cb"
+        );
+        assert_eq!(path_param("id", "x/y").unwrap(), "x%2Fy");
+        assert_eq!(query_param("size", &10).unwrap(), "10");
+        assert_eq!(
+            query_param("expand", &vec!["open", "closed"]).unwrap(),
+            "open,closed"
+        );
+        assert!(query_param("q", &json!({"a": 1})).is_err());
+        let crate::Body::Ndjson(bytes) =
+            ndjson_body(&[json!({"index": {}}), json!({"a": 1})]).unwrap()
+        else {
+            panic!("not NDJSON");
+        };
+        assert_eq!(bytes, b"{\"index\":{}}\n{\"a\":1}\n");
     }
 
     #[test]

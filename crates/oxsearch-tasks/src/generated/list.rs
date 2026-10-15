@@ -151,3 +151,90 @@ impl Request {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response(pub crate::TaskListResponseBase);
+
+impl ::core::ops::Deref for Response {
+    type Target = crate::TaskListResponseBase;
+    fn deref(&self) -> &crate::TaskListResponseBase {
+        &self.0
+    }
+}
+
+impl ::core::ops::DerefMut for Response {
+    fn deref_mut(&mut self) -> &mut crate::TaskListResponseBase {
+        &mut self.0
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::list::Response;
+
+    fn name(&self) -> &'static str {
+        "tasks.list"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Get,
+            "/_tasks",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.actions {
+            query.push((
+                "actions",
+                ::oxsearch_core::__private::query_param("actions", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.detailed {
+            query.push((
+                "detailed",
+                ::oxsearch_core::__private::query_param("detailed", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.group_by {
+            query.push((
+                "group_by",
+                ::oxsearch_core::__private::query_param("group_by", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.nodes {
+            query.push((
+                "nodes",
+                ::oxsearch_core::__private::query_param("nodes", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.parent_task_id {
+            query.push((
+                "parent_task_id",
+                ::oxsearch_core::__private::query_param("parent_task_id", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_completion {
+            query.push((
+                "wait_for_completion",
+                ::oxsearch_core::__private::query_param("wait_for_completion", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        ::core::result::Result::Ok(::core::option::Option::None)
+    }
+}

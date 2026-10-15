@@ -789,7 +789,10 @@ impl<'g> Ir<'g> {
                 env,
                 ..ctx
             };
-            if p.container_property {
+            // The specification marks a container's own properties that sit
+            // beside the variant; inherited ones, such as a query's `boost`
+            // and `_name`, always do.
+            if p.container_property || *declaring != i {
                 props.push(self.field(&ctx, p, &mut used_fields)?);
             } else {
                 variants.push(Variant {
@@ -897,13 +900,13 @@ impl<'g> Ir<'g> {
             }) => ItemKind::Tagged {
                 tag: tag.clone(),
                 default: default_tag.clone(),
-                members: self.tagged_members(&ctx, items, &location.ident)?,
+                members: self.tagged_members(&ctx, items, &location.ident, Some(tag))?,
             },
             Some(Variants::ExternalTag { .. }) => {
-                ItemKind::External(self.tagged_members(&ctx, items, &location.ident)?)
+                ItemKind::External(self.tagged_members(&ctx, items, &location.ident, None)?)
             }
             Some(Variants::Untagged { untyped_variant }) => {
-                let members = self.tagged_members(&ctx, items, &location.ident)?;
+                let members = self.tagged_members(&ctx, items, &location.ident, None)?;
                 let fallback = items
                     .iter()
                     .position(|m| matches!(m, ValueOf::InstanceOf { type_name, .. } if type_name == untyped_variant))
@@ -932,11 +935,15 @@ impl<'g> Ir<'g> {
     }
 
     /// The members of a tagged union, named by their variant names.
+    /// The members of a tagged union. A member's tag is the literal its tag
+    /// property holds (`"type": "text"` for a text mapping), else its variant
+    /// name, else its type's name.
     fn tagged_members(
         &mut self,
         ctx: &Ctx<'_>,
         items: &[ValueOf],
         union: &str,
+        tag: Option<&str>,
     ) -> Result<Vec<Variant>, Error> {
         let mut used = BTreeSet::new();
         used.insert("Raw".to_owned());
@@ -946,11 +953,20 @@ impl<'g> Ir<'g> {
                 return Err(format!("{union}: a tagged union's member isn't a type").into());
             };
             let member = self.graph.find(type_name);
-            let wire = member
-                .and_then(|m| match self.graph.types[m] {
-                    TypeDefinition::Interface(t) => t.variant_name.clone(),
+            let interface = member.and_then(|m| match self.graph.types[m] {
+                TypeDefinition::Interface(t) => Some(t),
+                _ => None,
+            });
+            let literal = interface.zip(tag).and_then(|(t, tag)| {
+                t.properties.iter().find_map(|p| match &p.value {
+                    ValueOf::LiteralValue {
+                        value: Literal::String(value),
+                    } if p.name == tag => Some(value.clone()),
                     _ => None,
                 })
+            });
+            let wire = literal
+                .or_else(|| interface.and_then(|t| t.variant_name.clone()))
                 .unwrap_or_else(|| snake(&type_name.name));
             let name = match type_name.name.strip_suffix(union) {
                 Some(stripped) if !stripped.is_empty() => stripped.to_owned(),

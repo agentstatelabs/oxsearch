@@ -7781,111 +7781,111 @@ impl<'de> ::serde::Deserialize<'de> for PreserveLeafArrays {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum Property {
-    /// `binary_property`.
+    /// `binary`.
     Binary(crate::BinaryProperty),
-    /// `boolean_property`.
+    /// `boolean`.
     Boolean(crate::BooleanProperty),
-    /// `dynamic_property`.
+    /// `{dynamic_type}`.
     Dynamic(crate::DynamicProperty),
-    /// `join_property`.
+    /// `join`.
     Join(crate::JoinProperty),
-    /// `keyword_property`.
+    /// `keyword`.
     Keyword(crate::KeywordProperty),
-    /// `match_only_text_property`.
+    /// `match_only_text`.
     MatchOnlyText(crate::MatchOnlyTextProperty),
-    /// `percolator_property`.
+    /// `percolator`.
     Percolator(crate::PercolatorProperty),
-    /// `rank_feature_property`.
+    /// `rank_feature`.
     RankFeature(crate::RankFeatureProperty),
-    /// `rank_features_property`.
+    /// `rank_features`.
     RankFeatures(crate::RankFeaturesProperty),
-    /// `search_as_you_type_property`.
+    /// `search_as_you_type`.
     SearchAsYouType(crate::SearchAsYouTypeProperty),
-    /// `text_property`.
+    /// `text`.
     Text(crate::TextProperty),
-    /// `version_property`.
+    /// `version`.
     Version(crate::VersionProperty),
-    /// `wildcard_property`.
+    /// `wildcard`.
     Wildcard(crate::WildcardProperty),
-    /// `date_nanos_property`.
+    /// `date_nanos`.
     DateNanos(crate::DateNanosProperty),
-    /// `date_property`.
+    /// `date`.
     Date(crate::DateProperty),
-    /// `aggregate_metric_double_property`.
+    /// `aggregate_metric_double`.
     AggregateMetricDouble(crate::AggregateMetricDoubleProperty),
-    /// `dense_vector_property`.
+    /// `dense_vector`.
     DenseVector(crate::DenseVectorProperty),
-    /// `flattened_property`.
+    /// `flattened`.
     Flattened(crate::FlattenedProperty),
-    /// `nested_property`.
+    /// `nested`.
     Nested(crate::NestedProperty),
-    /// `object_property`.
+    /// `object`.
     Object(crate::ObjectProperty),
-    /// `passthrough_object_property`.
+    /// `passthrough`.
     PassthroughObject(crate::PassthroughObjectProperty),
-    /// `rank_vector_property`.
+    /// `rank_vectors`.
     RankVector(crate::RankVectorProperty),
-    /// `semantic_text_property`.
+    /// `semantic_text`.
     SemanticText(crate::SemanticTextProperty),
-    /// `sparse_vector_property`.
+    /// `sparse_vector`.
     SparseVector(crate::SparseVectorProperty),
-    /// `completion_property`.
+    /// `completion`.
     Completion(crate::CompletionProperty),
-    /// `constant_keyword_property`.
+    /// `constant_keyword`.
     ConstantKeyword(crate::ConstantKeywordProperty),
-    /// `counted_keyword_property`.
+    /// `counted_keyword`.
     CountedKeyword(crate::CountedKeywordProperty),
-    /// `field_alias_property`.
+    /// `alias`.
     FieldAlias(crate::FieldAliasProperty),
-    /// `histogram_property`.
+    /// `histogram`.
     Histogram(crate::HistogramProperty),
-    /// `exponential_histogram_property`.
+    /// `exponential_histogram`.
     ExponentialHistogram(crate::ExponentialHistogramProperty),
-    /// `ip_property`.
+    /// `ip`.
     Ip(crate::IpProperty),
-    /// `murmur3_hash_property`.
+    /// `murmur3`.
     Murmur3Hash(crate::Murmur3HashProperty),
-    /// `token_count_property`.
+    /// `token_count`.
     TokenCount(crate::TokenCountProperty),
-    /// `geo_point_property`.
+    /// `geo_point`.
     GeoPoint(crate::GeoPointProperty),
-    /// `geo_shape_property`.
+    /// `geo_shape`.
     GeoShape(crate::GeoShapeProperty),
-    /// `point_property`.
+    /// `point`.
     Point(crate::PointProperty),
-    /// `shape_property`.
+    /// `shape`.
     Shape(crate::ShapeProperty),
-    /// `byte_number_property`.
+    /// `byte`.
     ByteNumber(crate::ByteNumberProperty),
-    /// `double_number_property`.
+    /// `double`.
     DoubleNumber(crate::DoubleNumberProperty),
-    /// `float_number_property`.
+    /// `float`.
     FloatNumber(crate::FloatNumberProperty),
-    /// `half_float_number_property`.
+    /// `half_float`.
     HalfFloatNumber(crate::HalfFloatNumberProperty),
-    /// `integer_number_property`.
+    /// `integer`.
     IntegerNumber(crate::IntegerNumberProperty),
-    /// `long_number_property`.
+    /// `long`.
     LongNumber(crate::LongNumberProperty),
-    /// `scaled_float_number_property`.
+    /// `scaled_float`.
     ScaledFloatNumber(crate::ScaledFloatNumberProperty),
-    /// `short_number_property`.
+    /// `short`.
     ShortNumber(crate::ShortNumberProperty),
-    /// `unsigned_long_number_property`.
+    /// `unsigned_long`.
     UnsignedLongNumber(crate::UnsignedLongNumberProperty),
-    /// `date_range_property`.
+    /// `date_range`.
     DateRange(crate::DateRangeProperty),
-    /// `double_range_property`.
+    /// `double_range`.
     DoubleRange(crate::DoubleRangeProperty),
-    /// `float_range_property`.
+    /// `float_range`.
     FloatRange(crate::FloatRangeProperty),
-    /// `integer_range_property`.
+    /// `integer_range`.
     IntegerRange(crate::IntegerRangeProperty),
-    /// `ip_range_property`.
+    /// `ip_range`.
     IpRange(crate::IpRangeProperty),
-    /// `long_range_property`.
+    /// `long_range`.
     LongRange(crate::LongRangeProperty),
-    /// `icu_collation_property`.
+    /// `icu_collation_keyword`.
     IcuCollation(crate::IcuCollationProperty),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
@@ -7897,322 +7897,244 @@ impl ::serde::Serialize for Property {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Binary(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "binary_property",
-                value,
-            ),
-            Self::Boolean(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "boolean_property",
-                value,
-            ),
+            Self::Binary(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "binary", value)
+            }
+            Self::Boolean(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "boolean", value)
+            }
             Self::Dynamic(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "dynamic_property",
+                "{dynamic_type}",
                 value,
             ),
-            Self::Join(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "join_property",
-                value,
-            ),
-            Self::Keyword(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "keyword_property",
-                value,
-            ),
+            Self::Join(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "join", value)
+            }
+            Self::Keyword(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "keyword", value)
+            }
             Self::MatchOnlyText(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "match_only_text_property",
+                "match_only_text",
                 value,
             ),
             Self::Percolator(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "percolator_property",
+                "percolator",
                 value,
             ),
             Self::RankFeature(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "rank_feature_property",
+                "rank_feature",
                 value,
             ),
             Self::RankFeatures(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "rank_features_property",
+                "rank_features",
                 value,
             ),
             Self::SearchAsYouType(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "search_as_you_type_property",
+                "search_as_you_type",
                 value,
             ),
-            Self::Text(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "text_property",
-                value,
-            ),
-            Self::Version(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "version_property",
-                value,
-            ),
-            Self::Wildcard(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "wildcard_property",
-                value,
-            ),
+            Self::Text(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "text", value)
+            }
+            Self::Version(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "version", value)
+            }
+            Self::Wildcard(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "wildcard", value)
+            }
             Self::DateNanos(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "date_nanos_property",
+                "date_nanos",
                 value,
             ),
-            Self::Date(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "date_property",
-                value,
-            ),
+            Self::Date(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "date", value)
+            }
             Self::AggregateMetricDouble(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "aggregate_metric_double_property",
+                "aggregate_metric_double",
                 value,
             ),
             Self::DenseVector(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "dense_vector_property",
+                "dense_vector",
                 value,
             ),
-            Self::Flattened(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "flattened_property",
-                value,
-            ),
-            Self::Nested(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "nested_property",
-                value,
-            ),
-            Self::Object(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "object_property",
-                value,
-            ),
+            Self::Flattened(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "flattened", value)
+            }
+            Self::Nested(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "nested", value)
+            }
+            Self::Object(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "object", value)
+            }
             Self::PassthroughObject(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "passthrough_object_property",
+                "passthrough",
                 value,
             ),
             Self::RankVector(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "rank_vector_property",
+                "rank_vectors",
                 value,
             ),
             Self::SemanticText(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "semantic_text_property",
+                "semantic_text",
                 value,
             ),
             Self::SparseVector(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "sparse_vector_property",
+                "sparse_vector",
                 value,
             ),
             Self::Completion(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "completion_property",
+                "completion",
                 value,
             ),
             Self::ConstantKeyword(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "constant_keyword_property",
+                "constant_keyword",
                 value,
             ),
             Self::CountedKeyword(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "counted_keyword_property",
+                "counted_keyword",
                 value,
             ),
-            Self::FieldAlias(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "field_alias_property",
-                value,
-            ),
-            Self::Histogram(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "histogram_property",
-                value,
-            ),
+            Self::FieldAlias(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "alias", value)
+            }
+            Self::Histogram(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "histogram", value)
+            }
             Self::ExponentialHistogram(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "exponential_histogram_property",
+                "exponential_histogram",
                 value,
             ),
-            Self::Ip(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ip_property",
-                value,
-            ),
-            Self::Murmur3Hash(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "murmur3_hash_property",
-                value,
-            ),
+            Self::Ip(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ip", value)
+            }
+            Self::Murmur3Hash(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "murmur3", value)
+            }
             Self::TokenCount(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "token_count_property",
+                "token_count",
                 value,
             ),
-            Self::GeoPoint(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "geo_point_property",
-                value,
-            ),
-            Self::GeoShape(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "geo_shape_property",
-                value,
-            ),
-            Self::Point(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "point_property",
-                value,
-            ),
-            Self::Shape(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "shape_property",
-                value,
-            ),
-            Self::ByteNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "byte_number_property",
-                value,
-            ),
-            Self::DoubleNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "double_number_property",
-                value,
-            ),
-            Self::FloatNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "float_number_property",
-                value,
-            ),
+            Self::GeoPoint(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "geo_point", value)
+            }
+            Self::GeoShape(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "geo_shape", value)
+            }
+            Self::Point(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "point", value)
+            }
+            Self::Shape(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "shape", value)
+            }
+            Self::ByteNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "byte", value)
+            }
+            Self::DoubleNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "double", value)
+            }
+            Self::FloatNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "float", value)
+            }
             Self::HalfFloatNumber(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "half_float_number_property",
+                "half_float",
                 value,
             ),
-            Self::IntegerNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "integer_number_property",
-                value,
-            ),
-            Self::LongNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "long_number_property",
-                value,
-            ),
+            Self::IntegerNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "integer", value)
+            }
+            Self::LongNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "long", value)
+            }
             Self::ScaledFloatNumber(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "scaled_float_number_property",
+                "scaled_float",
                 value,
             ),
-            Self::ShortNumber(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "short_number_property",
-                value,
-            ),
+            Self::ShortNumber(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "short", value)
+            }
             Self::UnsignedLongNumber(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "unsigned_long_number_property",
+                "unsigned_long",
                 value,
             ),
             Self::DateRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "date_range_property",
+                "date_range",
                 value,
             ),
             Self::DoubleRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "double_range_property",
+                "double_range",
                 value,
             ),
             Self::FloatRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "float_range_property",
+                "float_range",
                 value,
             ),
             Self::IntegerRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "integer_range_property",
+                "integer_range",
                 value,
             ),
-            Self::IpRange(value) => ::oxsearch_core::__private::serialize_tagged(
-                serializer,
-                "type",
-                "ip_range_property",
-                value,
-            ),
+            Self::IpRange(value) => {
+                ::oxsearch_core::__private::serialize_tagged(serializer, "type", "ip_range", value)
+            }
             Self::LongRange(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "long_range_property",
+                "long_range",
                 value,
             ),
             Self::IcuCollation(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "icu_collation_property",
+                "icu_collation_keyword",
                 value,
             ),
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
@@ -8231,163 +8153,163 @@ impl<'de> ::serde::Deserialize<'de> for Property {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("binary_property") => {
+            ::core::option::Option::Some("binary") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Binary)
             }
-            ::core::option::Option::Some("boolean_property") => {
+            ::core::option::Option::Some("boolean") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Boolean)
             }
-            ::core::option::Option::Some("dynamic_property") => {
+            ::core::option::Option::Some("{dynamic_type}") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Dynamic)
             }
-            ::core::option::Option::Some("join_property") => {
+            ::core::option::Option::Some("join") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Join)
             }
-            ::core::option::Option::Some("keyword_property") => {
+            ::core::option::Option::Some("keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Keyword)
             }
-            ::core::option::Option::Some("match_only_text_property") => {
+            ::core::option::Option::Some("match_only_text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::MatchOnlyText)
             }
-            ::core::option::Option::Some("percolator_property") => {
+            ::core::option::Option::Some("percolator") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Percolator)
             }
-            ::core::option::Option::Some("rank_feature_property") => {
+            ::core::option::Option::Some("rank_feature") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::RankFeature)
             }
-            ::core::option::Option::Some("rank_features_property") => {
+            ::core::option::Option::Some("rank_features") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::RankFeatures)
             }
-            ::core::option::Option::Some("search_as_you_type_property") => {
+            ::core::option::Option::Some("search_as_you_type") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::SearchAsYouType)
             }
-            ::core::option::Option::Some("text_property") => {
+            ::core::option::Option::Some("text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Text)
             }
-            ::core::option::Option::Some("version_property") => {
+            ::core::option::Option::Some("version") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Version)
             }
-            ::core::option::Option::Some("wildcard_property") => {
+            ::core::option::Option::Some("wildcard") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Wildcard)
             }
-            ::core::option::Option::Some("date_nanos_property") => {
+            ::core::option::Option::Some("date_nanos") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DateNanos)
             }
-            ::core::option::Option::Some("date_property") => {
+            ::core::option::Option::Some("date") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Date)
             }
-            ::core::option::Option::Some("aggregate_metric_double_property") => {
+            ::core::option::Option::Some("aggregate_metric_double") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::AggregateMetricDouble)
             }
-            ::core::option::Option::Some("dense_vector_property") => {
+            ::core::option::Option::Some("dense_vector") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DenseVector)
             }
-            ::core::option::Option::Some("flattened_property") => {
+            ::core::option::Option::Some("flattened") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Flattened)
             }
-            ::core::option::Option::Some("nested_property") => {
+            ::core::option::Option::Some("nested") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Nested)
             }
-            ::core::option::Option::Some("object_property") => {
+            ::core::option::Option::Some("object") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Object)
             }
-            ::core::option::Option::Some("passthrough_object_property") => {
+            ::core::option::Option::Some("passthrough") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::PassthroughObject)
             }
-            ::core::option::Option::Some("rank_vector_property") => {
+            ::core::option::Option::Some("rank_vectors") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::RankVector)
             }
-            ::core::option::Option::Some("semantic_text_property") => {
+            ::core::option::Option::Some("semantic_text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::SemanticText)
             }
-            ::core::option::Option::Some("sparse_vector_property") => {
+            ::core::option::Option::Some("sparse_vector") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::SparseVector)
             }
-            ::core::option::Option::Some("completion_property") => {
+            ::core::option::Option::Some("completion") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Completion)
             }
-            ::core::option::Option::Some("constant_keyword_property") => {
+            ::core::option::Option::Some("constant_keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ConstantKeyword)
             }
-            ::core::option::Option::Some("counted_keyword_property") => {
+            ::core::option::Option::Some("counted_keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::CountedKeyword)
             }
-            ::core::option::Option::Some("field_alias_property") => {
+            ::core::option::Option::Some("alias") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::FieldAlias)
             }
-            ::core::option::Option::Some("histogram_property") => {
+            ::core::option::Option::Some("histogram") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Histogram)
             }
-            ::core::option::Option::Some("exponential_histogram_property") => {
+            ::core::option::Option::Some("exponential_histogram") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ExponentialHistogram)
             }
-            ::core::option::Option::Some("ip_property") => {
+            ::core::option::Option::Some("ip") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Ip)
             }
-            ::core::option::Option::Some("murmur3_hash_property") => {
+            ::core::option::Option::Some("murmur3") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Murmur3Hash)
             }
-            ::core::option::Option::Some("token_count_property") => {
+            ::core::option::Option::Some("token_count") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::TokenCount)
             }
-            ::core::option::Option::Some("geo_point_property") => {
+            ::core::option::Option::Some("geo_point") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::GeoPoint)
             }
-            ::core::option::Option::Some("geo_shape_property") => {
+            ::core::option::Option::Some("geo_shape") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::GeoShape)
             }
-            ::core::option::Option::Some("point_property") => {
+            ::core::option::Option::Some("point") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Point)
             }
-            ::core::option::Option::Some("shape_property") => {
+            ::core::option::Option::Some("shape") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Shape)
             }
-            ::core::option::Option::Some("byte_number_property") => {
+            ::core::option::Option::Some("byte") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ByteNumber)
             }
-            ::core::option::Option::Some("double_number_property") => {
+            ::core::option::Option::Some("double") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DoubleNumber)
             }
-            ::core::option::Option::Some("float_number_property") => {
+            ::core::option::Option::Some("float") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::FloatNumber)
             }
-            ::core::option::Option::Some("half_float_number_property") => {
+            ::core::option::Option::Some("half_float") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::HalfFloatNumber)
             }
-            ::core::option::Option::Some("integer_number_property") => {
+            ::core::option::Option::Some("integer") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IntegerNumber)
             }
-            ::core::option::Option::Some("long_number_property") => {
+            ::core::option::Option::Some("long") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::LongNumber)
             }
-            ::core::option::Option::Some("scaled_float_number_property") => {
+            ::core::option::Option::Some("scaled_float") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ScaledFloatNumber)
             }
-            ::core::option::Option::Some("short_number_property") => {
+            ::core::option::Option::Some("short") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::ShortNumber)
             }
-            ::core::option::Option::Some("unsigned_long_number_property") => {
+            ::core::option::Option::Some("unsigned_long") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::UnsignedLongNumber)
             }
-            ::core::option::Option::Some("date_range_property") => {
+            ::core::option::Option::Some("date_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DateRange)
             }
-            ::core::option::Option::Some("double_range_property") => {
+            ::core::option::Option::Some("double_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::DoubleRange)
             }
-            ::core::option::Option::Some("float_range_property") => {
+            ::core::option::Option::Some("float_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::FloatRange)
             }
-            ::core::option::Option::Some("integer_range_property") => {
+            ::core::option::Option::Some("integer_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IntegerRange)
             }
-            ::core::option::Option::Some("ip_range_property") => {
+            ::core::option::Option::Some("ip_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IpRange)
             }
-            ::core::option::Option::Some("long_range_property") => {
+            ::core::option::Option::Some("long_range") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::LongRange)
             }
-            ::core::option::Option::Some("icu_collation_property") => {
+            ::core::option::Option::Some("icu_collation_keyword") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::IcuCollation)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),

@@ -655,3 +655,218 @@ impl Response {
         self
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::delete_by_query::Response;
+
+    fn name(&self) -> &'static str {
+        "delete_by_query"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.index),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Post,
+                format!(
+                    "/{}/_delete_by_query",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.analyzer {
+            query.push((
+                "analyzer",
+                ::oxsearch_core::__private::query_param("analyzer", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.analyze_wildcard {
+            query.push((
+                "analyze_wildcard",
+                ::oxsearch_core::__private::query_param("analyze_wildcard", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.conflicts {
+            query.push((
+                "conflicts",
+                ::oxsearch_core::__private::query_param("conflicts", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.default_operator {
+            query.push((
+                "default_operator",
+                ::oxsearch_core::__private::query_param("default_operator", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.df {
+            query.push(("df", ::oxsearch_core::__private::query_param("df", value)?));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.from {
+            query.push((
+                "from",
+                ::oxsearch_core::__private::query_param("from", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.lenient {
+            query.push((
+                "lenient",
+                ::oxsearch_core::__private::query_param("lenient", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_docs {
+            query.push((
+                "max_docs",
+                ::oxsearch_core::__private::query_param("max_docs", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.request_cache {
+            query.push((
+                "request_cache",
+                ::oxsearch_core::__private::query_param("request_cache", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.requests_per_second {
+            query.push((
+                "requests_per_second",
+                ::oxsearch_core::__private::query_param("requests_per_second", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.q {
+            query.push(("q", ::oxsearch_core::__private::query_param("q", value)?));
+        }
+        if let ::core::option::Option::Some(value) = &self.scroll {
+            query.push((
+                "scroll",
+                ::oxsearch_core::__private::query_param("scroll", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.scroll_size {
+            query.push((
+                "scroll_size",
+                ::oxsearch_core::__private::query_param("scroll_size", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_timeout {
+            query.push((
+                "search_timeout",
+                ::oxsearch_core::__private::query_param("search_timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_type {
+            query.push((
+                "search_type",
+                ::oxsearch_core::__private::query_param("search_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slices {
+            query.push((
+                "slices",
+                ::oxsearch_core::__private::query_param("slices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.sort {
+            query.push((
+                "sort",
+                ::oxsearch_core::__private::query_param("sort", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.stats {
+            query.push((
+                "stats",
+                ::oxsearch_core::__private::query_param("stats", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.terminate_after {
+            query.push((
+                "terminate_after",
+                ::oxsearch_core::__private::query_param("terminate_after", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_active_shards {
+            query.push((
+                "wait_for_active_shards",
+                ::oxsearch_core::__private::query_param("wait_for_active_shards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_completion {
+            query.push((
+                "wait_for_completion",
+                ::oxsearch_core::__private::query_param("wait_for_completion", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

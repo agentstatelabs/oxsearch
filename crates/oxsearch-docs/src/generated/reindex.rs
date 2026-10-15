@@ -700,3 +700,92 @@ impl Source {
         self
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::reindex::Response;
+
+    fn name(&self) -> &'static str {
+        "reindex"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            ::oxsearch_core::Method::Post,
+            "/_reindex",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.requests_per_second {
+            query.push((
+                "requests_per_second",
+                ::oxsearch_core::__private::query_param("requests_per_second", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.scroll {
+            query.push((
+                "scroll",
+                ::oxsearch_core::__private::query_param("scroll", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slices {
+            query.push((
+                "slices",
+                ::oxsearch_core::__private::query_param("slices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_docs {
+            query.push((
+                "max_docs",
+                ::oxsearch_core::__private::query_param("max_docs", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_active_shards {
+            query.push((
+                "wait_for_active_shards",
+                ::oxsearch_core::__private::query_param("wait_for_active_shards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_completion {
+            query.push((
+                "wait_for_completion",
+                ::oxsearch_core::__private::query_param("wait_for_completion", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.require_alias {
+            query.push((
+                "require_alias",
+                ::oxsearch_core::__private::query_param("require_alias", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

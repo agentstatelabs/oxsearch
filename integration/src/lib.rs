@@ -1,5 +1,5 @@
-//! Helpers for the integration tests, which run against the Elasticsearch
-//! fixture.
+//! Helpers for the integration tests, which run oxsearch against the
+//! Elasticsearch fixture.
 //!
 //! The tests are ignored by default, so `cargo test` passes without a
 //! cluster. To run them:
@@ -14,10 +14,20 @@
 //! is, and `OXSEARCH_TEST_LICENSE` (`basic`, the default, or `trial`) is the
 //! license the tests expect it to run.
 
+pub mod fixtures;
+
+use std::collections::HashMap;
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-use serde_json::Value;
+use oxsearch_core::{Client, Error, Method};
+use oxsearch_mapping::TypeMapping;
+use oxsearch_transport_reqwest::ReqwestTransport;
+use serde::{Deserialize, Serialize};
+use serde_json::{Value, json};
+
+/// The client the tests use.
+pub type TestClient = Client<ReqwestTransport>;
 
 /// The license the tests expect the cluster to run.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -47,66 +57,54 @@ impl License {
     }
 }
 
-/// A response's status and JSON body (`Value::Null` when it has none).
-#[derive(Debug)]
-pub struct Response {
-    /// The HTTP status code.
-    pub status: u16,
-    /// The body, parsed as JSON.
-    pub body: Value,
+/// A client for the cluster at `OXSEARCH_TEST_URL`, or
+/// `http://127.0.0.1:9200`.
+pub fn client() -> TestClient {
+    let url =
+        std::env::var("OXSEARCH_TEST_URL").unwrap_or_else(|_| "http://127.0.0.1:9200".to_owned());
+    Client::new(ReqwestTransport::new(&url).expect("OXSEARCH_TEST_URL is an http URL"))
 }
 
-/// The fixture cluster, reached over plain HTTP.
-pub struct Cluster {
-    url: String,
-    agent: ureq::Agent,
+/// A document the tests index: text, a keyword, a dense vector and sparse
+/// weights.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+pub struct Article {
+    /// The title.
+    pub title: String,
+    /// A tag.
+    pub tag: String,
+    /// A three-dimensional embedding. Elasticsearch 9 leaves vectors out of
+    /// the `_source` it returns, so it reads back empty.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub embedding: Vec<f32>,
+    /// Sparse weights by token, also left out of returned sources.
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    pub terms: HashMap<String, f32>,
 }
 
-impl Cluster {
-    /// The cluster at `OXSEARCH_TEST_URL`, or `http://127.0.0.1:9200`.
-    pub fn from_env() -> Cluster {
-        let url = std::env::var("OXSEARCH_TEST_URL")
-            .unwrap_or_else(|_| "http://127.0.0.1:9200".to_owned());
-        let agent = ureq::Agent::config_builder()
-            // Error statuses are what some tests check for.
-            .http_status_as_error(false)
-            .build()
-            .into();
-        Cluster {
-            url: url.trim_end_matches('/').to_owned(),
-            agent,
+impl Article {
+    /// An article.
+    pub fn new(title: &str, tag: &str, embedding: [f32; 3], terms: &[(&str, f32)]) -> Article {
+        Article {
+            title: title.to_owned(),
+            tag: tag.to_owned(),
+            embedding: embedding.to_vec(),
+            terms: terms.iter().map(|(t, w)| ((*t).to_owned(), *w)).collect(),
         }
     }
+}
 
-    /// `GET path`.
-    pub fn get(&self, path: &str) -> Response {
-        self.finish(path, self.agent.get(self.url(path)).call())
-    }
+/// An index that one test owns. Delete it with [`TestIndex::delete`] at the
+/// end of the test; the fixture is thrown away after a run anyway.
+pub struct TestIndex {
+    name: String,
+}
 
-    /// `POST path` with a JSON body.
-    pub fn post(&self, path: &str, body: &Value) -> Response {
-        self.finish(path, self.agent.post(self.url(path)).send_json(body))
-    }
-
-    /// `POST path` with no body.
-    pub fn post_empty(&self, path: &str) -> Response {
-        self.finish(path, self.agent.post(self.url(path)).send_empty())
-    }
-
-    /// `PUT path` with a JSON body.
-    pub fn put(&self, path: &str, body: &Value) -> Response {
-        self.finish(path, self.agent.put(self.url(path)).send_json(body))
-    }
-
-    /// `DELETE path`.
-    pub fn delete(&self, path: &str) -> Response {
-        self.finish(path, self.agent.delete(self.url(path)).call())
-    }
-
-    /// Creates an index with a name no other test uses, from a create-index
-    /// body (settings and mappings). The index is deleted when the returned
-    /// guard drops, even if the test fails.
-    pub fn create_index(&self, prefix: &str, body: &Value) -> TestIndex<'_> {
+impl TestIndex {
+    /// Creates an index with a name no other test uses. Index creation isn't
+    /// in the first slice's crates, so it goes through the raw call, with a
+    /// mapping built from the generated types.
+    pub async fn create(client: &TestClient, prefix: &str, mapping: &TypeMapping) -> TestIndex {
         static NEXT: AtomicU32 = AtomicU32::new(0);
         let nanos = SystemTime::now()
             .duration_since(UNIX_EPOCH)
@@ -116,87 +114,54 @@ impl Cluster {
             "oxsearch-test-{prefix}-{nanos}-{}",
             NEXT.fetch_add(1, Ordering::Relaxed)
         );
-        let created = self.put(&format!("/{name}"), body);
-        assert_eq!(created.status, 200, "creating {name}: {}", created.body);
-        TestIndex {
-            cluster: self,
-            name,
-        }
-    }
-
-    fn url(&self, path: &str) -> String {
-        format!("{}{path}", self.url)
-    }
-
-    fn finish(
-        &self,
-        path: &str,
-        result: Result<ureq::http::Response<ureq::Body>, ureq::Error>,
-    ) -> Response {
-        let mut response = result.unwrap_or_else(|e| {
-            panic!(
-                "{}{path}: {e} (is the fixture up? scripts/es-fixture.sh up)",
-                self.url
+        client
+            .send_raw(
+                Method::Put,
+                &format!("/{name}"),
+                Some(&json!({ "mappings": mapping })),
             )
-        });
-        let status = response.status().as_u16();
-        let text = response
-            .body_mut()
-            .read_to_string()
-            .unwrap_or_else(|e| panic!("{}{path}: reading the body: {e}", self.url));
-        let body = if text.is_empty() {
-            Value::Null
-        } else {
-            serde_json::from_str(&text)
-                .unwrap_or_else(|e| panic!("{}{path}: the body isn't JSON ({e}): {text}", self.url))
-        };
-        Response { status, body }
+            .await
+            .unwrap_or_else(|e| panic!("creating {name}: {e}"));
+        TestIndex { name }
     }
-}
 
-/// An index that one test owns, deleted when this drops.
-pub struct TestIndex<'a> {
-    cluster: &'a Cluster,
-    name: String,
-}
-
-impl TestIndex<'_> {
     /// The index's name.
     pub fn name(&self) -> &str {
         &self.name
     }
 
-    /// Indexes documents and refreshes, so searches see them.
-    pub fn add(&self, documents: &[Value]) {
-        for document in documents {
-            let indexed = self.cluster.post(&format!("/{}/_doc", self.name), document);
-            assert_eq!(
-                indexed.status, 201,
-                "indexing into {}: {}",
-                self.name, indexed.body
-            );
-        }
-        let refreshed = self.cluster.post_empty(&format!("/{}/_refresh", self.name));
-        assert_eq!(
-            refreshed.status, 200,
-            "refreshing {}: {}",
-            self.name, refreshed.body
-        );
+    /// The index's mapping, as Elasticsearch reports it.
+    pub async fn mapping(&self, client: &TestClient) -> Value {
+        let response = client
+            .send_raw(Method::Get, &format!("/{}/_mapping", self.name), None)
+            .await
+            .unwrap_or_else(|e| panic!("reading {}'s mapping: {e}", self.name));
+        response[&self.name]["mappings"].clone()
     }
 
-    /// Runs a search request body against this index.
-    pub fn search(&self, body: &Value) -> Response {
-        self.cluster.post(&format!("/{}/_search", self.name), body)
+    /// Deletes the index.
+    pub async fn delete(self, client: &TestClient) {
+        client
+            .send_raw(Method::Delete, &format!("/{}", self.name), None)
+            .await
+            .unwrap_or_else(|e| panic!("deleting {}: {e}", self.name));
     }
 }
 
-impl Drop for TestIndex<'_> {
-    fn drop(&mut self) {
-        // Best effort: a cleanup failure shouldn't hide the test's own.
-        let _ = self
-            .cluster
-            .agent
-            .delete(self.cluster.url(&format!("/{}", self.name)))
-            .call();
+/// Whether Elasticsearch read a request, even if it couldn't run it: the
+/// error isn't one about the request's shape. For features the fixture can't
+/// run, such as those that need a machine learning model.
+pub fn understood(error: &Error) -> bool {
+    match error {
+        Error::License(_) => true,
+        Error::Elasticsearch(e) => !matches!(
+            e.error_type(),
+            Some(
+                "parsing_exception"
+                    | "x_content_parse_exception"
+                    | "named_object_not_found_exception"
+            )
+        ),
+        _ => false,
     }
 }

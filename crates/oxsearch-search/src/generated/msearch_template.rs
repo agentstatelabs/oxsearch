@@ -206,6 +206,19 @@ pub struct Response<TDocument = ::serde_json::Value>(
     pub crate::msearch::MultiSearchResult<TDocument>,
 );
 
+impl<TDocument> ::core::ops::Deref for Response<TDocument> {
+    type Target = crate::msearch::MultiSearchResult<TDocument>;
+    fn deref(&self) -> &crate::msearch::MultiSearchResult<TDocument> {
+        &self.0
+    }
+}
+
+impl<TDocument> ::core::ops::DerefMut for Response<TDocument> {
+    fn deref_mut(&mut self) -> &mut crate::msearch::MultiSearchResult<TDocument> {
+        &mut self.0
+    }
+}
+
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TemplateConfig {
@@ -275,5 +288,93 @@ impl TemplateConfig {
     ) -> Self {
         self.source = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::msearch_template::Response;
+
+    fn name(&self) -> &'static str {
+        "msearch_template"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_msearch/template",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_msearch/template",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.ccs_minimize_roundtrips {
+            query.push((
+                "ccs_minimize_roundtrips",
+                ::oxsearch_core::__private::query_param("ccs_minimize_roundtrips", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.max_concurrent_searches {
+            query.push((
+                "max_concurrent_searches",
+                ::oxsearch_core::__private::query_param("max_concurrent_searches", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.project_routing {
+            query.push((
+                "project_routing",
+                ::oxsearch_core::__private::query_param("project_routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.search_type {
+            query.push((
+                "search_type",
+                ::oxsearch_core::__private::query_param("search_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.rest_total_hits_as_int {
+            query.push((
+                "rest_total_hits_as_int",
+                ::oxsearch_core::__private::query_param("rest_total_hits_as_int", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.typed_keys {
+            query.push((
+                "typed_keys",
+                ::oxsearch_core::__private::query_param("typed_keys", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::ndjson_body(body))
+            .transpose()
     }
 }

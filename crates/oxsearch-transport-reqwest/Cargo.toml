@@ -13,8 +13,14 @@ homepage.workspace = true
 authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
 
+[features]
+default = ["rustls"]
+# HTTPS through rustls.
+rustls = ["reqwest/rustls"]
+
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
+reqwest = { version = "0.13.5", default-features = false }
 
 [lints]
 workspace = true

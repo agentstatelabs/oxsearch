@@ -374,3 +374,103 @@ impl Response {
         }
     }
 }
+
+impl ::oxsearch_core::Endpoint for Request {
+    type Response = crate::field_caps::Response;
+
+    fn name(&self) -> &'static str {
+        "field_caps"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0),) = (self.index.as_ref(),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_field_caps",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Ok(::oxsearch_core::Route::new(
+            if self.body.is_some() {
+                ::oxsearch_core::Method::Post
+            } else {
+                ::oxsearch_core::Method::Get
+            },
+            "/_field_caps",
+        ))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.allow_no_indices {
+            query.push((
+                "allow_no_indices",
+                ::oxsearch_core::__private::query_param("allow_no_indices", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.expand_wildcards {
+            query.push((
+                "expand_wildcards",
+                ::oxsearch_core::__private::query_param("expand_wildcards", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.fields {
+            query.push((
+                "fields",
+                ::oxsearch_core::__private::query_param("fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.ignore_unavailable {
+            query.push((
+                "ignore_unavailable",
+                ::oxsearch_core::__private::query_param("ignore_unavailable", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.include_unmapped {
+            query.push((
+                "include_unmapped",
+                ::oxsearch_core::__private::query_param("include_unmapped", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.filters {
+            query.push((
+                "filters",
+                ::oxsearch_core::__private::query_param("filters", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.types {
+            query.push((
+                "types",
+                ::oxsearch_core::__private::query_param("types", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.include_empty_fields {
+            query.push((
+                "include_empty_fields",
+                ::oxsearch_core::__private::query_param("include_empty_fields", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

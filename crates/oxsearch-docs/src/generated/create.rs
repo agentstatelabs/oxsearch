@@ -205,7 +205,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: impl ::core::convert::Into<TDocument>) -> Self {
+    pub fn body(mut self, value: TDocument) -> Self {
         self.body = ::core::option::Option::Some(value.into());
         self
     }
@@ -214,3 +214,121 @@ impl<TDocument> Request<TDocument> {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
 pub struct Response(pub ::oxsearch_core::WriteResponseBase);
+
+impl ::core::ops::Deref for Response {
+    type Target = ::oxsearch_core::WriteResponseBase;
+    fn deref(&self) -> &::oxsearch_core::WriteResponseBase {
+        &self.0
+    }
+}
+
+impl ::core::ops::DerefMut for Response {
+    fn deref_mut(&mut self) -> &mut ::oxsearch_core::WriteResponseBase {
+        &mut self.0
+    }
+}
+
+impl<TDocument: ::serde::Serialize> ::oxsearch_core::Endpoint for Request<TDocument> {
+    type Response = crate::create::Response;
+
+    fn name(&self) -> &'static str {
+        "create"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) = (
+            ::core::option::Option::Some(&self.index),
+            ::core::option::Option::Some(&self.id),
+        ) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                ::oxsearch_core::Method::Put,
+                format!(
+                    "/{}/_create/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("id", p1)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.include_source_on_error {
+            query.push((
+                "include_source_on_error",
+                ::oxsearch_core::__private::query_param("include_source_on_error", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.pipeline {
+            query.push((
+                "pipeline",
+                ::oxsearch_core::__private::query_param("pipeline", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.refresh {
+            query.push((
+                "refresh",
+                ::oxsearch_core::__private::query_param("refresh", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.require_alias {
+            query.push((
+                "require_alias",
+                ::oxsearch_core::__private::query_param("require_alias", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.require_data_stream {
+            query.push((
+                "require_data_stream",
+                ::oxsearch_core::__private::query_param("require_data_stream", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.timeout {
+            query.push((
+                "timeout",
+                ::oxsearch_core::__private::query_param("timeout", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version_type {
+            query.push((
+                "version_type",
+                ::oxsearch_core::__private::query_param("version_type", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.wait_for_active_shards {
+            query.push((
+                "wait_for_active_shards",
+                ::oxsearch_core::__private::query_param("wait_for_active_shards", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
+    }
+}

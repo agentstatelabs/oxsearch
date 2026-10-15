@@ -182,7 +182,7 @@ impl<TDocument> RequestBody<TDocument> {
         }
     }
     /// Sets `doc`.
-    pub fn doc(mut self, value: impl ::core::convert::Into<TDocument>) -> Self {
+    pub fn doc(mut self, value: TDocument) -> Self {
         self.doc = ::core::option::Option::Some(value.into());
         self
     }
@@ -443,10 +443,7 @@ impl<TDocument> Request<TDocument> {
         self
     }
     /// Sets `body`.
-    pub fn body(
-        mut self,
-        value: impl ::core::convert::Into<crate::termvectors::RequestBody<TDocument>>,
-    ) -> Self {
+    pub fn body(mut self, value: crate::termvectors::RequestBody<TDocument>) -> Self {
         self.body = ::core::option::Option::Some(value.into());
         self
     }
@@ -633,5 +630,138 @@ impl Token {
     pub fn start_offset(mut self, value: impl ::core::convert::Into<i32>) -> Self {
         self.start_offset = ::core::option::Option::Some(value.into());
         self
+    }
+}
+
+impl<TDocument: ::serde::Serialize> ::oxsearch_core::Endpoint for Request<TDocument> {
+    type Response = crate::termvectors::Response;
+
+    fn name(&self) -> &'static str {
+        "termvectors"
+    }
+
+    fn route(&self) -> ::core::result::Result<::oxsearch_core::Route, ::oxsearch_core::Error> {
+        if let (::core::option::Option::Some(p0), ::core::option::Option::Some(p1)) =
+            (::core::option::Option::Some(&self.index), self.id.as_ref())
+        {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_termvectors/{}",
+                    ::oxsearch_core::__private::path_param("index", p0)?,
+                    ::oxsearch_core::__private::path_param("id", p1)?
+                ),
+            ));
+        }
+        if let (::core::option::Option::Some(p0),) = (::core::option::Option::Some(&self.index),) {
+            return ::core::result::Result::Ok(::oxsearch_core::Route::new(
+                if self.body.is_some() {
+                    ::oxsearch_core::Method::Post
+                } else {
+                    ::oxsearch_core::Method::Get
+                },
+                format!(
+                    "/{}/_termvectors",
+                    ::oxsearch_core::__private::path_param("index", p0)?
+                ),
+            ));
+        }
+        ::core::result::Result::Err(::oxsearch_core::__private::no_route(self.name()))
+    }
+
+    fn query(
+        &self,
+    ) -> ::core::result::Result<
+        ::std::vec::Vec<(&'static str, ::std::string::String)>,
+        ::oxsearch_core::Error,
+    > {
+        let mut query = ::std::vec::Vec::new();
+        if let ::core::option::Option::Some(value) = &self.fields {
+            query.push((
+                "fields",
+                ::oxsearch_core::__private::query_param("fields", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.field_statistics {
+            query.push((
+                "field_statistics",
+                ::oxsearch_core::__private::query_param("field_statistics", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.offsets {
+            query.push((
+                "offsets",
+                ::oxsearch_core::__private::query_param("offsets", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.payloads {
+            query.push((
+                "payloads",
+                ::oxsearch_core::__private::query_param("payloads", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.positions {
+            query.push((
+                "positions",
+                ::oxsearch_core::__private::query_param("positions", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.preference {
+            query.push((
+                "preference",
+                ::oxsearch_core::__private::query_param("preference", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.realtime {
+            query.push((
+                "realtime",
+                ::oxsearch_core::__private::query_param("realtime", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.routing {
+            query.push((
+                "routing",
+                ::oxsearch_core::__private::query_param("routing", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.slice {
+            query.push((
+                "_slice",
+                ::oxsearch_core::__private::query_param("_slice", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.term_statistics {
+            query.push((
+                "term_statistics",
+                ::oxsearch_core::__private::query_param("term_statistics", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version {
+            query.push((
+                "version",
+                ::oxsearch_core::__private::query_param("version", value)?,
+            ));
+        }
+        if let ::core::option::Option::Some(value) = &self.version_type {
+            query.push((
+                "version_type",
+                ::oxsearch_core::__private::query_param("version_type", value)?,
+            ));
+        }
+        ::core::result::Result::Ok(query)
+    }
+
+    fn body(
+        &self,
+    ) -> ::core::result::Result<::core::option::Option<::oxsearch_core::Body>, ::oxsearch_core::Error>
+    {
+        self.body
+            .as_ref()
+            .map(|body| ::oxsearch_core::__private::json_body(body))
+            .transpose()
     }
 }

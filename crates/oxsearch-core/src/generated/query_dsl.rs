@@ -1023,17 +1023,17 @@ impl<TOrigin, TScale> DecayPlacement<TOrigin, TScale> {
         self
     }
     /// Sets `offset`.
-    pub fn offset(mut self, value: impl ::core::convert::Into<TScale>) -> Self {
+    pub fn offset(mut self, value: TScale) -> Self {
         self.offset = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `scale`.
-    pub fn scale(mut self, value: impl ::core::convert::Into<TScale>) -> Self {
+    pub fn scale(mut self, value: TScale) -> Self {
         self.scale = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `origin`.
-    pub fn origin(mut self, value: impl ::core::convert::Into<TOrigin>) -> Self {
+    pub fn origin(mut self, value: TOrigin) -> Self {
         self.origin = ::core::option::Option::Some(value.into());
         self
     }
@@ -1158,8 +1158,8 @@ pub struct DistanceFeatureQueryBase<TOrigin = ::serde_json::Value, TDistance = :
 impl<TOrigin, TDistance> DistanceFeatureQueryBase<TOrigin, TDistance> {
     /// A `DistanceFeatureQueryBase` with its required properties set.
     pub fn new(
-        origin: impl ::core::convert::Into<TOrigin>,
-        pivot: impl ::core::convert::Into<TDistance>,
+        origin: TOrigin,
+        pivot: TDistance,
         field: impl ::core::convert::Into<crate::Field>,
     ) -> Self {
         Self {
@@ -2744,15 +2744,10 @@ impl<'de> ::serde::Deserialize<'de> for GeoExecution {
     }
 }
 
+/// The variants of [`GeoGridQuery`].
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
-pub enum GeoGridQuery {
-    /// Floating point number used to decrease or increase the relevance scores of the query.
-    /// Boost values are relative to the default value of 1.0.
-    /// A boost value between 0 and 1.0 decreases the relevance score.
-    /// A value greater than 1.0 increases the relevance score.
-    Boost(f32),
-    Name(::std::string::String),
+pub enum GeoGridQueryVariant {
     Geotile(crate::GeoTile),
     Geohash(crate::GeoHash),
     Geohex(crate::GeoHexCell),
@@ -2760,15 +2755,13 @@ pub enum GeoGridQuery {
     Raw(::serde_json::Value),
 }
 
-impl GeoGridQuery {
+impl GeoGridQueryVariant {
     /// Writes the variant as one entry of a map.
     pub fn serialize_entry<M__: ::serde::ser::SerializeMap>(
         &self,
         map: &mut M__,
     ) -> ::core::result::Result<(), M__::Error> {
         match self {
-            Self::Boost(value) => map.serialize_entry("boost", value),
-            Self::Name(value) => map.serialize_entry("_name", value),
             Self::Geotile(value) => map.serialize_entry("geotile", value),
             Self::Geohash(value) => map.serialize_entry("geohash", value),
             Self::Geohex(value) => map.serialize_entry("geohex", value),
@@ -2787,18 +2780,12 @@ impl GeoGridQuery {
     }
 }
 
-impl ::serde::Serialize for GeoGridQuery {
+impl ::serde::Serialize for GeoGridQueryVariant {
     fn serialize<S__: ::serde::Serializer>(
         &self,
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Boost(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "boost", value)
-            }
-            Self::Name(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "_name", value)
-            }
             Self::Geotile(value) => {
                 ::oxsearch_core::__private::serialize_variant(serializer, "geotile", value)
             }
@@ -2813,7 +2800,7 @@ impl ::serde::Serialize for GeoGridQuery {
     }
 }
 
-impl<'de> ::serde::Deserialize<'de> for GeoGridQuery {
+impl<'de> ::serde::Deserialize<'de> for GeoGridQueryVariant {
     fn deserialize<D__: ::serde::Deserializer<'de>>(
         deserializer: D__,
     ) -> ::core::result::Result<Self, D__::Error> {
@@ -2821,15 +2808,13 @@ impl<'de> ::serde::Deserialize<'de> for GeoGridQuery {
     }
 }
 
-impl<'de> ::oxsearch_core::__private::Container<'de> for GeoGridQuery {
-    const NAME: &'static str = "GeoGridQuery";
+impl<'de> ::oxsearch_core::__private::Container<'de> for GeoGridQueryVariant {
+    const NAME: &'static str = "GeoGridQueryVariant";
     fn variant<A__: ::serde::de::MapAccess<'de>>(
         key: &str,
         map: &mut A__,
     ) -> ::core::result::Result<Self, A__::Error> {
         ::core::result::Result::Ok(match key {
-            "boost" => Self::Boost(map.next_value()?),
-            "_name" => Self::Name(map.next_value()?),
             "geotile" => Self::Geotile(map.next_value()?),
             "geohash" => Self::Geohash(map.next_value()?),
             "geohex" => Self::Geohex(map.next_value()?),
@@ -2838,6 +2823,116 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for GeoGridQuery {
                 map.next_value()?,
             )),
         })
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
+#[non_exhaustive]
+pub struct GeoGridQuery {
+    /// Floating point number used to decrease or increase the relevance scores of the query.
+    /// Boost values are relative to the default value of 1.0.
+    /// A boost value between 0 and 1.0 decreases the relevance score.
+    /// A value greater than 1.0 increases the relevance score.
+    pub boost: ::core::option::Option<f32>,
+    pub name: ::core::option::Option<::std::string::String>,
+    /// The variant.
+    pub variant: ::core::option::Option<crate::query_dsl::GeoGridQueryVariant>,
+}
+
+impl GeoGridQuery {
+    /// A `GeoGridQuery` with its required properties set.
+    pub fn new() -> Self {
+        Self {
+            boost: ::core::option::Option::None,
+            name: ::core::option::Option::None,
+            variant: ::core::option::Option::None,
+        }
+    }
+    /// Sets `boost`.
+    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+        self.boost = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `name`.
+    pub fn name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
+        self.name = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `variant`.
+    pub fn variant(
+        mut self,
+        value: impl ::core::convert::Into<crate::query_dsl::GeoGridQueryVariant>,
+    ) -> Self {
+        self.variant = ::core::option::Option::Some(value.into());
+        self
+    }
+}
+
+impl ::serde::Serialize for GeoGridQuery {
+    fn serialize<S__: ::serde::Serializer>(
+        &self,
+        serializer: S__,
+    ) -> ::core::result::Result<S__::Ok, S__::Error> {
+        use ::serde::ser::SerializeMap as _;
+        let mut map = serializer.serialize_map(::core::option::Option::None)?;
+        if let ::core::option::Option::Some(value) = &self.boost {
+            map.serialize_entry("boost", value)?;
+        }
+        if let ::core::option::Option::Some(value) = &self.name {
+            map.serialize_entry("_name", value)?;
+        }
+        if let ::core::option::Option::Some(variant) = &self.variant {
+            variant.serialize_entry(&mut map)?;
+        }
+        map.end()
+    }
+}
+
+impl<'de> ::serde::Deserialize<'de> for GeoGridQuery {
+    fn deserialize<D__: ::serde::Deserializer<'de>>(
+        deserializer: D__,
+    ) -> ::core::result::Result<Self, D__::Error> {
+        struct Fields;
+        impl<'de> ::serde::de::Visitor<'de> for Fields {
+            type Value = GeoGridQuery;
+            fn expecting(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                f.write_str("a GeoGridQuery object")
+            }
+            fn visit_map<A__: ::serde::de::MapAccess<'de>>(
+                self,
+                mut map: A__,
+            ) -> ::core::result::Result<GeoGridQuery, A__::Error> {
+                let mut boost = ::core::option::Option::None;
+                let mut name = ::core::option::Option::None;
+                let mut variant__ = ::core::option::Option::None;
+                while let ::core::option::Option::Some(key) =
+                    map.next_key::<::std::string::String>()?
+                {
+                    match key.as_str() {
+                        "boost" => boost = ::core::option::Option::Some(map.next_value()?),
+                        "_name" => name = ::core::option::Option::Some(map.next_value()?),
+                        _ => {
+                            if variant__.is_some() {
+                                return ::core::result::Result::Err(
+                                    ::oxsearch_core::__private::two_variants("GeoGridQuery", &key),
+                                );
+                            }
+                            variant__ = ::core::option::Option::Some(
+                                <GeoGridQueryVariant as ::oxsearch_core::__private::Container<
+                                    'de,
+                                >>::variant(&key, &mut map)?,
+                            );
+                        }
+                    }
+                }
+                ::core::result::Result::Ok(GeoGridQuery {
+                    boost,
+                    name,
+                    variant: variant__,
+                })
+            }
+        }
+        deserializer.deserialize_map(Fields)
     }
 }
 
@@ -3904,15 +3999,10 @@ impl IntervalsPrefix {
     }
 }
 
+/// The variants of [`IntervalsQuery`].
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
-pub enum IntervalsQuery {
-    /// Floating point number used to decrease or increase the relevance scores of the query.
-    /// Boost values are relative to the default value of 1.0.
-    /// A boost value between 0 and 1.0 decreases the relevance score.
-    /// A value greater than 1.0 increases the relevance score.
-    Boost(f32),
-    Name(::std::string::String),
+pub enum IntervalsQueryVariant {
     /// Returns matches that span a combination of other rules.
     AllOf(crate::query_dsl::IntervalsAllOf),
     /// Returns intervals produced by any of its sub-rules.
@@ -3931,15 +4021,13 @@ pub enum IntervalsQuery {
     Raw(::serde_json::Value),
 }
 
-impl IntervalsQuery {
+impl IntervalsQueryVariant {
     /// Writes the variant as one entry of a map.
     pub fn serialize_entry<M__: ::serde::ser::SerializeMap>(
         &self,
         map: &mut M__,
     ) -> ::core::result::Result<(), M__::Error> {
         match self {
-            Self::Boost(value) => map.serialize_entry("boost", value),
-            Self::Name(value) => map.serialize_entry("_name", value),
             Self::AllOf(value) => map.serialize_entry("all_of", value),
             Self::AnyOf(value) => map.serialize_entry("any_of", value),
             Self::Fuzzy(value) => map.serialize_entry("fuzzy", value),
@@ -3963,18 +4051,12 @@ impl IntervalsQuery {
     }
 }
 
-impl ::serde::Serialize for IntervalsQuery {
+impl ::serde::Serialize for IntervalsQueryVariant {
     fn serialize<S__: ::serde::Serializer>(
         &self,
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Boost(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "boost", value)
-            }
-            Self::Name(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "_name", value)
-            }
             Self::AllOf(value) => {
                 ::oxsearch_core::__private::serialize_variant(serializer, "all_of", value)
             }
@@ -4004,7 +4086,7 @@ impl ::serde::Serialize for IntervalsQuery {
     }
 }
 
-impl<'de> ::serde::Deserialize<'de> for IntervalsQuery {
+impl<'de> ::serde::Deserialize<'de> for IntervalsQueryVariant {
     fn deserialize<D__: ::serde::Deserializer<'de>>(
         deserializer: D__,
     ) -> ::core::result::Result<Self, D__::Error> {
@@ -4012,15 +4094,13 @@ impl<'de> ::serde::Deserialize<'de> for IntervalsQuery {
     }
 }
 
-impl<'de> ::oxsearch_core::__private::Container<'de> for IntervalsQuery {
-    const NAME: &'static str = "IntervalsQuery";
+impl<'de> ::oxsearch_core::__private::Container<'de> for IntervalsQueryVariant {
+    const NAME: &'static str = "IntervalsQueryVariant";
     fn variant<A__: ::serde::de::MapAccess<'de>>(
         key: &str,
         map: &mut A__,
     ) -> ::core::result::Result<Self, A__::Error> {
         ::core::result::Result::Ok(match key {
-            "boost" => Self::Boost(map.next_value()?),
-            "_name" => Self::Name(map.next_value()?),
             "all_of" => Self::AllOf(map.next_value()?),
             "any_of" => Self::AnyOf(map.next_value()?),
             "fuzzy" => Self::Fuzzy(map.next_value()?),
@@ -4034,6 +4114,119 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for IntervalsQuery {
                 map.next_value()?,
             )),
         })
+    }
+}
+
+#[derive(Clone, Debug, PartialEq)]
+#[non_exhaustive]
+pub struct IntervalsQuery {
+    /// Floating point number used to decrease or increase the relevance scores of the query.
+    /// Boost values are relative to the default value of 1.0.
+    /// A boost value between 0 and 1.0 decreases the relevance score.
+    /// A value greater than 1.0 increases the relevance score.
+    pub boost: ::core::option::Option<f32>,
+    pub name: ::core::option::Option<::std::string::String>,
+    /// The variant.
+    pub variant: ::core::option::Option<crate::query_dsl::IntervalsQueryVariant>,
+}
+
+impl IntervalsQuery {
+    /// A `IntervalsQuery` with its required properties set.
+    pub fn new() -> Self {
+        Self {
+            boost: ::core::option::Option::None,
+            name: ::core::option::Option::None,
+            variant: ::core::option::Option::None,
+        }
+    }
+    /// Sets `boost`.
+    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+        self.boost = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `name`.
+    pub fn name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
+        self.name = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `variant`.
+    pub fn variant(
+        mut self,
+        value: impl ::core::convert::Into<crate::query_dsl::IntervalsQueryVariant>,
+    ) -> Self {
+        self.variant = ::core::option::Option::Some(value.into());
+        self
+    }
+}
+
+impl ::serde::Serialize for IntervalsQuery {
+    fn serialize<S__: ::serde::Serializer>(
+        &self,
+        serializer: S__,
+    ) -> ::core::result::Result<S__::Ok, S__::Error> {
+        use ::serde::ser::SerializeMap as _;
+        let mut map = serializer.serialize_map(::core::option::Option::None)?;
+        if let ::core::option::Option::Some(value) = &self.boost {
+            map.serialize_entry("boost", value)?;
+        }
+        if let ::core::option::Option::Some(value) = &self.name {
+            map.serialize_entry("_name", value)?;
+        }
+        if let ::core::option::Option::Some(variant) = &self.variant {
+            variant.serialize_entry(&mut map)?;
+        }
+        map.end()
+    }
+}
+
+impl<'de> ::serde::Deserialize<'de> for IntervalsQuery {
+    fn deserialize<D__: ::serde::Deserializer<'de>>(
+        deserializer: D__,
+    ) -> ::core::result::Result<Self, D__::Error> {
+        struct Fields;
+        impl<'de> ::serde::de::Visitor<'de> for Fields {
+            type Value = IntervalsQuery;
+            fn expecting(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                f.write_str("a IntervalsQuery object")
+            }
+            fn visit_map<A__: ::serde::de::MapAccess<'de>>(
+                self,
+                mut map: A__,
+            ) -> ::core::result::Result<IntervalsQuery, A__::Error> {
+                let mut boost = ::core::option::Option::None;
+                let mut name = ::core::option::Option::None;
+                let mut variant__ = ::core::option::Option::None;
+                while let ::core::option::Option::Some(key) =
+                    map.next_key::<::std::string::String>()?
+                {
+                    match key.as_str() {
+                        "boost" => boost = ::core::option::Option::Some(map.next_value()?),
+                        "_name" => name = ::core::option::Option::Some(map.next_value()?),
+                        _ => {
+                            if variant__.is_some() {
+                                return ::core::result::Result::Err(
+                                    ::oxsearch_core::__private::two_variants(
+                                        "IntervalsQuery",
+                                        &key,
+                                    ),
+                                );
+                            }
+                            variant__ = ::core::option::Option::Some(
+                                <IntervalsQueryVariant as ::oxsearch_core::__private::Container<
+                                    'de,
+                                >>::variant(&key, &mut map)?,
+                            );
+                        }
+                    }
+                }
+                ::core::result::Result::Ok(IntervalsQuery {
+                    boost,
+                    name,
+                    variant: variant__,
+                })
+            }
+        }
+        deserializer.deserialize_map(Fields)
     }
 }
 
@@ -6360,12 +6553,6 @@ impl PinnedDoc {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum PinnedQueryVariant {
-    /// Floating point number used to decrease or increase the relevance scores of the query.
-    /// Boost values are relative to the default value of 1.0.
-    /// A boost value between 0 and 1.0 decreases the relevance score.
-    /// A value greater than 1.0 increases the relevance score.
-    Boost(f32),
-    Name(::std::string::String),
     /// Document IDs listed in the order they are to appear in results.
     /// Required if `docs` is not specified.
     Ids(::std::vec::Vec<crate::Id>),
@@ -6383,8 +6570,6 @@ impl PinnedQueryVariant {
         map: &mut M__,
     ) -> ::core::result::Result<(), M__::Error> {
         match self {
-            Self::Boost(value) => map.serialize_entry("boost", value),
-            Self::Name(value) => map.serialize_entry("_name", value),
             Self::Ids(value) => map.serialize_entry("ids", value),
             Self::Docs(value) => map.serialize_entry("docs", value),
             Self::Raw(value) => match value {
@@ -6408,12 +6593,6 @@ impl ::serde::Serialize for PinnedQueryVariant {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Boost(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "boost", value)
-            }
-            Self::Name(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "_name", value)
-            }
             Self::Ids(value) => {
                 ::oxsearch_core::__private::serialize_variant(serializer, "ids", value)
             }
@@ -6440,8 +6619,6 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for PinnedQueryVariant {
         map: &mut A__,
     ) -> ::core::result::Result<Self, A__::Error> {
         ::core::result::Result::Ok(match key {
-            "boost" => Self::Boost(map.next_value()?),
-            "_name" => Self::Name(map.next_value()?),
             "ids" => Self::Ids(map.next_value()?),
             "docs" => Self::Docs(map.next_value()?),
             _ => Self::Raw(::oxsearch_core::__private::raw_variant(
@@ -6455,6 +6632,12 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for PinnedQueryVariant {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct PinnedQuery {
+    /// Floating point number used to decrease or increase the relevance scores of the query.
+    /// Boost values are relative to the default value of 1.0.
+    /// A boost value between 0 and 1.0 decreases the relevance score.
+    /// A value greater than 1.0 increases the relevance score.
+    pub boost: ::core::option::Option<f32>,
+    pub name: ::core::option::Option<::std::string::String>,
     /// Any choice of query used to rank documents which will be ranked below the "pinned" documents.
     pub organic: ::core::option::Option<crate::query_dsl::QueryContainer>,
     /// The variant.
@@ -6465,9 +6648,21 @@ impl PinnedQuery {
     /// A `PinnedQuery` with its required properties set.
     pub fn new(organic: impl ::core::convert::Into<crate::query_dsl::QueryContainer>) -> Self {
         Self {
+            boost: ::core::option::Option::None,
+            name: ::core::option::Option::None,
             organic: ::core::option::Option::Some(organic.into()),
             variant: ::core::option::Option::None,
         }
+    }
+    /// Sets `boost`.
+    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+        self.boost = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `name`.
+    pub fn name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
+        self.name = ::core::option::Option::Some(value.into());
+        self
     }
     /// Sets `variant`.
     pub fn variant(
@@ -6486,6 +6681,12 @@ impl ::serde::Serialize for PinnedQuery {
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         use ::serde::ser::SerializeMap as _;
         let mut map = serializer.serialize_map(::core::option::Option::None)?;
+        if let ::core::option::Option::Some(value) = &self.boost {
+            map.serialize_entry("boost", value)?;
+        }
+        if let ::core::option::Option::Some(value) = &self.name {
+            map.serialize_entry("_name", value)?;
+        }
         if let ::core::option::Option::Some(value) = &self.organic {
             map.serialize_entry("organic", value)?;
         }
@@ -6510,12 +6711,16 @@ impl<'de> ::serde::Deserialize<'de> for PinnedQuery {
                 self,
                 mut map: A__,
             ) -> ::core::result::Result<PinnedQuery, A__::Error> {
+                let mut boost = ::core::option::Option::None;
+                let mut name = ::core::option::Option::None;
                 let mut organic = ::core::option::Option::None;
                 let mut variant__ = ::core::option::Option::None;
                 while let ::core::option::Option::Some(key) =
                     map.next_key::<::std::string::String>()?
                 {
                     match key.as_str() {
+                        "boost" => boost = ::core::option::Option::Some(map.next_value()?),
+                        "_name" => name = ::core::option::Option::Some(map.next_value()?),
                         "organic" => organic = ::core::option::Option::Some(map.next_value()?),
                         _ => {
                             if variant__.is_some() {
@@ -6532,6 +6737,8 @@ impl<'de> ::serde::Deserialize<'de> for PinnedQuery {
                     }
                 }
                 ::core::result::Result::Ok(PinnedQuery {
+                    boost,
+                    name,
                     organic,
                     variant: variant__,
                 })
@@ -7703,22 +7910,22 @@ impl<T> RangeQueryBase<T> {
         self
     }
     /// Sets `gt`.
-    pub fn gt(mut self, value: impl ::core::convert::Into<T>) -> Self {
+    pub fn gt(mut self, value: T) -> Self {
         self.gt = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `gte`.
-    pub fn gte(mut self, value: impl ::core::convert::Into<T>) -> Self {
+    pub fn gte(mut self, value: T) -> Self {
         self.gte = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lt`.
-    pub fn lt(mut self, value: impl ::core::convert::Into<T>) -> Self {
+    pub fn lt(mut self, value: T) -> Self {
         self.lt = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `lte`.
-    pub fn lte(mut self, value: impl ::core::convert::Into<T>) -> Self {
+    pub fn lte(mut self, value: T) -> Self {
         self.lte = ::core::option::Option::Some(value.into());
         self
     }
@@ -9392,12 +9599,6 @@ impl SpanWithinQuery {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum SparseVectorQueryVariant {
-    /// Floating point number used to decrease or increase the relevance scores of the query.
-    /// Boost values are relative to the default value of 1.0.
-    /// A boost value between 0 and 1.0 decreases the relevance score.
-    /// A value greater than 1.0 increases the relevance score.
-    Boost(f32),
-    Name(::std::string::String),
     /// Dictionary of precomputed sparse vectors and their associated weights.
     /// Only one of inference_id or query_vector may be supplied in a request.
     QueryVector(::indexmap::IndexMap<::std::string::String, f32>),
@@ -9418,8 +9619,6 @@ impl SparseVectorQueryVariant {
         map: &mut M__,
     ) -> ::core::result::Result<(), M__::Error> {
         match self {
-            Self::Boost(value) => map.serialize_entry("boost", value),
-            Self::Name(value) => map.serialize_entry("_name", value),
             Self::QueryVector(value) => map.serialize_entry("query_vector", value),
             Self::InferenceId(value) => map.serialize_entry("inference_id", value),
             Self::Raw(value) => match value {
@@ -9443,12 +9642,6 @@ impl ::serde::Serialize for SparseVectorQueryVariant {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::Boost(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "boost", value)
-            }
-            Self::Name(value) => {
-                ::oxsearch_core::__private::serialize_variant(serializer, "_name", value)
-            }
             Self::QueryVector(value) => {
                 ::oxsearch_core::__private::serialize_variant(serializer, "query_vector", value)
             }
@@ -9475,8 +9668,6 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for SparseVectorQueryVarian
         map: &mut A__,
     ) -> ::core::result::Result<Self, A__::Error> {
         ::core::result::Result::Ok(match key {
-            "boost" => Self::Boost(map.next_value()?),
-            "_name" => Self::Name(map.next_value()?),
             "query_vector" => Self::QueryVector(map.next_value()?),
             "inference_id" => Self::InferenceId(map.next_value()?),
             _ => Self::Raw(::oxsearch_core::__private::raw_variant(
@@ -9490,6 +9681,12 @@ impl<'de> ::oxsearch_core::__private::Container<'de> for SparseVectorQueryVarian
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct SparseVectorQuery {
+    /// Floating point number used to decrease or increase the relevance scores of the query.
+    /// Boost values are relative to the default value of 1.0.
+    /// A boost value between 0 and 1.0 decreases the relevance score.
+    /// A value greater than 1.0 increases the relevance score.
+    pub boost: ::core::option::Option<f32>,
+    pub name: ::core::option::Option<::std::string::String>,
     /// The name of the field that contains the token-weight pairs to be searched against.
     /// This field must be a mapped sparse_vector field.
     pub field: ::core::option::Option<crate::Field>,
@@ -9513,12 +9710,24 @@ impl SparseVectorQuery {
     /// A `SparseVectorQuery` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<crate::Field>) -> Self {
         Self {
+            boost: ::core::option::Option::None,
+            name: ::core::option::Option::None,
             field: ::core::option::Option::Some(field.into()),
             query: ::core::option::Option::None,
             prune: ::core::option::Option::None,
             pruning_config: ::core::option::Option::None,
             variant: ::core::option::Option::None,
         }
+    }
+    /// Sets `boost`.
+    pub fn boost(mut self, value: impl ::core::convert::Into<f32>) -> Self {
+        self.boost = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `name`.
+    pub fn name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
+        self.name = ::core::option::Option::Some(value.into());
+        self
     }
     /// Sets `query`.
     pub fn query(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
@@ -9555,6 +9764,12 @@ impl ::serde::Serialize for SparseVectorQuery {
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         use ::serde::ser::SerializeMap as _;
         let mut map = serializer.serialize_map(::core::option::Option::None)?;
+        if let ::core::option::Option::Some(value) = &self.boost {
+            map.serialize_entry("boost", value)?;
+        }
+        if let ::core::option::Option::Some(value) = &self.name {
+            map.serialize_entry("_name", value)?;
+        }
         if let ::core::option::Option::Some(value) = &self.field {
             map.serialize_entry("field", value)?;
         }
@@ -9588,6 +9803,8 @@ impl<'de> ::serde::Deserialize<'de> for SparseVectorQuery {
                 self,
                 mut map: A__,
             ) -> ::core::result::Result<SparseVectorQuery, A__::Error> {
+                let mut boost = ::core::option::Option::None;
+                let mut name = ::core::option::Option::None;
                 let mut field = ::core::option::Option::None;
                 let mut query = ::core::option::Option::None;
                 let mut prune = ::core::option::Option::None;
@@ -9597,6 +9814,8 @@ impl<'de> ::serde::Deserialize<'de> for SparseVectorQuery {
                     map.next_key::<::std::string::String>()?
                 {
                     match key.as_str() {
+                        "boost" => boost = ::core::option::Option::Some(map.next_value()?),
+                        "_name" => name = ::core::option::Option::Some(map.next_value()?),
                         "field" => field = ::core::option::Option::Some(map.next_value()?),
                         "query" => query = ::core::option::Option::Some(map.next_value()?),
                         "prune" => prune = ::core::option::Option::Some(map.next_value()?),
@@ -9617,6 +9836,8 @@ impl<'de> ::serde::Deserialize<'de> for SparseVectorQuery {
                     }
                 }
                 ::core::result::Result::Ok(SparseVectorQuery {
+                    boost,
+                    name,
                     field,
                     query,
                     prune,

@@ -3514,7 +3514,7 @@ impl<TDocument> InlineGet<TDocument> {
         self
     }
     /// Sets `source`.
-    pub fn source(mut self, value: impl ::core::convert::Into<TDocument>) -> Self {
+    pub fn source(mut self, value: TDocument) -> Self {
         self.source = ::core::option::Option::Some(value.into());
         self
     }

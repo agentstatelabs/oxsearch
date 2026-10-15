@@ -9284,11 +9284,11 @@ impl Reasoning {
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub enum ReasoningDetail {
-    /// `encrypted_reasoning_detail`.
+    /// `reasoning.encrypted`.
     Encrypted(crate::EncryptedReasoningDetail),
-    /// `summary_reasoning_detail`.
+    /// `reasoning.summary`.
     Summary(crate::SummaryReasoningDetail),
-    /// `text_reasoning_detail`.
+    /// `reasoning.text`.
     Text(crate::TextReasoningDetail),
     /// Any member, as JSON.
     Raw(::serde_json::Value),
@@ -9303,19 +9303,19 @@ impl ::serde::Serialize for ReasoningDetail {
             Self::Encrypted(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "encrypted_reasoning_detail",
+                "reasoning.encrypted",
                 value,
             ),
             Self::Summary(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "summary_reasoning_detail",
+                "reasoning.summary",
                 value,
             ),
             Self::Text(value) => ::oxsearch_core::__private::serialize_tagged(
                 serializer,
                 "type",
-                "text_reasoning_detail",
+                "reasoning.text",
                 value,
             ),
             Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),
@@ -9334,13 +9334,13 @@ impl<'de> ::serde::Deserialize<'de> for ReasoningDetail {
         )?;
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
-            ::core::option::Option::Some("encrypted_reasoning_detail") => {
+            ::core::option::Option::Some("reasoning.encrypted") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Encrypted)
             }
-            ::core::option::Option::Some("summary_reasoning_detail") => {
+            ::core::option::Option::Some("reasoning.summary") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Summary)
             }
-            ::core::option::Option::Some("text_reasoning_detail") => {
+            ::core::option::Option::Some("reasoning.text") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Text)
             }
             _ => ::core::result::Result::Ok(Self::Raw(json)),
