@@ -12,9 +12,11 @@ repository.workspace = true
 homepage.workspace = true
 authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
+# Published once it's generated (Phase 2 in DESIGN.md).
+publish = false
 
 [dependencies]
-oxsearch-core = { path = "../oxsearch-core", version = "0.0.1" }
+oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
 
 [lints]
 workspace = true

@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: Phase 1, not released yet.** The generated crates cover search, documents, mappings, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. See [DESIGN.md](DESIGN.md) for the plan.
+**Status: 0.1 is being prepared.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL and the administration APIs come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -60,6 +60,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Escape hatches** for what isn't covered yet: your own `Endpoint`, `Raw` variants and `Client::send_raw` ([example](crates/oxsearch/examples/escape_hatches.rs)).
 
 [docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise.
+
+## Versions
+
+oxsearch's versions are its own, 0.N while its API settles. Each release is generated from one branch of the [Elasticsearch specification](https://github.com/elastic/elasticsearch-specification), one Elasticsearch minor, and tested against that minor:
+
+| oxsearch | Specification branch (commit) | Tested against |
+|---|---|---|
+| 0.1 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
+
+Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch.
 
 ## Licenses of Elasticsearch features
 

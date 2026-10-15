@@ -6,8 +6,8 @@
 //! retrieval half of a RAG application on any license.
 //!
 //! This crate re-exports the others behind features. The defaults are the
-//! AI-search set: `search`, `docs`, `mapping` and `inference`. The other API
-//! areas are `aggs`, `analysis`, `esql`, `admin` and `tasks`. `derive` adds
+//! AI-search set: `search`, `docs`, `mapping` and `inference`; `analysis`
+//! and `tasks` are the other areas generated so far. `derive` adds
 //! the typed document layer's derive macro, `helpers` the point-in-time
 //! scan and the bulk loader, and `transport-reqwest` the default HTTP
 //! transport.
@@ -35,6 +35,10 @@
 //! feature the license doesn't include, such as the `rrf` retriever or
 //! ELSER on Basic, fails with [`Error::License`].
 //!
+//! This release is generated from the Elasticsearch specification's 9.5
+//! branch and tested against Elasticsearch 9.5; the README's version table
+//! lists each release's branch.
+//!
 //! oxsearch is not affiliated with or endorsed by Elastic. Elasticsearch is
 //! a trademark of Elasticsearch B.V.
 
@@ -59,18 +63,12 @@ pub use oxsearch_core::{
 };
 pub use oxsearch_core::{auth, telemetry};
 
-#[cfg(feature = "admin")]
-pub use oxsearch_admin as admin;
-#[cfg(feature = "aggs")]
-pub use oxsearch_aggs as aggs;
 #[cfg(feature = "analysis")]
 pub use oxsearch_analysis as analysis;
 #[cfg(feature = "derive")]
 pub use oxsearch_derive as derive;
 #[cfg(feature = "docs")]
 pub use oxsearch_docs as docs;
-#[cfg(feature = "esql")]
-pub use oxsearch_esql as esql;
 #[cfg(feature = "inference")]
 pub use oxsearch_inference as inference;
 #[cfg(feature = "mapping")]
