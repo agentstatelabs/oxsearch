@@ -8,6 +8,8 @@ publish = false
 
 [dependencies]
 oxsearch = { path = "../crates/oxsearch", features = ["derive", "helpers"] }
+oxsearch-rig = { path = "../crates/oxsearch-rig" }
+rig-core = { version = "0.44", default-features = false }
 oxsearch-core = { path = "../crates/oxsearch-core" }
 oxsearch-docs = { path = "../crates/oxsearch-docs" }
 oxsearch-inference = { path = "../crates/oxsearch-inference" }

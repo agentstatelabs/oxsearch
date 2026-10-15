@@ -9,6 +9,6 @@ updates:
     schedule:
       interval: monthly
     ignore:
-      # The toolchain is chosen by its ref: `stable`, or the MSRV (`1.94`),
+      # The toolchain is chosen by its ref: `stable`, or the MSRV (`1.95`),
       # which changes only by policy. These refs aren't versions to bump.
       - dependency-name: dtolnay/rust-toolchain

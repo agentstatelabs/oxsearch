@@ -49,6 +49,28 @@ where
     round_trip::<T>(::serde_json::Value::Array(lines))
 }
 
+/// The value with every object's keys in sorted order, so what's read first,
+/// and so which error is reported, doesn't depend on whether serde_json
+/// keeps keys in order (its `preserve_order` feature).
+fn sorted(value: ::serde_json::Value) -> ::serde_json::Value {
+    use ::serde_json::Value;
+    match value {
+        Value::Object(map) => {
+            let mut entries: ::std::vec::Vec<(::std::string::String, Value)> =
+                map.into_iter().collect();
+            entries.sort_by(|a, b| a.0.cmp(&b.0));
+            Value::Object(
+                entries
+                    .into_iter()
+                    .map(|(key, value)| (key, sorted(value)))
+                    .collect(),
+            )
+        }
+        Value::Array(items) => Value::Array(items.into_iter().map(sorted).collect()),
+        other => other,
+    }
+}
+
 fn round_trip<T>(
     input: ::serde_json::Value,
 ) -> ::core::result::Result<Outcome, ::std::string::String>
@@ -58,6 +80,7 @@ where
         + ::core::cmp::PartialEq
         + ::core::fmt::Debug,
 {
+    let input = sorted(input);
     let read: T = ::serde_path_to_error::deserialize(input.clone())
         .map_err(|e| format!("reading {}: {}", e.path(), e.inner()))?;
     let output = ::serde_json::to_value(&read).map_err(|e| format!("writing: {e}"))?;
@@ -75,7 +98,8 @@ where
     Ok(Outcome::Normalized(first_difference(&input, &output, "")))
 }
 
-/// The JSON pointer of the first place two values differ.
+/// The JSON pointer of the first place two values differ, taking keys in
+/// sorted order, whatever order serde_json keeps them in.
 fn first_difference(
     a: &::serde_json::Value,
     b: &::serde_json::Value,
@@ -84,17 +108,21 @@ fn first_difference(
     use ::serde_json::Value;
     match (a, b) {
         (Value::Object(a), Value::Object(b)) => {
-            for (key, value) in a {
+            let mut keys: ::std::vec::Vec<&::std::string::String> = a.keys().collect();
+            keys.sort();
+            for key in keys {
+                let value = &a[key];
                 match b.get(key) {
                     Some(other) if other == value => {}
                     Some(other) => return first_difference(value, other, &format!("{at}/{key}")),
                     None => return format!("{at}/{key} (dropped)"),
                 }
             }
-            for key in b.keys() {
-                if !a.contains_key(key) {
-                    return format!("{at}/{key} (added)");
-                }
+            let mut added: ::std::vec::Vec<&::std::string::String> =
+                b.keys().filter(|key| !a.contains_key(*key)).collect();
+            added.sort();
+            if let Some(key) = added.first() {
+                return format!("{at}/{key} (added)");
             }
             at.to_owned()
         }

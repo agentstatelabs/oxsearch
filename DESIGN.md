@@ -67,7 +67,7 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-esql`, `oxsearch-admin` (cluster + indices + nodes), `oxsearch-ingest`, `oxsearch-security`, `oxsearch-ml`, … | one crate per API area | the rest of about 2,900 API types |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |
-| `oxsearch-rig` | `rig` vector-store integration | – |
+| `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
 The default features are the AI-search set: search, docs, mapping, inference. `features = ["aggs", "esql"]` adds more. Libraries depend on the specific crates they need.
@@ -272,5 +272,5 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 2. ~~**The specification model.** Reuse `clients_schema` from the specification repository, or read `schema.json` with our own model?~~ Decided in Phase 0: our own model (§4.2).
 3. **The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?
 4. **Serverless.** Generate a serverless profile from `schema-serverless.json`, or only document availability?
-5. **MSRV**, and whether `oxsearch-transport-reqwest` is on by default. With reqwest's rustls (aws-lc-rs), the transport adds about 15 s to a clean build, more than all the generated crates of the first slice together.
+5. ~~**MSRV**~~ Decided: Rust 1.95 for the whole workspace, which `rig-core` 0.44 needs for `oxsearch-rig` (the user, 2026-10-15; it was 1.94, oxtel's). Still open: whether `oxsearch-transport-reqwest` is on by default. With reqwest's rustls (aws-lc-rs), the transport adds about 15 s to a clean build, more than all the generated crates of the first slice together.
 6. ~~**Required properties in responses.** Read strictly, or tolerate a missing one?~~ Decided: tolerate (§4.2).
