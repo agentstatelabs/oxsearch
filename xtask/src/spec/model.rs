@@ -104,7 +104,7 @@ pub enum ValueOf {
 }
 
 /// A literal value.
-#[derive(Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize)]
 #[serde(untagged)]
 pub enum Literal {
     /// A string.

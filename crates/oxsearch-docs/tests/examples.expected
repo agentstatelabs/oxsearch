@@ -1,0 +1,77 @@
+61 exact, 11 normalized, 4 failing
+_global.bulk request BulkRequestExample1: exact
+_global.bulk request BulkRequestExample2: normalized at /6/update/_source (dropped)
+_global.bulk request BulkRequestExample3: exact
+_global.bulk request BulkRequestExample4: normalized at /1/field (dropped)
+_global.bulk response BulkResponseExample1: exact
+_global.bulk response BulkResponseExample2: exact
+_global.bulk response BulkResponseExample3: exact
+_global.cancel_reindex response CancelReindexResponseExample1: normalized at /response/canceled (dropped)
+_global.cancel_reindex response CancelReindexResponseExample2: exact
+_global.create request CreateRequestExample1: exact
+_global.create response CreateResponseExample1: exact
+_global.delete response DeleteResponseExample1: exact
+_global.delete_by_query request DeleteByQueryRequestExample1: exact
+_global.delete_by_query request DeleteByQueryRequestExample2: exact
+_global.delete_by_query request DeleteByQueryRequestExample3: fails: reading slice.id: invalid type: integer `0`, expected a string
+_global.delete_by_query request DeleteByQueryRequestExample4: exact
+_global.delete_by_query response DeleteByQueryResponseExample1: exact
+_global.get response GetResponseExample1: exact
+_global.get response GetResponseExample2: exact
+_global.get response GetResponseExample3: exact
+_global.get_reindex response GetReindexResponseExample1: normalized at /status/slices (dropped)
+_global.get_reindex response GetReindexResponseExample2: normalized at /response/slices (dropped)
+_global.index request IndexRequestExample1: exact
+_global.index request IndexRequestExample2: exact
+_global.index response IndexResponseExample1: exact
+_global.index response IndexResponseExample2: exact
+_global.list_reindex response ListReindexResponseExample1: exact
+_global.list_reindex response ListReindexResponseExample2: exact
+_global.list_reindex response ListReindexResponseNodeFailureExample1: exact
+_global.mget request MultiGetRequestExample1: exact
+_global.mget request MultiGetRequestExample2: normalized at /docs/2/_source/exclude (dropped)
+_global.mget request MultiGetRequestExample3: exact
+_global.mget request MultiGetRequestExample4: exact
+_global.mtermvectors request MultiTermVectorsRequestExample1: exact
+_global.mtermvectors request MultiTermVectorsRequestExample2: normalized at /fields (dropped)
+_global.mtermvectors request MultiTermVectorsRequestExample3: exact
+_global.reindex request ReindexRequestExample1: exact
+_global.reindex request ReindexRequestExample10: exact
+_global.reindex request ReindexRequestExample11: normalized at /source/query/function_score/random_score (dropped)
+_global.reindex request ReindexRequestExample12: exact
+_global.reindex request ReindexRequestExample13: exact
+_global.reindex request ReindexRequestExample2: fails: reading source.slice.id: invalid type: integer `0`, expected a string
+_global.reindex request ReindexRequestExample3: exact
+_global.reindex request ReindexRequestExample4: exact
+_global.reindex request ReindexRequestExample5: exact
+_global.reindex request ReindexRequestExample6: exact
+_global.reindex request ReindexRequestExample7: exact
+_global.reindex request ReindexRequestExample8: exact
+_global.reindex request ReindexRequestExample9: exact
+_global.reindex_rethrottle response ReindexRethrottleResponseExample1: exact
+_global.reindex_rethrottle response ReindexRethrottleResponseExample2: exact
+_global.reindex_rethrottle response ReindexRethrottleResponseRelocationExample1: exact
+_global.termvectors request TermVectorsRequestExample1: exact
+_global.termvectors request TermVectorsRequestExample2: exact
+_global.termvectors request TermVectorsRequestExample3: exact
+_global.termvectors request TermVectorsRequestExample4: exact
+_global.termvectors request TermVectorsRequestExample5: exact
+_global.termvectors response TermVectorsResponseExample1: exact
+_global.termvectors response TermVectorsResponseExample2: exact
+_global.termvectors response TermVectorsResponseExample3: exact
+_global.update request UpdateRequestExample1: exact
+_global.update request UpdateRequestExample10: fails: not JSON: expected `,` or `}` at line 4 column 17
+_global.update request UpdateRequestExample11: exact
+_global.update request UpdateRequestExample2: exact
+_global.update request UpdateRequestExample3: exact
+_global.update request UpdateRequestExample4: normalized at /script
+_global.update request UpdateRequestExample5: normalized at /script
+_global.update request UpdateRequestExample6: normalized at /script
+_global.update request UpdateRequestExample7: exact
+_global.update request UpdateRequestExample8: exact
+_global.update request UpdateRequestExample9: exact
+_global.update response UpdateResponseExample1: exact
+_global.update_by_query request UpdateByQueryRequestExample1: exact
+_global.update_by_query request UpdateByQueryRequestExample2: exact
+_global.update_by_query request UpdateByQueryRequestExample3: fails: reading slice.id: invalid type: integer `0`, expected a string
+_global.update_by_query request UpdateByQueryRequestExample4: exact

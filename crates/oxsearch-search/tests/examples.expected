@@ -1,0 +1,26 @@
+22 exact, 2 normalized, 1 failing
+_global.clear_scroll request ClearScrollRequestExample1: exact
+_global.close_point_in_time request ClosePointInTimeRequestExample1: exact
+_global.close_point_in_time response ClosePointInTimeResponseExample1: exact
+_global.count request CountRequestExample1: exact
+_global.count response CountResponseExample1: exact
+_global.explain request ExplainRequestExample1: exact
+_global.explain response ExplainResponseExample1: normalized at /explanation/details/0/details/0/value
+_global.field_caps request FieldCapabilitiesRequestExample1: exact
+_global.field_caps response FieldCapabilitiesResponseExample1: exact
+_global.field_caps response FieldCapabilitiesResponseExample2: exact
+_global.msearch request MsearchRequestExample1: exact
+_global.msearch_template request MultiSearchTemplateRequestExample1: exact
+_global.open_point_in_time response OpenPointInTimeResponseExample1: exact
+_global.rank_eval request RankEvalRequestExample1: exact
+_global.render_search_template request RenderSearchTemplateRequestExample1: exact
+_global.scroll request ScrollRequestExample1: exact
+_global.search request SearchRequestExample1: exact
+_global.search request SearchRequestExample2: exact
+_global.search request SearchRequestExample3: fails: reading slice.id: invalid type: integer `0`, expected a string
+_global.search response SearchResponseExample1: exact
+_global.search_mvt request SearchMvtRequestExample1: exact
+_global.search_shards response SearchShardsResponseExample1: normalized at /shards/0/0/relocating_node (dropped)
+_global.search_template request SearchTemplateRequestExample1: exact
+_global.terms_enum request TermsEnumRequestExample1: exact
+_global.terms_enum response TermsEnumResponseExample1: exact

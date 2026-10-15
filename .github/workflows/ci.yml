@@ -37,19 +37,32 @@ jobs:
   # The specification oxsearch is generated from: the pinned schema.json is
   # downloaded, checked against its SHA-256, and read with the generator's
   # model, which rejects anything it doesn't know. The test fixture must run
-  # the same Elasticsearch minor. Then the crate placement and the shape
-  # inventory are computed again from it, and must match the committed
-  # reports.
+  # the same Elasticsearch minor. Then the crate placement, the shape
+  # inventory and the generated code are produced again from it, and must
+  # match what is committed: the code was generated from the pinned
+  # specification, and nobody edited it by hand.
   spec:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
+      # The toolchain whose rustfmt formatted the committed code.
+      - uses: dtolnay/rust-toolchain@1.94
+        with:
+          components: rustfmt
       - run: cargo run -p xtask -- spec check
       - run: cargo run -p xtask -- placement
       - run: cargo run -p xtask -- shapes
-      - name: The committed reports are current
-        run: git diff --exit-code spec/placement.md spec/shapes.md
+      - run: cargo run -p xtask -- generate
+      - name: The committed reports and generated code are current
+        shell: bash
+        run: |
+          git diff --exit-code
+          untracked=$(git status --porcelain --untracked-files=all)
+          if [ -n "$untracked" ]; then
+            echo "files the generator writes that aren't committed:" >&2
+            echo "$untracked" >&2
+            exit 1
+          fi
 
   # The integration tests, against Elasticsearch in Docker (see
   # scripts/es-fixture.sh): once on the Basic license, once on a trial.
