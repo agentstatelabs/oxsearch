@@ -3,16 +3,25 @@
 //!
 //! This crate re-exports the others behind features. The defaults are the
 //! AI-search set: `search`, `docs`, `mapping` and `inference`. The other API
-//! areas are `aggs`, `analysis`, `esql`, `admin` and `tasks`; `derive` adds
-//! the typed document layer's derive macros, and `transport-reqwest` the
-//! default HTTP transport.
+//! areas are `aggs`, `analysis`, `esql`, `admin` and `tasks`. `derive` adds
+//! the typed document layer's derive macro, `helpers` the point-in-time
+//! scan and the bulk loader, and `transport-reqwest` the default HTTP
+//! transport.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
-//! common queries and retrievers in one call each, and `fusion` fuses
+//! common queries and retrievers in one call each, `fusion` fuses
 //! retrievers' results on the client when the cluster's license doesn't
-//! include the `rrf` and `linear` retrievers. Retries, failover, authentication and
-//! telemetry are still to come; see DESIGN.md in the repository.
+//! include the `rrf` and `linear` retrievers, and `document` reads and
+//! writes your own document types.
+//!
+//! For what isn't covered yet, implement [`Endpoint`] for your own request
+//! (`Route::segments` and `Body::json` help), write a query, retriever or
+//! value as a `Raw` variant, or send any request with `Client::send_raw`;
+//! `examples/escape_hatches.rs` shows each.
+//!
+//! Retries, failover, authentication and telemetry are still to come; see
+//! DESIGN.md in the repository.
 
 // The derive macros' code names this crate `::oxsearch`, in its own tests too.
 extern crate self as oxsearch;

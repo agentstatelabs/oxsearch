@@ -3,6 +3,7 @@
 
 use std::future::Future;
 
+use serde::Serialize;
 use serde::de::DeserializeOwned;
 
 use crate::error::{Error, TransportError};
@@ -47,6 +48,23 @@ pub enum Body {
 }
 
 impl Body {
+    /// A JSON body.
+    pub fn json<T: Serialize + ?Sized>(value: &T) -> Result<Body, Error> {
+        serde_json::to_vec(value)
+            .map(Body::Json)
+            .map_err(Error::Encode)
+    }
+
+    /// A newline-delimited JSON body: one line per item.
+    pub fn ndjson<T: Serialize>(lines: impl IntoIterator<Item = T>) -> Result<Body, Error> {
+        let mut out = Vec::new();
+        for line in lines {
+            serde_json::to_writer(&mut out, &line).map_err(Error::Encode)?;
+            out.push(b'\n');
+        }
+        Ok(Body::Ndjson(out))
+    }
+
     /// The body's media type.
     pub fn content_type(&self) -> &'static str {
         match self {
@@ -81,12 +99,26 @@ pub struct Route {
 }
 
 impl Route {
-    /// A route.
+    /// A route, with a path already percent-encoded.
     pub fn new(method: Method, path: impl Into<String>) -> Route {
         Route {
             method,
             path: path.into(),
         }
+    }
+
+    /// A route from its path's segments, each percent-encoded:
+    /// `Route::segments(Method::Get, ["_cat", "count", index])`.
+    pub fn segments<S: AsRef<str>>(method: Method, segments: impl IntoIterator<Item = S>) -> Route {
+        let mut path = String::new();
+        for segment in segments {
+            path.push('/');
+            path.push_str(&crate::__private::encode(segment.as_ref()));
+        }
+        if path.is_empty() {
+            path.push('/');
+        }
+        Route { method, path }
     }
 }
 
@@ -151,4 +183,27 @@ pub trait Transport: Send + Sync {
         &self,
         request: HttpRequest,
     ) -> impl Future<Output = Result<HttpResponse, TransportError>> + Send;
+}
+
+#[cfg(test)]
+mod tests {
+    use serde_json::json;
+
+    use super::*;
+
+    #[test]
+    fn routes_from_segments() {
+        let route = Route::segments(Method::Get, ["_cat", "count", "logs 2026/10"]);
+        assert_eq!(route.path, "/_cat/count/logs%202026%2F10");
+        assert_eq!(Route::segments(Method::Get, [""; 0]).path, "/");
+    }
+
+    #[test]
+    fn bodies() {
+        let body = Body::json(&json!({"a": 1})).unwrap();
+        assert_eq!(body.content_type(), "application/json");
+        assert_eq!(body.bytes(), br#"{"a":1}"#);
+        let lines = Body::ndjson([json!({"index": {}}), json!({"a": 1})]).unwrap();
+        assert_eq!(lines.into_bytes(), b"{\"index\":{}}\n{\"a\":1}\n");
+    }
 }

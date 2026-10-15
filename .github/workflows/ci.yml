@@ -108,10 +108,12 @@ jobs:
         run: scripts/es-fixture.sh up "${OXSEARCH_TEST_LICENSE}"
       - name: Integration tests
         run: cargo test -p oxsearch-integration -- --ignored
-      - name: The RAG example runs
+      - name: The examples run
         env:
           OXSEARCH_URL: http://127.0.0.1:9200
-        run: cargo run -p oxsearch --example rag --features transport-reqwest
+        run: |
+          cargo run -p oxsearch --example rag --features transport-reqwest
+          cargo run -p oxsearch --example escape_hatches --features transport-reqwest
       - name: Elasticsearch logs
         if: failure()
         run: scripts/es-fixture.sh logs | tail -200
