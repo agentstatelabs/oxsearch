@@ -101,10 +101,8 @@ pub struct TestIndex {
 }
 
 impl TestIndex {
-    /// Creates an index with a name no other test uses. Index creation isn't
-    /// in the first slice's crates, so it goes through the raw call, with a
-    /// mapping built from the generated types.
-    pub async fn create(client: &TestClient, prefix: &str, mapping: &TypeMapping) -> TestIndex {
+    /// A name no other test uses, for an index the test creates itself.
+    pub fn named(prefix: &str) -> TestIndex {
         static NEXT: AtomicU32 = AtomicU32::new(0);
         let nanos = SystemTime::now()
             .duration_since(UNIX_EPOCH)
@@ -114,6 +112,14 @@ impl TestIndex {
             "oxsearch-test-{prefix}-{nanos}-{}",
             NEXT.fetch_add(1, Ordering::Relaxed)
         );
+        TestIndex { name }
+    }
+
+    /// Creates an index with a name no other test uses. Index creation isn't
+    /// in the first slice's crates, so it goes through the raw call, with a
+    /// mapping built from the generated types.
+    pub async fn create(client: &TestClient, prefix: &str, mapping: &TypeMapping) -> TestIndex {
+        let name = TestIndex::named(prefix).name;
         client
             .send_raw(
                 Method::Put,

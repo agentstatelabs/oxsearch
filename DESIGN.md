@@ -142,8 +142,8 @@ struct Article {
     published: DateTime<Utc>,
 }
 
-let articles = client.index::<Article>();
-articles.ensure_mapping().await?;          // mapping comes from the struct; reports drift from the live index
+let articles = client.index::<Article>();   // `Indexes` trait; the name from #[index]
+let report = articles.ensure_mapping().await?; // creates the index, adds missing fields, reports drift
 articles.put(&article).await?;
 let hits = articles                         // Vec<Hit<Article>>
     .search(Retriever::rrf([
@@ -153,9 +153,14 @@ let hits = articles                         // Vec<Hit<Article>>
     .await?;
 ```
 
-- **The mapping is defined by the struct.** Field attributes choose mapped types, and Rust types give defaults. `ensure_mapping()` creates the index or reports drift. A changed field type is reported, never applied silently, because Elasticsearch can't change a mapped type in place.
-- **Typed field handles** offer only the queries that suit the field's mapped type: `semantic()` on `semantic_text`, `term()` on `keyword`, `range()` on dates and numbers.
-- **`Versioned<T>`** carries the sequence number and primary term for optimistic concurrency; a stale write fails with a typed conflict error.
+Built in Phase 1 (`oxsearch::document`, behind the `derive` feature for the macro):
+
+- **The mapping is defined by the struct.** Field attributes choose mapped types (`#[keyword]`, `#[text]`, `#[date]`, `#[semantic_text(inference_id = …)]`, `#[dense_vector(dims = …, similarity = …, element_type = …)]`, `#[sparse_vector]`), and Rust types give defaults through the `Mapped` trait: strings are `text`, numbers and booleans their own types, date and time types `date`, and a struct deriving `Document` an object. serde's `rename`, `rename_all` and `skip` are followed; `flatten` and generic documents are refused for now.
+  - `ensure_mapping()` creates the index, adds the fields the live mapping lacks, and reports fields mapped differently (by type, or by `dims`, `similarity`, `element_type` or `inference_id`). It never applies a changed type, because Elasticsearch can't change a mapped type in place.
+  - Elasticsearch 9 leaves vectors out of the `_source` it returns. A new index for a type with vector fields sets `index.mapping.exclude_source_vectors: false`, so documents read back whole.
+- **Typed field handles** offer only the queries that suit the field's mapped type: `semantic()` on `semantic_text`, `term()` on `keyword`, `range()` on dates (date math) and numbers (Rust ranges: `Product::PRICE.range(10.0..20.0)`), `knn()` on `dense_vector`, `r#match()` on `text`. An object's handle reaches its fields: `Article::AUTHOR.field(Author::NAME)`. A query also works wherever a retriever does, as a standard retriever.
+- **`Index<T>`** puts (with the id and routing from `#[id]` and `#[routing]`), gets, gets many, deletes, searches into `Vec<Hit<T>>`, and fuses (`oxsearch::fusion`), with an optional refresh policy for writes.
+- **`Versioned<T>`** carries the sequence number and primary term for optimistic concurrency; `put_versioned` fails with `Error::Conflict` when the document changed since it was read.
 - **ES|QL rows map into structs** by column name (Phase 2).
 - **Left out:** SQL emulation, relations between indices (ES|QL's `LOOKUP JOIN` does that on the server), lazy loading, change tracking, transactions, a unit of work.
 

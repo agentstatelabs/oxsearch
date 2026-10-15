@@ -19,6 +19,9 @@ pub enum Error {
     /// The cluster's license doesn't include a feature the request uses,
     /// such as server-side RRF on the Basic license.
     License(Box<LicenseError>),
+    /// A write conditional on a document's version found another version:
+    /// the document changed since it was read (status 409).
+    Conflict(Box<ElasticsearchError>),
     /// The request couldn't be written as JSON.
     Encode(serde_json::Error),
     /// A parameter can't be written in a URL, or no URL fits the parameters
@@ -41,6 +44,7 @@ impl fmt::Display for Error {
             Error::Transport(e) => write!(f, "transport: {e}"),
             Error::Elasticsearch(e) => e.fmt(f),
             Error::License(e) => e.fmt(f),
+            Error::Conflict(e) => e.fmt(f),
             Error::Encode(e) => write!(f, "writing the request: {e}"),
             Error::Parameter(e) => write!(f, "parameters: {e}"),
             Error::Decode {
@@ -122,7 +126,8 @@ impl fmt::Display for LicenseError {
 impl Error {
     /// The error for a response Elasticsearch failed, from its status and
     /// body: [`Error::License`] when the cluster's license doesn't include a
-    /// feature the request uses, else [`Error::Elasticsearch`].
+    /// feature the request uses, [`Error::Conflict`] for a version
+    /// conflict, else [`Error::Elasticsearch`].
     pub fn from_response(status: u16, body: &[u8]) -> Error {
         let body: Value = serde_json::from_slice(body)
             .unwrap_or_else(|_| Value::String(String::from_utf8_lossy(body).into_owned()));
@@ -147,6 +152,7 @@ impl Error {
             .or_else(|| error.reason().and_then(unlicensed_feature));
         match feature {
             Some(feature) => Error::License(Box::new(LicenseError { feature, error })),
+            None if status == 409 => Error::Conflict(Box::new(error)),
             None => Error::Elasticsearch(Box::new(error)),
         }
     }
@@ -200,6 +206,15 @@ mod tests {
             panic!("not a license error")
         };
         assert_eq!(e.feature, "query rules");
+    }
+
+    #[test]
+    fn conflicts() {
+        let body = json!({"error": {"type": "version_conflict_engine_exception", "reason": "[1]: version conflict, required seqNo [0], primary term [1]. current document has seqNo [1] and primary term [1]"}, "status": 409});
+        let Error::Conflict(e) = Error::from_response(409, body.to_string().as_bytes()) else {
+            panic!("not a conflict")
+        };
+        assert_eq!(e.error_type(), Some("version_conflict_engine_exception"));
     }
 
     #[test]

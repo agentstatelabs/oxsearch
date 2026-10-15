@@ -74,13 +74,15 @@ pub struct Fused<TDocument> {
 
 impl Fusion {
     /// Reciprocal rank fusion of the retrievers' results, each weighted 1.
-    pub fn rrf(retrievers: impl IntoIterator<Item = RetrieverContainer>) -> Fusion {
+    pub fn rrf<R: Into<RetrieverContainer>>(retrievers: impl IntoIterator<Item = R>) -> Fusion {
         Fusion::weighted_rrf(retrievers.into_iter().map(|retriever| (retriever, 1.0)))
     }
 
     /// Reciprocal rank fusion of the retrievers' results, with their
     /// weights.
-    pub fn weighted_rrf(retrievers: impl IntoIterator<Item = (RetrieverContainer, f32)>) -> Fusion {
+    pub fn weighted_rrf<R: Into<RetrieverContainer>>(
+        retrievers: impl IntoIterator<Item = (R, f32)>,
+    ) -> Fusion {
         Fusion::new(
             retrievers,
             Method::Rrf {
@@ -91,7 +93,9 @@ impl Fusion {
 
     /// A weighted sum of the retrievers' scores, normalized by
     /// [`Fusion::normalizer`] (none by default).
-    pub fn linear(retrievers: impl IntoIterator<Item = (RetrieverContainer, f32)>) -> Fusion {
+    pub fn linear<R: Into<RetrieverContainer>>(
+        retrievers: impl IntoIterator<Item = (R, f32)>,
+    ) -> Fusion {
         Fusion::new(
             retrievers,
             Method::Linear {
@@ -100,12 +104,15 @@ impl Fusion {
         )
     }
 
-    fn new(
-        retrievers: impl IntoIterator<Item = (RetrieverContainer, f32)>,
+    fn new<R: Into<RetrieverContainer>>(
+        retrievers: impl IntoIterator<Item = (R, f32)>,
         method: Method,
     ) -> Fusion {
         Fusion {
-            retrievers: retrievers.into_iter().collect(),
+            retrievers: retrievers
+                .into_iter()
+                .map(|(retriever, weight)| (retriever.into(), weight))
+                .collect(),
             method,
             rank_window_size: None,
             size: SIZE,
