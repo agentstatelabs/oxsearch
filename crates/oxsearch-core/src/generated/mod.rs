@@ -1541,58 +1541,6 @@ impl EmptyObject {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum ErrorCauseReason {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for ErrorCauseReason {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for ErrorCauseReason {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = ErrorCauseReason;
-            const EXPECTING: &'static str = "ErrorCauseReason: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value).map(ErrorCauseReason::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(ErrorCauseReason::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("ErrorCauseReason can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 /// Cause and details about a request failure. This class defines the properties common to all error types.
 /// Additional details are also provided, that depend on the error type.
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
@@ -1603,7 +1551,7 @@ pub struct ErrorCause {
     pub r#type: ::core::option::Option<::std::string::String>,
     /// A human-readable explanation of the error, in English.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub reason: ::core::option::Option<crate::ErrorCauseReason>,
+    pub reason: ::core::option::Option<::std::string::String>,
     /// The server stack trace. Present only if the `error_trace=true` parameter was sent with the request.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub stack_trace: ::core::option::Option<::std::string::String>,
@@ -1632,7 +1580,7 @@ impl ErrorCause {
         }
     }
     /// Sets `reason`.
-    pub fn reason(mut self, value: impl ::core::convert::Into<crate::ErrorCauseReason>) -> Self {
+    pub fn reason(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.reason = ::core::option::Option::Some(value.into());
         self
     }
@@ -3344,55 +3292,6 @@ impl IndicesResponseBase {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum InferenceStringFormat {
-    /// A string.
-    EmbeddingContentFormat(crate::inference::EmbeddingContentFormat),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for InferenceStringFormat {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::EmbeddingContentFormat(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for InferenceStringFormat {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = InferenceStringFormat;
-            const EXPECTING: &'static str = "InferenceStringFormat: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value).map(InferenceStringFormat::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <crate::inference::EmbeddingContentFormat as ::serde::Deserialize>::deserialize(value).map(InferenceStringFormat::EmbeddingContentFormat)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(format_args!("InferenceStringFormat can't be {kind:?}"))),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct InferenceString {
@@ -3401,7 +3300,7 @@ pub struct InferenceString {
     pub r#type: ::core::option::Option<crate::inference::EmbeddingContentType>,
     /// The format of the data. If null, the default data format for the given type is used.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub format: ::core::option::Option<crate::InferenceStringFormat>,
+    pub format: ::core::option::Option<crate::inference::EmbeddingContentFormat>,
     /// String which may be raw text, or the string representation of some other data such as an image in base64.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<::std::string::String>,
@@ -3422,7 +3321,7 @@ impl InferenceString {
     /// Sets `format`.
     pub fn format(
         mut self,
-        value: impl ::core::convert::Into<crate::InferenceStringFormat>,
+        value: impl ::core::convert::Into<crate::inference::EmbeddingContentFormat>,
     ) -> Self {
         self.format = ::core::option::Option::Some(value.into());
         self
@@ -4611,59 +4510,6 @@ impl<'de> ::serde::Deserialize<'de> for NodeRole {
 
 pub type NodeRoles = ::std::vec::Vec<crate::NodeRole>;
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum NodeShardRelocatingNode {
-    /// A string.
-    NodeId(crate::NodeId),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for NodeShardRelocatingNode {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::NodeId(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for NodeShardRelocatingNode {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = NodeShardRelocatingNode;
-            const EXPECTING: &'static str = "NodeShardRelocatingNode: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(NodeShardRelocatingNode::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <crate::NodeId as ::serde::Deserialize>::deserialize(value)
-                            .map(NodeShardRelocatingNode::NodeId)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("NodeShardRelocatingNode can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct NodeShard {
@@ -4687,7 +4533,7 @@ pub struct NodeShard {
     pub unassigned_info:
         ::core::option::Option<crate::cluster::allocation_explain::UnassignedInformation>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub relocating_node: ::core::option::Option<crate::NodeShardRelocatingNode>,
+    pub relocating_node: ::core::option::Option<crate::NodeId>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub relocation_failure_info: ::core::option::Option<crate::RelocationFailureInfo>,
 }
@@ -4743,10 +4589,7 @@ impl NodeShard {
         self
     }
     /// Sets `relocating_node`.
-    pub fn relocating_node(
-        mut self,
-        value: impl ::core::convert::Into<crate::NodeShardRelocatingNode>,
-    ) -> Self {
+    pub fn relocating_node(mut self, value: impl ::core::convert::Into<crate::NodeId>) -> Self {
         self.relocating_node = ::core::option::Option::Some(value.into());
         self
     }

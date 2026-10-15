@@ -254,7 +254,7 @@ impl Request {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct Response<TDocument = ::serde_json::Value> {
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub took: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -267,9 +267,7 @@ pub struct Response<TDocument = ::serde_json::Value> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hits: ::core::option::Option<crate::search::HitsMetadata<TDocument>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggregations: ::core::option::Option<
-        ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-    >,
+    pub aggregations: ::core::option::Option<TAggregations>,
     #[serde(
         rename = "_clusters",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -299,7 +297,7 @@ pub struct Response<TDocument = ::serde_json::Value> {
     pub terminated_early: ::core::option::Option<bool>,
 }
 
-impl<TDocument> Response<TDocument> {
+impl<TDocument, TAggregations> Response<TDocument, TAggregations> {
     /// A `Response` with its required properties set.
     pub fn new(
         took: i64,
@@ -325,12 +323,7 @@ impl<TDocument> Response<TDocument> {
         }
     }
     /// Sets `aggregations`.
-    pub fn aggregations(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggregations(mut self, value: TAggregations) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
     }

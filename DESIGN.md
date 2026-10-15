@@ -105,8 +105,8 @@ The default features are the AI-search set: search, docs, mapping, inference. `f
 
 ### 4.3 Seams
 
-- **Type parameters for user data.** `SearchResponse<Doc, Aggs = RawAggs>`. `_source` goes into the user's struct. Aggregation results are raw JSON by default, `oxsearch-aggs` types, or the user's own struct.
-- **Conversions on the request side.** The search request takes `impl Into<AggsBody>`. `oxsearch-aggs` provides the conversion, and `json!` works too, so `oxsearch-search` never depends on `oxsearch-aggs`. A script's search-body source gets the same treatment.
+- **Type parameters for user data.** `search::Response<TDocument, TAggregations = RawAggs>`. `_source` goes into the user's struct. Aggregation results are raw JSON by default, `oxsearch-aggs` types, or the user's own struct. The generator adds `TAggregations` to every type that holds a search response's aggregations: msearch, scroll, and the template searches.
+- **Conversions on the request side.** The search request takes `impl Into<AggsBody>`. `oxsearch-aggs` provides the conversion, and `json!` works too, so `oxsearch-search` never depends on `oxsearch-aggs`. A script's search-body source is plain JSON. The placement table says what each seam becomes, and `crates/oxsearch/examples/rag.rs` uses both seams.
 
 ### 4.4 Transport and middleware
 
@@ -194,7 +194,7 @@ Elasticsearch's free Basic license includes kNN and the standard, knn, pinned an
 - Round-trip tests from the specification's examples for every generated type.
 - Integration tests per API area against Elasticsearch in Docker, on Basic and trial licenses.
 - A published coverage report: endpoints generated, endpoints with integration tests, by area.
-- A compile-time budget for the default feature set, measured with `cargo build --timings` in CI.
+- A compile-time budget for the default feature set, measured with `cargo build --timings` in CI (`docs/compile-time.md`). A clean build takes 13.8 s on a 14-core Mac.
 - Benchmarks against the official crate for request overhead and bulk throughput (Phase 2).
 - The reference demo (section 7) running on a real cluster.
 
@@ -233,5 +233,5 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 2. ~~**The specification model.** Reuse `clients_schema` from the specification repository, or read `schema.json` with our own model?~~ Decided in Phase 0: our own model (§4.2).
 3. **The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?
 4. **Serverless.** Generate a serverless profile from `schema-serverless.json`, or only document availability?
-5. **MSRV**, and whether `oxsearch-transport-reqwest` is on by default.
+5. **MSRV**, and whether `oxsearch-transport-reqwest` is on by default. With reqwest's rustls (aws-lc-rs), the transport adds about 15 s to a clean build, more than all the generated crates of the first slice together.
 6. ~~**Required properties in responses.** Read strictly, or tolerate a missing one?~~ Decided: tolerate (§4.2).

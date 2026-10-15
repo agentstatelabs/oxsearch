@@ -688,6 +688,9 @@ dependencies = [
  "oxsearch-search",
  "oxsearch-tasks",
  "oxsearch-transport-reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
 ]
 
 [[package]]

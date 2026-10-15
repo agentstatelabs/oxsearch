@@ -50,6 +50,15 @@ oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.0.1", optional = tru
 oxsearch-derive = { path = "../oxsearch-derive", version = "0.0.1", optional = true }
 oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.0.1", optional = true }
 
+[dev-dependencies]
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1.53", features = ["macros", "rt"] }
+
+[[example]]
+name = "rag"
+required-features = ["transport-reqwest"]
+
 [package.metadata.docs.rs]
 # Document the APIs behind features too.
 all-features = true

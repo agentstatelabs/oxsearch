@@ -50,25 +50,56 @@ pub const FOUNDATION: &[(&str, &[&str])] = &[
 pub struct Seam {
     /// The crate the references are made from.
     pub from: &'static str,
-    /// The referenced types, as `namespace::name`.
-    pub to: &'static [&'static str],
+    /// The referenced types, as `namespace::name`, and what a reference to
+    /// each becomes.
+    pub to: &'static [(&'static str, Open)],
     /// Why it is a seam, and what the property's type becomes.
     pub why: &'static str,
+}
+
+/// What a reference through a seam becomes in the generated code.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Open {
+    /// Any JSON value.
+    Json,
+    /// `oxsearch_core::AggsBody`, which `json!` and oxsearch-aggs' types
+    /// convert into, in place of the map of aggregations the reference is
+    /// in.
+    AggsBody,
+    /// The type parameter `TAggregations`, `oxsearch_core::RawAggs` by
+    /// default, in place of the map of aggregation results the reference is
+    /// in. Every type that contains it takes the parameter too.
+    AggsParam,
+}
+
+/// What a reference placement cut becomes: by (from type, to type).
+pub fn open_form(placement: &Placement<'_>, from: usize, to: usize) -> Option<Open> {
+    let &(seam, ..) = placement
+        .cuts
+        .iter()
+        .find(|&&(_, f, _, t)| f == from && t == to)?;
+    let name = placement.graph.name(to);
+    let target = format!("{}::{}", name.namespace, name.name);
+    SEAMS[seam]
+        .to
+        .iter()
+        .find(|(t, _)| *t == target)
+        .map(|&(_, open)| open)
 }
 
 /// The seams.
 pub const SEAMS: &[Seam] = &[
     Seam {
         from: "core",
-        to: &["_global.search._types::SearchRequestBody"],
+        to: &[("_global.search._types::SearchRequestBody", Open::Json)],
         why: "A stored script's source may be a whole search body. The core takes \
               any body that converts into one, so it doesn't depend on search.",
     },
     Seam {
         from: "search",
         to: &[
-            "_types.aggregations::AggregationContainer",
-            "_types.aggregations::Aggregate",
+            ("_types.aggregations::AggregationContainer", Open::AggsBody),
+            ("_types.aggregations::Aggregate", Open::AggsParam),
         ],
         why: "A search's aggregations. The request takes `impl Into<AggsBody>`, \
               which aggs and `json!` provide, and the response's aggregations are \
@@ -76,7 +107,7 @@ pub const SEAMS: &[Seam] = &[
     },
     Seam {
         from: "core",
-        to: &["watcher._types::SearchInputRequestDefinition"],
+        to: &[("watcher._types::SearchInputRequestDefinition", Open::Json)],
         why: "A search transform's request, used only by Watcher. It is open \
               in the core, so the core doesn't depend on Watcher.",
     },
@@ -394,7 +425,11 @@ impl Placement<'_> {
                 out,
                 "**From {} to {}.** {}",
                 seam.from,
-                seam.to.join(", "),
+                seam.to
+                    .iter()
+                    .map(|(name, _)| *name)
+                    .collect::<Vec<_>>()
+                    .join(", "),
                 seam.why
             );
             let _ = writeln!(out);
@@ -485,7 +520,7 @@ impl Layers {
 fn seam_targets<'g>(graph: &Graph<'g>) -> Result<BTreeMap<(&'static str, usize), usize>, Error> {
     let mut targets = BTreeMap::new();
     for (s, seam) in SEAMS.iter().enumerate() {
-        for to in seam.to {
+        for (to, _) in seam.to {
             let (namespace, name) = to
                 .split_once("::")
                 .expect("seam targets are namespace::name");
@@ -527,7 +562,7 @@ mod tests {
     /// fails placement.
     fn schema(types: &[(&str, &str, &[&str])]) -> crate::spec::Schema {
         let mut types = types.to_vec();
-        for target in SEAMS.iter().flat_map(|seam| seam.to.iter()) {
+        for (target, _) in SEAMS.iter().flat_map(|seam| seam.to.iter()) {
             let (namespace, name) = target.split_once("::").unwrap();
             if !types.iter().any(|t| t.0 == namespace && t.1 == name) {
                 types.push((namespace, name, &[]));

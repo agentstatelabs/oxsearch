@@ -1031,58 +1031,6 @@ impl Response {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum ResponseItemId {
-    /// A string.
-    String(::std::string::String),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for ResponseItemId {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::String(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for ResponseItemId {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = ResponseItemId;
-            const EXPECTING: &'static str = "ResponseItemId: null or string";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value).map(ResponseItemId::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::String => {
-                        <::std::string::String as ::serde::Deserialize>::deserialize(value)
-                            .map(ResponseItemId::String)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("ResponseItemId can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ResponseItem {
@@ -1091,7 +1039,7 @@ pub struct ResponseItem {
         rename = "_id",
         skip_serializing_if = "::core::option::Option::is_none"
     )]
-    pub id: ::core::option::Option<crate::bulk::ResponseItemId>,
+    pub id: ::core::option::Option<::std::string::String>,
     /// The name of the index associated with the operation.
     /// If the operation targeted a data stream, this is the backing index into which the document was written.
     #[serde(
@@ -1169,7 +1117,7 @@ impl ResponseItem {
         }
     }
     /// Sets `id`.
-    pub fn id(mut self, value: impl ::core::convert::Into<crate::bulk::ResponseItemId>) -> Self {
+    pub fn id(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
         self.id = ::core::option::Option::Some(value.into());
         self
     }

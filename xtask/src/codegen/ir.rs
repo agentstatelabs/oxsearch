@@ -6,7 +6,7 @@ use std::collections::{BTreeSet, HashMap, HashSet};
 use super::names::{literal_variant, pascal, snake};
 use crate::Error;
 use crate::graph::{self, Graph};
-use crate::placement::Placement;
+use crate::placement::{Open, Placement};
 use crate::shapes::{self, ANY, OBJECT};
 use crate::spec::model::{
     Body, Inherits, Interface, Literal, Property, TypeAlias, TypeDefinition, TypeName, ValueOf,
@@ -56,6 +56,8 @@ pub enum Ty {
     WithNull(Box<Ty>),
     /// Flags joined by `|`.
     Flags(Box<Ty>),
+    /// A value or `null`.
+    Opt(Box<Ty>),
     /// An object whose keys carry their values' types.
     TypedKeys(Box<Ty>),
 }
@@ -265,8 +267,13 @@ pub struct Ir<'g> {
     /// The items for endpoints' responses.
     responses: Vec<ItemId>,
     cut: HashSet<(usize, usize)>,
+    /// What each reference through a seam becomes, by (from, to) type.
+    open: HashMap<(usize, usize), Open>,
     special: Vec<Option<Special>>,
 }
+
+/// The type parameter a search response's aggregation results become.
+pub const AGGREGATIONS: &str = "TAggregations";
 
 struct Ctx<'c> {
     krate: &'c str,
@@ -320,6 +327,13 @@ impl<'g> Ir<'g> {
             .iter()
             .map(|&(_, from, _, to)| (from, to))
             .collect();
+        let open = placement
+            .cuts
+            .iter()
+            .filter_map(|&(_, from, _, to)| {
+                crate::placement::open_form(placement, from, to).map(|o| ((from, to), o))
+            })
+            .collect();
         let mut ir = Ir {
             graph,
             items: Vec::new(),
@@ -328,6 +342,7 @@ impl<'g> Ir<'g> {
             boxed: HashSet::new(),
             responses: Vec::new(),
             cut,
+            open,
             special,
         };
         for i in 0..graph.types.len() {
@@ -336,6 +351,7 @@ impl<'g> Ir<'g> {
             }
         }
         ir.check_names()?;
+        ir.propagate(AGGREGATIONS);
         ir.tolerate_responses();
         ir.choose_boxes();
         Ok(ir)
@@ -1163,6 +1179,17 @@ impl<'g> Ir<'g> {
                 value,
                 single_key,
             } => {
+                // A map of aggregations through the search seam is open as a
+                // whole.
+                if let ValueOf::InstanceOf { type_name, .. } = &**value
+                    && let Some(target) = self.graph.find(type_name)
+                {
+                    match self.open.get(&(ctx.declaring, target)) {
+                        Some(Open::AggsBody) => return Ok(Ty::Prim("::oxsearch_core::AggsBody")),
+                        Some(Open::AggsParam) => return Ok(Ty::Param(AGGREGATIONS.to_owned())),
+                        Some(Open::Json) | None => {}
+                    }
+                }
                 let k = self.ty(ctx, key)?;
                 let v = self.ty(ctx, value)?;
                 if *single_key {
@@ -1176,6 +1203,14 @@ impl<'g> Ir<'g> {
             ValueOf::UnionOf { items } => {
                 if let Some(one) = self.one_or_many(ctx, items)? {
                     return Ok(one);
+                }
+                // `T | null` is an `Option<T>`.
+                if let [a, b] = &items[..] {
+                    match (self.is_null(a), self.is_null(b)) {
+                        (false, true) => return Ok(Ty::Opt(Box::new(self.ty(ctx, a)?))),
+                        (true, false) => return Ok(Ty::Opt(Box::new(self.ty(ctx, b)?))),
+                        _ => {}
+                    }
                 }
                 let base = format!("{}{}", ctx.owner, pascal(ctx.field));
                 let members = self.union_members(ctx, items, &base, &[])?;
@@ -1198,6 +1233,18 @@ impl<'g> Ir<'g> {
                 Literal::Boolean(_) => Ty::Prim("bool"),
             },
         })
+    }
+
+    /// Whether a value is `null`: the primitive, or the specification's
+    /// `NullValue`.
+    fn is_null(&self, value: &ValueOf) -> bool {
+        let ValueOf::InstanceOf { type_name, .. } = value else {
+            return false;
+        };
+        (type_name.namespace == "_builtins" && type_name.name == "null")
+            || self.graph.find(type_name).is_some_and(|t| {
+                matches!(self.special[t], Some(Special::Unit)) && type_name.name == "NullValue"
+            })
     }
 
     /// Whether a value (or each element of an array value) is an externally
@@ -1234,6 +1281,33 @@ impl<'g> Ir<'g> {
             }
         }
         Ok(())
+    }
+
+    /// Adds a type parameter a seam introduced to every item that contains
+    /// it, directly or through another item, and passes it on in their
+    /// references: `search::ResponseBody<TDocument, TAggregations>` makes
+    /// `search::Response` generic in it too.
+    fn propagate(&mut self, param: &str) {
+        loop {
+            let having: HashSet<ItemId> = (0..self.items.len())
+                .filter(|&id| self.items[id].generics.iter().any(|g| g == param))
+                .collect();
+            let mut changed = false;
+            for id in 0..self.items.len() {
+                let mut mentions = false;
+                let item_of = &self.item_of;
+                for ty in item_types_mut(&mut self.items[id].kind) {
+                    mentions |= add_param(ty, param, &having, item_of);
+                }
+                if mentions && !self.items[id].generics.iter().any(|g| g == param) {
+                    self.items[id].generics.push(param.to_owned());
+                    changed = true;
+                }
+            }
+            if !changed {
+                return;
+            }
+        }
     }
 
     /// Types read from responses tolerate a missing required property,
@@ -1333,6 +1407,7 @@ impl<'g> Ir<'g> {
             | Ty::Stringified(t)
             | Ty::WithNull(t)
             | Ty::Flags(t)
+            | Ty::Opt(t)
             | Ty::TypedKeys(t) => self.all_targets(t, out),
             Ty::Map(k, v) | Ty::SingleKey(k, v) => {
                 self.all_targets(k, out);
@@ -1366,7 +1441,7 @@ impl<'g> Ir<'g> {
                 self.direct_targets_of(k, out);
                 self.direct_targets_of(v, out);
             }
-            Ty::OneOrMany(t) | Ty::Stringified(t) | Ty::WithNull(t) | Ty::Flags(t) => {
+            Ty::OneOrMany(t) | Ty::Stringified(t) | Ty::WithNull(t) | Ty::Flags(t) | Ty::Opt(t) => {
                 self.direct_targets_of(t, out)
             }
             Ty::Vec(_)
@@ -1609,6 +1684,7 @@ fn used_params<'t>(types: impl Iterator<Item = &'t Ty>) -> Vec<String> {
             | Ty::Stringified(t)
             | Ty::WithNull(t)
             | Ty::Flags(t)
+            | Ty::Opt(t)
             | Ty::TypedKeys(t) => visit(t, out),
             Ty::Map(k, v) | Ty::SingleKey(k, v) => {
                 visit(k, out);
@@ -1651,4 +1727,93 @@ pub fn params_in_all<'t>(types: impl Iterator<Item = &'t Ty>) -> Vec<String> {
 /// A crate's name in Rust paths.
 pub fn crate_path(krate: &str) -> String {
     format!("oxsearch_{}", krate.replace('-', "_"))
+}
+
+/// Every type in an item, to change.
+fn item_types_mut(kind: &mut ItemKind) -> Vec<&mut Ty> {
+    match kind {
+        ItemKind::Struct(s) => {
+            let mut out: Vec<&mut Ty> = s.fields.iter_mut().map(|f| &mut f.ty).collect();
+            if let Some((_, k, v)) = &mut s.extra {
+                out.push(k);
+                out.push(v);
+            }
+            if let Some((_, _, k, v)) = &mut s.keyed {
+                out.push(k);
+                out.push(v);
+            }
+            out
+        }
+        ItemKind::Container(c) => {
+            let mut out: Vec<&mut Ty> = c.variants.iter_mut().map(|v| &mut v.ty).collect();
+            if let Some((_, k, v)) = &mut c.keyed {
+                out.push(k);
+                out.push(v);
+            }
+            out
+        }
+        ItemKind::Union(members) => members.iter_mut().filter_map(|m| m.ty.as_mut()).collect(),
+        ItemKind::Tagged { members, .. }
+        | ItemKind::External(members)
+        | ItemKind::Untagged { members, .. } => members.iter_mut().map(|v| &mut v.ty).collect(),
+        ItemKind::Alias(ty) | ItemKind::Newtype(ty) => vec![ty],
+        ItemKind::Request(r) => r
+            .path
+            .iter_mut()
+            .chain(r.query.iter_mut())
+            .map(|f| &mut f.ty)
+            .chain(r.body.as_mut())
+            .collect(),
+        ItemKind::Enum(_) => Vec::new(),
+    }
+}
+
+/// Passes `param` on in a type's references to items that take it, and
+/// says whether the type mentions it afterwards.
+fn add_param(
+    ty: &mut Ty,
+    param: &str,
+    having: &HashSet<ItemId>,
+    item_of: &HashMap<usize, ItemId>,
+) -> bool {
+    match ty {
+        Ty::Param(p) => p == param,
+        Ty::Named { target, args } => {
+            let takes = item_of.get(target).is_some_and(|i| having.contains(i));
+            let mut mentions = false;
+            for arg in args.iter_mut() {
+                mentions |= add_param(arg, param, having, item_of);
+            }
+            if takes && !args.iter().any(|a| matches!(a, Ty::Param(p) if p == param)) {
+                args.push(Ty::Param(param.to_owned()));
+                mentions = true;
+            }
+            mentions
+        }
+        Ty::Inline { item, args } => {
+            let takes = having.contains(item);
+            let mut mentions = false;
+            for arg in args.iter_mut() {
+                mentions |= add_param(arg, param, having, item_of);
+            }
+            if takes && !args.iter().any(|a| matches!(a, Ty::Param(p) if p == param)) {
+                args.push(Ty::Param(param.to_owned()));
+                mentions = true;
+            }
+            mentions
+        }
+        Ty::Vec(t)
+        | Ty::OneOrMany(t)
+        | Ty::Stringified(t)
+        | Ty::WithNull(t)
+        | Ty::Flags(t)
+        | Ty::Opt(t)
+        | Ty::TypedKeys(t) => add_param(t, param, having, item_of),
+        Ty::Map(k, v) | Ty::SingleKey(k, v) => {
+            let a = add_param(k, param, having, item_of);
+            let b = add_param(v, param, having, item_of);
+            a || b
+        }
+        Ty::Prim(_) | Ty::Unit | Ty::Json => false,
+    }
 }

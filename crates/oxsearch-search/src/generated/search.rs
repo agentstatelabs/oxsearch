@@ -65,8 +65,7 @@ pub struct RequestBody {
         alias = "aggs",
         skip_serializing_if = "::core::option::Option::is_none"
     )]
-    pub aggregations:
-        ::core::option::Option<::indexmap::IndexMap<::std::string::String, ::serde_json::Value>>,
+    pub aggregations: ::core::option::Option<::oxsearch_core::AggsBody>,
     /// Collapses search results the values of the specified field.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub collapse: ::core::option::Option<::oxsearch_core::search::FieldCollapse>,
@@ -270,9 +269,7 @@ impl RequestBody {
     /// Sets `aggregations`.
     pub fn aggregations(
         mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::std::string::String, ::serde_json::Value>,
-        >,
+        value: impl ::core::convert::Into<::oxsearch_core::AggsBody>,
     ) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
@@ -1069,24 +1066,26 @@ impl Request {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
-pub struct Response<TDocument = ::serde_json::Value>(pub crate::search::ResponseBody<TDocument>);
+pub struct Response<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs>(
+    pub crate::search::ResponseBody<TDocument, TAggregations>,
+);
 
-impl<TDocument> ::core::ops::Deref for Response<TDocument> {
-    type Target = crate::search::ResponseBody<TDocument>;
-    fn deref(&self) -> &crate::search::ResponseBody<TDocument> {
+impl<TDocument, TAggregations> ::core::ops::Deref for Response<TDocument, TAggregations> {
+    type Target = crate::search::ResponseBody<TDocument, TAggregations>;
+    fn deref(&self) -> &crate::search::ResponseBody<TDocument, TAggregations> {
         &self.0
     }
 }
 
-impl<TDocument> ::core::ops::DerefMut for Response<TDocument> {
-    fn deref_mut(&mut self) -> &mut crate::search::ResponseBody<TDocument> {
+impl<TDocument, TAggregations> ::core::ops::DerefMut for Response<TDocument, TAggregations> {
+    fn deref_mut(&mut self) -> &mut crate::search::ResponseBody<TDocument, TAggregations> {
         &mut self.0
     }
 }
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
-pub struct ResponseBody<TDocument = ::serde_json::Value> {
+pub struct ResponseBody<TDocument = ::serde_json::Value, TAggregations = ::oxsearch_core::RawAggs> {
     /// The number of milliseconds it took Elasticsearch to run the request.
     /// This value is calculated by measuring the time elapsed between receipt of a request on the coordinating node and the time at which the coordinating node is ready to send the response.
     /// It includes:
@@ -1115,9 +1114,7 @@ pub struct ResponseBody<TDocument = ::serde_json::Value> {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub hits: ::core::option::Option<crate::search::HitsMetadata<TDocument>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub aggregations: ::core::option::Option<
-        ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-    >,
+    pub aggregations: ::core::option::Option<TAggregations>,
     #[serde(
         rename = "_clusters",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -1150,7 +1147,7 @@ pub struct ResponseBody<TDocument = ::serde_json::Value> {
     pub terminated_early: ::core::option::Option<bool>,
 }
 
-impl<TDocument> ResponseBody<TDocument> {
+impl<TDocument, TAggregations> ResponseBody<TDocument, TAggregations> {
     /// A `ResponseBody` with its required properties set.
     pub fn new(
         took: i64,
@@ -1176,12 +1173,7 @@ impl<TDocument> ResponseBody<TDocument> {
         }
     }
     /// Sets `aggregations`.
-    pub fn aggregations(
-        mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::oxsearch_core::AggregateName, ::serde_json::Value>,
-        >,
-    ) -> Self {
+    pub fn aggregations(mut self, value: TAggregations) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
     }
@@ -2918,57 +2910,6 @@ impl<'de> ::serde::Deserialize<'de> for FieldSuggester {
 
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
-pub enum HitScore {
-    /// A number.
-    Double(f64),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for HitScore {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::Double(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for HitScore {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = HitScore;
-            const EXPECTING: &'static str = "HitScore: null or number";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value).map(HitScore::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Number => {
-                        <f64 as ::serde::Deserialize>::deserialize(value).map(HitScore::Double)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("HitScore can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
 pub enum HitMatchedQueries {
     /// A array.
     StringList(::std::vec::Vec<::std::string::String>),
@@ -3042,7 +2983,7 @@ pub struct Hit<TDocument = ::serde_json::Value> {
         rename = "_score",
         skip_serializing_if = "::core::option::Option::is_none"
     )]
-    pub score: ::core::option::Option<crate::search::HitScore>,
+    pub score: ::core::option::Option<f64>,
     #[serde(
         rename = "_explanation",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -3151,7 +3092,7 @@ impl<TDocument> Hit<TDocument> {
         self
     }
     /// Sets `score`.
-    pub fn score(mut self, value: impl ::core::convert::Into<crate::search::HitScore>) -> Self {
+    pub fn score(mut self, value: f64) -> Self {
         self.score = ::core::option::Option::Some(value.into());
         self
     }
@@ -3333,59 +3274,6 @@ impl<'de> ::serde::Deserialize<'de> for HitsMetadataTotal {
     }
 }
 
-#[derive(Clone, Debug, PartialEq)]
-#[non_exhaustive]
-pub enum HitsMetadataMaxScore {
-    /// A number.
-    Double(f64),
-    /// A null.
-    Null(()),
-}
-
-impl ::serde::Serialize for HitsMetadataMaxScore {
-    fn serialize<S__: ::serde::Serializer>(
-        &self,
-        serializer: S__,
-    ) -> ::core::result::Result<S__::Ok, S__::Error> {
-        match self {
-            Self::Double(value) => ::serde::Serialize::serialize(value, serializer),
-            Self::Null(value) => ::serde::Serialize::serialize(value, serializer),
-        }
-    }
-}
-
-impl<'de> ::serde::Deserialize<'de> for HitsMetadataMaxScore {
-    fn deserialize<D__: ::serde::Deserializer<'de>>(
-        deserializer: D__,
-    ) -> ::core::result::Result<Self, D__::Error> {
-        struct Shape;
-        impl<'de> ::oxsearch_core::__private::ByKind<'de> for Shape {
-            type Value = HitsMetadataMaxScore;
-            const EXPECTING: &'static str = "HitsMetadataMaxScore: null or number";
-            fn visit<V__: ::serde::Deserializer<'de>>(
-                self,
-                kind: ::oxsearch_core::__private::Kind,
-                value: V__,
-            ) -> ::core::result::Result<Self::Value, V__::Error> {
-                match kind {
-                    ::oxsearch_core::__private::Kind::Null => {
-                        <() as ::serde::Deserialize>::deserialize(value)
-                            .map(HitsMetadataMaxScore::Null)
-                    }
-                    ::oxsearch_core::__private::Kind::Number => {
-                        <f64 as ::serde::Deserialize>::deserialize(value)
-                            .map(HitsMetadataMaxScore::Double)
-                    }
-                    _ => ::core::result::Result::Err(<V__::Error as ::serde::de::Error>::custom(
-                        format_args!("HitsMetadataMaxScore can't be {kind:?}"),
-                    )),
-                }
-            }
-        }
-        ::oxsearch_core::__private::deserialize_by_kind(deserializer, Shape)
-    }
-}
-
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct HitsMetadata<T = ::serde_json::Value> {
@@ -3395,7 +3283,7 @@ pub struct HitsMetadata<T = ::serde_json::Value> {
     #[serde(default = "::core::default::Default::default")]
     pub hits: ::std::vec::Vec<crate::search::Hit<T>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub max_score: ::core::option::Option<crate::search::HitsMetadataMaxScore>,
+    pub max_score: ::core::option::Option<f64>,
 }
 
 impl<T> HitsMetadata<T> {
@@ -3416,10 +3304,7 @@ impl<T> HitsMetadata<T> {
         self
     }
     /// Sets `max_score`.
-    pub fn max_score(
-        mut self,
-        value: impl ::core::convert::Into<crate::search::HitsMetadataMaxScore>,
-    ) -> Self {
+    pub fn max_score(mut self, value: f64) -> Self {
         self.max_score = ::core::option::Option::Some(value.into());
         self
     }
@@ -4370,8 +4255,7 @@ pub struct SearchRequestBody {
         alias = "aggs",
         skip_serializing_if = "::core::option::Option::is_none"
     )]
-    pub aggregations:
-        ::core::option::Option<::indexmap::IndexMap<::std::string::String, ::serde_json::Value>>,
+    pub aggregations: ::core::option::Option<::oxsearch_core::AggsBody>,
     /// Collapses search results the values of the specified field.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub collapse: ::core::option::Option<::oxsearch_core::search::FieldCollapse>,
@@ -4564,9 +4448,7 @@ impl SearchRequestBody {
     /// Sets `aggregations`.
     pub fn aggregations(
         mut self,
-        value: impl ::core::convert::Into<
-            ::indexmap::IndexMap<::std::string::String, ::serde_json::Value>,
-        >,
+        value: impl ::core::convert::Into<::oxsearch_core::AggsBody>,
     ) -> Self {
         self.aggregations = ::core::option::Option::Some(value.into());
         self
