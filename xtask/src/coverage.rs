@@ -130,17 +130,28 @@ fn list(names: &[&str]) -> String {
         .join(", ")
 }
 
-/// The generated endpoint a request was for: of the URL templates its
-/// method and path fit, the one with the most fixed segments.
+/// The endpoint a request was for: of the URL templates its method and
+/// path fit, the one with the most fixed segments. Endpoints that share a
+/// template, such as the inference API's general `put` and its
+/// provider-specific ones, go to the first in the specification's order,
+/// the general one.
 fn best_match<'a>(generated: &[Generated<'a>], method: &str, path: &str) -> Option<&'a str> {
     let path = path.split('?').next().unwrap_or(path);
-    generated
+    let mut best: Option<(usize, &'a str)> = None;
+    for (name, url) in generated
         .iter()
         .flat_map(|g| g.endpoint.urls.iter().map(move |url| (g.name, url)))
-        .filter(|(_, url)| url.methods.iter().any(|m| m == method))
-        .filter_map(|(name, url)| fits(&url.path, path).map(|fixed| (fixed, name)))
-        .max_by_key(|(fixed, _)| *fixed)
-        .map(|(_, name)| name)
+    {
+        if !url.methods.iter().any(|m| m == method) {
+            continue;
+        }
+        if let Some(fixed) = fits(&url.path, path)
+            && best.is_none_or(|(most, _)| fixed > most)
+        {
+            best = Some((fixed, name));
+        }
+    }
+    best.map(|(_, name)| name)
 }
 
 /// How many fixed segments a template has, if the path fits it: a
