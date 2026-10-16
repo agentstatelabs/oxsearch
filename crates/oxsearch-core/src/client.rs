@@ -40,16 +40,7 @@ impl<T: Transport> Client<T> {
         &self,
         endpoint: &E,
     ) -> Result<R, Error> {
-        let route = endpoint.route()?;
-        let mut path_and_query = route.path;
-        let query = endpoint.query()?;
-        for (n, (name, value)) in query.iter().enumerate() {
-            path_and_query.push(if n == 0 { '?' } else { '&' });
-            path_and_query.push_str(name);
-            path_and_query.push('=');
-            path_and_query.push_str(&crate::__private::encode(value));
-        }
-        let request = HttpRequest::new(route.method, path_and_query, endpoint.body()?);
+        let request = http_request(endpoint)?;
         let text = endpoint.text_response();
         self.call(Some(endpoint.name()), request, |response| {
             if text {
@@ -67,6 +58,15 @@ impl<T: Transport> Client<T> {
             serde_json::from_slice(body).map_err(|source| decode(response.status, body, source))
         })
         .await
+    }
+
+    /// Sends a call and returns its response's body as it came, for formats
+    /// other than JSON, such as ES|QL's Arrow output (`format=arrow`). An
+    /// error response still reads as an [`Error`].
+    pub async fn send_bytes<E: Endpoint>(&self, endpoint: &E) -> Result<Vec<u8>, Error> {
+        let request = http_request(endpoint)?;
+        self.call(Some(endpoint.name()), request, |response| Ok(response.body))
+            .await
     }
 
     /// Sends any request, for APIs oxsearch doesn't cover yet: a path,
@@ -97,7 +97,7 @@ impl<T: Transport> Client<T> {
         &self,
         name: Option<&'static str>,
         request: HttpRequest,
-        read: impl FnOnce(&HttpResponse) -> Result<R, Error>,
+        read: impl FnOnce(HttpResponse) -> Result<R, Error>,
     ) -> Result<R, Error> {
         let span = telemetry::span(name, &request);
         let started = Instant::now();
@@ -110,7 +110,7 @@ impl<T: Transport> Client<T> {
         let status = response.as_ref().ok().map(|r| r.status);
         let outcome = response.and_then(|response| {
             if (200..300).contains(&response.status) {
-                read(&response)
+                read(response)
             } else {
                 Err(Error::from_response(response.status, &response.body))
             }
@@ -124,6 +124,25 @@ impl<T: Transport> Client<T> {
         );
         outcome
     }
+}
+
+/// The HTTP request for a call: its method, its path with the query
+/// parameters set, and its body.
+fn http_request<E: Endpoint>(endpoint: &E) -> Result<HttpRequest, Error> {
+    let route = endpoint.route()?;
+    let mut path_and_query = route.path;
+    let query = endpoint.query()?;
+    for (n, (name, value)) in query.iter().enumerate() {
+        path_and_query.push(if n == 0 { '?' } else { '&' });
+        path_and_query.push_str(name);
+        path_and_query.push('=');
+        path_and_query.push_str(&crate::__private::encode(value));
+    }
+    Ok(HttpRequest::new(
+        route.method,
+        path_and_query,
+        endpoint.body()?,
+    ))
 }
 
 /// A response that didn't fit the type it was read into.
@@ -141,12 +160,12 @@ mod tests {
     use crate::endpoint::Route;
     use crate::error::TransportError;
 
-    /// Answers every request with a text body.
-    struct Text(&'static str);
+    /// Answers every request with a body and a status.
+    struct Text(&'static str, u16);
 
     impl Transport for Text {
         async fn send(&self, _: HttpRequest) -> Result<HttpResponse, TransportError> {
-            Ok(HttpResponse::new(200, self.0.as_bytes().to_vec()))
+            Ok(HttpResponse::new(self.1, self.0.as_bytes().to_vec()))
         }
     }
 
@@ -183,9 +202,28 @@ mod tests {
             .build()
             .unwrap();
         let text = "::: {node-1}\n   Hot threads at 2026-10-16T00:00:00Z:\n";
-        let client = Client::new(Text(text));
+        let client = Client::new(Text(text, 200));
         assert_eq!(runtime.block_on(client.send(&HotThreads)).unwrap(), text);
         let value: Value = runtime.block_on(client.send_as(&HotThreads)).unwrap();
         assert_eq!(value, Value::String(text.to_owned()));
+    }
+
+    #[test]
+    fn bytes() {
+        let runtime = tokio::runtime::Builder::new_current_thread()
+            .build()
+            .unwrap();
+        let client = Client::new(Text("ARROW1\u{0}\u{1}", 200));
+        let bytes = runtime.block_on(client.send_bytes(&HotThreads)).unwrap();
+        assert_eq!(bytes, b"ARROW1\0\x01");
+        // An error still reads as one.
+        let client = Client::new(Text(
+            r#"{"error": {"type": "verification_exception", "reason": "bad"}, "status": 400}"#,
+            400,
+        ));
+        let Err(Error::Elasticsearch(e)) = runtime.block_on(client.send_bytes(&HotThreads)) else {
+            panic!("an error response");
+        };
+        assert_eq!(e.error_type(), Some("verification_exception"));
     }
 }

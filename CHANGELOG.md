@@ -38,6 +38,11 @@ specification it's generated from.
     new `Error::Row`, naming the row and the column.
   - `Index<T>::esql`, a query `FROM` a typed document index, whose rows
     read back as the documents.
+  - Arrow output, with the `esql-arrow` feature: `Esql::fetch_arrow` runs a
+    query with `format=arrow` and reads the result as Arrow record batches
+    (`arrow-array` 60), without JSON in between.
+- `Client::send_bytes`, which returns a response's body as it came, for
+  formats other than JSON.
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`
