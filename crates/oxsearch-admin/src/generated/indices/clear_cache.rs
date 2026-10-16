@@ -18,10 +18,6 @@ pub struct Request {
     /// To target all data streams and indices, omit this parameter or use `*` or `_all`.
     pub index: ::core::option::Option<::oxsearch_core::Indices>,
     // Query parameters.
-    /// Comma-separated list of data streams, indices, and aliases used to limit the request.
-    /// Supports wildcards (`*`).
-    /// To target all data streams and indices, omit this parameter or use `*` or `_all`.
-    pub index2: ::core::option::Option<::oxsearch_core::Indices>,
     /// A setting that does two separate checks on the index expression.
     /// If `false`, the request returns an error (1) if any wildcard expression
     /// (including `_all` and `*`) resolves to zero matching indices or (2) if the
@@ -53,7 +49,6 @@ impl Request {
     pub fn new() -> Self {
         Self {
             index: ::core::option::Option::None,
-            index2: ::core::option::Option::None,
             allow_no_indices: ::core::option::Option::None,
             expand_wildcards: ::core::option::Option::None,
             fielddata: ::core::option::Option::None,
@@ -69,11 +64,6 @@ impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
-        self
-    }
-    /// Sets `index2`.
-    pub fn index2(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
-        self.index2 = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `allow_no_indices`.
@@ -163,12 +153,6 @@ impl ::oxsearch_core::Endpoint for Request {
         ::oxsearch_core::Error,
     > {
         let mut query = ::std::vec::Vec::new();
-        if let ::core::option::Option::Some(value) = &self.index2 {
-            query.push((
-                "index",
-                ::oxsearch_core::__private::query_param("index", value)?,
-            ));
-        }
         if let ::core::option::Option::Some(value) = &self.allow_no_indices {
             query.push((
                 "allow_no_indices",

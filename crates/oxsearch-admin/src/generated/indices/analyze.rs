@@ -363,11 +363,6 @@ pub struct Request {
     /// If specified, the `analyzer` or field parameter overrides this value.
     /// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
     pub index: ::core::option::Option<::oxsearch_core::IndexName>,
-    // Query parameters.
-    /// Index used to derive the analyzer.
-    /// If specified, the `analyzer` or field parameter overrides this value.
-    /// If no index is specified or the index does not have a default analyzer, the analyze API uses the standard analyzer.
-    pub index2: ::core::option::Option<::oxsearch_core::IndexName>,
     /// The body.
     pub body: ::core::option::Option<crate::indices::analyze::RequestBody>,
 }
@@ -377,7 +372,6 @@ impl Request {
     pub fn new() -> Self {
         Self {
             index: ::core::option::Option::None,
-            index2: ::core::option::Option::None,
             body: ::core::option::Option::None,
         }
     }
@@ -387,11 +381,6 @@ impl Request {
     /// Sets `index`.
     pub fn index(mut self, value: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
         self.index = ::core::option::Option::Some(value.into());
-        self
-    }
-    /// Sets `index2`.
-    pub fn index2(mut self, value: impl ::core::convert::Into<::oxsearch_core::IndexName>) -> Self {
-        self.index2 = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `body`.
@@ -507,14 +496,7 @@ impl ::oxsearch_core::Endpoint for Request {
         ::std::vec::Vec<(&'static str, ::std::string::String)>,
         ::oxsearch_core::Error,
     > {
-        let mut query = ::std::vec::Vec::new();
-        if let ::core::option::Option::Some(value) = &self.index2 {
-            query.push((
-                "index",
-                ::oxsearch_core::__private::query_param("index", value)?,
-            ));
-        }
-        ::core::result::Result::Ok(query)
+        ::core::result::Result::Ok(::std::vec::Vec::new())
     }
 
     fn body(

@@ -281,39 +281,36 @@ impl ::core::ops::DerefMut for Response {
 #[non_exhaustive]
 pub struct ResponseBase {
     /// Contains statistics about the number of nodes selected by the request’s node filters.
-    #[serde(
-        rename = "_nodes",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub nodes: ::core::option::Option<::oxsearch_core::NodeStatistics>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub _nodes: ::core::option::Option<::oxsearch_core::NodeStatistics>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub cluster_name: ::core::option::Option<::oxsearch_core::Name>,
-    #[serde(rename = "nodes", default = "::core::default::Default::default")]
-    pub nodes2: ::indexmap::IndexMap<::std::string::String, crate::nodes::Stats>,
+    #[serde(default = "::core::default::Default::default")]
+    pub nodes: ::indexmap::IndexMap<::std::string::String, crate::nodes::Stats>,
 }
 
 impl ResponseBase {
     /// A `ResponseBase` with its required properties set.
     pub fn new(
-        nodes2: impl ::core::convert::Into<
+        nodes: impl ::core::convert::Into<
             ::indexmap::IndexMap<::std::string::String, crate::nodes::Stats>,
         >,
     ) -> Self {
         Self {
-            nodes: ::core::option::Option::None,
+            _nodes: ::core::option::Option::None,
             cluster_name: ::core::option::Option::None,
-            nodes2: nodes2.into(),
+            nodes: nodes.into(),
         }
     }
 }
 
 impl ResponseBase {
-    /// Sets `nodes`.
-    pub fn nodes(
+    /// Sets `_nodes`.
+    pub fn _nodes(
         mut self,
         value: impl ::core::convert::Into<::oxsearch_core::NodeStatistics>,
     ) -> Self {
-        self.nodes = ::core::option::Option::Some(value.into());
+        self._nodes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `cluster_name`.

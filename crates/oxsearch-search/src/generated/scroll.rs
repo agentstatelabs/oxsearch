@@ -53,8 +53,6 @@ pub struct Request {
     // Query parameters.
     /// The period to retain the search context for scrolling.
     pub scroll: ::core::option::Option<::oxsearch_core::Duration>,
-    /// The scroll ID
-    pub scroll_id2: ::core::option::Option<::oxsearch_core::ScrollId>,
     /// If true, the API response’s hit.total property is returned as an integer. If false, the API response’s hit.total property is returned as an object.
     pub rest_total_hits_as_int: ::core::option::Option<bool>,
     /// The body.
@@ -67,7 +65,6 @@ impl Request {
         Self {
             scroll_id: ::core::option::Option::None,
             scroll: ::core::option::Option::None,
-            scroll_id2: ::core::option::Option::None,
             rest_total_hits_as_int: ::core::option::Option::None,
             body: ::core::option::Option::None,
         }
@@ -86,14 +83,6 @@ impl Request {
     /// Sets `scroll`.
     pub fn scroll(mut self, value: impl ::core::convert::Into<::oxsearch_core::Duration>) -> Self {
         self.scroll = ::core::option::Option::Some(value.into());
-        self
-    }
-    /// Sets `scroll_id2`.
-    pub fn scroll_id2(
-        mut self,
-        value: impl ::core::convert::Into<::oxsearch_core::ScrollId>,
-    ) -> Self {
-        self.scroll_id2 = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `rest_total_hits_as_int`.
@@ -169,12 +158,6 @@ impl ::oxsearch_core::Endpoint for Request {
             query.push((
                 "scroll",
                 ::oxsearch_core::__private::query_param("scroll", value)?,
-            ));
-        }
-        if let ::core::option::Option::Some(value) = &self.scroll_id2 {
-            query.push((
-                "scroll_id",
-                ::oxsearch_core::__private::query_param("scroll_id", value)?,
             ));
         }
         if let ::core::option::Option::Some(value) = &self.rest_total_hits_as_int {

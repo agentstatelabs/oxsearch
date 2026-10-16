@@ -34,10 +34,6 @@ pub struct Request {
     /// To prevent errors, the API immediately compiles the script or template in this context.
     pub context: ::core::option::Option<::oxsearch_core::Name>,
     // Query parameters.
-    /// The context in which the script or search template should run.
-    /// To prevent errors, the API immediately compiles the script or template in this context.
-    /// If you specify both this and the `<context>` path parameter, the API uses the request path parameter.
-    pub context2: ::core::option::Option<::oxsearch_core::Name>,
     /// The period to wait for a connection to the master node.
     /// If no response is received before the timeout expires, the request fails and returns an error.
     /// It can also be set to `-1` to indicate that the request should never timeout.
@@ -56,7 +52,6 @@ impl Request {
         Self {
             id: id.into(),
             context: ::core::option::Option::None,
-            context2: ::core::option::Option::None,
             master_timeout: ::core::option::Option::None,
             timeout: ::core::option::Option::None,
             body: ::core::option::Option::None,
@@ -68,11 +63,6 @@ impl Request {
     /// Sets `context`.
     pub fn context(mut self, value: impl ::core::convert::Into<::oxsearch_core::Name>) -> Self {
         self.context = ::core::option::Option::Some(value.into());
-        self
-    }
-    /// Sets `context2`.
-    pub fn context2(mut self, value: impl ::core::convert::Into<::oxsearch_core::Name>) -> Self {
-        self.context2 = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `master_timeout`.
@@ -155,12 +145,6 @@ impl ::oxsearch_core::Endpoint for Request {
         ::oxsearch_core::Error,
     > {
         let mut query = ::std::vec::Vec::new();
-        if let ::core::option::Option::Some(value) = &self.context2 {
-            query.push((
-                "context",
-                ::oxsearch_core::__private::query_param("context", value)?,
-            ));
-        }
         if let ::core::option::Option::Some(value) = &self.master_timeout {
             query.push((
                 "master_timeout",

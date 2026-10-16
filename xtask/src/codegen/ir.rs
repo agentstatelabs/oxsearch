@@ -432,11 +432,18 @@ impl<'g> Ir<'g> {
                     declaring: i,
                     env: &[],
                 };
-                let mut used = BTreeSet::new();
+                // A query parameter that repeats a path parameter is the same
+                // value sent another way, which the path parameter covers.
+                let query: Vec<&Property> = t
+                    .query
+                    .iter()
+                    .filter(|q| !t.path.iter().any(|p| p.name == q.name))
+                    .collect();
+                let mut names = FieldNames::new(t.path.iter().chain(query.iter().copied()));
                 let mut fields =
-                    |props: &[Property], ir: &mut Ir<'g>| -> Result<Vec<Field>, Error> {
+                    |props: Vec<&Property>, ir: &mut Ir<'g>| -> Result<Vec<Field>, Error> {
                         props
-                            .iter()
+                            .into_iter()
                             .map(|p| {
                                 ir.field(
                                     &Ctx {
@@ -444,13 +451,13 @@ impl<'g> Ir<'g> {
                                         ..ctx
                                     },
                                     p,
-                                    &mut used,
+                                    &mut names,
                                 )
                             })
                             .collect()
                     };
-                let path = fields(&t.path, self)?;
-                let query = fields(&t.query, self)?;
+                let path = fields(t.path.iter().collect(), self)?;
+                let query = fields(query, self)?;
                 let body = match &t.body {
                     Body::NoBody {} => None,
                     Body::Value { value, .. } => Some(self.ty(
@@ -461,7 +468,7 @@ impl<'g> Ir<'g> {
                         value,
                     )?),
                     Body::Properties { properties } => {
-                        let mut used = BTreeSet::new();
+                        let mut names = FieldNames::new(properties);
                         let fields = properties
                             .iter()
                             .map(|p| {
@@ -472,7 +479,7 @@ impl<'g> Ir<'g> {
                                         ..ctx
                                     },
                                     p,
-                                    &mut used,
+                                    &mut names,
                                 )
                             })
                             .collect::<Result<Vec<_>, Error>>()?;
@@ -529,7 +536,7 @@ impl<'g> Ir<'g> {
                     )?),
                     Body::NoBody {} => ItemKind::Struct(plain(Vec::new())),
                     Body::Properties { properties } => {
-                        let mut used = BTreeSet::new();
+                        let mut names = FieldNames::new(properties);
                         let fields = properties
                             .iter()
                             .map(|p| {
@@ -539,7 +546,7 @@ impl<'g> Ir<'g> {
                                         ..ctx
                                     },
                                     p,
-                                    &mut used,
+                                    &mut names,
                                 )
                             })
                             .collect::<Result<Vec<_>, Error>>()?;
@@ -570,12 +577,16 @@ impl<'g> Ir<'g> {
         &mut self,
         ctx: &Ctx<'_>,
         p: &Property,
-        used: &mut BTreeSet<String>,
+        names: &mut FieldNames,
     ) -> Result<Field, Error> {
         let mut ident = snake(&p.name);
-        if used.contains(&ident) && p.name.starts_with('_') {
+        // An underscore property whose plain name another one takes keeps
+        // its underscore, whichever comes first: `_nodes` beside `nodes`.
+        if p.name.starts_with('_') && (names.plain.contains(&ident) || names.used.contains(&ident))
+        {
             ident = format!("_{ident}");
         }
+        let used = &mut names.used;
         let declaring = self.graph.name(ctx.declaring);
         let ty = if AS_STRING.contains(&(
             declaring.namespace.as_str(),
@@ -682,11 +693,12 @@ impl<'g> Ir<'g> {
             env: &[],
         };
         let flat = self.flatten(i, Vec::new(), &ctx)?;
-        let mut used = BTreeSet::new();
+        // The tag of the union the type is a member of isn't a field.
+        let tag = |p: &Property| matches!(p.value, ValueOf::LiteralValue { .. });
+        let mut names = FieldNames::new(flat.props.iter().map(|(p, ..)| *p).filter(|p| !tag(p)));
         let mut fields = Vec::new();
         for (p, declaring, env) in &flat.props {
-            if matches!(p.value, ValueOf::LiteralValue { .. }) {
-                // The tag of the union the type is a member of.
+            if tag(p) {
                 continue;
             }
             let ctx = Ctx {
@@ -695,8 +707,9 @@ impl<'g> Ir<'g> {
                 env,
                 ..ctx
             };
-            fields.push(self.field(&ctx, p, &mut used)?);
+            fields.push(self.field(&ctx, p, &mut names)?);
         }
+        let used = &mut names.used;
         let mut extra = None;
         let mut keyed = None;
         for (behavior, declaring, env) in &flat.behaviors {
@@ -718,7 +731,7 @@ impl<'g> Ir<'g> {
                         .meta
                         .get("fieldname")
                         .map_or("additional", String::as_str);
-                    let ident = unique(&mut used, snake(name));
+                    let ident = unique(used, snake(name));
                     let value = self.ty(&Ctx { field: name, ..ctx }, v)?;
                     // Values tagged by their key, such as the aggregations
                     // in a bucket (`sterms#by_tag`), read their tag from it.
@@ -739,8 +752,8 @@ impl<'g> Ir<'g> {
                     };
                     let key = behavior.meta.get("key").map_or("key", String::as_str);
                     let value = behavior.meta.get("value").map_or("value", String::as_str);
-                    let key_ident = unique(&mut used, snake(key));
-                    let value_ident = unique(&mut used, snake(value));
+                    let key_ident = unique(used, snake(key));
+                    let value_ident = unique(used, snake(value));
                     keyed = Some((
                         key_ident,
                         value_ident,
@@ -832,7 +845,16 @@ impl<'g> Ir<'g> {
         let flat = self.flatten(i, Vec::new(), &ctx)?;
         let mut props = Vec::new();
         let mut variants = Vec::new();
-        let mut used_fields = BTreeSet::new();
+        // The specification marks a container's own properties that sit
+        // beside the variant; inherited ones, such as a query's `boost` and
+        // `_name`, always do.
+        let beside = |p: &Property, declaring: usize| p.container_property || declaring != i;
+        let mut names = FieldNames::new(
+            flat.props
+                .iter()
+                .filter(|(p, declaring, _)| beside(p, *declaring))
+                .map(|(p, ..)| *p),
+        );
         let mut used_variants = BTreeSet::new();
         used_variants.insert("Raw".to_owned());
         for (p, declaring, env) in &flat.props {
@@ -842,11 +864,8 @@ impl<'g> Ir<'g> {
                 env,
                 ..ctx
             };
-            // The specification marks a container's own properties that sit
-            // beside the variant; inherited ones, such as a query's `boost`
-            // and `_name`, always do.
-            if p.container_property || *declaring != i {
-                props.push(self.field(&ctx, p, &mut used_fields)?);
+            if beside(p, *declaring) {
+                props.push(self.field(&ctx, p, &mut names)?);
             } else {
                 variants.push(Variant {
                     wire: p.name.clone(),
@@ -901,7 +920,7 @@ impl<'g> Ir<'g> {
             generics: Vec::new(),
             kind: ItemKind::Container(container),
         });
-        let field = unique(&mut used_fields, "variant".to_owned());
+        let field = unique(&mut names.used, "variant".to_owned());
         let id = self.push(Item {
             krate: location.krate.clone(),
             module: location.module.clone(),
@@ -1688,6 +1707,27 @@ pub fn module_path(namespace: &str, krate: &str) -> Vec<String> {
         .iter()
         .map(|p| snake(p.trim_start_matches('_')))
         .collect()
+}
+
+/// The Rust names a struct's fields have taken, and the names its
+/// properties without a leading underscore will take.
+struct FieldNames {
+    used: BTreeSet<String>,
+    plain: BTreeSet<String>,
+}
+
+impl FieldNames {
+    /// For a struct with these properties.
+    fn new<'p>(properties: impl IntoIterator<Item = &'p Property>) -> FieldNames {
+        FieldNames {
+            used: BTreeSet::new(),
+            plain: properties
+                .into_iter()
+                .filter(|p| !p.name.starts_with('_'))
+                .map(|p| snake(&p.name))
+                .collect(),
+        }
+    }
 }
 
 fn unique(used: &mut BTreeSet<String>, name: String) -> String {

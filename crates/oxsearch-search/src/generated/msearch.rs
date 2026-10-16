@@ -412,8 +412,6 @@ pub struct Request {
     /// Typically, this adds a small overhead to a request.
     /// However, using computationally expensive named queries on a large number of hits may add significant overhead.
     pub include_named_queries_score: ::core::option::Option<bool>,
-    /// Comma-separated list of data streams, indices, and index aliases to use as default
-    pub index2: ::core::option::Option<::oxsearch_core::Indices>,
     /// Maximum number of concurrent searches the multi search API can execute.
     /// Defaults to `max(1, (# of data nodes * min(search thread pool size, 10)))`.
     pub max_concurrent_searches: ::core::option::Option<i32>,
@@ -459,7 +457,6 @@ impl Request {
             ignore_throttled: ::core::option::Option::None,
             ignore_unavailable: ::core::option::Option::None,
             include_named_queries_score: ::core::option::Option::None,
-            index2: ::core::option::Option::None,
             max_concurrent_searches: ::core::option::Option::None,
             max_concurrent_shard_requests: ::core::option::Option::None,
             pre_filter_shard_size: ::core::option::Option::None,
@@ -511,11 +508,6 @@ impl Request {
     /// Sets `include_named_queries_score`.
     pub fn include_named_queries_score(mut self, value: bool) -> Self {
         self.include_named_queries_score = ::core::option::Option::Some(value.into());
-        self
-    }
-    /// Sets `index2`.
-    pub fn index2(mut self, value: impl ::core::convert::Into<::oxsearch_core::Indices>) -> Self {
-        self.index2 = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `max_concurrent_searches`.
@@ -905,12 +897,6 @@ impl ::oxsearch_core::Endpoint for Request {
             query.push((
                 "include_named_queries_score",
                 ::oxsearch_core::__private::query_param("include_named_queries_score", value)?,
-            ));
-        }
-        if let ::core::option::Option::Some(value) = &self.index2 {
-            query.push((
-                "index",
-                ::oxsearch_core::__private::query_param("index", value)?,
             ));
         }
         if let ::core::option::Option::Some(value) = &self.max_concurrent_searches {
