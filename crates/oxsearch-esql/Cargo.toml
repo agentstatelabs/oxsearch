@@ -1,8 +1,8 @@
 [package]
 name = "oxsearch-esql"
-description = "ES|QL for oxsearch, generated from the Elasticsearch specification"
+description = "ES|QL for oxsearch: queries generated from the Elasticsearch specification, a typed query builder, and rows read into your own types"
 readme = "../../README.md"
-keywords = ["elasticsearch", "search", "client"]
+keywords = ["elasticsearch", "search", "client", "esql"]
 categories = ["api-bindings", "database"]
 version.workspace = true
 edition.workspace = true
@@ -12,11 +12,32 @@ repository.workspace = true
 homepage.workspace = true
 authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
-# Published once it's generated (Phase 2 in DESIGN.md).
-publish = false
+
+[lib]
+# The generated documentation quotes Elasticsearch's own, which isn't Rust.
+doctest = false
+
+[features]
+# Endpoints Elasticsearch marks beta or experimental: they may change or go
+# away in any Elasticsearch release.
+beta = []
+experimental = []
 
 [dependencies]
+indexmap = { version = "2.14", features = ["serde"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+# Which column of a row didn't fit, for the error.
+serde_path_to_error = "0.1.20"
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
+
+[dev-dependencies]
+# The tests cover the endpoints behind features too.
+oxsearch-esql = { path = ".", features = ["beta", "experimental"] }
+
+[package.metadata.docs.rs]
+# Document the endpoints behind features too.
+all-features = true
 
 [lints]
 workspace = true

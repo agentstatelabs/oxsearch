@@ -1,4 +1,4 @@
-61 exact, 11 normalized, 4 failing
+62 exact, 11 normalized, 3 failing
 _global.bulk request BulkRequestExample1: exact
 _global.bulk request BulkRequestExample2: normalized at /6/update/_source (dropped)
 _global.bulk request BulkRequestExample3: exact
@@ -60,7 +60,7 @@ _global.termvectors response TermVectorsResponseExample1: exact
 _global.termvectors response TermVectorsResponseExample2: exact
 _global.termvectors response TermVectorsResponseExample3: exact
 _global.update request UpdateRequestExample1: exact
-_global.update request UpdateRequestExample10: fails: not JSON: expected `,` or `}` at line 4 column 17
+_global.update request UpdateRequestExample10: exact
 _global.update request UpdateRequestExample11: exact
 _global.update request UpdateRequestExample2: exact
 _global.update request UpdateRequestExample3: exact

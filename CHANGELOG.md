@@ -24,6 +24,20 @@ specification it's generated from.
   allocation) and nodes (info, stats, usage, hot threads).
 - Calls that answer in plain text, such as `nodes.hot_threads`, read as a
   `String` (`Endpoint::text_response`).
+- **ES|QL** (`oxsearch-esql`, the `esql` feature): the query and async query
+  APIs, generated from the specification, with:
+  - `Esql`, a typed query builder: `from_index`, `row`, `where_`, `eval`,
+    `keep`, `drop`, `rename`, `sort`, `limit`, `stats`, `mv_expand`, `fork`
+    and `fuse`, with `then` for any other command. Values go into the
+    request's `params`, never into the query, and column names are quoted
+    where they need it. `col("year").gte(2020)` and the other conditions,
+    `Expr` for the rest.
+  - Rows read into your own types by column name (`Esql::fetch`,
+    `EsqlResult::rows`): dotted columns fill nested structs, and a single
+    value reads into a `Vec` field. A row that doesn't fit fails with the
+    new `Error::Row`, naming the row and the column.
+  - `Index<T>::esql`, a query `FROM` a typed document index, whose rows
+    read back as the documents.
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`

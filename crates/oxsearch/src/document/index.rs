@@ -393,6 +393,26 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
     }
 }
 
+#[cfg(feature = "esql")]
+impl<T: Document, Tr: Transport> Index<T, Tr> {
+    /// An ES|QL query `FROM` the index, to build on and run with
+    /// [`Esql::fetch`](oxsearch_esql::Esql::fetch), which reads the rows as
+    /// the documents, or as any other type, by column name:
+    ///
+    /// ```ignore
+    /// let popular: Vec<Note> = notes
+    ///     .esql()
+    ///     .where_(col("views").gte(100))
+    ///     .sort([col("views").desc()])
+    ///     .limit(10)
+    ///     .fetch(notes.client())
+    ///     .await?;
+    /// ```
+    pub fn esql(&self) -> oxsearch_esql::Esql {
+        oxsearch_esql::Esql::from_index(&self.name)
+    }
+}
+
 /// A document read with its version, or `None` if it wasn't found.
 fn versioned<T: Document>(result: get::GetResult<Value>) -> Result<Option<Versioned<T>>, Error> {
     if result.found == Some(false) {
