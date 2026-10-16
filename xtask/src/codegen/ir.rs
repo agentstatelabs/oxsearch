@@ -266,11 +266,25 @@ pub struct Ir<'g> {
     pub boxed: HashSet<(ItemId, ItemId, Position)>,
     /// The items for endpoints' responses.
     responses: Vec<ItemId>,
+    /// The responses that are plain text, by specification type.
+    text: HashSet<usize>,
     cut: HashSet<(usize, usize)>,
     /// What each reference through a seam becomes, by (from, to) type.
     open: HashMap<(usize, usize), Open>,
     special: Vec<Option<Special>>,
 }
+
+/// Properties the specification types otherwise than Elasticsearch sends
+/// them, by namespace, type and property, generated as strings instead.
+const AS_STRING: &[(&str, &str, &str)] = &[
+    // A node setting, which comes back as a string like the others,
+    // `xpack.security.enabled` among them.
+    (
+        "nodes.info",
+        "NodeInfoXpackMl",
+        "use_auto_machine_memory_percent",
+    ),
+];
 
 /// The type parameter a search response's aggregation results become.
 pub const AGGREGATIONS: &str = "TAggregations";
@@ -285,11 +299,14 @@ struct Ctx<'c> {
 }
 
 impl<'g> Ir<'g> {
-    /// Builds the items for the given crates.
+    /// Builds the items for the given crates. The `text` responses, by
+    /// specification type, are plain text rather than JSON, and read as a
+    /// `String`.
     pub fn build(
         graph: &'g Graph<'g>,
         placement: &'g Placement<'g>,
         crates: &[&str],
+        text: HashSet<usize>,
     ) -> Result<Ir<'g>, Error> {
         let special: Vec<Option<Special>> =
             (0..graph.types.len()).map(|i| special(graph, i)).collect();
@@ -341,6 +358,7 @@ impl<'g> Ir<'g> {
             locations,
             boxed: HashSet::new(),
             responses: Vec::new(),
+            text,
             cut,
             open,
             special,
@@ -497,6 +515,11 @@ impl<'g> Ir<'g> {
                     env: &[],
                 };
                 let kind = match &t.body {
+                    // The specification declares a text response's body as
+                    // empty.
+                    _ if self.text.contains(&i) => {
+                        ItemKind::Newtype(Ty::Prim("::std::string::String"))
+                    }
                     Body::Value { value, .. } => ItemKind::Newtype(self.ty(
                         &Ctx {
                             field: "body",
@@ -553,10 +576,20 @@ impl<'g> Ir<'g> {
         if used.contains(&ident) && p.name.starts_with('_') {
             ident = format!("_{ident}");
         }
+        let declaring = self.graph.name(ctx.declaring);
+        let ty = if AS_STRING.contains(&(
+            declaring.namespace.as_str(),
+            declaring.name.as_str(),
+            p.name.as_str(),
+        )) {
+            Ty::Prim("::std::string::String")
+        } else {
+            self.ty(ctx, &p.value)?
+        };
         Ok(Field {
             wire: p.name.clone(),
             ident: unique(used, ident),
-            ty: self.ty(ctx, &p.value)?,
+            ty,
             required: p.required,
             optional: !p.required,
             defaulted: false,

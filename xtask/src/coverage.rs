@@ -155,7 +155,8 @@ fn best_match<'a>(generated: &[Generated<'a>], method: &str, path: &str) -> Opti
 }
 
 /// How many fixed segments a template has, if the path fits it: a
-/// `{parameter}` takes one segment, which isn't an API's (`_search`).
+/// `{parameter}` takes one segment, which isn't an API's (`_search`) but may
+/// be `_all`.
 fn fits(template: &str, path: &str) -> Option<usize> {
     let template: Vec<&str> = template.trim_matches('/').split('/').collect();
     let path: Vec<&str> = path.trim_matches('/').split('/').collect();
@@ -165,7 +166,7 @@ fn fits(template: &str, path: &str) -> Option<usize> {
     let mut fixed = 0;
     for (t, p) in template.iter().zip(&path) {
         if t.starts_with('{') {
-            if p.is_empty() || p.starts_with('_') {
+            if p.is_empty() || (p.starts_with('_') && *p != "_all") {
                 return None;
             }
         } else if t == p {
@@ -187,6 +188,7 @@ mod tests {
         assert_eq!(fits("/_search", "/_search"), Some(1));
         assert_eq!(fits("/{index}/_doc/{id}", "/_inference/rerank/x"), None);
         assert_eq!(fits("/{index}", "/_bulk"), None);
+        assert_eq!(fits("/_info/{target}", "/_info/_all"), Some(1));
         assert_eq!(fits("/", "/"), Some(1));
         assert_eq!(fits("/{index}/_doc/{id}", "/a/_doc/1"), Some(1));
     }

@@ -20,11 +20,12 @@ use std::collections::HashMap;
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 
-use oxsearch_core::{Client, Error, Method};
+use oxsearch::admin::indices::{create, delete, get_mapping};
+use oxsearch_core::{Client, Error};
 use oxsearch_mapping::TypeMapping;
 use oxsearch_transport_reqwest::ReqwestTransport;
 use serde::{Deserialize, Serialize};
-use serde_json::{Value, json};
+use serde_json::Value;
 
 /// The client the tests use.
 pub type TestClient = Client<Recorded<ReqwestTransport>>;
@@ -146,16 +147,13 @@ impl TestIndex {
         TestIndex { name }
     }
 
-    /// Creates an index with a name no other test uses. Index creation isn't
-    /// in the first slice's crates, so it goes through the raw call, with a
-    /// mapping built from the generated types.
+    /// Creates an index with a name no other test uses, and the mapping.
     pub async fn create(client: &TestClient, prefix: &str, mapping: &TypeMapping) -> TestIndex {
         let name = TestIndex::named(prefix).name;
         client
-            .send_raw(
-                Method::Put,
-                &format!("/{name}"),
-                Some(&json!({ "mappings": mapping })),
+            .send(
+                &create::Request::new(name.as_str())
+                    .body(create::RequestBody::new().mappings(mapping.clone())),
             )
             .await
             .unwrap_or_else(|e| panic!("creating {name}: {e}"));
@@ -167,10 +165,11 @@ impl TestIndex {
         &self.name
     }
 
-    /// The index's mapping, as Elasticsearch reports it.
+    /// The index's mapping, as Elasticsearch reports it: the JSON, not the
+    /// generated types' reading of it.
     pub async fn mapping(&self, client: &TestClient) -> Value {
-        let response = client
-            .send_raw(Method::Get, &format!("/{}/_mapping", self.name), None)
+        let response: Value = client
+            .send_as(&get_mapping::Request::new().index(self.name.as_str()))
             .await
             .unwrap_or_else(|e| panic!("reading {}'s mapping: {e}", self.name));
         response[&self.name]["mappings"].clone()
@@ -179,7 +178,7 @@ impl TestIndex {
     /// Deletes the index.
     pub async fn delete(self, client: &TestClient) {
         client
-            .send_raw(Method::Delete, &format!("/{}", self.name), None)
+            .send(&delete::Request::new(self.name.as_str()))
             .await
             .unwrap_or_else(|e| panic!("deleting {}: {e}", self.name));
     }

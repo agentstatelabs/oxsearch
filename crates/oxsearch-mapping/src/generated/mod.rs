@@ -35,9 +35,11 @@ pub struct AggregateMetricDoubleProperty {
     >,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub synthetic_source_keep: ::core::option::Option<crate::SyntheticSourceKeepEnum>,
-    pub default_metric: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub default_metric: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub ignore_malformed: ::core::option::Option<bool>,
+    #[serde(default = "::core::default::Default::default")]
     pub metrics: ::std::vec::Vec<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub time_series_metric: ::core::option::Option<crate::TimeSeriesMetricType>,
@@ -56,7 +58,7 @@ impl AggregateMetricDoubleProperty {
             dynamic: ::core::option::Option::None,
             fields: ::core::option::Option::None,
             synthetic_source_keep: ::core::option::Option::None,
-            default_metric: default_metric.into(),
+            default_metric: ::core::option::Option::Some(default_metric.into()),
             ignore_malformed: ::core::option::Option::None,
             metrics: metrics.into(),
             time_series_metric: ::core::option::Option::None,
@@ -131,16 +133,26 @@ impl AggregateMetricDoubleProperty {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct AllField {
-    pub analyzer: ::std::string::String,
-    pub enabled: bool,
-    pub omit_norms: bool,
-    pub search_analyzer: ::std::string::String,
-    pub similarity: ::std::string::String,
-    pub store: bool,
-    pub store_term_vector_offsets: bool,
-    pub store_term_vector_payloads: bool,
-    pub store_term_vector_positions: bool,
-    pub store_term_vectors: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub analyzer: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub enabled: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub omit_norms: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub search_analyzer: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub similarity: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub store: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub store_term_vector_offsets: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub store_term_vector_payloads: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub store_term_vector_positions: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub store_term_vectors: ::core::option::Option<bool>,
 }
 
 impl AllField {
@@ -158,16 +170,22 @@ impl AllField {
         store_term_vectors: bool,
     ) -> Self {
         Self {
-            analyzer: analyzer.into(),
-            enabled: enabled.into(),
-            omit_norms: omit_norms.into(),
-            search_analyzer: search_analyzer.into(),
-            similarity: similarity.into(),
-            store: store.into(),
-            store_term_vector_offsets: store_term_vector_offsets.into(),
-            store_term_vector_payloads: store_term_vector_payloads.into(),
-            store_term_vector_positions: store_term_vector_positions.into(),
-            store_term_vectors: store_term_vectors.into(),
+            analyzer: ::core::option::Option::Some(analyzer.into()),
+            enabled: ::core::option::Option::Some(enabled.into()),
+            omit_norms: ::core::option::Option::Some(omit_norms.into()),
+            search_analyzer: ::core::option::Option::Some(search_analyzer.into()),
+            similarity: ::core::option::Option::Some(similarity.into()),
+            store: ::core::option::Option::Some(store.into()),
+            store_term_vector_offsets: ::core::option::Option::Some(
+                store_term_vector_offsets.into(),
+            ),
+            store_term_vector_payloads: ::core::option::Option::Some(
+                store_term_vector_payloads.into(),
+            ),
+            store_term_vector_positions: ::core::option::Option::Some(
+                store_term_vector_positions.into(),
+            ),
+            store_term_vectors: ::core::option::Option::Some(store_term_vectors.into()),
         }
     }
 }
@@ -672,11 +690,13 @@ pub struct ChunkingSettings {
     /// - either `separators` or`separator_group`
     ///
     /// Learn more about different chunking strategies in the linked documentation.
-    pub strategy: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub strategy: ::core::option::Option<::std::string::String>,
     /// The maximum size of a chunk in words.
     /// This value cannot be lower than `20` (for `sentence` strategy) or `10` (for `word` strategy).
     /// This value should not exceed the window size for the associated model.
-    pub max_chunk_size: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub max_chunk_size: ::core::option::Option<i32>,
     /// The number of overlapping words for chunks.
     /// It is applicable only to a `word` chunking strategy.
     /// This value cannot be higher than half the `max_chunk_size` value.
@@ -715,8 +735,8 @@ impl ChunkingSettings {
         max_chunk_size: i32,
     ) -> Self {
         Self {
-            strategy: strategy.into(),
-            max_chunk_size: max_chunk_size.into(),
+            strategy: ::core::option::Option::Some(strategy.into()),
+            max_chunk_size: ::core::option::Option::Some(max_chunk_size.into()),
             overlap: ::core::option::Option::None,
             sentence_overlap: ::core::option::Option::None,
             separator_group: ::core::option::Option::None,
@@ -1237,14 +1257,15 @@ impl CountedKeywordProperty {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DataStreamTimestamp {
-    pub enabled: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub enabled: ::core::option::Option<bool>,
 }
 
 impl DataStreamTimestamp {
     /// A `DataStreamTimestamp` with its required properties set.
     pub fn new(enabled: bool) -> Self {
         Self {
-            enabled: enabled.into(),
+            enabled: ::core::option::Option::Some(enabled.into()),
         }
     }
 }
@@ -1868,7 +1889,8 @@ pub struct DenseVectorIndexOptions {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub m: ::core::option::Option<i32>,
     /// The type of kNN algorithm to use.
-    pub r#type: crate::DenseVectorIndexOptionsType,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r#type: ::core::option::Option<crate::DenseVectorIndexOptionsType>,
     /// The rescore vector options. This is only applicable to `bbq_disk`, `bbq_hnsw`, `int4_hnsw`, `int8_hnsw`, `bbq_flat`, `int4_flat`, and `int8_flat` index types.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub rescore_vector: ::core::option::Option<crate::DenseVectorIndexOptionsRescoreVector>,
@@ -1916,7 +1938,7 @@ impl DenseVectorIndexOptions {
             confidence_interval: ::core::option::Option::None,
             ef_construction: ::core::option::Option::None,
             m: ::core::option::Option::None,
-            r#type: r#type.into(),
+            r#type: ::core::option::Option::Some(r#type.into()),
             rescore_vector: ::core::option::Option::None,
             on_disk_rescore: ::core::option::Option::None,
             flat_index_threshold: ::core::option::Option::None,
@@ -1997,14 +2019,15 @@ pub struct DenseVectorIndexOptionsRescoreVector {
     /// When provided, `oversample * k` vectors will be gathered and then their scores will be re-computed with the original vectors.
     ///
     /// valid values are between `1.0` and `10.0` (inclusive), or `0` exactly to disable oversampling.
-    pub oversample: f32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub oversample: ::core::option::Option<f32>,
 }
 
 impl DenseVectorIndexOptionsRescoreVector {
     /// A `DenseVectorIndexOptionsRescoreVector` with its required properties set.
     pub fn new(oversample: f32) -> Self {
         Self {
-            oversample: oversample.into(),
+            oversample: ::core::option::Option::Some(oversample.into()),
         }
     }
 }
@@ -3758,8 +3781,12 @@ impl FieldAliasProperty {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FieldMapping {
-    pub full_name: ::std::string::String,
-    pub mapping: ::oxsearch_core::shapes::SingleKey<::oxsearch_core::Field, crate::Property>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub full_name: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub mapping: ::core::option::Option<
+        ::oxsearch_core::shapes::SingleKey<::oxsearch_core::Field, crate::Property>,
+    >,
 }
 
 impl FieldMapping {
@@ -3771,8 +3798,8 @@ impl FieldMapping {
         >,
     ) -> Self {
         Self {
-            full_name: full_name.into(),
-            mapping: mapping.into(),
+            full_name: ::core::option::Option::Some(full_name.into()),
+            mapping: ::core::option::Option::Some(mapping.into()),
         }
     }
 }
@@ -3782,14 +3809,15 @@ impl FieldMapping {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FieldNamesField {
-    pub enabled: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub enabled: ::core::option::Option<bool>,
 }
 
 impl FieldNamesField {
     /// A `FieldNamesField` with its required properties set.
     pub fn new(enabled: bool) -> Self {
         Self {
-            enabled: enabled.into(),
+            enabled: ::core::option::Option::Some(enabled.into()),
         }
     }
 }
@@ -5367,14 +5395,15 @@ impl IcuCollationProperty {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct IndexField {
-    pub enabled: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub enabled: ::core::option::Option<bool>,
 }
 
 impl IndexField {
     /// A `IndexField` with its required properties set.
     pub fn new(enabled: bool) -> Self {
         Self {
-            enabled: enabled.into(),
+            enabled: ::core::option::Option::Some(enabled.into()),
         }
     }
 }
@@ -9285,14 +9314,15 @@ impl RankVectorProperty {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RoutingField {
-    pub required: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub required: ::core::option::Option<bool>,
 }
 
 impl RoutingField {
     /// A `RoutingField` with its required properties set.
     pub fn new(required: bool) -> Self {
         Self {
-            required: required.into(),
+            required: ::core::option::Option::Some(required.into()),
         }
     }
 }
@@ -10432,14 +10462,15 @@ impl ShortNumberProperty {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SizeField {
-    pub enabled: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub enabled: ::core::option::Option<bool>,
 }
 
 impl SizeField {
     /// A `SizeField` with its required properties set.
     pub fn new(enabled: bool) -> Self {
         Self {
-            enabled: enabled.into(),
+            enabled: ::core::option::Option::Some(enabled.into()),
         }
     }
 }
@@ -10840,10 +10871,12 @@ impl ::core::convert::From<&str> for SuggestContextPrecision {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SuggestContext {
-    pub name: ::oxsearch_core::Name,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<::oxsearch_core::Name>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub path: ::core::option::Option<::oxsearch_core::Field>,
-    pub r#type: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r#type: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub precision: ::core::option::Option<crate::SuggestContextPrecision>,
 }
@@ -10855,9 +10888,9 @@ impl SuggestContext {
         r#type: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
-            name: name.into(),
+            name: ::core::option::Option::Some(name.into()),
             path: ::core::option::Option::None,
-            r#type: r#type.into(),
+            r#type: ::core::option::Option::Some(r#type.into()),
             precision: ::core::option::Option::None,
         }
     }

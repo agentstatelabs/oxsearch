@@ -7,13 +7,14 @@
 //!
 //! ```text
 //! scripts/es-fixture.sh up
-//! cargo run -p oxsearch --example rag --features transport-reqwest
+//! cargo run -p oxsearch --example rag --features admin,transport-reqwest
 //! ```
 //!
 //! On the Basic license, which doesn't include server-side RRF, the fusion
 //! runs on the client instead. The embeddings are a toy stand-in for an
 //! embedding model, so the example needs nothing but Elasticsearch.
 
+use oxsearch::admin::indices::{create, delete};
 use oxsearch::docs::bulk;
 use oxsearch::fusion::Fusion;
 use oxsearch::mapping::{
@@ -23,7 +24,7 @@ use oxsearch::mapping::{
 use oxsearch::search::search;
 use oxsearch::shapes::IndexMap;
 use oxsearch::transport_reqwest::ReqwestTransport;
-use oxsearch::{Client, Method, Query, Refresh, Retriever};
+use oxsearch::{Client, Query, Refresh, Retriever};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
@@ -91,16 +92,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
                 .similarity(DenseVectorSimilarity::Cosine),
         ),
     );
-    let _ = client
-        .send_raw(Method::Delete, &format!("/{INDEX}"), None)
-        .await;
+    let _ = client.send(&delete::Request::new(INDEX)).await;
     let mapping = TypeMapping::new().properties(properties);
     client
-        .send_raw(
-            Method::Put,
-            &format!("/{INDEX}"),
-            Some(&json!({ "mappings": mapping })),
-        )
+        .send(&create::Request::new(INDEX).body(create::RequestBody::new().mappings(mapping)))
         .await?;
 
     // Index the passages in one bulk request.
@@ -182,8 +177,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         println!("by topic: {}", counts.join(", "));
     }
 
-    client
-        .send_raw(Method::Delete, &format!("/{INDEX}"), None)
-        .await?;
+    client.send(&delete::Request::new(INDEX)).await?;
     Ok(())
 }

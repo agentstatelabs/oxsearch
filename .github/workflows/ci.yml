@@ -127,7 +127,7 @@ jobs:
         env:
           OXSEARCH_URL: http://127.0.0.1:9200
         run: |
-          cargo run -p oxsearch --example rag --features transport-reqwest
+          cargo run -p oxsearch --example rag --features admin,transport-reqwest
           cargo run -p oxsearch --example escape_hatches --features transport-reqwest
           # semantic_text's default model, ELSER, needs a trial.
           if [ "${OXSEARCH_TEST_LICENSE}" = trial ]; then

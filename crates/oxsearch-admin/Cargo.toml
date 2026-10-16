@@ -2,7 +2,7 @@
 name = "oxsearch-admin"
 description = "Cluster, index and node administration APIs for oxsearch, generated from the Elasticsearch specification"
 readme = "../../README.md"
-keywords = ["elasticsearch", "search", "client"]
+keywords = ["elasticsearch", "search", "client", "admin"]
 categories = ["api-bindings", "database"]
 version.workspace = true
 edition.workspace = true
@@ -12,11 +12,34 @@ repository.workspace = true
 homepage.workspace = true
 authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
-# Published once it's generated (Phase 2 in DESIGN.md).
-publish = false
+
+[lib]
+# The generated documentation quotes Elasticsearch's own, which isn't Rust.
+doctest = false
+
+[features]
+# Endpoints Elasticsearch marks beta or experimental: they may change or go
+# away in any Elasticsearch release.
+beta = []
+experimental = []
 
 [dependencies]
+indexmap = { version = "2.14", features = ["serde"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
+oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0" }
+oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.1.0" }
+
+[dev-dependencies]
+# The tests cover the endpoints behind features too.
+oxsearch-admin = { path = ".", features = ["beta", "experimental"] }
+# The generated example tests report where an example doesn't fit.
+serde_path_to_error = "0.1.20"
+
+[package.metadata.docs.rs]
+# Document the endpoints behind features too.
+all-features = true
 
 [lints]
 workspace = true

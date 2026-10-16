@@ -50,7 +50,13 @@ impl<T: Transport> Client<T> {
             path_and_query.push_str(&crate::__private::encode(value));
         }
         let request = HttpRequest::new(route.method, path_and_query, endpoint.body()?);
+        let text = endpoint.text_response();
         self.call(Some(endpoint.name()), request, |response| {
+            if text {
+                let text = String::from_utf8_lossy(&response.body);
+                return serde_json::from_value(Value::String(text.into_owned()))
+                    .map_err(|source| decode(response.status, &response.body, source));
+            }
             // Calls that answer with no body, such as HEAD requests, read as
             // an empty object.
             let body: &[u8] = if response.body.is_empty() {
@@ -126,5 +132,60 @@ fn decode(status: u16, body: &[u8], source: serde_json::Error) -> Error {
         status,
         source,
         body: String::from_utf8_lossy(&body[..body.len().min(512)]).into_owned(),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::endpoint::Route;
+    use crate::error::TransportError;
+
+    /// Answers every request with a text body.
+    struct Text(&'static str);
+
+    impl Transport for Text {
+        async fn send(&self, _: HttpRequest) -> Result<HttpResponse, TransportError> {
+            Ok(HttpResponse::new(200, self.0.as_bytes().to_vec()))
+        }
+    }
+
+    /// A call whose response is plain text, like `nodes.hot_threads`.
+    struct HotThreads;
+
+    impl Endpoint for HotThreads {
+        type Response = String;
+
+        fn name(&self) -> &'static str {
+            "nodes.hot_threads"
+        }
+
+        fn route(&self) -> Result<Route, Error> {
+            Ok(Route::new(Method::Get, "/_nodes/hot_threads"))
+        }
+
+        fn query(&self) -> Result<Vec<(&'static str, String)>, Error> {
+            Ok(Vec::new())
+        }
+
+        fn body(&self) -> Result<Option<Body>, Error> {
+            Ok(None)
+        }
+
+        fn text_response(&self) -> bool {
+            true
+        }
+    }
+
+    #[test]
+    fn text_responses() {
+        let runtime = tokio::runtime::Builder::new_current_thread()
+            .build()
+            .unwrap();
+        let text = "::: {node-1}\n   Hot threads at 2026-10-16T00:00:00Z:\n";
+        let client = Client::new(Text(text));
+        assert_eq!(runtime.block_on(client.send(&HotThreads)).unwrap(), text);
+        let value: Value = runtime.block_on(client.send_as(&HotThreads)).unwrap();
+        assert_eq!(value, Value::String(text.to_owned()));
     }
 }

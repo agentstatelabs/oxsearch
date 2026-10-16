@@ -4,18 +4,21 @@
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FielddataFrequencyFilter {
-    pub max: f64,
-    pub min: f64,
-    pub min_segment_size: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub max: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub min_segment_size: ::core::option::Option<i32>,
 }
 
 impl FielddataFrequencyFilter {
     /// A `FielddataFrequencyFilter` with its required properties set.
     pub fn new(max: f64, min: f64, min_segment_size: i32) -> Self {
         Self {
-            max: max.into(),
-            min: min.into(),
-            min_segment_size: min_segment_size.into(),
+            max: ::core::option::Option::Some(max.into()),
+            min: ::core::option::Option::Some(min.into()),
+            min_segment_size: ::core::option::Option::Some(min_segment_size.into()),
         }
     }
 }
@@ -25,14 +28,15 @@ impl FielddataFrequencyFilter {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct NumericFielddata {
-    pub format: crate::indices::NumericFielddataFormat,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub format: ::core::option::Option<crate::indices::NumericFielddataFormat>,
 }
 
 impl NumericFielddata {
     /// A `NumericFielddata` with its required properties set.
     pub fn new(format: impl ::core::convert::Into<crate::indices::NumericFielddataFormat>) -> Self {
         Self {
-            format: format.into(),
+            format: ::core::option::Option::Some(format.into()),
         }
     }
 }

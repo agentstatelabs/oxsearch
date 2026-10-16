@@ -368,7 +368,7 @@ impl<T> Action<T> {
     }
 }
 
-#[cfg(feature = "mapping")]
+#[cfg(feature = "document")]
 impl<T: crate::document::Document> Action<T> {
     /// Writes a document, with the id and routing from its `#[id]` and
     /// `#[routing]` fields, and into its `#[index]` if it names one.

@@ -4,9 +4,12 @@ use std::fmt;
 use std::marker::PhantomData;
 use std::ops::{Deref, DerefMut};
 
-use oxsearch_core::__private::encode;
-use oxsearch_core::{Client, Error, Method, Refresh, RetrieverContainer, Transport};
+use oxsearch_admin::indices::delete as indices_delete;
+use oxsearch_admin::indices::{IndexSettings, create, get_mapping, put_mapping};
+use oxsearch_core::shapes::IndexMap;
+use oxsearch_core::{Client, Error, Refresh, RetrieverContainer, Transport};
 use oxsearch_docs::{delete, get, index, mget};
+use oxsearch_mapping::{Property, TypeMapping};
 use oxsearch_search::fusion::{Fused, Fusion};
 use oxsearch_search::search::{self, Hit};
 use serde_json::{Map, Value, json};
@@ -188,10 +191,6 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
         self
     }
 
-    fn path(&self) -> String {
-        format!("/{}", encode(&self.name))
-    }
-
     /// Makes the index's mapping the document type's: creates the index if
     /// it doesn't exist, adds the fields it lacks, and reports fields mapped
     /// differently, which it never changes.
@@ -200,22 +199,28 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
     /// `_source` it returns (`index.mapping.exclude_source_vectors: false`),
     /// so documents read back whole.
     pub async fn ensure_mapping(&self) -> Result<MappingReport, Error> {
-        let expected = serde_json::to_value(T::properties()).map_err(Error::Encode)?;
+        let properties = T::properties();
+        let expected = serde_json::to_value(&properties).map_err(Error::Encode)?;
         let expected = expected.as_object().cloned().unwrap_or_default();
-        let path = self.path();
         let live = match self
             .client
-            .send_raw(Method::Get, &format!("{path}/_mapping"), None)
+            .send(&get_mapping::Request::new().index(self.name.as_str()))
             .await
         {
             Ok(live) => live,
             Err(Error::Elasticsearch(e)) if e.error_type() == Some("index_not_found_exception") => {
-                let mut body = json!({ "mappings": { "properties": expected } });
+                let mut body =
+                    create::RequestBody::new().mappings(TypeMapping::new().properties(properties));
                 if has_vectors(&expected) {
-                    body["settings"] = json!({ "index.mapping.exclude_source_vectors": false });
+                    let mut settings = IndexSettings::new();
+                    settings.other_settings.insert(
+                        "index.mapping.exclude_source_vectors".to_owned(),
+                        Value::Bool(false),
+                    );
+                    body = body.settings(settings);
                 }
                 self.client
-                    .send_raw(Method::Put, &path, Some(&body))
+                    .send(&create::Request::new(self.name.as_str()).body(body))
                     .await?;
                 return Ok(MappingReport {
                     created: true,
@@ -228,24 +233,37 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
         // The mapping is keyed by the index, which an alias names otherwise:
         // the first index's is compared, and every index an alias names gets
         // the missing fields at once.
-        let properties = live
-            .as_object()
-            .and_then(|indices| indices.values().next())
-            .and_then(|mapping| mapping.pointer("/mappings/properties"))
-            .and_then(Value::as_object)
-            .cloned()
-            .unwrap_or_default();
-        let missing = compare("", &expected, &properties, &mut report);
+        let live_properties = live
+            .0
+            .values()
+            .next()
+            .and_then(|record| record.mappings.as_ref().or(record.item.as_ref()))
+            .and_then(|mapping| mapping.properties.as_ref());
+        let live_properties = match live_properties {
+            Some(properties) => serde_json::to_value(properties).map_err(Error::Encode)?,
+            None => Value::Object(Map::new()),
+        };
+        let live_properties = live_properties.as_object().cloned().unwrap_or_default();
+        let missing = compare("", &expected, &live_properties, &mut report);
         if !missing.is_empty() {
+            let missing: IndexMap<String, Property> =
+                serde_json::from_value(Value::Object(missing)).map_err(Error::Encode)?;
             self.client
-                .send_raw(
-                    Method::Put,
-                    &format!("{path}/_mapping"),
-                    Some(&json!({ "properties": missing })),
+                .send(
+                    &put_mapping::Request::new(self.name.as_str())
+                        .body(put_mapping::RequestBody::new().properties(missing)),
                 )
                 .await?;
         }
         Ok(report)
+    }
+
+    /// Deletes the index, and every document in it.
+    pub async fn delete_index(&self) -> Result<(), Error> {
+        self.client
+            .send(&indices_delete::Request::new(self.name.as_str()))
+            .await?;
+        Ok(())
     }
 
     /// Writes a document, with the id from its `#[id]` field, replacing any

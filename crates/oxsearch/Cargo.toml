@@ -20,14 +20,17 @@ search = ["dep:oxsearch-search"]
 docs = ["dep:oxsearch-docs"]
 mapping = ["dep:oxsearch-mapping"]
 inference = ["dep:oxsearch-inference"]
-# The other API areas generated so far. ES|QL and administration come
-# later in Phase 2 (DESIGN.md).
+# The other API areas generated so far. ES|QL comes later in Phase 2
+# (DESIGN.md).
 aggs = ["dep:oxsearch-aggs", "search"]
+admin = ["dep:oxsearch-admin"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
-# `#[derive(Document)]` for the typed document layer, which needs the
-# docs, search and mapping areas.
-derive = ["dep:oxsearch-derive", "docs", "search", "mapping"]
+# The typed document layer, `oxsearch::document`, which creates and maps
+# indices with the admin area.
+document = ["docs", "search", "mapping", "admin"]
+# `#[derive(Document)]` for the typed document layer.
+derive = ["dep:oxsearch-derive", "document"]
 # Point-in-time streams and the bulk loader, which run on Tokio.
 helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util", "dep:metrics"]
 # The default HTTP transport. Whether it is on by default is still open
@@ -35,8 +38,8 @@ helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
-beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta"]
-experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental"]
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
@@ -44,6 +47,7 @@ oxsearch-search = { path = "../oxsearch-search", version = "0.1.0", optional = t
 oxsearch-docs = { path = "../oxsearch-docs", version = "0.1.0", optional = true }
 oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.1.0", optional = true }
 oxsearch-inference = { path = "../oxsearch-inference", version = "0.1.0", optional = true }
+oxsearch-admin = { path = "../oxsearch-admin", version = "0.1.0", optional = true }
 oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.1.0", optional = true }
 oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0", optional = true }
 oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.1.0", optional = true }
@@ -66,7 +70,7 @@ futures-util = { version = "0.3.31", default-features = false, features = ["std"
 
 [[example]]
 name = "rag"
-required-features = ["transport-reqwest"]
+required-features = ["admin", "transport-reqwest"]
 
 [[example]]
 name = "escape_hatches"

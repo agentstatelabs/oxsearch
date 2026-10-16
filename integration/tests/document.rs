@@ -74,7 +74,13 @@ async fn write_read_and_delete() {
 
     assert!(notes_index.delete("2").await.unwrap());
     assert!(!notes_index.delete("2").await.unwrap());
-    test.delete(&client).await;
+
+    notes_index.delete_index().await.unwrap();
+    let gone = notes_index.get("1").await;
+    assert!(
+        matches!(&gone, Err(Error::Elasticsearch(e)) if e.error_type() == Some("index_not_found_exception")),
+        "{gone:?}"
+    );
 }
 
 #[tokio::test]

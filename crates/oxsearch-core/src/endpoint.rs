@@ -143,6 +143,13 @@ pub trait Endpoint {
 
     /// The body, if the call has one.
     fn body(&self) -> Result<Option<Body>, Error>;
+
+    /// Whether the response is plain text rather than JSON, as for
+    /// `nodes.hot_threads`. The text reads as a JSON string, so into a
+    /// `String`.
+    fn text_response(&self) -> bool {
+        false
+    }
 }
 
 /// The HTTP request a transport sends.
