@@ -6801,11 +6801,8 @@ pub struct PercolateQuery {
     /// A value greater than 1.0 increases the relevance score.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub boost: ::core::option::Option<f32>,
-    #[serde(
-        rename = "_name",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub name: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub _name: ::core::option::Option<::std::string::String>,
     /// The source of the document being percolated.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub document: ::core::option::Option<::serde_json::Value>,
@@ -6822,11 +6819,8 @@ pub struct PercolateQuery {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index: ::core::option::Option<crate::IndexName>,
     /// The suffix used for the `_percolator_document_slot` field when multiple `percolate` queries are specified.
-    #[serde(
-        rename = "name",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub name2: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<::std::string::String>,
     /// Preference used to fetch document to percolate.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub preference: ::core::option::Option<::std::string::String>,
@@ -6843,13 +6837,13 @@ impl PercolateQuery {
     pub fn new(field: impl ::core::convert::Into<crate::Field>) -> Self {
         Self {
             boost: ::core::option::Option::None,
-            name: ::core::option::Option::None,
+            _name: ::core::option::Option::None,
             document: ::core::option::Option::None,
             documents: ::core::option::Option::None,
             field: ::core::option::Option::Some(field.into()),
             id: ::core::option::Option::None,
             index: ::core::option::Option::None,
-            name2: ::core::option::Option::None,
+            name: ::core::option::Option::None,
             preference: ::core::option::Option::None,
             routing: ::core::option::Option::None,
             version: ::core::option::Option::None,
@@ -6863,9 +6857,9 @@ impl PercolateQuery {
         self.boost = ::core::option::Option::Some(value.into());
         self
     }
-    /// Sets `name`.
-    pub fn name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
-        self.name = ::core::option::Option::Some(value.into());
+    /// Sets `_name`.
+    pub fn _name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
+        self._name = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `document`.
@@ -6891,9 +6885,9 @@ impl PercolateQuery {
         self.index = ::core::option::Option::Some(value.into());
         self
     }
-    /// Sets `name2`.
-    pub fn name2(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
-        self.name2 = ::core::option::Option::Some(value.into());
+    /// Sets `name`.
+    pub fn name(mut self, value: impl ::core::convert::Into<::std::string::String>) -> Self {
+        self.name = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `preference`.

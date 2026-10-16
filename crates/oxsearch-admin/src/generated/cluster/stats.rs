@@ -2703,11 +2703,8 @@ impl SparseVectorStats {}
 #[non_exhaustive]
 pub struct StatsResponseBase {
     /// Contains statistics about the number of nodes selected by the request’s node filters.
-    #[serde(
-        rename = "_nodes",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub nodes: ::core::option::Option<::oxsearch_core::NodeStatistics>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub _nodes: ::core::option::Option<::oxsearch_core::NodeStatistics>,
     /// Name of the cluster, based on the cluster name setting.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub cluster_name: ::core::option::Option<::oxsearch_core::Name>,
@@ -2718,11 +2715,8 @@ pub struct StatsResponseBase {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub indices: ::core::option::Option<crate::cluster::stats::ClusterIndices>,
     /// Contains statistics about nodes selected by the request’s node filters.
-    #[serde(
-        rename = "nodes",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub nodes2: ::core::option::Option<crate::cluster::stats::ClusterNodes>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub nodes: ::core::option::Option<crate::cluster::stats::ClusterNodes>,
     /// Contains stats on repository feature usage exposed in cluster stats for telemetry.
     #[serde(default = "::core::default::Default::default")]
     pub repositories: ::indexmap::IndexMap<
@@ -2749,7 +2743,7 @@ impl StatsResponseBase {
         cluster_name: impl ::core::convert::Into<::oxsearch_core::Name>,
         cluster_uuid: impl ::core::convert::Into<::oxsearch_core::Uuid>,
         indices: impl ::core::convert::Into<crate::cluster::stats::ClusterIndices>,
-        nodes2: impl ::core::convert::Into<crate::cluster::stats::ClusterNodes>,
+        nodes: impl ::core::convert::Into<crate::cluster::stats::ClusterNodes>,
         repositories: impl ::core::convert::Into<
             ::indexmap::IndexMap<
                 ::oxsearch_core::Name,
@@ -2761,11 +2755,11 @@ impl StatsResponseBase {
         ccs: impl ::core::convert::Into<crate::cluster::stats::CCSStats>,
     ) -> Self {
         Self {
-            nodes: ::core::option::Option::None,
+            _nodes: ::core::option::Option::None,
             cluster_name: ::core::option::Option::Some(cluster_name.into()),
             cluster_uuid: ::core::option::Option::Some(cluster_uuid.into()),
             indices: ::core::option::Option::Some(indices.into()),
-            nodes2: ::core::option::Option::Some(nodes2.into()),
+            nodes: ::core::option::Option::Some(nodes.into()),
             repositories: repositories.into(),
             snapshots: ::core::option::Option::Some(snapshots.into()),
             status: ::core::option::Option::None,
@@ -2776,12 +2770,12 @@ impl StatsResponseBase {
 }
 
 impl StatsResponseBase {
-    /// Sets `nodes`.
-    pub fn nodes(
+    /// Sets `_nodes`.
+    pub fn _nodes(
         mut self,
         value: impl ::core::convert::Into<::oxsearch_core::NodeStatistics>,
     ) -> Self {
-        self.nodes = ::core::option::Option::Some(value.into());
+        self._nodes = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `status`.

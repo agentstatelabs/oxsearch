@@ -175,8 +175,10 @@ async fn cluster() {
 async fn nodes() {
     let client = client();
     let info = client.send(&nodes::info::Request::new()).await.unwrap();
-    assert_eq!(info.nodes2.len(), 1);
-    let node = info.nodes2.values().next().unwrap();
+    assert_eq!(info.nodes.len(), 1);
+    // The header counts the nodes the request reached.
+    assert_eq!(info._nodes.as_ref().and_then(|n| n.successful), Some(1));
+    let node = info.nodes.values().next().unwrap();
     assert!(node.name.is_some());
     assert!(
         node.version.as_deref().is_some_and(|v| v.starts_with("9.")),
@@ -191,7 +193,7 @@ async fn nodes() {
         ]))
         .await
         .unwrap();
-    let node = stats.nodes2.values().next().unwrap();
+    let node = stats.nodes.values().next().unwrap();
     let heap = node
         .jvm
         .as_ref()
@@ -201,7 +203,7 @@ async fn nodes() {
     assert!(node.indices.is_some());
 
     let usage = client.send(&nodes::usage::Request::new()).await.unwrap();
-    let node = usage.nodes2.values().next().unwrap();
+    let node = usage.nodes.values().next().unwrap();
     assert!(!node.rest_actions.is_empty(), "{node:?}");
 
     // Hot threads come back as text.
@@ -215,7 +217,7 @@ async fn nodes() {
         .send(&nodes::reload_secure_settings::Request::new())
         .await
         .unwrap();
-    assert_eq!(reloaded.nodes2.len(), 1);
+    assert_eq!(reloaded.nodes.len(), 1);
 }
 
 #[tokio::test]

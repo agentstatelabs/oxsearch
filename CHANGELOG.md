@@ -33,6 +33,20 @@ specification it's generated from.
   (mappings, index and node statistics, …) now take a required property
   Elasticsearch leaves out as `None`, as other response types do: such
   fields are `Option`s.
+- Generated names no longer end in `2` where two properties would share
+  one.
+  - When a type has both `_x` and `x`, `x` keeps the plain name and `_x`
+    its underscore. The node APIs' map of nodes is `nodes`, beside the
+    `_nodes` header.
+  - Two fields from 0.1 now mean the other property, with the same type,
+    so code using them still compiles: `CompletionSuggestOption::score` is
+    the suggestion's `score` (the hit's is `_score`, which was `score`),
+    and `PercolateQuery::name` is the percolator's `name` (the query's own
+    is `_name`, which was `name`).
+  - A query parameter that repeats a path parameter isn't generated twice:
+    `index2` (`msearch`, `indices.analyze`, `indices.clear_cache`),
+    `scroll_id2` (`scroll`) and `context2` (`put_script`) are gone. Set the
+    path parameter instead.
 
 ## [0.1.0] - 2026-10-15
 

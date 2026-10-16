@@ -1982,11 +1982,8 @@ pub struct CompletionSuggestOption<TDocument = ::serde_json::Value> {
         skip_serializing_if = "::core::option::Option::is_none"
     )]
     pub routing: ::core::option::Option<::std::string::String>,
-    #[serde(
-        rename = "_score",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub score: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub _score: ::core::option::Option<f64>,
     #[serde(
         rename = "_source",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -1994,11 +1991,8 @@ pub struct CompletionSuggestOption<TDocument = ::serde_json::Value> {
     pub source: ::core::option::Option<TDocument>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub text: ::core::option::Option<::std::string::String>,
-    #[serde(
-        rename = "score",
-        skip_serializing_if = "::core::option::Option::is_none"
-    )]
-    pub score2: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub score: ::core::option::Option<f64>,
 }
 
 impl CompletionSuggestOption<::serde_json::Value> {
@@ -2011,10 +2005,10 @@ impl CompletionSuggestOption<::serde_json::Value> {
             id: ::core::option::Option::None,
             index: ::core::option::Option::None,
             routing: ::core::option::Option::None,
-            score: ::core::option::Option::None,
+            _score: ::core::option::Option::None,
             source: ::core::option::Option::None,
             text: ::core::option::Option::Some(text.into()),
-            score2: ::core::option::Option::None,
+            score: ::core::option::Option::None,
         }
     }
 }
@@ -2060,9 +2054,9 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
         self.routing = ::core::option::Option::Some(value.into());
         self
     }
-    /// Sets `score`.
-    pub fn score(mut self, value: f64) -> Self {
-        self.score = ::core::option::Option::Some(value.into());
+    /// Sets `_score`.
+    pub fn _score(mut self, value: f64) -> Self {
+        self._score = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `source`.
@@ -2074,15 +2068,15 @@ impl<TDocument> CompletionSuggestOption<TDocument> {
             id: self.id,
             index: self.index,
             routing: self.routing,
-            score: self.score,
+            _score: self._score,
             text: self.text,
-            score2: self.score2,
+            score: self.score,
             source: ::core::option::Option::Some(value.into()),
         }
     }
-    /// Sets `score2`.
-    pub fn score2(mut self, value: f64) -> Self {
-        self.score2 = ::core::option::Option::Some(value.into());
+    /// Sets `score`.
+    pub fn score(mut self, value: f64) -> Self {
+        self.score = ::core::option::Option::Some(value.into());
         self
     }
 }
