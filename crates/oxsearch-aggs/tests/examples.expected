@@ -1,0 +1,4 @@
+2 exact, 1 normalized, 0 failing
+_global.search_mvt request SearchMvtRequestExample1 aggregations: exact
+async_search.submit request AsyncSearchSubmitRequestExample1 aggregations: normalized at /sale_date/date_histogram/calendar_interval
+rollup.rollup_search request RollupSearchRequestExample1 aggregations: exact

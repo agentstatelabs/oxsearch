@@ -686,11 +686,15 @@ impl<'g> Ir<'g> {
                         .get("fieldname")
                         .map_or("additional", String::as_str);
                     let ident = unique(&mut used, snake(name));
-                    extra = Some((
-                        ident,
-                        self.ty(&Ctx { field: name, ..ctx }, k)?,
-                        self.ty(&Ctx { field: name, ..ctx }, v)?,
-                    ));
+                    let value = self.ty(&Ctx { field: name, ..ctx }, v)?;
+                    // Values tagged by their key, such as the aggregations
+                    // in a bucket (`sterms#by_tag`), read their tag from it.
+                    let value = if self.externally_tagged(v) && !matches!(value, Ty::Json) {
+                        Ty::TypedKeys(Box::new(value))
+                    } else {
+                        value
+                    };
+                    extra = Some((ident, self.ty(&Ctx { field: name, ..ctx }, k)?, value));
                 }
                 "AdditionalProperty" => {
                     let [k, v] = &behavior.generics[..] else {

@@ -1662,7 +1662,7 @@ impl ErrorCause {
             caused_by: ::core::option::Option::None,
             root_cause: ::core::option::Option::None,
             suppressed: ::core::option::Option::None,
-            metadata: ::indexmap::IndexMap::new(),
+            metadata: ::core::default::Default::default(),
         }
     }
 }
@@ -3639,7 +3639,7 @@ impl InlineGet<::serde_json::Value> {
             primary_term: ::core::option::Option::None,
             routing: ::core::option::Option::None,
             source: ::core::option::Option::None,
-            metadata: ::indexmap::IndexMap::new(),
+            metadata: ::core::default::Default::default(),
         }
     }
 }

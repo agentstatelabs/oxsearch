@@ -5516,7 +5516,7 @@ impl Suggester {
     pub fn new() -> Self {
         Self {
             text: ::core::option::Option::None,
-            suggesters: ::indexmap::IndexMap::new(),
+            suggesters: ::core::default::Default::default(),
         }
     }
 }

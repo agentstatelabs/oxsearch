@@ -17,6 +17,13 @@ use super::ir::{Ir, ItemKind, Ty};
 use crate::spec::Pin;
 use crate::spec::model::{Endpoint, TypeDefinition};
 
+/// A request body's aggregations, as JSON text, if it has any.
+fn request_aggregations(body: &str) -> Option<String> {
+    let body: serde_json::Value = serde_json::from_str(body).ok()?;
+    let aggregations = body.get("aggregations").or_else(|| body.get("aggs"))?;
+    aggregations.is_object().then(|| aggregations.to_string())
+}
+
 /// The test files, by path relative to the workspace root.
 pub fn tests(
     ir: &Ir<'_>,
@@ -26,6 +33,30 @@ pub fn tests(
 ) -> BTreeMap<PathBuf, String> {
     let graph = ir.graph;
     let mut by_crate: BTreeMap<&str, Vec<(String, String, String, bool)>> = BTreeMap::new();
+    // Every request's aggregations, generated endpoint or not, are checked
+    // in the aggregations crate as its own types: requests read them as
+    // JSON, through the seam. Responses' can't be: their examples are
+    // written without `typed_keys`, which names each result's type.
+    if crates.contains(&"aggs") {
+        for (i, definition) in graph.types.iter().enumerate() {
+            let TypeDefinition::Request(t) = definition else {
+                continue;
+            };
+            for (example_name, example) in &t.examples {
+                let Some(aggregations) = example.value.as_deref().and_then(request_aggregations)
+                else {
+                    continue;
+                };
+                by_crate.entry("aggs").or_default().push((
+                    format!("{} request {example_name} aggregations", graph.name(i).namespace),
+                    "::indexmap::IndexMap<::std::string::String, ::oxsearch_aggs::AggregationContainer>"
+                        .to_owned(),
+                    aggregations,
+                    false,
+                ));
+            }
+        }
+    }
     for (i, definition) in graph.types.iter().enumerate() {
         let Some(&item) = ir.item_of.get(&i) else {
             continue;
@@ -89,6 +120,7 @@ pub fn tests(
             {
                 continue;
             }
+
             let label = format!(
                 "{} {} {example_name}",
                 name.namespace,

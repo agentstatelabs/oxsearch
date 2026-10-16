@@ -107,7 +107,7 @@ The default features are the AI-search set: search, docs, mapping, inference. `f
 ### 4.3 Seams
 
 - **Type parameters for user data.** `search::Response<TDocument, TAggregations = RawAggs>`. `_source` goes into the user's struct. Aggregation results are raw JSON by default, `oxsearch-aggs` types, or the user's own struct. The generator adds `TAggregations` to every type that holds a search response's aggregations: msearch, scroll, and the template searches.
-- **Conversions on the request side.** The search request takes `impl Into<AggsBody>`. `oxsearch-aggs` provides the conversion, and `json!` works too, so `oxsearch-search` never depends on `oxsearch-aggs`. A script's search-body source is plain JSON. The placement table says what each seam becomes, and `crates/oxsearch/examples/rag.rs` uses both seams.
+- **Conversions on the request side.** The search request takes `impl Into<AggsBody>`. `oxsearch-aggs` provides the conversion (`Aggs`, built with `Agg`), and `json!` works too, so `oxsearch-search` never depends on `oxsearch-aggs`. On the response side, `search::Response<T, oxsearch_aggs::Aggregates>` reads the results typed, for a request sent with `typed_keys`; a bucket's sub-aggregations are typed the same way, by the type their key names. A script's search-body source is plain JSON. The placement table says what each seam becomes, and `crates/oxsearch/examples/rag.rs` uses both seams.
 
 ### 4.4 Transport and middleware
 

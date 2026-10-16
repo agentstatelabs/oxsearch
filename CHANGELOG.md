@@ -7,6 +7,17 @@ specification it's generated from.
 
 ## [Unreleased]
 
+### Added
+- **Aggregations with typed results** (`oxsearch-aggs`, the `aggs` feature).
+  - The aggregation types are generated from the specification: every
+    request container and every result.
+  - `Agg` builds the common bucket, metric and pipeline aggregations,
+    `.sub()` nests them, and `Aggs` names them for a search request's body.
+  - `Aggregates` reads a response's results, typed, from a request sent with
+    `typed_keys`. `Results` picks them out by name (`value`, `stats`,
+    `terms`, `histogram`, `date_histogram`, `ranges`, `filters`,
+    `percentiles`, `top_hits`, …), in a bucket's sub-aggregations too.
+
 ## [0.1.0] - 2026-10-15
 
 The first release: a typed Rust client for Elasticsearch 9, generated from
