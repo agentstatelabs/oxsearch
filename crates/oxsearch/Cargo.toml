@@ -20,8 +20,9 @@ search = ["dep:oxsearch-search"]
 docs = ["dep:oxsearch-docs"]
 mapping = ["dep:oxsearch-mapping"]
 inference = ["dep:oxsearch-inference"]
-# The other API areas generated so far. Aggregations, ES|QL and
-# administration come with Phase 2 (DESIGN.md).
+# The other API areas generated so far. ES|QL and administration come
+# later in Phase 2 (DESIGN.md).
+aggs = ["dep:oxsearch-aggs", "search"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
 # `#[derive(Document)]` for the typed document layer, which needs the
@@ -34,8 +35,8 @@ helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
-beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta"]
-experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental"]
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
@@ -43,6 +44,7 @@ oxsearch-search = { path = "../oxsearch-search", version = "0.1.0", optional = t
 oxsearch-docs = { path = "../oxsearch-docs", version = "0.1.0", optional = true }
 oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.1.0", optional = true }
 oxsearch-inference = { path = "../oxsearch-inference", version = "0.1.0", optional = true }
+oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.1.0", optional = true }
 oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0", optional = true }
 oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.1.0", optional = true }
 oxsearch-derive = { path = "../oxsearch-derive", version = "0.1.0", optional = true }

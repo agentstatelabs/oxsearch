@@ -420,6 +420,22 @@ impl Emitter<'_> {
         )
     }
 
+    /// The map of a struct's properties the specification doesn't name:
+    /// keyed by their tags for tagged values.
+    fn extra_map(&self, k: &Ty, v: &Ty) -> String {
+        match v {
+            Ty::TypedKeys(inner) => format!(
+                "::oxsearch_core::shapes::TypedKeys<{}>",
+                self.ty_in(inner, Position::Field, true)
+            ),
+            _ => format!(
+                "::indexmap::IndexMap<{}, {}>",
+                self.ty_in(k, Position::Field, true),
+                self.ty_in(v, Position::Field, true)
+            ),
+        }
+    }
+
     fn structure(&self, s: &Struct, out: &mut String) {
         let ident = &self.item.ident;
         let mut types: Vec<&Ty> = s.fields.iter().map(|f| &f.ty).collect();
@@ -476,12 +492,7 @@ impl Emitter<'_> {
             if derive_serde {
                 out.push_str("    #[serde(flatten)]\n");
             }
-            let _ = writeln!(
-                out,
-                "    pub {name}: ::indexmap::IndexMap<{}, {}>,",
-                self.ty_in(k, Position::Field, true),
-                self.ty_in(v, Position::Field, true)
-            );
+            let _ = writeln!(out, "    pub {name}: {},", self.extra_map(k, v));
         }
         if let Some((key, value, k, v)) = &s.keyed {
             let _ = writeln!(
@@ -549,7 +560,7 @@ impl Emitter<'_> {
             }
         }
         if let Some((name, _, _)) = &s.extra {
-            inits.push(format!("{name}: ::indexmap::IndexMap::new()"));
+            inits.push(format!("{name}: ::core::default::Default::default()"));
         }
         if let Some((key, value, k, v)) = &s.keyed {
             params.push(format!(
@@ -860,9 +871,8 @@ impl Emitter<'_> {
         if let Some((name, ek, ev)) = &s.extra {
             let _ = writeln!(
                 out,
-                "    #[serde(flatten)]\n    {name}: ::indexmap::IndexMap<{}, {}>,",
-                self.ty_in(ek, Position::Field, true),
-                self.ty_in(ev, Position::Field, true)
+                "    #[serde(flatten)]\n    {name}: {},",
+                self.extra_map(ek, ev)
             );
         }
         let _ = writeln!(

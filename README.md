@@ -51,6 +51,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 ## What's in it
 
 - **Generated types and endpoints** for every request and response in the first slice, with builders, `Raw` variants for what a newer Elasticsearch adds, and typed errors (license refusals and version conflicts have their own).
+- **Aggregations with typed results** (`oxsearch::aggs`, the `aggs` feature): `Agg::terms("category", 10).sub("avg_price", Agg::avg("price"))`, sent with `typed_keys` and read back as `Aggregates`.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
 - **A typed document layer** (`oxsearch::document`): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.
 - **Helpers** (`oxsearch::helpers`): a point-in-time scan and a bulk loader with backpressure.

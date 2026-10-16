@@ -7,7 +7,7 @@ license.workspace = true
 publish = false
 
 [dependencies]
-oxsearch = { path = "../crates/oxsearch", features = ["derive", "helpers", "tasks", "experimental"] }
+oxsearch = { path = "../crates/oxsearch", features = ["derive", "helpers", "tasks", "aggs", "experimental"] }
 oxsearch-rig = { path = "../crates/oxsearch-rig" }
 rig-core = { version = "0.44", default-features = false }
 oxsearch-core = { path = "../crates/oxsearch-core" }

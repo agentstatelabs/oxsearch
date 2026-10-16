@@ -1017,6 +1017,7 @@ dependencies = [
  "futures-util",
  "metrics",
  "oxsearch",
+ "oxsearch-aggs",
  "oxsearch-analysis",
  "oxsearch-core",
  "oxsearch-derive",
@@ -1042,7 +1043,14 @@ dependencies = [
 name = "oxsearch-aggs"
 version = "0.1.0"
 dependencies = [
+ "indexmap",
+ "oxsearch-aggs",
  "oxsearch-core",
+ "oxsearch-mapping",
+ "oxsearch-search",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
 ]
 
 [[package]]

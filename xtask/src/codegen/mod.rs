@@ -25,6 +25,7 @@ pub const CRATES: &[&str] = &[
     "inference",
     "search",
     "docs",
+    "aggs",
 ];
 
 /// The directory generated code goes in, inside each crate's `src`.

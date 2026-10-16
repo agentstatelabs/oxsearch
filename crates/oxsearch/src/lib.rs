@@ -6,8 +6,9 @@
 //! retrieval half of a RAG application on any license.
 //!
 //! This crate re-exports the others behind features. The defaults are the
-//! AI-search set: `search`, `docs`, `mapping` and `inference`; `analysis`
-//! and `tasks` are the other areas generated so far. `derive` adds
+//! AI-search set: `search`, `docs`, `mapping` and `inference`; `aggs`
+//! (aggregations with typed results), `analysis` and `tasks` are the other
+//! areas generated so far. `derive` adds
 //! the typed document layer's derive macro, `helpers` the point-in-time
 //! scan and the bulk loader, and `transport-reqwest` the default HTTP
 //! transport.
@@ -63,6 +64,8 @@ pub use oxsearch_core::{
 };
 pub use oxsearch_core::{auth, telemetry};
 
+#[cfg(feature = "aggs")]
+pub use oxsearch_aggs as aggs;
 #[cfg(feature = "analysis")]
 pub use oxsearch_analysis as analysis;
 #[cfg(feature = "derive")]
