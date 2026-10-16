@@ -1,0 +1,99 @@
+81 exact, 10 normalized, 7 failing
+_global.put_script request PutScriptRequestExample1: exact
+_global.put_script request PutScriptRequestExample2: exact
+_global.scripts_painless_execute request ExecutePainlessScriptRequestExample1: exact
+_global.scripts_painless_execute request ExecutePainlessScriptRequestExample2: exact
+_global.scripts_painless_execute request ExecutePainlessScriptRequestExample3: exact
+_global.scripts_painless_execute response ExecutePainlessScriptResponseExample1: exact
+_global.scripts_painless_execute response ExecutePainlessScriptResponseExample2: exact
+_global.scripts_painless_execute response ExecutePainlessScriptResponseExample3: exact
+cluster.allocation_explain request ClusterAllocationExplainRequestExample1: exact
+cluster.allocation_explain request ClusterAllocationExplainRequestExample2: exact
+cluster.allocation_explain response ClusterAllocationExplainResponseExample1: exact
+cluster.allocation_explain response ClusterAllocationExplainResponseExample2: fails: not JSON: expected `:` at line 8 column 102
+cluster.get_component_template response GetComponentTemplateResponseExample1: exact
+cluster.health response ClusterHealthResponseExample1: exact
+cluster.put_component_template request ClusterPutComponentTemplateRequestExample1: exact
+cluster.put_component_template request ClusterPutComponentTemplateRequestExample2: exact
+cluster.put_settings request ClusterPutSettingsRequestExample1: exact
+cluster.put_settings request ClusterPutSettingsRequestExample2: exact
+cluster.reroute request ClusterRerouteRequestExample1: exact
+indices.add_block response IndicesAddBlockResponseExample1: exact
+indices.analyze request indicesAnalyzeRequestExample1: exact
+indices.analyze request indicesAnalyzeRequestExample2: exact
+indices.analyze request indicesAnalyzeRequestExample3: exact
+indices.analyze request indicesAnalyzeRequestExample4: exact
+indices.analyze request indicesAnalyzeRequestExample5: exact
+indices.analyze request indicesAnalyzeRequestExample6: exact
+indices.analyze request indicesAnalyzeRequestExample7: exact
+indices.analyze response indicesAnalyzeResponseExample7: exact
+indices.clone request indicesCloneRequestExample1: exact
+indices.close response CloseIndexResponseExample1: exact
+indices.create request indicesCreateRequestExample1: exact
+indices.create request indicesCreateRequestExample2: exact
+indices.create request indicesCreateRequestExample3: exact
+indices.create request indicesCreateRequestExample4: exact
+indices.create request indicesCreateRequestExample5: exact
+indices.create request indicesCreateRequestExample6: exact
+indices.data_streams_stats response indicesDataStreamStatsResponseExample1: normalized at /total_store_size (dropped)
+indices.delete_data_lifecycle response IndicesDeleteDataLifecycleResponseExample1: exact
+indices.delete_data_stream_options response IndicesDeleteDataStreamOptionsResponseExample1: exact
+indices.disk_usage response IndicesDiskUsageResponseExample1: exact
+indices.downsample request DownsampleRequestExample1: exact
+indices.explain_data_lifecycle response IndicesExplainDataLifecycleResponseExample1: fails: not JSON: EOF while parsing an object at line 13 column 1
+indices.explain_data_lifecycle response IndicesExplainDataLifecycleResponseExample2: fails: not JSON: control character (\u0000-\u001F) found while parsing a string at line 12 column 0
+indices.field_usage_stats response indicesFieldUsageStatsResponseExample1: fails: reading .: invalid type: string "6", expected u32
+indices.get_data_lifecycle response IndicesGetDataLifecycleResponseExample1: exact
+indices.get_data_lifecycle_stats response IndicesGetDataLifecycleStatsResponseExample1: normalized at /data_streams_count (dropped)
+indices.get_data_stream response indicesGetDataStreamResponseExample1: normalized at /data_streams/0/status
+indices.get_data_stream_mappings response IndicesGetDataStreamMappingsResponseExample1: exact
+indices.get_data_stream_settings response IndicesGetDataStreamSettingsResponseExample1: exact
+indices.get_field_mapping response indicesGetFieldMappingResponseExample1: exact
+indices.get_field_mapping response indicesGetFieldMappingResponseExample2: exact
+indices.get_field_mapping response indicesGetFieldMappingResponseExample3: exact
+indices.get_index_template response GetIndexTemplateResponseExample1: exact
+indices.migrate_reindex request IndicesMigrateReindexExample1: exact
+indices.modify_data_stream request IndicesModifyDataStreamExample1: exact
+indices.open response indicesOpenResponseExample1: exact
+indices.put_alias request indicesPutAliasRequestExample1: exact
+indices.put_alias request indicesPutAliasRequestExample2: exact
+indices.put_alias request indicesPutAliasRequestExample3: exact
+indices.put_data_lifecycle request IndicesPutDataLifecycleRequestExample1: exact
+indices.put_data_lifecycle request IndicesPutDataLifecycleRequestExample2: exact
+indices.put_data_lifecycle response IndicesPutDataLifecycleResponseExample1: exact
+indices.put_data_stream_mappings request IndicesPutDataStreamMappingsRequestExample1: exact
+indices.put_data_stream_mappings response IndicesPutDataStreamMappingsResponseExample1: exact
+indices.put_data_stream_mappings response IndicesPutDataStreamMappingsResponseExample2: normalized at /data_streams/0/effective_mappings/_doc (dropped)
+indices.put_data_stream_settings request IndicesPutDataStreamSettingsRequestExample1: exact
+indices.put_data_stream_settings response IndicesPutDataStreamSettingsResponseExample1: exact
+indices.put_data_stream_settings response IndicesPutDataStreamSettingsResponseExample2: exact
+indices.put_data_stream_settings response IndicesPutDataStreamSettingsResponseExample3: exact
+indices.put_index_template request IndicesPutIndexTemplateRequestExample1: exact
+indices.put_index_template request IndicesPutIndexTemplateRequestExample2: exact
+indices.put_mapping request indicesPutMappingRequestExample1: normalized at /properties/user/type (added)
+indices.put_settings request IndicesPutSettingsRequestExample1: exact
+indices.put_settings request indicesPutSettingsRequestExample2: normalized at /index/refresh_interval (dropped)
+indices.put_settings request indicesPutSettingsRequestExample3: exact
+indices.put_template request indicesPutTemplateRequestExample1: exact
+indices.put_template request indicesPutTemplateRequestExample2: exact
+indices.recovery response indicesRecoveryResponseExample1: exact
+indices.recovery response indicesRecoveryResponseExample2: fails: reading index1.shards[0].start_time_in_millis: invalid type: string "1393245486349", expected i64
+indices.reload_search_analyzers response ReloadSearchAnalyzersResponseExample1: normalized at /template (dropped)
+indices.remove_block response IndicesRemoveBlockResponseExample1: exact
+indices.resolve_cluster response ResolveClusterResponseExample1: exact
+indices.resolve_cluster response ResolveClusterResponseExample2: exact
+indices.resolve_index response ResolveIndexResponseExample1: exact
+indices.rollover request indicesRolloverRequestExample1: fails: reading conditions.max_primary_shard_docs: invalid type: string "2000", expected i64
+indices.rollover request indicesRolloverRequestExample2: exact
+indices.rollover response indicesRolloverResponseExample1: normalized at /_shards (dropped)
+indices.segments response indicesSegmentsResponseExample1: normalized at /indices/kibana_sample_data_ecommerce/shards/0/0/segments/_0/size_in_bytes
+indices.shard_stores response indicesShardStoresResponseExample1: normalized at /indices/my-index-000001/shards/0/stores/0/sPa3OgxLSYGvQ4oPs-Tajw/max_index_version (dropped)
+indices.shrink request indicesShrinkRequestExample1: exact
+indices.simulate_index_template response indicesSimulateIndexTemplateResponseExample1: exact
+indices.simulate_template request indicesSimulateTemplateRequestExample1: exact
+indices.simulate_template response indicesSimulateTemplateResponseExample2: exact
+indices.split request indicesSplitRequestExample1: exact
+indices.update_aliases request IndicesUpdateAliasesExample1: exact
+nodes.info response nodesInfoResponseExample1: fails: not JSON: control character (\u0000-\u001F) found while parsing a string at line 31 column 0
+nodes.reload_secure_settings request ReloadSecureSettingsRequestExample1: exact
+nodes.reload_secure_settings response ReloadSecureSettingsResponseExample1: exact

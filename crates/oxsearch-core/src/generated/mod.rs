@@ -83,19 +83,24 @@ impl BulkIndexByScrollFailure {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct BulkStats {
-    pub total_operations: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_operations: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time: ::core::option::Option<crate::Duration>,
-    pub total_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_size: ::core::option::Option<crate::ByteSize>,
-    pub total_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_size_in_bytes: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg_time: ::core::option::Option<crate::Duration>,
-    pub avg_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub avg_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg_size: ::core::option::Option<crate::ByteSize>,
-    pub avg_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub avg_size_in_bytes: ::core::option::Option<i64>,
 }
 
 impl BulkStats {
@@ -108,15 +113,15 @@ impl BulkStats {
         avg_size_in_bytes: i64,
     ) -> Self {
         Self {
-            total_operations: total_operations.into(),
+            total_operations: ::core::option::Option::Some(total_operations.into()),
             total_time: ::core::option::Option::None,
-            total_time_in_millis: total_time_in_millis.into(),
+            total_time_in_millis: ::core::option::Option::Some(total_time_in_millis.into()),
             total_size: ::core::option::Option::None,
-            total_size_in_bytes: total_size_in_bytes.into(),
+            total_size_in_bytes: ::core::option::Option::Some(total_size_in_bytes.into()),
             avg_time: ::core::option::Option::None,
-            avg_time_in_millis: avg_time_in_millis.into(),
+            avg_time_in_millis: ::core::option::Option::Some(avg_time_in_millis.into()),
             avg_size: ::core::option::Option::None,
-            avg_size_in_bytes: avg_size_in_bytes.into(),
+            avg_size_in_bytes: ::core::option::Option::Some(avg_size_in_bytes.into()),
         }
     }
 }
@@ -727,7 +732,8 @@ pub type CommonStatsFlags = ::oxsearch_core::shapes::OneOrMany<crate::CommonStat
 #[non_exhaustive]
 pub struct CompletionStats {
     /// Total amount, in bytes, of memory used for completion across all shards assigned to selected nodes.
-    pub size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub size_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used for completion across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub size: ::core::option::Option<crate::ByteSize>,
@@ -739,7 +745,7 @@ impl CompletionStats {
     /// A `CompletionStats` with its required properties set.
     pub fn new(size_in_bytes: i64) -> Self {
         Self {
-            size_in_bytes: size_in_bytes.into(),
+            size_in_bytes: ::core::option::Option::Some(size_in_bytes.into()),
             size: ::core::option::Option::None,
             fields: ::core::option::Option::None,
         }
@@ -1355,7 +1361,8 @@ impl<'de> ::serde::Deserialize<'de> for DiversifyRetrieverTypes {
 pub struct DocStats {
     /// Total number of non-deleted documents across all primary shards assigned to selected nodes.
     /// This number is based on documents in Lucene segments and may include documents from nested fields.
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
     /// Total number of deleted documents across all primary shards assigned to selected nodes.
     /// This number is based on documents in Lucene segments.
     /// Elasticsearch reclaims the disk space of deleted Lucene documents when a segment is merged.
@@ -1363,7 +1370,8 @@ pub struct DocStats {
     pub deleted: ::core::option::Option<i64>,
     /// Returns the total size in bytes of all documents in this stats.
     /// This value may be more reliable than store_stats.size_in_bytes in estimating the index size.
-    pub total_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_size_in_bytes: ::core::option::Option<i64>,
     /// Human readable total_size_in_bytes
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_size: ::core::option::Option<crate::ByteSize>,
@@ -1373,9 +1381,9 @@ impl DocStats {
     /// A `DocStats` with its required properties set.
     pub fn new(count: i64, total_size_in_bytes: i64) -> Self {
         Self {
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             deleted: ::core::option::Option::None,
-            total_size_in_bytes: total_size_in_bytes.into(),
+            total_size_in_bytes: ::core::option::Option::Some(total_size_in_bytes.into()),
             total_size: ::core::option::Option::None,
         }
     }
@@ -1550,10 +1558,14 @@ impl ElasticsearchVersionInfo {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ElasticsearchVersionMinInfo {
-    pub build_flavor: ::std::string::String,
-    pub minimum_index_compatibility_version: crate::VersionString,
-    pub minimum_wire_compatibility_version: crate::VersionString,
-    pub number: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub build_flavor: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub minimum_index_compatibility_version: ::core::option::Option<crate::VersionString>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub minimum_wire_compatibility_version: ::core::option::Option<crate::VersionString>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub number: ::core::option::Option<::std::string::String>,
 }
 
 impl ElasticsearchVersionMinInfo {
@@ -1565,10 +1577,14 @@ impl ElasticsearchVersionMinInfo {
         number: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
-            build_flavor: build_flavor.into(),
-            minimum_index_compatibility_version: minimum_index_compatibility_version.into(),
-            minimum_wire_compatibility_version: minimum_wire_compatibility_version.into(),
-            number: number.into(),
+            build_flavor: ::core::option::Option::Some(build_flavor.into()),
+            minimum_index_compatibility_version: ::core::option::Option::Some(
+                minimum_index_compatibility_version.into(),
+            ),
+            minimum_wire_compatibility_version: ::core::option::Option::Some(
+                minimum_wire_compatibility_version.into(),
+            ),
+            number: ::core::option::Option::Some(number.into()),
         }
     }
 }
@@ -1797,7 +1813,8 @@ pub type Field = ::std::string::String;
 pub struct FieldMemoryUsage {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub memory_size: ::core::option::Option<crate::ByteSize>,
-    pub memory_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub memory_size_in_bytes: ::core::option::Option<i64>,
 }
 
 impl FieldMemoryUsage {
@@ -1805,7 +1822,7 @@ impl FieldMemoryUsage {
     pub fn new(memory_size_in_bytes: i64) -> Self {
         Self {
             memory_size: ::core::option::Option::None,
-            memory_size_in_bytes: memory_size_in_bytes.into(),
+            memory_size_in_bytes: ::core::option::Option::Some(memory_size_in_bytes.into()),
         }
     }
 }
@@ -1823,7 +1840,8 @@ impl FieldMemoryUsage {
 pub struct FieldSizeUsage {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub size: ::core::option::Option<crate::ByteSize>,
-    pub size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub size_in_bytes: ::core::option::Option<i64>,
 }
 
 impl FieldSizeUsage {
@@ -1831,7 +1849,7 @@ impl FieldSizeUsage {
     pub fn new(size_in_bytes: i64) -> Self {
         Self {
             size: ::core::option::Option::None,
-            size_in_bytes: size_in_bytes.into(),
+            size_in_bytes: ::core::option::Option::Some(size_in_bytes.into()),
         }
     }
 }
@@ -2156,10 +2174,12 @@ pub struct FielddataStats {
     pub evictions: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub memory_size: ::core::option::Option<crate::ByteSize>,
-    pub memory_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub memory_size_in_bytes: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub fields: ::core::option::Option<::indexmap::IndexMap<crate::Field, crate::FieldMemoryUsage>>,
-    pub global_ordinals: crate::GlobalOrdinalsStats,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub global_ordinals: ::core::option::Option<crate::GlobalOrdinalsStats>,
 }
 
 impl FielddataStats {
@@ -2171,9 +2191,9 @@ impl FielddataStats {
         Self {
             evictions: ::core::option::Option::None,
             memory_size: ::core::option::Option::None,
-            memory_size_in_bytes: memory_size_in_bytes.into(),
+            memory_size_in_bytes: ::core::option::Option::Some(memory_size_in_bytes.into()),
             fields: ::core::option::Option::None,
-            global_ordinals: global_ordinals.into(),
+            global_ordinals: ::core::option::Option::Some(global_ordinals.into()),
         }
     }
 }
@@ -2204,14 +2224,18 @@ pub type Fields = ::oxsearch_core::shapes::OneOrMany<crate::Field>;
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FlushStats {
-    pub periodic: i64,
-    pub total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub periodic: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time: ::core::option::Option<crate::Duration>,
-    pub total_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time_excluding_waiting: ::core::option::Option<crate::Duration>,
-    pub total_time_excluding_waiting_on_lock_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_time_excluding_waiting_on_lock_in_millis: ::core::option::Option<crate::UnitMillis>,
 }
 
 impl FlushStats {
@@ -2223,13 +2247,14 @@ impl FlushStats {
         total_time_excluding_waiting_on_lock_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
-            periodic: periodic.into(),
-            total: total.into(),
+            periodic: ::core::option::Option::Some(periodic.into()),
+            total: ::core::option::Option::Some(total.into()),
             total_time: ::core::option::Option::None,
-            total_time_in_millis: total_time_in_millis.into(),
+            total_time_in_millis: ::core::option::Option::Some(total_time_in_millis.into()),
             total_time_excluding_waiting: ::core::option::Option::None,
-            total_time_excluding_waiting_on_lock_in_millis:
+            total_time_excluding_waiting_on_lock_in_millis: ::core::option::Option::Some(
                 total_time_excluding_waiting_on_lock_in_millis.into(),
+            ),
         }
     }
 }
@@ -3027,22 +3052,29 @@ pub type GeoTilePrecision = i32;
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct GetStats {
-    pub current: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub exists_time: ::core::option::Option<crate::Duration>,
-    pub exists_time_in_millis: crate::UnitMillis,
-    pub exists_total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub exists_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub exists_total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub missing_time: ::core::option::Option<crate::Duration>,
-    pub missing_time_in_millis: crate::UnitMillis,
-    pub missing_total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub missing_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub missing_total: ::core::option::Option<i64>,
     #[serde(
         rename = "getTime",
         skip_serializing_if = "::core::option::Option::is_none"
     )]
     pub get_time: ::core::option::Option<crate::Duration>,
-    pub time_in_millis: crate::UnitMillis,
-    pub total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total: ::core::option::Option<i64>,
 }
 
 impl GetStats {
@@ -3057,16 +3089,16 @@ impl GetStats {
         total: i64,
     ) -> Self {
         Self {
-            current: current.into(),
+            current: ::core::option::Option::Some(current.into()),
             exists_time: ::core::option::Option::None,
-            exists_time_in_millis: exists_time_in_millis.into(),
-            exists_total: exists_total.into(),
+            exists_time_in_millis: ::core::option::Option::Some(exists_time_in_millis.into()),
+            exists_total: ::core::option::Option::Some(exists_total.into()),
             missing_time: ::core::option::Option::None,
-            missing_time_in_millis: missing_time_in_millis.into(),
-            missing_total: missing_total.into(),
+            missing_time_in_millis: ::core::option::Option::Some(missing_time_in_millis.into()),
+            missing_total: ::core::option::Option::Some(missing_total.into()),
             get_time: ::core::option::Option::None,
-            time_in_millis: time_in_millis.into(),
-            total: total.into(),
+            time_in_millis: ::core::option::Option::Some(time_in_millis.into()),
+            total: ::core::option::Option::Some(total.into()),
         }
     }
 }
@@ -3092,10 +3124,12 @@ impl GetStats {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct GlobalOrdinalFieldStats {
-    pub build_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub build_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub build_time: ::core::option::Option<::std::string::String>,
-    pub shard_max_value_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub shard_max_value_count: ::core::option::Option<i64>,
 }
 
 impl GlobalOrdinalFieldStats {
@@ -3105,9 +3139,9 @@ impl GlobalOrdinalFieldStats {
         shard_max_value_count: i64,
     ) -> Self {
         Self {
-            build_time_in_millis: build_time_in_millis.into(),
+            build_time_in_millis: ::core::option::Option::Some(build_time_in_millis.into()),
             build_time: ::core::option::Option::None,
-            shard_max_value_count: shard_max_value_count.into(),
+            shard_max_value_count: ::core::option::Option::Some(shard_max_value_count.into()),
         }
     }
 }
@@ -3123,7 +3157,8 @@ impl GlobalOrdinalFieldStats {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct GlobalOrdinalsStats {
-    pub build_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub build_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub build_time: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -3135,7 +3170,7 @@ impl GlobalOrdinalsStats {
     /// A `GlobalOrdinalsStats` with its required properties set.
     pub fn new(build_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>) -> Self {
         Self {
-            build_time_in_millis: build_time_in_millis.into(),
+            build_time_in_millis: ::core::option::Option::Some(build_time_in_millis.into()),
             build_time: ::core::option::Option::None,
             fields: ::core::option::Option::None,
         }
@@ -3348,23 +3383,34 @@ pub type IndexPatterns = ::std::vec::Vec<crate::IndexPattern>;
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct IndexingStats {
-    pub index_current: i64,
-    pub delete_current: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub index_current: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub delete_current: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub delete_time: ::core::option::Option<crate::Duration>,
-    pub delete_time_in_millis: crate::UnitMillis,
-    pub delete_total: i64,
-    pub is_throttled: bool,
-    pub noop_update_total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub delete_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub delete_total: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub is_throttled: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub noop_update_total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub throttle_time: ::core::option::Option<crate::Duration>,
-    pub throttle_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub throttle_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index_time: ::core::option::Option<crate::Duration>,
-    pub index_time_in_millis: crate::UnitMillis,
-    pub index_total: i64,
-    pub index_failed: i64,
-    pub index_failed_due_to_version_conflict: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub index_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub index_total: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub index_failed: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub index_failed_due_to_version_conflict: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub types:
         ::core::option::Option<::indexmap::IndexMap<::std::string::String, crate::IndexingStats>>,
@@ -3392,20 +3438,22 @@ impl IndexingStats {
         index_failed_due_to_version_conflict: i64,
     ) -> Self {
         Self {
-            index_current: index_current.into(),
-            delete_current: delete_current.into(),
+            index_current: ::core::option::Option::Some(index_current.into()),
+            delete_current: ::core::option::Option::Some(delete_current.into()),
             delete_time: ::core::option::Option::None,
-            delete_time_in_millis: delete_time_in_millis.into(),
-            delete_total: delete_total.into(),
-            is_throttled: is_throttled.into(),
-            noop_update_total: noop_update_total.into(),
+            delete_time_in_millis: ::core::option::Option::Some(delete_time_in_millis.into()),
+            delete_total: ::core::option::Option::Some(delete_total.into()),
+            is_throttled: ::core::option::Option::Some(is_throttled.into()),
+            noop_update_total: ::core::option::Option::Some(noop_update_total.into()),
             throttle_time: ::core::option::Option::None,
-            throttle_time_in_millis: throttle_time_in_millis.into(),
+            throttle_time_in_millis: ::core::option::Option::Some(throttle_time_in_millis.into()),
             index_time: ::core::option::Option::None,
-            index_time_in_millis: index_time_in_millis.into(),
-            index_total: index_total.into(),
-            index_failed: index_failed.into(),
-            index_failed_due_to_version_conflict: index_failed_due_to_version_conflict.into(),
+            index_time_in_millis: ::core::option::Option::Some(index_time_in_millis.into()),
+            index_total: ::core::option::Option::Some(index_total.into()),
+            index_failed: ::core::option::Option::Some(index_failed.into()),
+            index_failed_due_to_version_conflict: ::core::option::Option::Some(
+                index_failed_due_to_version_conflict.into(),
+            ),
             types: ::core::option::Option::None,
             write_load: ::core::option::Option::None,
             recent_write_load: ::core::option::Option::None,
@@ -3529,7 +3577,8 @@ impl IndicesOptions {
 #[non_exhaustive]
 pub struct IndicesResponseBase {
     /// For a successful response, this value is always true. On failure, an exception is returned instead.
-    pub acknowledged: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub acknowledged: ::core::option::Option<bool>,
     #[serde(
         rename = "_shards",
         skip_serializing_if = "::core::option::Option::is_none"
@@ -3541,7 +3590,7 @@ impl IndicesResponseBase {
     /// A `IndicesResponseBase` with its required properties set.
     pub fn new(acknowledged: bool) -> Self {
         Self {
-            acknowledged: acknowledged.into(),
+            acknowledged: ::core::option::Option::Some(acknowledged.into()),
             shards: ::core::option::Option::None,
         }
     }
@@ -4469,28 +4518,38 @@ pub type MapboxVectorTiles = ::std::string::String;
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct MergesStats {
-    pub current: i64,
-    pub current_docs: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current_docs: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub current_size: ::core::option::Option<::std::string::String>,
-    pub current_size_in_bytes: i64,
-    pub total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current_size_in_bytes: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_auto_throttle: ::core::option::Option<::std::string::String>,
-    pub total_auto_throttle_in_bytes: i64,
-    pub total_docs: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_auto_throttle_in_bytes: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_docs: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_size: ::core::option::Option<::std::string::String>,
-    pub total_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_size_in_bytes: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_stopped_time: ::core::option::Option<crate::Duration>,
-    pub total_stopped_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_stopped_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_throttled_time: ::core::option::Option<crate::Duration>,
-    pub total_throttled_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_throttled_time_in_millis: ::core::option::Option<crate::UnitMillis>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time: ::core::option::Option<crate::Duration>,
-    pub total_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_time_in_millis: ::core::option::Option<crate::UnitMillis>,
 }
 
 impl MergesStats {
@@ -4508,22 +4567,28 @@ impl MergesStats {
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
-            current: current.into(),
-            current_docs: current_docs.into(),
+            current: ::core::option::Option::Some(current.into()),
+            current_docs: ::core::option::Option::Some(current_docs.into()),
             current_size: ::core::option::Option::None,
-            current_size_in_bytes: current_size_in_bytes.into(),
-            total: total.into(),
+            current_size_in_bytes: ::core::option::Option::Some(current_size_in_bytes.into()),
+            total: ::core::option::Option::Some(total.into()),
             total_auto_throttle: ::core::option::Option::None,
-            total_auto_throttle_in_bytes: total_auto_throttle_in_bytes.into(),
-            total_docs: total_docs.into(),
+            total_auto_throttle_in_bytes: ::core::option::Option::Some(
+                total_auto_throttle_in_bytes.into(),
+            ),
+            total_docs: ::core::option::Option::Some(total_docs.into()),
             total_size: ::core::option::Option::None,
-            total_size_in_bytes: total_size_in_bytes.into(),
+            total_size_in_bytes: ::core::option::Option::Some(total_size_in_bytes.into()),
             total_stopped_time: ::core::option::Option::None,
-            total_stopped_time_in_millis: total_stopped_time_in_millis.into(),
+            total_stopped_time_in_millis: ::core::option::Option::Some(
+                total_stopped_time_in_millis.into(),
+            ),
             total_throttled_time: ::core::option::Option::None,
-            total_throttled_time_in_millis: total_throttled_time_in_millis.into(),
+            total_throttled_time_in_millis: ::core::option::Option::Some(
+                total_throttled_time_in_millis.into(),
+            ),
             total_time: ::core::option::Option::None,
-            total_time_in_millis: total_time_in_millis.into(),
+            total_time_in_millis: ::core::option::Option::Some(total_time_in_millis.into()),
         }
     }
 }
@@ -4954,11 +5019,14 @@ pub struct NodeStatistics {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub failures: ::core::option::Option<::std::vec::Vec<crate::ErrorCause>>,
     /// Total number of nodes selected by the request.
-    pub total: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total: ::core::option::Option<i32>,
     /// Number of nodes that responded successfully to the request.
-    pub successful: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub successful: ::core::option::Option<i32>,
     /// Number of nodes that rejected the request or failed to respond. If this value is not 0, a reason for the rejection or failure is included in the response.
-    pub failed: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub failed: ::core::option::Option<i32>,
 }
 
 impl NodeStatistics {
@@ -4966,9 +5034,9 @@ impl NodeStatistics {
     pub fn new(total: i32, successful: i32, failed: i32) -> Self {
         Self {
             failures: ::core::option::Option::None,
-            total: total.into(),
-            successful: successful.into(),
-            failed: failed.into(),
+            total: ::core::option::Option::Some(total.into()),
+            successful: ::core::option::Option::Some(successful.into()),
+            failed: ::core::option::Option::Some(failed.into()),
         }
     }
 }
@@ -5318,15 +5386,24 @@ pub type PipelineName = ::std::string::String;
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct PluginStats {
-    pub classname: ::std::string::String,
-    pub description: ::std::string::String,
-    pub elasticsearch_version: crate::VersionString,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub classname: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub description: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub elasticsearch_version: ::core::option::Option<crate::VersionString>,
+    #[serde(default = "::core::default::Default::default")]
     pub extended_plugins: ::std::vec::Vec<::std::string::String>,
-    pub has_native_controller: bool,
-    pub java_version: crate::VersionString,
-    pub name: crate::Name,
-    pub version: crate::VersionString,
-    pub licensed: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub has_native_controller: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub java_version: ::core::option::Option<crate::VersionString>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<crate::Name>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub version: ::core::option::Option<crate::VersionString>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub licensed: ::core::option::Option<bool>,
 }
 
 impl PluginStats {
@@ -5343,15 +5420,15 @@ impl PluginStats {
         licensed: bool,
     ) -> Self {
         Self {
-            classname: classname.into(),
-            description: description.into(),
-            elasticsearch_version: elasticsearch_version.into(),
+            classname: ::core::option::Option::Some(classname.into()),
+            description: ::core::option::Option::Some(description.into()),
+            elasticsearch_version: ::core::option::Option::Some(elasticsearch_version.into()),
             extended_plugins: extended_plugins.into(),
-            has_native_controller: has_native_controller.into(),
-            java_version: java_version.into(),
-            name: name.into(),
-            version: version.into(),
-            licensed: licensed.into(),
+            has_native_controller: ::core::option::Option::Some(has_native_controller.into()),
+            java_version: ::core::option::Option::Some(java_version.into()),
+            name: ::core::option::Option::Some(name.into()),
+            version: ::core::option::Option::Some(version.into()),
+            licensed: ::core::option::Option::Some(licensed.into()),
         }
     }
 }
@@ -5367,22 +5444,29 @@ pub type PropertyName = ::std::string::String;
 pub struct QueryCacheStats {
     /// Total number of entries added to the query cache across all shards assigned to selected nodes.
     /// This number includes current and evicted entries.
-    pub cache_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub cache_count: ::core::option::Option<i64>,
     /// Total number of entries currently in the query cache across all shards assigned to selected nodes.
-    pub cache_size: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub cache_size: ::core::option::Option<i64>,
     /// Total number of query cache evictions across all shards assigned to selected nodes.
-    pub evictions: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub evictions: ::core::option::Option<i64>,
     /// Total count of query cache hits across all shards assigned to selected nodes.
-    pub hit_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub hit_count: ::core::option::Option<i64>,
     /// Total amount of memory used for the query cache across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub memory_size: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for the query cache across all shards assigned to selected nodes.
-    pub memory_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub memory_size_in_bytes: ::core::option::Option<i64>,
     /// Total count of query cache misses across all shards assigned to selected nodes.
-    pub miss_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub miss_count: ::core::option::Option<i64>,
     /// Total count of hits and misses in the query cache across all shards assigned to selected nodes.
-    pub total_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_count: ::core::option::Option<i64>,
 }
 
 impl QueryCacheStats {
@@ -5397,14 +5481,14 @@ impl QueryCacheStats {
         total_count: i64,
     ) -> Self {
         Self {
-            cache_count: cache_count.into(),
-            cache_size: cache_size.into(),
-            evictions: evictions.into(),
-            hit_count: hit_count.into(),
+            cache_count: ::core::option::Option::Some(cache_count.into()),
+            cache_size: ::core::option::Option::Some(cache_size.into()),
+            evictions: ::core::option::Option::Some(evictions.into()),
+            hit_count: ::core::option::Option::Some(hit_count.into()),
             memory_size: ::core::option::Option::None,
-            memory_size_in_bytes: memory_size_in_bytes.into(),
-            miss_count: miss_count.into(),
-            total_count: total_count.into(),
+            memory_size_in_bytes: ::core::option::Option::Some(memory_size_in_bytes.into()),
+            miss_count: ::core::option::Option::Some(miss_count.into()),
+            total_count: ::core::option::Option::Some(total_count.into()),
         }
     }
 }
@@ -5828,10 +5912,12 @@ impl ::core::convert::From<crate::RrfRank> for RankContainer {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RecoveryStats {
-    pub current_as_source: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current_as_source: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub current_as_source_queued: ::core::option::Option<i64>,
-    pub current_as_target: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current_as_target: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub current_as_target_queued: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -5840,7 +5926,8 @@ pub struct RecoveryStats {
     pub current_from_store_queued: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub throttle_time: ::core::option::Option<crate::Duration>,
-    pub throttle_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub throttle_time_in_millis: ::core::option::Option<crate::UnitMillis>,
 }
 
 impl RecoveryStats {
@@ -5851,14 +5938,14 @@ impl RecoveryStats {
         throttle_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
-            current_as_source: current_as_source.into(),
+            current_as_source: ::core::option::Option::Some(current_as_source.into()),
             current_as_source_queued: ::core::option::Option::None,
-            current_as_target: current_as_target.into(),
+            current_as_target: ::core::option::Option::Some(current_as_target.into()),
             current_as_target_queued: ::core::option::Option::None,
             current_from_store: ::core::option::Option::None,
             current_from_store_queued: ::core::option::Option::None,
             throttle_time: ::core::option::Option::None,
-            throttle_time_in_millis: throttle_time_in_millis.into(),
+            throttle_time_in_millis: ::core::option::Option::Some(throttle_time_in_millis.into()),
         }
     }
 }
@@ -5948,15 +6035,20 @@ impl<'de> ::serde::Deserialize<'de> for Refresh {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RefreshStats {
-    pub external_total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub external_total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub external_total_time: ::core::option::Option<crate::Duration>,
-    pub external_total_time_in_millis: crate::UnitMillis,
-    pub listeners: i64,
-    pub total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub external_total_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub listeners: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time: ::core::option::Option<crate::Duration>,
-    pub total_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_time_in_millis: ::core::option::Option<crate::UnitMillis>,
 }
 
 impl RefreshStats {
@@ -5969,13 +6061,15 @@ impl RefreshStats {
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
-            external_total: external_total.into(),
+            external_total: ::core::option::Option::Some(external_total.into()),
             external_total_time: ::core::option::Option::None,
-            external_total_time_in_millis: external_total_time_in_millis.into(),
-            listeners: listeners.into(),
-            total: total.into(),
+            external_total_time_in_millis: ::core::option::Option::Some(
+                external_total_time_in_millis.into(),
+            ),
+            listeners: ::core::option::Option::Some(listeners.into()),
+            total: ::core::option::Option::Some(total.into()),
             total_time: ::core::option::Option::None,
-            total_time_in_millis: total_time_in_millis.into(),
+            total_time_in_millis: ::core::option::Option::Some(total_time_in_millis.into()),
         }
     }
 }
@@ -6376,23 +6470,27 @@ impl RequestBase {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RequestCacheStats {
-    pub evictions: i64,
-    pub hit_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub evictions: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub hit_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub memory_size: ::core::option::Option<::std::string::String>,
-    pub memory_size_in_bytes: i64,
-    pub miss_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub memory_size_in_bytes: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub miss_count: ::core::option::Option<i64>,
 }
 
 impl RequestCacheStats {
     /// A `RequestCacheStats` with its required properties set.
     pub fn new(evictions: i64, hit_count: i64, memory_size_in_bytes: i64, miss_count: i64) -> Self {
         Self {
-            evictions: evictions.into(),
-            hit_count: hit_count.into(),
+            evictions: ::core::option::Option::Some(evictions.into()),
+            hit_count: ::core::option::Option::Some(hit_count.into()),
             memory_size: ::core::option::Option::None,
-            memory_size_in_bytes: memory_size_in_bytes.into(),
-            miss_count: miss_count.into(),
+            memory_size_in_bytes: ::core::option::Option::Some(memory_size_in_bytes.into()),
+            miss_count: ::core::option::Option::Some(miss_count.into()),
         }
     }
 }
@@ -7626,30 +7724,44 @@ pub type ScrollIds = ::oxsearch_core::shapes::OneOrMany<crate::ScrollId>;
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SearchStats {
-    pub fetch_current: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub fetch_current: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub fetch_time: ::core::option::Option<crate::Duration>,
-    pub fetch_time_in_millis: crate::UnitMillis,
-    pub fetch_total: i64,
-    pub fetch_failure: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub fetch_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub fetch_total: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub fetch_failure: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub open_contexts: ::core::option::Option<i64>,
-    pub query_current: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub query_current: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub query_time: ::core::option::Option<crate::Duration>,
-    pub query_time_in_millis: crate::UnitMillis,
-    pub query_total: i64,
-    pub query_failure: i64,
-    pub scroll_current: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub query_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub query_total: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub query_failure: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub scroll_current: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub scroll_time: ::core::option::Option<crate::Duration>,
-    pub scroll_time_in_millis: crate::UnitMillis,
-    pub scroll_total: i64,
-    pub suggest_current: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub scroll_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub scroll_total: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub suggest_current: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub suggest_time: ::core::option::Option<crate::Duration>,
-    pub suggest_time_in_millis: crate::UnitMillis,
-    pub suggest_total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub suggest_time_in_millis: ::core::option::Option<crate::UnitMillis>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub suggest_total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub recent_search_load: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -7676,25 +7788,25 @@ impl SearchStats {
         suggest_total: i64,
     ) -> Self {
         Self {
-            fetch_current: fetch_current.into(),
+            fetch_current: ::core::option::Option::Some(fetch_current.into()),
             fetch_time: ::core::option::Option::None,
-            fetch_time_in_millis: fetch_time_in_millis.into(),
-            fetch_total: fetch_total.into(),
-            fetch_failure: fetch_failure.into(),
+            fetch_time_in_millis: ::core::option::Option::Some(fetch_time_in_millis.into()),
+            fetch_total: ::core::option::Option::Some(fetch_total.into()),
+            fetch_failure: ::core::option::Option::Some(fetch_failure.into()),
             open_contexts: ::core::option::Option::None,
-            query_current: query_current.into(),
+            query_current: ::core::option::Option::Some(query_current.into()),
             query_time: ::core::option::Option::None,
-            query_time_in_millis: query_time_in_millis.into(),
-            query_total: query_total.into(),
-            query_failure: query_failure.into(),
-            scroll_current: scroll_current.into(),
+            query_time_in_millis: ::core::option::Option::Some(query_time_in_millis.into()),
+            query_total: ::core::option::Option::Some(query_total.into()),
+            query_failure: ::core::option::Option::Some(query_failure.into()),
+            scroll_current: ::core::option::Option::Some(scroll_current.into()),
             scroll_time: ::core::option::Option::None,
-            scroll_time_in_millis: scroll_time_in_millis.into(),
-            scroll_total: scroll_total.into(),
-            suggest_current: suggest_current.into(),
+            scroll_time_in_millis: ::core::option::Option::Some(scroll_time_in_millis.into()),
+            scroll_total: ::core::option::Option::Some(scroll_total.into()),
+            suggest_current: ::core::option::Option::Some(suggest_current.into()),
             suggest_time: ::core::option::Option::None,
-            suggest_time_in_millis: suggest_time_in_millis.into(),
-            suggest_total: suggest_total.into(),
+            suggest_time_in_millis: ::core::option::Option::Some(suggest_time_in_millis.into()),
+            suggest_total: ::core::option::Option::Some(suggest_total.into()),
             recent_search_load: ::core::option::Option::None,
             groups: ::core::option::Option::None,
         }
@@ -7824,14 +7936,17 @@ impl<'de> ::serde::Deserialize<'de> for SearchType {
 #[non_exhaustive]
 pub struct SegmentsStats {
     /// Total number of segments across all shards assigned to selected nodes.
-    pub count: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i32>,
     /// Total amount of memory used for doc values across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_values_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for doc values across all shards assigned to selected nodes.
-    pub doc_values_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_values_memory_in_bytes: ::core::option::Option<i64>,
     /// This object is not populated by the cluster stats API.
     /// To get information on segment files, use the node stats API.
+    #[serde(default = "::core::default::Default::default")]
     pub file_sizes:
         ::indexmap::IndexMap<::std::string::String, crate::indices::stats::ShardFileSizeInfo>,
     /// Total amount of memory used by fixed bit sets across all shards assigned to selected nodes.
@@ -7839,36 +7954,44 @@ pub struct SegmentsStats {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub fixed_bit_set: ::core::option::Option<crate::ByteSize>,
     /// Total amount of memory, in bytes, used by fixed bit sets across all shards assigned to selected nodes.
-    pub fixed_bit_set_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub fixed_bit_set_memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used by all index writers across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub index_writer_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used by all index writers across all shards assigned to selected nodes.
-    pub index_writer_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub index_writer_memory_in_bytes: ::core::option::Option<i64>,
     /// Unix timestamp, in milliseconds, of the most recently retried indexing request.
-    pub max_unsafe_auto_id_timestamp: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub max_unsafe_auto_id_timestamp: ::core::option::Option<i64>,
     /// Total amount of memory used for segments across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for segments across all shards assigned to selected nodes.
-    pub memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used for normalization factors across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub norms_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for normalization factors across all shards assigned to selected nodes.
-    pub norms_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub norms_memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used for points across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub points_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for points across all shards assigned to selected nodes.
-    pub points_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub points_memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount, in bytes, of memory used for stored fields across all shards assigned to selected nodes.
-    pub stored_fields_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub stored_fields_memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used for stored fields across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub stored_fields_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for terms across all shards assigned to selected nodes.
-    pub terms_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub terms_memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used for terms across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub terms_memory: ::core::option::Option<crate::ByteSize>,
@@ -7876,12 +7999,14 @@ pub struct SegmentsStats {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub term_vectors_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used for term vectors across all shards assigned to selected nodes.
-    pub term_vectors_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub term_vectors_memory_in_bytes: ::core::option::Option<i64>,
     /// Total amount of memory used by all version maps across all shards assigned to selected nodes.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version_map_memory: ::core::option::Option<crate::ByteSize>,
     /// Total amount, in bytes, of memory used by all version maps across all shards assigned to selected nodes.
-    pub version_map_memory_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub version_map_memory_in_bytes: ::core::option::Option<i64>,
 }
 
 impl SegmentsStats {
@@ -7904,29 +8029,43 @@ impl SegmentsStats {
         version_map_memory_in_bytes: i64,
     ) -> Self {
         Self {
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             doc_values_memory: ::core::option::Option::None,
-            doc_values_memory_in_bytes: doc_values_memory_in_bytes.into(),
+            doc_values_memory_in_bytes: ::core::option::Option::Some(
+                doc_values_memory_in_bytes.into(),
+            ),
             file_sizes: file_sizes.into(),
             fixed_bit_set: ::core::option::Option::None,
-            fixed_bit_set_memory_in_bytes: fixed_bit_set_memory_in_bytes.into(),
+            fixed_bit_set_memory_in_bytes: ::core::option::Option::Some(
+                fixed_bit_set_memory_in_bytes.into(),
+            ),
             index_writer_memory: ::core::option::Option::None,
-            index_writer_memory_in_bytes: index_writer_memory_in_bytes.into(),
-            max_unsafe_auto_id_timestamp: max_unsafe_auto_id_timestamp.into(),
+            index_writer_memory_in_bytes: ::core::option::Option::Some(
+                index_writer_memory_in_bytes.into(),
+            ),
+            max_unsafe_auto_id_timestamp: ::core::option::Option::Some(
+                max_unsafe_auto_id_timestamp.into(),
+            ),
             memory: ::core::option::Option::None,
-            memory_in_bytes: memory_in_bytes.into(),
+            memory_in_bytes: ::core::option::Option::Some(memory_in_bytes.into()),
             norms_memory: ::core::option::Option::None,
-            norms_memory_in_bytes: norms_memory_in_bytes.into(),
+            norms_memory_in_bytes: ::core::option::Option::Some(norms_memory_in_bytes.into()),
             points_memory: ::core::option::Option::None,
-            points_memory_in_bytes: points_memory_in_bytes.into(),
-            stored_fields_memory_in_bytes: stored_fields_memory_in_bytes.into(),
+            points_memory_in_bytes: ::core::option::Option::Some(points_memory_in_bytes.into()),
+            stored_fields_memory_in_bytes: ::core::option::Option::Some(
+                stored_fields_memory_in_bytes.into(),
+            ),
             stored_fields_memory: ::core::option::Option::None,
-            terms_memory_in_bytes: terms_memory_in_bytes.into(),
+            terms_memory_in_bytes: ::core::option::Option::Some(terms_memory_in_bytes.into()),
             terms_memory: ::core::option::Option::None,
             term_vectors_memory: ::core::option::Option::None,
-            term_vectors_memory_in_bytes: term_vectors_memory_in_bytes.into(),
+            term_vectors_memory_in_bytes: ::core::option::Option::Some(
+                term_vectors_memory_in_bytes.into(),
+            ),
             version_map_memory: ::core::option::Option::None,
-            version_map_memory_in_bytes: version_map_memory_in_bytes.into(),
+            version_map_memory_in_bytes: ::core::option::Option::Some(
+                version_map_memory_in_bytes.into(),
+            ),
         }
     }
 }
@@ -8713,12 +8852,14 @@ pub struct StoreStats {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub size: ::core::option::Option<crate::ByteSize>,
     /// Total size, in bytes, of all shards assigned to selected nodes.
-    pub size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub size_in_bytes: ::core::option::Option<i64>,
     /// A prediction of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub reserved: ::core::option::Option<crate::ByteSize>,
     /// A prediction, in bytes, of how much larger the shard stores will eventually grow due to ongoing peer recoveries, restoring snapshots, and similar activities.
-    pub reserved_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub reserved_in_bytes: ::core::option::Option<i64>,
     /// Total data set size of all shards assigned to selected nodes.
     /// This includes the size of shards not stored fully on the nodes, such as the cache for partially mounted indices.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -8734,9 +8875,9 @@ impl StoreStats {
     pub fn new(size_in_bytes: i64, reserved_in_bytes: i64) -> Self {
         Self {
             size: ::core::option::Option::None,
-            size_in_bytes: size_in_bytes.into(),
+            size_in_bytes: ::core::option::Option::Some(size_in_bytes.into()),
             reserved: ::core::option::Option::None,
-            reserved_in_bytes: reserved_in_bytes.into(),
+            reserved_in_bytes: ::core::option::Option::Some(reserved_in_bytes.into()),
             total_data_set_size: ::core::option::Option::None,
             total_data_set_size_in_bytes: ::core::option::Option::None,
         }
@@ -8774,13 +8915,15 @@ impl StoreStats {
 pub struct StoredScript {
     /// The language the script is written in.
     /// For search templates, use `mustache`.
-    pub lang: crate::ScriptLanguage,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub lang: ::core::option::Option<crate::ScriptLanguage>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub options:
         ::core::option::Option<::indexmap::IndexMap<::std::string::String, ::std::string::String>>,
     /// The script source.
     /// For search templates, an object containing the search template.
-    pub source: crate::ScriptSource,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub source: ::core::option::Option<crate::ScriptSource>,
 }
 
 impl StoredScript {
@@ -8790,9 +8933,9 @@ impl StoredScript {
         source: impl ::core::convert::Into<crate::ScriptSource>,
     ) -> Self {
         Self {
-            lang: lang.into(),
+            lang: ::core::option::Option::Some(lang.into()),
             options: ::core::option::Option::None,
-            source: source.into(),
+            source: ::core::option::Option::Some(source.into()),
         }
     }
 }
@@ -9366,15 +9509,20 @@ impl ::core::convert::From<crate::SearchTransform> for TransformContainer {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TranslogStats {
-    pub earliest_last_modified_age: i64,
-    pub operations: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub earliest_last_modified_age: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub operations: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub size: ::core::option::Option<::std::string::String>,
-    pub size_in_bytes: i64,
-    pub uncommitted_operations: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub size_in_bytes: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub uncommitted_operations: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub uncommitted_size: ::core::option::Option<::std::string::String>,
-    pub uncommitted_size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub uncommitted_size_in_bytes: ::core::option::Option<i64>,
 }
 
 impl TranslogStats {
@@ -9387,13 +9535,17 @@ impl TranslogStats {
         uncommitted_size_in_bytes: i64,
     ) -> Self {
         Self {
-            earliest_last_modified_age: earliest_last_modified_age.into(),
-            operations: operations.into(),
+            earliest_last_modified_age: ::core::option::Option::Some(
+                earliest_last_modified_age.into(),
+            ),
+            operations: ::core::option::Option::Some(operations.into()),
             size: ::core::option::Option::None,
-            size_in_bytes: size_in_bytes.into(),
-            uncommitted_operations: uncommitted_operations.into(),
+            size_in_bytes: ::core::option::Option::Some(size_in_bytes.into()),
+            uncommitted_operations: ::core::option::Option::Some(uncommitted_operations.into()),
             uncommitted_size: ::core::option::Option::None,
-            uncommitted_size_in_bytes: uncommitted_size_in_bytes.into(),
+            uncommitted_size_in_bytes: ::core::option::Option::Some(
+                uncommitted_size_in_bytes.into(),
+            ),
         }
     }
 }
@@ -9682,11 +9834,14 @@ impl<'de> ::serde::Deserialize<'de> for WaitForEvents {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct WarmerStats {
-    pub current: i64,
-    pub total: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub current: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time: ::core::option::Option<crate::Duration>,
-    pub total_time_in_millis: crate::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub total_time_in_millis: ::core::option::Option<crate::UnitMillis>,
 }
 
 impl WarmerStats {
@@ -9697,10 +9852,10 @@ impl WarmerStats {
         total_time_in_millis: impl ::core::convert::Into<crate::UnitMillis>,
     ) -> Self {
         Self {
-            current: current.into(),
-            total: total.into(),
+            current: ::core::option::Option::Some(current.into()),
+            total: ::core::option::Option::Some(total.into()),
             total_time: ::core::option::Option::None,
-            total_time_in_millis: total_time_in_millis.into(),
+            total_time_in_millis: ::core::option::Option::Some(total_time_in_millis.into()),
         }
     }
 }

@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.1, the first release.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL and the administration APIs come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.1, the first release.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations and the administration APIs are on `main` for 0.2, and ES|QL comes next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -52,8 +52,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
 - **Generated types and endpoints** for every request and response in the first slice, with builders, `Raw` variants for what a newer Elasticsearch adds, and typed errors (license refusals and version conflicts have their own).
 - **Aggregations with typed results** (`oxsearch::aggs`, the `aggs` feature): `Agg::terms("category", 10).sub("avg_price", Agg::avg("price"))`, sent with `typed_keys` and read back as `Aggregates`.
+- **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
-- **A typed document layer** (`oxsearch::document`): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.
+- **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.
 - **Helpers** (`oxsearch::helpers`): a point-in-time scan and a bulk loader with backpressure.
 - **Transport layers**: several nodes with failover, retries, sniffing, credentials (basic, bearer, API key, Elastic Cloud) and gzip.
 - **Telemetry** through `tracing` and `metrics`, following the OpenTelemetry conventions for Elasticsearch, for [oxtel](https://github.com/agentstatelabs/oxtel) or any other exporter.
@@ -118,7 +119,7 @@ scripts/es-fixture.sh down
 With the fixture up, the examples run against it:
 
 ```bash
-cargo run -p oxsearch --example rag --features transport-reqwest
+cargo run -p oxsearch --example rag --features admin,transport-reqwest
 ```
 
 ## License

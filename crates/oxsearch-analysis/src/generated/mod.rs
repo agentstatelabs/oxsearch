@@ -1475,6 +1475,7 @@ impl ::core::convert::From<crate::KuromojiIterationMarkCharFilter> for CharFilte
 pub struct CharGroupTokenizer {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
+    #[serde(default = "::core::default::Default::default")]
     pub tokenize_on_chars: ::std::vec::Vec<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub max_token_length: ::core::option::Option<i32>,
@@ -1953,9 +1954,11 @@ pub struct ConditionTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     /// Array of token filters. If a token matches the predicate script in the `script` parameter, these filters are applied to the token in the order provided.
+    #[serde(default = "::core::default::Default::default")]
     pub filter: ::std::vec::Vec<::std::string::String>,
     /// Predicate script used to apply token filters. If a token matches this script, the filters in the `filter` parameter are applied to the token.
-    pub script: ::oxsearch_core::Script,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub script: ::core::option::Option<::oxsearch_core::Script>,
 }
 
 impl ConditionTokenFilter {
@@ -1967,7 +1970,7 @@ impl ConditionTokenFilter {
         Self {
             version: ::core::option::Option::None,
             filter: filter.into(),
-            script: script.into(),
+            script: ::core::option::Option::Some(script.into()),
         }
     }
 }
@@ -1995,7 +1998,8 @@ pub struct CustomAnalyzer {
     pub position_increment_gap: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub position_offset_gap: ::core::option::Option<i32>,
-    pub tokenizer: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub tokenizer: ::core::option::Option<::std::string::String>,
 }
 
 impl CustomAnalyzer {
@@ -2006,7 +2010,7 @@ impl CustomAnalyzer {
             filter: ::core::option::Option::None,
             position_increment_gap: ::core::option::Option::None,
             position_offset_gap: ::core::option::Option::None,
-            tokenizer: tokenizer.into(),
+            tokenizer: ::core::option::Option::Some(tokenizer.into()),
         }
     }
 }
@@ -3462,8 +3466,12 @@ pub struct HunspellTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub dictionary: ::core::option::Option<::std::string::String>,
     /// Locale directory used to specify the `.aff` and `.dic` files for a Hunspell dictionary.
-    #[serde(alias = "lang", alias = "language")]
-    pub locale: ::std::string::String,
+    #[serde(
+        alias = "lang",
+        alias = "language",
+        skip_serializing_if = "::core::option::Option::is_none"
+    )]
+    pub locale: ::core::option::Option<::std::string::String>,
     /// If `true`, only the longest stemmed version of each token is included in the output. If `false`, all stemmed versions of the token are included. Defaults to `false`.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub longest_only: ::core::option::Option<bool>,
@@ -3476,7 +3484,7 @@ impl HunspellTokenFilter {
             version: ::core::option::Option::None,
             dedup: ::core::option::Option::None,
             dictionary: ::core::option::Option::None,
-            locale: locale.into(),
+            locale: ::core::option::Option::Some(locale.into()),
             longest_only: ::core::option::Option::None,
         }
     }
@@ -3536,7 +3544,8 @@ pub struct HyphenationDecompounderTokenFilter {
     pub word_list_path: ::core::option::Option<::std::string::String>,
     /// Path to an Apache FOP (Formatting Objects Processor) XML hyphenation pattern file.
     /// This path must be absolute or relative to the `config` location. Only FOP v1.2 compatible files are supported.
-    pub hyphenation_patterns_path: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub hyphenation_patterns_path: ::core::option::Option<::std::string::String>,
     /// If `true`, do not match sub tokens in tokens that are in the word list. Defaults to `false`.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub no_sub_matches: ::core::option::Option<bool>,
@@ -3558,7 +3567,9 @@ impl HyphenationDecompounderTokenFilter {
             only_longest_match: ::core::option::Option::None,
             word_list: ::core::option::Option::None,
             word_list_path: ::core::option::Option::None,
-            hyphenation_patterns_path: hyphenation_patterns_path.into(),
+            hyphenation_patterns_path: ::core::option::Option::Some(
+                hyphenation_patterns_path.into(),
+            ),
             no_sub_matches: ::core::option::Option::None,
             no_overlapping_matches: ::core::option::Option::None,
         }
@@ -3625,8 +3636,10 @@ impl HyphenationDecompounderTokenFilter {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct IcuAnalyzer {
-    pub method: crate::IcuNormalizationType,
-    pub mode: crate::IcuNormalizationMode,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub method: ::core::option::Option<crate::IcuNormalizationType>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub mode: ::core::option::Option<crate::IcuNormalizationMode>,
 }
 
 impl IcuAnalyzer {
@@ -3636,8 +3649,8 @@ impl IcuAnalyzer {
         mode: impl ::core::convert::Into<crate::IcuNormalizationMode>,
     ) -> Self {
         Self {
-            method: method.into(),
-            mode: mode.into(),
+            method: ::core::option::Option::Some(method.into()),
+            mode: ::core::option::Option::Some(mode.into()),
         }
     }
 }
@@ -4019,7 +4032,8 @@ impl IcuCollationTokenFilter {
 pub struct IcuFoldingTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub unicode_set_filter: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub unicode_set_filter: ::core::option::Option<::std::string::String>,
 }
 
 impl IcuFoldingTokenFilter {
@@ -4027,7 +4041,7 @@ impl IcuFoldingTokenFilter {
     pub fn new(unicode_set_filter: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
             version: ::core::option::Option::None,
-            unicode_set_filter: unicode_set_filter.into(),
+            unicode_set_filter: ::core::option::Option::Some(unicode_set_filter.into()),
         }
     }
 }
@@ -4154,7 +4168,8 @@ impl<'de> ::serde::Deserialize<'de> for IcuNormalizationMode {
 pub struct IcuNormalizationTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub name: crate::IcuNormalizationType,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<crate::IcuNormalizationType>,
 }
 
 impl IcuNormalizationTokenFilter {
@@ -4162,7 +4177,7 @@ impl IcuNormalizationTokenFilter {
     pub fn new(name: impl ::core::convert::Into<crate::IcuNormalizationType>) -> Self {
         Self {
             version: ::core::option::Option::None,
-            name: name.into(),
+            name: ::core::option::Option::Some(name.into()),
         }
     }
 }
@@ -4239,7 +4254,8 @@ impl<'de> ::serde::Deserialize<'de> for IcuNormalizationType {
 pub struct IcuTokenizer {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub rule_files: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub rule_files: ::core::option::Option<::std::string::String>,
 }
 
 impl IcuTokenizer {
@@ -4247,7 +4263,7 @@ impl IcuTokenizer {
     pub fn new(rule_files: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
             version: ::core::option::Option::None,
-            rule_files: rule_files.into(),
+            rule_files: ::core::option::Option::Some(rule_files.into()),
         }
     }
 }
@@ -4322,7 +4338,8 @@ pub struct IcuTransformTokenFilter {
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub dir: ::core::option::Option<crate::IcuTransformDirection>,
-    pub id: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub id: ::core::option::Option<::std::string::String>,
 }
 
 impl IcuTransformTokenFilter {
@@ -4331,7 +4348,7 @@ impl IcuTransformTokenFilter {
         Self {
             version: ::core::option::Option::None,
             dir: ::core::option::Option::None,
-            id: id.into(),
+            id: ::core::option::Option::Some(id.into()),
         }
     }
 }
@@ -4652,6 +4669,7 @@ pub struct KeepTypesTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub mode: ::core::option::Option<crate::KeepTypesMode>,
     /// List of token types to keep or remove.
+    #[serde(default = "::core::default::Default::default")]
     pub types: ::std::vec::Vec<::std::string::String>,
 }
 
@@ -4953,8 +4971,10 @@ impl KuromojiAnalyzer {
 pub struct KuromojiIterationMarkCharFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub normalize_kana: bool,
-    pub normalize_kanji: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub normalize_kana: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub normalize_kanji: ::core::option::Option<bool>,
 }
 
 impl KuromojiIterationMarkCharFilter {
@@ -4962,8 +4982,8 @@ impl KuromojiIterationMarkCharFilter {
     pub fn new(normalize_kana: bool, normalize_kanji: bool) -> Self {
         Self {
             version: ::core::option::Option::None,
-            normalize_kana: normalize_kana.into(),
-            normalize_kanji: normalize_kanji.into(),
+            normalize_kana: ::core::option::Option::Some(normalize_kana.into()),
+            normalize_kanji: ::core::option::Option::Some(normalize_kanji.into()),
         }
     }
 }
@@ -4984,6 +5004,7 @@ impl KuromojiIterationMarkCharFilter {
 pub struct KuromojiPartOfSpeechTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
+    #[serde(default = "::core::default::Default::default")]
     pub stoptags: ::std::vec::Vec<::std::string::String>,
 }
 
@@ -5015,7 +5036,8 @@ impl KuromojiPartOfSpeechTokenFilter {
 pub struct KuromojiReadingFormTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub use_romaji: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub use_romaji: ::core::option::Option<bool>,
 }
 
 impl KuromojiReadingFormTokenFilter {
@@ -5023,7 +5045,7 @@ impl KuromojiReadingFormTokenFilter {
     pub fn new(use_romaji: bool) -> Self {
         Self {
             version: ::core::option::Option::None,
-            use_romaji: use_romaji.into(),
+            use_romaji: ::core::option::Option::Some(use_romaji.into()),
         }
     }
 }
@@ -5044,7 +5066,8 @@ impl KuromojiReadingFormTokenFilter {
 pub struct KuromojiStemmerTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub minimum_length: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub minimum_length: ::core::option::Option<i32>,
 }
 
 impl KuromojiStemmerTokenFilter {
@@ -5052,7 +5075,7 @@ impl KuromojiStemmerTokenFilter {
     pub fn new(minimum_length: i32) -> Self {
         Self {
             version: ::core::option::Option::None,
-            minimum_length: minimum_length.into(),
+            minimum_length: ::core::option::Option::Some(minimum_length.into()),
         }
     }
 }
@@ -5131,7 +5154,8 @@ pub struct KuromojiTokenizer {
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub discard_punctuation: ::core::option::Option<bool>,
-    pub mode: crate::KuromojiTokenizationMode,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub mode: ::core::option::Option<crate::KuromojiTokenizationMode>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub nbest_cost: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -5150,7 +5174,7 @@ impl KuromojiTokenizer {
         Self {
             version: ::core::option::Option::None,
             discard_punctuation: ::core::option::Option::None,
-            mode: mode.into(),
+            mode: ::core::option::Option::Some(mode.into()),
             nbest_cost: ::core::option::Option::None,
             nbest_examples: ::core::option::Option::None,
             user_dictionary: ::core::option::Option::None,
@@ -5682,6 +5706,7 @@ pub struct MultiplexerTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     /// A list of token filters to apply to incoming tokens.
+    #[serde(default = "::core::default::Default::default")]
     pub filters: ::std::vec::Vec<::std::string::String>,
     /// If `true` (the default) then emit the original token in addition to the filtered tokens.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -6339,6 +6364,7 @@ pub struct PatternCaptureTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     /// A list of regular expressions to match.
+    #[serde(default = "::core::default::Default::default")]
     pub patterns: ::std::vec::Vec<::std::string::String>,
     /// If set to `true` (the default) it will emit the original token.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -6384,7 +6410,8 @@ pub struct PatternReplaceCharFilter {
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub flags: ::core::option::Option<::std::string::String>,
-    pub pattern: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub pattern: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub replacement: ::core::option::Option<::std::string::String>,
 }
@@ -6395,7 +6422,7 @@ impl PatternReplaceCharFilter {
         Self {
             version: ::core::option::Option::None,
             flags: ::core::option::Option::None,
-            pattern: pattern.into(),
+            pattern: ::core::option::Option::Some(pattern.into()),
             replacement: ::core::option::Option::None,
         }
     }
@@ -6433,7 +6460,8 @@ pub struct PatternReplaceTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub flags: ::core::option::Option<::std::string::String>,
     /// Regular expression, written in Java’s regular expression syntax. The filter replaces token substrings matching this pattern with the substring in the `replacement` parameter.
-    pub pattern: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub pattern: ::core::option::Option<::std::string::String>,
     /// Replacement substring. Defaults to an empty substring (`""`).
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub replacement: ::core::option::Option<::std::string::String>,
@@ -6446,7 +6474,7 @@ impl PatternReplaceTokenFilter {
             version: ::core::option::Option::None,
             all: ::core::option::Option::None,
             flags: ::core::option::Option::None,
-            pattern: pattern.into(),
+            pattern: ::core::option::Option::Some(pattern.into()),
             replacement: ::core::option::Option::None,
         }
     }
@@ -6918,7 +6946,8 @@ impl<'de> ::serde::Deserialize<'de> for PhoneticRuleType {
 pub struct PhoneticTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub encoder: crate::PhoneticEncoder,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub encoder: ::core::option::Option<crate::PhoneticEncoder>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub languageset:
         ::core::option::Option<::oxsearch_core::shapes::OneOrMany<crate::PhoneticLanguage>>,
@@ -6937,7 +6966,7 @@ impl PhoneticTokenFilter {
     pub fn new(encoder: impl ::core::convert::Into<crate::PhoneticEncoder>) -> Self {
         Self {
             version: ::core::option::Option::None,
-            encoder: encoder.into(),
+            encoder: ::core::option::Option::Some(encoder.into()),
             languageset: ::core::option::Option::None,
             max_code_len: ::core::option::Option::None,
             name_type: ::core::option::Option::None,
@@ -7068,7 +7097,8 @@ pub struct PredicateTokenFilter {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
     /// Script containing a condition used to filter incoming tokens. Only tokens that match this script are included in the output.
-    pub script: ::oxsearch_core::Script,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub script: ::core::option::Option<::oxsearch_core::Script>,
 }
 
 impl PredicateTokenFilter {
@@ -7076,7 +7106,7 @@ impl PredicateTokenFilter {
     pub fn new(script: impl ::core::convert::Into<::oxsearch_core::Script>) -> Self {
         Self {
             version: ::core::option::Option::None,
-            script: script.into(),
+            script: ::core::option::Option::Some(script.into()),
         }
     }
 }
@@ -7596,7 +7626,8 @@ impl SimplePatternTokenizer {
 pub struct SnowballAnalyzer {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub version: ::core::option::Option<::oxsearch_core::VersionString>,
-    pub language: crate::SnowballLanguage,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub language: ::core::option::Option<crate::SnowballLanguage>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub stopwords: ::core::option::Option<::oxsearch_core::analysis::StopWords>,
 }
@@ -7606,7 +7637,7 @@ impl SnowballAnalyzer {
     pub fn new(language: impl ::core::convert::Into<crate::SnowballLanguage>) -> Self {
         Self {
             version: ::core::option::Option::None,
-            language: language.into(),
+            language: ::core::option::Option::Some(language.into()),
             stopwords: ::core::option::Option::None,
         }
     }

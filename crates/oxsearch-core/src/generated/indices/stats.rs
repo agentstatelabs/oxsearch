@@ -4,8 +4,10 @@
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ShardFileSizeInfo {
-    pub description: ::std::string::String,
-    pub size_in_bytes: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub description: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub size_in_bytes: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_size_in_bytes: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -23,8 +25,8 @@ impl ShardFileSizeInfo {
         size_in_bytes: i64,
     ) -> Self {
         Self {
-            description: description.into(),
-            size_in_bytes: size_in_bytes.into(),
+            description: ::core::option::Option::Some(description.into()),
+            size_in_bytes: ::core::option::Option::Some(size_in_bytes.into()),
             min_size_in_bytes: ::core::option::Option::None,
             max_size_in_bytes: ::core::option::Option::None,
             average_size_in_bytes: ::core::option::Option::None,

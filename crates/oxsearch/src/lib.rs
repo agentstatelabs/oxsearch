@@ -7,11 +7,11 @@
 //!
 //! This crate re-exports the others behind features. The defaults are the
 //! AI-search set: `search`, `docs`, `mapping` and `inference`; `aggs`
-//! (aggregations with typed results), `analysis` and `tasks` are the other
-//! areas generated so far. `derive` adds
-//! the typed document layer's derive macro, `helpers` the point-in-time
-//! scan and the bulk loader, and `transport-reqwest` the default HTTP
-//! transport.
+//! (aggregations with typed results), `admin` (cluster, index and node
+//! administration), `analysis` and `tasks` are the other areas generated so
+//! far. `document` adds the typed document layer and `derive` its derive
+//! macro, `helpers` the point-in-time scan and the bulk loader, and
+//! `transport-reqwest` the default HTTP transport.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -49,7 +49,7 @@ extern crate self as oxsearch;
 mod generated;
 pub use generated::*;
 
-#[cfg(all(feature = "docs", feature = "search", feature = "mapping"))]
+#[cfg(feature = "document")]
 pub mod document;
 #[cfg(feature = "helpers")]
 pub mod helpers;
@@ -64,6 +64,8 @@ pub use oxsearch_core::{
 };
 pub use oxsearch_core::{auth, telemetry};
 
+#[cfg(feature = "admin")]
+pub use oxsearch_admin as admin;
 #[cfg(feature = "aggs")]
 pub use oxsearch_aggs as aggs;
 #[cfg(feature = "analysis")]

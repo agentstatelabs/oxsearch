@@ -26,6 +26,7 @@ pub const CRATES: &[&str] = &[
     "search",
     "docs",
     "aggs",
+    "admin",
 ];
 
 /// The directory generated code goes in, inside each crate's `src`.
@@ -53,7 +54,12 @@ pub fn generate(
     endpoints: &[Endpoint],
     pin: &Pin,
 ) -> Result<Generated, Error> {
-    let ir = ir::Ir::build(graph, placement, CRATES)?;
+    let text = endpoints
+        .iter()
+        .filter(|e| text_response(e))
+        .filter_map(|e| e.response.as_ref().and_then(|r| graph.find(r)))
+        .collect();
+    let ir = ir::Ir::build(graph, placement, CRATES, text)?;
     check_reserved(&ir)?;
     let mut modules = emit::emit(&ir);
     for endpoint in endpoints.iter().filter(|e| !e.codegen_exclude) {
@@ -317,6 +323,13 @@ fn check_reserved(ir: &ir::Ir<'_>) -> Result<(), Error> {
         }
     }
     Ok(())
+}
+
+/// Whether an endpoint answers in plain text only, such as
+/// `nodes.hot_threads`, rather than JSON.
+pub fn text_response(endpoint: &Endpoint) -> bool {
+    let types = &endpoint.response_media_type;
+    types.iter().any(|t| t == "text/plain") && !types.iter().any(|t| t == "application/json")
 }
 
 /// The endpoint modules to put behind the `beta` or `experimental` feature:

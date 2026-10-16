@@ -48,7 +48,7 @@ async fn vector_and_semantic_mappings_round_trip() {
     };
     assert_eq!(embedding.dims, Some(64));
     let options = embedding.index_options.as_ref().expect("index options");
-    assert_eq!(options.r#type, DenseVectorIndexOptionsType::Int8Hnsw);
+    assert_eq!(options.r#type, Some(DenseVectorIndexOptionsType::Int8Hnsw));
     assert_eq!(options.m, Some(24));
     assert!(
         matches!(properties.get("terms"), Some(Property::SparseVector(_))),

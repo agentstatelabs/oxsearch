@@ -2094,7 +2094,11 @@ impl Emitter<'_> {
                 );
             }
         }
-        out.push_str("    }\n}\n\n");
+        out.push_str("    }\n");
+        if super::text_response(endpoint) {
+            out.push_str("\n    fn text_response(&self) -> bool {\n        true\n    }\n");
+        }
+        out.push_str("}\n\n");
         out
     }
 

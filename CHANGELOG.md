@@ -17,6 +17,22 @@ specification it's generated from.
     `typed_keys`. `Results` picks them out by name (`value`, `stats`,
     `terms`, `histogram`, `date_histogram`, `ranges`, `filters`,
     `percentiles`, `top_hits`, …), in a bucket's sub-aggregations too.
+- **Administration APIs** (`oxsearch-admin`, the `admin` feature), generated
+  from the specification: indices (create, get, settings, mappings, aliases,
+  templates, data streams, rollover, blocks, clone, shrink, split, stats,
+  …), the cluster (health, settings, state, stats, component templates,
+  allocation) and nodes (info, stats, usage, hot threads).
+- Calls that answer in plain text, such as `nodes.hot_threads`, read as a
+  `String` (`Endpoint::text_response`).
+
+### Changed
+- The typed document layer is the `document` feature, which `derive`
+  implies, and creates and maps indices with the `admin` crate's typed
+  calls rather than raw ones. It adds `Index::delete_index`.
+- Mapping, analysis and common types that the admin responses read
+  (mappings, index and node statistics, …) now take a required property
+  Elasticsearch leaves out as `None`, as other response types do: such
+  fields are `Option`s.
 
 ## [0.1.0] - 2026-10-15
 

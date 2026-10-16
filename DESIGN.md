@@ -64,13 +64,14 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-inference` | inference endpoints, one feature flag per provider | 340, mostly per-provider settings |
 | `oxsearch-docs` | index, get, multi-get, update, delete, bulk | – |
 | `oxsearch-tasks` | the task API, which reindex and the by-query APIs report through | 12 |
-| `oxsearch-esql`, `oxsearch-admin` (cluster + indices + nodes), `oxsearch-ingest`, `oxsearch-security`, `oxsearch-ml`, … | one crate per API area | the rest of about 2,900 API types |
+| `oxsearch-admin` | cluster, indices and nodes: index creation, mappings, settings, aliases, templates, data streams; cluster health, settings and state; node information and statistics | 700 |
+| `oxsearch-esql`, `oxsearch-ingest`, `oxsearch-security`, `oxsearch-ml`, … | one crate per API area | the rest of about 2,900 API types |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |
 | `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
-The default features are the AI-search set: search, docs, mapping, inference. `features = ["analysis", "tasks"]` adds more; aggregations, ES|QL and administration come in Phase 2, and until then their crates aren't published. Libraries depend on the specific crates they need.
+The default features are the AI-search set: search, docs, mapping, inference. `features = ["aggs", "admin", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`; ES|QL comes later in Phase 2, and until then its crate isn't published. Libraries depend on the specific crates they need.
 
 **Why crates and not only feature flags:** Cargo compiles crates in parallel and caches each one separately; feature flags inside one huge crate get neither benefit.
 
