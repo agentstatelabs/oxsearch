@@ -1617,13 +1617,7 @@ fn examples() -> ::std::vec::Vec<Example> {
             r#"{
   "scripted_upsert": true,
   "script": {
-    "source": """
-      if ( ctx.op == 'create' ) {
-        ctx._source.counter = params.count
-      } else {
-        ctx._source.counter += params.count
-      }
-    """,
+    "source": "\n      if ( ctx.op == 'create' ) {\n        ctx._source.counter = params.count\n      } else {\n        ctx._source.counter += params.count\n      }\n    ",
     "params": {
       "count": 4
     }

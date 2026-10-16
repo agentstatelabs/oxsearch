@@ -129,7 +129,7 @@ pub fn tests(
             by_crate.entry(krate).or_default().push((
                 label,
                 ty.clone(),
-                value.clone(),
+                console_strings(value),
                 is_request && ndjson,
             ));
         }
@@ -186,6 +186,24 @@ fn concrete(ty: &Ty) -> Ty {
         Ty::TypedKeys(t) => Ty::TypedKeys(boxed(t)),
         Ty::Prim(_) | Ty::Unit | Ty::Json => ty.clone(),
     }
+}
+
+/// The example with the console's triple-quoted strings (`"""FROM a"""`,
+/// which ES|QL examples use) written as JSON strings.
+fn console_strings(text: &str) -> String {
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some(start) = rest.find(r#"""""#) {
+        let Some(len) = rest[start + 3..].find(r#"""""#) else {
+            break;
+        };
+        out.push_str(&rest[..start]);
+        let inner = &rest[start + 3..start + 3 + len];
+        out.push_str(&serde_json::to_string(inner).expect("a string writes as JSON"));
+        rest = &rest[start + 3 + len + 3..];
+    }
+    out.push_str(rest);
+    out
 }
 
 /// A raw string literal holding `text`, with enough `#`s.
@@ -360,3 +378,19 @@ fn examples_round_trip() {
     }
 }
 "#;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn triple_quoted_strings() {
+        let example = "{\n  \"query\": \"\"\"\n    FROM library\n    | WHERE title == \"x\"\n  \"\"\",\n  \"columnar\": true\n}";
+        let json: serde_json::Value = serde_json::from_str(&console_strings(example)).unwrap();
+        assert_eq!(
+            json["query"],
+            "\n    FROM library\n    | WHERE title == \"x\"\n  "
+        );
+        assert_eq!(console_strings("{\"a\": 1}"), "{\"a\": 1}");
+    }
+}

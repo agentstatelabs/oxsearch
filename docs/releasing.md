@@ -23,6 +23,3 @@ steps, as for oxtel:
 
 6. Create the GitHub release from the tag, with the changelog's section for
    the version as its notes.
-
-The crate still empty, `oxsearch-esql`, has `publish = false` until it's
-generated.

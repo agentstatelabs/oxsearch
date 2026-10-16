@@ -7,7 +7,8 @@
 //!
 //! This crate re-exports the others behind features. The defaults are the
 //! AI-search set: `search`, `docs`, `mapping` and `inference`; `aggs`
-//! (aggregations with typed results), `admin` (cluster, index and node
+//! (aggregations with typed results), `esql` (ES|QL, with a typed builder
+//! and rows read into your own types), `admin` (cluster, index and node
 //! administration), `analysis` and `tasks` are the other areas generated so
 //! far. `document` adds the typed document layer and `derive` its derive
 //! macro, `helpers` the point-in-time scan and the bulk loader, and
@@ -60,7 +61,8 @@ pub mod helpers;
 pub use oxsearch_core;
 pub use oxsearch_core::{
     AggsBody, Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse,
-    LicenseError, Method, Query, RawAggs, Retriever, Route, Transport, TransportError, shapes,
+    LicenseError, Method, Query, RawAggs, Retriever, Route, RowError, Transport, TransportError,
+    shapes,
 };
 pub use oxsearch_core::{auth, telemetry};
 
@@ -74,6 +76,8 @@ pub use oxsearch_analysis as analysis;
 pub use oxsearch_derive as derive;
 #[cfg(feature = "docs")]
 pub use oxsearch_docs as docs;
+#[cfg(feature = "esql")]
+pub use oxsearch_esql as esql;
 #[cfg(feature = "inference")]
 pub use oxsearch_inference as inference;
 #[cfg(feature = "mapping")]

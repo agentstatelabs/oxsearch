@@ -274,17 +274,27 @@ pub struct Ir<'g> {
     special: Vec<Option<Special>>,
 }
 
-/// Properties the specification types otherwise than Elasticsearch sends
-/// them, by namespace, type and property, generated as strings instead.
-const AS_STRING: &[(&str, &str, &str)] = &[
-    // A node setting, which comes back as a string like the others,
-    // `xpack.security.enabled` among them.
-    (
-        "nodes.info",
-        "NodeInfoXpackMl",
-        "use_auto_machine_memory_percent",
-    ),
-];
+/// The type a property is generated as when the specification types it
+/// otherwise than Elasticsearch sends it, by namespace, type and property.
+fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
+    match (
+        declaring.namespace.as_str(),
+        declaring.name.as_str(),
+        property,
+    ) {
+        // A node setting, which comes back as a string like the others,
+        // `xpack.security.enabled` among them.
+        ("nodes.info", "NodeInfoXpackMl", "use_auto_machine_memory_percent") => {
+            Some(Ty::Prim("::std::string::String"))
+        }
+        // A multi-valued column's cell is an array, which a field value
+        // isn't.
+        ("esql._types", "EsqlResult", "values") => {
+            Some(Ty::Vec(Box::new(Ty::Vec(Box::new(Ty::Json)))))
+        }
+        _ => None,
+    }
+}
 
 /// The type parameter a search response's aggregation results become.
 pub const AGGREGATIONS: &str = "TAggregations";
@@ -587,15 +597,9 @@ impl<'g> Ir<'g> {
             ident = format!("_{ident}");
         }
         let used = &mut names.used;
-        let declaring = self.graph.name(ctx.declaring);
-        let ty = if AS_STRING.contains(&(
-            declaring.namespace.as_str(),
-            declaring.name.as_str(),
-            p.name.as_str(),
-        )) {
-            Ty::Prim("::std::string::String")
-        } else {
-            self.ty(ctx, &p.value)?
+        let ty = match corrected(self.graph.name(ctx.declaring), &p.name) {
+            Some(ty) => ty,
+            None => self.ty(ctx, &p.value)?,
         };
         Ok(Field {
             wire: p.name.clone(),

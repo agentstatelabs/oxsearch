@@ -22,7 +22,7 @@ pub mod telemetry;
 pub use builders::{Query, Retriever};
 pub use client::Client;
 pub use endpoint::{Body, Endpoint, HttpRequest, HttpResponse, Method, Route, Transport};
-pub use error::{ElasticsearchError, Error, LicenseError, TransportError};
+pub use error::{ElasticsearchError, Error, LicenseError, RowError, TransportError};
 pub use seams::{AggsBody, RawAggs};
 
 #[doc(hidden)]

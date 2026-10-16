@@ -1,0 +1,13 @@
+12 exact, 0 normalized, 0 failing
+esql.async_query request AsyncQueryRequestExample1: exact
+esql.delete_data_source response DeleteDataSourceResponseExample1: exact
+esql.delete_dataset response DeleteDatasetResponseExample1: exact
+esql.get_data_source response GetDataSourceResponseExample1: exact
+esql.get_data_source response GetDataSourceResponseExample2: exact
+esql.get_dataset response GetDatasetResponseExample1: exact
+esql.get_dataset response GetDatasetResponseExample2: exact
+esql.put_data_source request PutDataSourceRequestExample1: exact
+esql.put_data_source response PutDataSourceResponseExample1: exact
+esql.put_dataset request PutDatasetRequestExample1: exact
+esql.put_dataset response PutDatasetResponseExample1: exact
+esql.query request QueryRequestExample1: exact

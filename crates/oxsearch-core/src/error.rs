@@ -36,6 +36,9 @@ pub enum Error {
         /// The start of the response, for diagnosis.
         body: String,
     },
+    /// A row of a tabular result, such as an ES|QL query's, didn't fit the
+    /// type it was read into.
+    Row(Box<RowError>),
 }
 
 impl fmt::Display for Error {
@@ -54,6 +57,7 @@ impl fmt::Display for Error {
             } => {
                 write!(f, "reading a {status} response: {source}: {body}")
             }
+            Error::Row(e) => e.fmt(f),
         }
     }
 }
@@ -65,6 +69,53 @@ impl std::error::Error for Error {
             Error::Encode(e) | Error::Decode { source: e, .. } => Some(e),
             _ => None,
         }
+    }
+}
+
+/// A row of a tabular result that didn't fit the type it was read into.
+#[derive(Debug)]
+#[non_exhaustive]
+pub struct RowError {
+    /// The row, counted from 0.
+    pub row: usize,
+    /// The column that didn't fit, if one did: a nested field's is dotted
+    /// (`author.name`).
+    pub column: Option<String>,
+    /// What didn't fit, such as `missing field `price``.
+    pub message: String,
+    /// The result's columns.
+    pub columns: Vec<String>,
+}
+
+impl RowError {
+    /// The error for a row.
+    pub fn new(
+        row: usize,
+        column: Option<String>,
+        message: impl Into<String>,
+        columns: Vec<String>,
+    ) -> RowError {
+        RowError {
+            row,
+            column,
+            message: message.into(),
+            columns,
+        }
+    }
+}
+
+impl fmt::Display for RowError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "reading row {}", self.row)?;
+        if let Some(column) = &self.column {
+            write!(f, ", column `{column}`")?;
+        }
+        write!(
+            f,
+            ": {} (the columns are {})",
+            self.message,
+            self.columns.join(", ")
+        )
     }
 }
 

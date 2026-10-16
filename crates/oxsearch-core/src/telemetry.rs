@@ -148,7 +148,7 @@ fn error_type(error: &Error) -> String {
             .to_owned(),
         Error::Encode(_) => "encode".to_owned(),
         Error::Parameter(_) => "parameter".to_owned(),
-        Error::Decode { .. } => "decode".to_owned(),
+        Error::Decode { .. } | Error::Row(_) => "decode".to_owned(),
     }
 }
 
