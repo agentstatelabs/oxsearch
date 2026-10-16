@@ -379,6 +379,55 @@ async fn async_queries() {
     test.delete(&client).await;
 }
 
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn arrow_output() {
+    use oxsearch::esql::arrow_array::{Array, Int32Array, ListArray, StringArray};
+
+    let client = client();
+    let test = books(&client).await;
+    let batches = Esql::from_index(test.name())
+        .keep(["title", "year", "author.name", "tags"])
+        .sort([col("year").asc()])
+        .fetch_arrow(&client)
+        .await
+        .unwrap();
+    assert_eq!(batches.iter().map(|b| b.num_rows()).sum::<usize>(), 4);
+    let batch = &batches[0];
+    let schema = batch.schema();
+    // Each ES|QL column is a field, a multi-valued one a list.
+    let fields: Vec<(&str, String)> = schema
+        .fields()
+        .iter()
+        .map(|f| (f.name().as_str(), f.data_type().to_string()))
+        .collect();
+    assert_eq!(
+        fields[..3],
+        [
+            ("title", "Utf8".to_owned()),
+            ("year", "Int32".to_owned()),
+            ("author.name", "Utf8".to_owned()),
+        ]
+    );
+    assert!(fields[3].1.starts_with("List("), "{fields:?}");
+    let column = |name: &str| batch.column(schema.index_of(name).unwrap()).clone();
+    let years = column("year");
+    let years = years.as_any().downcast_ref::<Int32Array>().unwrap();
+    assert_eq!(years.values(), &[2019, 2021, 2024, 2025]);
+    let titles = column("title");
+    let titles = titles.as_any().downcast_ref::<StringArray>().unwrap();
+    assert_eq!(titles.value(0), "Search relevance");
+    let tags = column("tags");
+    let tags = tags.as_any().downcast_ref::<ListArray>().unwrap();
+    let hnsw = tags.value(2);
+    let hnsw = hnsw.as_any().downcast_ref::<StringArray>().unwrap();
+    assert_eq!(
+        hnsw.iter().flatten().collect::<Vec<_>>(),
+        ["search", "vectors"]
+    );
+    test.delete(&client).await;
+}
+
 #[derive(Document, Clone, Debug, PartialEq, Serialize, Deserialize)]
 struct Note {
     #[id]

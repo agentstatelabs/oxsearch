@@ -65,7 +65,7 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-docs` | index, get, multi-get, update, delete, bulk | – |
 | `oxsearch-tasks` | the task API, which reindex and the by-query APIs report through | 12 |
 | `oxsearch-admin` | cluster, indices and nodes: index creation, mappings, settings, aliases, templates, data streams; cluster health, settings and state; node information and statistics | 700 |
-| `oxsearch-esql` | ES|QL queries and async queries; a typed builder (`Esql`) and rows read into structs by column name | 67 |
+| `oxsearch-esql` | ES|QL queries and async queries; a typed builder (`Esql`) and rows read into structs by column name; Arrow record batches behind the `arrow` feature | 67 |
 | `oxsearch-ingest`, `oxsearch-security`, `oxsearch-ml`, … | one crate per API area | the rest of about 2,900 API types |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |

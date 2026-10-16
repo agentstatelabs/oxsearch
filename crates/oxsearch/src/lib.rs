@@ -8,7 +8,8 @@
 //! This crate re-exports the others behind features. The defaults are the
 //! AI-search set: `search`, `docs`, `mapping` and `inference`; `aggs`
 //! (aggregations with typed results), `esql` (ES|QL, with a typed builder
-//! and rows read into your own types), `admin` (cluster, index and node
+//! and rows read into your own types; `esql-arrow` adds Arrow output),
+//! `admin` (cluster, index and node
 //! administration), `analysis` and `tasks` are the other areas generated so
 //! far. `document` adds the typed document layer and `derive` its derive
 //! macro, `helpers` the point-in-time scan and the bulk loader, and

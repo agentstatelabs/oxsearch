@@ -22,6 +22,8 @@ doctest = false
 # away in any Elasticsearch release.
 beta = []
 experimental = []
+# ES|QL results as Arrow record batches (`Esql::fetch_arrow`).
+arrow = ["dep:arrow-array", "dep:arrow-ipc"]
 
 [dependencies]
 indexmap = { version = "2.14", features = ["serde"] }
@@ -30,10 +32,12 @@ serde_json = "1.0.149"
 # Which column of a row didn't fit, for the error.
 serde_path_to_error = "0.1.20"
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
+arrow-array = { version = "60", default-features = false, optional = true }
+arrow-ipc = { version = "60", default-features = false, optional = true }
 
 [dev-dependencies]
 # The tests cover the endpoints behind features too.
-oxsearch-esql = { path = ".", features = ["beta", "experimental"] }
+oxsearch-esql = { path = ".", features = ["beta", "experimental", "arrow"] }
 
 [package.metadata.docs.rs]
 # Document the endpoints behind features too.

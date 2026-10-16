@@ -24,6 +24,8 @@ inference = ["dep:oxsearch-inference"]
 aggs = ["dep:oxsearch-aggs", "search"]
 admin = ["dep:oxsearch-admin"]
 esql = ["dep:oxsearch-esql"]
+# ES|QL results as Arrow record batches (`Esql::fetch_arrow`).
+esql-arrow = ["esql", "oxsearch-esql/arrow"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
 # The typed document layer, `oxsearch::document`, which creates and maps
