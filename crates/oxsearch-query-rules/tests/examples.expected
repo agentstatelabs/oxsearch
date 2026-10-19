@@ -1,0 +1,8 @@
+4 exact, 1 normalized, 2 failing
+query_rules.get_rule response QueryRuleGetResponseExample1: exact
+query_rules.get_ruleset response QueryRulesetGetResponseExample1: exact
+query_rules.list_rulesets response QueryRulesetListResponseExample1: normalized at /results/0/rule_type_counts (added)
+query_rules.put_rule request QueryRulePutRequestExample1: fails: reading .: missing field `type`
+query_rules.put_ruleset request QueryRulesetPutRequestExample1: exact
+query_rules.test request QueryRulesetTestRequestExample1: fails: reading .: missing field `match_criteria`
+query_rules.test response QueryRulesetTestResponseExample1: exact

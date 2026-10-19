@@ -153,12 +153,17 @@ fn generate() -> Result<(), Error> {
     let root = workspace_root();
     for krate in xtask::codegen::CRATES {
         let dir = root
-            .join(format!("crates/oxsearch-{krate}/src"))
+            .join("crates")
+            .join(xtask::codegen::package(krate))
+            .join("src")
             .join(xtask::codegen::DIR);
         if dir.exists() {
             std::fs::remove_dir_all(&dir)?;
         }
-        let tests = root.join(format!("crates/oxsearch-{krate}/tests/examples.rs"));
+        let tests = root
+            .join("crates")
+            .join(xtask::codegen::package(krate))
+            .join("tests/examples.rs");
         if tests.exists() {
             std::fs::remove_file(&tests)?;
         }

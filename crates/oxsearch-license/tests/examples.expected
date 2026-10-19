@@ -1,0 +1,8 @@
+5 exact, 2 normalized, 0 failing
+license.get response GetLicenseResponseExample1: normalized at /license/max_resource_units (dropped)
+license.get_basic_status response GetBasicLicenseStatusResponseExample1: exact
+license.get_trial_status response GetTrialLicenseStatusResponseExample1: exact
+license.post request PostLicenseRequestExample1: exact
+license.post response PostLicenseResponseExample1: normalized at /acknowledge/logstash (dropped)
+license.post_start_basic response StartBasicLicenseResponseExample1: exact
+license.post_start_trial response StartTrialLicenseResponseExample1: exact

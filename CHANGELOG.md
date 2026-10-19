@@ -47,6 +47,14 @@ specification it's generated from.
   from the specification: pipelines and their 45 processors (each converts
   into a `ProcessorContainer`), simulation, the grok patterns, and the
   GeoIP and IP location databases.
+- **Query rules** (`oxsearch-query-rules`, the `query-rules` feature):
+  rulesets whose rules pin or exclude documents for queries that match
+  their criteria, which the `rule` retriever applies; they need a license
+  above Basic.
+- **Synonym sets** (`oxsearch-synonyms`, the `synonyms` feature): synonym
+  rules stored in Elasticsearch, which analyzers read and which take
+  effect without reindexing.
+- **The license API** (`oxsearch-license`, the `license` feature).
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`
