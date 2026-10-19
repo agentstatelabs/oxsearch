@@ -11,7 +11,8 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-docs` | 21 | 21 (100%) |
 | `oxsearch-admin` | 102 | 58 (56%) |
 | `oxsearch-esql` | 16 | 4 (25%) |
-| all | 202 | 109 (53%) |
+| `oxsearch-ingest` | 12 | 8 (66%) |
+| all | 214 | 117 (54%) |
 
 ## `oxsearch-core`
 
@@ -51,6 +52,12 @@ Not tested yet: `capabilities`, `cluster.delete_voting_config_exclusions`, `clus
 Tested: `esql.async_query`, `esql.async_query_delete`, `esql.async_query_get`, `esql.query`.
 
 Not tested yet: `esql.async_query_stop`, `esql.delete_data_source`, `esql.delete_dataset`, `esql.delete_view`, `esql.get_data_source`, `esql.get_dataset`, `esql.get_query`, `esql.get_view`, `esql.list_queries`, `esql.put_data_source`, `esql.put_dataset`, `esql.put_view`.
+
+## `oxsearch-ingest`
+
+Tested: `ingest.delete_pipeline`, `ingest.geo_ip_stats`, `ingest.get_geoip_database`, `ingest.get_ip_location_database`, `ingest.get_pipeline`, `ingest.processor_grok`, `ingest.put_pipeline`, `ingest.simulate`.
+
+Not tested yet: `ingest.delete_geoip_database`, `ingest.delete_ip_location_database`, `ingest.put_geoip_database`, `ingest.put_ip_location_database`.
 
 ## APIs not generated yet
 

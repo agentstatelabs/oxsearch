@@ -6,12 +6,12 @@
 //! retrieval half of a RAG application on any license.
 //!
 //! This crate re-exports the others behind features. The defaults are the
-//! AI-search set: `search`, `docs`, `mapping` and `inference`; `aggs`
-//! (aggregations with typed results), `esql` (ES|QL, with a typed builder
-//! and rows read into your own types; `esql-arrow` adds Arrow output),
-//! `admin` (cluster, index and node
-//! administration), `analysis` and `tasks` are the other areas generated so
-//! far. `document` adds the typed document layer and `derive` its derive
+//! AI-search set: `search`, `docs`, `mapping` and `inference`. The other
+//! areas generated so far are `aggs` (aggregations with typed results),
+//! `esql` (ES|QL, with a typed builder and rows read into your own types;
+//! `esql-arrow` adds Arrow output), `admin` (cluster, index and node
+//! administration), `ingest` (pipelines and processors), `analysis` and
+//! `tasks`. `document` adds the typed document layer and `derive` its derive
 //! macro, `helpers` the point-in-time scan and the bulk loader, and
 //! `transport-reqwest` the default HTTP transport.
 //!
@@ -81,6 +81,8 @@ pub use oxsearch_docs as docs;
 pub use oxsearch_esql as esql;
 #[cfg(feature = "inference")]
 pub use oxsearch_inference as inference;
+#[cfg(feature = "ingest")]
+pub use oxsearch_ingest as ingest;
 #[cfg(feature = "mapping")]
 pub use oxsearch_mapping as mapping;
 #[cfg(feature = "search")]

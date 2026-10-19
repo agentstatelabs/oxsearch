@@ -26,6 +26,7 @@ admin = ["dep:oxsearch-admin"]
 esql = ["dep:oxsearch-esql"]
 # ES|QL results as Arrow record batches (`Esql::fetch_arrow`).
 esql-arrow = ["esql", "oxsearch-esql/arrow"]
+ingest = ["dep:oxsearch-ingest"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
 # The typed document layer, `oxsearch::document`, which creates and maps
@@ -40,8 +41,8 @@ helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
-beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta"]
-experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental"]
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
@@ -51,6 +52,7 @@ oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.1.0", optional =
 oxsearch-inference = { path = "../oxsearch-inference", version = "0.1.0", optional = true }
 oxsearch-admin = { path = "../oxsearch-admin", version = "0.1.0", optional = true }
 oxsearch-esql = { path = "../oxsearch-esql", version = "0.1.0", optional = true }
+oxsearch-ingest = { path = "../oxsearch-ingest", version = "0.1.0", optional = true }
 oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.1.0", optional = true }
 oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0", optional = true }
 oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.1.0", optional = true }

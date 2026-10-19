@@ -43,6 +43,10 @@ specification it's generated from.
     (`arrow-array` 60), without JSON in between.
 - `Client::send_bytes`, which returns a response's body as it came, for
   formats other than JSON.
+- **Ingest pipelines** (`oxsearch-ingest`, the `ingest` feature), generated
+  from the specification: pipelines and their 45 processors (each converts
+  into a `ProcessorContainer`), simulation, the grok patterns, and the
+  GeoIP and IP location databases.
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`
