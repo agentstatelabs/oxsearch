@@ -12,7 +12,10 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-admin` | 102 | 58 (56%) |
 | `oxsearch-esql` | 16 | 4 (25%) |
 | `oxsearch-ingest` | 12 | 8 (66%) |
-| all | 214 | 117 (54%) |
+| `oxsearch-license` | 7 | 3 (42%) |
+| `oxsearch-query-rules` | 8 | 8 (100%) |
+| `oxsearch-synonyms` | 7 | 7 (100%) |
+| all | 236 | 135 (57%) |
 
 ## `oxsearch-core`
 
@@ -59,6 +62,18 @@ Tested: `ingest.delete_pipeline`, `ingest.geo_ip_stats`, `ingest.get_geoip_datab
 
 Not tested yet: `ingest.delete_geoip_database`, `ingest.delete_ip_location_database`, `ingest.put_geoip_database`, `ingest.put_ip_location_database`.
 
-## APIs not generated yet
+## `oxsearch-license`
 
-The tests also call these through the escape hatches: `license.get`, `query_rules.delete_ruleset`, `query_rules.put_ruleset`.
+Tested: `license.get`, `license.get_basic_status`, `license.get_trial_status`.
+
+Not tested yet: `license.delete`, `license.post`, `license.post_start_basic`, `license.post_start_trial`.
+
+## `oxsearch-query-rules`
+
+Tested: `query_rules.delete_rule`, `query_rules.delete_ruleset`, `query_rules.get_rule`, `query_rules.get_ruleset`, `query_rules.list_rulesets`, `query_rules.put_rule`, `query_rules.put_ruleset`, `query_rules.test`.
+
+
+## `oxsearch-synonyms`
+
+Tested: `synonyms.delete_synonym`, `synonyms.delete_synonym_rule`, `synonyms.get_synonym`, `synonyms.get_synonym_rule`, `synonyms.get_synonyms_sets`, `synonyms.put_synonym`, `synonyms.put_synonym_rule`.
+

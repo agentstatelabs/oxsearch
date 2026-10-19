@@ -29,7 +29,16 @@ pub const CRATES: &[&str] = &[
     "admin",
     "esql",
     "ingest",
+    "license",
+    "query_rules",
+    "synonyms",
 ];
+
+/// An area's package, and its directory under `crates`: `query_rules` is
+/// `oxsearch-query-rules`.
+pub fn package(krate: &str) -> String {
+    format!("oxsearch-{}", krate.replace('_', "-"))
+}
 
 /// The directory generated code goes in, inside each crate's `src`.
 pub const DIR: &str = "generated";
@@ -110,7 +119,7 @@ pub fn generate(
                 .map(|p| p.last().expect("a child has a name"))
                 .collect();
             let mut file = PathBuf::from("crates")
-                .join(format!("oxsearch-{krate}"))
+                .join(package(krate))
                 .join("src")
                 .join(DIR);
             for part in path {
@@ -197,15 +206,18 @@ fn moved(
                 continue;
             }
             return Err(format!(
-                "oxsearch-{krate}'s module `{}` holds types from several crates: {away:?}",
+                "{}'s module `{}` holds types from several crates: {away:?}",
+                package(krate),
                 module.join("::")
             )
             .into());
         };
         if targets.len() > 1 {
             return Err(format!(
-                "oxsearch-{krate}'s module `{}` holds its own types and oxsearch-{home}'s",
-                module.join("::")
+                "{}'s module `{}` holds its own types and {}'s",
+                package(krate),
+                module.join("::"),
+                package(home)
             )
             .into());
         }
@@ -218,7 +230,8 @@ fn moved(
             .any(|(k, gated)| k == krate && module.starts_with(gated))
         {
             return Err(format!(
-                "oxsearch-{krate}'s module `{}` is behind a feature",
+                "{}'s module `{}` is behind a feature",
+                package(krate),
                 module.join("::")
             )
             .into());
@@ -236,7 +249,9 @@ fn moved(
                 .any(|item| &item.krate == home && &item.module == path && item.ident == *name)
             {
                 return Err(format!(
-                    "oxsearch-{home} has its own {name} where oxsearch-{krate}'s would be re-exported"
+                    "{} has its own {name} where {}'s would be re-exported",
+                    package(home),
+                    package(krate)
                 )
                 .into());
             }
@@ -249,7 +264,8 @@ fn moved(
         out.entry((home.clone(), path.clone()))
             .or_default()
             .push_str(&format!(
-                "/// Types placement moved down to `oxsearch-{krate}`, which uses them.\npub use {from}::{{{}}};\n\n",
+                "/// Types placement moved down to `{}`, which uses them.\npub use {from}::{{{}}};\n\n",
+                package(krate),
                 names.join(", ")
             ));
     }

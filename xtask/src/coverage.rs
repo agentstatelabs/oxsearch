@@ -89,7 +89,8 @@ pub fn report(
         all += total;
         hit += yes.len();
         out.push_str(&format!(
-            "| `oxsearch-{krate}` | {total} | {} ({}%) |\n",
+            "| `{}` | {total} | {} ({}%) |\n",
+            crate::codegen::package(krate),
             yes.len(),
             yes.len() * 100 / total.max(1)
         ));
@@ -102,7 +103,7 @@ pub fn report(
         let Some((yes, no)) = by_crate.get(krate) else {
             continue;
         };
-        out.push_str(&format!("\n## `oxsearch-{krate}`\n\n"));
+        out.push_str(&format!("\n## `{}`\n\n", crate::codegen::package(krate)));
         if !yes.is_empty() {
             out.push_str(&format!("Tested: {}.\n\n", list(yes)));
         }

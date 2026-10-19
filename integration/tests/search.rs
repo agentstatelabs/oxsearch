@@ -2,6 +2,10 @@
 //! generated types. Retrievers the free license doesn't include must fail
 //! there with a typed license error, and work on a trial.
 
+use oxsearch::query_rules::{
+    QueryRule, QueryRuleActions, QueryRuleCriteria, QueryRuleCriteriaType, QueryRuleType,
+    delete_ruleset, put_ruleset,
+};
 use oxsearch_core::query_dsl::{
     IntervalsMatch, IntervalsQuery, IntervalsQueryVariant, MatchQuery, MatchQueryQuery,
     QueryContainer, SparseVectorQuery, SparseVectorQueryVariant,
@@ -10,9 +14,8 @@ use oxsearch_core::search::{Rescore, RescoreQuery, RescoreVariant};
 use oxsearch_core::shapes::{IndexMap, SingleKey};
 use oxsearch_core::{
     DiversifyRetriever, DiversifyRetrieverTypes, Error, InnerRetriever, KnnQuery, KnnRetriever,
-    LinearRetriever, Method, PinnedRetriever, RRFRetriever, RRFRetrieverEntry, Refresh,
-    RescorerRetriever, RetrieverContainer, RuleRetriever, StandardRetriever,
-    TextSimilarityReranker,
+    LinearRetriever, PinnedRetriever, RRFRetriever, RRFRetrieverEntry, Refresh, RescorerRetriever,
+    RetrieverContainer, RuleRetriever, StandardRetriever, TextSimilarityReranker,
 };
 use oxsearch_docs::index;
 use oxsearch_integration::fixtures::{article_mapping, articles};
@@ -179,18 +182,19 @@ async fn fusion_retrievers_need_a_paid_license() {
 async fn rule_retriever_pins_by_ruleset() {
     let client = client();
     let test = articles_index(&client, "rules").await;
-    // The query rules API isn't in the first slice's crates: the raw call.
     let ruleset = format!("{}-rules", test.name());
     let created = client
-        .send_raw(
-            Method::Put,
-            &format!("/_query_rules/{ruleset}"),
-            Some(&json!({"rules": [{
-                "rule_id": "pin-bulk",
-                "type": "pinned",
-                "criteria": [{"type": "exact", "metadata": "topic", "values": ["ingest"]}],
-                "actions": {"ids": ["2"]}
-            }]})),
+        .send(
+            &put_ruleset::Request::new(ruleset.as_str()).body(put_ruleset::RequestBody::new(
+                QueryRule::new(
+                    "pin-bulk",
+                    QueryRuleType::Pinned,
+                    QueryRuleCriteria::new(QueryRuleCriteriaType::Exact)
+                        .metadata("topic")
+                        .values(vec![json!("ingest")]),
+                    QueryRuleActions::new().ids(vec!["2".into()]),
+                ),
+            )),
         )
         .await;
     let rule = RuleRetriever::new(
@@ -215,7 +219,7 @@ async fn rule_retriever_pins_by_ruleset() {
         (License::Basic, Ok(_)) => assert!(matches!(result, Err(Error::License(_))), "{result:?}"),
     }
     let _ = client
-        .send_raw(Method::Delete, &format!("/_query_rules/{ruleset}"), None)
+        .send(&delete_ruleset::Request::new(ruleset.as_str()))
         .await;
     test.delete(&client).await;
 }

@@ -1,0 +1,8 @@
+7 exact, 0 normalized, 0 failing
+synonyms.delete_synonym_rule response SynonymRuleDeleteResponseExample1: exact
+synonyms.get_synonym response SynonymsGetResponseExample1: exact
+synonyms.get_synonym_rule response SynonymRuleGetResponseExample1: exact
+synonyms.get_synonyms_sets response SynonymsSetsGetResponseExample1: exact
+synonyms.put_synonym request SynonymsPutRequestExample1: exact
+synonyms.put_synonym_rule request SynonymRulePutRequestExample1: exact
+synonyms.put_synonym_rule response SynonymRuleResponseExample1: exact

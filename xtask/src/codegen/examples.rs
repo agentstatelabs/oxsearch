@@ -155,7 +155,9 @@ pub fn tests(
         }
         source.push_str("    ]\n}\n");
         files.insert(
-            PathBuf::from(format!("crates/oxsearch-{krate}/tests/examples.rs")),
+            PathBuf::from("crates")
+                .join(super::package(krate))
+                .join("tests/examples.rs"),
             source,
         );
     }
