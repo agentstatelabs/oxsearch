@@ -28,6 +28,7 @@ pub const CRATES: &[&str] = &[
     "aggs",
     "admin",
     "esql",
+    "ingest",
 ];
 
 /// The directory generated code goes in, inside each crate's `src`.

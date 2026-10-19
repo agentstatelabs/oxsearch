@@ -184,6 +184,41 @@ impl TestIndex {
     }
 }
 
+/// A call to one of Elastic's models, sent again while the model is still
+/// deploying. On first use, a model can take longer to start than the 30 s
+/// Elasticsearch waits for it (408), and the deployment goes on meanwhile; a
+/// call during that time can be refused because the deployment is already
+/// starting (409).
+pub async fn deployed<T, F>(mut call: impl FnMut() -> F) -> T
+where
+    F: std::future::Future<Output = Result<T, oxsearch_core::Error>>,
+{
+    use oxsearch_core::Error;
+
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(300);
+    loop {
+        let starting = match call().await {
+            Err(Error::Elasticsearch(e))
+                if e.error_type() == Some("model_deployment_timeout_exception") =>
+            {
+                e
+            }
+            Err(Error::Conflict(e))
+                if e.causes()
+                    .any(|c| c.r#type.as_deref() == Some("resource_already_exists_exception")) =>
+            {
+                tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+                e
+            }
+            other => return other.unwrap(),
+        };
+        assert!(
+            std::time::Instant::now() < deadline,
+            "the model didn't deploy in 5 minutes: {starting}"
+        );
+    }
+}
+
 /// Whether Elasticsearch read a request, even if it couldn't run it: the
 /// error isn't one about the request's shape. For features the fixture can't
 /// run, such as those that need a machine learning model.
