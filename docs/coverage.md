@@ -15,7 +15,9 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-license` | 7 | 3 (42%) |
 | `oxsearch-query-rules` | 8 | 8 (100%) |
 | `oxsearch-synonyms` | 7 | 7 (100%) |
-| all | 236 | 135 (57%) |
+| `oxsearch-snapshot` | 13 | 12 (92%) |
+| `oxsearch-ilm` | 11 | 11 (100%) |
+| all | 260 | 158 (60%) |
 
 ## `oxsearch-core`
 
@@ -76,4 +78,15 @@ Tested: `query_rules.delete_rule`, `query_rules.delete_ruleset`, `query_rules.ge
 ## `oxsearch-synonyms`
 
 Tested: `synonyms.delete_synonym`, `synonyms.delete_synonym_rule`, `synonyms.get_synonym`, `synonyms.get_synonym_rule`, `synonyms.get_synonyms_sets`, `synonyms.put_synonym`, `synonyms.put_synonym_rule`.
+
+
+## `oxsearch-snapshot`
+
+Tested: `snapshot.cleanup_repository`, `snapshot.clone`, `snapshot.create`, `snapshot.create_repository`, `snapshot.delete`, `snapshot.delete_repository`, `snapshot.get`, `snapshot.get_repository`, `snapshot.repository_analyze`, `snapshot.restore`, `snapshot.status`, `snapshot.verify_repository`.
+
+Not tested yet: `snapshot.repository_verify_integrity`.
+
+## `oxsearch-ilm`
+
+Tested: `ilm.delete_lifecycle`, `ilm.explain_lifecycle`, `ilm.get_lifecycle`, `ilm.get_status`, `ilm.migrate_to_data_tiers`, `ilm.move_to_step`, `ilm.put_lifecycle`, `ilm.remove_policy`, `ilm.retry`, `ilm.start`, `ilm.stop`.
 

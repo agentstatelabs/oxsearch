@@ -1,0 +1,15 @@
+12 exact, 1 normalized, 1 failing
+ilm.delete_lifecycle response DeleteLifecycleResponseExample1: exact
+ilm.explain_lifecycle response ExplainLifecycleResponseExample1: fails: not JSON: expected `,` or `}` at line 17 column 7
+ilm.get_lifecycle response GetLifecycleResponseExample1: normalized at /my_policy/in_use_by (dropped)
+ilm.get_status response GetILMStatusResponseExample1: exact
+ilm.migrate_to_data_tiers request MigrateToDataTiersRequestExample1: exact
+ilm.migrate_to_data_tiers response MigrateToDataTiersResponseExample1: exact
+ilm.move_to_step request MoveToStepRequestExample1: exact
+ilm.move_to_step request MoveToStepRequestExample2: exact
+ilm.move_to_step response MoveToStepResponseExample1: exact
+ilm.put_lifecycle request PutLifecycleRequestExample1: exact
+ilm.put_lifecycle response PutLifecycleResponseExample1: exact
+ilm.remove_policy response RemovePolicyResponseExample1: exact
+ilm.start response StartILMResponseExample1: exact
+ilm.stop response StopILMResponseExample1: exact

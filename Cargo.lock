@@ -1254,12 +1254,14 @@ dependencies = [
  "oxsearch-derive",
  "oxsearch-docs",
  "oxsearch-esql",
+ "oxsearch-ilm",
  "oxsearch-inference",
  "oxsearch-ingest",
  "oxsearch-license",
  "oxsearch-mapping",
  "oxsearch-query-rules",
  "oxsearch-search",
+ "oxsearch-snapshot",
  "oxsearch-synonyms",
  "oxsearch-tasks",
  "oxsearch-transport-reqwest",
@@ -1357,6 +1359,18 @@ dependencies = [
  "indexmap",
  "oxsearch-core",
  "oxsearch-esql",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-ilm"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-ilm",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -1467,6 +1481,19 @@ dependencies = [
  "oxsearch-core",
  "oxsearch-mapping",
  "oxsearch-search",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-snapshot"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-admin",
+ "oxsearch-core",
+ "oxsearch-snapshot",
  "serde",
  "serde_json",
  "serde_path_to_error",

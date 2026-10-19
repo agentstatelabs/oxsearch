@@ -21,6 +21,9 @@ services:
       # On a trial, tests deploy machine learning models (ELSER for
       # semantic_text, a reranker); let them use the machine's memory.
       xpack.ml.use_auto_machine_memory_percent: "true"
+      # Shared file system snapshot repositories must be under this
+      # directory.
+      path.repo: /usr/share/elasticsearch/snapshots
       # Sniffing reads the address the node publishes: make it the one the
       # tests reach it at, not the container's own.
       http.publish_host: 127.0.0.1

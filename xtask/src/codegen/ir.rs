@@ -106,6 +106,9 @@ pub enum ItemKind {
         default: Option<String>,
         /// The members.
         members: Vec<Variant>,
+        /// Whether the tag is a boolean (`"managed": true`) rather than a
+        /// string; the members' names are then `true` and `false`.
+        boolean: bool,
     },
     /// An externally tagged union, read under typed keys.
     External(Vec<Variant>),
@@ -977,6 +980,7 @@ impl<'g> Ir<'g> {
                 tag: tag.clone(),
                 default: default_tag.clone(),
                 members: self.tagged_members(&ctx, items, &location.ident, Some(tag))?,
+                boolean: self.boolean_tag(items, tag),
             },
             Some(Variants::ExternalTag { .. }) => {
                 ItemKind::External(self.tagged_members(&ctx, items, &location.ident, None)?)
@@ -1033,20 +1037,37 @@ impl<'g> Ir<'g> {
                 TypeDefinition::Interface(t) => Some(t),
                 _ => None,
             });
-            let literal = interface.zip(tag).and_then(|(t, tag)| {
+            let tag_literal = interface.zip(tag).and_then(|(t, tag)| {
                 t.properties.iter().find_map(|p| match &p.value {
-                    ValueOf::LiteralValue {
-                        value: Literal::String(value),
-                    } if p.name == tag => Some(value.clone()),
+                    ValueOf::LiteralValue { value } if p.name == tag => Some(value),
                     _ => None,
                 })
+            });
+            let boolean = matches!(tag_literal, Some(Literal::Boolean(_)));
+            let literal = tag_literal.and_then(|value| match value {
+                Literal::String(value) => Some(value.clone()),
+                Literal::Boolean(value) => Some(value.to_string()),
+                Literal::Number(_) => None,
             });
             let wire = literal
                 .or_else(|| interface.and_then(|t| t.variant_name.clone()))
                 .unwrap_or_else(|| snake(&type_name.name));
-            let name = match type_name.name.strip_suffix(union) {
-                Some(stripped) if !stripped.is_empty() => stripped.to_owned(),
-                _ => wire.clone(),
+            // Named without the union's name: `TextProperty` in `Property`
+            // is `Text`. A member whose tag is a boolean, which says nothing
+            // as a name, may have it at the start: `LifecycleExplainManaged`
+            // in `LifecycleExplain` is `Managed`.
+            let stripped = type_name
+                .name
+                .strip_suffix(union)
+                .or_else(|| {
+                    boolean
+                        .then(|| type_name.name.strip_prefix(union))
+                        .flatten()
+                })
+                .filter(|s| !s.is_empty());
+            let name = match stripped {
+                Some(stripped) => stripped.to_owned(),
+                None => wire.clone(),
             };
             members.push(Variant {
                 ident: unique(&mut used, pascal(&name)),
@@ -1057,6 +1078,31 @@ impl<'g> Ir<'g> {
             });
         }
         Ok(members)
+    }
+
+    /// Whether an internally tagged union's members hold booleans in their
+    /// tag property.
+    fn boolean_tag(&self, items: &[ValueOf], tag: &str) -> bool {
+        items.iter().any(|item| {
+            let ValueOf::InstanceOf { type_name, .. } = item else {
+                return false;
+            };
+            let Some(member) = self.graph.find(type_name) else {
+                return false;
+            };
+            let TypeDefinition::Interface(t) = self.graph.types[member] else {
+                return false;
+            };
+            t.properties.iter().any(|p| {
+                p.name == tag
+                    && matches!(
+                        p.value,
+                        ValueOf::LiteralValue {
+                            value: Literal::Boolean(_)
+                        }
+                    )
+            })
+        })
     }
 
     /// `T | T[]` as `OneOrMany<T>`, unless `T` can itself be an array.
