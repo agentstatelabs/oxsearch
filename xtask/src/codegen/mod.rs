@@ -32,6 +32,8 @@ pub const CRATES: &[&str] = &[
     "license",
     "query_rules",
     "synonyms",
+    "snapshot",
+    "ilm",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is

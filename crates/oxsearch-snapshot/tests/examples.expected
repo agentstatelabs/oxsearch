@@ -1,0 +1,18 @@
+14 exact, 1 normalized, 2 failing
+snapshot.cleanup_repository response SnapshotCleanupRepositoryResponseExample1: exact
+snapshot.clone request SnapshotCloneRequestExample1: exact
+snapshot.create request SnapshotCreateRequestExample1: exact
+snapshot.create response SnapshotCreateResponseExample1: fails: not JSON: expected value at line 6 column 19
+snapshot.create_repository request SnapshotCreateRepositoryRequestExample1: exact
+snapshot.create_repository request SnapshotCreateRepositoryRequestExample2: exact
+snapshot.create_repository request SnapshotCreateRepositoryRequestExample3: exact
+snapshot.create_repository request SnapshotCreateRepositoryRequestExample4: exact
+snapshot.create_repository request SnapshotCreateRepositoryRequestExample5: exact
+snapshot.create_repository request SnapshotCreateRepositoryRequestExample6: exact
+snapshot.delete response SnapshotDeleteResponseExample1: exact
+snapshot.get response SnapshotGetResponseExample1: fails: not JSON: expected value at line 7 column 21
+snapshot.get_repository response SnapshotGetRepositoryResponseExample1: exact
+snapshot.restore request SnapshotRestoreRequestExample1: exact
+snapshot.restore request SnapshotRestoreRequestExample2: exact
+snapshot.status response SnapshotStatusResponseExample1: exact
+snapshot.status response SnapshotStatusResponseExample2: normalized at /snapshots/0/indices/index-1/shards/0/node (dropped)

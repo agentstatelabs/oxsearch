@@ -217,10 +217,30 @@ pub fn serialize_tagged<S: Serializer, T: Serialize>(
     name: &str,
     value: &T,
 ) -> Result<S::Ok, S::Error> {
+    serialize_tag(serializer, tag, Value::String(name.to_owned()), value)
+}
+
+/// Writes a member of a union tagged by a boolean, such as `"managed":
+/// true`.
+pub fn serialize_tagged_bool<S: Serializer, T: Serialize>(
+    serializer: S,
+    tag: &str,
+    name: bool,
+    value: &T,
+) -> Result<S::Ok, S::Error> {
+    serialize_tag(serializer, tag, Value::Bool(name), value)
+}
+
+fn serialize_tag<S: Serializer, T: Serialize>(
+    serializer: S,
+    tag: &str,
+    name: Value,
+    value: &T,
+) -> Result<S::Ok, S::Error> {
     let mut value = serde_json::to_value(value).map_err(ser::Error::custom)?;
     match &mut value {
         Value::Object(map) => {
-            map.insert(tag.to_owned(), Value::String(name.to_owned()));
+            map.insert(tag.to_owned(), name);
         }
         _ => {
             return Err(ser::Error::custom(
@@ -245,7 +265,13 @@ pub fn deserialize_tagged<'de, D: Deserializer<'de>>(
     let map = Map::deserialize(deserializer)?;
     let name = match map.get(tag) {
         Some(Value::String(name)) => Some(name.clone()),
-        Some(_) => return Err(de::Error::custom(format_args!("`{tag}` isn't a string"))),
+        // A boolean tag reads as `true` or `false`.
+        Some(Value::Bool(name)) => Some(name.to_string()),
+        Some(_) => {
+            return Err(de::Error::custom(format_args!(
+                "`{tag}` isn't a string or a boolean"
+            )));
+        }
         None => default.map(str::to_owned),
     };
     Ok((name, map))
@@ -455,5 +481,18 @@ mod tests {
         )
         .unwrap();
         assert_eq!(written, json!({"type": "text", "index": true}));
+
+        // A boolean tag, such as an ILM explanation's `managed`.
+        let (tag, _) = deserialize_tagged(json!({"managed": false}), "managed", None).unwrap();
+        assert_eq!(tag.as_deref(), Some("false"));
+        let written = serialize_tagged_bool(
+            serde_json::value::Serializer,
+            "managed",
+            true,
+            &json!({"phase": "hot"}),
+        )
+        .unwrap();
+        assert_eq!(written, json!({"managed": true, "phase": "hot"}));
+        assert!(deserialize_tagged(json!({"managed": 1}), "managed", None).is_err());
     }
 }

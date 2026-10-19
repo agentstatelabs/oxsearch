@@ -47,7 +47,8 @@ impl Emitter<'_> {
                 tag,
                 default,
                 members,
-            } => self.tagged(tag, default.as_deref(), members, out),
+                boolean,
+            } => self.tagged(tag, default.as_deref(), members, *boolean, out),
             ItemKind::External(members) => self.external(members, out),
             ItemKind::Untagged { members, fallback } => self.untagged(members, *fallback, out),
             ItemKind::Alias(ty) => {
@@ -1546,7 +1547,14 @@ impl Emitter<'_> {
         out.push_str("}\n\n");
     }
 
-    fn tagged(&self, tag: &str, default: Option<&str>, members: &[Variant], out: &mut String) {
+    fn tagged(
+        &self,
+        tag: &str,
+        default: Option<&str>,
+        members: &[Variant],
+        boolean: bool,
+        out: &mut String,
+    ) {
         let ident = &self.item.ident;
         self.variants_decl(
             members,
@@ -1565,12 +1573,17 @@ impl Emitter<'_> {
         );
         out.push_str("        match self {\n");
         for v in members {
+            // A boolean tag is written as one, not as its name.
+            let (write, name) = if boolean {
+                ("serialize_tagged_bool", v.wire.clone())
+            } else {
+                ("serialize_tagged", string(&v.wire))
+            };
             let _ = writeln!(
                 out,
-                "            Self::{}(value) => {CORE}::__private::serialize_tagged(serializer, {}, {}, value),",
+                "            Self::{}(value) => {CORE}::__private::{write}(serializer, {}, {name}, value),",
                 v.ident,
                 string(tag),
-                string(&v.wire)
             );
         }
         out.push_str("            Self::Raw(value) => ::serde::Serialize::serialize(value, serializer),\n        }\n    }\n}\n\n");

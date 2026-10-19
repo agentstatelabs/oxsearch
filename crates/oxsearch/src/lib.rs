@@ -12,7 +12,8 @@
 //! `esql-arrow` adds Arrow output), `admin` (cluster, index and node
 //! administration), `ingest` (pipelines and processors), `query-rules`
 //! (results pinned or excluded for matching queries), `synonyms` (synonym
-//! sets), `license`, `analysis` and `tasks`. `document` adds the typed document layer and `derive` its derive
+//! sets), `snapshot` (repositories and snapshots), `ilm` (index lifecycle
+//! policies), `license`, `analysis` and `tasks`. `document` adds the typed document layer and `derive` its derive
 //! macro, `helpers` the point-in-time scan and the bulk loader, and
 //! `transport-reqwest` the default HTTP transport.
 //!
@@ -80,6 +81,8 @@ pub use oxsearch_derive as derive;
 pub use oxsearch_docs as docs;
 #[cfg(feature = "esql")]
 pub use oxsearch_esql as esql;
+#[cfg(feature = "ilm")]
+pub use oxsearch_ilm as ilm;
 #[cfg(feature = "inference")]
 pub use oxsearch_inference as inference;
 #[cfg(feature = "ingest")]
@@ -94,6 +97,8 @@ pub use oxsearch_query_rules as query_rules;
 pub use oxsearch_search as search;
 #[cfg(feature = "search")]
 pub use oxsearch_search::fusion;
+#[cfg(feature = "snapshot")]
+pub use oxsearch_snapshot as snapshot;
 #[cfg(feature = "synonyms")]
 pub use oxsearch_synonyms as synonyms;
 #[cfg(feature = "tasks")]

@@ -55,6 +55,11 @@ specification it's generated from.
   rules stored in Elasticsearch, which analyzers read and which take
   effect without reindexing.
 - **The license API** (`oxsearch-license`, the `license` feature).
+- **Snapshots** (`oxsearch-snapshot`, the `snapshot` feature): repositories,
+  and snapshots taken, cloned, restored, analyzed and deleted.
+- **Index lifecycle management** (`oxsearch-ilm`, the `ilm` feature):
+  policies and their phases, the indices they manage, and ILM itself
+  stopped and started.
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`
@@ -78,6 +83,10 @@ specification it's generated from.
     `index2` (`msearch`, `indices.analyze`, `indices.clear_cache`),
     `scroll_id2` (`scroll`) and `context2` (`put_script`) are gone. Set the
     path parameter instead.
+
+### Fixed
+- A union tagged by a boolean, such as an ILM explanation's `"managed":
+  true`, reads and writes its tag as a boolean.
 
 ## [0.1.0] - 2026-10-15
 
