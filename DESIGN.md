@@ -280,7 +280,7 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 
 ## 11. Open questions
 
-1. ~~**Version numbers.**~~ Decided: 0.N, with the specification branch each release is generated from recorded in the README and the changelog (the user, 2026-10-15). 0.1 is generated from the 9.5 branch.
+1. ~~**Version numbers.**~~ Decided: 0.N, with the specification branch each release is generated from recorded in the README and the changelog (the user, 2026-10-15). 0.1 and 0.2 are generated from the 9.5 branch.
 2. ~~**The specification model.** Reuse `clients_schema` from the specification repository, or read `schema.json` with our own model?~~ Decided in Phase 0: our own model (§4.2).
 3. **The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?
 4. **Serverless.** Generate a serverless profile from `schema-serverless.json`, or only document availability?

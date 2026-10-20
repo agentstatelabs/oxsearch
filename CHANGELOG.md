@@ -7,6 +7,17 @@ specification it's generated from.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-19
+
+The second release, generated from the same specification branch as 0.1,
+9.5 (commit `84bf510a`), and tested against Elasticsearch 9.5.5 on the Basic
+license and a trial. It adds aggregations with typed results, ES|QL with a
+typed builder, and twelve more API areas, each its own crate behind a
+feature of its name, from administration to ingest pipelines, snapshots and
+SQL: 289 endpoints are generated, 183 of them integration-tested. Some 0.1
+code needs changes to build against it; **Changed** lists them. Rust 1.95 or
+newer.
+
 ### Added
 - **Aggregations with typed results** (`oxsearch-aggs`, the `aggs` feature).
   - The aggregation types are generated from the specification: every
@@ -76,13 +87,13 @@ specification it's generated from.
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`
-  implies, and creates and maps indices with the `admin` crate's typed
-  calls rather than raw ones. It adds `Index::delete_index`.
+  implies; code that uses `oxsearch::document` without `derive` turns the
+  feature on. It creates and maps indices with the `admin` crate's typed
+  calls rather than raw ones, and adds `Index::delete_index`.
 - Mapping, analysis and common types that the admin and aggregation
   responses read (mappings, index and node statistics, `CartesianPoint`,
-  `GeoLine`, …) now take a required property
-  Elasticsearch leaves out as `None`, as other response types do: such
-  fields are `Option`s.
+  `GeoLine`, …) now take a required property Elasticsearch leaves out as
+  `None`, as other response types do: such fields are `Option`s.
 - Generated names no longer end in `2` where two properties would share
   one.
   - When a type has both `_x` and `x`, `x` keeps the plain name and `_x`
@@ -97,7 +108,6 @@ specification it's generated from.
     `index2` (`msearch`, `indices.analyze`, `indices.clear_cache`),
     `scroll_id2` (`scroll`) and `context2` (`put_script`) are gone. Set the
     path parameter instead.
-
 - Enum variants the specification writes in capitals are named in Rust's
   UpperCamelCase, an acronym as one word: `LifecycleOperationMode::Running`
   (was `RUNNING`), `ShardRoutingState::Started`, `RestMethod::Get`,
@@ -168,5 +178,6 @@ on top. Rust 1.95 or newer.
 - [docs/coverage.md](docs/coverage.md) lists which generated endpoints the
   integration tests exercise.
 
-[Unreleased]: https://github.com/agentstatelabs/oxsearch/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/agentstatelabs/oxsearch/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/agentstatelabs/oxsearch/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/agentstatelabs/oxsearch/releases/tag/v0.1.0

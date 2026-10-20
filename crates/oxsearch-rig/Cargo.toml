@@ -14,9 +14,9 @@ authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
 
 [dependencies]
-oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
-oxsearch-docs = { path = "../oxsearch-docs", version = "0.1.0" }
-oxsearch-search = { path = "../oxsearch-search", version = "0.1.0" }
+oxsearch-core = { path = "../oxsearch-core", version = "0.2.0" }
+oxsearch-docs = { path = "../oxsearch-docs", version = "0.2.0" }
+oxsearch-search = { path = "../oxsearch-search", version = "0.2.0" }
 rig-core = { version = "0.44", default-features = false }
 serde = "1.0.228"
 serde_json = "1.0.149"
