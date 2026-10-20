@@ -288,16 +288,18 @@ impl<'de> ::serde::Deserialize<'de> for Bytes {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct CartesianPoint {
-    pub x: f64,
-    pub y: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub x: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub y: ::core::option::Option<f64>,
 }
 
 impl CartesianPoint {
     /// A `CartesianPoint` with its required properties set.
     pub fn new(x: f64, y: f64) -> Self {
         Self {
-            x: x.into(),
-            y: y.into(),
+            x: ::core::option::Option::Some(x.into()),
+            y: ::core::option::Option::Some(y.into()),
         }
     }
 }
@@ -2844,8 +2846,10 @@ pub type GeoHexCell = ::std::string::String;
 #[non_exhaustive]
 pub struct GeoLine {
     /// Always `"LineString"`
-    pub r#type: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r#type: ::core::option::Option<::std::string::String>,
     /// Array of `[lon, lat]` coordinates
+    #[serde(default = "::core::default::Default::default")]
     pub coordinates: ::std::vec::Vec<::std::vec::Vec<f64>>,
 }
 
@@ -2856,7 +2860,7 @@ impl GeoLine {
         coordinates: impl ::core::convert::Into<::std::vec::Vec<::std::vec::Vec<f64>>>,
     ) -> Self {
         Self {
-            r#type: r#type.into(),
+            r#type: ::core::option::Option::Some(r#type.into()),
             coordinates: coordinates.into(),
         }
     }

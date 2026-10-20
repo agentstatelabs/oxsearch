@@ -1,0 +1,7 @@
+3 exact, 3 normalized, 0 failing
+async_search.get response AsyncSearchGetResponseExample1: normalized at /response/hits/max_score (dropped)
+async_search.status response AsyncSearchStatusResponseExample1: exact
+async_search.status response AsyncSearchStatusResponseExample2: exact
+async_search.status response AsyncSearchStatusResponseExample3: exact
+async_search.submit request AsyncSearchSubmitRequestExample1: normalized at /aggs (dropped)
+async_search.submit response AsyncSearchSubmitResponseExample1: normalized at /response/hits/max_score (dropped)

@@ -1,0 +1,9 @@
+5 exact, 3 normalized, 0 failing
+search_application.get response SearchApplicationGetResponseExample1: exact
+search_application.get_behavioral_analytics response BehavioralAnalyticsGetResponseExample1: exact
+search_application.list response SearchApplicationsListResponseExample1: normalized at /results/0/indices (added)
+search_application.post_behavioral_analytics_event request BehavioralAnalyticsEventPostRequestExample1: exact
+search_application.put request SearchApplicationPutRequestExample1: normalized at /template/dictionary (dropped)
+search_application.render_query request SearchApplicationsRenderQueryRequestExample1: exact
+search_application.render_query response SearchApplicationsRenderQueryResponseExample1: normalized at /explain (dropped)
+search_application.search request SearchApplicationsSearchRequestExample1: exact

@@ -33,7 +33,7 @@ pub trait Results {
             Aggregate::ValueCount(a) => a.value,
             Aggregate::WeightedAvg(a) => a.value,
             Aggregate::MedianAbsoluteDeviation(a) => a.value,
-            Aggregate::Cardinality(a) => Some(a.value as f64),
+            Aggregate::Cardinality(a) => a.value.map(|v| v as f64),
             Aggregate::SimpleValue(a) => a.value,
             Aggregate::Derivative(a) => a.value,
             Aggregate::BucketMetricValue(a) => a.value,
@@ -56,22 +56,26 @@ pub trait Results {
             Some(Aggregate::HdrPercentiles(p)) => &p.values,
             _ => return Vec::new(),
         };
-        match values {
-            Percentiles::Keyed(keyed) => keyed
+        match values.as_ref() {
+            None => Vec::new(),
+            Some(Percentiles::Keyed(keyed)) => keyed
                 .iter()
                 .filter_map(|(percent, value)| {
                     let percent = percent.parse::<f64>().ok()?;
                     Some((percent, serde_json::to_value(value).ok()?.as_f64()))
                 })
                 .collect(),
-            Percentiles::Array(items) => items.iter().map(|i| (i.key, i.value)).collect(),
+            Some(Percentiles::Array(items)) => items
+                .iter()
+                .filter_map(|i| Some((i.key?, i.value)))
+                .collect(),
         }
     }
 
     /// A terms aggregation's buckets on a text or keyword field.
     fn string_terms(&self, name: &str) -> Vec<&StringTermsBucket> {
         match self.aggregate(name) {
-            Some(Aggregate::StringTerms(t)) => buckets(&t.buckets),
+            Some(Aggregate::StringTerms(t)) => some_buckets(&t.buckets),
             _ => Vec::new(),
         }
     }
@@ -79,7 +83,7 @@ pub trait Results {
     /// A terms aggregation's buckets on an integer field.
     fn long_terms(&self, name: &str) -> Vec<&LongTermsBucket> {
         match self.aggregate(name) {
-            Some(Aggregate::LongTerms(t)) => buckets(&t.buckets),
+            Some(Aggregate::LongTerms(t)) => some_buckets(&t.buckets),
             _ => Vec::new(),
         }
     }
@@ -87,28 +91,29 @@ pub trait Results {
     /// A terms aggregation's buckets on a floating-point field.
     fn double_terms(&self, name: &str) -> Vec<&DoubleTermsBucket> {
         match self.aggregate(name) {
-            Some(Aggregate::DoubleTerms(t)) => buckets(&t.buckets),
+            Some(Aggregate::DoubleTerms(t)) => some_buckets(&t.buckets),
             _ => Vec::new(),
         }
     }
 
     /// A terms aggregation's keys and document counts, whatever the field's
-    /// type, most frequent first.
+    /// type, most frequent first. A bucket without a key is left out.
     fn terms(&self, name: &str) -> Vec<(String, i64)> {
+        let count = |n: Option<i64>| n.unwrap_or_default();
         let mut out: Vec<(String, i64)> = self
             .string_terms(name)
             .iter()
-            .map(|b| (field_text(&b.key), b.doc_count))
+            .filter_map(|b| Some((field_text(b.key.as_ref()?), count(b.doc_count))))
             .collect();
         out.extend(
             self.long_terms(name)
                 .iter()
-                .map(|b| (b.key.to_string(), b.doc_count)),
+                .filter_map(|b| Some((b.key?.to_string(), count(b.doc_count)))),
         );
         out.extend(
             self.double_terms(name)
                 .iter()
-                .map(|b| (b.key.to_string(), b.doc_count)),
+                .filter_map(|b| Some((b.key?.to_string(), count(b.doc_count)))),
         );
         out
     }
@@ -116,7 +121,7 @@ pub trait Results {
     /// A histogram's buckets.
     fn histogram(&self, name: &str) -> Vec<&HistogramBucket> {
         match self.aggregate(name) {
-            Some(Aggregate::Histogram(h)) => buckets(&h.buckets),
+            Some(Aggregate::Histogram(h)) => some_buckets(&h.buckets),
             _ => Vec::new(),
         }
     }
@@ -124,7 +129,7 @@ pub trait Results {
     /// A date histogram's buckets.
     fn date_histogram(&self, name: &str) -> Vec<&DateHistogramBucket> {
         match self.aggregate(name) {
-            Some(Aggregate::DateHistogram(h)) => buckets(&h.buckets),
+            Some(Aggregate::DateHistogram(h)) => some_buckets(&h.buckets),
             _ => Vec::new(),
         }
     }
@@ -132,7 +137,7 @@ pub trait Results {
     /// A range aggregation's buckets.
     fn ranges(&self, name: &str) -> Vec<&RangeBucket> {
         match self.aggregate(name) {
-            Some(Aggregate::Range(r)) => buckets(&r.buckets),
+            Some(Aggregate::Range(r)) => some_buckets(&r.buckets),
             _ => Vec::new(),
         }
     }
@@ -141,8 +146,9 @@ pub trait Results {
     fn filters(&self, name: &str) -> Vec<(String, &FiltersBucket)> {
         match self.aggregate(name) {
             Some(Aggregate::Filters(f)) => match &f.buckets {
-                Buckets::Keyed(keyed) => keyed.iter().map(|(k, b)| (k.clone(), b)).collect(),
-                Buckets::Array(array) => array
+                None => Vec::new(),
+                Some(Buckets::Keyed(keyed)) => keyed.iter().map(|(k, b)| (k.clone(), b)).collect(),
+                Some(Buckets::Array(array)) => array
                     .iter()
                     .enumerate()
                     .map(|(n, b)| (b.key.clone().unwrap_or_else(|| n.to_string()), b))
@@ -155,7 +161,7 @@ pub trait Results {
     /// A top hits aggregation's hits, with documents as JSON.
     fn top_hits(&self, name: &str) -> &[Hit] {
         match self.aggregate(name) {
-            Some(Aggregate::TopHits(t)) => &t.hits.hits,
+            Some(Aggregate::TopHits(t)) => t.hits.as_ref().map_or(&[], |h| &h.hits),
             _ => &[],
         }
     }
@@ -165,6 +171,11 @@ impl Results for TypedKeys<Aggregate> {
     fn aggregate(&self, name: &str) -> Option<&Aggregate> {
         self.0.get(name)
     }
+}
+
+/// The buckets of an aggregation that may have none.
+fn some_buckets<T>(found: &Option<Buckets<T>>) -> Vec<&T> {
+    found.as_ref().map(buckets).unwrap_or_default()
 }
 
 /// A bucket aggregation's buckets, keyed or not, in order.

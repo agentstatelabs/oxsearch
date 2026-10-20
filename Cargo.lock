@@ -1250,9 +1250,12 @@ dependencies = [
  "oxsearch-admin",
  "oxsearch-aggs",
  "oxsearch-analysis",
+ "oxsearch-async-search",
  "oxsearch-core",
  "oxsearch-derive",
  "oxsearch-docs",
+ "oxsearch-enrich",
+ "oxsearch-eql",
  "oxsearch-esql",
  "oxsearch-ilm",
  "oxsearch-inference",
@@ -1261,7 +1264,9 @@ dependencies = [
  "oxsearch-mapping",
  "oxsearch-query-rules",
  "oxsearch-search",
+ "oxsearch-search-application",
  "oxsearch-snapshot",
+ "oxsearch-sql",
  "oxsearch-synonyms",
  "oxsearch-tasks",
  "oxsearch-transport-reqwest",
@@ -1311,6 +1316,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "oxsearch-async-search"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-aggs",
+ "oxsearch-async-search",
+ "oxsearch-core",
+ "oxsearch-mapping",
+ "oxsearch-search",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
 name = "oxsearch-core"
 version = "0.1.0"
 dependencies = [
@@ -1345,6 +1365,33 @@ dependencies = [
  "oxsearch-docs",
  "oxsearch-mapping",
  "oxsearch-tasks",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-enrich"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-enrich",
+ "oxsearch-tasks",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-eql"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-eql",
+ "oxsearch-mapping",
+ "oxsearch-search",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -1487,6 +1534,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "oxsearch-search-application"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-search",
+ "oxsearch-search-application",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
 name = "oxsearch-snapshot"
 version = "0.1.0"
 dependencies = [
@@ -1494,6 +1554,21 @@ dependencies = [
  "oxsearch-admin",
  "oxsearch-core",
  "oxsearch-snapshot",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-sql"
+version = "0.1.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-aggs",
+ "oxsearch-core",
+ "oxsearch-mapping",
+ "oxsearch-search",
+ "oxsearch-sql",
  "serde",
  "serde_json",
  "serde_path_to_error",

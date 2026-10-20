@@ -34,6 +34,11 @@ pub const CRATES: &[&str] = &[
     "synonyms",
     "snapshot",
     "ilm",
+    "async_search",
+    "eql",
+    "sql",
+    "search_application",
+    "enrich",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is

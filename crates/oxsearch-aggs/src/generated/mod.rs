@@ -38,7 +38,8 @@ impl AbstractChangePoint {}
 pub struct AdjacencyMatrixAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::AdjacencyMatrixBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::AdjacencyMatrixBucket>>,
 }
 
 impl AdjacencyMatrixAggregate {
@@ -48,7 +49,7 @@ impl AdjacencyMatrixAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -106,8 +107,10 @@ impl AdjacencyMatrixAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct AdjacencyMatrixBucket {
-    pub doc_count: i64,
-    pub key: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -117,8 +120,8 @@ impl AdjacencyMatrixBucket {
     /// A `AdjacencyMatrixBucket` with its required properties set.
     pub fn new(doc_count: i64, key: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -2511,7 +2514,9 @@ impl AggregationRange {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ArrayPercentilesItem {
-    pub key: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -2521,7 +2526,7 @@ impl ArrayPercentilesItem {
     /// A `ArrayPercentilesItem` with its required properties set.
     pub fn new(key: f64, value: impl ::core::convert::Into<::core::option::Option<f64>>) -> Self {
         Self {
-            key: key.into(),
+            key: ::core::option::Option::Some(key.into()),
             value: value.into(),
             value_as_string: ::core::option::Option::None,
         }
@@ -2544,8 +2549,10 @@ impl ArrayPercentilesItem {
 pub struct AutoDateHistogramAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::DateHistogramBucket>,
-    pub interval: ::oxsearch_core::DurationLarge,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::DateHistogramBucket>>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub interval: ::core::option::Option<::oxsearch_core::DurationLarge>,
 }
 
 impl AutoDateHistogramAggregate {
@@ -2556,8 +2563,8 @@ impl AutoDateHistogramAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
-            interval: interval.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
+            interval: ::core::option::Option::Some(interval.into()),
         }
     }
 }
@@ -2785,6 +2792,7 @@ pub struct AvgAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -2822,13 +2830,20 @@ impl AvgAggregate {
 pub struct BoxPlotAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub min: f64,
-    pub max: f64,
-    pub q1: f64,
-    pub q2: f64,
-    pub q3: f64,
-    pub lower: f64,
-    pub upper: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub max: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub q1: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub q2: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub q3: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub lower: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub upper: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -2850,13 +2865,13 @@ impl BoxPlotAggregate {
     pub fn new(min: f64, max: f64, q1: f64, q2: f64, q3: f64, lower: f64, upper: f64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            min: min.into(),
-            max: max.into(),
-            q1: q1.into(),
-            q2: q2.into(),
-            q3: q3.into(),
-            lower: lower.into(),
-            upper: upper.into(),
+            min: ::core::option::Option::Some(min.into()),
+            max: ::core::option::Option::Some(max.into()),
+            q1: ::core::option::Option::Some(q1.into()),
+            q2: ::core::option::Option::Some(q2.into()),
+            q3: ::core::option::Option::Some(q3.into()),
+            lower: ::core::option::Option::Some(lower.into()),
+            upper: ::core::option::Option::Some(upper.into()),
             min_as_string: ::core::option::Option::None,
             max_as_string: ::core::option::Option::None,
             q1_as_string: ::core::option::Option::None,
@@ -3022,7 +3037,8 @@ pub struct BucketCorrelationAggregation {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub buckets_path: ::core::option::Option<crate::BucketsPath>,
     /// The correlation function to execute.
-    pub function: crate::BucketCorrelationFunction,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub function: ::core::option::Option<crate::BucketCorrelationFunction>,
 }
 
 impl BucketCorrelationAggregation {
@@ -3030,7 +3046,7 @@ impl BucketCorrelationAggregation {
     pub fn new(function: impl ::core::convert::Into<crate::BucketCorrelationFunction>) -> Self {
         Self {
             buckets_path: ::core::option::Option::None,
-            function: function.into(),
+            function: ::core::option::Option::Some(function.into()),
         }
     }
 }
@@ -3047,7 +3063,8 @@ impl BucketCorrelationAggregation {
 #[non_exhaustive]
 pub struct BucketCorrelationFunction {
     /// The configuration to calculate a count correlation. This function is designed for determining the correlation of a term value and a given metric.
-    pub count_correlation: crate::BucketCorrelationFunctionCountCorrelation,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count_correlation: ::core::option::Option<crate::BucketCorrelationFunctionCountCorrelation>,
 }
 
 impl BucketCorrelationFunction {
@@ -3056,7 +3073,7 @@ impl BucketCorrelationFunction {
         count_correlation: impl ::core::convert::Into<crate::BucketCorrelationFunctionCountCorrelation>,
     ) -> Self {
         Self {
-            count_correlation: count_correlation.into(),
+            count_correlation: ::core::option::Option::Some(count_correlation.into()),
         }
     }
 }
@@ -3067,7 +3084,9 @@ impl BucketCorrelationFunction {}
 #[non_exhaustive]
 pub struct BucketCorrelationFunctionCountCorrelation {
     /// The indicator with which to correlate the configured `bucket_path` values.
-    pub indicator: crate::BucketCorrelationFunctionCountCorrelationIndicator,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub indicator:
+        ::core::option::Option<crate::BucketCorrelationFunctionCountCorrelationIndicator>,
 }
 
 impl BucketCorrelationFunctionCountCorrelation {
@@ -3076,7 +3095,7 @@ impl BucketCorrelationFunctionCountCorrelation {
         indicator: impl ::core::convert::Into<crate::BucketCorrelationFunctionCountCorrelationIndicator>,
     ) -> Self {
         Self {
-            indicator: indicator.into(),
+            indicator: ::core::option::Option::Some(indicator.into()),
         }
     }
 }
@@ -3089,9 +3108,11 @@ pub struct BucketCorrelationFunctionCountCorrelationIndicator {
     /// The total number of documents that initially created the expectations. It’s required to be greater
     /// than or equal to the sum of all values in the buckets_path as this is the originating superset of data
     /// to which the term values are correlated.
-    pub doc_count: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i32>,
     /// An array of numbers with which to correlate the configured `bucket_path` values.
     /// The length of this value must always equal the number of buckets returned by the `bucket_path`.
+    #[serde(default = "::core::default::Default::default")]
     pub expectations: ::std::vec::Vec<f64>,
     /// An array of fractions to use when averaging and calculating variance. This should be used if
     /// the pre-calculated data and the buckets_path have known gaps. The length of fractions, if provided,
@@ -3107,7 +3128,7 @@ impl BucketCorrelationFunctionCountCorrelationIndicator {
         expectations: impl ::core::convert::Into<::std::vec::Vec<f64>>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             expectations: expectations.into(),
             fractions: ::core::option::Option::None,
         }
@@ -3205,9 +3226,11 @@ pub struct BucketMetricValueAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
+    #[serde(default = "::core::default::Default::default")]
     pub keys: ::std::vec::Vec<::std::string::String>,
 }
 
@@ -3678,7 +3701,8 @@ impl<'de> ::serde::Deserialize<'de> for CalendarInterval {
 pub struct CardinalityAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub value: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub value: ::core::option::Option<i64>,
 }
 
 impl CardinalityAggregate {
@@ -3686,7 +3710,7 @@ impl CardinalityAggregate {
     pub fn new(value: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            value: value.into(),
+            value: ::core::option::Option::Some(value.into()),
         }
     }
 }
@@ -3925,7 +3949,8 @@ impl CartesianBoundsAggregation {
 pub struct CartesianCentroidAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub location: ::core::option::Option<::oxsearch_core::CartesianPoint>,
 }
@@ -3935,7 +3960,7 @@ impl CartesianCentroidAggregate {
     pub fn new(count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             location: ::core::option::Option::None,
         }
     }
@@ -4011,7 +4036,8 @@ impl CartesianCentroidAggregation {
 #[non_exhaustive]
 pub struct CategorizeTextAggregation {
     /// The semi-structured text field to categorize.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
     /// The maximum number of unique tokens at any position up to max_matched_tokens. Must be larger than 1.
     /// Smaller values use less memory and create fewer categories. Larger values will use more memory and
     /// create narrower categories. Max allowed value is 100.
@@ -4058,7 +4084,7 @@ impl CategorizeTextAggregation {
     /// A `CategorizeTextAggregation` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
             max_unique_tokens: ::core::option::Option::None,
             max_matched_tokens: ::core::option::Option::None,
             similarity_threshold: ::core::option::Option::None,
@@ -4204,7 +4230,8 @@ impl ::core::convert::From<&str> for CategorizeTextAnalyzer {
 pub struct ChangePointAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub r#type: crate::ChangeType,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r#type: ::core::option::Option<crate::ChangeType>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub bucket: ::core::option::Option<crate::ChangePointBucket>,
 }
@@ -4214,7 +4241,7 @@ impl ChangePointAggregate {
     pub fn new(r#type: impl ::core::convert::Into<crate::ChangeType>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            r#type: r#type.into(),
+            r#type: ::core::option::Option::Some(r#type.into()),
             bucket: ::core::option::Option::None,
         }
     }
@@ -4280,8 +4307,10 @@ impl ChangePointAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ChangePointBucket {
-    pub doc_count: i64,
-    pub key: ::oxsearch_core::FieldValue,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::oxsearch_core::FieldValue>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -4294,8 +4323,8 @@ impl ChangePointBucket {
         key: impl ::core::convert::Into<::oxsearch_core::FieldValue>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -4468,17 +4497,19 @@ impl ::core::convert::From<crate::TrendChange> for ChangeType {
 #[non_exhaustive]
 pub struct ChiSquareHeuristic {
     /// Set to `false` if you defined a custom background filter that represents a different set of documents that you want to compare to.
-    pub background_is_superset: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub background_is_superset: ::core::option::Option<bool>,
     /// Set to `false` to filter out the terms that appear less often in the subset than in documents outside the subset.
-    pub include_negatives: bool,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub include_negatives: ::core::option::Option<bool>,
 }
 
 impl ChiSquareHeuristic {
     /// A `ChiSquareHeuristic` with its required properties set.
     pub fn new(background_is_superset: bool, include_negatives: bool) -> Self {
         Self {
-            background_is_superset: background_is_superset.into(),
-            include_negatives: include_negatives.into(),
+            background_is_superset: ::core::option::Option::Some(background_is_superset.into()),
+            include_negatives: ::core::option::Option::Some(include_negatives.into()),
         }
     }
 }
@@ -4490,7 +4521,8 @@ impl ChiSquareHeuristic {}
 pub struct ChildrenAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -4501,7 +4533,7 @@ impl ChildrenAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -4548,7 +4580,8 @@ impl ChildrenAggregation {
 pub struct CompositeAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::CompositeBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::CompositeBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub after_key: ::core::option::Option<crate::CompositeAggregateKey>,
 }
@@ -4560,7 +4593,7 @@ impl CompositeAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             after_key: ::core::option::Option::None,
         }
     }
@@ -4835,8 +4868,10 @@ impl ::core::convert::From<crate::CompositeGeoTileGridAggregation> for Composite
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct CompositeBucket {
-    pub doc_count: i64,
-    pub key: crate::CompositeAggregateKey,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<crate::CompositeAggregateKey>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -4849,8 +4884,8 @@ impl CompositeBucket {
         key: impl ::core::convert::Into<crate::CompositeAggregateKey>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -5074,7 +5109,8 @@ pub struct CompositeHistogramAggregation {
     pub value_type: ::core::option::Option<crate::ValueType>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub order: ::core::option::Option<::oxsearch_core::SortOrder>,
-    pub interval: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub interval: ::core::option::Option<f64>,
 }
 
 impl CompositeHistogramAggregation {
@@ -5087,7 +5123,7 @@ impl CompositeHistogramAggregation {
             script: ::core::option::Option::None,
             value_type: ::core::option::Option::None,
             order: ::core::option::Option::None,
-            interval: interval.into(),
+            interval: ::core::option::Option::Some(interval.into()),
         }
     }
 }
@@ -5197,7 +5233,8 @@ impl CompositeTermsAggregation {
 pub struct CumulativeCardinalityAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub value: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub value: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
 }
@@ -5207,7 +5244,7 @@ impl CumulativeCardinalityAggregate {
     pub fn new(value: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            value: value.into(),
+            value: ::core::option::Option::Some(value.into()),
             value_as_string: ::core::option::Option::None,
         }
     }
@@ -5368,7 +5405,8 @@ impl CustomCategorizeTextAnalyzer {
 pub struct DateHistogramAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::DateHistogramBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::DateHistogramBucket>>,
 }
 
 impl DateHistogramAggregate {
@@ -5378,7 +5416,7 @@ impl DateHistogramAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -5571,10 +5609,12 @@ impl DateHistogramAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DateHistogramBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
-    pub key: ::oxsearch_core::UnitMillis,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::oxsearch_core::UnitMillis>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -5587,9 +5627,9 @@ impl DateHistogramBucket {
         key: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key_as_string: ::core::option::Option::None,
-            key: key.into(),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -5613,7 +5653,8 @@ impl DateHistogramBucket {
 pub struct DateRangeAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::RangeBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::RangeBucket>>,
 }
 
 impl DateRangeAggregate {
@@ -5621,7 +5662,7 @@ impl DateRangeAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<crate::RangeBucket>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -5764,6 +5805,7 @@ pub struct DerivativeAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -5862,16 +5904,18 @@ impl DerivativeAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Dip {
-    pub p_value: f64,
-    pub change_point: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub p_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub change_point: ::core::option::Option<i32>,
 }
 
 impl Dip {
     /// A `Dip` with its required properties set.
     pub fn new(p_value: f64, change_point: i32) -> Self {
         Self {
-            p_value: p_value.into(),
-            change_point: change_point.into(),
+            p_value: ::core::option::Option::Some(p_value.into()),
+            change_point: ::core::option::Option::Some(change_point.into()),
         }
     }
 }
@@ -5881,16 +5925,18 @@ impl Dip {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DistributionChange {
-    pub p_value: f64,
-    pub change_point: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub p_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub change_point: ::core::option::Option<i32>,
 }
 
 impl DistributionChange {
     /// A `DistributionChange` with its required properties set.
     pub fn new(p_value: f64, change_point: i32) -> Self {
         Self {
-            p_value: p_value.into(),
-            change_point: change_point.into(),
+            p_value: ::core::option::Option::Some(p_value.into()),
+            change_point: ::core::option::Option::Some(change_point.into()),
         }
     }
 }
@@ -5966,7 +6012,8 @@ impl DiversifiedSamplerAggregation {
 pub struct DoubleTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::DoubleTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::DoubleTermsBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -5980,7 +6027,7 @@ impl DoubleTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
             sum_other_doc_count: ::core::option::Option::None,
         }
@@ -6008,10 +6055,12 @@ impl DoubleTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct DoubleTermsBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
-    pub key: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
@@ -6023,9 +6072,9 @@ impl DoubleTermsBucket {
     /// A `DoubleTermsBucket` with its required properties set.
     pub fn new(doc_count: i64, key: f64) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
-            key: key.into(),
+            key: ::core::option::Option::Some(key.into()),
             key_as_string: ::core::option::Option::None,
             aggregations: ::core::default::Default::default(),
         }
@@ -6091,7 +6140,8 @@ pub struct EwmaMovingAverageAggregation {
     pub predict: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub window: ::core::option::Option<i32>,
-    pub settings: crate::EwmaModelSettings,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub settings: ::core::option::Option<crate::EwmaModelSettings>,
 }
 
 impl EwmaMovingAverageAggregation {
@@ -6104,7 +6154,7 @@ impl EwmaMovingAverageAggregation {
             minimize: ::core::option::Option::None,
             predict: ::core::option::Option::None,
             window: ::core::option::Option::None,
-            settings: settings.into(),
+            settings: ::core::option::Option::Some(settings.into()),
         }
     }
 }
@@ -6181,11 +6231,16 @@ impl<T> ExtendedBounds<T> {
 pub struct ExtendedStatsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub max: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg: ::core::option::Option<f64>,
-    pub sum: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub sum: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -6194,12 +6249,19 @@ pub struct ExtendedStatsAggregate {
     pub avg_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub sum_as_string: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub sum_of_squares: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub variance: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub variance_population: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub variance_sampling: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation_population: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation_sampling: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation_bounds: ::core::option::Option<crate::StandardDeviationBounds>,
@@ -6236,11 +6298,11 @@ impl ExtendedStatsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             min: min.into(),
             max: max.into(),
             avg: avg.into(),
-            sum: sum.into(),
+            sum: ::core::option::Option::Some(sum.into()),
             min_as_string: ::core::option::Option::None,
             max_as_string: ::core::option::Option::None,
             avg_as_string: ::core::option::Option::None,
@@ -6427,11 +6489,16 @@ impl ExtendedStatsAggregation {
 pub struct ExtendedStatsBucketAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub max: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg: ::core::option::Option<f64>,
-    pub sum: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub sum: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -6440,12 +6507,19 @@ pub struct ExtendedStatsBucketAggregate {
     pub avg_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub sum_as_string: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub sum_of_squares: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub variance: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub variance_population: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub variance_sampling: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation_population: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation_sampling: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub std_deviation_bounds: ::core::option::Option<crate::StandardDeviationBounds>,
@@ -6482,11 +6556,11 @@ impl ExtendedStatsBucketAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             min: min.into(),
             max: max.into(),
             avg: avg.into(),
-            sum: sum.into(),
+            sum: ::core::option::Option::Some(sum.into()),
             min_as_string: ::core::option::Option::None,
             max_as_string: ::core::option::Option::None,
             avg_as_string: ::core::option::Option::None,
@@ -6735,7 +6809,8 @@ impl ::core::convert::From<&str> for FieldDateMath {
 pub struct FilterAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -6746,7 +6821,7 @@ impl FilterAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -6765,7 +6840,8 @@ impl FilterAggregate {
 pub struct FiltersAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::FiltersBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::FiltersBucket>>,
 }
 
 impl FiltersAggregate {
@@ -6773,7 +6849,7 @@ impl FiltersAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<crate::FiltersBucket>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -6848,7 +6924,8 @@ impl FiltersAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FiltersBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
@@ -6860,7 +6937,7 @@ impl FiltersBucket {
     /// A `FiltersBucket` with its required properties set.
     pub fn new(doc_count: i64) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key: ::core::option::Option::None,
             aggregations: ::core::default::Default::default(),
         }
@@ -6988,7 +7065,8 @@ impl FormattableMetricAggregation {
 pub struct FrequentItemSetsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::FrequentItemSetsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::FrequentItemSetsBucket>>,
 }
 
 impl FrequentItemSetsAggregate {
@@ -6998,7 +7076,7 @@ impl FrequentItemSetsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -7015,6 +7093,7 @@ impl FrequentItemSetsAggregate {
 #[non_exhaustive]
 pub struct FrequentItemSetsAggregation {
     /// Fields to analyze.
+    #[serde(default = "::core::default::Default::default")]
     pub fields: ::std::vec::Vec<crate::FrequentItemSetsField>,
     /// The minimum size of one item set.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -7074,9 +7153,12 @@ impl FrequentItemSetsAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FrequentItemSetsBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(default = "::core::default::Default::default")]
     pub key: ::indexmap::IndexMap<::oxsearch_core::Field, ::std::vec::Vec<::std::string::String>>,
-    pub support: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub support: ::core::option::Option<f64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -7092,9 +7174,9 @@ impl FrequentItemSetsBucket {
         support: f64,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key: key.into(),
-            support: support.into(),
+            support: ::core::option::Option::Some(support.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -7105,7 +7187,8 @@ impl FrequentItemSetsBucket {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct FrequentItemSetsField {
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
     /// Values to exclude.
     /// Can be regular expression strings or arrays of strings of exact terms.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -7120,7 +7203,7 @@ impl FrequentItemSetsField {
     /// A `FrequentItemSetsField` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
             exclude: ::core::option::Option::None,
             include: ::core::option::Option::None,
         }
@@ -7288,7 +7371,8 @@ impl GeoBoundsAggregation {
 pub struct GeoCentroidAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub location: ::core::option::Option<::oxsearch_core::GeoLocation>,
 }
@@ -7298,7 +7382,7 @@ impl GeoCentroidAggregate {
     pub fn new(count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             location: ::core::option::Option::None,
         }
     }
@@ -7391,7 +7475,8 @@ impl GeoCentroidAggregation {
 pub struct GeoDistanceAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::RangeBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::RangeBucket>>,
 }
 
 impl GeoDistanceAggregate {
@@ -7399,7 +7484,7 @@ impl GeoDistanceAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<crate::RangeBucket>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -7490,7 +7575,8 @@ impl GeoDistanceAggregation {
 pub struct GeoHashGridAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::GeoHashGridBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::GeoHashGridBucket>>,
 }
 
 impl GeoHashGridAggregate {
@@ -7500,7 +7586,7 @@ impl GeoHashGridAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -7582,8 +7668,10 @@ impl GeoHashGridAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct GeoHashGridBucket {
-    pub doc_count: i64,
-    pub key: ::oxsearch_core::GeoHash,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::oxsearch_core::GeoHash>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -7593,8 +7681,8 @@ impl GeoHashGridBucket {
     /// A `GeoHashGridBucket` with its required properties set.
     pub fn new(doc_count: i64, key: impl ::core::convert::Into<::oxsearch_core::GeoHash>) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -7607,7 +7695,8 @@ impl GeoHashGridBucket {}
 pub struct GeoHexGridAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::GeoHexGridBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::GeoHexGridBucket>>,
 }
 
 impl GeoHexGridAggregate {
@@ -7617,7 +7706,7 @@ impl GeoHexGridAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -7633,8 +7722,10 @@ impl GeoHexGridAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct GeoHexGridBucket {
-    pub doc_count: i64,
-    pub key: ::oxsearch_core::GeoHexCell,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::oxsearch_core::GeoHexCell>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -7647,8 +7738,8 @@ impl GeoHexGridBucket {
         key: impl ::core::convert::Into<::oxsearch_core::GeoHexCell>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -7661,9 +7752,12 @@ impl GeoHexGridBucket {}
 pub struct GeoLineAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub r#type: ::std::string::String,
-    pub geometry: ::oxsearch_core::GeoLine,
-    pub properties: ::serde_json::Value,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r#type: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub geometry: ::core::option::Option<::oxsearch_core::GeoLine>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub properties: ::core::option::Option<::serde_json::Value>,
 }
 
 impl GeoLineAggregate {
@@ -7675,9 +7769,9 @@ impl GeoLineAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            r#type: r#type.into(),
-            geometry: geometry.into(),
-            properties: properties.into(),
+            r#type: ::core::option::Option::Some(r#type.into()),
+            geometry: ::core::option::Option::Some(geometry.into()),
+            properties: ::core::option::Option::Some(properties.into()),
         }
     }
 }
@@ -7694,7 +7788,8 @@ impl GeoLineAggregate {
 #[non_exhaustive]
 pub struct GeoLineAggregation {
     /// The name of the geo_point field.
-    pub point: crate::GeoLinePoint,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub point: ::core::option::Option<crate::GeoLinePoint>,
     /// The name of the numeric field to use as the sort key for ordering the points.
     /// When the `geo_line` aggregation is nested inside a `time_series` aggregation, this field defaults to `@timestamp`, and any other value will result in error.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -7715,7 +7810,7 @@ impl GeoLineAggregation {
     /// A `GeoLineAggregation` with its required properties set.
     pub fn new(point: impl ::core::convert::Into<crate::GeoLinePoint>) -> Self {
         Self {
-            point: point.into(),
+            point: ::core::option::Option::Some(point.into()),
             sort: ::core::option::Option::None,
             include_sort: ::core::option::Option::None,
             sort_order: ::core::option::Option::None,
@@ -7754,14 +7849,15 @@ impl GeoLineAggregation {
 #[non_exhaustive]
 pub struct GeoLinePoint {
     /// The name of the geo_point field.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
 }
 
 impl GeoLinePoint {
     /// A `GeoLinePoint` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
         }
     }
 }
@@ -7772,14 +7868,15 @@ impl GeoLinePoint {}
 #[non_exhaustive]
 pub struct GeoLineSort {
     /// The name of the numeric field to use as the sort key for ordering the points.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
 }
 
 impl GeoLineSort {
     /// A `GeoLineSort` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
         }
     }
 }
@@ -7791,7 +7888,8 @@ impl GeoLineSort {}
 pub struct GeoTileGridAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::GeoTileGridBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::GeoTileGridBucket>>,
 }
 
 impl GeoTileGridAggregate {
@@ -7801,7 +7899,7 @@ impl GeoTileGridAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -7884,8 +7982,10 @@ impl GeoTileGridAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct GeoTileGridBucket {
-    pub doc_count: i64,
-    pub key: ::oxsearch_core::GeoTile,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::oxsearch_core::GeoTile>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -7895,8 +7995,8 @@ impl GeoTileGridBucket {
     /// A `GeoTileGridBucket` with its required properties set.
     pub fn new(doc_count: i64, key: impl ::core::convert::Into<::oxsearch_core::GeoTile>) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -7909,7 +8009,8 @@ impl GeoTileGridBucket {}
 pub struct GeohexGridAggregation {
     /// Field containing indexed `geo_point` or `geo_shape` values.
     /// If the field contains an array, `geohex_grid` aggregates all array values.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
     /// Integer zoom of the key used to defined cells or buckets
     /// in the results. Value should be between 0-15.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -7929,7 +8030,7 @@ impl GeohexGridAggregation {
     /// A `GeohexGridAggregation` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
             precision: ::core::option::Option::None,
             bounds: ::core::option::Option::None,
             size: ::core::option::Option::None,
@@ -7966,7 +8067,8 @@ impl GeohexGridAggregation {
 pub struct GlobalAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -7977,7 +8079,7 @@ impl GlobalAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -8059,7 +8161,8 @@ impl HdrMethod {
 pub struct HdrPercentileRanksAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub values: crate::Percentiles,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub values: ::core::option::Option<crate::Percentiles>,
 }
 
 impl HdrPercentileRanksAggregate {
@@ -8067,7 +8170,7 @@ impl HdrPercentileRanksAggregate {
     pub fn new(values: impl ::core::convert::Into<crate::Percentiles>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            values: values.into(),
+            values: ::core::option::Option::Some(values.into()),
         }
     }
 }
@@ -8085,7 +8188,8 @@ impl HdrPercentileRanksAggregate {
 pub struct HdrPercentilesAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub values: crate::Percentiles,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub values: ::core::option::Option<crate::Percentiles>,
 }
 
 impl HdrPercentilesAggregate {
@@ -8093,7 +8197,7 @@ impl HdrPercentilesAggregate {
     pub fn new(values: impl ::core::convert::Into<crate::Percentiles>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            values: values.into(),
+            values: ::core::option::Option::Some(values.into()),
         }
     }
 }
@@ -8111,7 +8215,8 @@ impl HdrPercentilesAggregate {
 pub struct HistogramAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::HistogramBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::HistogramBucket>>,
 }
 
 impl HistogramAggregate {
@@ -8121,7 +8226,7 @@ impl HistogramAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -8262,10 +8367,12 @@ impl HistogramAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct HistogramBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
-    pub key: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<f64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -8275,9 +8382,9 @@ impl HistogramBucket {
     /// A `HistogramBucket` with its required properties set.
     pub fn new(doc_count: i64, key: f64) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key_as_string: ::core::option::Option::None,
-            key: key.into(),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -8345,7 +8452,8 @@ pub struct HoltMovingAverageAggregation {
     pub predict: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub window: ::core::option::Option<i32>,
-    pub settings: crate::HoltLinearModelSettings,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub settings: ::core::option::Option<crate::HoltLinearModelSettings>,
 }
 
 impl HoltMovingAverageAggregation {
@@ -8358,7 +8466,7 @@ impl HoltMovingAverageAggregation {
             minimize: ::core::option::Option::None,
             predict: ::core::option::Option::None,
             window: ::core::option::Option::None,
-            settings: settings.into(),
+            settings: ::core::option::Option::Some(settings.into()),
         }
     }
 }
@@ -8479,7 +8587,8 @@ pub struct HoltWintersMovingAverageAggregation {
     pub predict: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub window: ::core::option::Option<i32>,
-    pub settings: crate::HoltWintersModelSettings,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub settings: ::core::option::Option<crate::HoltWintersModelSettings>,
 }
 
 impl HoltWintersMovingAverageAggregation {
@@ -8492,7 +8601,7 @@ impl HoltWintersMovingAverageAggregation {
             minimize: ::core::option::Option::None,
             predict: ::core::option::Option::None,
             window: ::core::option::Option::None,
-            settings: settings.into(),
+            settings: ::core::option::Option::Some(settings.into()),
         }
     }
 }
@@ -8585,14 +8694,15 @@ impl<'de> ::serde::Deserialize<'de> for HoltWintersType {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Indeterminable {
-    pub reason: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub reason: ::core::option::Option<::std::string::String>,
 }
 
 impl Indeterminable {
     /// A `Indeterminable` with its required properties set.
     pub fn new(reason: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
-            reason: reason.into(),
+            reason: ::core::option::Option::Some(reason.into()),
         }
     }
 }
@@ -8680,7 +8790,8 @@ pub struct InferenceAggregation {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub gap_policy: ::core::option::Option<crate::GapPolicy>,
     /// The ID or alias for the trained model.
-    pub model_id: ::oxsearch_core::Name,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub model_id: ::core::option::Option<::oxsearch_core::Name>,
     /// Contains the inference type and its options.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub inference_config: ::core::option::Option<crate::InferenceConfigContainer>,
@@ -8693,7 +8804,7 @@ impl InferenceAggregation {
             buckets_path: ::core::option::Option::None,
             format: ::core::option::Option::None,
             gap_policy: ::core::option::Option::None,
-            model_id: model_id.into(),
+            model_id: ::core::option::Option::Some(model_id.into()),
             inference_config: ::core::option::Option::None,
         }
     }
@@ -8728,8 +8839,10 @@ impl InferenceAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct InferenceClassImportance {
-    pub class_name: ::std::string::String,
-    pub importance: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub class_name: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub importance: ::core::option::Option<f64>,
 }
 
 impl InferenceClassImportance {
@@ -8739,8 +8852,8 @@ impl InferenceClassImportance {
         importance: f64,
     ) -> Self {
         Self {
-            class_name: class_name.into(),
-            importance: importance.into(),
+            class_name: ::core::option::Option::Some(class_name.into()),
+            importance: ::core::option::Option::Some(importance.into()),
         }
     }
 }
@@ -8839,7 +8952,8 @@ impl ::core::convert::From<crate::ml::ClassificationInferenceOptions> for Infere
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct InferenceFeatureImportance {
-    pub feature_name: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub feature_name: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub importance: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -8850,7 +8964,7 @@ impl InferenceFeatureImportance {
     /// A `InferenceFeatureImportance` with its required properties set.
     pub fn new(feature_name: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
-            feature_name: feature_name.into(),
+            feature_name: ::core::option::Option::Some(feature_name.into()),
             importance: ::core::option::Option::None,
             classes: ::core::option::Option::None,
         }
@@ -8876,9 +8990,12 @@ impl InferenceFeatureImportance {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct InferenceTopClassEntry {
-    pub class_name: ::oxsearch_core::FieldValue,
-    pub class_probability: f64,
-    pub class_score: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub class_name: ::core::option::Option<::oxsearch_core::FieldValue>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub class_probability: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub class_score: ::core::option::Option<f64>,
 }
 
 impl InferenceTopClassEntry {
@@ -8889,9 +9006,9 @@ impl InferenceTopClassEntry {
         class_score: f64,
     ) -> Self {
         Self {
-            class_name: class_name.into(),
-            class_probability: class_probability.into(),
-            class_score: class_score.into(),
+            class_name: ::core::option::Option::Some(class_name.into()),
+            class_probability: ::core::option::Option::Some(class_probability.into()),
+            class_score: ::core::option::Option::Some(class_score.into()),
         }
     }
 }
@@ -8903,7 +9020,8 @@ impl InferenceTopClassEntry {}
 pub struct IpPrefixAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::IpPrefixBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::IpPrefixBucket>>,
 }
 
 impl IpPrefixAggregate {
@@ -8911,7 +9029,7 @@ impl IpPrefixAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<crate::IpPrefixBucket>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -8928,10 +9046,12 @@ impl IpPrefixAggregate {
 #[non_exhaustive]
 pub struct IpPrefixAggregation {
     /// The IP address field to aggregation on. The field mapping type must be `ip`.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
     /// Length of the network prefix. For IPv4 addresses the accepted range is [0, 32].
     /// For IPv6 addresses the accepted range is [0, 128].
-    pub prefix_length: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub prefix_length: ::core::option::Option<i32>,
     /// Defines whether the prefix applies to IPv6 addresses.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub is_ipv6: ::core::option::Option<bool>,
@@ -8953,8 +9073,8 @@ impl IpPrefixAggregation {
         prefix_length: i32,
     ) -> Self {
         Self {
-            field: field.into(),
-            prefix_length: prefix_length.into(),
+            field: ::core::option::Option::Some(field.into()),
+            prefix_length: ::core::option::Option::Some(prefix_length.into()),
             is_ipv6: ::core::option::Option::None,
             append_prefix_length: ::core::option::Option::None,
             keyed: ::core::option::Option::None,
@@ -8989,10 +9109,14 @@ impl IpPrefixAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct IpPrefixBucket {
-    pub doc_count: i64,
-    pub is_ipv6: bool,
-    pub key: ::std::string::String,
-    pub prefix_length: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub is_ipv6: ::core::option::Option<bool>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub prefix_length: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub netmask: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
@@ -9009,10 +9133,10 @@ impl IpPrefixBucket {
         prefix_length: i32,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            is_ipv6: is_ipv6.into(),
-            key: key.into(),
-            prefix_length: prefix_length.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            is_ipv6: ::core::option::Option::Some(is_ipv6.into()),
+            key: ::core::option::Option::Some(key.into()),
+            prefix_length: ::core::option::Option::Some(prefix_length.into()),
             netmask: ::core::option::Option::None,
             aggregations: ::core::default::Default::default(),
         }
@@ -9032,7 +9156,8 @@ impl IpPrefixBucket {
 pub struct IpRangeAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::IpRangeBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::IpRangeBucket>>,
 }
 
 impl IpRangeAggregate {
@@ -9040,7 +9165,7 @@ impl IpRangeAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<crate::IpRangeBucket>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -9136,7 +9261,8 @@ impl IpRangeAggregationRange {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct IpRangeBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -9152,7 +9278,7 @@ impl IpRangeBucket {
     /// A `IpRangeBucket` with its required properties set.
     pub fn new(doc_count: i64) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key: ::core::option::Option::None,
             from: ::core::option::Option::None,
             to: ::core::option::Option::None,
@@ -9279,7 +9405,8 @@ pub struct LinearMovingAverageAggregation {
     pub predict: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub window: ::core::option::Option<i32>,
-    pub settings: ::oxsearch_core::EmptyObject,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub settings: ::core::option::Option<::oxsearch_core::EmptyObject>,
 }
 
 impl LinearMovingAverageAggregation {
@@ -9292,7 +9419,7 @@ impl LinearMovingAverageAggregation {
             minimize: ::core::option::Option::None,
             predict: ::core::option::Option::None,
             window: ::core::option::Option::None,
-            settings: settings.into(),
+            settings: ::core::option::Option::Some(settings.into()),
         }
     }
 }
@@ -9336,7 +9463,8 @@ impl LinearMovingAverageAggregation {
 pub struct LongRareTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::LongRareTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::LongRareTermsBucket>>,
 }
 
 impl LongRareTermsAggregate {
@@ -9346,7 +9474,7 @@ impl LongRareTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -9362,8 +9490,10 @@ impl LongRareTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct LongRareTermsBucket {
-    pub doc_count: i64,
-    pub key: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
@@ -9375,8 +9505,8 @@ impl LongRareTermsBucket {
     /// A `LongRareTermsBucket` with its required properties set.
     pub fn new(doc_count: i64, key: i64) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             key_as_string: ::core::option::Option::None,
             aggregations: ::core::default::Default::default(),
         }
@@ -9400,7 +9530,8 @@ impl LongRareTermsBucket {
 pub struct LongTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::LongTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::LongTermsBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -9414,7 +9545,7 @@ impl LongTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
             sum_other_doc_count: ::core::option::Option::None,
         }
@@ -9442,10 +9573,12 @@ impl LongTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct LongTermsBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
-    pub key: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
@@ -9457,9 +9590,9 @@ impl LongTermsBucket {
     /// A `LongTermsBucket` with its required properties set.
     pub fn new(doc_count: i64, key: i64) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
-            key: key.into(),
+            key: ::core::option::Option::Some(key.into()),
             key_as_string: ::core::option::Option::None,
             aggregations: ::core::default::Default::default(),
         }
@@ -9525,7 +9658,8 @@ impl MatrixAggregation {
 pub struct MatrixStatsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub fields: ::core::option::Option<::std::vec::Vec<crate::MatrixStatsFields>>,
 }
@@ -9535,7 +9669,7 @@ impl MatrixStatsAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             fields: ::core::option::Option::None,
         }
     }
@@ -9607,13 +9741,21 @@ impl MatrixStatsAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct MatrixStatsFields {
-    pub name: ::oxsearch_core::Field,
-    pub count: i64,
-    pub mean: f64,
-    pub variance: f64,
-    pub skewness: f64,
-    pub kurtosis: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<::oxsearch_core::Field>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub mean: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub variance: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub skewness: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub kurtosis: ::core::option::Option<f64>,
+    #[serde(default = "::core::default::Default::default")]
     pub covariance: ::indexmap::IndexMap<::oxsearch_core::Field, f64>,
+    #[serde(default = "::core::default::Default::default")]
     pub correlation: ::indexmap::IndexMap<::oxsearch_core::Field, f64>,
 }
 
@@ -9630,12 +9772,12 @@ impl MatrixStatsFields {
         correlation: impl ::core::convert::Into<::indexmap::IndexMap<::oxsearch_core::Field, f64>>,
     ) -> Self {
         Self {
-            name: name.into(),
-            count: count.into(),
-            mean: mean.into(),
-            variance: variance.into(),
-            skewness: skewness.into(),
-            kurtosis: kurtosis.into(),
+            name: ::core::option::Option::Some(name.into()),
+            count: ::core::option::Option::Some(count.into()),
+            mean: ::core::option::Option::Some(mean.into()),
+            variance: ::core::option::Option::Some(variance.into()),
+            skewness: ::core::option::Option::Some(skewness.into()),
+            kurtosis: ::core::option::Option::Some(kurtosis.into()),
             covariance: covariance.into(),
             correlation: correlation.into(),
         }
@@ -9651,6 +9793,7 @@ pub struct MaxAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -9788,6 +9931,7 @@ pub struct MedianAbsoluteDeviationAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -9949,6 +10093,7 @@ pub struct MinAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -10152,7 +10297,8 @@ impl<'de> ::serde::Deserialize<'de> for MinimumInterval {
 pub struct MissingAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -10163,7 +10309,7 @@ impl MissingAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -10838,7 +10984,8 @@ impl<'de> ::serde::Deserialize<'de> for MultiTermLookup {
 pub struct MultiTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::MultiTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::MultiTermsBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -10852,7 +10999,7 @@ impl MultiTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
             sum_other_doc_count: ::core::option::Option::None,
         }
@@ -10904,6 +11051,7 @@ pub struct MultiTermsAggregation {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub size: ::core::option::Option<i32>,
     /// The field from which to generate sets of terms.
+    #[serde(default = "::core::default::Default::default")]
     pub terms: ::std::vec::Vec<crate::MultiTermLookup>,
 }
 
@@ -10967,7 +11115,9 @@ impl MultiTermsAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct MultiTermsBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(default = "::core::default::Default::default")]
     pub key: ::std::vec::Vec<::oxsearch_core::FieldValue>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
@@ -10985,7 +11135,7 @@ impl MultiTermsBucket {
         key: impl ::core::convert::Into<::std::vec::Vec<::oxsearch_core::FieldValue>>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key: key.into(),
             key_as_string: ::core::option::Option::None,
             doc_count_error_upper_bound: ::core::option::Option::None,
@@ -11049,7 +11199,8 @@ impl MutualInformationHeuristic {
 pub struct NestedAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -11060,7 +11211,7 @@ impl NestedAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -11102,9 +11253,12 @@ impl NestedAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct NonStationary {
-    pub p_value: f64,
-    pub r_value: f64,
-    pub trend: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub p_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub trend: ::core::option::Option<::std::string::String>,
 }
 
 impl NonStationary {
@@ -11115,9 +11269,9 @@ impl NonStationary {
         trend: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
-            p_value: p_value.into(),
-            r_value: r_value.into(),
-            trend: trend.into(),
+            p_value: ::core::option::Option::Some(p_value.into()),
+            r_value: ::core::option::Option::Some(r_value.into()),
+            trend: ::core::option::Option::Some(trend.into()),
         }
     }
 }
@@ -11285,7 +11439,8 @@ impl PValueHeuristic {
 pub struct ParentAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -11296,7 +11451,7 @@ impl ParentAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -11634,7 +11789,8 @@ impl PercentilesAggregation {
 pub struct PercentilesBucketAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub values: crate::Percentiles,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub values: ::core::option::Option<crate::Percentiles>,
 }
 
 impl PercentilesBucketAggregate {
@@ -11642,7 +11798,7 @@ impl PercentilesBucketAggregate {
     pub fn new(values: impl ::core::convert::Into<crate::Percentiles>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            values: values.into(),
+            values: ::core::option::Option::Some(values.into()),
         }
     }
 }
@@ -11758,7 +11914,8 @@ pub struct RandomSamplerAggregation {
     /// The probability that a document will be included in the aggregated data.
     /// Must be greater than 0, less than 0.5, or exactly 1.
     /// The lower the probability, the fewer documents are matched.
-    pub probability: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub probability: ::core::option::Option<f64>,
     /// The seed to generate the random sampling of documents.
     /// When a seed is provided, the random subset of documents is the same between calls.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -11772,7 +11929,7 @@ impl RandomSamplerAggregation {
     /// A `RandomSamplerAggregation` with its required properties set.
     pub fn new(probability: f64) -> Self {
         Self {
-            probability: probability.into(),
+            probability: ::core::option::Option::Some(probability.into()),
             seed: ::core::option::Option::None,
             shard_seed: ::core::option::Option::None,
         }
@@ -11797,7 +11954,8 @@ impl RandomSamplerAggregation {
 pub struct RangeAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::RangeBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::RangeBucket>>,
 }
 
 impl RangeAggregate {
@@ -11805,7 +11963,7 @@ impl RangeAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<crate::RangeBucket>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -11893,7 +12051,8 @@ impl RangeAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct RangeBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub from: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -11914,7 +12073,7 @@ impl RangeBucket {
     /// A `RangeBucket` with its required properties set.
     pub fn new(doc_count: i64) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             from: ::core::option::Option::None,
             to: ::core::option::Option::None,
             from_as_string: ::core::option::Option::None,
@@ -12047,7 +12206,8 @@ impl RareTermsAggregation {
 pub struct RateAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub value: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
 }
@@ -12057,7 +12217,7 @@ impl RateAggregate {
     pub fn new(value: f64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            value: value.into(),
+            value: ::core::option::Option::Some(value.into()),
             value_as_string: ::core::option::Option::None,
         }
     }
@@ -12207,7 +12367,8 @@ impl<'de> ::serde::Deserialize<'de> for RateMode {
 pub struct ReverseNestedAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -12218,7 +12379,7 @@ impl ReverseNestedAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -12263,7 +12424,8 @@ impl ReverseNestedAggregation {
 pub struct SamplerAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -12274,7 +12436,7 @@ impl SamplerAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -12372,14 +12534,15 @@ impl<'de> ::serde::Deserialize<'de> for SamplerAggregationExecutionHint {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct ScriptedHeuristic {
-    pub script: ::oxsearch_core::Script,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub script: ::core::option::Option<::oxsearch_core::Script>,
 }
 
 impl ScriptedHeuristic {
     /// A `ScriptedHeuristic` with its required properties set.
     pub fn new(script: impl ::core::convert::Into<::oxsearch_core::Script>) -> Self {
         Self {
-            script: script.into(),
+            script: ::core::option::Option::Some(script.into()),
         }
     }
 }
@@ -12391,7 +12554,8 @@ impl ScriptedHeuristic {}
 pub struct ScriptedMetricAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub value: ::serde_json::Value,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub value: ::core::option::Option<::serde_json::Value>,
 }
 
 impl ScriptedMetricAggregate {
@@ -12399,7 +12563,7 @@ impl ScriptedMetricAggregate {
     pub fn new(value: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            value: value.into(),
+            value: ::core::option::Option::Some(value.into()),
         }
     }
 }
@@ -12585,7 +12749,8 @@ impl SerialDifferencingAggregation {
 pub struct SignificantLongTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::SignificantLongTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::SignificantLongTermsBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub bg_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -12599,7 +12764,7 @@ impl SignificantLongTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             bg_count: ::core::option::Option::None,
             doc_count: ::core::option::Option::None,
         }
@@ -12627,10 +12792,14 @@ impl SignificantLongTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SignificantLongTermsBucket {
-    pub doc_count: i64,
-    pub score: f64,
-    pub bg_count: i64,
-    pub key: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub score: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub bg_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub key_as_string: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
@@ -12642,10 +12811,10 @@ impl SignificantLongTermsBucket {
     /// A `SignificantLongTermsBucket` with its required properties set.
     pub fn new(doc_count: i64, score: f64, bg_count: i64, key: i64) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            score: score.into(),
-            bg_count: bg_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            score: ::core::option::Option::Some(score.into()),
+            bg_count: ::core::option::Option::Some(bg_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             key_as_string: ::core::option::Option::None,
             aggregations: ::core::default::Default::default(),
         }
@@ -12668,7 +12837,8 @@ impl SignificantLongTermsBucket {
 pub struct SignificantStringTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::SignificantStringTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::SignificantStringTermsBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub bg_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -12682,7 +12852,7 @@ impl SignificantStringTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             bg_count: ::core::option::Option::None,
             doc_count: ::core::option::Option::None,
         }
@@ -12710,10 +12880,14 @@ impl SignificantStringTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SignificantStringTermsBucket {
-    pub doc_count: i64,
-    pub score: f64,
-    pub bg_count: i64,
-    pub key: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub score: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub bg_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -12728,10 +12902,10 @@ impl SignificantStringTermsBucket {
         key: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            score: score.into(),
-            bg_count: bg_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            score: ::core::option::Option::Some(score.into()),
+            bg_count: ::core::option::Option::Some(bg_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -13209,7 +13383,8 @@ pub struct SimpleMovingAverageAggregation {
     pub predict: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub window: ::core::option::Option<i32>,
-    pub settings: ::oxsearch_core::EmptyObject,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub settings: ::core::option::Option<::oxsearch_core::EmptyObject>,
 }
 
 impl SimpleMovingAverageAggregation {
@@ -13222,7 +13397,7 @@ impl SimpleMovingAverageAggregation {
             minimize: ::core::option::Option::None,
             predict: ::core::option::Option::None,
             window: ::core::option::Option::None,
-            settings: settings.into(),
+            settings: ::core::option::Option::Some(settings.into()),
         }
     }
 }
@@ -13267,6 +13442,7 @@ pub struct SimpleValueAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -13372,16 +13548,18 @@ impl SingleMetricAggregateBase {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct Spike {
-    pub p_value: f64,
-    pub change_point: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub p_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub change_point: ::core::option::Option<i32>,
 }
 
 impl Spike {
     /// A `Spike` with its required properties set.
     pub fn new(p_value: f64, change_point: i32) -> Self {
         Self {
-            p_value: p_value.into(),
-            change_point: change_point.into(),
+            p_value: ::core::option::Option::Some(p_value.into()),
+            change_point: ::core::option::Option::Some(change_point.into()),
         }
     }
 }
@@ -13391,11 +13569,17 @@ impl Spike {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct StandardDeviationBounds {
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub upper: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub lower: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub upper_population: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub lower_population: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub upper_sampling: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub lower_sampling: ::core::option::Option<f64>,
 }
 
@@ -13425,12 +13609,18 @@ impl StandardDeviationBounds {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct StandardDeviationBoundsAsString {
-    pub upper: ::std::string::String,
-    pub lower: ::std::string::String,
-    pub upper_population: ::std::string::String,
-    pub lower_population: ::std::string::String,
-    pub upper_sampling: ::std::string::String,
-    pub lower_sampling: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub upper: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub lower: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub upper_population: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub lower_population: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub upper_sampling: ::core::option::Option<::std::string::String>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub lower_sampling: ::core::option::Option<::std::string::String>,
 }
 
 impl StandardDeviationBoundsAsString {
@@ -13444,12 +13634,12 @@ impl StandardDeviationBoundsAsString {
         lower_sampling: impl ::core::convert::Into<::std::string::String>,
     ) -> Self {
         Self {
-            upper: upper.into(),
-            lower: lower.into(),
-            upper_population: upper_population.into(),
-            lower_population: lower_population.into(),
-            upper_sampling: upper_sampling.into(),
-            lower_sampling: lower_sampling.into(),
+            upper: ::core::option::Option::Some(upper.into()),
+            lower: ::core::option::Option::Some(lower.into()),
+            upper_population: ::core::option::Option::Some(upper_population.into()),
+            lower_population: ::core::option::Option::Some(lower_population.into()),
+            upper_sampling: ::core::option::Option::Some(upper_sampling.into()),
+            lower_sampling: ::core::option::Option::Some(lower_sampling.into()),
         }
     }
 }
@@ -13476,11 +13666,16 @@ impl Stationary {}
 pub struct StatsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub max: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg: ::core::option::Option<f64>,
-    pub sum: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub sum: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -13502,11 +13697,11 @@ impl StatsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             min: min.into(),
             max: max.into(),
             avg: avg.into(),
-            sum: sum.into(),
+            sum: ::core::option::Option::Some(sum.into()),
             min_as_string: ::core::option::Option::None,
             max_as_string: ::core::option::Option::None,
             avg_as_string: ::core::option::Option::None,
@@ -13614,11 +13809,16 @@ impl StatsAggregation {
 pub struct StatsBucketAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub max: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg: ::core::option::Option<f64>,
-    pub sum: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub sum: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -13640,11 +13840,11 @@ impl StatsBucketAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             min: min.into(),
             max: max.into(),
             avg: avg.into(),
-            sum: sum.into(),
+            sum: ::core::option::Option::Some(sum.into()),
             min_as_string: ::core::option::Option::None,
             max_as_string: ::core::option::Option::None,
             avg_as_string: ::core::option::Option::None,
@@ -13740,16 +13940,18 @@ impl StatsBucketAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct StepChange {
-    pub p_value: f64,
-    pub change_point: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub p_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub change_point: ::core::option::Option<i32>,
 }
 
 impl StepChange {
     /// A `StepChange` with its required properties set.
     pub fn new(p_value: f64, change_point: i32) -> Self {
         Self {
-            p_value: p_value.into(),
-            change_point: change_point.into(),
+            p_value: ::core::option::Option::Some(p_value.into()),
+            change_point: ::core::option::Option::Some(change_point.into()),
         }
     }
 }
@@ -13762,7 +13964,8 @@ impl StepChange {}
 pub struct StringRareTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::StringRareTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::StringRareTermsBucket>>,
 }
 
 impl StringRareTermsAggregate {
@@ -13772,7 +13975,7 @@ impl StringRareTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -13788,8 +13991,10 @@ impl StringRareTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct StringRareTermsBucket {
-    pub doc_count: i64,
-    pub key: ::std::string::String,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::std::string::String>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -13799,8 +14004,8 @@ impl StringRareTermsBucket {
     /// A `StringRareTermsBucket` with its required properties set.
     pub fn new(doc_count: i64, key: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            key: key.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -13813,10 +14018,15 @@ impl StringRareTermsBucket {}
 pub struct StringStatsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_length: ::core::option::Option<i32>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub max_length: ::core::option::Option<i32>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub avg_length: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub entropy: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub distribution: ::core::option::Option<::indexmap::IndexMap<::std::string::String, f64>>,
@@ -13839,7 +14049,7 @@ impl StringStatsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            count: count.into(),
+            count: ::core::option::Option::Some(count.into()),
             min_length: min_length.into(),
             max_length: max_length.into(),
             avg_length: avg_length.into(),
@@ -13953,7 +14163,8 @@ impl StringStatsAggregation {
 pub struct StringTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::StringTermsBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::StringTermsBucket>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -13967,7 +14178,7 @@ impl StringTermsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
             sum_other_doc_count: ::core::option::Option::None,
         }
@@ -13995,10 +14206,12 @@ impl StringTermsAggregate {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct StringTermsBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
-    pub key: ::oxsearch_core::FieldValue,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<::oxsearch_core::FieldValue>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -14011,9 +14224,9 @@ impl StringTermsBucket {
         key: impl ::core::convert::Into<::oxsearch_core::FieldValue>,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
-            key: key.into(),
+            key: ::core::option::Option::Some(key.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -14035,6 +14248,7 @@ pub struct SumAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -14260,7 +14474,8 @@ impl<'de> ::serde::Deserialize<'de> for TDigestExecutionHint {
 pub struct TDigestPercentileRanksAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub values: crate::Percentiles,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub values: ::core::option::Option<crate::Percentiles>,
 }
 
 impl TDigestPercentileRanksAggregate {
@@ -14268,7 +14483,7 @@ impl TDigestPercentileRanksAggregate {
     pub fn new(values: impl ::core::convert::Into<crate::Percentiles>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            values: values.into(),
+            values: ::core::option::Option::Some(values.into()),
         }
     }
 }
@@ -14286,7 +14501,8 @@ impl TDigestPercentileRanksAggregate {
 pub struct TDigestPercentilesAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub values: crate::Percentiles,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub values: ::core::option::Option<crate::Percentiles>,
 }
 
 impl TDigestPercentilesAggregate {
@@ -14294,7 +14510,7 @@ impl TDigestPercentilesAggregate {
     pub fn new(values: impl ::core::convert::Into<crate::Percentiles>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            values: values.into(),
+            values: ::core::option::Option::Some(values.into()),
         }
     }
 }
@@ -14312,6 +14528,7 @@ impl TDigestPercentilesAggregate {
 pub struct TTestAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -14899,17 +15116,19 @@ impl ::core::convert::From<&str> for TermsInclude {
 #[non_exhaustive]
 pub struct TermsPartition {
     /// The number of partitions.
-    pub num_partitions: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub num_partitions: ::core::option::Option<i64>,
     /// The partition number for this request.
-    pub partition: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub partition: ::core::option::Option<i64>,
 }
 
 impl TermsPartition {
     /// A `TermsPartition` with its required properties set.
     pub fn new(num_partitions: i64, partition: i64) -> Self {
         Self {
-            num_partitions: num_partitions.into(),
-            partition: partition.into(),
+            num_partitions: ::core::option::Option::Some(num_partitions.into()),
+            partition: ::core::option::Option::Some(partition.into()),
         }
     }
 }
@@ -14920,7 +15139,8 @@ impl TermsPartition {}
 #[non_exhaustive]
 pub struct TestPopulation {
     /// The field to aggregate.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub script: ::core::option::Option<::oxsearch_core::Script>,
     /// A filter used to define a set of records to run unpaired t-test on.
@@ -14932,7 +15152,7 @@ impl TestPopulation {
     /// A `TestPopulation` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
             script: ::core::option::Option::None,
             filter: ::core::option::Option::None,
         }
@@ -14960,7 +15180,8 @@ impl TestPopulation {
 pub struct TimeSeriesAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::TimeSeriesBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::TimeSeriesBucket>>,
 }
 
 impl TimeSeriesAggregate {
@@ -14970,7 +15191,7 @@ impl TimeSeriesAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -15020,7 +15241,9 @@ impl TimeSeriesAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TimeSeriesBucket {
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(default = "::core::default::Default::default")]
     pub key: ::indexmap::IndexMap<::oxsearch_core::Field, ::oxsearch_core::FieldValue>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
@@ -15036,7 +15259,7 @@ impl TimeSeriesBucket {
         >,
     ) -> Self {
         Self {
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             key: key.into(),
             aggregations: ::core::default::Default::default(),
         }
@@ -15050,7 +15273,8 @@ impl TimeSeriesBucket {}
 pub struct TopHitsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub hits: ::oxsearch_search::search::HitsMetadata<::serde_json::Value>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub hits: ::core::option::Option<::oxsearch_search::search::HitsMetadata<::serde_json::Value>>,
 }
 
 impl TopHitsAggregate {
@@ -15060,7 +15284,7 @@ impl TopHitsAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            hits: hits.into(),
+            hits: ::core::option::Option::Some(hits.into()),
         }
     }
 }
@@ -15267,7 +15491,9 @@ impl TopHitsAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TopMetrics {
+    #[serde(default = "::core::default::Default::default")]
     pub sort: ::std::vec::Vec<::core::option::Option<::oxsearch_core::FieldValue>>,
+    #[serde(default = "::core::default::Default::default")]
     pub metrics: ::indexmap::IndexMap<
         ::std::string::String,
         ::core::option::Option<::oxsearch_core::FieldValue>,
@@ -15301,6 +15527,7 @@ impl TopMetrics {}
 pub struct TopMetricsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
+    #[serde(default = "::core::default::Default::default")]
     pub top: ::std::vec::Vec<crate::TopMetrics>,
 }
 
@@ -15402,14 +15629,15 @@ impl TopMetricsAggregation {
 #[non_exhaustive]
 pub struct TopMetricsValue {
     /// A field to return as a metric.
-    pub field: ::oxsearch_core::Field,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub field: ::core::option::Option<::oxsearch_core::Field>,
 }
 
 impl TopMetricsValue {
     /// A `TopMetricsValue` with its required properties set.
     pub fn new(field: impl ::core::convert::Into<::oxsearch_core::Field>) -> Self {
         Self {
-            field: field.into(),
+            field: ::core::option::Option::Some(field.into()),
         }
     }
 }
@@ -15419,18 +15647,21 @@ impl TopMetricsValue {}
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct TrendChange {
-    pub p_value: f64,
-    pub r_value: f64,
-    pub change_point: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub p_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub r_value: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub change_point: ::core::option::Option<i32>,
 }
 
 impl TrendChange {
     /// A `TrendChange` with its required properties set.
     pub fn new(p_value: f64, r_value: f64, change_point: i32) -> Self {
         Self {
-            p_value: p_value.into(),
-            r_value: r_value.into(),
-            change_point: change_point.into(),
+            p_value: ::core::option::Option::Some(p_value.into()),
+            r_value: ::core::option::Option::Some(r_value.into()),
+            change_point: ::core::option::Option::Some(change_point.into()),
         }
     }
 }
@@ -15443,7 +15674,8 @@ impl TrendChange {}
 pub struct UnmappedRareTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<()>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<()>>,
 }
 
 impl UnmappedRareTermsAggregate {
@@ -15451,7 +15683,7 @@ impl UnmappedRareTermsAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<()>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -15469,7 +15701,8 @@ impl UnmappedRareTermsAggregate {
 pub struct UnmappedSamplerAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub doc_count: i64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
     /// Properties the specification doesn't name.
     #[serde(flatten)]
     pub aggregations: ::oxsearch_core::shapes::TypedKeys<crate::Aggregate>,
@@ -15480,7 +15713,7 @@ impl UnmappedSamplerAggregate {
     pub fn new(doc_count: i64) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            doc_count: doc_count.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
             aggregations: ::core::default::Default::default(),
         }
     }
@@ -15500,7 +15733,8 @@ impl UnmappedSamplerAggregate {
 pub struct UnmappedSignificantTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<()>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<()>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub bg_count: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -15512,7 +15746,7 @@ impl UnmappedSignificantTermsAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<()>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             bg_count: ::core::option::Option::None,
             doc_count: ::core::option::Option::None,
         }
@@ -15543,7 +15777,8 @@ impl UnmappedSignificantTermsAggregate {
 pub struct UnmappedTermsAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<()>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<()>>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub doc_count_error_upper_bound: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -15555,7 +15790,7 @@ impl UnmappedTermsAggregate {
     pub fn new(buckets: impl ::core::convert::Into<crate::Buckets<()>>) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
             doc_count_error_upper_bound: ::core::option::Option::None,
             sum_other_doc_count: ::core::option::Option::None,
         }
@@ -15588,6 +15823,7 @@ pub struct ValueCountAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,
@@ -15761,7 +15997,8 @@ impl<'de> ::serde::Deserialize<'de> for ValueType {
 pub struct VariableWidthHistogramAggregate {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
-    pub buckets: crate::Buckets<crate::VariableWidthHistogramBucket>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub buckets: ::core::option::Option<crate::Buckets<crate::VariableWidthHistogramBucket>>,
 }
 
 impl VariableWidthHistogramAggregate {
@@ -15771,7 +16008,7 @@ impl VariableWidthHistogramAggregate {
     ) -> Self {
         Self {
             meta: ::core::option::Option::None,
-            buckets: buckets.into(),
+            buckets: ::core::option::Option::Some(buckets.into()),
         }
     }
 }
@@ -15849,10 +16086,14 @@ impl VariableWidthHistogramAggregation {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct VariableWidthHistogramBucket {
-    pub doc_count: i64,
-    pub min: f64,
-    pub key: f64,
-    pub max: f64,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub doc_count: ::core::option::Option<i64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub min: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub key: ::core::option::Option<f64>,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub max: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub min_as_string: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -15868,10 +16109,10 @@ impl VariableWidthHistogramBucket {
     /// A `VariableWidthHistogramBucket` with its required properties set.
     pub fn new(doc_count: i64, min: f64, key: f64, max: f64) -> Self {
         Self {
-            doc_count: doc_count.into(),
-            min: min.into(),
-            key: key.into(),
-            max: max.into(),
+            doc_count: ::core::option::Option::Some(doc_count.into()),
+            min: ::core::option::Option::Some(min.into()),
+            key: ::core::option::Option::Some(key.into()),
+            max: ::core::option::Option::Some(max.into()),
             min_as_string: ::core::option::Option::None,
             key_as_string: ::core::option::Option::None,
             max_as_string: ::core::option::Option::None,
@@ -16011,6 +16252,7 @@ pub struct WeightedAvgAggregate {
     pub meta: ::core::option::Option<::oxsearch_core::Metadata>,
     /// The metric value. A missing value generally means that there was no data to aggregate,
     /// unless specified otherwise.
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value: ::core::option::Option<f64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub value_as_string: ::core::option::Option<::std::string::String>,

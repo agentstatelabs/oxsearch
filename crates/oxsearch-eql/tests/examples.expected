@@ -1,0 +1,5 @@
+4 exact, 0 normalized, 0 failing
+eql.get_status response EqlGetStatusResponseExample1: exact
+eql.search request EqlSearchRequestExample1: exact
+eql.search request EqlSearchRequestExample2: exact
+eql.search response EqlSearchResponseExample2: exact
