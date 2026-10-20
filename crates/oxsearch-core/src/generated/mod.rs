@@ -4320,11 +4320,11 @@ impl<'de> ::serde::Deserialize<'de> for Level {
 #[non_exhaustive]
 pub enum LifecycleOperationMode {
     /// `RUNNING`
-    RUNNING,
+    Running,
     /// `STOPPING`
-    STOPPING,
+    Stopping,
     /// `STOPPED`
-    STOPPED,
+    Stopped,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -4333,9 +4333,9 @@ impl LifecycleOperationMode {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::RUNNING => "RUNNING",
-            Self::STOPPING => "STOPPING",
-            Self::STOPPED => "STOPPED",
+            Self::Running => "RUNNING",
+            Self::Stopping => "STOPPING",
+            Self::Stopped => "STOPPED",
             Self::Raw(value) => value,
         }
     }
@@ -4343,9 +4343,9 @@ impl LifecycleOperationMode {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "RUNNING" => ::core::option::Option::Some(Self::RUNNING),
-            "STOPPING" => ::core::option::Option::Some(Self::STOPPING),
-            "STOPPED" => ::core::option::Option::Some(Self::STOPPED),
+            "RUNNING" => ::core::option::Option::Some(Self::Running),
+            "STOPPING" => ::core::option::Option::Some(Self::Stopping),
+            "STOPPED" => ::core::option::Option::Some(Self::Stopped),
             _ => ::core::option::Option::None,
         }
     }

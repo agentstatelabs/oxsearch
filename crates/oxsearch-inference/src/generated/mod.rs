@@ -2314,11 +2314,11 @@ impl<'de> ::serde::Deserialize<'de> for CohereTaskType {
 #[non_exhaustive]
 pub enum CohereTruncateType {
     /// `END`
-    END,
+    End,
     /// `NONE`
-    NONE,
+    None,
     /// `START`
-    START,
+    Start,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -2327,9 +2327,9 @@ impl CohereTruncateType {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::END => "END",
-            Self::NONE => "NONE",
-            Self::START => "START",
+            Self::End => "END",
+            Self::None => "NONE",
+            Self::Start => "START",
             Self::Raw(value) => value,
         }
     }
@@ -2337,9 +2337,9 @@ impl CohereTruncateType {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "END" => ::core::option::Option::Some(Self::END),
-            "NONE" => ::core::option::Option::Some(Self::NONE),
-            "START" => ::core::option::Option::Some(Self::START),
+            "END" => ::core::option::Option::Some(Self::End),
+            "NONE" => ::core::option::Option::Some(Self::None),
+            "START" => ::core::option::Option::Some(Self::Start),
             _ => ::core::option::Option::None,
         }
     }

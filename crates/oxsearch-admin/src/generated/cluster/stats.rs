@@ -2508,21 +2508,21 @@ impl SearchUsageStats {}
 #[non_exhaustive]
 pub enum ShardState {
     /// `INIT`
-    INIT,
+    Init,
     /// `SUCCESS`
-    SUCCESS,
+    Success,
     /// `FAILED`
-    FAILED,
+    Failed,
     /// `ABORTED`
-    ABORTED,
+    Aborted,
     /// `MISSING`
-    MISSING,
+    Missing,
     /// `WAITING`
-    WAITING,
+    Waiting,
     /// `QUEUED`
-    QUEUED,
+    Queued,
     /// `PAUSED_FOR_NODE_REMOVAL`
-    PAUSEDFORNODEREMOVAL,
+    PausedForNodeRemoval,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -2531,14 +2531,14 @@ impl ShardState {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::INIT => "INIT",
-            Self::SUCCESS => "SUCCESS",
-            Self::FAILED => "FAILED",
-            Self::ABORTED => "ABORTED",
-            Self::MISSING => "MISSING",
-            Self::WAITING => "WAITING",
-            Self::QUEUED => "QUEUED",
-            Self::PAUSEDFORNODEREMOVAL => "PAUSED_FOR_NODE_REMOVAL",
+            Self::Init => "INIT",
+            Self::Success => "SUCCESS",
+            Self::Failed => "FAILED",
+            Self::Aborted => "ABORTED",
+            Self::Missing => "MISSING",
+            Self::Waiting => "WAITING",
+            Self::Queued => "QUEUED",
+            Self::PausedForNodeRemoval => "PAUSED_FOR_NODE_REMOVAL",
             Self::Raw(value) => value,
         }
     }
@@ -2546,14 +2546,14 @@ impl ShardState {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "INIT" => ::core::option::Option::Some(Self::INIT),
-            "SUCCESS" => ::core::option::Option::Some(Self::SUCCESS),
-            "FAILED" => ::core::option::Option::Some(Self::FAILED),
-            "ABORTED" => ::core::option::Option::Some(Self::ABORTED),
-            "MISSING" => ::core::option::Option::Some(Self::MISSING),
-            "WAITING" => ::core::option::Option::Some(Self::WAITING),
-            "QUEUED" => ::core::option::Option::Some(Self::QUEUED),
-            "PAUSED_FOR_NODE_REMOVAL" => ::core::option::Option::Some(Self::PAUSEDFORNODEREMOVAL),
+            "INIT" => ::core::option::Option::Some(Self::Init),
+            "SUCCESS" => ::core::option::Option::Some(Self::Success),
+            "FAILED" => ::core::option::Option::Some(Self::Failed),
+            "ABORTED" => ::core::option::Option::Some(Self::Aborted),
+            "MISSING" => ::core::option::Option::Some(Self::Missing),
+            "WAITING" => ::core::option::Option::Some(Self::Waiting),
+            "QUEUED" => ::core::option::Option::Some(Self::Queued),
+            "PAUSED_FOR_NODE_REMOVAL" => ::core::option::Option::Some(Self::PausedForNodeRemoval),
             _ => ::core::option::Option::None,
         }
     }

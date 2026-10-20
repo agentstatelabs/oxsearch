@@ -45,6 +45,22 @@ pub fn snake(wire: &str) -> String {
 
 /// A type or variant name: `PascalCase`.
 pub fn pascal(wire: &str) -> String {
+    // A word in capitals is one word, as an acronym is in Rust's names:
+    // `RUNNING` is `Running` and `BM25` is `Bm25`.
+    let wire: String = wire
+        .split_inclusive(|c: char| !c.is_ascii_alphanumeric())
+        .map(|word| {
+            if word.chars().any(|c| c.is_ascii_lowercase()) {
+                return word.to_owned();
+            }
+            let mut chars = word.chars();
+            chars.next().map_or_else(String::new, |first| {
+                std::iter::once(first)
+                    .chain(chars.map(|c| c.to_ascii_lowercase()))
+                    .collect()
+            })
+        })
+        .collect();
     let mut out = String::new();
     let mut upper = true;
     for c in wire.chars() {
@@ -165,6 +181,11 @@ mod tests {
 
     #[test]
     fn pascal_names() {
+        assert_eq!(pascal("RUNNING"), "Running");
+        assert_eq!(pascal("PAUSED_FOR_NODE_REMOVAL"), "PausedForNodeRemoval");
+        assert_eq!(pascal("BM25"), "Bm25");
+        assert_eq!(pascal("LMDirichlet"), "LMDirichlet");
+        assert_eq!(pascal("GET"), "Get");
         assert_eq!(pascal("match_phrase"), "MatchPhrase");
         assert_eq!(pascal("geo_distance"), "GeoDistance");
         assert_eq!(pascal("text"), "Text");
