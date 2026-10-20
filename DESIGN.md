@@ -282,7 +282,7 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 
 1. ~~**Version numbers.**~~ Decided: 0.N, with the specification branch each release is generated from recorded in the README and the changelog (the user, 2026-10-15). 0.1 and 0.2 are generated from the 9.5 branch.
 2. ~~**The specification model.** Reuse `clients_schema` from the specification repository, or read `schema.json` with our own model?~~ Decided in Phase 0: our own model (§4.2).
-3. **The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?
+3. ~~**The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?~~ Decided: 8.19, through compatibility headers (the user, 2026-10-20). Phase 2's version matrix builds it and tests it against an 8.19 fixture. Until then requests send plain media types, and only Elasticsearch 9 is tested.
 4. **Serverless.** Generate a serverless profile from `schema-serverless.json`, or only document availability?
 5. ~~**MSRV**~~ Decided: Rust 1.95 for the whole workspace, which `rig-core` 0.44 needs for `oxsearch-rig` (the user, 2026-10-15; it was 1.94, oxtel's). Still open: whether `oxsearch-transport-reqwest` is on by default. With reqwest's rustls (aws-lc-rs), the transport adds about 15 s to a clean build, more than all the generated crates of the first slice together.
 6. ~~**Required properties in responses.** Read strictly, or tolerate a missing one?~~ Decided: tolerate (§4.2).
