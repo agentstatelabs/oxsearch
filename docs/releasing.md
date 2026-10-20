@@ -21,5 +21,10 @@ steps, as for oxtel:
    cargo publish --workspace
    ```
 
+   crates.io lets an account publish a few new crates at once, then about
+   one every ten minutes, so a release with new crates stops with a 429
+   partway. Publish the rest one at a time, in dependency order, as the
+   limit allows (`cargo publish -p <crate>` from the tag).
+
 6. Create the GitHub release from the tag, with the changelog's section for
    the version as its notes.

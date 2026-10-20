@@ -55,29 +55,29 @@ beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta
 experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental", "oxsearch-async-search?/experimental", "oxsearch-eql?/experimental", "oxsearch-sql?/experimental", "oxsearch-search-application?/experimental", "oxsearch-enrich?/experimental"]
 
 [dependencies]
-oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
-oxsearch-search = { path = "../oxsearch-search", version = "0.1.0", optional = true }
-oxsearch-docs = { path = "../oxsearch-docs", version = "0.1.0", optional = true }
-oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.1.0", optional = true }
-oxsearch-inference = { path = "../oxsearch-inference", version = "0.1.0", optional = true }
-oxsearch-admin = { path = "../oxsearch-admin", version = "0.1.0", optional = true }
-oxsearch-esql = { path = "../oxsearch-esql", version = "0.1.0", optional = true }
-oxsearch-ingest = { path = "../oxsearch-ingest", version = "0.1.0", optional = true }
-oxsearch-license = { path = "../oxsearch-license", version = "0.1.0", optional = true }
-oxsearch-query-rules = { path = "../oxsearch-query-rules", version = "0.1.0", optional = true }
-oxsearch-synonyms = { path = "../oxsearch-synonyms", version = "0.1.0", optional = true }
-oxsearch-snapshot = { path = "../oxsearch-snapshot", version = "0.1.0", optional = true }
-oxsearch-ilm = { path = "../oxsearch-ilm", version = "0.1.0", optional = true }
-oxsearch-async-search = { path = "../oxsearch-async-search", version = "0.1.0", optional = true }
-oxsearch-eql = { path = "../oxsearch-eql", version = "0.1.0", optional = true }
-oxsearch-sql = { path = "../oxsearch-sql", version = "0.1.0", optional = true }
-oxsearch-search-application = { path = "../oxsearch-search-application", version = "0.1.0", optional = true }
-oxsearch-enrich = { path = "../oxsearch-enrich", version = "0.1.0", optional = true }
-oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.1.0", optional = true }
-oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0", optional = true }
-oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.1.0", optional = true }
-oxsearch-derive = { path = "../oxsearch-derive", version = "0.1.0", optional = true }
-oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.1.0", optional = true }
+oxsearch-core = { path = "../oxsearch-core", version = "0.2.0" }
+oxsearch-search = { path = "../oxsearch-search", version = "0.2.0", optional = true }
+oxsearch-docs = { path = "../oxsearch-docs", version = "0.2.0", optional = true }
+oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.2.0", optional = true }
+oxsearch-inference = { path = "../oxsearch-inference", version = "0.2.0", optional = true }
+oxsearch-admin = { path = "../oxsearch-admin", version = "0.2.0", optional = true }
+oxsearch-esql = { path = "../oxsearch-esql", version = "0.2.0", optional = true }
+oxsearch-ingest = { path = "../oxsearch-ingest", version = "0.2.0", optional = true }
+oxsearch-license = { path = "../oxsearch-license", version = "0.2.0", optional = true }
+oxsearch-query-rules = { path = "../oxsearch-query-rules", version = "0.2.0", optional = true }
+oxsearch-synonyms = { path = "../oxsearch-synonyms", version = "0.2.0", optional = true }
+oxsearch-snapshot = { path = "../oxsearch-snapshot", version = "0.2.0", optional = true }
+oxsearch-ilm = { path = "../oxsearch-ilm", version = "0.2.0", optional = true }
+oxsearch-async-search = { path = "../oxsearch-async-search", version = "0.2.0", optional = true }
+oxsearch-eql = { path = "../oxsearch-eql", version = "0.2.0", optional = true }
+oxsearch-sql = { path = "../oxsearch-sql", version = "0.2.0", optional = true }
+oxsearch-search-application = { path = "../oxsearch-search-application", version = "0.2.0", optional = true }
+oxsearch-enrich = { path = "../oxsearch-enrich", version = "0.2.0", optional = true }
+oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.2.0", optional = true }
+oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.2.0", optional = true }
+oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.2.0", optional = true }
+oxsearch-derive = { path = "../oxsearch-derive", version = "0.2.0", optional = true }
+oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.2.0", optional = true }
 serde = "1.0.228"
 serde_json = "1.0.149"
 tokio = { version = "1.53", features = ["rt", "sync", "time", "macros"], optional = true }

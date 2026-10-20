@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.1, the first release.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL, async search, EQL, SQL, ingest pipelines, enrich policies, query rules, synonyms, search applications, snapshots, index lifecycle management and the administration APIs are on `main` for 0.2; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API: 289 endpoints, tested against the specification's own examples, and 183 of them against Elasticsearch 9 on the Basic license and a trial. Security, machine learning, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -50,7 +50,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
 ## What's in it
 
-- **Generated types and endpoints** for every request and response in the first slice, with builders, `Raw` variants for what a newer Elasticsearch adds, and typed errors (license refusals and version conflicts have their own).
+- **Generated types and endpoints** for every request and response in the areas generated so far, with builders, `Raw` variants for what a newer Elasticsearch adds, and typed errors (license refusals and version conflicts have their own).
 - **Aggregations with typed results** (`oxsearch::aggs`, the `aggs` feature): `Agg::terms("category", 10).sub("avg_price", Agg::avg("price"))`, sent with `typed_keys` and read back as `Aggregates`.
 - **ES|QL** (`oxsearch::esql`, the `esql` feature): a typed builder, `Esql::from_index("books").where_(col("year").gte(2020)).sort([col("year").desc()])`, with values sent as parameters, `FORK` and `FUSE`; and rows read into your own structs by column name with `.fetch(&client)`, or as Arrow record batches with `.fetch_arrow(&client)` (the `esql-arrow` feature).
 - **Ingest pipelines** (`oxsearch::ingest`, the `ingest` feature): pipelines built from typed processors (`SetProcessor::new("indexed_by").value(…).into()`), simulated, or run as documents are indexed, including the inference processor that embeds text at index time.
@@ -74,6 +74,7 @@ oxsearch's versions are its own, 0.N while its API settles. Each release is gene
 
 | oxsearch | Specification branch (commit) | Tested against |
 |---|---|---|
+| 0.2 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 | 0.1 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 
 Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch.
@@ -89,7 +90,10 @@ Every API is generated whatever the license; a request for a feature the cluster
 | Fusion on the client (`oxsearch::fusion`) | ✓ | ✓ |
 | `rrf` and `linear` retrievers (server-side fusion) | | ✓ |
 | `rule` and `text_similarity_reranker` retrievers | | ✓ |
-| `semantic_text` with ELSER, and other machine learning models | | ✓ |
+| `semantic_text` with ELSER, and other machine learning models, including the ingest inference processor | | ✓ |
+| ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, ILM, administration | ✓ | ✓ |
+| ES\|QL `FUSE` | | ✓ |
+| Query rules (Enterprise) and search applications (Platinum) | | ✓ |
 
 Elastic's subscription matrix is the authority, and it has moved between releases.
 
