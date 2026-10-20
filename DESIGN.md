@@ -256,15 +256,16 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 - The Rust service implements the same five operations with the same responses: search, get by id, retrieve for chat, retrieve for a listing, and location suggestions.
 - On Basic it uses embeddings from a local model (Ollama), kNN plus BM25, and client-side RRF. With a trial license, the same requests switch to server-side RRF and linear retrievers and `semantic_text`.
 - One trace runs from the Java service through the Rust service to Elasticsearch: the Java agent and oxtel export OTLP to a collector, and the trace appears in Kibana.
-- The service lives in `demo/` in this repo. The Java application stays in its own repository, and the cluster deployment in the cluster's GitOps repository.
+- The service lives in the Java application's repository, beside the code it serves, and depends on oxsearch's released crates like any other project. The cluster deployment lives in the cluster's GitOps repository.
+- The demo is a separate track from the library work, which never waits for it. Passing it is Phase 2's gate (section 8).
 
 ## 8. Plan
 
 | Phase | Scope | Gate |
 |---|---|---|
 | 0 | Workspace and CI; specification ingestion; placement by type graph; serde for the hard shapes; the AI-search slice generated with a minimal transport; integration tests on Basic and trial; compile-time budget | The generator handles the hard shapes cleanly, the slice passes against Elasticsearch 9.x, and the compile time is acceptable |
-| 1 | Transport middleware; telemetry; escape hatches; retriever and query builders; client-side fusion; typed document layer; point-in-time stream and bulk helper; `rig` integration; docs and examples; 0.1 on crates.io | The reference demo runs on 0.1 |
-| 2 | Aggregations; ES|QL; remaining API areas; the rest of the document layer; import/export CLI; version matrix; benchmarks | Outside adopters |
+| 1 | Transport middleware; telemetry; escape hatches; retriever and query builders; client-side fusion; typed document layer; point-in-time stream and bulk helper; `rig` integration; docs and examples; 0.1 on crates.io | 0.1 is released (the reference demo gate moved to Phase 2, 2026-10-20) |
+| 2 | Aggregations; ES|QL; remaining API areas; the rest of the document layer; import/export CLI; version matrix; benchmarks | The reference demo runs on a release; outside adopters |
 
 ## 9. Governance
 
