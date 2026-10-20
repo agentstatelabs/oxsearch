@@ -79,35 +79,35 @@ impl UnassignedInformation {
 #[non_exhaustive]
 pub enum UnassignedInformationReason {
     /// `INDEX_CREATED`
-    INDEXCREATED,
+    IndexCreated,
     /// `CLUSTER_RECOVERED`
-    CLUSTERRECOVERED,
+    ClusterRecovered,
     /// `INDEX_REOPENED`
-    INDEXREOPENED,
+    IndexReopened,
     /// `DANGLING_INDEX_IMPORTED`
-    DANGLINGINDEXIMPORTED,
+    DanglingIndexImported,
     /// `NEW_INDEX_RESTORED`
-    NEWINDEXRESTORED,
+    NewIndexRestored,
     /// `EXISTING_INDEX_RESTORED`
-    EXISTINGINDEXRESTORED,
+    ExistingIndexRestored,
     /// `REPLICA_ADDED`
-    REPLICAADDED,
+    ReplicaAdded,
     /// `ALLOCATION_FAILED`
-    ALLOCATIONFAILED,
+    AllocationFailed,
     /// `NODE_LEFT`
-    NODELEFT,
+    NodeLeft,
     /// `REROUTE_CANCELLED`
-    REROUTECANCELLED,
+    RerouteCancelled,
     /// `REINITIALIZED`
-    REINITIALIZED,
+    Reinitialized,
     /// `REALLOCATED_REPLICA`
-    REALLOCATEDREPLICA,
+    ReallocatedReplica,
     /// `PRIMARY_FAILED`
-    PRIMARYFAILED,
+    PrimaryFailed,
     /// `FORCED_EMPTY_PRIMARY`
-    FORCEDEMPTYPRIMARY,
+    ForcedEmptyPrimary,
     /// `MANUAL_ALLOCATION`
-    MANUALALLOCATION,
+    ManualAllocation,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -116,21 +116,21 @@ impl UnassignedInformationReason {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::INDEXCREATED => "INDEX_CREATED",
-            Self::CLUSTERRECOVERED => "CLUSTER_RECOVERED",
-            Self::INDEXREOPENED => "INDEX_REOPENED",
-            Self::DANGLINGINDEXIMPORTED => "DANGLING_INDEX_IMPORTED",
-            Self::NEWINDEXRESTORED => "NEW_INDEX_RESTORED",
-            Self::EXISTINGINDEXRESTORED => "EXISTING_INDEX_RESTORED",
-            Self::REPLICAADDED => "REPLICA_ADDED",
-            Self::ALLOCATIONFAILED => "ALLOCATION_FAILED",
-            Self::NODELEFT => "NODE_LEFT",
-            Self::REROUTECANCELLED => "REROUTE_CANCELLED",
-            Self::REINITIALIZED => "REINITIALIZED",
-            Self::REALLOCATEDREPLICA => "REALLOCATED_REPLICA",
-            Self::PRIMARYFAILED => "PRIMARY_FAILED",
-            Self::FORCEDEMPTYPRIMARY => "FORCED_EMPTY_PRIMARY",
-            Self::MANUALALLOCATION => "MANUAL_ALLOCATION",
+            Self::IndexCreated => "INDEX_CREATED",
+            Self::ClusterRecovered => "CLUSTER_RECOVERED",
+            Self::IndexReopened => "INDEX_REOPENED",
+            Self::DanglingIndexImported => "DANGLING_INDEX_IMPORTED",
+            Self::NewIndexRestored => "NEW_INDEX_RESTORED",
+            Self::ExistingIndexRestored => "EXISTING_INDEX_RESTORED",
+            Self::ReplicaAdded => "REPLICA_ADDED",
+            Self::AllocationFailed => "ALLOCATION_FAILED",
+            Self::NodeLeft => "NODE_LEFT",
+            Self::RerouteCancelled => "REROUTE_CANCELLED",
+            Self::Reinitialized => "REINITIALIZED",
+            Self::ReallocatedReplica => "REALLOCATED_REPLICA",
+            Self::PrimaryFailed => "PRIMARY_FAILED",
+            Self::ForcedEmptyPrimary => "FORCED_EMPTY_PRIMARY",
+            Self::ManualAllocation => "MANUAL_ALLOCATION",
             Self::Raw(value) => value,
         }
     }
@@ -138,21 +138,21 @@ impl UnassignedInformationReason {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "INDEX_CREATED" => ::core::option::Option::Some(Self::INDEXCREATED),
-            "CLUSTER_RECOVERED" => ::core::option::Option::Some(Self::CLUSTERRECOVERED),
-            "INDEX_REOPENED" => ::core::option::Option::Some(Self::INDEXREOPENED),
-            "DANGLING_INDEX_IMPORTED" => ::core::option::Option::Some(Self::DANGLINGINDEXIMPORTED),
-            "NEW_INDEX_RESTORED" => ::core::option::Option::Some(Self::NEWINDEXRESTORED),
-            "EXISTING_INDEX_RESTORED" => ::core::option::Option::Some(Self::EXISTINGINDEXRESTORED),
-            "REPLICA_ADDED" => ::core::option::Option::Some(Self::REPLICAADDED),
-            "ALLOCATION_FAILED" => ::core::option::Option::Some(Self::ALLOCATIONFAILED),
-            "NODE_LEFT" => ::core::option::Option::Some(Self::NODELEFT),
-            "REROUTE_CANCELLED" => ::core::option::Option::Some(Self::REROUTECANCELLED),
-            "REINITIALIZED" => ::core::option::Option::Some(Self::REINITIALIZED),
-            "REALLOCATED_REPLICA" => ::core::option::Option::Some(Self::REALLOCATEDREPLICA),
-            "PRIMARY_FAILED" => ::core::option::Option::Some(Self::PRIMARYFAILED),
-            "FORCED_EMPTY_PRIMARY" => ::core::option::Option::Some(Self::FORCEDEMPTYPRIMARY),
-            "MANUAL_ALLOCATION" => ::core::option::Option::Some(Self::MANUALALLOCATION),
+            "INDEX_CREATED" => ::core::option::Option::Some(Self::IndexCreated),
+            "CLUSTER_RECOVERED" => ::core::option::Option::Some(Self::ClusterRecovered),
+            "INDEX_REOPENED" => ::core::option::Option::Some(Self::IndexReopened),
+            "DANGLING_INDEX_IMPORTED" => ::core::option::Option::Some(Self::DanglingIndexImported),
+            "NEW_INDEX_RESTORED" => ::core::option::Option::Some(Self::NewIndexRestored),
+            "EXISTING_INDEX_RESTORED" => ::core::option::Option::Some(Self::ExistingIndexRestored),
+            "REPLICA_ADDED" => ::core::option::Option::Some(Self::ReplicaAdded),
+            "ALLOCATION_FAILED" => ::core::option::Option::Some(Self::AllocationFailed),
+            "NODE_LEFT" => ::core::option::Option::Some(Self::NodeLeft),
+            "REROUTE_CANCELLED" => ::core::option::Option::Some(Self::RerouteCancelled),
+            "REINITIALIZED" => ::core::option::Option::Some(Self::Reinitialized),
+            "REALLOCATED_REPLICA" => ::core::option::Option::Some(Self::ReallocatedReplica),
+            "PRIMARY_FAILED" => ::core::option::Option::Some(Self::PrimaryFailed),
+            "FORCED_EMPTY_PRIMARY" => ::core::option::Option::Some(Self::ForcedEmptyPrimary),
+            "MANUAL_ALLOCATION" => ::core::option::Option::Some(Self::ManualAllocation),
             _ => ::core::option::Option::None,
         }
     }

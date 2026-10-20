@@ -368,17 +368,17 @@ impl RecoveryOrigin {
 #[non_exhaustive]
 pub enum RecoveryStage {
     /// Recovery has not started.
-    INIT,
+    Init,
     /// Reading index metadata and copying bytes from source to destination.
-    INDEX,
+    Index,
     /// Verifying the integrity of the index.
-    VERIFYINDEX,
+    VerifyIndex,
     /// Replaying the transaction log.
-    TRANSLOG,
+    Translog,
     /// Cleanup.
-    FINALIZE,
+    Finalize,
     /// Complete.
-    DONE,
+    Done,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -387,12 +387,12 @@ impl RecoveryStage {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::INIT => "INIT",
-            Self::INDEX => "INDEX",
-            Self::VERIFYINDEX => "VERIFY_INDEX",
-            Self::TRANSLOG => "TRANSLOG",
-            Self::FINALIZE => "FINALIZE",
-            Self::DONE => "DONE",
+            Self::Init => "INIT",
+            Self::Index => "INDEX",
+            Self::VerifyIndex => "VERIFY_INDEX",
+            Self::Translog => "TRANSLOG",
+            Self::Finalize => "FINALIZE",
+            Self::Done => "DONE",
             Self::Raw(value) => value,
         }
     }
@@ -400,12 +400,12 @@ impl RecoveryStage {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "INIT" => ::core::option::Option::Some(Self::INIT),
-            "INDEX" => ::core::option::Option::Some(Self::INDEX),
-            "VERIFY_INDEX" => ::core::option::Option::Some(Self::VERIFYINDEX),
-            "TRANSLOG" => ::core::option::Option::Some(Self::TRANSLOG),
-            "FINALIZE" => ::core::option::Option::Some(Self::FINALIZE),
-            "DONE" => ::core::option::Option::Some(Self::DONE),
+            "INIT" => ::core::option::Option::Some(Self::Init),
+            "INDEX" => ::core::option::Option::Some(Self::Index),
+            "VERIFY_INDEX" => ::core::option::Option::Some(Self::VerifyIndex),
+            "TRANSLOG" => ::core::option::Option::Some(Self::Translog),
+            "FINALIZE" => ::core::option::Option::Some(Self::Finalize),
+            "DONE" => ::core::option::Option::Some(Self::Done),
             _ => ::core::option::Option::None,
         }
     }
@@ -505,15 +505,15 @@ impl RecoveryStatus {}
 #[non_exhaustive]
 pub enum RecoveryType {
     /// An empty store. Indicates a new primary shard or the forced allocation of an empty primary shard using the cluster reroute API.
-    EMPTYSTORE,
+    EmptyStore,
     /// The store of an existing primary shard. Indicates recovery is related to node startup or the allocation of an existing primary shard.
-    EXISTINGSTORE,
+    ExistingStore,
     /// Shards of another index on the same node. Indicates recovery is related to a clone, shrink, or split operation.
-    LOCALSHARDS,
+    LocalShards,
     /// A primary shard on another node. Indicates recovery is related to shard replication.
-    PEER,
+    Peer,
     /// A snapshot. Indicates recovery is related to a snapshot restore operation.
-    SNAPSHOT,
+    Snapshot,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -522,11 +522,11 @@ impl RecoveryType {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::EMPTYSTORE => "EMPTY_STORE",
-            Self::EXISTINGSTORE => "EXISTING_STORE",
-            Self::LOCALSHARDS => "LOCAL_SHARDS",
-            Self::PEER => "PEER",
-            Self::SNAPSHOT => "SNAPSHOT",
+            Self::EmptyStore => "EMPTY_STORE",
+            Self::ExistingStore => "EXISTING_STORE",
+            Self::LocalShards => "LOCAL_SHARDS",
+            Self::Peer => "PEER",
+            Self::Snapshot => "SNAPSHOT",
             Self::Raw(value) => value,
         }
     }
@@ -534,11 +534,11 @@ impl RecoveryType {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "EMPTY_STORE" => ::core::option::Option::Some(Self::EMPTYSTORE),
-            "EXISTING_STORE" => ::core::option::Option::Some(Self::EXISTINGSTORE),
-            "LOCAL_SHARDS" => ::core::option::Option::Some(Self::LOCALSHARDS),
-            "PEER" => ::core::option::Option::Some(Self::PEER),
-            "SNAPSHOT" => ::core::option::Option::Some(Self::SNAPSHOT),
+            "EMPTY_STORE" => ::core::option::Option::Some(Self::EmptyStore),
+            "EXISTING_STORE" => ::core::option::Option::Some(Self::ExistingStore),
+            "LOCAL_SHARDS" => ::core::option::Option::Some(Self::LocalShards),
+            "PEER" => ::core::option::Option::Some(Self::Peer),
+            "SNAPSHOT" => ::core::option::Option::Some(Self::Snapshot),
             _ => ::core::option::Option::None,
         }
     }

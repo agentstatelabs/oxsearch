@@ -5254,15 +5254,15 @@ impl SettingsSearch {
 #[non_exhaustive]
 pub enum SettingsSimilarity {
     /// `BM25`.
-    BM25(crate::indices::SettingsSimilarityBm25),
+    Bm25(crate::indices::SettingsSimilarityBm25),
     /// `boolean`.
     Boolean(crate::indices::SettingsSimilarityBoolean),
     /// `DFI`.
-    DFI(crate::indices::SettingsSimilarityDfi),
+    Dfi(crate::indices::SettingsSimilarityDfi),
     /// `DFR`.
-    DFR(crate::indices::SettingsSimilarityDfr),
+    Dfr(crate::indices::SettingsSimilarityDfr),
     /// `IB`.
-    IB(crate::indices::SettingsSimilarityIb),
+    Ib(crate::indices::SettingsSimilarityIb),
     /// `LMDirichlet`.
     LMDirichlet(crate::indices::SettingsSimilarityLmd),
     /// `LMJelinekMercer`.
@@ -5279,19 +5279,19 @@ impl ::serde::Serialize for SettingsSimilarity {
         serializer: S__,
     ) -> ::core::result::Result<S__::Ok, S__::Error> {
         match self {
-            Self::BM25(value) => {
+            Self::Bm25(value) => {
                 ::oxsearch_core::__private::serialize_tagged(serializer, "type", "BM25", value)
             }
             Self::Boolean(value) => {
                 ::oxsearch_core::__private::serialize_tagged(serializer, "type", "boolean", value)
             }
-            Self::DFI(value) => {
+            Self::Dfi(value) => {
                 ::oxsearch_core::__private::serialize_tagged(serializer, "type", "DFI", value)
             }
-            Self::DFR(value) => {
+            Self::Dfr(value) => {
                 ::oxsearch_core::__private::serialize_tagged(serializer, "type", "DFR", value)
             }
-            Self::IB(value) => {
+            Self::Ib(value) => {
                 ::oxsearch_core::__private::serialize_tagged(serializer, "type", "IB", value)
             }
             Self::LMDirichlet(value) => ::oxsearch_core::__private::serialize_tagged(
@@ -5326,19 +5326,19 @@ impl<'de> ::serde::Deserialize<'de> for SettingsSimilarity {
         let json = ::serde_json::Value::Object(map);
         match tag.as_deref() {
             ::core::option::Option::Some("BM25") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::BM25)
+                ::oxsearch_core::__private::from_value(json).map(Self::Bm25)
             }
             ::core::option::Option::Some("boolean") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::Boolean)
             }
             ::core::option::Option::Some("DFI") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::DFI)
+                ::oxsearch_core::__private::from_value(json).map(Self::Dfi)
             }
             ::core::option::Option::Some("DFR") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::DFR)
+                ::oxsearch_core::__private::from_value(json).map(Self::Dfr)
             }
             ::core::option::Option::Some("IB") => {
-                ::oxsearch_core::__private::from_value(json).map(Self::IB)
+                ::oxsearch_core::__private::from_value(json).map(Self::Ib)
             }
             ::core::option::Option::Some("LMDirichlet") => {
                 ::oxsearch_core::__private::from_value(json).map(Self::LMDirichlet)
@@ -5356,7 +5356,7 @@ impl<'de> ::serde::Deserialize<'de> for SettingsSimilarity {
 
 impl ::core::convert::From<crate::indices::SettingsSimilarityBm25> for SettingsSimilarity {
     fn from(value: crate::indices::SettingsSimilarityBm25) -> Self {
-        Self::BM25(value)
+        Self::Bm25(value)
     }
 }
 
@@ -5368,19 +5368,19 @@ impl ::core::convert::From<crate::indices::SettingsSimilarityBoolean> for Settin
 
 impl ::core::convert::From<crate::indices::SettingsSimilarityDfi> for SettingsSimilarity {
     fn from(value: crate::indices::SettingsSimilarityDfi) -> Self {
-        Self::DFI(value)
+        Self::Dfi(value)
     }
 }
 
 impl ::core::convert::From<crate::indices::SettingsSimilarityDfr> for SettingsSimilarity {
     fn from(value: crate::indices::SettingsSimilarityDfr) -> Self {
-        Self::DFR(value)
+        Self::Dfr(value)
     }
 }
 
 impl ::core::convert::From<crate::indices::SettingsSimilarityIb> for SettingsSimilarity {
     fn from(value: crate::indices::SettingsSimilarityIb) -> Self {
-        Self::IB(value)
+        Self::Ib(value)
     }
 }
 

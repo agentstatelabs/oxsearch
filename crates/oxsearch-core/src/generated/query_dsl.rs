@@ -9680,33 +9680,33 @@ impl ::core::convert::From<ShapeQuery> for ShapeQueryRepr {
 #[non_exhaustive]
 pub enum SimpleQueryStringFlag {
     /// Disables all operators.
-    NONE,
+    None,
     /// Enables the `+` AND operator.
-    AND,
+    And,
     /// Enables the `-` NOT operator.
-    NOT,
+    Not,
     /// Enables the `\|` OR operator.
-    OR,
+    Or,
     /// Enables the `*` prefix operator.
-    PREFIX,
+    Prefix,
     /// Enables the `"` quotes operator used to search for phrases.
-    PHRASE,
+    Phrase,
     /// Enables the `(` and `)` operators to control operator precedence.
-    PRECEDENCE,
+    Precedence,
     /// Enables `\` as an escape character.
-    ESCAPE,
+    Escape,
     /// Enables whitespace as split characters.
-    WHITESPACE,
+    Whitespace,
     /// Enables the `~N` operator after a word, where `N` is an integer denoting the allowed edit distance for matching.
-    FUZZY,
+    Fuzzy,
     /// Enables the `~N` operator, after a phrase where `N` is the maximum number of positions allowed between matching tokens.
     /// Synonymous to `SLOP`.
-    NEAR,
+    Near,
     /// Enables the `~N` operator, after a phrase where `N` is maximum number of positions allowed between matching tokens.
     /// Synonymous to `NEAR`.
-    SLOP,
+    Slop,
     /// Enables all optional operators.
-    ALL,
+    All,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -9715,19 +9715,19 @@ impl SimpleQueryStringFlag {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::NONE => "NONE",
-            Self::AND => "AND",
-            Self::NOT => "NOT",
-            Self::OR => "OR",
-            Self::PREFIX => "PREFIX",
-            Self::PHRASE => "PHRASE",
-            Self::PRECEDENCE => "PRECEDENCE",
-            Self::ESCAPE => "ESCAPE",
-            Self::WHITESPACE => "WHITESPACE",
-            Self::FUZZY => "FUZZY",
-            Self::NEAR => "NEAR",
-            Self::SLOP => "SLOP",
-            Self::ALL => "ALL",
+            Self::None => "NONE",
+            Self::And => "AND",
+            Self::Not => "NOT",
+            Self::Or => "OR",
+            Self::Prefix => "PREFIX",
+            Self::Phrase => "PHRASE",
+            Self::Precedence => "PRECEDENCE",
+            Self::Escape => "ESCAPE",
+            Self::Whitespace => "WHITESPACE",
+            Self::Fuzzy => "FUZZY",
+            Self::Near => "NEAR",
+            Self::Slop => "SLOP",
+            Self::All => "ALL",
             Self::Raw(value) => value,
         }
     }
@@ -9735,19 +9735,19 @@ impl SimpleQueryStringFlag {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "NONE" => ::core::option::Option::Some(Self::NONE),
-            "AND" => ::core::option::Option::Some(Self::AND),
-            "NOT" => ::core::option::Option::Some(Self::NOT),
-            "OR" => ::core::option::Option::Some(Self::OR),
-            "PREFIX" => ::core::option::Option::Some(Self::PREFIX),
-            "PHRASE" => ::core::option::Option::Some(Self::PHRASE),
-            "PRECEDENCE" => ::core::option::Option::Some(Self::PRECEDENCE),
-            "ESCAPE" => ::core::option::Option::Some(Self::ESCAPE),
-            "WHITESPACE" => ::core::option::Option::Some(Self::WHITESPACE),
-            "FUZZY" => ::core::option::Option::Some(Self::FUZZY),
-            "NEAR" => ::core::option::Option::Some(Self::NEAR),
-            "SLOP" => ::core::option::Option::Some(Self::SLOP),
-            "ALL" => ::core::option::Option::Some(Self::ALL),
+            "NONE" => ::core::option::Option::Some(Self::None),
+            "AND" => ::core::option::Option::Some(Self::And),
+            "NOT" => ::core::option::Option::Some(Self::Not),
+            "OR" => ::core::option::Option::Some(Self::Or),
+            "PREFIX" => ::core::option::Option::Some(Self::Prefix),
+            "PHRASE" => ::core::option::Option::Some(Self::Phrase),
+            "PRECEDENCE" => ::core::option::Option::Some(Self::Precedence),
+            "ESCAPE" => ::core::option::Option::Some(Self::Escape),
+            "WHITESPACE" => ::core::option::Option::Some(Self::Whitespace),
+            "FUZZY" => ::core::option::Option::Some(Self::Fuzzy),
+            "NEAR" => ::core::option::Option::Some(Self::Near),
+            "SLOP" => ::core::option::Option::Some(Self::Slop),
+            "ALL" => ::core::option::Option::Some(Self::All),
             _ => ::core::option::Option::None,
         }
     }

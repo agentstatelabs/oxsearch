@@ -62,13 +62,13 @@ impl ShardFileSizeInfo {
 #[non_exhaustive]
 pub enum ShardRoutingState {
     /// `UNASSIGNED`
-    UNASSIGNED,
+    Unassigned,
     /// `INITIALIZING`
-    INITIALIZING,
+    Initializing,
     /// `STARTED`
-    STARTED,
+    Started,
     /// `RELOCATING`
-    RELOCATING,
+    Relocating,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -77,10 +77,10 @@ impl ShardRoutingState {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::UNASSIGNED => "UNASSIGNED",
-            Self::INITIALIZING => "INITIALIZING",
-            Self::STARTED => "STARTED",
-            Self::RELOCATING => "RELOCATING",
+            Self::Unassigned => "UNASSIGNED",
+            Self::Initializing => "INITIALIZING",
+            Self::Started => "STARTED",
+            Self::Relocating => "RELOCATING",
             Self::Raw(value) => value,
         }
     }
@@ -88,10 +88,10 @@ impl ShardRoutingState {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "UNASSIGNED" => ::core::option::Option::Some(Self::UNASSIGNED),
-            "INITIALIZING" => ::core::option::Option::Some(Self::INITIALIZING),
-            "STARTED" => ::core::option::Option::Some(Self::STARTED),
-            "RELOCATING" => ::core::option::Option::Some(Self::RELOCATING),
+            "UNASSIGNED" => ::core::option::Option::Some(Self::Unassigned),
+            "INITIALIZING" => ::core::option::Option::Some(Self::Initializing),
+            "STARTED" => ::core::option::Option::Some(Self::Started),
+            "RELOCATING" => ::core::option::Option::Some(Self::Relocating),
             _ => ::core::option::Option::None,
         }
     }

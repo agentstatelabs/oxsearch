@@ -1147,15 +1147,15 @@ impl ShardsStats {}
 #[non_exhaustive]
 pub enum ShardsStatsStage {
     /// The number of shards in the snapshot that were successfully stored in the repository.
-    DONE,
+    Done,
     /// The number of shards in the snapshot that were not successfully stored in the repository.
-    FAILURE,
+    Failure,
     /// The number of shards in the snapshot that are in the finalizing stage of being stored in the repository.
-    FINALIZE,
+    Finalize,
     /// The number of shards in the snapshot that are in the initializing stage of being stored in the repository.
-    INIT,
+    Init,
     /// The number of shards in the snapshot that are in the started stage of being stored in the repository.
-    STARTED,
+    Started,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -1164,11 +1164,11 @@ impl ShardsStatsStage {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::DONE => "DONE",
-            Self::FAILURE => "FAILURE",
-            Self::FINALIZE => "FINALIZE",
-            Self::INIT => "INIT",
-            Self::STARTED => "STARTED",
+            Self::Done => "DONE",
+            Self::Failure => "FAILURE",
+            Self::Finalize => "FINALIZE",
+            Self::Init => "INIT",
+            Self::Started => "STARTED",
             Self::Raw(value) => value,
         }
     }
@@ -1176,11 +1176,11 @@ impl ShardsStatsStage {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "DONE" => ::core::option::Option::Some(Self::DONE),
-            "FAILURE" => ::core::option::Option::Some(Self::FAILURE),
-            "FINALIZE" => ::core::option::Option::Some(Self::FINALIZE),
-            "INIT" => ::core::option::Option::Some(Self::INIT),
-            "STARTED" => ::core::option::Option::Some(Self::STARTED),
+            "DONE" => ::core::option::Option::Some(Self::Done),
+            "FAILURE" => ::core::option::Option::Some(Self::Failure),
+            "FINALIZE" => ::core::option::Option::Some(Self::Finalize),
+            "INIT" => ::core::option::Option::Some(Self::Init),
+            "STARTED" => ::core::option::Option::Some(Self::Started),
             _ => ::core::option::Option::None,
         }
     }
@@ -1795,15 +1795,15 @@ impl<'de> ::serde::Deserialize<'de> for SnapshotSort {
 #[non_exhaustive]
 pub enum SnapshotState {
     /// The snapshot process has started.
-    INPROGRESS,
+    InProgress,
     /// The snapshot process completed successfully.
-    SUCCESS,
+    Success,
     /// The snapshot failed.
-    FAILED,
+    Failed,
     /// The snapshot was partially successful.
-    PARTIAL,
+    Partial,
     /// The snapshot is incompatible with the current version of the cluster.
-    INCOMPATIBLE,
+    Incompatible,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -1812,11 +1812,11 @@ impl SnapshotState {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::INPROGRESS => "IN_PROGRESS",
-            Self::SUCCESS => "SUCCESS",
-            Self::FAILED => "FAILED",
-            Self::PARTIAL => "PARTIAL",
-            Self::INCOMPATIBLE => "INCOMPATIBLE",
+            Self::InProgress => "IN_PROGRESS",
+            Self::Success => "SUCCESS",
+            Self::Failed => "FAILED",
+            Self::Partial => "PARTIAL",
+            Self::Incompatible => "INCOMPATIBLE",
             Self::Raw(value) => value,
         }
     }
@@ -1824,11 +1824,11 @@ impl SnapshotState {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "IN_PROGRESS" => ::core::option::Option::Some(Self::INPROGRESS),
-            "SUCCESS" => ::core::option::Option::Some(Self::SUCCESS),
-            "FAILED" => ::core::option::Option::Some(Self::FAILED),
-            "PARTIAL" => ::core::option::Option::Some(Self::PARTIAL),
-            "INCOMPATIBLE" => ::core::option::Option::Some(Self::INCOMPATIBLE),
+            "IN_PROGRESS" => ::core::option::Option::Some(Self::InProgress),
+            "SUCCESS" => ::core::option::Option::Some(Self::Success),
+            "FAILED" => ::core::option::Option::Some(Self::Failed),
+            "PARTIAL" => ::core::option::Option::Some(Self::Partial),
+            "INCOMPATIBLE" => ::core::option::Option::Some(Self::Incompatible),
             _ => ::core::option::Option::None,
         }
     }

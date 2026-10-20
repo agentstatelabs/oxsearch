@@ -135,7 +135,7 @@ async fn lifecycle() {
 /// moves no index on.
 async fn stopped_and_started(client: &TestClient) {
     let status = client.send(&get_status::Request::new()).await.unwrap();
-    assert_eq!(status.operation_mode, Some(LifecycleOperationMode::RUNNING));
+    assert_eq!(status.operation_mode, Some(LifecycleOperationMode::Running));
 
     client.send(&stop::Request::new()).await.unwrap();
     // Migrating to data tiers needs ILM stopped; a dry run changes nothing.
@@ -161,5 +161,5 @@ async fn stopped_and_started(client: &TestClient) {
 
     client.send(&start::Request::new()).await.unwrap();
     let status = client.send(&get_status::Request::new()).await.unwrap();
-    assert_eq!(status.operation_mode, Some(LifecycleOperationMode::RUNNING));
+    assert_eq!(status.operation_mode, Some(LifecycleOperationMode::Running));
 }

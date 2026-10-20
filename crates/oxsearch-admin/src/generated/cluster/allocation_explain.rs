@@ -36,13 +36,13 @@ impl AllocationDecision {}
 #[non_exhaustive]
 pub enum AllocationExplainDecision {
     /// `NO`
-    NO,
+    No,
     /// `YES`
-    YES,
+    Yes,
     /// `THROTTLE`
-    THROTTLE,
+    Throttle,
     /// `ALWAYS`
-    ALWAYS,
+    Always,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -51,10 +51,10 @@ impl AllocationExplainDecision {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::NO => "NO",
-            Self::YES => "YES",
-            Self::THROTTLE => "THROTTLE",
-            Self::ALWAYS => "ALWAYS",
+            Self::No => "NO",
+            Self::Yes => "YES",
+            Self::Throttle => "THROTTLE",
+            Self::Always => "ALWAYS",
             Self::Raw(value) => value,
         }
     }
@@ -62,10 +62,10 @@ impl AllocationExplainDecision {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "NO" => ::core::option::Option::Some(Self::NO),
-            "YES" => ::core::option::Option::Some(Self::YES),
-            "THROTTLE" => ::core::option::Option::Some(Self::THROTTLE),
-            "ALWAYS" => ::core::option::Option::Some(Self::ALWAYS),
+            "NO" => ::core::option::Option::Some(Self::No),
+            "YES" => ::core::option::Option::Some(Self::Yes),
+            "THROTTLE" => ::core::option::Option::Some(Self::Throttle),
+            "ALWAYS" => ::core::option::Option::Some(Self::Always),
             _ => ::core::option::Option::None,
         }
     }

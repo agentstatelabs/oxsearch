@@ -84,6 +84,12 @@ specification it's generated from.
     `scroll_id2` (`scroll`) and `context2` (`put_script`) are gone. Set the
     path parameter instead.
 
+- Enum variants the specification writes in capitals are named in Rust's
+  UpperCamelCase, an acronym as one word: `LifecycleOperationMode::Running`
+  (was `RUNNING`), `ShardRoutingState::Started`, `RestMethod::Get`,
+  `SettingsSimilarity::Bm25`, and 76 more in the core, inference, admin and
+  snapshot crates. What they read and write is unchanged.
+
 ### Fixed
 - A union tagged by a boolean, such as an ILM explanation's `"managed":
   true`, reads and writes its tag as a boolean.

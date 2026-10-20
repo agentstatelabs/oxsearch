@@ -144,15 +144,15 @@ impl Response {
 #[non_exhaustive]
 pub enum RestMethod {
     /// `GET`
-    GET,
+    Get,
     /// `HEAD`
-    HEAD,
+    Head,
     /// `POST`
-    POST,
+    Post,
     /// `PUT`
-    PUT,
+    Put,
     /// `DELETE`
-    DELETE,
+    Delete,
     /// A value this version of the specification doesn't list.
     Raw(::std::string::String),
 }
@@ -161,11 +161,11 @@ impl RestMethod {
     /// The value as Elasticsearch writes it.
     pub fn as_str(&self) -> &str {
         match self {
-            Self::GET => "GET",
-            Self::HEAD => "HEAD",
-            Self::POST => "POST",
-            Self::PUT => "PUT",
-            Self::DELETE => "DELETE",
+            Self::Get => "GET",
+            Self::Head => "HEAD",
+            Self::Post => "POST",
+            Self::Put => "PUT",
+            Self::Delete => "DELETE",
             Self::Raw(value) => value,
         }
     }
@@ -173,11 +173,11 @@ impl RestMethod {
     /// The listed value with this name, if there is one.
     pub fn from_known(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "GET" => ::core::option::Option::Some(Self::GET),
-            "HEAD" => ::core::option::Option::Some(Self::HEAD),
-            "POST" => ::core::option::Option::Some(Self::POST),
-            "PUT" => ::core::option::Option::Some(Self::PUT),
-            "DELETE" => ::core::option::Option::Some(Self::DELETE),
+            "GET" => ::core::option::Option::Some(Self::Get),
+            "HEAD" => ::core::option::Option::Some(Self::Head),
+            "POST" => ::core::option::Option::Some(Self::Post),
+            "PUT" => ::core::option::Option::Some(Self::Put),
+            "DELETE" => ::core::option::Option::Some(Self::Delete),
             _ => ::core::option::Option::None,
         }
     }
