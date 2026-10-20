@@ -72,13 +72,16 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-license` | the cluster's license, and starting a trial or going back to Basic | 19 |
 | `oxsearch-snapshot` | snapshot repositories, and snapshots taken, cloned, restored and deleted | 72 |
 | `oxsearch-ilm` | index lifecycle policies, and the indices they manage | 42 |
+| `oxsearch-async-search`, `oxsearch-eql`, `oxsearch-sql` | searches run in the background; event and sequence queries; SQL queries and cursors | 41 |
+| `oxsearch-search-application` | search templates and their indices behind one name | 27 |
+| `oxsearch-enrich` | enrich policies the ingest pipeline's enrich processor uses | 18 |
 | `oxsearch-security`, `oxsearch-ml`, `oxsearch-transform`, … | one crate per API area, named with hyphens (`query_rules` is `oxsearch-query-rules`) | the rest of about 2,900 API types |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |
 | `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
-The default features are the AI-search set: search, docs, mapping, inference. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
+The default features are the AI-search set: search, docs, mapping, inference. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
 
 **Why crates and not only feature flags:** Cargo compiles crates in parallel and caches each one separately; feature flags inside one huge crate get neither benefit.
 

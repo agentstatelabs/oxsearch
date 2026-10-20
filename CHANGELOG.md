@@ -17,6 +17,9 @@ specification it's generated from.
     `typed_keys`. `Results` picks them out by name (`value`, `stats`,
     `terms`, `histogram`, `date_histogram`, `ranges`, `filters`,
     `percentiles`, `top_hits`, …), in a bucket's sub-aggregations too.
+  - Results take a required property Elasticsearch leaves out as `None`,
+    as other response types do: a bucket's `key` and `doc_count` are
+    `Option`s, which `Results` reads past.
 - **Administration APIs** (`oxsearch-admin`, the `admin` feature), generated
   from the specification: indices (create, get, settings, mappings, aliases,
   templates, data streams, rollover, blocks, clone, shrink, split, stats,
@@ -60,13 +63,24 @@ specification it's generated from.
 - **Index lifecycle management** (`oxsearch-ilm`, the `ilm` feature):
   policies and their phases, the indices they manage, and ILM itself
   stopped and started.
+- **Async search, EQL and SQL** (`oxsearch-async-search`, `oxsearch-eql`
+  and `oxsearch-sql`; the `async-search`, `eql` and `sql` features):
+  searches run in the background and read by their id, with typed
+  aggregation results; event and sequence queries; SQL queries with
+  cursors, async queries and translation into a search.
+- **Search applications** (`oxsearch-search-application`, the
+  `search-application` feature, its endpoints `beta`): a search template
+  and its indices behind one name. They need a license above Basic.
+- **Enrich policies** (`oxsearch-enrich`, the `enrich` feature), which the
+  ingest pipeline's enrich processor uses.
 
 ### Changed
 - The typed document layer is the `document` feature, which `derive`
   implies, and creates and maps indices with the `admin` crate's typed
   calls rather than raw ones. It adds `Index::delete_index`.
-- Mapping, analysis and common types that the admin responses read
-  (mappings, index and node statistics, …) now take a required property
+- Mapping, analysis and common types that the admin and aggregation
+  responses read (mappings, index and node statistics, `CartesianPoint`,
+  `GeoLine`, …) now take a required property
   Elasticsearch leaves out as `None`, as other response types do: such
   fields are `Option`s.
 - Generated names no longer end in `2` where two properties would share

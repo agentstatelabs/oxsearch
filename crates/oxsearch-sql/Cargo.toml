@@ -1,0 +1,46 @@
+[package]
+name = "oxsearch-sql"
+description = "SQL for oxsearch, generated from the Elasticsearch specification: queries, cursors and their translation into search requests"
+readme = "../../README.md"
+keywords = ["elasticsearch", "search", "client", "sql"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[lib]
+# The generated documentation quotes Elasticsearch's own, which isn't Rust.
+doctest = false
+
+[features]
+# Endpoints Elasticsearch marks beta or experimental: they may change or go
+# away in any Elasticsearch release.
+beta = []
+experimental = []
+
+[dependencies]
+indexmap = { version = "2.14", features = ["serde"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
+oxsearch-mapping = { path = "../oxsearch-mapping", version = "0.1.0" }
+oxsearch-search = { path = "../oxsearch-search", version = "0.1.0" }
+oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.1.0" }
+
+[dev-dependencies]
+# The tests cover the endpoints behind features too.
+oxsearch-sql = { path = ".", features = ["beta", "experimental"] }
+# The generated example tests report where an example doesn't fit.
+serde_path_to_error = "0.1.20"
+
+[package.metadata.docs.rs]
+# Document the endpoints behind features too.
+all-features = true
+
+[lints]
+workspace = true

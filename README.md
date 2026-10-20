@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.1, the first release.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL, ingest pipelines, query rules, synonyms, snapshots, index lifecycle management and the administration APIs are on `main` for 0.2; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.1, the first release.** The generated crates cover search, documents, mappings, analysis, inference and tasks, tested against the specification's own examples and against Elasticsearch 9 on the Basic license and a trial. Aggregations, ES|QL, async search, EQL, SQL, ingest pipelines, enrich policies, query rules, synonyms, search applications, snapshots, index lifecycle management and the administration APIs are on `main` for 0.2; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -55,6 +55,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **ES|QL** (`oxsearch::esql`, the `esql` feature): a typed builder, `Esql::from_index("books").where_(col("year").gte(2020)).sort([col("year").desc()])`, with values sent as parameters, `FORK` and `FUSE`; and rows read into your own structs by column name with `.fetch(&client)`, or as Arrow record batches with `.fetch_arrow(&client)` (the `esql-arrow` feature).
 - **Ingest pipelines** (`oxsearch::ingest`, the `ingest` feature): pipelines built from typed processors (`SetProcessor::new("indexed_by").value(…).into()`), simulated, or run as documents are indexed, including the inference processor that embeds text at index time.
 - **Search relevance**: query rules that pin documents for matching queries (`oxsearch::query_rules`, the `query-rules` feature) and synonym sets that analyzers read and update without reindexing (`oxsearch::synonyms`, the `synonyms` feature).
+- **More ways to query**: async search, EQL and SQL (`oxsearch::async_search`, `oxsearch::eql`, `oxsearch::sql`), search applications (`oxsearch::search_application`) and enrich policies (`oxsearch::enrich`), each behind the feature of its name.
 - **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.

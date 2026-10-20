@@ -127,31 +127,42 @@ async fn buckets() {
         results.terms("by_stock"),
         [("2".into(), 3), ("5".into(), 3), ("10".into(), 2)]
     );
-    let prices: Vec<(f64, i64)> = results
+    let prices: Vec<(Option<f64>, Option<i64>)> = results
         .histogram("by_price")
         .iter()
         .map(|b| (b.key, b.doc_count))
         .collect();
-    assert_eq!(prices, [(0.0, 6), (50.0, 0), (100.0, 1), (150.0, 1)]);
-    let months: Vec<i64> = results
+    assert_eq!(
+        prices,
+        [
+            (Some(0.0), Some(6)),
+            (Some(50.0), Some(0)),
+            (Some(100.0), Some(1)),
+            (Some(150.0), Some(1))
+        ]
+    );
+    let months: Vec<Option<i64>> = results
         .date_histogram("by_month")
         .iter()
         .map(|b| b.doc_count)
         .collect();
-    assert_eq!(months, [2, 2, 4]);
-    let bands: Vec<i64> = results
+    assert_eq!(months, [Some(2), Some(2), Some(4)]);
+    let bands: Vec<Option<i64>> = results
         .ranges("price_bands")
         .iter()
         .map(|b| b.doc_count)
         .collect();
-    assert_eq!(bands, [3, 3, 2]);
-    let kinds: Vec<(String, i64)> = results
+    assert_eq!(bands, [Some(3), Some(3), Some(2)]);
+    let kinds: Vec<(String, Option<i64>)> = results
         .filters("kinds")
         .into_iter()
         .map(|(k, b)| (k, b.doc_count))
         .collect();
     // Keyed buckets come back in their names' order.
-    assert_eq!(kinds, [("books".into(), 3), ("cheap".into(), 3)]);
+    assert_eq!(
+        kinds,
+        [("books".into(), Some(3)), ("cheap".into(), Some(3))]
+    );
     test.delete(&client).await;
 }
 
@@ -187,8 +198,8 @@ async fn metrics() {
     assert!(close(results.value("count").unwrap(), 8.0));
     assert!(close(results.value("categories").unwrap(), 3.0));
     let stats = results.stats("stats").unwrap();
-    assert_eq!(stats.count, 8);
-    assert!(close(stats.sum, 41.0));
+    assert_eq!(stats.count, Some(8));
+    assert!(close(stats.sum.unwrap(), 41.0));
     let median = results.percentiles("median");
     assert_eq!(median.len(), 1);
     assert!(

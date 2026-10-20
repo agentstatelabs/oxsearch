@@ -1,0 +1,4 @@
+3 exact, 0 normalized, 0 failing
+sql.clear_cursor request ClearSqlCursorRequestExample1: exact
+sql.query request QuerySqlRequestExample1: exact
+sql.translate request TranslateSqlRequestExample1: exact

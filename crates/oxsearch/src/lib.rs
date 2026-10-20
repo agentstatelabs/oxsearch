@@ -13,7 +13,9 @@
 //! administration), `ingest` (pipelines and processors), `query-rules`
 //! (results pinned or excluded for matching queries), `synonyms` (synonym
 //! sets), `snapshot` (repositories and snapshots), `ilm` (index lifecycle
-//! policies), `license`, `analysis` and `tasks`. `document` adds the typed document layer and `derive` its derive
+//! policies), `async-search`, `eql`, `sql`, `search-application` (search
+//! templates behind a name), `enrich` (enrich policies), `license`,
+//! `analysis` and `tasks`. `document` adds the typed document layer and `derive` its derive
 //! macro, `helpers` the point-in-time scan and the bulk loader, and
 //! `transport-reqwest` the default HTTP transport.
 //!
@@ -75,10 +77,16 @@ pub use oxsearch_admin as admin;
 pub use oxsearch_aggs as aggs;
 #[cfg(feature = "analysis")]
 pub use oxsearch_analysis as analysis;
+#[cfg(feature = "async-search")]
+pub use oxsearch_async_search as async_search;
 #[cfg(feature = "derive")]
 pub use oxsearch_derive as derive;
 #[cfg(feature = "docs")]
 pub use oxsearch_docs as docs;
+#[cfg(feature = "enrich")]
+pub use oxsearch_enrich as enrich;
+#[cfg(feature = "eql")]
+pub use oxsearch_eql as eql;
 #[cfg(feature = "esql")]
 pub use oxsearch_esql as esql;
 #[cfg(feature = "ilm")]
@@ -97,8 +105,12 @@ pub use oxsearch_query_rules as query_rules;
 pub use oxsearch_search as search;
 #[cfg(feature = "search")]
 pub use oxsearch_search::fusion;
+#[cfg(feature = "search-application")]
+pub use oxsearch_search_application as search_application;
 #[cfg(feature = "snapshot")]
 pub use oxsearch_snapshot as snapshot;
+#[cfg(feature = "sql")]
+pub use oxsearch_sql as sql;
 #[cfg(feature = "synonyms")]
 pub use oxsearch_synonyms as synonyms;
 #[cfg(feature = "tasks")]

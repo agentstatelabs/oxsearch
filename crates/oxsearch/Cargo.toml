@@ -32,6 +32,11 @@ query-rules = ["dep:oxsearch-query-rules"]
 synonyms = ["dep:oxsearch-synonyms"]
 snapshot = ["dep:oxsearch-snapshot"]
 ilm = ["dep:oxsearch-ilm"]
+async-search = ["dep:oxsearch-async-search"]
+eql = ["dep:oxsearch-eql"]
+sql = ["dep:oxsearch-sql"]
+search-application = ["dep:oxsearch-search-application"]
+enrich = ["dep:oxsearch-enrich"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
 # The typed document layer, `oxsearch::document`, which creates and maps
@@ -46,8 +51,8 @@ helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
-beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta", "oxsearch-license?/beta", "oxsearch-query-rules?/beta", "oxsearch-synonyms?/beta", "oxsearch-snapshot?/beta", "oxsearch-ilm?/beta"]
-experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental"]
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta", "oxsearch-license?/beta", "oxsearch-query-rules?/beta", "oxsearch-synonyms?/beta", "oxsearch-snapshot?/beta", "oxsearch-ilm?/beta", "oxsearch-async-search?/beta", "oxsearch-eql?/beta", "oxsearch-sql?/beta", "oxsearch-search-application?/beta", "oxsearch-enrich?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental", "oxsearch-async-search?/experimental", "oxsearch-eql?/experimental", "oxsearch-sql?/experimental", "oxsearch-search-application?/experimental", "oxsearch-enrich?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.1.0" }
@@ -63,6 +68,11 @@ oxsearch-query-rules = { path = "../oxsearch-query-rules", version = "0.1.0", op
 oxsearch-synonyms = { path = "../oxsearch-synonyms", version = "0.1.0", optional = true }
 oxsearch-snapshot = { path = "../oxsearch-snapshot", version = "0.1.0", optional = true }
 oxsearch-ilm = { path = "../oxsearch-ilm", version = "0.1.0", optional = true }
+oxsearch-async-search = { path = "../oxsearch-async-search", version = "0.1.0", optional = true }
+oxsearch-eql = { path = "../oxsearch-eql", version = "0.1.0", optional = true }
+oxsearch-sql = { path = "../oxsearch-sql", version = "0.1.0", optional = true }
+oxsearch-search-application = { path = "../oxsearch-search-application", version = "0.1.0", optional = true }
+oxsearch-enrich = { path = "../oxsearch-enrich", version = "0.1.0", optional = true }
 oxsearch-aggs = { path = "../oxsearch-aggs", version = "0.1.0", optional = true }
 oxsearch-analysis = { path = "../oxsearch-analysis", version = "0.1.0", optional = true }
 oxsearch-tasks = { path = "../oxsearch-tasks", version = "0.1.0", optional = true }

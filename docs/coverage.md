@@ -17,7 +17,12 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-synonyms` | 7 | 7 (100%) |
 | `oxsearch-snapshot` | 13 | 12 (92%) |
 | `oxsearch-ilm` | 11 | 11 (100%) |
-| all | 260 | 158 (60%) |
+| `oxsearch-async-search` | 4 | 4 (100%) |
+| `oxsearch-eql` | 4 | 4 (100%) |
+| `oxsearch-sql` | 6 | 6 (100%) |
+| `oxsearch-search-application` | 10 | 6 (60%) |
+| `oxsearch-enrich` | 5 | 5 (100%) |
+| all | 289 | 183 (63%) |
 
 ## `oxsearch-core`
 
@@ -89,4 +94,30 @@ Not tested yet: `snapshot.repository_verify_integrity`.
 ## `oxsearch-ilm`
 
 Tested: `ilm.delete_lifecycle`, `ilm.explain_lifecycle`, `ilm.get_lifecycle`, `ilm.get_status`, `ilm.migrate_to_data_tiers`, `ilm.move_to_step`, `ilm.put_lifecycle`, `ilm.remove_policy`, `ilm.retry`, `ilm.start`, `ilm.stop`.
+
+
+## `oxsearch-async-search`
+
+Tested: `async_search.delete`, `async_search.get`, `async_search.status`, `async_search.submit`.
+
+
+## `oxsearch-eql`
+
+Tested: `eql.delete`, `eql.get`, `eql.get_status`, `eql.search`.
+
+
+## `oxsearch-sql`
+
+Tested: `sql.clear_cursor`, `sql.delete_async`, `sql.get_async`, `sql.get_async_status`, `sql.query`, `sql.translate`.
+
+
+## `oxsearch-search-application`
+
+Tested: `search_application.delete`, `search_application.get`, `search_application.list`, `search_application.put`, `search_application.render_query`, `search_application.search`.
+
+Not tested yet: `search_application.delete_behavioral_analytics`, `search_application.get_behavioral_analytics`, `search_application.post_behavioral_analytics_event`, `search_application.put_behavioral_analytics`.
+
+## `oxsearch-enrich`
+
+Tested: `enrich.delete_policy`, `enrich.execute_policy`, `enrich.get_policy`, `enrich.put_policy`, `enrich.stats`.
 
