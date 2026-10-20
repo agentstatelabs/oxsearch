@@ -7,7 +7,7 @@ specification it's generated from.
 
 ## [Unreleased]
 
-## [0.2.0] - 2026-10-19
+## [0.2.0] - 2026-10-20
 
 The second release, generated from the same specification branch as 0.1,
 9.5 (commit `84bf510a`), and tested against Elasticsearch 9.5.5 on the Basic
