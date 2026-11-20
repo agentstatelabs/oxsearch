@@ -67,7 +67,14 @@ async fn policies() {
                     .name("<nightly-{now/d}>")
                     .schedule("0 30 1 * * ?")
                     .repository(repository.as_str())
-                    .config(Configuration::new().indices(test.name()))
+                    // Only the index: the global state takes in every
+                    // feature's state, machine learning's models among them,
+                    // and would take minutes to snapshot.
+                    .config(
+                        Configuration::new()
+                            .indices(test.name())
+                            .include_global_state(false),
+                    )
                     .retention(Retention::new("30d", 5, 1)),
             ),
         )
