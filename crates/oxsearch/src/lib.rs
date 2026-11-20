@@ -16,8 +16,9 @@
 //! (results pinned or excluded for matching queries), `synonyms` (synonym
 //! sets), `snapshot` (repositories and snapshots), `ilm` (index lifecycle
 //! policies), `async-search`, `eql`, `sql`, `search-application` (search
-//! templates behind a name), `enrich` (enrich policies), `license`,
-//! `analysis` and `tasks`. `document` adds the typed document layer and
+//! templates behind a name), `enrich` (enrich policies), `ml` (machine
+//! learning: anomaly detection, data frame analytics and trained models),
+//! `license`, `analysis` and `tasks`. `document` adds the typed document layer and
 //! `derive` its derive macro, and `helpers` the point-in-time scan and the
 //! bulk loader.
 //!
@@ -101,6 +102,8 @@ pub use oxsearch_ingest as ingest;
 pub use oxsearch_license as license;
 #[cfg(feature = "mapping")]
 pub use oxsearch_mapping as mapping;
+#[cfg(feature = "ml")]
+pub use oxsearch_ml as ml;
 #[cfg(feature = "query-rules")]
 pub use oxsearch_query_rules as query_rules;
 #[cfg(feature = "search")]
