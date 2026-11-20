@@ -7,7 +7,7 @@
 //!
 //! ```text
 //! scripts/es-fixture.sh up
-//! cargo run -p oxsearch --example rag --features admin,transport-reqwest
+//! cargo run -p oxsearch --example rag --features admin
 //! ```
 //!
 //! On the Basic license, which doesn't include server-side RRF, the fusion

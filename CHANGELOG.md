@@ -7,6 +7,14 @@ specification it's generated from.
 
 ## [Unreleased]
 
+### Changed
+- The front crate's default features include `transport-reqwest`, the HTTP
+  transport on reqwest with rustls, so the quick start builds with
+  `features = ["derive"]` (DESIGN.md, question 5). With a transport of your
+  own, set `default-features = false` and name the areas you use. A clean
+  build of the default features still takes 37 s on CI, within the 60 s
+  budget (docs/compile-time.md).
+
 ## [0.2.0] - 2026-10-20
 
 The second release, generated from the same specification branch as 0.1,

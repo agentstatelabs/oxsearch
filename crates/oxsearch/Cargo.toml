@@ -14,8 +14,9 @@ authors.workspace = true
 include = ["src/**", "Cargo.toml", "LICENSE"]
 
 [features]
-# The AI-search set.
-default = ["search", "docs", "mapping", "inference"]
+# The AI-search set and the HTTP transport. With your own transport,
+# set default-features = false and pick the areas you use.
+default = ["search", "docs", "mapping", "inference", "transport-reqwest"]
 search = ["dep:oxsearch-search"]
 docs = ["dep:oxsearch-docs"]
 mapping = ["dep:oxsearch-mapping"]
@@ -46,8 +47,7 @@ document = ["docs", "search", "mapping", "admin"]
 derive = ["dep:oxsearch-derive", "document"]
 # Point-in-time streams and the bulk loader, which run on Tokio.
 helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util", "dep:metrics"]
-# The default HTTP transport. Whether it is on by default is still open
-# (DESIGN.md, open question 5).
+# The HTTP transport, on reqwest with rustls (DESIGN.md, question 5).
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
