@@ -44,6 +44,7 @@ pub const CRATES: &[&str] = &[
     "slm",
     "xpack",
     "cat",
+    "security",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is

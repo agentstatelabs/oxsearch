@@ -10,15 +10,27 @@
 # The version is set in integration/compose.yaml, or by ELASTICSEARCH_VERSION.
 # It listens on 127.0.0.1:${OXSEARCH_TEST_PORT:-9200}. The tests read
 # OXSEARCH_TEST_URL and OXSEARCH_TEST_LICENSE; `up` prints both.
+#
+# With OXSEARCH_TEST_SECURITY=true, security is on, and the elastic user's
+# password is OXSEARCH_TEST_PASSWORD, which the tests read too.
 
 set -euo pipefail
 
 root="$(cd "$(dirname "$0")/.." && pwd)"
 compose=(docker compose -f "${root}/integration/compose.yaml")
 url="http://127.0.0.1:${OXSEARCH_TEST_PORT:-9200}"
+security="${OXSEARCH_TEST_SECURITY:-false}"
+auth=()
+if [ "$security" = true ]; then
+  if [ -z "${OXSEARCH_TEST_PASSWORD:-}" ]; then
+    echo "OXSEARCH_TEST_SECURITY is true: set OXSEARCH_TEST_PASSWORD too" >&2
+    exit 2
+  fi
+  auth=(-u "elastic:${OXSEARCH_TEST_PASSWORD}")
+fi
 
 license_type() {
-  curl -fsS "${url}/_license" | sed -n 's/.*"type" *: *"\([a-z]*\)".*/\1/p' | head -1
+  curl -fsS ${auth[@]+"${auth[@]}"} "${url}/_license" | sed -n 's/.*"type" *: *"\([a-z]*\)".*/\1/p' | head -1
 }
 
 up() {
@@ -33,7 +45,7 @@ up() {
   # A new node installs its Basic license a moment after the cluster turns
   # yellow; until then, GET /_license is a 404.
   for _ in $(seq 1 60); do
-    curl -fsS -o /dev/null "${url}/_license" 2>/dev/null && break
+    curl -fsS ${auth[@]+"${auth[@]}"} -o /dev/null "${url}/_license" 2>/dev/null && break
     sleep 1
   done
 
@@ -41,7 +53,7 @@ up() {
     # The same call a demo-day trial uses. A node can start one trial in its
     # life, so a second `up trial` on a running fixture finds it already on.
     if [ "$(license_type)" != trial ]; then
-      curl -fsS -X POST "${url}/_license/start_trial?acknowledge=true" >/dev/null
+      curl -fsS ${auth[@]+"${auth[@]}"} -X POST "${url}/_license/start_trial?acknowledge=true" >/dev/null
     fi
   fi
 
@@ -52,9 +64,9 @@ up() {
     exit 1
   fi
 
-  version="$(curl -fsS "${url}/" | sed -n 's/.*"number" *: *"\([^"]*\)".*/\1/p' | head -1)"
-  echo "Elasticsearch ${version} on the ${license} license at ${url}"
-  echo "export OXSEARCH_TEST_URL=${url} OXSEARCH_TEST_LICENSE=${license}"
+  version="$(curl -fsS ${auth[@]+"${auth[@]}"} "${url}/" | sed -n 's/.*"number" *: *"\([^"]*\)".*/\1/p' | head -1)"
+  echo "Elasticsearch ${version} on the ${license} license at ${url}, security ${security}"
+  echo "export OXSEARCH_TEST_URL=${url} OXSEARCH_TEST_LICENSE=${license} OXSEARCH_TEST_SECURITY=${security}"
 }
 
 case "${1:-}" in

@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, and the cat APIs. That's 413 endpoints, tested against the specification's own examples, and 307 of them against Elasticsearch 9 on the Basic license and a trial. Security, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, and security. That's 479 endpoints, tested against the specification's own examples, and 373 of them against Elasticsearch 9 on the Basic license and a trial. Transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -59,6 +59,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature), snapshot lifecycle policies that take them on a schedule (`oxsearch::slm`, the `slm` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
 - **Machine learning** (`oxsearch::ml`, the `ml` feature): anomaly detection jobs with their datafeeds, results, forecasts and model snapshots; calendars and filters; data frame analytics; and trained models, imported, inferred with and deployed.
 - **Alerting** (`oxsearch::watcher`, the `watcher` feature): watches that run an input, such as a search, on a schedule, test a condition and act, put, run, acknowledged, activated and deactivated, and the Watcher service itself.
+- **Security** (`oxsearch::security`, the `security` feature): native users, roles and role mappings, application privileges, API keys and cross-cluster API keys, tokens, service accounts and user profiles; and single sign-on through SAML, OpenID Connect and PKI.
 - **What the cluster offers** (`oxsearch::xpack`, the `xpack` feature): its build, its license and which features it makes available, and how much each is used.
 - **The cat APIs** (`oxsearch::cat`, the `cat` feature): the compact tables of indices, nodes, shards, allocation, tasks, snapshots and the rest, read as typed rows from their JSON form.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
@@ -98,6 +99,8 @@ Every API is generated whatever the license; a request for a feature the cluster
 | Machine learning: anomaly detection, data frame analytics, trained models and their deployments | | ✓ |
 | Machine learning: validating a detector, and filters | ✓ | ✓ |
 | Watcher | | ✓ |
+| Security: users, roles, role mappings, application privileges, API keys, service accounts, user profiles | ✓ | ✓ |
+| Security: tokens; single sign-on through SAML, OpenID Connect and PKI | | ✓ |
 | ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, snapshot lifecycle policies, ILM, administration | ✓ | ✓ |
 | ES\|QL `FUSE` | | ✓ |
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |
@@ -130,6 +133,14 @@ The integration tests run against Elasticsearch in Docker, on the Basic license 
 scripts/es-fixture.sh up trial
 OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration -- --ignored
 scripts/es-fixture.sh down
+```
+
+The security tests need security on, and skip otherwise; the fixture turns it on, with a password for the `elastic` user, like this:
+
+```bash
+export OXSEARCH_TEST_SECURITY=true OXSEARCH_TEST_PASSWORD=$(openssl rand -hex 16)
+scripts/es-fixture.sh up trial
+OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration --test security -- --ignored
 ```
 
 With the fixture up, the examples run against it:
