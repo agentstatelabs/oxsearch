@@ -1,0 +1,17 @@
+12 exact, 4 normalized, 0 failing
+watcher.ack_watch response WatcherAckWatchResponseExample1: exact
+watcher.delete_watch response DeleteWatchResponseExample1: exact
+watcher.execute_watch request WatcherExecuteRequestExample1: exact
+watcher.execute_watch request WatcherExecuteRequestExample2: exact
+watcher.execute_watch request WatcherExecuteRequestExample3: exact
+watcher.execute_watch response WatcherExecuteWatchResponseExample1: exact
+watcher.get_settings response WatcherGetSettingsResponseExample1: exact
+watcher.get_watch response GetWatchResponseExample1: exact
+watcher.put_watch request WatcherPutWatchRequestExample1: normalized at /input/search/request/body/query/bool/filter/range/@timestamp/from (dropped)
+watcher.query_watches response WatcherQueryWatchesResponseExample1: exact
+watcher.start response WatcherStartResponseExample1: exact
+watcher.stats response WatcherStatsResponseExample1: normalized at /execution_thread_pool (dropped)
+watcher.stats response WatcherStatsResponseExample2: normalized at /current_watches (dropped)
+watcher.stats response WatcherStatsResponseExample3: normalized at /execution_thread_pool (dropped)
+watcher.stop response WatcherStopResponseExample1: exact
+watcher.update_settings request WatcherUpdateSettingsRequestExample1: exact

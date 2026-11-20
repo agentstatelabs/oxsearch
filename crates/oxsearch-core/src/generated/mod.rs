@@ -7867,7 +7867,8 @@ impl SearchStats {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SearchTransform {
-    pub request: ::serde_json::Value,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub request: ::core::option::Option<::serde_json::Value>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub timeout: ::core::option::Option<crate::Duration>,
 }
@@ -7876,7 +7877,7 @@ impl SearchTransform {
     /// A `SearchTransform` with its required properties set.
     pub fn new(request: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         Self {
-            request: request.into(),
+            request: ::core::option::Option::Some(request.into()),
             timeout: ::core::option::Option::None,
         }
     }
