@@ -1,0 +1,28 @@
+---
+title: Aggregations and ES|QL
+description: Counting and averaging by group, with aggregations read back as typed results, and with ES|QL rows read into your own struct.
+---
+
+import Example from '../../../components/Example.astro';
+
+The same question asked two ways: how many products each category has, and their average price. Both run on any license.
+
+<Example file="crates/oxsearch/examples/analytics.rs" doc="toml" />
+
+## Aggregations
+
+<Example file="crates/oxsearch/examples/analytics.rs" region="aggregations" />
+
+`Agg` builds the common bucket, metric and pipeline aggregations, `.sub()` nests one under another, and `Aggs` names them for the request. Sent with `typed_keys`, the results read back as `Aggregates`, and `Results` picks them out by name: `value`, `stats`, `terms`, `histogram`, `date_histogram`, `ranges`, `filters`, `percentiles`, `top_hits`, and the same in each bucket's own sub-aggregations.
+
+Every aggregation the specification describes is a generated type, for those the builders don't cover; `Agg::of` takes any of them.
+
+## ES|QL
+
+<Example file="crates/oxsearch/examples/analytics.rs" region="esql" />
+
+<Example file="crates/oxsearch/examples/analytics.rs" region="row" />
+
+`Esql` builds the query: `FROM`, `WHERE`, `EVAL`, `KEEP`, `DROP`, `RENAME`, `SORT`, `LIMIT`, `STATS … BY`, `MV_EXPAND`, `FORK` and `FUSE`. Values are sent as parameters, never written into the query's text, and identifiers are quoted.
+
+`fetch` reads each row into your own type by column name. A dotted column, such as `author.name`, fills a nested struct, and a column missing or of the wrong type fails with `Error::Row`, which names the row and the column. With the `esql-arrow` feature, `fetch_arrow` reads the results as Arrow record batches instead.

@@ -1,0 +1,49 @@
+---
+title: Overview
+description: How oxsearch is put together, and what each of its features adds.
+---
+
+oxsearch is a family of crates generated from the [Elasticsearch specification](https://github.com/elastic/elasticsearch-specification), the description of every request and response that Elastic's own clients are built from. The front crate, `oxsearch`, re-exports them behind features, so an application compiles only the areas it uses.
+
+## Features
+
+The default features are the AI-search set, `search`, `docs`, `mapping` and `inference`, and the HTTP transport, `transport-reqwest`. With a transport of your own, set `default-features = false` and name the areas you use.
+
+| Feature | Module | What it adds |
+|---|---|---|
+| `search` | `oxsearch::search`, `oxsearch::fusion` | Search, retrievers, point-in-time, scroll, and fusion on the client |
+| `docs` | `oxsearch::docs` | Indexing, getting, updating and deleting documents, and bulk requests |
+| `mapping` | `oxsearch::mapping` | Index mappings: field types, `semantic_text`, dense and sparse vectors |
+| `inference` | `oxsearch::inference` | The inference API: embeddings, reranking and completions through endpoints |
+| `transport-reqwest` | `oxsearch::transport_reqwest` | The HTTP transport, on reqwest with rustls |
+| `document`, `derive` | `oxsearch::document` | [Your own document types](/guide/documents/), and `#[derive(Document)]` |
+| `helpers` | `oxsearch::helpers` | A point-in-time scan and a bulk loader with backpressure |
+| `aggs` | `oxsearch::aggs` | [Aggregations](/guide/analytics/), with builders and typed results |
+| `esql` | `oxsearch::esql` | [ES\|QL](/guide/analytics/), with a typed builder and rows read into your types; `esql-arrow` adds Arrow output |
+| `admin` | `oxsearch::admin` | Indices, the cluster and nodes |
+| `ingest`, `enrich` | `oxsearch::ingest`, `oxsearch::enrich` | Ingest pipelines and their processors, and enrich policies |
+| `query-rules`, `synonyms` | `oxsearch::query_rules`, `oxsearch::synonyms` | Results pinned or excluded for matching queries, and synonym sets |
+| `async-search`, `eql`, `sql` | `oxsearch::async_search`, `oxsearch::eql`, `oxsearch::sql` | More ways to query |
+| `search-application` | `oxsearch::search_application` | Search templates behind a name |
+| `snapshot`, `ilm` | `oxsearch::snapshot`, `oxsearch::ilm` | Snapshots, and index lifecycle policies |
+| `license`, `analysis`, `tasks` | `oxsearch::license`, `oxsearch::analysis`, `oxsearch::tasks` | The license API, analyzers, and tasks |
+| `beta`, `experimental` | | Endpoints Elasticsearch marks beta or experimental, in the areas enabled |
+
+[Endpoint coverage](/reference/coverage/) lists every endpoint in each area, and which ones the integration tests run.
+
+## The types
+
+Each request is a type with a builder: its required parts are `new`'s arguments, and each optional part is a method of its name. The client sends it, and reads the answer as the request's response type.
+
+- **Requests and responses** come from the specification. A response tolerates a property Elasticsearch leaves out, even one the specification calls required: it reads as `None`.
+- **Unions and enums** have a `Raw` variant, which holds what a newer Elasticsearch sends that this release doesn't know, so it still reads.
+- **Errors** are typed: `Error::License` for a feature the cluster's license doesn't include, `Error::Conflict` for a version conflict, and `Error::Elasticsearch` for Elasticsearch's other errors, with the status, type and reason.
+- **Builders** for the common cases: `Query::r#match`, `Query::term`, `Retriever::knn`, `Retriever::rrf`, `Agg::terms`, `Esql::from_index` and the like build them in one call each.
+
+## Telemetry
+
+Every request records a span, and its duration as the `db.client.operation.duration` histogram, through the `tracing` and `metrics` facades, following OpenTelemetry's conventions for Elasticsearch. Nothing is recorded until the application installs a subscriber and a recorder, such as [oxtel](https://github.com/agentstatelabs/oxtel)'s.
+
+## When the types don't reach
+
+Your own endpoints go through the same client, a value the types don't know is a `Raw` variant, and `Client::send_raw` sends any request: [what isn't covered yet](/guide/escape-hatches/).

@@ -1,0 +1,26 @@
+---
+title: What isn't covered yet
+description: Your own endpoints, raw variants and raw calls, for what the generated types don't reach.
+---
+
+import Example from '../../../components/Example.astro';
+
+Some areas aren't generated yet, and a newer Elasticsearch adds what this release doesn't know. Three ways through, each going through the same client, with the same transport, errors and telemetry.
+
+## Your own endpoint
+
+<Example file="crates/oxsearch/examples/escape_hatches.rs" region="endpoint" />
+
+An endpoint is a type that implements `Endpoint`: its name, its route, its query parameters and its body, and the type its response reads as. `Route::segments` percent-encodes each segment, and `Body::json` writes any serializable value. `client.send` sends it like a generated request.
+
+## Raw variants
+
+<Example file="crates/oxsearch/examples/escape_hatches.rs" region="raw-variants" />
+
+Every query, retriever, aggregation and other union has a `Raw` variant that holds JSON, for one the types don't know. The other way, a value a newer Elasticsearch sends that this release doesn't know reads as a `Raw` variant, instead of failing.
+
+## A raw call
+
+<Example file="crates/oxsearch/examples/escape_hatches.rs" region="raw-call" />
+
+`Client::send_raw` sends any method and path, with an optional JSON body, and returns the response as JSON.

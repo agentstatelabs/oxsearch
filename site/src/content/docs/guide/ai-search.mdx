@@ -1,0 +1,45 @@
+---
+title: AI search
+description: The retrieval half of a RAG application, keyword and vector search fused with RRF, on the server or on the client.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Example from '../../../components/Example.astro';
+
+This is the retrieval half of a RAG application: passages indexed with their embeddings, and the ones that answer a question found by fusing a keyword match with nearest neighbours. It runs on any license, with your own embeddings; the [quick start](/start/) shows `semantic_text`, where Elasticsearch embeds the text itself.
+
+<Example file="crates/oxsearch/examples/rag.rs" doc="toml" />
+
+The example stands in for an embedding model with a toy function that scores how much a text is about vectors, ingestion and operations, so it needs nothing but Elasticsearch. In an application, the vectors come from your model.
+
+## The mapping
+
+<Example file="crates/oxsearch/examples/rag.rs" region="mapping" />
+
+The mapping is built from the generated types: `text` for the keyword match, `keyword` for the topic, and a `dense_vector` with cosine similarity for the embedding.
+
+## Indexing
+
+<Example file="crates/oxsearch/examples/rag.rs" region="bulk" />
+
+A bulk request takes its lines as `bulk::RequestBody`: an operation, then the document it applies to, as your own type. For large loads, the `helpers` feature has a bulk loader with backpressure.
+
+## Retrieving
+
+<Example file="crates/oxsearch/examples/rag.rs" region="retrieve" />
+
+`Fusion::rrf` fuses the results of several retrievers with reciprocal rank fusion. Elasticsearch does it on the server with the `rrf` retriever, which needs a license above Basic. On Basic, the request fails with `Error::License`, and `Fusion` runs each retriever on its own and fuses their results on the client instead; `fallback` says why it did.
+
+## The queries and retrievers
+
+`Query` and `Retriever` build the common ones in one call each:
+
+- `Query::r#match`, `Query::term`, `Query::range` and the rest of the query DSL, and `Query::semantic` on a `semantic_text` field.
+- `Query::knn` and `Retriever::knn` for nearest neighbours of a vector, and `Query::sparse_vector` for weighted tokens.
+- `Retriever::standard` for a query, and `Retriever::rrf` and `Retriever::linear` to fuse others on the server.
+
+Every other query and retriever the specification describes is a generated type too, and one the types don't know yet is a `Raw` variant: [what isn't covered yet](/guide/escape-hatches/).
+
+<Aside>
+	[Licenses](/reference/licenses/) lists which retrievers and models each license includes, as the integration tests find them.
+</Aside>

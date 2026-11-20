@@ -7,6 +7,16 @@ specification it's generated from.
 
 ## [Unreleased]
 
+### Added
+- Three more examples, which CI runs against Elasticsearch: `documents`
+  (the typed document layer on any license), `analytics` (aggregations
+  and ES|QL) and `transport` (several nodes, retries and credentials).
+  Each example's documentation lists the dependencies it needs, which a
+  test keeps true.
+- The site, oxsearch.agentstatelabs.com (`site/`), with its code drawn from
+  the examples and its coverage, license and version tables from the
+  repository's own files.
+
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
   transport on reqwest with rustls, so the quick start builds with
