@@ -296,6 +296,9 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
         | ("ml._types", "ModelSnapshot", "latest_record_time_stamp" | "latest_result_time_stamp") => {
             Some(Ty::Prim("i64"))
         }
+        // How many times Watcher ran an action, which the specification
+        // types as a duration.
+        ("xpack.usage", "WatcherActionTotals", "total") => Some(Ty::Prim("i64")),
         // A multi-valued column's cell is an array, which a field value
         // isn't.
         ("esql._types", "EsqlResult", "values") => {

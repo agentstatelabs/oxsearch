@@ -2906,7 +2906,7 @@ impl Watcher {}
 #[non_exhaustive]
 pub struct WatcherActionTotals {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub total: ::core::option::Option<::oxsearch_core::Duration>,
+    pub total: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub total_time_in_ms: ::core::option::Option<::oxsearch_core::UnitMillis>,
 }
@@ -2914,7 +2914,7 @@ pub struct WatcherActionTotals {
 impl WatcherActionTotals {
     /// A `WatcherActionTotals` with its required properties set.
     pub fn new(
-        total: impl ::core::convert::Into<::oxsearch_core::Duration>,
+        total: i64,
         total_time_in_ms: impl ::core::convert::Into<::oxsearch_core::UnitMillis>,
     ) -> Self {
         Self {
