@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning and Watcher. That's 375 endpoints, tested against the specification's own examples, and 269 of them against Elasticsearch 9 on the Basic license and a trial. Security, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher and snapshot lifecycle management. That's 384 endpoints, tested against the specification's own examples, and 278 of them against Elasticsearch 9 on the Basic license and a trial. Security, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -56,7 +56,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Ingest pipelines** (`oxsearch::ingest`, the `ingest` feature): pipelines built from typed processors (`SetProcessor::new("indexed_by").value(…).into()`), simulated, or run as documents are indexed, including the inference processor that embeds text at index time.
 - **Search relevance**: query rules that pin documents for matching queries (`oxsearch::query_rules`, the `query-rules` feature) and synonym sets that analyzers read and update without reindexing (`oxsearch::synonyms`, the `synonyms` feature).
 - **More ways to query**: async search, EQL and SQL (`oxsearch::async_search`, `oxsearch::eql`, `oxsearch::sql`), search applications (`oxsearch::search_application`) and enrich policies (`oxsearch::enrich`), each behind the feature of its name.
-- **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
+- **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature), snapshot lifecycle policies that take them on a schedule (`oxsearch::slm`, the `slm` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
 - **Machine learning** (`oxsearch::ml`, the `ml` feature): anomaly detection jobs with their datafeeds, results, forecasts and model snapshots; calendars and filters; data frame analytics; and trained models, imported, inferred with and deployed.
 - **Alerting** (`oxsearch::watcher`, the `watcher` feature): watches that run an input, such as a search, on a schedule, test a condition and act, put, run, acknowledged, activated and deactivated, and the Watcher service itself.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
@@ -96,7 +96,7 @@ Every API is generated whatever the license; a request for a feature the cluster
 | Machine learning: anomaly detection, data frame analytics, trained models and their deployments | | ✓ |
 | Machine learning: validating a detector, and filters | ✓ | ✓ |
 | Watcher | | ✓ |
-| ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, ILM, administration | ✓ | ✓ |
+| ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, snapshot lifecycle policies, ILM, administration | ✓ | ✓ |
 | ES\|QL `FUSE` | | ✓ |
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |
 

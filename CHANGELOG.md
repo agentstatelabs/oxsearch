@@ -19,6 +19,10 @@ specification it's generated from.
   schedule, test a condition and act, put, run, acknowledged, activated
   and deactivated, found by a query; and the Watcher service's settings,
   statistics, start and stop. Watcher needs a license above Basic.
+- **Snapshot lifecycle management** (`oxsearch-slm`, the `slm` feature),
+  generated from the specification: policies that take snapshots on a
+  schedule and expire old ones, run now, their statistics and retention,
+  and the service stopped and started. It runs on any license.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
