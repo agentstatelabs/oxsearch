@@ -40,6 +40,11 @@ use oxsearch_docs::index;
 use oxsearch_integration::{License, TestClient, TestIndex, client, deployed, understood};
 use serde_json::{Value, json};
 
+/// Held by each test while it runs: machine learning's jobs, analyses and
+/// deployments share the node's memory for them, and on a CI runner tests
+/// running at once leave a job no room to open (429).
+static ML: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+
 /// The start of the hour the test data begins at, in milliseconds.
 const START: i64 = 1_700_000_000_000 - 1_700_000_000_000 % 3_600_000;
 const HOUR: i64 = 3_600_000;
@@ -167,6 +172,7 @@ async fn snapshot_ids(client: &TestClient, job: &str) -> Vec<String> {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn cluster_wide() {
+    let _ml = ML.lock().await;
     let client = client();
     let trial = License::from_env() == License::Trial;
     let read = send(&client, &info::Request::new()).await;
@@ -196,6 +202,7 @@ async fn cluster_wide() {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn anomaly_detection() {
+    let _ml = ML.lock().await;
     let client = client();
     // Validating a detector needs no license; the rest does.
     send(
@@ -417,6 +424,7 @@ async fn anomaly_detection() {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn categories() {
+    let _ml = ML.lock().await;
     let client = client();
     let job = id("ml-categories");
     let created = send(
@@ -469,6 +477,7 @@ async fn categories() {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn datafeeds() {
+    let _ml = ML.lock().await;
     let client = client();
     let job = id("ml-feed-job");
     let created = send(
@@ -599,6 +608,7 @@ async fn datafeeds() {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn calendars_and_filters() {
+    let _ml = ML.lock().await;
     let client = client();
     let filter = id("ml-filter");
     let put = send(
@@ -619,16 +629,23 @@ async fn calendars_and_filters() {
     .await
     .unwrap();
     assert_eq!(filters.filters[0].items, ["a", "b"]);
-    let updated = send(
-        &client,
-        &update_filter::Request::new(filter.as_str()).body(
-            update_filter::RequestBody::new()
-                .add_items(vec!["c".to_owned()])
-                .remove_items(vec!["a".to_owned()]),
-        ),
-    )
-    .await
-    .unwrap();
+    // An update right after the put can miss the items it put ("not
+    // present in filter"), until the filter's index refreshes.
+    let update = update_filter::Request::new(filter.as_str()).body(
+        update_filter::RequestBody::new()
+            .add_items(vec!["c".to_owned()])
+            .remove_items(vec!["a".to_owned()]),
+    );
+    let client_ref = &client;
+    let update_ref = &update;
+    let updated = eventually("the filter's update", || async move {
+        match send(client_ref, update_ref).await {
+            Ok(updated) => Some(updated),
+            Err(Error::Elasticsearch(e)) if e.to_string().contains("not present in filter") => None,
+            Err(e) => panic!("{e}"),
+        }
+    })
+    .await;
     assert_eq!(updated.items, ["b", "c"]);
     send(&client, &delete_filter::Request::new(filter.as_str()))
         .await
@@ -719,6 +736,7 @@ async fn calendars_and_filters() {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn data_frame_analytics() {
+    let _ml = ML.lock().await;
     let client = client();
     let analytics = id("ml-analytics");
     let source_name = TestIndex::named("ml-points").name().to_owned();
@@ -913,6 +931,7 @@ fn tree() -> put_trained_model::RequestBody {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn trained_models() {
+    let _ml = ML.lock().await;
     let client = client();
     let model = id("ml-tree");
     let put = send(
@@ -1020,6 +1039,7 @@ async fn trained_models() {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn deployments() {
+    let _ml = ML.lock().await;
     let client = client();
     if License::from_env() != License::Trial {
         let started = send(
