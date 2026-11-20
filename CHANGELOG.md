@@ -26,6 +26,11 @@ specification it's generated from.
 - **X-Pack information and usage** (`oxsearch-xpack`, the `xpack` feature),
   generated from the specification: the cluster's build, its license and
   the features it makes available, and each feature's usage statistics.
+- **The cat APIs** (`oxsearch-cat`, the `cat` feature), generated from the
+  specification: every table, from indices, nodes and shards to tasks,
+  snapshots and machine learning's jobs, read as typed rows. The requests
+  always ask for the JSON form (`format=json`); the list of tables, which
+  is text whatever the format, reads as a `String`.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
