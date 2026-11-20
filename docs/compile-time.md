@@ -36,10 +36,10 @@ The transport has been a default feature since DESIGN.md's question 5 was decide
 | | M-series Mac, 18 cores | CI (`ubuntu-latest`, 4 cores) |
 |---|--:|--:|
 | Clean build, AI-search features only | 20.6 s wall, 41 s of CPU | |
-| Clean build, default features (with the transport) | 17.6 s wall, 80 s of CPU | to come |
+| Clean build, default features (with the transport) | 17.6 s wall, 80 s of CPU | 37 s |
 
-On a machine with many cores the transport builds alongside the generated crates and costs no wall time; on CI's four it nearly doubles the work. aws-lc-sys's build script is 4 s of it; rustls, reqwest, hyper and tokio most of the rest.
+The transport nearly doubles the work, but it builds alongside the generated crates, and the clean build takes no longer: 37 s on CI, as before. aws-lc-sys's build script is 4 s of it; rustls, reqwest, hyper and tokio most of the rest.
 
 ## The budget
 
-The CI job `compile-time` runs `cargo build -p oxsearch --timings` from a clean target directory, so it times the default features, transport included. It fails if the build takes longer than `BUDGET_SECONDS`, and keeps `cargo-timing.html` as an artifact. The budget is 120 s until CI has measured the build with the transport on by default, when it becomes about 1.5 times that figure, which allows for the variance of shared runners. It was 60 s, 1.5 times the 37 s CI measured on 2026-10-15 without the transport. Raise it only on purpose, with the reason in the commit.
+The CI job `compile-time` runs `cargo build -p oxsearch --timings` from a clean target directory, so it times the default features, transport included. It fails if the build takes longer than `BUDGET_SECONDS`, and keeps `cargo-timing.html` as an artifact. The budget is 60 s, about 1.5 times the 37 s CI measured, which allows for the variance of shared runners. CI measured 37 s on 2026-10-15 without the transport and again on 2026-11-20 with it, so turning the transport on left the budget where it was. Raise it only on purpose, with the reason in the commit.
