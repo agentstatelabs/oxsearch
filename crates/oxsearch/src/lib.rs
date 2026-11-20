@@ -6,7 +6,9 @@
 //! retrieval half of a RAG application on any license.
 //!
 //! This crate re-exports the others behind features. The defaults are the
-//! AI-search set: `search`, `docs`, `mapping` and `inference`. The other
+//! AI-search set, `search`, `docs`, `mapping` and `inference`, and
+//! `transport-reqwest`, the HTTP transport; with a transport of your own,
+//! set `default-features = false` and name the areas you use. The other
 //! areas generated so far are `aggs` (aggregations with typed results),
 //! `esql` (ES|QL, with a typed builder and rows read into your own types;
 //! `esql-arrow` adds Arrow output), `admin` (cluster, index and node
@@ -15,9 +17,9 @@
 //! sets), `snapshot` (repositories and snapshots), `ilm` (index lifecycle
 //! policies), `async-search`, `eql`, `sql`, `search-application` (search
 //! templates behind a name), `enrich` (enrich policies), `license`,
-//! `analysis` and `tasks`. `document` adds the typed document layer and `derive` its derive
-//! macro, `helpers` the point-in-time scan and the bulk loader, and
-//! `transport-reqwest` the default HTTP transport.
+//! `analysis` and `tasks`. `document` adds the typed document layer and
+//! `derive` its derive macro, and `helpers` the point-in-time scan and the
+//! bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the

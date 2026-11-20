@@ -9,7 +9,7 @@
 //!
 //! ```text
 //! scripts/es-fixture.sh up
-//! cargo run -p oxsearch --example escape_hatches --features transport-reqwest
+//! cargo run -p oxsearch --example escape_hatches
 //! ```
 
 use oxsearch::docs::index;

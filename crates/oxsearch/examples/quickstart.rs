@@ -4,7 +4,7 @@
 //!
 //! ```text
 //! scripts/es-fixture.sh up trial
-//! cargo run -p oxsearch --example quickstart --features derive,transport-reqwest
+//! cargo run -p oxsearch --example quickstart --features derive
 //! ```
 
 use oxsearch::document::{Document, Indexes};
