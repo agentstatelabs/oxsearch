@@ -1,0 +1,33 @@
+---
+title: Connecting to a cluster
+description: Several nodes with failover, retries with backoff, sniffing, and credentials.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Example from '../../../components/Example.astro';
+
+`ReqwestTransport::new(url)` sends each request once, to one node. For a cluster in production, its builder adds the layers you need, each one opt-in.
+
+<Example file="crates/oxsearch/examples/transport.rs" doc="toml" />
+
+<Example file="crates/oxsearch/examples/transport.rs" region="builder" />
+
+<Example file="crates/oxsearch/examples/transport.rs" region="calls" />
+
+## The layers
+
+- **Nodes and failover.** Requests go to the nodes in turn. A node that fails rests, for a minute after its first failure and twice as long after each one in a row, up to half an hour; then it's tried again. When every node rests, the one resting least is tried.
+- **Retries** (`retries`, none by default). A request that couldn't reach a node, or that a node answered with 502, 503 or 504, goes to the next node. One answered with 429 goes again after a growing backoff. Timeouts are retried only with `retry_on_timeout`, since the node may have acted on the request.
+- **Sniffing** (`sniff_every`, `sniff_on_failure`): the node list is refreshed from the cluster's own list of HTTP addresses.
+- **Credentials** (`auth`): basic, bearer or an API key, on every request. `cloud_id` takes an Elastic Cloud deployment's ID in place of node URLs.
+- **Compression**: with the transport crate's `gzip` feature, request bodies are compressed and compressed responses accepted.
+
+The transport is a trait in `oxsearch-core`, `Transport`, and the generated crates depend only on it. A layer of your own is a `Transport` that wraps another, and `oxsearch::auth` signs requests with credentials that refresh, such as short-lived tokens.
+
+## Telemetry
+
+Each request records a span, named for its endpoint, and its duration, through the `tracing` and `metrics` facades, following OpenTelemetry's conventions for Elasticsearch. The transport adds where the request went and each retry. Install a subscriber and a recorder, such as [oxtel](https://github.com/agentstatelabs/oxtel)'s, to export them.
+
+<Aside>
+	Search requests record their body as `db.query.text`, with every value replaced by `?`, so the query's shape is there and its values aren't. `oxsearch::telemetry::record_query_text(false)` turns it off.
+</Aside>

@@ -1,0 +1,17 @@
+/* A placeholder identity until there's a logo: a teal accent on
+   Starlight's defaults, and system fonts only, so the site loads nothing
+   from anyone else. */
+
+/* Dark mode. */
+:root {
+	--sl-color-accent-low: #083344;
+	--sl-color-accent: #06b6d4;
+	--sl-color-accent-high: #a5f3fc;
+}
+
+/* Light mode. */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #cffafe;
+	--sl-color-accent: #0e7490;
+	--sl-color-accent-high: #164e63;
+}

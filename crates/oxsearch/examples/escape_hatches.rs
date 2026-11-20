@@ -24,6 +24,7 @@ use serde_json::{Value, json};
 
 const INDEX: &str = "oxsearch-example-escape-hatches";
 
+// ANCHOR: endpoint
 /// 1. An endpoint of your own: creating an index, whose API isn't
 ///    generated yet. It goes through the client like any other, with the
 ///    same transport, errors and, later, middleware.
@@ -59,6 +60,7 @@ impl Endpoint for CreateIndex<'_> {
         Body::json(&json!({ "mappings": self.mappings })).map(Some)
     }
 }
+// ANCHOR_END: endpoint
 
 /// Another: counting an index's documents with the cat API, whose rows
 /// come back as an array.
@@ -133,6 +135,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let rows = client.send(&CatCount { index: INDEX }).await?;
     println!("{} documents", rows[0].count);
 
+    // ANCHOR: raw-variants
     // 2. Raw variants. A query the types don't know, written as JSON...
     let query_string = QueryContainer::Raw(json!({
         "query_string": { "query": "hnsw OR graphs", "default_field": "text" }
@@ -151,12 +154,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     // A value a newer Elasticsearch writes still reads: as a raw variant.
     let order: SortOrder = serde_json::from_value(json!("sideways"))?;
     println!("an unknown sort order reads as {order:?}");
+    // ANCHOR_END: raw-variants
 
+    // ANCHOR: raw-call
     // 3. A raw call, for anything else.
     let health = client
         .send_raw(Method::Get, "/_cluster/health", None)
         .await?;
     println!("cluster status: {}", health["status"]);
+    // ANCHOR_END: raw-call
 
     client
         .send_raw(Method::Delete, &format!("/{INDEX}"), None)

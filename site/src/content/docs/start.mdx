@@ -1,0 +1,47 @@
+---
+title: Get started
+description: Add oxsearch to an application, start Elasticsearch, and run semantic search over your own documents.
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import Example from '../../components/Example.astro';
+
+oxsearch needs Rust 1.95 or newer, and Elasticsearch 9.
+
+<Steps>
+
+1. **Add the dependencies.** oxsearch, serde for your document type, and Tokio to run it:
+
+   <Example file="crates/oxsearch/examples/quickstart.rs" doc="toml" />
+
+   `derive` turns on the typed document layer and its derive macro. `transport-reqwest`, the HTTP transport, is one of the default features from the release after 0.2; naming it does no harm.
+
+2. **Start Elasticsearch.** Any cluster of Elasticsearch 9 will do. In the repository, the test fixture is one node in Docker:
+
+   <Example file="crates/oxsearch/examples/quickstart.rs" doc="text" />
+
+   The example embeds text with ELSER, Elastic's sparse model, which needs a license above Basic, such as the trial the fixture starts. On Basic, [the AI search guide](/guide/ai-search/) brings its own embeddings instead.
+
+3. **Write the code.**
+
+   <Example file="crates/oxsearch/examples/quickstart.rs" />
+
+</Steps>
+
+## What it does
+
+- `#[derive(Document)]` reads the struct: `#[index(…)]` names its index, and `#[semantic_text]` maps `text` as a `semantic_text` field, which Elasticsearch embeds as documents are indexed.
+- `client.index::<Passage>()` is an `Index<Passage>`, which reads, writes and searches that type. `refresh(Refresh::WaitFor)` makes each write wait until searches can see it.
+- `ensure_mapping` creates the index with the type's mapping if it doesn't exist, adds the fields an existing one lacks, and reports fields mapped differently, which it never changes.
+- `Passage::TEXT` is the field's handle. A `semantic_text` field offers `semantic`; a keyword field would offer `term` and `terms` instead.
+- Each hit carries its score and its source, read back as a `Passage`.
+
+<Aside title="When something fails">
+	Every call returns `Result<_, oxsearch::Error>`. A request for a feature the cluster's license doesn't include fails with `Error::License`, which names the feature; Elasticsearch's own errors are `Error::Elasticsearch`, with the status and the error's type and reason.
+</Aside>
+
+## Next
+
+- [Your own document types](/guide/documents/): more of the document layer.
+- [Connecting to a cluster](/guide/transport/): several nodes, retries and credentials.
+- [The overview](/guide/): what each feature adds.

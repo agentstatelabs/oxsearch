@@ -129,6 +129,9 @@ jobs:
         run: |
           cargo run -p oxsearch --example rag --features admin
           cargo run -p oxsearch --example escape_hatches
+          cargo run -p oxsearch --example analytics --features admin,aggs,esql
+          cargo run -p oxsearch --example transport
+          cargo run -p oxsearch --example documents --features derive
           # semantic_text's default model, ELSER, needs a trial.
           if [ "${OXSEARCH_TEST_LICENSE}" = trial ]; then
             cargo run -p oxsearch --example quickstart --features derive

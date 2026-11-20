@@ -70,6 +70,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 
 ## Versions
 
+<!-- ANCHOR: versions -->
 oxsearch's versions are its own, 0.N while its API settles. Each release is generated from one branch of the [Elasticsearch specification](https://github.com/elastic/elasticsearch-specification), one Elasticsearch minor, and tested against that minor:
 
 | oxsearch | Specification branch (commit) | Tested against |
@@ -78,9 +79,11 @@ oxsearch's versions are its own, 0.N while its API settles. Each release is gene
 | 0.1 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 
 Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch.
+<!-- ANCHOR_END: versions -->
 
 ## Licenses of Elasticsearch features
 
+<!-- ANCHOR: licenses -->
 Every API is generated whatever the license; a request for a feature the cluster's license doesn't include fails with `Error::License`. What the integration tests show on Elasticsearch 9.5:
 
 | Feature | Basic | Above Basic (trial) |
@@ -96,6 +99,7 @@ Every API is generated whatever the license; a request for a feature the cluster
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |
 
 Elastic's subscription matrix is the authority, and it has moved between releases.
+<!-- ANCHOR_END: licenses -->
 
 ## Development
 

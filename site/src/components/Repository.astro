@@ -1,0 +1,17 @@
+---
+// Shows Markdown the repository keeps, such as the coverage report, as it
+// is when the site is built; see src/content.config.ts.
+import { getEntry, render } from 'astro:content';
+
+interface Props {
+	part: 'coverage' | 'licenses' | 'versions';
+}
+
+const entry = await getEntry('repository', Astro.props.part);
+if (!entry) {
+	throw new Error(`the repository has no part "${Astro.props.part}"`);
+}
+const { Content } = await render(entry);
+---
+
+<Content />
