@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API: 289 endpoints, tested against the specification's own examples, and 183 of them against Elasticsearch 9 on the Basic license and a trial. Security, machine learning, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning. That's 362 endpoints, tested against the specification's own examples, and 256 of them against Elasticsearch 9 on the Basic license and a trial. Security, Watcher, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -57,6 +57,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Search relevance**: query rules that pin documents for matching queries (`oxsearch::query_rules`, the `query-rules` feature) and synonym sets that analyzers read and update without reindexing (`oxsearch::synonyms`, the `synonyms` feature).
 - **More ways to query**: async search, EQL and SQL (`oxsearch::async_search`, `oxsearch::eql`, `oxsearch::sql`), search applications (`oxsearch::search_application`) and enrich policies (`oxsearch::enrich`), each behind the feature of its name.
 - **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
+- **Machine learning** (`oxsearch::ml`, the `ml` feature): anomaly detection jobs with their datafeeds, results, forecasts and model snapshots; calendars and filters; data frame analytics; and trained models, imported, inferred with and deployed.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
 - **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.
@@ -91,6 +92,8 @@ Every API is generated whatever the license; a request for a feature the cluster
 | `rrf` and `linear` retrievers (server-side fusion) | | ✓ |
 | `rule` and `text_similarity_reranker` retrievers | | ✓ |
 | `semantic_text` with ELSER, and other machine learning models, including the ingest inference processor | | ✓ |
+| Machine learning: anomaly detection, data frame analytics, trained models and their deployments | | ✓ |
+| Machine learning: validating a detector, and filters | ✓ | ✓ |
 | ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, ILM, administration | ✓ | ✓ |
 | ES\|QL `FUSE` | | ✓ |
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |

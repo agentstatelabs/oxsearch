@@ -290,12 +290,28 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
         ("nodes.info", "NodeInfoXpackMl", "use_auto_machine_memory_percent") => {
             Some(Ty::Prim("::std::string::String"))
         }
+        // Times in milliseconds since the Epoch, which outgrow an `integer`
+        // (`1700168400000`).
+        ("ml.flush_job", "Response", "last_finalized_bucket_end")
+        | ("ml._types", "ModelSnapshot", "latest_record_time_stamp" | "latest_result_time_stamp") => {
+            Some(Ty::Prim("i64"))
+        }
         // A multi-valued column's cell is an array, which a field value
         // isn't.
         ("esql._types", "EsqlResult", "values") => {
             Some(Ty::Vec(Box::new(Ty::Vec(Box::new(Ty::Json)))))
         }
         _ => None,
+    }
+}
+
+/// A byte count the specification types as an `integer`: generated as an
+/// `i64`, as most byte counts are, since a node's memory outgrows 32 bits
+/// (`ml.get_memory_stats` reports 8 GB as `8317267968`).
+fn widened(property: &str, ty: Ty) -> Ty {
+    match ty {
+        Ty::Prim("i32") if property.ends_with("_in_bytes") => Ty::Prim("i64"),
+        ty => ty,
     }
 }
 
@@ -602,7 +618,7 @@ impl<'g> Ir<'g> {
         let used = &mut names.used;
         let ty = match corrected(self.graph.name(ctx.declaring), &p.name) {
             Some(ty) => ty,
-            None => self.ty(ctx, &p.value)?,
+            None => widened(&p.name, self.ty(ctx, &p.value)?),
         };
         Ok(Field {
             wire: p.name.clone(),

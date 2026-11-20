@@ -22,7 +22,8 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-sql` | 6 | 6 (100%) |
 | `oxsearch-search-application` | 10 | 6 (60%) |
 | `oxsearch-enrich` | 5 | 5 (100%) |
-| all | 289 | 183 (63%) |
+| `oxsearch-ml` | 73 | 73 (100%) |
+| all | 362 | 256 (70%) |
 
 ## `oxsearch-core`
 
@@ -120,4 +121,9 @@ Not tested yet: `search_application.delete_behavioral_analytics`, `search_applic
 ## `oxsearch-enrich`
 
 Tested: `enrich.delete_policy`, `enrich.execute_policy`, `enrich.get_policy`, `enrich.put_policy`, `enrich.stats`.
+
+
+## `oxsearch-ml`
+
+Tested: `ml.clear_trained_model_deployment_cache`, `ml.close_job`, `ml.delete_calendar`, `ml.delete_calendar_event`, `ml.delete_calendar_job`, `ml.delete_data_frame_analytics`, `ml.delete_datafeed`, `ml.delete_expired_data`, `ml.delete_filter`, `ml.delete_forecast`, `ml.delete_job`, `ml.delete_model_snapshot`, `ml.delete_trained_model`, `ml.delete_trained_model_alias`, `ml.estimate_model_memory`, `ml.evaluate_data_frame`, `ml.explain_data_frame_analytics`, `ml.flush_job`, `ml.forecast`, `ml.get_buckets`, `ml.get_calendar_events`, `ml.get_calendars`, `ml.get_categories`, `ml.get_data_frame_analytics`, `ml.get_data_frame_analytics_stats`, `ml.get_datafeed_stats`, `ml.get_datafeeds`, `ml.get_filters`, `ml.get_influencers`, `ml.get_job_stats`, `ml.get_jobs`, `ml.get_memory_stats`, `ml.get_model_snapshot_upgrade_stats`, `ml.get_model_snapshots`, `ml.get_overall_buckets`, `ml.get_records`, `ml.get_trained_models`, `ml.get_trained_models_stats`, `ml.infer_trained_model`, `ml.info`, `ml.open_job`, `ml.post_calendar_events`, `ml.post_data`, `ml.preview_data_frame_analytics`, `ml.preview_datafeed`, `ml.put_calendar`, `ml.put_calendar_job`, `ml.put_data_frame_analytics`, `ml.put_datafeed`, `ml.put_filter`, `ml.put_job`, `ml.put_trained_model`, `ml.put_trained_model_alias`, `ml.put_trained_model_definition_part`, `ml.put_trained_model_vocabulary`, `ml.reset_job`, `ml.revert_model_snapshot`, `ml.set_upgrade_mode`, `ml.start_data_frame_analytics`, `ml.start_datafeed`, `ml.start_trained_model_deployment`, `ml.stop_data_frame_analytics`, `ml.stop_datafeed`, `ml.stop_trained_model_deployment`, `ml.update_data_frame_analytics`, `ml.update_datafeed`, `ml.update_filter`, `ml.update_job`, `ml.update_model_snapshot`, `ml.update_trained_model_deployment`, `ml.upgrade_job_snapshot`, `ml.validate`, `ml.validate_detector`.
 
