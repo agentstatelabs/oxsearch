@@ -19,9 +19,10 @@
 //! `sql`, `search-application` (search templates behind a name), `enrich`
 //! (enrich policies), `ml` (machine learning: anomaly detection, data frame
 //! analytics and trained models), `watcher` (watches that run a search on a
-//! schedule and act on it), `license`, `analysis` and `tasks`. `document`
-//! adds the typed document layer and `derive` its derive macro, and
-//! `helpers` the point-in-time scan and the bulk loader.
+//! schedule and act on it), `xpack` (the cluster's features and their
+//! usage), `license`, `analysis` and `tasks`. `document` adds the typed
+//! document layer and `derive` its derive macro, and `helpers` the
+//! point-in-time scan and the bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -127,3 +128,5 @@ pub use oxsearch_tasks as tasks;
 pub use oxsearch_transport_reqwest as transport_reqwest;
 #[cfg(feature = "watcher")]
 pub use oxsearch_watcher as watcher;
+#[cfg(feature = "xpack")]
+pub use oxsearch_xpack as xpack;

@@ -1273,6 +1273,7 @@ dependencies = [
  "oxsearch-tasks",
  "oxsearch-transport-reqwest",
  "oxsearch-watcher",
+ "oxsearch-xpack",
  "serde",
  "serde_json",
  "tokio",
@@ -1653,6 +1654,21 @@ dependencies = [
  "oxsearch-core",
  "oxsearch-search",
  "oxsearch-watcher",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-xpack"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-license",
+ "oxsearch-ml",
+ "oxsearch-slm",
+ "oxsearch-xpack",
  "serde",
  "serde_json",
  "serde_path_to_error",

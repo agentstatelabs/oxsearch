@@ -25,7 +25,8 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-ml` | 73 | 73 (100%) |
 | `oxsearch-watcher` | 13 | 13 (100%) |
 | `oxsearch-slm` | 9 | 9 (100%) |
-| all | 384 | 278 (72%) |
+| `oxsearch-xpack` | 2 | 2 (100%) |
+| all | 386 | 280 (72%) |
 
 ## `oxsearch-core`
 
@@ -138,4 +139,9 @@ Tested: `watcher.ack_watch`, `watcher.activate_watch`, `watcher.deactivate_watch
 ## `oxsearch-slm`
 
 Tested: `slm.delete_lifecycle`, `slm.execute_lifecycle`, `slm.execute_retention`, `slm.get_lifecycle`, `slm.get_stats`, `slm.get_status`, `slm.put_lifecycle`, `slm.start`, `slm.stop`.
+
+
+## `oxsearch-xpack`
+
+Tested: `xpack.info`, `xpack.usage`.
 
