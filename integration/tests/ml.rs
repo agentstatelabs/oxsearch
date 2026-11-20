@@ -66,17 +66,19 @@ fn id(prefix: &str) -> String {
 
 /// Sends a request, and again while machine learning's own indices are
 /// being created: on a fresh cluster, the first calls, made at once by
-/// several tests, can find those indices' shards not yet allocated (503).
+/// several tests, can find those indices' shards not yet allocated, as a
+/// 503 or inside a 500 ("error deleting prior documents").
 async fn send<E: Endpoint>(client: &TestClient, request: &E) -> Result<E::Response, Error> {
     let deadline = Instant::now() + Duration::from_secs(60);
     loop {
         match client.send(request).await {
             Err(Error::Elasticsearch(e))
-                if e.status == 503
+                if (e.status == 500 || e.status == 503)
                     && Instant::now() < deadline
                     && [
                         "no_shard_available_action_exception",
                         "unavailable_shards_exception",
+                        "due to missing shards",
                     ]
                     .iter()
                     .any(|t| e.body.to_string().contains(t)) =>
