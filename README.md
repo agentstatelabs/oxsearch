@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, and X-Pack information and usage. That's 386 endpoints, tested against the specification's own examples, and 280 of them against Elasticsearch 9 on the Basic license and a trial. Security, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, and the cat APIs. That's 413 endpoints, tested against the specification's own examples, and 307 of them against Elasticsearch 9 on the Basic license and a trial. Security, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -60,6 +60,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Machine learning** (`oxsearch::ml`, the `ml` feature): anomaly detection jobs with their datafeeds, results, forecasts and model snapshots; calendars and filters; data frame analytics; and trained models, imported, inferred with and deployed.
 - **Alerting** (`oxsearch::watcher`, the `watcher` feature): watches that run an input, such as a search, on a schedule, test a condition and act, put, run, acknowledged, activated and deactivated, and the Watcher service itself.
 - **What the cluster offers** (`oxsearch::xpack`, the `xpack` feature): its build, its license and which features it makes available, and how much each is used.
+- **The cat APIs** (`oxsearch::cat`, the `cat` feature): the compact tables of indices, nodes, shards, allocation, tasks, snapshots and the rest, read as typed rows from their JSON form.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
 - **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.

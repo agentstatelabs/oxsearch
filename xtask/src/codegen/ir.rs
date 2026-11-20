@@ -227,6 +227,9 @@ pub struct Request {
     pub query: Vec<Field>,
     /// The body, if it has one.
     pub body: Option<Ty>,
+    /// Query parameters always sent, by name: `format=json` for the cat
+    /// APIs, whose rows are read from their JSON form.
+    pub fixed: Vec<(&'static str, &'static str)>,
 }
 
 /// Where a specification type lives in Rust.
@@ -568,7 +571,20 @@ impl<'g> Ir<'g> {
                     ident: location.ident,
                     doc: t.description.clone(),
                     generics: t.generics.iter().map(|g| g.name.clone()).collect(),
-                    kind: ItemKind::Request(Request { path, query, body }),
+                    kind: ItemKind::Request(Request {
+                        path,
+                        query,
+                        body,
+                        fixed: if t
+                            .attached_behaviors
+                            .iter()
+                            .any(|b| b == "CommonCatQueryParameters")
+                        {
+                            vec![("format", "json")]
+                        } else {
+                            Vec::new()
+                        },
+                    }),
                 }
             }
             TypeDefinition::Response(t) => {
