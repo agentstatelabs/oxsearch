@@ -401,7 +401,34 @@ impl<'g> Ir<'g> {
         ir.propagate(AGGREGATIONS);
         ir.tolerate_responses();
         ir.choose_boxes();
+        ir.box_search_bodies();
         Ok(ir)
+    }
+
+    /// Boxes a whole search request's body where another area's type holds
+    /// it, such as a watch's search input. It's 11 KB, and held by value
+    /// five types deep, reading a watch in a debug build takes more than a
+    /// 2 MiB thread's stack. The search crate's own types hold it by value,
+    /// as they always have.
+    fn box_search_bodies(&mut self) {
+        let name = TypeName {
+            namespace: "_global.search._types".to_owned(),
+            name: "SearchRequestBody".to_owned(),
+        };
+        let Some(&body) = self.graph.find(&name).and_then(|i| self.item_of.get(&i)) else {
+            return;
+        };
+        let home = self.items[body].krate.clone();
+        for (from, out) in self.by_value().into_iter().enumerate() {
+            if self.items[from].krate == home {
+                continue;
+            }
+            for (to, position) in out {
+                if to == body {
+                    self.boxed.insert((from, to, position));
+                }
+            }
+        }
     }
 
     fn location(&self, i: usize) -> &Location {

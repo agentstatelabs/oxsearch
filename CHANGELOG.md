@@ -14,6 +14,11 @@ specification it's generated from.
   analytics; and trained models, imported, inferred with and deployed.
   Machine learning needs a license above Basic, and the integration tests
   run it on a trial.
+- **Watcher** (`oxsearch-watcher`, the `watcher` feature), generated from
+  the specification: watches that run an input, such as a search, on a
+  schedule, test a condition and act, put, run, acknowledged, activated
+  and deactivated, found by a query; and the Watcher service's settings,
+  statistics, start and stop. Watcher needs a license above Basic.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
@@ -30,6 +35,13 @@ specification it's generated from.
 - `oxsearch_core::NodeAttributes`, which machine learning's responses
   carry too, takes a missing name, ephemeral ID or transport address as
   `None`, as other response types do; the three fields are `Option`s.
+- `oxsearch_core::SearchTransform`, which a watch's response carries, takes
+  a missing `request` as `None` by the same rule.
+- A whole search request's body inside another area's type, such as a
+  watch's search input, is boxed: at 11 KB, held by value several types
+  deep, reading a watch in a debug build ran out of a 2 MiB thread's stack.
+  The generated example tests run on a thread with a larger stack for the
+  same reason.
 
 ## [0.2.0] - 2026-10-20
 
