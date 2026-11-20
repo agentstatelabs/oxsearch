@@ -15,13 +15,13 @@
 //! administration), `ingest` (pipelines and processors), `query-rules`
 //! (results pinned or excluded for matching queries), `synonyms` (synonym
 //! sets), `snapshot` (repositories and snapshots), `ilm` (index lifecycle
-//! policies), `async-search`, `eql`, `sql`, `search-application` (search
-//! templates behind a name), `enrich` (enrich policies), `ml` (machine
-//! learning: anomaly detection, data frame analytics and trained models),
-//! `watcher` (watches that run a search on a schedule and act on it),
-//! `license`, `analysis` and `tasks`. `document` adds the typed document layer and
-//! `derive` its derive macro, and `helpers` the point-in-time scan and the
-//! bulk loader.
+//! policies), `slm` (snapshot lifecycle policies), `async-search`, `eql`,
+//! `sql`, `search-application` (search templates behind a name), `enrich`
+//! (enrich policies), `ml` (machine learning: anomaly detection, data frame
+//! analytics and trained models), `watcher` (watches that run a search on a
+//! schedule and act on it), `license`, `analysis` and `tasks`. `document`
+//! adds the typed document layer and `derive` its derive macro, and
+//! `helpers` the point-in-time scan and the bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -113,6 +113,8 @@ pub use oxsearch_search as search;
 pub use oxsearch_search::fusion;
 #[cfg(feature = "search-application")]
 pub use oxsearch_search_application as search_application;
+#[cfg(feature = "slm")]
+pub use oxsearch_slm as slm;
 #[cfg(feature = "snapshot")]
 pub use oxsearch_snapshot as snapshot;
 #[cfg(feature = "sql")]
