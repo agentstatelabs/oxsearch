@@ -1,0 +1,4 @@
+2 exact, 1 normalized, 0 failing
+migration.deprecations response DeprecationInfoResponseExample1: normalized at /data_streams (added)
+migration.get_feature_upgrade_status response GetFeatureUpgradeStatusResponseExample1: exact
+migration.post_feature_upgrade response PostFeatureUpgradeResponseExample1: exact

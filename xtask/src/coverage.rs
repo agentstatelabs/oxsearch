@@ -12,6 +12,31 @@ use crate::graph::Graph;
 use crate::placement::Placement;
 use crate::spec::model::Endpoint;
 
+/// What a single-node fixture can't give an area's tests, by crate.
+const LIMITS: &[(&str, &str)] = &[
+    (
+        "ccr",
+        "Tested on the trial only. The fixture follows its own indices, through a remote \
+         cluster that points back at its node; following another cluster isn't tested.",
+    ),
+    (
+        "searchable_snapshots",
+        "Mounting is tested on the trial only, as a full copy: the fixture's node has no \
+         shared cache, so its cache statistics count no regions.",
+    ),
+    (
+        "dangling_indices",
+        "A single node can't leave an index dangling, so the import and the delete are \
+         tested on a UUID no node has, which Elasticsearch refuses.",
+    ),
+    ("autoscaling", "Tested on the trial only."),
+    (
+        "migration",
+        "A cluster on the current version has no system features to upgrade, so the \
+         upgrade asked for is declined.",
+    ),
+];
+
 /// An endpoint the generator wrote, and where.
 struct Generated<'a> {
     name: &'a str,
@@ -109,6 +134,12 @@ pub fn report(
         }
         if !no.is_empty() {
             out.push_str(&format!("Not tested yet: {}.\n", list(no)));
+        }
+        if let Some((_, note)) = LIMITS.iter().find(|(k, _)| k == krate) {
+            if !no.is_empty() {
+                out.push('\n');
+            }
+            out.push_str(&format!("{note}\n\n"));
         }
     }
     if !elsewhere.is_empty() {

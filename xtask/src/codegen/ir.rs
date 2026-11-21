@@ -299,6 +299,11 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
         | ("ml._types", "ModelSnapshot", "latest_record_time_stamp" | "latest_result_time_stamp") => {
             Some(Ty::Prim("i64"))
         }
+        // The capacity autoscaling calls for, in bytes, which outgrows an
+        // `integer` past 2 GiB.
+        ("autoscaling.get_autoscaling_capacity", "AutoscalingResources", "storage" | "memory") => {
+            Some(Ty::Prim("i64"))
+        }
         // How many times Watcher ran an action, which the specification
         // types as a duration.
         ("xpack.usage", "WatcherActionTotals", "total") => Some(Ty::Prim("i64")),
@@ -307,8 +312,46 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
         ("esql._types", "EsqlResult", "values") => {
             Some(Ty::Vec(Box::new(Ty::Vec(Box::new(Ty::Json)))))
         }
+        // Each feature reset and how that went, `{"feature_name": "security",
+        // "status": "SUCCESS"}`, which the specification types as the
+        // features listed, `{"name", "description"}`: no type in it fits.
+        ("features.reset_features", "Response", "features") => Some(Ty::Vec(Box::new(Ty::Json))),
+        // A numeric field's statistics, which are doubles: a mean like
+        // `387.0833333333333`, and a double field's bounds.
+        (
+            "text_structure._types",
+            "FieldStat",
+            "mean_value" | "median_value" | "max_value" | "min_value",
+        ) => Some(Ty::Prim("f64")),
         _ => None,
     }
+}
+
+/// The name Elasticsearch writes for a property the specification
+/// misspells, by the declaring type's namespace and name.
+fn respelled(declaring: &TypeName, property: &str) -> Option<&'static str> {
+    match (
+        declaring.namespace.as_str(),
+        declaring.name.as_str(),
+        property,
+    ) {
+        // When the node's shutdown was asked for.
+        ("shutdown.get_node", "NodeShutdownStatus", "shutdown_startedmillis") => {
+            Some("shutdown_started_millis")
+        }
+        _ => None,
+    }
+}
+
+/// An enum Elasticsearch writes in upper case, though the specification
+/// lists its values in lower case: each member reads either way, and is
+/// written as listed, which Elasticsearch takes too.
+fn upper_cased(name: &TypeName) -> bool {
+    matches!(
+        (name.namespace.as_str(), name.name.as_str()),
+        // A node shutdown's type and progress, `RESTART` and `IN_PROGRESS`.
+        ("shutdown.get_node", "ShutdownStatus" | "ShutdownType")
+    )
 }
 
 /// A property the specification types as another area's type where its own
@@ -477,6 +520,7 @@ impl<'g> Ir<'g> {
             },
             TypeDefinition::Enum(t) => {
                 let mut used = BTreeSet::new();
+                let upper = upper_cased(&t.name);
                 let members = t
                     .members
                     .iter()
@@ -485,10 +529,14 @@ impl<'g> Ir<'g> {
                         if ident == "Raw" {
                             ident = "RawValue".to_owned();
                         }
+                        let mut aliases = m.aliases.clone();
+                        if upper {
+                            aliases.push(m.name.to_uppercase());
+                        }
                         EnumMember {
                             ident: unique(&mut used, ident),
                             wire: m.name.clone(),
-                            aliases: m.aliases.clone(),
+                            aliases,
                             doc: m.description.clone(),
                         }
                     })
@@ -672,7 +720,16 @@ impl<'g> Ir<'g> {
         p: &Property,
         names: &mut FieldNames,
     ) -> Result<Field, Error> {
-        let mut ident = snake(&p.name);
+        let declaring = self.graph.name(ctx.declaring);
+        // A misspelt property goes by the name Elasticsearch writes, and
+        // reads the specification's too.
+        let respelt = respelled(declaring, &p.name);
+        let wire = respelt.unwrap_or(&p.name);
+        let mut aliases = p.aliases.clone();
+        if respelt.is_some() {
+            aliases.push(p.name.clone());
+        }
+        let mut ident = snake(wire);
         // An underscore property whose plain name another one takes keeps
         // its underscore, whichever comes first: `_nodes` beside `nodes`.
         if p.name.starts_with('_') && (names.plain.contains(&ident) || names.used.contains(&ident))
@@ -680,7 +737,6 @@ impl<'g> Ir<'g> {
             ident = format!("_{ident}");
         }
         let used = &mut names.used;
-        let declaring = self.graph.name(ctx.declaring);
         let retarget = retargeted(declaring, &p.name).and_then(|(namespace, name)| {
             self.graph.find(&TypeName {
                 namespace: namespace.to_owned(),
@@ -696,14 +752,14 @@ impl<'g> Ir<'g> {
             (None, None) => widened(&p.name, self.ty(ctx, &p.value)?),
         };
         Ok(Field {
-            wire: p.name.clone(),
+            wire: wire.to_owned(),
             ident: unique(used, ident),
             ty,
             required: p.required,
             optional: !p.required,
             defaulted: false,
             doc: p.description.clone(),
-            aliases: p.aliases.clone(),
+            aliases,
         })
     }
 

@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, security, transforms and rollups. That's 500 endpoints, tested against the specification's own examples, and 394 of them against Elasticsearch 9 on the Basic license and a trial. The cluster operations and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, security, transforms, rollups, and the cluster operations: cross-cluster replication, searchable snapshots, dangling indices, autoscaling, node shutdown, migration, feature states, ingest simulation and text structure. That's 537 endpoints, tested against the specification's own examples, and 431 of them against Elasticsearch 9 on the Basic license and a trial. The other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -61,6 +61,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Alerting** (`oxsearch::watcher`, the `watcher` feature): watches that run an input, such as a search, on a schedule, test a condition and act, put, run, acknowledged, activated and deactivated, and the Watcher service itself.
 - **Security** (`oxsearch::security`, the `security` feature): native users, roles and role mappings, application privileges, API keys and cross-cluster API keys, tokens, service accounts and user profiles; and single sign-on through SAML, OpenID Connect and PKI.
 - **Transforms** (`oxsearch::transform`, the `transform` feature): pivot and latest transforms that summarize one index into another, previewed, run once or continuously, scheduled now, stopped, reset and upgraded; and **rollups** (`oxsearch::rollup`, the `rollup` feature), which Elasticsearch deprecates in favour of downsampling and takes new jobs for only in a cluster that already has rollup indices.
+- **Cluster operations**: cross-cluster replication (`oxsearch::ccr`), searchable snapshots (`oxsearch::searchable_snapshots`), dangling indices (`oxsearch::dangling_indices`), node shutdown and autoscaling (`oxsearch::shutdown`, `oxsearch::autoscaling`), deprecations and system feature upgrades (`oxsearch::migration`), and feature states (`oxsearch::features`), each behind the feature of its name with hyphens (`searchable-snapshots`); and, for data on its way in, ingest simulation against an index's pipelines and mapping (`oxsearch::simulate`) and the structure of log text (`oxsearch::text_structure`).
 - **What the cluster offers** (`oxsearch::xpack`, the `xpack` feature): its build, its license and which features it makes available, and how much each is used.
 - **The cat APIs** (`oxsearch::cat`, the `cat` feature): the compact tables of indices, nodes, shards, allocation, tasks, snapshots and the rest, read as typed rows from their JSON form.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
@@ -104,6 +105,8 @@ Every API is generated whatever the license; a request for a feature the cluster
 | Security: tokens; single sign-on through SAML, OpenID Connect and PKI | | ✓ |
 | ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, snapshot lifecycle policies, ILM, transforms, rollups, administration | ✓ | ✓ |
 | ES\|QL `FUSE` | | ✓ |
+| Cross-cluster replication, searchable snapshots, autoscaling | | ✓ |
+| Node shutdown, dangling indices, migration, feature states, ingest simulation, text structure | ✓ | ✓ |
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |
 
 Elastic's subscription matrix is the authority, and it has moved between releases.
