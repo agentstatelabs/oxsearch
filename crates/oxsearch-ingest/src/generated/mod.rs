@@ -4854,6 +4854,7 @@ pub struct PipelineConfig {
     pub version: ::core::option::Option<::oxsearch_core::VersionNumber>,
     /// Processors used to perform transformations on documents before indexing.
     /// Processors run sequentially in the order specified.
+    #[serde(default = "::core::default::Default::default")]
     pub processors: ::std::vec::Vec<crate::ProcessorContainer>,
 }
 

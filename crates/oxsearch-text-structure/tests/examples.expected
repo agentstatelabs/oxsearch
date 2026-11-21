@@ -1,0 +1,8 @@
+6 exact, 1 normalized, 0 failing
+text_structure.find_field_structure response FindFieldStructureResponseExample1: exact
+text_structure.find_message_structure request FindMessageStructureRequestExample1: exact
+text_structure.find_message_structure response FindMessageStructureResponseExample1: exact
+text_structure.find_structure request FindStructureRequestExample1: exact
+text_structure.find_structure response FindStructureResponseExample1: normalized at /ecs_compatibility (dropped)
+text_structure.test_grok_pattern request TestGrokPatternRequestExample1: exact
+text_structure.test_grok_pattern response TestGrokPatternResponseExample1: exact

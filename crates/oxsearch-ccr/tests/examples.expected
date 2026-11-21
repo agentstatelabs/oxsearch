@@ -1,0 +1,19 @@
+16 exact, 2 normalized, 0 failing
+ccr.delete_auto_follow_pattern response DeleteAutoFollowPatternResponseExample1: exact
+ccr.follow request CreateFollowIndexRequestExample1: exact
+ccr.follow response CreateFollowIndexResponseExample1: exact
+ccr.follow_info response FollowInfoResponseExample1: exact
+ccr.follow_info response FollowInfoResponseExample2: exact
+ccr.follow_stats response FollowIndexStatsResponseExample1: normalized at /indices/0/total_global_checkpoint_lag (dropped)
+ccr.forget_follower request ForgetFollowerIndexRequestExample1: exact
+ccr.forget_follower response ForgetFollowerIndexResponseExample1: exact
+ccr.get_auto_follow_pattern response GetAutoFollowPatternResponseExample1: exact
+ccr.pause_auto_follow_pattern response PauseAutoFollowPatternResponseExample1: exact
+ccr.pause_follow response PauseFollowIndexResponseExample1: exact
+ccr.put_auto_follow_pattern request PutAutoFollowPatternRequestExample1: exact
+ccr.put_auto_follow_pattern response PutAutoFollowPatternResponseExample1: exact
+ccr.resume_auto_follow_pattern response ResumeAutoFollowPatternResponseExample1: exact
+ccr.resume_follow request ResumeFollowIndexRequestExample1: exact
+ccr.resume_follow response ResumeFollowIndexResponseExample1: exact
+ccr.stats response CcrStatsResponseExample1: normalized at /follow_stats/indices/0/total_global_checkpoint_lag (dropped)
+ccr.unfollow response UnfollowIndexResponseExample1: exact

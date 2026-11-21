@@ -47,6 +47,15 @@ pub const CRATES: &[&str] = &[
     "security",
     "transform",
     "rollup",
+    "ccr",
+    "searchable_snapshots",
+    "dangling_indices",
+    "autoscaling",
+    "shutdown",
+    "migration",
+    "features",
+    "simulate",
+    "text_structure",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is

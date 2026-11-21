@@ -49,6 +49,18 @@ specification it's generated from.
   specification: rollup jobs, their capabilities, and search across rollup
   indices. Elasticsearch deprecates rollups in favour of downsampling, and
   takes a new rollup job only in a cluster that already has a rollup index.
+- **The cluster operations**, generated from the specification, each
+  behind the feature of its name: cross-cluster replication
+  (`oxsearch-ccr`), follower indices and auto-follow patterns; searchable
+  snapshots (`oxsearch-searchable-snapshots`), indices mounted from a
+  snapshot; dangling indices (`oxsearch-dangling-indices`); autoscaling
+  policies and node shutdown (`oxsearch-autoscaling`, `oxsearch-shutdown`),
+  which Elasticsearch meant for its orchestrators; deprecations and system
+  feature upgrades (`oxsearch-migration`); feature states and their reset
+  (`oxsearch-features`); ingest simulation against an index's pipelines
+  and mapping (`oxsearch-simulate`); and the structure of log text, with
+  grok pattern tests (`oxsearch-text-structure`). Replication, searchable
+  snapshots and autoscaling need a license above Basic.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
@@ -72,6 +84,9 @@ specification it's generated from.
   deep, reading a watch in a debug build ran out of a 2 MiB thread's stack.
   The generated example tests run on a thread with a larger stack for the
   same reason.
+- `oxsearch_ingest::PipelineConfig`, which text structure's responses
+  carry too, takes missing `processors` as empty, as other response types
+  do.
 
 ## [0.2.0] - 2026-10-20
 
