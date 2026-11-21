@@ -21,9 +21,11 @@
 //! analytics and trained models), `watcher` (watches that run a search on a
 //! schedule and act on it), `xpack` (the cluster's features and their
 //! usage), `cat` (the cat APIs' tables as typed rows), `security` (users,
-//! roles, API keys, tokens and single sign-on), `license`, `analysis` and
-//! `tasks`. `document` adds the typed document layer and `derive` its derive
-//! macro, and `helpers` the point-in-time scan and the bulk loader.
+//! roles, API keys, tokens and single sign-on), `transform` (pivot and
+//! latest transforms), `rollup` (rollup jobs, deprecated upstream),
+//! `license`, `analysis` and `tasks`. `document` adds the typed document
+//! layer and `derive` its derive macro, and `helpers` the point-in-time scan
+//! and the bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -111,6 +113,8 @@ pub use oxsearch_mapping as mapping;
 pub use oxsearch_ml as ml;
 #[cfg(feature = "query-rules")]
 pub use oxsearch_query_rules as query_rules;
+#[cfg(feature = "rollup")]
+pub use oxsearch_rollup as rollup;
 #[cfg(feature = "search")]
 pub use oxsearch_search as search;
 #[cfg(feature = "search")]
@@ -129,6 +133,8 @@ pub use oxsearch_sql as sql;
 pub use oxsearch_synonyms as synonyms;
 #[cfg(feature = "tasks")]
 pub use oxsearch_tasks as tasks;
+#[cfg(feature = "transform")]
+pub use oxsearch_transform as transform;
 #[cfg(feature = "transport-reqwest")]
 pub use oxsearch_transport_reqwest as transport_reqwest;
 #[cfg(feature = "watcher")]
