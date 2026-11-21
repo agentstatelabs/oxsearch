@@ -311,6 +311,24 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
     }
 }
 
+/// A property the specification types as another area's type where its own
+/// area has the right one, by the type's namespace and name.
+fn retargeted(declaring: &TypeName, property: &str) -> Option<(&'static str, &'static str)> {
+    match (
+        declaring.namespace.as_str(),
+        declaring.name.as_str(),
+        property,
+    ) {
+        // The transform's source, as `transform.get_transform` returns it,
+        // rather than a reindex request's: reading it from a response would
+        // make the reindex source's required index optional.
+        ("transform.update_transform", "Response", "source") => {
+            Some(("transform._types", "Source"))
+        }
+        _ => None,
+    }
+}
+
 /// A byte count the specification types as an `integer`: generated as an
 /// `i64`, as most byte counts are, since a node's memory outgrows 32 bits
 /// (`ml.get_memory_stats` reports 8 GB as `8317267968`).
@@ -662,9 +680,20 @@ impl<'g> Ir<'g> {
             ident = format!("_{ident}");
         }
         let used = &mut names.used;
-        let ty = match corrected(self.graph.name(ctx.declaring), &p.name) {
-            Some(ty) => ty,
-            None => widened(&p.name, self.ty(ctx, &p.value)?),
+        let declaring = self.graph.name(ctx.declaring);
+        let retarget = retargeted(declaring, &p.name).and_then(|(namespace, name)| {
+            self.graph.find(&TypeName {
+                namespace: namespace.to_owned(),
+                name: name.to_owned(),
+            })
+        });
+        let ty = match (corrected(declaring, &p.name), retarget) {
+            (Some(ty), _) => ty,
+            (None, Some(target)) => Ty::Named {
+                target,
+                args: Vec::new(),
+            },
+            (None, None) => widened(&p.name, self.ty(ctx, &p.value)?),
         };
         Ok(Field {
             wire: p.name.clone(),

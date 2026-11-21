@@ -40,6 +40,15 @@ specification it's generated from.
   snapshots and machine learning's jobs, read as typed rows. The requests
   always ask for the JSON form (`format=json`); the list of tables, which
   is text whatever the format, reads as a `String`.
+- **Transforms** (`oxsearch-transform`, the `transform` feature), generated
+  from the specification: pivot and latest transforms that summarize one
+  index into another, previewed, run once or continuously, scheduled now,
+  stopped, reset and upgraded; their statistics; and upgrade mode. They run
+  on any license.
+- **Rollups** (`oxsearch-rollup`, the `rollup` feature), generated from the
+  specification: rollup jobs, their capabilities, and search across rollup
+  indices. Elasticsearch deprecates rollups in favour of downsampling, and
+  takes a new rollup job only in a cluster that already has a rollup index.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP

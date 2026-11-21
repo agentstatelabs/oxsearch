@@ -45,6 +45,8 @@ pub const CRATES: &[&str] = &[
     "xpack",
     "cat",
     "security",
+    "transform",
+    "rollup",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is

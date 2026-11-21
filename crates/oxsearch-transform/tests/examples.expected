@@ -1,0 +1,17 @@
+12 exact, 4 normalized, 0 failing
+transform.delete_transform response DeleteTransformResponseExample1: exact
+transform.get_transform response GetTransformResponseExample1: normalized at /transforms/0/source/query/term/geoip.continent_name
+transform.get_transform_stats response GetTransformStatsResponseExample1: exact
+transform.preview_transform request PreviewTransformRequestExample1: exact
+transform.preview_transform response PreviewTransformResponseExample1: exact
+transform.put_transform request PutTransformRequestExample1: normalized at /source/query/term/geoip.continent_name
+transform.put_transform request PutTransformRequestExample2: exact
+transform.put_transform request PutTransformRequestExample3: exact
+transform.put_transform response PutTransformResponseExample1: exact
+transform.reset_transform response ResetTransformResponseExample1: exact
+transform.schedule_now_transform response ScheduleNowTransformResponseExample1: exact
+transform.start_transform response StartTransformResponseExample1: exact
+transform.stop_transform response StopTransformResponseExample1: exact
+transform.update_transform request UpdateTransformRequestExample1: normalized at /source/query/term/geoip.continent_name
+transform.update_transform response UpdateTransformResponseExample1: normalized at /source/query/term/geoip.continent_name
+transform.upgrade_transforms response UpgradeTransformResponseExample1: exact
