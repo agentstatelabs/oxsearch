@@ -43,6 +43,7 @@ watcher = ["dep:oxsearch-watcher"]
 slm = ["dep:oxsearch-slm"]
 xpack = ["dep:oxsearch-xpack"]
 cat = ["dep:oxsearch-cat"]
+security = ["dep:oxsearch-security"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
 # The typed document layer, `oxsearch::document`, which creates and maps
@@ -56,8 +57,8 @@ helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
-beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta", "oxsearch-license?/beta", "oxsearch-query-rules?/beta", "oxsearch-synonyms?/beta", "oxsearch-snapshot?/beta", "oxsearch-ilm?/beta", "oxsearch-async-search?/beta", "oxsearch-eql?/beta", "oxsearch-sql?/beta", "oxsearch-search-application?/beta", "oxsearch-enrich?/beta", "oxsearch-ml?/beta", "oxsearch-watcher?/beta", "oxsearch-slm?/beta", "oxsearch-xpack?/beta", "oxsearch-cat?/beta"]
-experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental", "oxsearch-async-search?/experimental", "oxsearch-eql?/experimental", "oxsearch-sql?/experimental", "oxsearch-search-application?/experimental", "oxsearch-enrich?/experimental", "oxsearch-ml?/experimental", "oxsearch-watcher?/experimental", "oxsearch-slm?/experimental", "oxsearch-xpack?/experimental", "oxsearch-cat?/experimental"]
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta", "oxsearch-license?/beta", "oxsearch-query-rules?/beta", "oxsearch-synonyms?/beta", "oxsearch-snapshot?/beta", "oxsearch-ilm?/beta", "oxsearch-async-search?/beta", "oxsearch-eql?/beta", "oxsearch-sql?/beta", "oxsearch-search-application?/beta", "oxsearch-enrich?/beta", "oxsearch-ml?/beta", "oxsearch-watcher?/beta", "oxsearch-slm?/beta", "oxsearch-xpack?/beta", "oxsearch-cat?/beta", "oxsearch-security?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental", "oxsearch-async-search?/experimental", "oxsearch-eql?/experimental", "oxsearch-sql?/experimental", "oxsearch-search-application?/experimental", "oxsearch-enrich?/experimental", "oxsearch-ml?/experimental", "oxsearch-watcher?/experimental", "oxsearch-slm?/experimental", "oxsearch-xpack?/experimental", "oxsearch-cat?/experimental", "oxsearch-security?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.2.0" }
@@ -86,6 +87,7 @@ oxsearch-watcher = { path = "../oxsearch-watcher", version = "0.2.0", optional =
 oxsearch-slm = { path = "../oxsearch-slm", version = "0.2.0", optional = true }
 oxsearch-xpack = { path = "../oxsearch-xpack", version = "0.2.0", optional = true }
 oxsearch-cat = { path = "../oxsearch-cat", version = "0.2.0", optional = true }
+oxsearch-security = { path = "../oxsearch-security", version = "0.2.0", optional = true }
 oxsearch-derive = { path = "../oxsearch-derive", version = "0.2.0", optional = true }
 oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.2.0", optional = true }
 serde = "1.0.228"

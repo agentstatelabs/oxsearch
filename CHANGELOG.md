@@ -23,6 +23,15 @@ specification it's generated from.
   generated from the specification: policies that take snapshots on a
   schedule and expire old ones, run now, their statistics and retention,
   and the service stopped and started. It runs on any license.
+- **Security** (`oxsearch-security`, the `security` feature), generated
+  from the specification: native users, roles and role mappings,
+  application privileges, API keys and cross-cluster API keys, tokens,
+  service accounts, user profiles, the security index's settings, and
+  single sign-on through SAML, OpenID Connect and PKI. The integration
+  tests run it against Elasticsearch with security on, on Basic and on a
+  trial: the test fixture turns security on with
+  `OXSEARCH_TEST_SECURITY=true` and the `elastic` user's password in
+  `OXSEARCH_TEST_PASSWORD`, and CI has a job for it.
 - **X-Pack information and usage** (`oxsearch-xpack`, the `xpack` feature),
   generated from the specification: the cluster's build, its license and
   the features it makes available, and each feature's usage statistics.

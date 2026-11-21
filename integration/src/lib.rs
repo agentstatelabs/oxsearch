@@ -12,7 +12,14 @@
 //!
 //! `OXSEARCH_TEST_URL` (default `http://127.0.0.1:9200`) is where the cluster
 //! is, and `OXSEARCH_TEST_LICENSE` (`basic`, the default, or `trial`) is the
-//! license the tests expect it to run.
+//! license the tests expect it to run. The security tests need a cluster
+//! with security on, and skip otherwise:
+//!
+//! ```text
+//! export OXSEARCH_TEST_SECURITY=true OXSEARCH_TEST_PASSWORD=$(openssl rand -hex 16)
+//! scripts/es-fixture.sh up trial
+//! OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration --test security -- --ignored
+//! ```
 
 pub mod fixtures;
 
@@ -88,13 +95,32 @@ impl License {
 }
 
 /// A client for the cluster at `OXSEARCH_TEST_URL`, or
-/// `http://127.0.0.1:9200`.
+/// `http://127.0.0.1:9200`, as the elastic user when security is on.
 pub fn client() -> TestClient {
     let url =
         std::env::var("OXSEARCH_TEST_URL").unwrap_or_else(|_| "http://127.0.0.1:9200".to_owned());
+    let mut transport = ReqwestTransport::builder().node(url);
+    if let Some(password) = password() {
+        transport = transport.auth(oxsearch_core::auth::Auth::basic("elastic", password));
+    }
     Client::new(Recorded(
-        ReqwestTransport::new(&url).expect("OXSEARCH_TEST_URL is an http URL"),
+        transport.build().expect("OXSEARCH_TEST_URL is an http URL"),
     ))
+}
+
+/// Whether the cluster runs with security on (`OXSEARCH_TEST_SECURITY`,
+/// which `scripts/es-fixture.sh` reads too). The security tests need it;
+/// the others run either way.
+pub fn secured() -> bool {
+    std::env::var("OXSEARCH_TEST_SECURITY").as_deref() == Ok("true")
+}
+
+/// The elastic user's password, `OXSEARCH_TEST_PASSWORD`, when security is
+/// on.
+pub fn password() -> Option<String> {
+    std::env::var("OXSEARCH_TEST_PASSWORD")
+        .ok()
+        .filter(|p| secured() && !p.is_empty())
 }
 
 /// A document the tests index: text, a keyword, a dense vector and sparse
