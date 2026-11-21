@@ -1,0 +1,11 @@
+# gitleaks reads this file from the repository root: its default rules, less
+# the examples the generator copies from the Elasticsearch specification into
+# each crate's tests/examples.rs. They hold Elastic's documentation tokens
+# and keys, which look real but are published examples, and the generator
+# writes them: CI fails if a file differs from what `xtask generate` writes.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "The Elasticsearch specification's examples"
+paths = ['''^crates/oxsearch-[a-z0-9-]+/tests/examples\.rs$''']
