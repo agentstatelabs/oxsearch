@@ -5,7 +5,6 @@
 
 use oxsearch::license::LicenseType;
 use oxsearch::xpack::{info, monitoring, usage};
-use oxsearch_docs::bulk::{IndexOperation, OperationContainer};
 use oxsearch_integration::{License, client};
 use serde_json::json;
 
@@ -44,10 +43,10 @@ async fn information_and_usage() {
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn monitored() {
     let client = client();
+    // A monitoring document's action names its type, which a bulk request's
+    // no longer does, so it's written as JSON.
     let lines: Vec<monitoring::bulk::RequestBody> = vec![
-        monitoring::bulk::RequestBody::OperationContainer(OperationContainer::Index(
-            IndexOperation::new(),
-        )),
+        monitoring::bulk::RequestBody::TDocument(json!({"index": {"_type": "kibana_stats"}})),
         monitoring::bulk::RequestBody::TDocument(json!({"kibana_stats": {"requests": 1}})),
     ];
     let sent = client

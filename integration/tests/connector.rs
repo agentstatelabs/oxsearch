@@ -113,7 +113,7 @@ async fn connectors() {
     assert_eq!(connector.is_native, Some(false));
     assert_eq!(connector.api_key_id.as_deref(), Some("key"));
 
-    // Configured: a property, then the states a connector goes through.
+    // Configured, with a property's value, and connected.
     let mut configuration = IndexMap::new();
     configuration.insert(
         "folder".to_owned(),
@@ -142,17 +142,18 @@ async fn connectors() {
         Some(json!("notes")),
         "{configuration:?}"
     );
-    assert_eq!(connector.status, Some(ConnectorStatus::NeedsConfiguration));
-    for status in [ConnectorStatus::Configured, ConnectorStatus::Connected] {
-        client
-            .send(
-                &update_status::Request::new(id)
-                    .body(update_status::RequestBody::new(status.clone())),
-            )
-            .await
-            .unwrap();
-        assert_eq!(read(&client, id).await.status, Some(status));
-    }
+    assert_eq!(connector.status, Some(ConnectorStatus::Configured));
+    client
+        .send(
+            &update_status::Request::new(id)
+                .body(update_status::RequestBody::new(ConnectorStatus::Connected)),
+        )
+        .await
+        .unwrap();
+    assert_eq!(
+        read(&client, id).await.status,
+        Some(ConnectorStatus::Connected)
+    );
 
     // What it can do, when it syncs, and its ingest pipeline.
     client

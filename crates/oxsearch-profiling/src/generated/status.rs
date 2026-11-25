@@ -105,24 +105,21 @@ impl Request {
 }
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
-#[non_exhaustive]
-pub struct Response {
-    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub operation_mode: ::core::option::Option<crate::status::ProfilingOperationMode>,
-}
+#[serde(transparent)]
+pub struct Response(pub ::serde_json::Value);
 
-impl Response {
-    /// A `Response` with its required properties set.
-    pub fn new(
-        operation_mode: impl ::core::convert::Into<crate::status::ProfilingOperationMode>,
-    ) -> Self {
-        Self {
-            operation_mode: ::core::option::Option::Some(operation_mode.into()),
-        }
+impl ::core::ops::Deref for Response {
+    type Target = ::serde_json::Value;
+    fn deref(&self) -> &::serde_json::Value {
+        &self.0
     }
 }
 
-impl Response {}
+impl ::core::ops::DerefMut for Response {
+    fn deref_mut(&mut self) -> &mut ::serde_json::Value {
+        &mut self.0
+    }
+}
 
 impl ::oxsearch_core::Endpoint for Request {
     type Response = crate::status::Response;

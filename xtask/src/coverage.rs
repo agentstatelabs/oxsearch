@@ -32,6 +32,17 @@ const LIMITS: &[(&str, &str)] = &[
     ),
     ("autoscaling", "Tested on the trial only."),
     (
+        "fleet",
+        "The specification gives the multi-search a `wait_for_checkpoints` URL parameter, \
+         which Elasticsearch refuses.",
+    ),
+    ("graph", "Tested on the trial only."),
+    (
+        "profiling",
+        "The queries need a license above Basic and indices the fixture doesn't have, so \
+         they're refused on both licenses.",
+    ),
+    (
         "project",
         "Only Elastic Cloud Serverless has these, so the fixture can't test them.",
     ),

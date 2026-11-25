@@ -72,14 +72,14 @@ pub struct PipelineMetadata {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub r#type: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub version: ::core::option::Option<::std::string::String>,
+    pub version: ::core::option::Option<::serde_json::Value>,
 }
 
 impl PipelineMetadata {
     /// A `PipelineMetadata` with its required properties set.
     pub fn new(
         r#type: impl ::core::convert::Into<::std::string::String>,
-        version: impl ::core::convert::Into<::std::string::String>,
+        version: impl ::core::convert::Into<::serde_json::Value>,
     ) -> Self {
         Self {
             r#type: ::core::option::Option::Some(r#type.into()),

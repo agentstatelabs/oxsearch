@@ -182,6 +182,12 @@ jobs:
       - name: Endpoint coverage
         if: always()
         run: cargo run -q -p xtask -- coverage target/coverage.txt >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: coverage-security-${{ matrix.license }}
+          path: target/coverage.txt
+          if-no-files-found: ignore
       - name: Elasticsearch logs
         if: failure()
         run: scripts/es-fixture.sh logs | tail -200

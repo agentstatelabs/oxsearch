@@ -1,13 +1,13 @@
 //! Fleet's APIs against Elasticsearch, on any license: an index's global
-//! checkpoints, searches that wait until one is visible, and Fleet's
-//! secrets.
+//! checkpoints, searches that wait until one is visible, a multi-search, and
+//! Fleet's secrets.
 
-use oxsearch::Query;
 use oxsearch::fleet::{
     delete_secret, get_secret, global_checkpoints, msearch, post_secret, search,
 };
 use oxsearch::search::msearch::{MultisearchHeader, RequestItem, ResponseItem};
 use oxsearch::search::search::SearchRequestBody;
+use oxsearch::{Error, Query};
 use oxsearch_docs::index;
 use oxsearch_integration::{TestIndex, client};
 use serde_json::{Value, json};
@@ -50,18 +50,32 @@ async fn checkpoints() {
     let hits = found.hits.expect("the hits");
     assert_eq!(hits.hits.len(), 3, "{hits:?}");
 
-    let many = client
+    // The specification gives the multi-search the same parameter, which
+    // Elasticsearch refuses there.
+    let lines = || {
+        vec![
+            RequestItem::Header(MultisearchHeader::new()),
+            RequestItem::Body(SearchRequestBody::new().query(Query::r#match("title", "note"))),
+        ]
+    };
+    let refused = client
         .send(
             &msearch::Request::new()
                 .index(test.name())
                 .wait_for_checkpoints(vec![2])
-                .body(vec![
-                    RequestItem::Header(MultisearchHeader::new()),
-                    RequestItem::Body(
-                        SearchRequestBody::new().query(Query::r#match("title", "note")),
-                    ),
-                ]),
+                .body(lines()),
         )
+        .await;
+    match refused {
+        Err(Error::Elasticsearch(e)) => assert!(
+            e.reason()
+                .is_some_and(|r| r.contains("unrecognized parameter")),
+            "{e}"
+        ),
+        other => panic!("a multi-search's checkpoints in the URL: {other:?}"),
+    }
+    let many = client
+        .send(&msearch::Request::new().index(test.name()).body(lines()))
         .await
         .unwrap();
     assert_eq!(many.responses.len(), 1, "{many:?}");
