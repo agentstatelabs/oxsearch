@@ -13,4 +13,5 @@
 )]
 
 pub mod info;
+pub mod monitoring;
 pub mod usage;

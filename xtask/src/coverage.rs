@@ -21,8 +21,9 @@ const LIMITS: &[(&str, &str)] = &[
     ),
     (
         "searchable_snapshots",
-        "Mounting is tested on the trial only, as a full copy: the fixture's node has no \
-         shared cache, so its cache statistics count no regions.",
+        "Mounting, the mounted index's statistics and clearing its cache are tested on the \
+         trial only, and the mount as a full copy: the fixture's node has no shared cache, \
+         so its cache statistics count no regions.",
     ),
     (
         "dangling_indices",
@@ -30,6 +31,10 @@ const LIMITS: &[(&str, &str)] = &[
          tested on a UUID no node has, which Elasticsearch refuses.",
     ),
     ("autoscaling", "Tested on the trial only."),
+    (
+        "project",
+        "Only Elastic Cloud Serverless has these, so the fixture can't test them.",
+    ),
     (
         "migration",
         "A cluster on the current version has no system features to upgrade, so the \

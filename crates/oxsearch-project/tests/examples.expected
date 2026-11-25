@@ -1,0 +1,9 @@
+7 exact, 0 normalized, 1 failing
+project.create_many_routing request CreateProjectRoutingRequestExample1: exact
+project.create_many_routing response CreateProjectResponseExample1: exact
+project.create_routing request CreateProjectRoutingRequestExample1: exact
+project.create_routing response CreateProjectResponseExample1: exact
+project.delete_routing response DeleteProjectResponseExample1: exact
+project.get_many_routing response GetProjectResponseExample1: exact
+project.get_routing response GetProjectResponseExample1: exact
+project.tags response ProjectTagsResponseExample1: fails: not JSON: expected `,` or `}` at line 5 column 7

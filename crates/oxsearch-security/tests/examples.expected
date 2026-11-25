@@ -1,4 +1,5 @@
-119 exact, 10 normalized, 5 failing
+121 exact, 10 normalized, 5 failing
+encryption.reset response EncryptionResetResponseExample1: exact
 security.activate_user_profile request ActivateUserProfileRequestExample1: exact
 security.activate_user_profile response ActivateUserProfileResponseExample1: exact
 security.authenticate response SecurityAuthenticateResponseExample1: normalized at /email (dropped)
@@ -133,3 +134,4 @@ security.update_cross_cluster_api_key response UpdateCrossClusterApiKeyResponseE
 security.update_settings request SecurityUpdateSettingsRequestExample1: exact
 security.update_user_profile_data request UpdateUserProfileDataRequestExample1: exact
 security.update_user_profile_data response UpdateUserProfileDataResponseExample1: exact
+ssl.certificates response GetCertificatesResponseExample1: exact

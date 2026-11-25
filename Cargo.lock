@@ -1254,6 +1254,7 @@ dependencies = [
  "oxsearch-autoscaling",
  "oxsearch-cat",
  "oxsearch-ccr",
+ "oxsearch-connector",
  "oxsearch-core",
  "oxsearch-dangling-indices",
  "oxsearch-derive",
@@ -1262,13 +1263,18 @@ dependencies = [
  "oxsearch-eql",
  "oxsearch-esql",
  "oxsearch-features",
+ "oxsearch-fleet",
+ "oxsearch-graph",
  "oxsearch-ilm",
  "oxsearch-inference",
  "oxsearch-ingest",
  "oxsearch-license",
+ "oxsearch-logstash",
  "oxsearch-mapping",
  "oxsearch-migration",
  "oxsearch-ml",
+ "oxsearch-profiling",
+ "oxsearch-project",
  "oxsearch-query-rules",
  "oxsearch-rollup",
  "oxsearch-search",
@@ -1280,6 +1286,7 @@ dependencies = [
  "oxsearch-slm",
  "oxsearch-snapshot",
  "oxsearch-sql",
+ "oxsearch-streams",
  "oxsearch-synonyms",
  "oxsearch-tasks",
  "oxsearch-text-structure",
@@ -1380,6 +1387,18 @@ dependencies = [
  "indexmap",
  "oxsearch-admin",
  "oxsearch-ccr",
+ "oxsearch-core",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-connector"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-connector",
  "oxsearch-core",
  "serde",
  "serde_json",
@@ -1492,6 +1511,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "oxsearch-fleet"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-aggs",
+ "oxsearch-core",
+ "oxsearch-fleet",
+ "oxsearch-mapping",
+ "oxsearch-search",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-graph"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-graph",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
 name = "oxsearch-ilm"
 version = "0.2.0"
 dependencies = [
@@ -1564,6 +1610,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "oxsearch-logstash"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-logstash",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
 name = "oxsearch-mapping"
 version = "0.2.0"
 dependencies = [
@@ -1598,6 +1656,30 @@ dependencies = [
  "oxsearch-core",
  "oxsearch-mapping",
  "oxsearch-ml",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-profiling"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-profiling",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-project"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-project",
  "serde",
  "serde_json",
  "serde_path_to_error",
@@ -1763,6 +1845,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "oxsearch-streams"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-core",
+ "oxsearch-streams",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
 name = "oxsearch-synonyms"
 version = "0.2.0"
 dependencies = [
@@ -1851,6 +1945,7 @@ version = "0.2.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
+ "oxsearch-docs",
  "oxsearch-license",
  "oxsearch-ml",
  "oxsearch-slm",

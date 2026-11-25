@@ -61,6 +61,18 @@ specification it's generated from.
   and mapping (`oxsearch-simulate`); and the structure of log text, with
   grok pattern tests (`oxsearch-text-structure`). Replication, searchable
   snapshots and autoscaling need a license above Basic.
+- **The rest of the specification's areas**, each behind the feature of its
+  name: content connectors with their sync jobs and secrets
+  (`oxsearch-connector`); Fleet's global checkpoints, searches and secrets
+  (`oxsearch-fleet`); Logstash's centrally managed pipelines
+  (`oxsearch-logstash`); graph exploration (`oxsearch-graph`), which needs
+  a license above Basic; Universal Profiling (`oxsearch-profiling`); named
+  streams (`oxsearch-streams`); and serverless projects' tags and routing
+  (`oxsearch-project`), which only Elastic Cloud Serverless has. The
+  smallest areas are modules of a neighbour: `security::ssl` (the cluster's
+  TLS certificates), `security::encryption` (its encryption key) and
+  `xpack::monitoring` (monitoring's bulk request). Every endpoint the
+  specification offers for code generation now has a typed request.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP

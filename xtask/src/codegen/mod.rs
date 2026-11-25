@@ -56,6 +56,13 @@ pub const CRATES: &[&str] = &[
     "features",
     "simulate",
     "text_structure",
+    "connector",
+    "fleet",
+    "logstash",
+    "graph",
+    "profiling",
+    "project",
+    "streams",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is
@@ -395,10 +402,12 @@ fn gates(
         };
         let item = &ir.items[*item];
         let module = (item.krate.clone(), item.module.clone());
+        // An endpoint only serverless has goes by its stability there.
         let feature = match endpoint
             .availability
             .stack
             .as_ref()
+            .or(endpoint.availability.serverless.as_ref())
             .and_then(|s| s.stability)
         {
             Some(Stability::Beta) => "beta",

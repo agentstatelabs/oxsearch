@@ -21,16 +21,21 @@
 //! analytics and trained models), `watcher` (watches that run a search on a
 //! schedule and act on it), `xpack` (the cluster's features and their
 //! usage), `cat` (the cat APIs' tables as typed rows), `security` (users,
-//! roles, API keys, tokens and single sign-on), `transform` (pivot and
-//! latest transforms), `rollup` (rollup jobs, deprecated upstream), `ccr`
-//! (cross-cluster replication), `searchable-snapshots`, `dangling-indices`,
-//! `autoscaling` and `shutdown` (node shutdown; both meant for Elastic's
-//! orchestrators), `migration` (deprecations and system feature upgrades),
-//! `features` (feature states, and resetting them), `simulate` (ingest
-//! simulation), `text-structure` (finding the structure of log text, and
-//! testing grok patterns), `license`, `analysis` and `tasks`. `document`
-//! adds the typed document layer and `derive` its derive macro, and
-//! `helpers` the point-in-time scan and the bulk loader.
+//! roles, API keys, tokens, single sign-on and TLS certificates),
+//! `transform` (pivot and latest transforms), `rollup` (rollup jobs,
+//! deprecated upstream), `ccr` (cross-cluster replication),
+//! `searchable-snapshots`, `dangling-indices`, `autoscaling` and `shutdown`
+//! (node shutdown; both meant for Elastic's orchestrators), `migration`
+//! (deprecations and system feature upgrades), `features` (feature states,
+//! and resetting them), `simulate` (ingest simulation), `text-structure`
+//! (finding the structure of log text, and testing grok patterns),
+//! `connector` (content connectors and their sync jobs), `fleet` (global
+//! checkpoints and searches that wait for them), `logstash` (Logstash's
+//! centrally managed pipelines), `graph` (terms that go together),
+//! `profiling` (Universal Profiling), `project` (serverless projects' tags
+//! and routing), `streams` (named streams), `license`, `analysis` and
+//! `tasks`. `document` adds the typed document layer and `derive` its derive
+//! macro, and `helpers` the point-in-time scan and the bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -98,6 +103,8 @@ pub use oxsearch_autoscaling as autoscaling;
 pub use oxsearch_cat as cat;
 #[cfg(feature = "ccr")]
 pub use oxsearch_ccr as ccr;
+#[cfg(feature = "connector")]
+pub use oxsearch_connector as connector;
 #[cfg(feature = "dangling-indices")]
 pub use oxsearch_dangling_indices as dangling_indices;
 #[cfg(feature = "derive")]
@@ -112,6 +119,10 @@ pub use oxsearch_eql as eql;
 pub use oxsearch_esql as esql;
 #[cfg(feature = "features")]
 pub use oxsearch_features as features;
+#[cfg(feature = "fleet")]
+pub use oxsearch_fleet as fleet;
+#[cfg(feature = "graph")]
+pub use oxsearch_graph as graph;
 #[cfg(feature = "ilm")]
 pub use oxsearch_ilm as ilm;
 #[cfg(feature = "inference")]
@@ -120,12 +131,18 @@ pub use oxsearch_inference as inference;
 pub use oxsearch_ingest as ingest;
 #[cfg(feature = "license")]
 pub use oxsearch_license as license;
+#[cfg(feature = "logstash")]
+pub use oxsearch_logstash as logstash;
 #[cfg(feature = "mapping")]
 pub use oxsearch_mapping as mapping;
 #[cfg(feature = "migration")]
 pub use oxsearch_migration as migration;
 #[cfg(feature = "ml")]
 pub use oxsearch_ml as ml;
+#[cfg(feature = "profiling")]
+pub use oxsearch_profiling as profiling;
+#[cfg(feature = "project")]
+pub use oxsearch_project as project;
 #[cfg(feature = "query-rules")]
 pub use oxsearch_query_rules as query_rules;
 #[cfg(feature = "rollup")]
@@ -150,6 +167,8 @@ pub use oxsearch_slm as slm;
 pub use oxsearch_snapshot as snapshot;
 #[cfg(feature = "sql")]
 pub use oxsearch_sql as sql;
+#[cfg(feature = "streams")]
+pub use oxsearch_streams as streams;
 #[cfg(feature = "synonyms")]
 pub use oxsearch_synonyms as synonyms;
 #[cfg(feature = "tasks")]

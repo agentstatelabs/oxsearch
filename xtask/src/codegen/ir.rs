@@ -339,6 +339,8 @@ fn respelled(declaring: &TypeName, property: &str) -> Option<&'static str> {
         ("shutdown.get_node", "NodeShutdownStatus", "shutdown_startedmillis") => {
             Some("shutdown_started_millis")
         }
+        // Fleet's multi-search answers as the multi-search does.
+        ("fleet.msearch", "Response", "docs") => Some("responses"),
         _ => None,
     }
 }
@@ -367,6 +369,12 @@ fn retargeted(declaring: &TypeName, property: &str) -> Option<(&'static str, &'s
         // make the reindex source's required index optional.
         ("transform.update_transform", "Response", "source") => {
             Some(("transform._types", "Source"))
+        }
+        // The index Fleet's searches and checkpoints read, by its name or an
+        // alias's: both are strings, which a union of the two can't tell
+        // apart, and the other APIs take as one.
+        ("fleet.global_checkpoints" | "fleet.msearch" | "fleet.search", "Request", "index") => {
+            Some(("_types", "IndexName"))
         }
         _ => None,
     }
