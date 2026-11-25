@@ -74,10 +74,11 @@ async fn checkpoints() {
         ),
         other => panic!("a multi-search's checkpoints in the URL: {other:?}"),
     }
-    let many = client
-        .send(&msearch::Request::new().index(test.name()).body(lines()))
-        .await
-        .unwrap();
+    // Read as JSON first: the type takes the specification's `docs` too.
+    let many = msearch::Request::new().index(test.name()).body(lines());
+    let raw: Value = client.send_as(&many).await.unwrap();
+    assert!(raw["responses"].is_array(), "{raw}");
+    let many = client.send(&many).await.unwrap();
     assert_eq!(many.responses.len(), 1, "{many:?}");
     match &many.responses[0] {
         ResponseItem::Result(item) => assert_eq!(

@@ -25,9 +25,9 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-ml` | 73 | 73 (100%) |
 | `oxsearch-watcher` | 13 | 13 (100%) |
 | `oxsearch-slm` | 9 | 9 (100%) |
-| `oxsearch-xpack` | 2 | 2 (100%) |
+| `oxsearch-xpack` | 3 | 3 (100%) |
 | `oxsearch-cat` | 27 | 27 (100%) |
-| `oxsearch-security` | 66 | 66 (100%) |
+| `oxsearch-security` | 68 | 68 (100%) |
 | `oxsearch-transform` | 13 | 13 (100%) |
 | `oxsearch-rollup` | 8 | 8 (100%) |
 | `oxsearch-ccr` | 13 | 13 (100%) |
@@ -39,7 +39,14 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-features` | 2 | 2 (100%) |
 | `oxsearch-simulate` | 1 | 1 (100%) |
 | `oxsearch-text-structure` | 4 | 4 (100%) |
-| all | 537 | 431 (80%) |
+| `oxsearch-connector` | 34 | 34 (100%) |
+| `oxsearch-fleet` | 6 | 6 (100%) |
+| `oxsearch-logstash` | 3 | 3 (100%) |
+| `oxsearch-graph` | 1 | 1 (100%) |
+| `oxsearch-profiling` | 4 | 4 (100%) |
+| `oxsearch-project` | 6 | 0 (0%) |
+| `oxsearch-streams` | 3 | 3 (100%) |
+| all | 597 | 485 (81%) |
 
 ## `oxsearch-core`
 
@@ -156,7 +163,7 @@ Tested: `slm.delete_lifecycle`, `slm.execute_lifecycle`, `slm.execute_retention`
 
 ## `oxsearch-xpack`
 
-Tested: `xpack.info`, `xpack.usage`.
+Tested: `monitoring.bulk`, `xpack.info`, `xpack.usage`.
 
 
 ## `oxsearch-cat`
@@ -166,7 +173,7 @@ Tested: `cat.aliases`, `cat.allocation`, `cat.circuit_breaker`, `cat.component_t
 
 ## `oxsearch-security`
 
-Tested: `security.activate_user_profile`, `security.authenticate`, `security.bulk_delete_role`, `security.bulk_put_role`, `security.bulk_update_api_keys`, `security.change_password`, `security.clear_api_key_cache`, `security.clear_cached_privileges`, `security.clear_cached_realms`, `security.clear_cached_roles`, `security.clear_cached_service_tokens`, `security.clone_api_key`, `security.create_api_key`, `security.create_cross_cluster_api_key`, `security.create_service_token`, `security.delegate_pki`, `security.delete_privileges`, `security.delete_role`, `security.delete_role_mapping`, `security.delete_service_token`, `security.delete_user`, `security.disable_user`, `security.disable_user_profile`, `security.enable_user`, `security.enable_user_profile`, `security.enroll_kibana`, `security.enroll_node`, `security.get_api_key`, `security.get_builtin_privileges`, `security.get_privileges`, `security.get_role`, `security.get_role_mapping`, `security.get_service_accounts`, `security.get_service_credentials`, `security.get_settings`, `security.get_stats`, `security.get_token`, `security.get_user`, `security.get_user_privileges`, `security.get_user_profile`, `security.grant_api_key`, `security.has_privileges`, `security.has_privileges_user_profile`, `security.invalidate_api_key`, `security.invalidate_token`, `security.oidc_authenticate`, `security.oidc_logout`, `security.oidc_prepare_authentication`, `security.put_privileges`, `security.put_role`, `security.put_role_mapping`, `security.put_user`, `security.query_api_keys`, `security.query_role`, `security.query_user`, `security.saml_authenticate`, `security.saml_complete_logout`, `security.saml_invalidate`, `security.saml_logout`, `security.saml_prepare_authentication`, `security.saml_service_provider_metadata`, `security.suggest_user_profiles`, `security.update_api_key`, `security.update_cross_cluster_api_key`, `security.update_settings`, `security.update_user_profile_data`.
+Tested: `encryption.reset`, `security.activate_user_profile`, `security.authenticate`, `security.bulk_delete_role`, `security.bulk_put_role`, `security.bulk_update_api_keys`, `security.change_password`, `security.clear_api_key_cache`, `security.clear_cached_privileges`, `security.clear_cached_realms`, `security.clear_cached_roles`, `security.clear_cached_service_tokens`, `security.clone_api_key`, `security.create_api_key`, `security.create_cross_cluster_api_key`, `security.create_service_token`, `security.delegate_pki`, `security.delete_privileges`, `security.delete_role`, `security.delete_role_mapping`, `security.delete_service_token`, `security.delete_user`, `security.disable_user`, `security.disable_user_profile`, `security.enable_user`, `security.enable_user_profile`, `security.enroll_kibana`, `security.enroll_node`, `security.get_api_key`, `security.get_builtin_privileges`, `security.get_privileges`, `security.get_role`, `security.get_role_mapping`, `security.get_service_accounts`, `security.get_service_credentials`, `security.get_settings`, `security.get_stats`, `security.get_token`, `security.get_user`, `security.get_user_privileges`, `security.get_user_profile`, `security.grant_api_key`, `security.has_privileges`, `security.has_privileges_user_profile`, `security.invalidate_api_key`, `security.invalidate_token`, `security.oidc_authenticate`, `security.oidc_logout`, `security.oidc_prepare_authentication`, `security.put_privileges`, `security.put_role`, `security.put_role_mapping`, `security.put_user`, `security.query_api_keys`, `security.query_role`, `security.query_user`, `security.saml_authenticate`, `security.saml_complete_logout`, `security.saml_invalidate`, `security.saml_logout`, `security.saml_prepare_authentication`, `security.saml_service_provider_metadata`, `security.suggest_user_profiles`, `security.update_api_key`, `security.update_cross_cluster_api_key`, `security.update_settings`, `security.update_user_profile_data`, `ssl.certificates`.
 
 
 ## `oxsearch-transform`
@@ -190,7 +197,7 @@ Tested on the trial only. The fixture follows its own indices, through a remote 
 
 Tested: `searchable_snapshots.cache_stats`, `searchable_snapshots.clear_cache`, `searchable_snapshots.mount`, `searchable_snapshots.stats`.
 
-Mounting is tested on the trial only, as a full copy: the fixture's node has no shared cache, so its cache statistics count no regions.
+Mounting, the mounted index's statistics and clearing its cache are tested on the trial only, and the mount as a full copy: the fixture's node has no shared cache, so its cache statistics count no regions.
 
 
 ## `oxsearch-dangling-indices`
@@ -232,4 +239,47 @@ Tested: `simulate.ingest`.
 ## `oxsearch-text-structure`
 
 Tested: `text_structure.find_field_structure`, `text_structure.find_message_structure`, `text_structure.find_structure`, `text_structure.test_grok_pattern`.
+
+
+## `oxsearch-connector`
+
+Tested: `connector.check_in`, `connector.delete`, `connector.get`, `connector.last_sync`, `connector.list`, `connector.post`, `connector.put`, `connector.secret_delete`, `connector.secret_get`, `connector.secret_post`, `connector.secret_put`, `connector.sync_job_cancel`, `connector.sync_job_check_in`, `connector.sync_job_claim`, `connector.sync_job_delete`, `connector.sync_job_error`, `connector.sync_job_get`, `connector.sync_job_list`, `connector.sync_job_post`, `connector.sync_job_update_stats`, `connector.update_active_filtering`, `connector.update_api_key_id`, `connector.update_configuration`, `connector.update_error`, `connector.update_features`, `connector.update_filtering`, `connector.update_filtering_validation`, `connector.update_index_name`, `connector.update_name`, `connector.update_native`, `connector.update_pipeline`, `connector.update_scheduling`, `connector.update_service_type`, `connector.update_status`.
+
+
+## `oxsearch-fleet`
+
+Tested: `fleet.delete_secret`, `fleet.get_secret`, `fleet.global_checkpoints`, `fleet.msearch`, `fleet.post_secret`, `fleet.search`.
+
+The specification gives the multi-search a `wait_for_checkpoints` URL parameter, which Elasticsearch refuses.
+
+
+## `oxsearch-logstash`
+
+Tested: `logstash.delete_pipeline`, `logstash.get_pipeline`, `logstash.put_pipeline`.
+
+
+## `oxsearch-graph`
+
+Tested: `graph.explore`.
+
+Tested on the trial only.
+
+
+## `oxsearch-profiling`
+
+Tested: `profiling.flamegraph`, `profiling.stacktraces`, `profiling.status`, `profiling.topn_functions`.
+
+The queries need a license above Basic and indices the fixture doesn't have, so they're refused on both licenses.
+
+
+## `oxsearch-project`
+
+Not tested yet: `project.create_many_routing`, `project.create_routing`, `project.delete_routing`, `project.get_many_routing`, `project.get_routing`, `project.tags`.
+
+Only Elastic Cloud Serverless has these, so the fixture can't test them.
+
+
+## `oxsearch-streams`
+
+Tested: `streams.logs_disable`, `streams.logs_enable`, `streams.status`.
 
