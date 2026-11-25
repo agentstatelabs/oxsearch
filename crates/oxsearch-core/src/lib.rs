@@ -15,6 +15,7 @@ mod builders;
 mod client;
 mod endpoint;
 mod error;
+mod script;
 mod seams;
 pub mod shapes;
 pub mod telemetry;

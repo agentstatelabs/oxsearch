@@ -7,14 +7,15 @@ use std::task::{Context, Poll};
 use std::time::Duration;
 
 use futures_core::Stream;
-use oxsearch_core::__private::encode as percent_encode;
-use oxsearch_core::{Body, Client, Endpoint, Error, ErrorCause, Method, Refresh, Route, Transport};
-use oxsearch_docs::bulk::{self, OperationType};
+use oxsearch_core::{Client, Error, ErrorCause, Refresh, Transport};
+use oxsearch_docs::bulk::OperationType;
 use serde::Serialize;
 use serde_json::{Map, Value};
 use tokio::sync::mpsc;
 use tokio::task::JoinSet;
 use tokio::time::{Instant, sleep, sleep_until};
+
+use crate::batch::Batch;
 
 /// Loads documents with bulk requests. Start it, send it actions, drop the
 /// sender when done, and read each action's outcome:
@@ -277,39 +278,6 @@ impl<Tr: Transport + Clone + 'static> BulkLoader<Tr> {
 struct Line {
     position: u64,
     bytes: Vec<u8>,
-}
-
-/// A bulk request of actions already written as NDJSON.
-struct Batch<'a> {
-    index: Option<&'a str>,
-    refresh: Option<&'a Refresh>,
-    body: Vec<u8>,
-}
-
-impl Endpoint for Batch<'_> {
-    type Response = bulk::Response;
-
-    fn name(&self) -> &'static str {
-        "bulk"
-    }
-
-    fn route(&self) -> Result<Route, Error> {
-        Ok(match self.index {
-            Some(index) => Route::new(Method::Post, format!("/{}/_bulk", percent_encode(index))),
-            None => Route::new(Method::Post, "/_bulk"),
-        })
-    }
-
-    fn query(&self) -> Result<Vec<(&'static str, String)>, Error> {
-        Ok(self
-            .refresh
-            .map(|refresh| vec![("refresh", refresh.as_str().to_owned())])
-            .unwrap_or_default())
-    }
-
-    fn body(&self) -> Result<Option<Body>, Error> {
-        Ok(Some(Body::Ndjson(self.body.clone())))
-    }
 }
 
 /// One action for a [`BulkLoader`].

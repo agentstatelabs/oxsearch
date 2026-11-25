@@ -197,14 +197,17 @@ let hits = articles                         // Vec<Hit<Article>>
     .await?;
 ```
 
-Built in Phase 1 (`oxsearch::document`, behind the `derive` feature for the macro):
+Built in Phases 1 and 2 (`oxsearch::document`, behind the `derive` feature for the macro):
 
 - **The mapping is defined by the struct.** Field attributes choose mapped types (`#[keyword]`, `#[text]`, `#[date]`, `#[semantic_text(inference_id = …)]`, `#[dense_vector(dims = …, similarity = …, element_type = …)]`, `#[sparse_vector]`), and Rust types give defaults through the `Mapped` trait: strings are `text`, numbers and booleans their own types, date and time types `date`, and a struct deriving `Document` an object. serde's `rename`, `rename_all` and `skip` are followed; `flatten` and generic documents are refused for now.
   - `ensure_mapping()` creates the index, adds the fields the live mapping lacks, and reports fields mapped differently (by type, or by `dims`, `similarity`, `element_type` or `inference_id`). It never applies a changed type, because Elasticsearch can't change a mapped type in place.
   - Elasticsearch 9 leaves vectors out of the `_source` it returns. A new index for a type with vector fields sets `index.mapping.exclude_source_vectors: false`, so documents read back whole.
 - **Typed field handles** offer only the queries that suit the field's mapped type: `semantic()` on `semantic_text`, `term()` on `keyword`, `range()` on dates (date math) and numbers (Rust ranges: `Product::PRICE.range(10.0..20.0)`), `knn()` on `dense_vector`, `r#match()` on `text`. An object's handle reaches its fields: `Article::AUTHOR.field(Author::NAME)`. A query also works wherever a retriever does, as a standard retriever.
 - **`Index<T>`** puts (with the id and routing from `#[id]` and `#[routing]`), gets, gets many, deletes, searches into `Vec<Hit<T>>`, and fuses (`oxsearch::fusion`), with an optional refresh policy for writes.
-- **`Versioned<T>`** carries the sequence number and primary term for optimistic concurrency; `put_versioned` fails with `Error::Conflict` when the document changed since it was read.
+- **`Versioned<T>`** carries the sequence number and primary term for optimistic concurrency; `put_versioned` and `delete_versioned` fail with `Error::Conflict` when the document changed since it was read. It remembers the routing it was read with, so a document goes back where it was.
+- **Updates** change part of a document: `update(id, Patch::new().set(Article::VIEWS, 41))` sets fields through their handles (a nested object's field inside it), and `update(id, Script::inline(…).param(…))` runs a script. `Update` adds an upsert, retries on conflict and a condition on the version. A missing document is `None`; what the update did is a `Change` (created, updated, unchanged, deleted).
+- **Bulk writes**: `index.bulk()` collects puts, creates, updates and deletes, conditional on a `Versioned<T>` or not, and sends them in one request. Each succeeds or fails on its own, in order, with conflicts as `Error::Conflict`. Loading a lot of documents stays `BulkLoader`'s job (§4.7).
+- **Routing**: writes take it from the document's `#[routing]` field. A read or delete by id has no document to take it from, so `Index::routed` sets it for those, and for updates, searches and `fuse`. New indices don't set `_routing.required`, which would refuse reads that work today.
 - **ES|QL rows map into structs** by column name. `Index<T>::esql()` starts a query `FROM` the index, and `Esql::fetch` reads its rows as `T` or any other type: a dotted column (`author.name`) fills a nested struct, a single value a `Vec` field, since ES|QL writes a multi-valued field with one value as a plain value. A row that doesn't fit fails with `Error::Row`, which names the row and the column.
 - **Left out:** SQL emulation, relations between indices (ES|QL's `LOOKUP JOIN` does that on the server), lazy loading, change tracking, transactions, a unit of work.
 

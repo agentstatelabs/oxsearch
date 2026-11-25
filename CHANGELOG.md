@@ -73,6 +73,14 @@ specification it's generated from.
   TLS certificates), `security::encryption` (its encryption key) and
   `xpack::monitoring` (monitoring's bulk request). Every endpoint the
   specification offers for code generation now has a typed request.
+- **The rest of the typed document layer**: `Index::update` changes part of
+  a document with a `Patch` of its fields or a script, with upserts,
+  retries on conflict and a condition on the version; `Index::bulk` sends
+  several writes in one request, each with its own outcome, conditional on
+  a `Versioned<T>` or not; `Index::delete_versioned`; and `Index::routed`,
+  which reads, deletes, updates and searches with a routing, as writes do
+  from a `#[routing]` field. `Script::inline` and `Script::param` build a
+  script, and `Fusion::routing` fuses the searches of one shard.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP

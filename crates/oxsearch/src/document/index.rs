@@ -8,13 +8,15 @@ use oxsearch_admin::indices::delete as indices_delete;
 use oxsearch_admin::indices::{IndexSettings, create, get_mapping, put_mapping};
 use oxsearch_core::shapes::IndexMap;
 use oxsearch_core::{Client, Error, Refresh, RetrieverContainer, Transport};
-use oxsearch_docs::{delete, get, index, mget};
+use oxsearch_docs::{delete, get, index, mget, update};
 use oxsearch_mapping::{Property, TypeMapping};
 use oxsearch_search::fusion::{Fused, Fusion};
 use oxsearch_search::search::{self, Hit};
 use serde_json::{Map, Value, json};
 
 use super::Document;
+use super::bulk::Bulk;
+use super::update::{Applied, Change, Update};
 
 /// Indexes of document types, from a client: `client.index::<Article>()`.
 pub trait Indexes<Tr> {
@@ -46,7 +48,8 @@ impl<Tr: Transport + Clone> Indexes<Tr> for Client<Tr> {
 pub struct Index<T, Tr> {
     client: Client<Tr>,
     name: String,
-    refresh: Option<Refresh>,
+    pub(super) refresh: Option<Refresh>,
+    routing: Option<String>,
     document: PhantomData<fn() -> T>,
 }
 
@@ -56,6 +59,7 @@ impl<T, Tr: Clone> Clone for Index<T, Tr> {
             client: self.client.clone(),
             name: self.name.clone(),
             refresh: self.refresh.clone(),
+            routing: self.routing.clone(),
             document: PhantomData,
         }
     }
@@ -66,6 +70,7 @@ impl<T, Tr> fmt::Debug for Index<T, Tr> {
         f.debug_struct("Index")
             .field("name", &self.name)
             .field("refresh", &self.refresh)
+            .field("routing", &self.routing)
             .finish_non_exhaustive()
     }
 }
@@ -90,6 +95,9 @@ pub struct Versioned<T> {
     pub id: String,
     /// The version read.
     pub version: Version,
+    /// The routing the document was written with, if any. Not public: it
+    /// would hide a document's field of the name.
+    pub(super) routed: Option<String>,
     /// The document.
     pub document: T,
 }
@@ -169,6 +177,7 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
             client,
             name: name.into(),
             refresh: None,
+            routing: None,
             document: PhantomData,
         }
     }
@@ -189,6 +198,35 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
     pub fn refresh(mut self, refresh: Refresh) -> Index<T, Tr> {
         self.refresh = Some(refresh);
         self
+    }
+
+    /// Reads, deletes, updates and searches with this routing, which names
+    /// the shard that holds the documents written with it: without it, a
+    /// read by id looks on the shard the id names, and can miss a document
+    /// with a `#[routing]` field.
+    ///
+    /// ```ignore
+    /// let article = articles.clone().routed("owner-1").get("1").await?;
+    /// ```
+    ///
+    /// Writes of documents use it only for those without a routing of
+    /// their own. It doesn't filter: the shard can hold other routings'
+    /// documents, which searches find too.
+    pub fn routed(mut self, routing: impl Into<String>) -> Index<T, Tr> {
+        self.routing = Some(routing.into());
+        self
+    }
+
+    /// Where to write a document, or look for one by id.
+    pub(super) fn routing_for(&self, document: Option<&T>) -> Option<String> {
+        document
+            .and_then(Document::routing)
+            .or_else(|| self.routing.clone())
+    }
+
+    /// Where a document that was read is.
+    pub(super) fn routing_of(&self, document: &Versioned<T>) -> Option<String> {
+        document.routed.clone().or_else(|| self.routing.clone())
     }
 
     /// Makes the index's mapping the document type's: creates the index if
@@ -273,7 +311,7 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
         if let Some(id) = document.id() {
             request = request.id(id);
         }
-        self.write(request, document).await
+        self.write(request, self.routing_for(Some(document))).await
     }
 
     /// Writes a document back if it hasn't changed since it was read, and
@@ -284,11 +322,19 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
             .if_seq_no(document.version.seq_no)
             .if_primary_term(document.version.primary_term)
             .body(&document.document);
-        self.write(request, &document.document).await
+        let routing = document
+            .document
+            .routing()
+            .or_else(|| self.routing_of(document));
+        self.write(request, routing).await
     }
 
-    async fn write(&self, mut request: index::Request<&T>, document: &T) -> Result<Written, Error> {
-        if let Some(routing) = document.routing() {
+    async fn write(
+        &self,
+        mut request: index::Request<&T>,
+        routing: Option<String>,
+    ) -> Result<Written, Error> {
+        if let Some(routing) = routing {
             request = request.routing(routing);
         }
         if let Some(refresh) = &self.refresh {
@@ -308,7 +354,10 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
 
     /// A document by id, or `None` if there's none.
     pub async fn get(&self, id: &str) -> Result<Option<Versioned<T>>, Error> {
-        let request = get::Request::new(id, self.name.as_str());
+        let mut request = get::Request::new(id, self.name.as_str());
+        if let Some(routing) = &self.routing {
+            request = request.routing(routing.clone());
+        }
         match self
             .client
             .send_as::<_, get::Response<Value>>(&request)
@@ -331,9 +380,12 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
         ids: impl IntoIterator<Item = I>,
     ) -> Result<Vec<Option<Versioned<T>>>, Error> {
         let ids: Vec<String> = ids.into_iter().map(Into::into).collect();
-        let request = mget::Request::new()
+        let mut request = mget::Request::new()
             .index(self.name.as_str())
             .body(mget::RequestBody::new().ids(ids));
+        if let Some(routing) = &self.routing {
+            request = request.routing(routing.clone());
+        }
         let response: mget::Response<Value> = self.client.send_as(&request).await?;
         response
             .docs
@@ -353,6 +405,9 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
     /// Deletes a document by id; `false` if there was none.
     pub async fn delete(&self, id: &str) -> Result<bool, Error> {
         let mut request = delete::Request::new(id, self.name.as_str());
+        if let Some(routing) = &self.routing {
+            request = request.routing(routing.clone());
+        }
         if let Some(refresh) = &self.refresh {
             request = request.refresh(refresh.clone());
         }
@@ -365,6 +420,85 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
             }
             Err(e) => Err(e),
         }
+    }
+
+    /// Deletes a document if it hasn't changed since it was read, and fails
+    /// with [`Error::Conflict`] if it has.
+    pub async fn delete_versioned(&self, document: &Versioned<T>) -> Result<(), Error> {
+        let mut request = delete::Request::new(document.id.as_str(), self.name.as_str())
+            .if_seq_no(document.version.seq_no)
+            .if_primary_term(document.version.primary_term);
+        if let Some(routing) = self.routing_of(document) {
+            request = request.routing(routing);
+        }
+        if let Some(refresh) = &self.refresh {
+            request = request.refresh(refresh.clone());
+        }
+        self.client.send(&request).await?;
+        Ok(())
+    }
+
+    /// Changes part of a document, with a [`Patch`](super::Patch) of its
+    /// fields or a [`Script`](oxsearch_core::Script); `None` if there's no
+    /// such document and nothing to write instead.
+    ///
+    /// ```ignore
+    /// articles
+    ///     .update("1", Patch::new().set(Article::VIEWS, 41))
+    ///     .await?;
+    /// articles
+    ///     .update("1", Script::inline("ctx._source.views += params.by").param("by", 1))
+    ///     .await?;
+    /// ```
+    pub async fn update(
+        &self,
+        id: &str,
+        update: impl Into<Update<T>>,
+    ) -> Result<Option<Applied>, Error> {
+        let update = update.into();
+        let body = update.body().map_err(Error::Encode)?;
+        let body: update::RequestBody = serde_json::from_value(body).map_err(Error::Encode)?;
+        let mut request = update::Request::new(id, self.name.as_str()).body(body);
+        if let Some(routing) = self.routing_for(update.upsert.as_ref()) {
+            request = request.routing(routing);
+        }
+        if let Some(refresh) = &self.refresh {
+            request = request.refresh(refresh.clone());
+        }
+        if let Some(times) = update.retry_on_conflict {
+            request = request.retry_on_conflict(i32::try_from(times).unwrap_or(i32::MAX));
+        }
+        if let Some(version) = update.version {
+            request = request
+                .if_seq_no(version.seq_no)
+                .if_primary_term(version.primary_term);
+        }
+        match self.client.send(&request).await {
+            Ok(response) => {
+                let response = response.0;
+                Ok(Some(Applied {
+                    id: response.id.unwrap_or_default(),
+                    version: Version {
+                        seq_no: response.seq_no.unwrap_or_default(),
+                        primary_term: response.primary_term.unwrap_or_default(),
+                    },
+                    change: response
+                        .result
+                        .map_or_else(|| Change::Other(String::new()), Change::from),
+                }))
+            }
+            Err(Error::Elasticsearch(e))
+                if e.error_type() == Some("document_missing_exception") =>
+            {
+                Ok(None)
+            }
+            Err(e) => Err(e),
+        }
+    }
+
+    /// Several writes in one request, to add to and send.
+    pub fn bulk(&self) -> Bulk<'_, T, Tr> {
+        Bulk::new(self)
     }
 
     /// The best ten documents a retriever finds. A query is a retriever
@@ -382,14 +516,23 @@ impl<T: Document, Tr: Transport> Index<T, Tr> {
         &self,
         body: search::RequestBody,
     ) -> Result<search::Response<T>, Error> {
-        let request = search::Request::new().index(self.name.as_str()).body(body);
+        let mut request = search::Request::new().index(self.name.as_str()).body(body);
+        if let Some(routing) = &self.routing {
+            request = request.routing(routing.clone());
+        }
         self.client.send_as(&request).await
     }
 
     /// Fuses retrievers' results, on the server if its license allows,
     /// else on the client.
     pub async fn fuse(&self, fusion: &Fusion) -> Result<Fused<T>, Error> {
-        fusion.search(&self.client, self.name.as_str()).await
+        match &self.routing {
+            Some(routing) => {
+                let fusion = fusion.clone().routing(routing.clone());
+                fusion.search(&self.client, self.name.as_str()).await
+            }
+            None => fusion.search(&self.client, self.name.as_str()).await,
+        }
     }
 }
 
@@ -433,6 +576,7 @@ fn versioned<T: Document>(result: get::GetResult<Value>) -> Result<Option<Versio
             seq_no: result.seq_no.unwrap_or_default(),
             primary_term: result.primary_term.unwrap_or_default(),
         },
+        routed: result.routing,
         document,
     }))
 }
