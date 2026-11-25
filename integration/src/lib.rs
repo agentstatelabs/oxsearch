@@ -215,6 +215,8 @@ impl TestIndex {
 /// than the 30 s Elasticsearch waits for it (408), and the deployment goes
 /// on meanwhile; a call during that time can be refused because the model
 /// is still downloading (408) or the deployment is already starting (409).
+/// A cluster's first call can also find the index of endpoints still being
+/// made (500).
 pub async fn deployed<T, F>(mut call: impl FnMut() -> F) -> T
 where
     F: std::future::Future<Output = Result<T, oxsearch_core::Error>>,
@@ -239,6 +241,18 @@ where
                     }) =>
             {
                 tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+                e
+            }
+            // Elasticsearch is making the index it keeps the endpoints in,
+            // which the first inference call of a cluster does.
+            Err(Error::Elasticsearch(e))
+                if e.causes().any(|c| {
+                    c.reason
+                        .as_deref()
+                        .is_some_and(|r| r.contains("missing shards") && r.contains("[.inference]"))
+                }) =>
+            {
+                tokio::time::sleep(std::time::Duration::from_secs(1)).await;
                 e
             }
             Err(Error::Conflict(e))
