@@ -16,9 +16,8 @@
 /// branch.
 pub const SPECIFICATION_VERSION: &str = "9.5";
 
-/// Its major version. Requests ask Elasticsearch to answer as this version
-/// does (`compatible-with`), which the last minor of the major before
-/// understands too.
+/// Its major version, which a transport can ask a newer server to
+/// answer as (`compatible-with`).
 pub const MAJOR_VERSION: u8 = 9;
 
 pub mod aggregations;

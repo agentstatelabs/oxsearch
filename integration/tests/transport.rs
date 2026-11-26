@@ -1,10 +1,12 @@
 //! The reqwest transport's layers against Elasticsearch: failover past a
-//! node that's down, and sniffing the cluster's own node list.
+//! node that's down, sniffing the cluster's own node list, and asking to be
+//! answered as Elasticsearch 9 does.
 
 use std::time::Duration;
 
-use oxsearch_core::Client;
 use oxsearch_core::info;
+use oxsearch_core::{Client, Error};
+use oxsearch_integration::server_version;
 use oxsearch_transport_reqwest::ReqwestTransport;
 
 fn url() -> String {
@@ -53,4 +55,28 @@ async fn sniffs_the_cluster() {
         .trim_end_matches('/')
         .to_owned();
     assert_eq!(transport.nodes(), [format!("http://127.0.0.1:{port}")]);
+}
+
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn compatibility_headers() {
+    // Elasticsearch 9 answers as itself; 8.19 refuses to, since a server
+    // answers only as its own major or an older one. So the transport
+    // sends plain media types unless asked.
+    let transport = ReqwestTransport::builder()
+        .node(url())
+        .compatible_with(Some(oxsearch_core::MAJOR_VERSION))
+        .build()
+        .unwrap();
+    let answered = Client::new(transport).send(&info::Request::new()).await;
+    if server_version().0 >= u32::from(oxsearch_core::MAJOR_VERSION) {
+        assert!(answered.unwrap().version.is_some());
+    } else {
+        match answered {
+            Err(Error::Elasticsearch(e)) => {
+                assert_eq!(e.error_type(), Some("media_type_header_exception"), "{e}")
+            }
+            other => panic!("{other:?}"),
+        }
+    }
 }

@@ -44,10 +44,11 @@
 //!   ID.
 //! - **Compression** (`gzip`, behind the `gzip` feature): request bodies
 //!   are compressed, and responses may be.
-//! - **Compatibility** (`compatible_with`, on by default): requests ask the
-//!   cluster to answer as the Elasticsearch major oxsearch is generated
-//!   for, through `compatible-with` in the `Accept` and `Content-Type`
-//!   headers. That's what lets this release talk to Elasticsearch 8.19.
+//! - **Compatibility** (`compatible_with`, off by default): requests ask a
+//!   newer cluster to answer as an older Elasticsearch major does, through
+//!   `compatible-with` in the `Accept` and `Content-Type` headers. Without
+//!   it, requests carry plain JSON media types, which Elasticsearch 8.19
+//!   and 9 both read.
 //!
 //! Timeouts, proxies and certificates are the `reqwest::Client`'s: build
 //! one and pass it with `client`.
@@ -137,7 +138,7 @@ impl ReqwestTransport {
                 sniff_every: None,
                 sniff_on_failure: false,
                 gzip: false,
-                compatible_with: Some(oxsearch_core::MAJOR_VERSION),
+                compatible_with: None,
             },
             rest: (Duration::from_secs(60), Duration::from_secs(30 * 60)),
         }
@@ -474,12 +475,13 @@ impl Builder {
         self
     }
 
-    /// The Elasticsearch major version requests ask the cluster to answer
-    /// as: by default the one oxsearch is generated for,
-    /// [`oxsearch_core::MAJOR_VERSION`]. The last minor of the major before
-    /// understands it, so a client for 9 works with Elasticsearch 8.19.
-    /// `None` sends plain JSON media types, for a proxy or service that
-    /// refuses Elasticsearch's own.
+    /// Asks the cluster to answer as this Elasticsearch major does, through
+    /// `compatible-with` in the `Accept` and `Content-Type` headers: for a
+    /// server newer than the major oxsearch is generated for,
+    /// [`oxsearch_core::MAJOR_VERSION`]. Off by default: requests carry
+    /// plain JSON media types, which every supported version reads.
+    /// Elasticsearch 8.19 refuses `compatible-with=9`, since a server can
+    /// only answer as its own major or an older one.
     pub fn compatible_with(mut self, major: Option<u8>) -> Builder {
         self.settings.compatible_with = major;
         self

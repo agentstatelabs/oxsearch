@@ -89,8 +89,8 @@ pub struct Generated {
     pub ungated: Vec<String>,
 }
 
-/// The core's constants for the specification's version: its minor, and
-/// the major that the transport asks servers to answer as.
+/// The core's constants for the specification's version: its minor and its
+/// major.
 fn versions(pin: &Pin) -> Result<String, Error> {
     let major: u8 = pin
         .branch
@@ -102,9 +102,8 @@ fn versions(pin: &Pin) -> Result<String, Error> {
         "/// The Elasticsearch minor this code is generated for: the specification's\n\
          /// branch.\n\
          pub const SPECIFICATION_VERSION: &str = \"{}\";\n\n\
-         /// Its major version. Requests ask Elasticsearch to answer as this version\n\
-         /// does (`compatible-with`), which the last minor of the major before\n\
-         /// understands too.\n\
+         /// Its major version, which a transport can ask a newer server to\n\
+         /// answer as (`compatible-with`).\n\
          pub const MAJOR_VERSION: u8 = {major};\n\n",
         pin.branch
     ))

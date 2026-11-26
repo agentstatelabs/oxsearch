@@ -87,7 +87,7 @@ oxsearch's versions are its own, 0.N while its API settles. Each release is gene
 | 0.2 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 | 0.1 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 
-Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch. From the next release, Elasticsearch 8.19 does too: requests ask the server to answer as Elasticsearch 9 does (`compatible-with=9`), which 8.19 understands. What 8.19 doesn't have, it refuses; each endpoint's documentation says since which version it's there, and whether Elastic Cloud Serverless has it.
+Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch. From the next release, CI tests Elasticsearch 8.19 too: requests carry plain JSON, which 8.19 reads as 9 does, and what 8.19 doesn't have, it refuses. Each endpoint's documentation says since which version it's there, and whether Elastic Cloud Serverless has it.
 
 ## Licenses of Elasticsearch features
 
