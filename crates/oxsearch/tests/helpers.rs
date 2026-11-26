@@ -71,7 +71,7 @@ async fn scans_page_by_page_and_closes() {
     let transport = Scripted::new(|request, body| {
         match (request.method.as_str(), request.path_and_query.as_str()) {
             ("POST", "/idx/_pit?keep_alive=1m") => (200, json!({"id": "pit-1"})),
-            ("POST", "/_search") => {
+            ("POST", "/_search?allow_partial_search_results=false") => {
                 let page = match body.get("search_after") {
                     None => json!([hit("a", 1), hit("b", 2)]),
                     Some(after) if after == &json!([2]) => json!([hit("c", 3)]),
@@ -105,9 +105,9 @@ async fn scans_page_by_page_and_closes() {
         lines,
         [
             "POST /idx/_pit?keep_alive=1m",
-            "POST /_search",
-            "POST /_search",
-            "POST /_search",
+            "POST /_search?allow_partial_search_results=false",
+            "POST /_search?allow_partial_search_results=false",
+            "POST /_search?allow_partial_search_results=false",
             "DELETE /_pit"
         ]
     );
@@ -126,7 +126,7 @@ async fn scans_page_by_page_and_closes() {
 async fn scans_in_slices() {
     let transport = Scripted::new(|request, body| match request.path_and_query.as_str() {
         "/idx/_pit?keep_alive=1m" => (200, json!({"id": "pit"})),
-        "/_search" => {
+        "/_search?allow_partial_search_results=false" => {
             let slice = body["slice"]["id"].as_str().unwrap().to_owned();
             let page = if body.get("search_after").is_some() {
                 json!([])
@@ -150,7 +150,10 @@ async fn scans_in_slices() {
     let slices: Vec<Value> = transport
         .requests()
         .iter()
-        .filter(|(l, b)| l == "POST /_search" && b.get("search_after").is_none())
+        .filter(|(l, b)| {
+            l == "POST /_search?allow_partial_search_results=false"
+                && b.get("search_after").is_none()
+        })
         .map(|(_, b)| b["slice"].clone())
         .collect();
     assert!(slices.contains(&json!({"id": "0", "max": 2})));
@@ -161,7 +164,7 @@ async fn scans_in_slices() {
 async fn a_failed_page_ends_the_scan_and_closes() {
     let transport = Scripted::new(|request, _| match request.path_and_query.as_str() {
         "/idx/_pit?keep_alive=1m" => (200, json!({"id": "pit"})),
-        "/_search" => (
+        "/_search?allow_partial_search_results=false" => (
             500,
             json!({"error": {"type": "search_phase_execution_exception"}, "status": 500}),
         ),

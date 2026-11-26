@@ -69,6 +69,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
 - **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, changes part of it with a patch or a script, and sends bulk writes; `Versioned<T>` makes a write conditional on what was read; and field handles offer only the queries that suit each field.
 - **Helpers** (`oxsearch::helpers`): a point-in-time scan and a bulk loader with backpressure.
+- **A command line** (`oxsearch-cli`, `cargo install oxsearch-cli`): `oxsearch export`, `import` and `transfer` move documents to and from NDJSON files and between clusters, with their ids and routing, in slices, samples and limits.
 - **Transport layers**: several nodes with failover, retries, sniffing, credentials (basic, bearer, API key, Elastic Cloud) and gzip.
 - **Telemetry** through `tracing` and `metrics`, following the OpenTelemetry conventions for Elasticsearch, for [oxtel](https://github.com/agentstatelabs/oxtel) or any other exporter.
 - **A `rig` vector store** ([`oxsearch-rig`](crates/oxsearch-rig)).

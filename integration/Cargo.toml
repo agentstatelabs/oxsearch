@@ -12,6 +12,7 @@ oxsearch-rig = { path = "../crates/oxsearch-rig" }
 rig-core = { version = "0.44", default-features = false }
 oxsearch-core = { path = "../crates/oxsearch-core" }
 oxsearch-docs = { path = "../crates/oxsearch-docs" }
+oxsearch-cli = { path = "../crates/oxsearch-cli" }
 oxsearch-inference = { path = "../crates/oxsearch-inference" }
 oxsearch-mapping = { path = "../crates/oxsearch-mapping" }
 oxsearch-search = { path = "../crates/oxsearch-search" }

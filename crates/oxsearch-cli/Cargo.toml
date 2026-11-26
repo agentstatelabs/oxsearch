@@ -1,0 +1,35 @@
+[package]
+name = "oxsearch-cli"
+description = "Export, import and transfer Elasticsearch documents with oxsearch: NDJSON files, sliced point-in-time reads and bulk writes"
+readme = "README.md"
+keywords = ["elasticsearch", "export", "import", "ndjson", "cli"]
+categories = ["command-line-utilities", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE", "README.md"]
+
+[[bin]]
+name = "oxsearch"
+path = "src/main.rs"
+
+[dependencies]
+oxsearch = { path = "../oxsearch", version = "0.2.0", features = ["helpers"] }
+clap = { version = "4.6", features = ["derive", "env"] }
+flate2 = "1.1"
+futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
+metrics = "0.24"
+oxtel = "0.3.1"
+serde = { version = "1.0.228", features = ["derive"] }
+# Documents pass through as they are, without being parsed and written
+# again.
+serde_json = { version = "1.0.149", features = ["raw_value"] }
+tokio = { version = "1.53", features = ["rt-multi-thread", "macros", "sync", "time"] }
+tracing = { version = "0.1.44", default-features = false, features = ["std"] }
+
+[lints]
+workspace = true

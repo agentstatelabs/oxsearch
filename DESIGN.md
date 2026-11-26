@@ -218,6 +218,7 @@ Both are in `oxsearch::helpers`, behind the `helpers` feature, which brings in T
 - **Point-in-time stream** (`Scan`). An async stream of `Hit<T>` over point-in-time and `search_after`, sorted by `_shard_doc`.
   - It splits into slices for parallel reads, merged as pages arrive.
   - It renews a short keep-alive with each page and always uses the latest point-in-time id. It ends at the first empty page (no exact total needed) and closes the point-in-time when it finishes or fails. A stream dropped early leaves the point-in-time to expire.
+  - A page some shards couldn't answer is an error (`allow_partial_search_results=false`), never a page with documents missing.
 - **Bulk-loading helper** (`BulkLoader`). `start()` returns a sender and a stream of results.
   - Bounded channels give backpressure: `send` waits while the loader is behind, and the loader waits while results aren't read. Actions are written to NDJSON as they're sent, so documents needn't be `Send`.
   - It has a concurrency limit and flushes by action count, bytes and interval.
@@ -249,6 +250,23 @@ Built in Phase 1 (`oxsearch_core::telemetry`):
 - **GenAI.** `gen_ai.operation.name` is `embeddings`, `chat`, `text_completion` or `rerank` for inference calls.
 - **Metrics.** `db.client.operation.duration` (seconds) is recorded by operation, with `error.type` and the status on failure; `telemetry::describe_metrics` gives its unit. The helpers record `oxsearch.bulk.{queued,in_flight}` gauges, `oxsearch.bulk.{actions,bytes,requests}` and `oxsearch.scan.{pages,documents}` counters.
 - **Tests.** Field names follow the literal-then-check pattern of oxtel-sql: the `tracing` macros need literals, and a test checks them against `oxtel-semconv`'s constants. `integration/tests/collector.rs` exports a search's span and duration through oxtel to a real OpenTelemetry Collector, and checks what it decoded. CI's integration jobs run it.
+
+### 4.9 The command line
+
+`oxsearch-cli` installs `oxsearch`, which moves documents in bulk where reindex can't: to and from files, in samples, and between clusters that can't reach each other.
+
+- **Export** reads over a sliced point in time (`Scan`) and writes NDJSON from one writer thread. A line is a record, `{"_index", "_id", "_routing", "_source"}`, so an import puts each document back where it was. `--plain` writes bare documents.
+- **Import** reads NDJSON, gzip or not, and writes it through `BulkLoader`: records to their own index or `--index`, plain documents with ids from `--id-field`.
+- **Transfer** streams a scan of one cluster into a bulk loader for another, or for another index of the same one.
+- `--every N` keeps one document in N and `--limit N` at most N; `--slices`, `--concurrency`, `--page-size` and `--batch-size` set the threads and the block sizes.
+- Documents pass through as the JSON they are (`serde_json`'s `RawValue`), never parsed into a structure and written again.
+
+It follows what elasticstore's import and export taught:
+- Nothing fails silently. A partial page is an error. So is a malformed line, at its number. A refused document is counted and reported, and fails the exit status.
+- An export never overwrites a file. Credentials come from the environment and never reach a log.
+- One owner per resource: a single writer, one reader feeding the loader through bounded channels, and the loader's or the reader's first error ending the run.
+
+Progress goes to oxtel: logs to standard error, and the scan's, the loader's and the command's own metrics over OTLP when it's configured.
 
 ## 5. Licenses
 
