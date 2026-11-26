@@ -60,6 +60,10 @@ impl RequestBody {
 /// An empty response is returned if the verification process is successful.
 /// The response can be sent by the IdP with either the HTTP-Redirect or the HTTP-Post binding.
 /// The caller of this API must prepare the request accordingly so that this API can handle either of them.
+///
+/// **Availability:** Elasticsearch 7.14.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-saml-complete-logout)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -252,6 +252,10 @@ impl RequestBody {
 /// The query roles API does not retrieve roles that are defined in roles files, nor built-in ones.
 /// You can optionally filter the results with a query.
 /// Also, the results can be paginated and sorted.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-query-role)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

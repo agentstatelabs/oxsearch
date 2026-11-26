@@ -1031,6 +1031,10 @@ impl JobsRecord {
 /// IMPORTANT: CAT APIs are only intended for human consumption using the Kibana
 /// console or command line. They are not intended for use by applications. For
 /// application consumption, use the get anomaly detection job statistics API.
+///
+/// **Availability:** Elasticsearch 7.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-ml-jobs)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

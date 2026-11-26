@@ -156,6 +156,10 @@ impl RequestBody {
 ///
 /// NOTE: As opposed to the get user API, built-in users are excluded from the result.
 /// This API is only for native users.
+///
+/// **Availability:** Elasticsearch 8.14.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-query-user)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

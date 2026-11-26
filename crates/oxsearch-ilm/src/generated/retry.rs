@@ -6,6 +6,10 @@
 /// Retry running the lifecycle policy for an index that is in the ERROR step.
 /// The API sets the policy back to the step where the error occurred and runs the step.
 /// Use the explain lifecycle state API to determine whether an index is in the ERROR step.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-retry)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

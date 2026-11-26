@@ -23,6 +23,10 @@ impl RequestBody {}
 /// Create or update the inference region policy.
 ///
 /// The region policy restricts inference to a set of allowed geographic areas or cloud service provider regions.
+///
+/// **Availability:** Elasticsearch 9.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-region-policy)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -40,6 +40,10 @@ impl RequestBody {
 }
 
 /// Evaluate a trained model.
+///
+/// **Availability:** Elasticsearch 8.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-infer-trained-model)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -124,6 +124,10 @@ impl RequestBody {
 ///
 /// When Elasticsearch security features are enabled, your watch can index or search only on indices for which the user that stored the watch has privileges.
 /// If the user is able to read index `a`, but not index `b`, the same will apply when the watch runs.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-put-watch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

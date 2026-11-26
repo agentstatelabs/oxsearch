@@ -233,6 +233,10 @@ impl NativeCode {}
 /// used to find out what those defaults are. It also provides information about
 /// the maximum size of machine learning jobs that could run in the current
 /// cluster configuration.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-info)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

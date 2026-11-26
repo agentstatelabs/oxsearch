@@ -26,6 +26,10 @@ impl RequestBody {}
 /// Set the error field for the connector.
 /// If the error provided in the request body is non-null, the connector’s status is updated to error.
 /// Otherwise, if the error is reset to null, the connector status is updated to connected.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-error)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

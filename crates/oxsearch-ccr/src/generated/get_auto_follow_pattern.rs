@@ -85,6 +85,10 @@ impl AutoFollowPatternSummary {
 /// Get auto-follow patterns.
 ///
 /// Get cross-cluster replication auto-follow patterns.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-get-auto-follow-pattern-1)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

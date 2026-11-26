@@ -33,6 +33,10 @@ impl RequestBody {
 /// Update data stream options.
 ///
 /// Update the data stream options of the specified data streams.
+///
+/// **Availability:** Elasticsearch 8.19.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-data-stream-options)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

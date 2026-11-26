@@ -140,6 +140,10 @@ impl RequestBody {
 ///
 /// Cancellation should happen quickly but might take a few seconds.
 /// The get task status API will continue to list the delete by query task until this task checks that it has been cancelled and terminates itself.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-delete-by-query)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

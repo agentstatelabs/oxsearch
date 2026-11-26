@@ -7,6 +7,10 @@
 /// request by using a group name, a comma-separated list of jobs, or a wildcard
 /// expression. You can get information for all anomaly detection jobs by using
 /// `_all`, by specifying `*` as the `<job_id>`, or by omitting the `<job_id>`.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-jobs)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

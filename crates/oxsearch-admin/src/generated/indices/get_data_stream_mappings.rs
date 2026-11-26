@@ -36,6 +36,10 @@ impl DataStreamMappings {}
 /// Get data stream mappings.
 ///
 /// Get mapping information for one or more data streams.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-data-stream-mappings)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -39,6 +39,10 @@ impl RequestBody {
 /// The API returns the specific Elasticsearch query that would be generated and run by calling the search application search API.
 ///
 /// You must have `read` privileges on the backing alias of the search application.
+///
+/// **Availability:** Elasticsearch 8.9.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-render-query)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -119,6 +119,10 @@ impl RequestBody {
 /// The follower index could have been paused with the pause follower API.
 /// Alternatively it could be paused due to replication that cannot be retried due to failures during following tasks.
 /// When this API returns, the follower index will resume fetching operations from the leader index.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-resume-follow)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

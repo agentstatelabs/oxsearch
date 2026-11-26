@@ -47,6 +47,10 @@
 /// For example with `GET _resolve/cluster` or `GET _resolve/cluster/*:*`.
 /// The `connected` field in the response will indicate whether it was successful.
 /// If a connection was (re-)established, this will also cause the `remote/info` endpoint to now indicate a connected status.
+///
+/// **Availability:** Elasticsearch 8.13.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-resolve-cluster)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

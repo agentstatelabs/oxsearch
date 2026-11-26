@@ -32,6 +32,10 @@ impl IndicesAliasesResponseBody {
 /// Delete an alias.
 ///
 /// Removes a data stream or index from an alias.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete-alias)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

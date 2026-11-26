@@ -58,6 +58,10 @@ impl RequestBody {
 /// When Elasticsearch security features are enabled, your datafeed remembers which roles the last user to create or
 /// update it had at the time of creation or update and runs the query using those same roles. If you provided secondary
 /// authorization headers when you created or updated the datafeed, those credentials are used instead.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-start-datafeed)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -7,6 +7,10 @@
 /// different retention period with the `expires_in` parameter in the forecast
 /// jobs API. The delete forecast API enables you to delete one or more
 /// forecasts before they expire.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-forecast)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

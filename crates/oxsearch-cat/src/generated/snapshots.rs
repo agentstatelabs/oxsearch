@@ -6,6 +6,10 @@
 /// Get information about the snapshots stored in one or more repositories.
 /// A snapshot is a backup of an index or running Elasticsearch cluster.
 /// IMPORTANT: cat APIs are only intended for human consumption using the command line or Kibana console. They are not intended for use by applications. For application consumption, use the get snapshot API.
+///
+/// **Availability:** Elasticsearch 2.1.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-snapshots)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

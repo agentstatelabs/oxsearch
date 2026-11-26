@@ -5,6 +5,10 @@
 ///
 /// Get the current status and available results or stored results for an ES|QL asynchronous query.
 /// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can retrieve the results using this API.
+///
+/// **Availability:** Elasticsearch 8.13.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-async-query-get)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

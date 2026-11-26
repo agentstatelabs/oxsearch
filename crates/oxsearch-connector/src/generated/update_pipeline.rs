@@ -22,6 +22,10 @@ impl RequestBody {}
 /// Update the connector pipeline.
 ///
 /// When you create a new connector, the configuration of an ingest pipeline is populated with default settings.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-pipeline)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

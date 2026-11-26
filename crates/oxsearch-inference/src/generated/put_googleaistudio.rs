@@ -44,6 +44,10 @@ impl RequestBody {
 /// Create an Google AI Studio inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `googleaistudio` service.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-googleaistudio)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

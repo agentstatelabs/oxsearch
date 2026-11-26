@@ -4,6 +4,10 @@
 /// Get async EQL search results.
 ///
 /// Get the current status and available results for an async EQL search or a stored synchronous EQL search.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-eql-get)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

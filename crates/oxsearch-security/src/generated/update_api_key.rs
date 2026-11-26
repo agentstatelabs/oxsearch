@@ -88,6 +88,10 @@ impl RequestBody {
 ///
 /// IMPORTANT: If you don't specify `role_descriptors` in the request, a call to this API might still change the API key's access scope.
 /// This change can occur if the owner user's permissions have changed since the API key was created or last modified.
+///
+/// **Availability:** Elasticsearch 8.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-update-api-key)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

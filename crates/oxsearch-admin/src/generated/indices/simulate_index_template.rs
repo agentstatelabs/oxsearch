@@ -4,6 +4,10 @@
 /// Simulate an index.
 ///
 /// Get the index configuration that would be applied to the specified index from an existing index template.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-simulate-index-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

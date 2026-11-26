@@ -44,6 +44,10 @@ impl RequestBody {
 ///
 /// A filter contains a list of strings. It can be used by one or more anomaly detection jobs.
 /// Specifically, filters are referenced in the `custom_rules` property of detector configuration objects.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-filter)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

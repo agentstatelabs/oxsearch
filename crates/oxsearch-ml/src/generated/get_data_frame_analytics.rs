@@ -6,6 +6,10 @@
 /// You can get information for multiple data frame analytics jobs in a single
 /// API request by using a comma-separated list of data frame analytics jobs or a
 /// wildcard expression.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

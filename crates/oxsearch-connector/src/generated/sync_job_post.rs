@@ -43,6 +43,10 @@ impl RequestBody {
 /// Create a connector sync job.
 ///
 /// Create a connector sync job document in the internal index and initialize its counters and timestamps with default values.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-sync-job-post)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

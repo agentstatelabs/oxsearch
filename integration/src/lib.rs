@@ -94,6 +94,29 @@ impl License {
     }
 }
 
+/// The Elasticsearch version the fixture runs, as major and minor, from
+/// `OXSEARCH_TEST_VERSION`; the specification's when it's unset.
+pub fn server_version() -> (u32, u32) {
+    let version = std::env::var("OXSEARCH_TEST_VERSION")
+        .unwrap_or_else(|_| oxsearch::SPECIFICATION_VERSION.to_owned());
+    let mut parts = version.split('.').map(|p| p.parse::<u32>());
+    match (parts.next(), parts.next()) {
+        (Some(Ok(major)), Some(Ok(minor))) => (major, minor),
+        _ => panic!("OXSEARCH_TEST_VERSION is {version:?}; expected a version such as 8.19.26"),
+    }
+}
+
+/// Whether the fixture's Elasticsearch has what `major.minor` added. A
+/// test of something newer calls this first and stops, saying why, when
+/// it's `false`.
+pub fn has(major: u32, minor: u32, what: &str) -> bool {
+    let has = server_version() >= (major, minor);
+    if !has {
+        eprintln!("{what} needs Elasticsearch {major}.{minor}: skipped");
+    }
+    has
+}
+
 /// A client for the cluster at `OXSEARCH_TEST_URL`, or
 /// `http://127.0.0.1:9200`, as the elastic user when security is on.
 pub fn client() -> TestClient {

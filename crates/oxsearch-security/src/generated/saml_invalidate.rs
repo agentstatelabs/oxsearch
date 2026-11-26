@@ -54,6 +54,10 @@ impl RequestBody {
 /// The custom web application can use this API to have Elasticsearch process the `LogoutRequest`.
 /// After successful validation of the request, Elasticsearch invalidates the access token and refresh token that corresponds to that specific SAML principal and provides a URL that contains a SAML LogoutResponse message.
 /// Thus the user can be redirected back to their IdP.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-saml-invalidate)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

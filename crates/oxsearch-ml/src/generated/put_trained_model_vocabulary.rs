@@ -48,6 +48,10 @@ impl RequestBody {
 ///
 /// This API is supported only for natural language processing (NLP) models.
 /// The vocabulary is stored in the index as described in `inference_config.*.vocabulary` of the trained model definition.
+///
+/// **Availability:** Elasticsearch 8.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-trained-model-vocabulary)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

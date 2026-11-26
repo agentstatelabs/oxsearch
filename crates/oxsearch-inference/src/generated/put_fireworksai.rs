@@ -59,6 +59,10 @@ impl RequestBody {
 /// Create a Fireworks AI inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `fireworksai` service.
+///
+/// **Availability:** Elasticsearch 9.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-fireworksai)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

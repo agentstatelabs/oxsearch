@@ -35,6 +35,10 @@ impl DataStreamStats {}
 /// Get data stream lifecycle stats.
 ///
 /// Get statistics about the data streams that are managed by a data stream lifecycle.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-data-lifecycle-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

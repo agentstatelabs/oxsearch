@@ -614,6 +614,10 @@ impl RequestBody {
 /// Evaluate ranked search results.
 ///
 /// Evaluate the quality of ranked search results over a set of typical search queries.
+///
+/// **Availability:** Elasticsearch 6.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rank-eval)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

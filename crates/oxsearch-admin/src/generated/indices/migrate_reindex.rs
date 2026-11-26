@@ -76,6 +76,10 @@ impl<'de> ::serde::Deserialize<'de> for ModeEnum {
 /// Reindex all legacy backing indices for a data stream.
 /// This operation occurs in a persistent task.
 /// The persistent task ID is returned immediately and the reindexing work is completed in that task.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-migrate-reindex)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

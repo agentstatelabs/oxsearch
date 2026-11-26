@@ -97,6 +97,10 @@ impl ExecuteEnrichPolicyStatus {
 /// Run an enrich policy.
 ///
 /// Create the enrich index for an existing enrich policy.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-enrich-execute-policy)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

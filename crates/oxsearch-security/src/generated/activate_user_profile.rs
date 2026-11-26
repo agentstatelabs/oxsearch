@@ -72,6 +72,10 @@ impl RequestBody {
 ///
 /// When updating a profile document, the API enables the document if it was disabled.
 /// Any updates do not change existing content for either the `labels` or `data` fields.
+///
+/// **Availability:** Elasticsearch 8.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-activate-user-profile)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

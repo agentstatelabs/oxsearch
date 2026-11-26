@@ -71,6 +71,10 @@ impl RequestBody {
 ///
 /// For both labels and data, content is namespaced by the top-level fields.
 /// The `update_profile_data` global privilege grants privileges for updating only the allowed namespaces.
+///
+/// **Availability:** Elasticsearch 8.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-update-user-profile-data)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

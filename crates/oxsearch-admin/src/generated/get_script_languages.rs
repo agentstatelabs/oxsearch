@@ -28,6 +28,10 @@ impl LanguageContext {}
 /// Get script languages.
 ///
 /// Get a list of available script types, languages, and contexts.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-get-script-languages)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

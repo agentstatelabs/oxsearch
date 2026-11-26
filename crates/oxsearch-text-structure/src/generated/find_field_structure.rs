@@ -20,6 +20,10 @@
 ///
 /// If the structure finder produces unexpected results, specify the `explain` query parameter and an explanation will appear in the response.
 /// It helps determine why the returned structure was chosen.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-text_structure)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

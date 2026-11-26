@@ -84,6 +84,10 @@ impl RequestBody {
 /// * The number of primary shards in the target index must be a multiple of the number of primary shards in the source index.
 /// * The number of primary shards in the target index must be a divisor of the source index's `index.number_of_routing_shards`.
 /// * The node handling the split process must have sufficient free disk space to accommodate a second copy of the existing index.
+///
+/// **Availability:** Elasticsearch 6.1.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-split)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

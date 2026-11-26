@@ -6,6 +6,10 @@
 /// Start the index lifecycle management plugin if it is currently stopped.
 /// ILM is started automatically when the cluster is formed.
 /// Restarting ILM is necessary only when it has been stopped using the stop ILM API.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-start)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

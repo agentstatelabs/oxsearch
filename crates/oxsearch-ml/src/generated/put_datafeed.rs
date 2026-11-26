@@ -236,6 +236,10 @@ impl RequestBody {
 /// those credentials are used instead.
 /// You must use Kibana, this API, or the create anomaly detection jobs API to create a datafeed. Do not add a datafeed
 /// directly to the `.ml-config` index. Do not give users `write` privileges on the `.ml-config` index.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-datafeed)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

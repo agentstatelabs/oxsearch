@@ -43,6 +43,10 @@ impl RequestBody {
 /// You can specify the ID of the API key used for authorization and the ID of the connector secret where the API key is stored.
 /// The connector secret ID is required only for Elastic managed (native) connectors.
 /// Self-managed connectors (connector clients) do not use this field.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-api-key-id)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

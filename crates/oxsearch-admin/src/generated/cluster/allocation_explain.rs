@@ -516,6 +516,10 @@ impl RequestBody {
 /// For assigned shards, it provides an explanation for why the shard is remaining on its current node and has not moved or rebalanced to another node.
 /// This API can be very useful when attempting to diagnose why a shard is unassigned or why a shard continues to remain on its current node when you might expect otherwise.
 /// Refer to the linked documentation for examples of how to troubleshoot allocation issues using this API.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-allocation-explain)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

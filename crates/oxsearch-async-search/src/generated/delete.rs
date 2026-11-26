@@ -6,6 +6,10 @@
 /// If the asynchronous search is still running, it is cancelled.
 /// Otherwise, the saved search results are deleted.
 /// If the Elasticsearch security features are enabled, the deletion of a specific async search is restricted to: the authenticated user that submitted the original search request; users that have the `cancel_task` cluster privilege.
+///
+/// **Availability:** Elasticsearch 7.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

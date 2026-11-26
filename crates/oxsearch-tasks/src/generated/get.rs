@@ -13,6 +13,10 @@
 /// For relocatable tasks, this API transparently follows the task across graceful shutdown relocations,
 /// so callers can keep using the original task ID. The returned task reports its `original_task_id` and `original_start_time_in_millis`
 /// if it is continuing work from an earlier task.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

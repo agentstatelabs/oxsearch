@@ -4,6 +4,10 @@
 /// Get snapshot lifecycle management statistics.
 ///
 /// Get global and policy-level statistics about actions taken by snapshot lifecycle management.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-slm-get-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

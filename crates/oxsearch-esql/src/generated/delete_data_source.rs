@@ -6,6 +6,10 @@
 /// Deletes one or more data sources used in ES|QL data federation.
 /// Fails with `409` if any dataset references one of the named data sources;
 /// delete the dependent datasets first.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-delete-data-source)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

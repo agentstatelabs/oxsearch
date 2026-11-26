@@ -246,6 +246,10 @@ impl HealthRecord {
 /// The latter format is useful for cluster recoveries that take multiple days.
 /// You can use the cat health API to verify cluster health across multiple nodes.
 /// You also can use the API to track the recovery of a large cluster over a longer period of time.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-health)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -166,6 +166,10 @@ impl RequestBody {
 ///
 /// Whether query or update performance dominates the runtime depends on the documents being reindexed and cluster resources.
 /// Refer to the linked documentation for examples of how to update documents using the `_update_by_query` API:
+///
+/// **Availability:** Elasticsearch 2.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-update-by-query)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

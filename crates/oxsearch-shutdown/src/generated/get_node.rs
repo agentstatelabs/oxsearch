@@ -96,6 +96,10 @@ impl PluginsStatus {}
 /// NOTE: This feature is designed for indirect use by Elasticsearch Service, Elastic Cloud Enterprise, and Elastic Cloud on Kubernetes. Direct use is not supported.
 ///
 /// If the operator privileges feature is enabled, you must be an operator to use this API.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-shutdown-get-node)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -4,6 +4,8 @@
 /// Get the status of streams.
 ///
 /// Get the current status for all types of streams.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later; not on Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

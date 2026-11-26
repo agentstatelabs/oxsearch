@@ -62,6 +62,10 @@ impl RequestBody {
 /// These parameters contain the algorithm used for the signature and the signature value itself.
 /// It also returns a random string that uniquely identifies this SAML Authentication request.
 /// The caller of this API needs to store this identifier as it needs to be used in a following step of the authentication process.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-saml-prepare-authentication)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -6,6 +6,10 @@
 /// Run several Fleet searches with a single API request.
 /// The API follows the same structure as the multi search API.
 /// However, similar to the Fleet search API, it supports the `wait_for_checkpoints` parameter.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-fleet-msearch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

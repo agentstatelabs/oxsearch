@@ -4,6 +4,10 @@
 /// Check component templates.
 ///
 /// Returns information about whether a particular component template exists.
+///
+/// **Availability:** Elasticsearch 7.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-put-component-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

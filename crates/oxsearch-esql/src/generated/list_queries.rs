@@ -40,6 +40,10 @@ impl Body {}
 /// Get running ES|QL queries information.
 ///
 /// Returns an object containing IDs and other information about the running ES|QL queries.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-list-queries)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

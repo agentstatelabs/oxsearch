@@ -5,6 +5,10 @@
 ///
 /// Get settings for the Watcher internal index (`.watches`).
 /// Only a subset of settings are shown, for example `index.auto_expand_replicas` and `index.number_of_replicas`.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-get-settings)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

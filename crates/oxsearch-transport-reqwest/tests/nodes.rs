@@ -152,8 +152,47 @@ async fn sends_credentials_and_headers() {
         Some("Basic ZWxhc3RpYzpjaGFuZ2VtZQ==")
     );
     assert_eq!(seen.header("x-opaque-id"), Some("test-1"));
-    assert_eq!(seen.header("content-type"), Some("application/json"));
+    assert_eq!(
+        seen.header("content-type"),
+        Some("application/vnd.elasticsearch+json; compatible-with=9")
+    );
+    assert_eq!(
+        seen.header("accept"),
+        Some("application/vnd.elasticsearch+json; compatible-with=9")
+    );
     assert_eq!(seen.body, br#"{"size":1}"#);
+}
+
+#[tokio::test]
+async fn compatibility_can_be_turned_off() {
+    let server = Server::start(|_, _| (200, "{}".into())).await;
+    let transport = ReqwestTransport::builder()
+        .node(&server.url)
+        .compatible_with(None)
+        .build()
+        .unwrap();
+    let lines = Body::ndjson([serde_json::json!({"index": {}}), serde_json::json!({})]).unwrap();
+    transport
+        .send(HttpRequest::new(Method::Post, "/_bulk", Some(lines)))
+        .await
+        .unwrap();
+    let compatible = ReqwestTransport::builder()
+        .node(&server.url)
+        .build()
+        .unwrap();
+    let lines = Body::ndjson([serde_json::json!({"index": {}}), serde_json::json!({})]).unwrap();
+    compatible
+        .send(HttpRequest::new(Method::Post, "/_bulk", Some(lines)))
+        .await
+        .unwrap();
+    let seen = server.seen();
+    assert_eq!(seen[0].header("content-type"), Some("application/x-ndjson"));
+    // reqwest's own default.
+    assert_eq!(seen[0].header("accept"), Some("*/*"));
+    assert_eq!(
+        seen[1].header("content-type"),
+        Some("application/vnd.elasticsearch+x-ndjson; compatible-with=9")
+    );
 }
 
 #[tokio::test]

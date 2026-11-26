@@ -9,6 +9,10 @@
 /// `<feed_id>`, or by omitting the `<feed_id>`. If the datafeed is stopped, the
 /// only information you receive is the `datafeed_id` and the `state`.
 /// This API returns a maximum of 10,000 datafeeds.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-datafeed-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

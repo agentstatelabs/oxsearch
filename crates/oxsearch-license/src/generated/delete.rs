@@ -6,6 +6,10 @@
 /// When the license expires, your subscription level reverts to Basic.
 ///
 /// If the operator privileges feature is enabled, only operator users can use this API.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-license-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

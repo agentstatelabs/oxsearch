@@ -88,6 +88,10 @@ impl RequestBody {
 /// Preview features used by data frame analytics.
 ///
 /// Preview the extracted features used by a data frame analytics config.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-preview-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

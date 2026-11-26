@@ -46,6 +46,10 @@ impl RequestBody {
 /// Create an inference endpoint to perform an inference task with the `watsonxai` service.
 /// You need an IBM Cloud Databases for Elasticsearch deployment to use the `watsonxai` inference service.
 /// You can provision one through the IBM catalog, the Cloud Databases CLI plug-in, the Cloud Databases API, or Terraform.
+///
+/// **Availability:** Elasticsearch 8.16.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-watsonx)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -5,6 +5,10 @@
 ///
 /// This API interrupts the query execution and returns the results so far.
 /// If the Elasticsearch security features are enabled, only the user who first submitted the ES|QL query can stop it.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-async-query-stop)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

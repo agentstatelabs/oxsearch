@@ -33,6 +33,10 @@ impl RequestBody {
 /// Influencers are the entities that have contributed to, or are to blame for,
 /// the anomalies. Influencer results are available only if an
 /// `influencer_field_name` is specified in the job configuration.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-influencers)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

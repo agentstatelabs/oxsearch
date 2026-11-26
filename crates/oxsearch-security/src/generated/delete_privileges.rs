@@ -25,6 +25,10 @@ impl FoundStatus {}
 ///
 /// * The `manage_security` cluster privilege (or a greater privilege such as `all`).
 /// * The "Manage Application Privileges" global privilege for the application being referenced in the request.
+///
+/// **Availability:** Elasticsearch 6.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-delete-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

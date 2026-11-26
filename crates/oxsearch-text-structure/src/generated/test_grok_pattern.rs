@@ -98,6 +98,10 @@ impl RequestBody {}
 ///
 /// Test a Grok pattern on one or more lines of text.
 /// The API indicates whether the lines match the pattern together with the offsets and lengths of the matched substrings.
+///
+/// **Availability:** Elasticsearch 8.13.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-text-structure-test-grok-pattern)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

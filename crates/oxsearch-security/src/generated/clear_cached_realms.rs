@@ -9,6 +9,10 @@
 /// User credentials are cached in memory on each node to avoid connecting to a remote authentication service or hitting the disk for every incoming request.
 /// There are realm settings that you can use to configure the user cache.
 /// For more information, refer to the documentation about controlling the user cache.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-clear-cached-realms)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

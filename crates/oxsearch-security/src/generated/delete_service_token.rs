@@ -7,6 +7,10 @@
 ///
 /// IMPORTANT: On Serverless, non-operator users can delete tokens for only `elastic/fleet-server` and `elastic/fleet-server-remote`.
 /// Deleting tokens for any other service account requires operator privileges.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-delete-service-token)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -1036,6 +1036,10 @@ impl RequestBody {
 /// If you have only the `manage_own_api_key` privilege, this API returns only the API keys that you own.
 /// If you have the `read_security`, `manage_api_key`, or greater privileges (including `manage_security`), this API returns all API keys regardless of ownership.
 /// Refer to the linked documentation for examples of how to find API keys:
+///
+/// **Availability:** Elasticsearch 7.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-query-api-keys)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

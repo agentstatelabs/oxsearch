@@ -74,6 +74,10 @@ impl CloseShardResult {}
 ///
 /// Closed indices consume a significant amount of disk-space which can cause problems in managed environments.
 /// Closing indices can be turned off with the cluster settings API by setting `cluster.indices.close.enable` to `false`.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-close)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

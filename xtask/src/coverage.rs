@@ -10,7 +10,26 @@ use std::collections::{BTreeMap, BTreeSet};
 use crate::codegen::CRATES;
 use crate::graph::Graph;
 use crate::placement::Placement;
-use crate::spec::model::Endpoint;
+use crate::spec::model::{Endpoint, Visibility};
+
+/// The oldest Elasticsearch this release supports, through compatibility
+/// headers: the last minor of the major before the specification's.
+pub const FLOOR: (u32, u32) = (8, 19);
+
+/// Whether Elastic Cloud Serverless offers an endpoint to everyone.
+fn on_serverless(endpoint: &Endpoint) -> bool {
+    endpoint
+        .availability
+        .serverless
+        .as_ref()
+        .is_some_and(|a| !matches!(a.visibility, Some(Visibility::Private)))
+}
+
+/// The major version an endpoint appeared in, if the specification says.
+fn since_major(endpoint: &Endpoint) -> Option<u32> {
+    let since = endpoint.availability.stack.as_ref()?.since.as_deref()?;
+    since.split('.').next()?.parse().ok()
+}
 
 /// What a single-node fixture can't give an area's tests, by crate.
 const LIMITS: &[(&str, &str)] = &[
@@ -105,6 +124,10 @@ pub fn report(
         }
     }
     let mut by_crate: BTreeMap<&str, (Vec<&str>, Vec<&str>)> = BTreeMap::new();
+    // By crate: the endpoints serverless lacks, and those newer than the
+    // last minor of the major before.
+    let mut not_serverless: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
+    let mut newer: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
     for g in &generated {
         let entry = by_crate.entry(g.krate).or_default();
         if tested.contains(g.name) {
@@ -112,32 +135,45 @@ pub fn report(
         } else {
             entry.1.push(g.name);
         }
+        if !on_serverless(g.endpoint) && g.endpoint.availability.stack.is_some() {
+            not_serverless.entry(g.krate).or_default().push(g.name);
+        }
+        if since_major(g.endpoint).is_some_and(|major| major > FLOOR.0) {
+            newer.entry(g.krate).or_default().push(g.name);
+        }
     }
     let mut out = String::from(
         "# Endpoint coverage\n\n\
          The endpoints generated in each crate, and those the integration tests send to \
          Elasticsearch on the Basic license and a trial. Written by \
          `cargo run -p xtask -- coverage` from the requests the tests record \
-         (`OXSEARCH_COVERAGE`); each CI integration job prints its own.\n\n\
-         | Crate | Generated | Integration-tested |\n|---|---:|---:|\n",
+         (`OXSEARCH_COVERAGE`); each CI integration job prints its own. Each endpoint's \
+         documentation also says where it's available: since which Elasticsearch \
+         version, and whether on Elastic Cloud Serverless.\n\n\
+         | Crate | Generated | On Serverless | Integration-tested |\n|---|---:|---:|---:|\n",
     );
-    let (mut all, mut hit) = (0, 0);
+    let (mut all, mut hit, mut on) = (0, 0, 0);
     for krate in CRATES {
         let Some((yes, no)) = by_crate.get(krate) else {
             continue;
         };
         let total = yes.len() + no.len();
+        let serverless = generated
+            .iter()
+            .filter(|g| g.krate == *krate && on_serverless(g.endpoint))
+            .count();
         all += total;
         hit += yes.len();
+        on += serverless;
         out.push_str(&format!(
-            "| `{}` | {total} | {} ({}%) |\n",
+            "| `{}` | {total} | {serverless} | {} ({}%) |\n",
             crate::codegen::package(krate),
             yes.len(),
             yes.len() * 100 / total.max(1)
         ));
     }
     out.push_str(&format!(
-        "| all | {all} | {hit} ({}%) |\n",
+        "| all | {all} | {on} | {hit} ({}%) |\n",
         hit * 100 / all.max(1)
     ));
     for krate in CRATES {
@@ -149,12 +185,23 @@ pub fn report(
             out.push_str(&format!("Tested: {}.\n\n", list(yes)));
         }
         if !no.is_empty() {
-            out.push_str(&format!("Not tested yet: {}.\n", list(no)));
+            out.push_str(&format!("Not tested yet: {}.\n\n", list(no)));
+        }
+        if let Some(names) = newer.get(krate) {
+            out.push_str(&format!(
+                "Newer than Elasticsearch {}.{}: {}.\n\n",
+                FLOOR.0,
+                FLOOR.1,
+                list(names)
+            ));
+        }
+        if let Some(names) = not_serverless.get(krate) {
+            out.push_str(&format!(
+                "Not on Elastic Cloud Serverless: {}.\n\n",
+                list(names)
+            ));
         }
         if let Some((_, note)) = LIMITS.iter().find(|(k, _)| k == krate) {
-            if !no.is_empty() {
-                out.push('\n');
-            }
             out.push_str(&format!("{note}\n\n"));
         }
     }

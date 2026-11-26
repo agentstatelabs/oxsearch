@@ -90,6 +90,10 @@ impl RequestBody {
 ///
 /// Cross-cluster API keys can only be updated with the update cross-cluster API key API.
 /// Attempting to update them with the update REST API key API or the bulk update REST API keys API will result in an error.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-create-cross-cluster-api-key)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

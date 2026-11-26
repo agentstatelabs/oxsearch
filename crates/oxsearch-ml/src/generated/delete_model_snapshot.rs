@@ -6,6 +6,10 @@
 /// You cannot delete the active model snapshot. To delete that snapshot, first
 /// revert to a different one. To identify the active model snapshot, refer to
 /// the `model_snapshot_id` in the results from the get jobs API.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-model-snapshot)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

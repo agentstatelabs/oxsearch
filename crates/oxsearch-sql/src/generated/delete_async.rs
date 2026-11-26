@@ -10,6 +10,10 @@
 ///
 /// * Users with the `cancel_task` cluster privilege.
 /// * The user who first submitted the search.
+///
+/// **Availability:** Elasticsearch 7.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-delete-async)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

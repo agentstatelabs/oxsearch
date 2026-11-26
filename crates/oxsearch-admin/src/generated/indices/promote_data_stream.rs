@@ -13,6 +13,10 @@
 /// NOTE: When promoting a data stream, ensure the local cluster has a data stream enabled index template that matches the data stream.
 /// If this is missing, the data stream will not be able to roll over until a matching index template is created.
 /// This will affect the lifecycle management of the data stream and interfere with the data stream size and retention.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-promote-data-stream)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

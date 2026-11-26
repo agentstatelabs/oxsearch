@@ -5,6 +5,10 @@
 ///
 /// If you try to start a job that does not exist, an exception occurs.
 /// If you try to start a job that is already started, nothing happens.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rollup-start-job)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

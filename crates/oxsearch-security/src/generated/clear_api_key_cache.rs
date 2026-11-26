@@ -5,6 +5,10 @@
 ///
 /// Evict a subset of all entries from the API key cache.
 /// The cache is also automatically cleared on state changes of the security index.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-clear-api-key-cache)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

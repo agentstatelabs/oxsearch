@@ -129,6 +129,10 @@ impl RequestBody {
 /// * which fields are included or not in the analysis and why,
 /// * how much memory is estimated to be required. The estimate can be used when deciding the appropriate value for model_memory_limit setting later on.
 /// If you have object fields or fields that are excluded via source filtering, they are not included in the explanation.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-explain-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

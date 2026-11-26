@@ -82,6 +82,10 @@ impl ContextMethodParam {}
 /// Get script contexts.
 ///
 /// Get a list of supported script contexts and their methods.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-get-script-context)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

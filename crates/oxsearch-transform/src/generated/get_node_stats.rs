@@ -4,6 +4,10 @@
 /// Get node stats.
 ///
 /// Get per-node information about transform usage.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-get-node-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

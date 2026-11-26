@@ -5,6 +5,10 @@
 ///
 /// IMPORTANT: For each job, data can be accepted from only a single connection at a time.
 /// It is not currently possible to post data to multiple jobs using wildcards or a comma-separated list.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-post-data)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TData = ::serde_json::Value> {

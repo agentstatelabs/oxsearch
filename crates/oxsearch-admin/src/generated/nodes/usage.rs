@@ -100,6 +100,10 @@ pub type NodesUsageMetrics =
     ::oxsearch_core::shapes::OneOrMany<crate::nodes::usage::NodesUsageMetric>;
 
 /// Get feature usage information.
+///
+/// **Availability:** Elasticsearch 6.0.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-nodes-usage)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

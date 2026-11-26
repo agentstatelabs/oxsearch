@@ -71,6 +71,10 @@ impl RequestBody {
 /// Create or update a snapshot lifecycle policy.
 /// If the policy already exists, this request increments the policy version.
 /// Only the latest version of a policy is stored.
+///
+/// **Availability:** Elasticsearch 7.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-slm-put-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -58,6 +58,10 @@ impl RequestBody {
 ///
 /// A datafeed that is stopped ceases to retrieve data from Elasticsearch. A datafeed can be started and stopped
 /// multiple times throughout its lifecycle.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-stop-datafeed)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

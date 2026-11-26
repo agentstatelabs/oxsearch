@@ -5,6 +5,10 @@
 ///
 /// If Elasticsearch encounters index data that is absent from the current cluster state, those indices are considered to be dangling.
 /// For example, this can happen if you delete more than `cluster.indices.tombstones.size` indices while an Elasticsearch node is offline.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-dangling-indices-import-dangling-index)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

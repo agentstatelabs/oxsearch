@@ -11,6 +11,10 @@
 ///
 /// When you activate a user profile, it's automatically enabled and visible in user profile searches.
 /// If you later disable the user profile, you can use the enable user profile API to make the profile visible in these searches again.
+///
+/// **Availability:** Elasticsearch 8.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-enable-user-profile)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

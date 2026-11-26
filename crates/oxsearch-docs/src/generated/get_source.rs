@@ -15,6 +15,10 @@
 /// ```text
 /// GET my-index-000001/_source/1/?_source_includes=*.id&_source_excludes=entities
 /// ```
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-get)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

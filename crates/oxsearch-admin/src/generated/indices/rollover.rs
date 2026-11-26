@@ -119,6 +119,10 @@ impl RequestBody {
 /// For example, you can create an alias that points to an index named `<my-index-{now/d}-000001>`.
 /// If you create the index on May 6, 2099, the index's name is `my-index-2099.05.06-000001`.
 /// If you roll over the alias on May 7, 2099, the new index's name is `my-index-2099.05.07-000002`.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-rollover)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

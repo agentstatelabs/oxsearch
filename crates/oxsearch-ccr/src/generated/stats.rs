@@ -107,6 +107,10 @@ impl FollowStats {}
 /// Get cross-cluster replication stats.
 ///
 /// This API returns stats about auto-following and the same shard-level stats as the get follower stats API.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

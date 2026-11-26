@@ -34,6 +34,10 @@ impl RequestBody {
 /// Clear a scrolling search.
 ///
 /// Clear the search context and results for a scrolling search.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-clear-scroll)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

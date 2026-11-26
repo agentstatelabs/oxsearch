@@ -106,6 +106,10 @@ impl RequestBody {
 }
 
 /// Validate an anomaly detection job.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/guide/en/machine-learning/current/ml-jobs.html)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

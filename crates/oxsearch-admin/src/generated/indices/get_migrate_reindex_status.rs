@@ -4,6 +4,10 @@
 /// Get the migration reindexing status.
 ///
 /// Get the status of a migration reindex attempt for a data stream or index.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-migration)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -5,6 +5,10 @@
 ///
 /// Snapshot lifecycle management (SLM) starts automatically when a cluster is formed.
 /// Manually starting SLM is necessary only if it has been stopped using the stop SLM API.
+///
+/// **Availability:** Elasticsearch 7.6.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-slm-start)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

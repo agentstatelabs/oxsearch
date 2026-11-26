@@ -72,6 +72,10 @@ impl RequestBody {
 /// Make an estimation of the memory usage for an anomaly detection job model.
 /// The estimate is based on analysis configuration details for the job and cardinality
 /// estimates for the fields it references.
+///
+/// **Availability:** Elasticsearch 7.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-estimate-model-memory)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

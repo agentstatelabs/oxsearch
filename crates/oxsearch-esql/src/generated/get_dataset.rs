@@ -6,6 +6,10 @@
 /// Returns one or more datasets used in ES|QL data federation.
 /// A concrete-name miss returns `404`; a wildcard pattern or list-all request with no match
 /// returns `200` with an empty array.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-get-dataset)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

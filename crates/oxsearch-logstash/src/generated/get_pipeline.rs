@@ -4,6 +4,10 @@
 /// Get Logstash pipelines.
 ///
 /// Get pipelines that are used for Logstash Central Management.
+///
+/// **Availability:** Elasticsearch 7.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-logstash-get-pipeline)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

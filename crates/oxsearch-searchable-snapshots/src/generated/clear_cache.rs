@@ -4,6 +4,10 @@
 /// Clear the cache.
 ///
 /// Clear indices and data streams from the shared cache for partially mounted indices.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-searchable-snapshots-clear-cache)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

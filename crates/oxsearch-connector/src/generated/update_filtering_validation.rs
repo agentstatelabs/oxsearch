@@ -22,6 +22,10 @@ impl RequestBody {}
 /// Update the connector draft filtering validation.
 ///
 /// Update the draft filtering validation info for a connector.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-filtering-validation)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

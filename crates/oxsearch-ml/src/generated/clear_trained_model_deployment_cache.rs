@@ -7,6 +7,10 @@
 /// A trained model deployment may have an inference cache enabled.
 /// As requests are handled by each allocated node, their responses may be cached on that individual node.
 /// Calling this API clears the caches without restarting the deployment.
+///
+/// **Availability:** Elasticsearch 8.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-clear-trained-model-deployment-cache)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

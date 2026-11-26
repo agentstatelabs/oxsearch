@@ -34,6 +34,10 @@ impl IndexMappingRecord {
 /// Get mapping definitions.
 ///
 /// For data streams, the API retrieves mappings for the stream’s backing indices.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-mapping)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

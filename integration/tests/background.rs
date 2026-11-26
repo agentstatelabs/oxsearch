@@ -6,7 +6,7 @@ use oxsearch::tasks;
 use oxsearch::{Query, Refresh};
 use oxsearch_docs::index;
 use oxsearch_integration::fixtures::{article_mapping, articles};
-use oxsearch_integration::{TestClient, TestIndex, client};
+use oxsearch_integration::{TestClient, TestIndex, client, has};
 
 /// An index holding the three articles.
 async fn articles_index(client: &TestClient, prefix: &str) -> TestIndex {
@@ -53,18 +53,20 @@ async fn follow_and_cancel_tasks() {
     let (first, second) = (TestIndex::named("copy-a"), TestIndex::named("copy-b"));
 
     // Through the reindex management API.
-    let task = slow_reindex(&client, &test, &first).await;
-    let status = client
-        .send(&get_reindex::Request::new(task.as_str()))
-        .await
-        .unwrap();
-    assert_eq!(status.completed, Some(false), "{status:?}");
-    let running = client.send(&list_reindex::Request::new()).await.unwrap();
-    assert!(!running.reindex.is_empty(), "{running:?}");
-    client
-        .send(&cancel_reindex::Request::new(task.as_str()).wait_for_completion(true))
-        .await
-        .unwrap();
+    if has(9, 5, "The reindex management API") {
+        let task = slow_reindex(&client, &test, &first).await;
+        let status = client
+            .send(&get_reindex::Request::new(task.as_str()))
+            .await
+            .unwrap();
+        assert_eq!(status.completed, Some(false), "{status:?}");
+        let running = client.send(&list_reindex::Request::new()).await.unwrap();
+        assert!(!running.reindex.is_empty(), "{running:?}");
+        client
+            .send(&cancel_reindex::Request::new(task.as_str()).wait_for_completion(true))
+            .await
+            .unwrap();
+    }
 
     // Through the task API.
     let task = slow_reindex(&client, &test, &second).await;

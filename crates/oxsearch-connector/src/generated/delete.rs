@@ -7,6 +7,10 @@
 /// This is a destructive action that is not recoverable.
 /// NOTE: This action doesn’t delete any API keys, ingest pipelines, or data indices associated with the connector.
 /// These need to be removed manually.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

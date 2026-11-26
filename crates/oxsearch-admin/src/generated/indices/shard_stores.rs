@@ -42,6 +42,10 @@ impl IndicesShardStores {}
 /// * Any errors encountered while opening the shard index or from an earlier failure.
 ///
 /// By default, the API returns store information only for primary shards that are unassigned or have one or more unassigned replica shards.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-shard-stores)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

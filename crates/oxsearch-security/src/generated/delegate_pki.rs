@@ -151,6 +151,10 @@ impl RequestBody {}
 /// IMPORTANT: The association between the subject public key in the target certificate and the corresponding private key is not validated.
 /// This is part of the TLS authentication process and it is delegated to the proxy that calls this API.
 /// The proxy is trusted to have performed the TLS authentication and this API translates that authentication into an Elasticsearch access token.
+///
+/// **Availability:** Elasticsearch 7.4.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-delegate-pki)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

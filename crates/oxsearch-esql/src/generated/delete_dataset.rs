@@ -5,6 +5,10 @@
 ///
 /// Deletes one or more datasets used in ES|QL data federation.
 /// If any specified dataset does not exist, the request fails and no datasets are deleted.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-delete-dataset)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

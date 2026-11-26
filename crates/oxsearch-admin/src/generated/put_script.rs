@@ -23,6 +23,10 @@ impl RequestBody {}
 /// Create or update a script or search template.
 ///
 /// Creates or updates a stored script or search template.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-put-script)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

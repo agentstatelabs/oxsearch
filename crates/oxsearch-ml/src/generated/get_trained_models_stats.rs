@@ -5,6 +5,10 @@
 ///
 /// You can get usage information for multiple trained
 /// models in a single API request by using a comma-separated list of model IDs or a wildcard expression.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-trained-models-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

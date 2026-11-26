@@ -70,6 +70,10 @@ impl RequestBody {
 /// `highlighter`, `suggestors`, `post_filter`, `profile`, `explain`: These are similarly disallowed.
 ///
 /// For more detailed examples of using the rollup search API, including querying rolled-up data only or combining rolled-up and live data, refer to the External documentation.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rollup-rollup-search)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

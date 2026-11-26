@@ -149,6 +149,10 @@ impl RequestBody {
 /// The role management APIs are generally the preferred way to manage roles in the native realm, rather than using file-based role management.
 /// The create or update roles API cannot update roles that are defined in roles files.
 /// File-based role management is not available in Elastic Serverless.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-put-role)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

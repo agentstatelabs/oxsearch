@@ -137,6 +137,10 @@ impl<'de> ::serde::Deserialize<'de> for DeprecationLevel {
 /// > info
 /// > This API is designed for indirect use by the [Upgrade Assistant](https://www.elastic.co/docs/deploy-manage/upgrade/prepare-to-upgrade/upgrade-assistant).
 /// > We recommend learning about deprecated features using the Upgrade Assistant rather than calling this API directly.
+///
+/// **Availability:** Elasticsearch 6.1.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-migration-deprecations)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

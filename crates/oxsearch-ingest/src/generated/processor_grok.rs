@@ -6,6 +6,10 @@
 /// Extract structured fields out of a single text field within a document.
 /// You must choose which field to extract matched fields from, as well as the grok pattern you expect will match.
 /// A grok pattern is like a regular expression that supports aliased expressions that can be reused.
+///
+/// **Availability:** Elasticsearch 6.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/reference/enrich-processor/grok-processor)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

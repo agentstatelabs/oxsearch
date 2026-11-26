@@ -98,6 +98,10 @@ impl GeoIpNodeDatabases {}
 /// Get GeoIP statistics.
 ///
 /// Get download statistics for GeoIP2 databases that are used with the GeoIP processor.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/reference/enrich-processor/geoip-processor)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

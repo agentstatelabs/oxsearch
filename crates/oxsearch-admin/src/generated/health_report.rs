@@ -1247,6 +1247,10 @@ impl RepositoryIntegrityIndicatorDetails {
 ///
 /// NOTE: The health indicators perform root cause analysis of non-green health statuses. This can be computationally expensive when called frequently.
 /// When setting up automated polling of the API for health status, set verbose to false to disable the more expensive analysis logic.
+///
+/// **Availability:** Elasticsearch 8.7.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-health-report)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

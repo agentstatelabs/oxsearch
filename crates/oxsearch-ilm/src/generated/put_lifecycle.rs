@@ -31,6 +31,10 @@ impl RequestBody {
 /// If the specified policy exists, it is replaced and the policy version is incremented.
 ///
 /// NOTE: Only the latest version of the policy is stored, you cannot revert to previous versions.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-put-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

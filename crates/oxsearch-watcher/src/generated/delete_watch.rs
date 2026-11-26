@@ -10,6 +10,10 @@
 /// IMPORTANT: Deleting a watch must be done by using only this API.
 /// Do not delete the watch directly from the `.watches` index using the Elasticsearch delete document API
 /// When Elasticsearch security features are enabled, make sure no write privileges are granted to anyone for the `.watches` index.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-delete-watch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

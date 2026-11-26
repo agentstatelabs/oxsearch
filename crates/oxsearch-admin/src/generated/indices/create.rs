@@ -81,6 +81,10 @@ impl RequestBody {
 ///
 /// You can change the default of only waiting for the primary shards to start through the index setting `index.write.wait_for_active_shards`.
 /// Note that changing this setting will also affect the `wait_for_active_shards` value on all subsequent write operations.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-create)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -14,6 +14,8 @@
 ///
 /// Because this operation causes permanent data loss, it requires the `accept_data_loss`
 /// query parameter to be set to `true`.
+///
+/// **Availability:** Elasticsearch 9.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

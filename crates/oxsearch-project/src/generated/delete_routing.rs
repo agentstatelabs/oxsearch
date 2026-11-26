@@ -2,6 +2,8 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// Delete a project routing expression.
+///
+/// **Availability:** Elastic Cloud Serverless only; a self-managed cluster refuses it.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

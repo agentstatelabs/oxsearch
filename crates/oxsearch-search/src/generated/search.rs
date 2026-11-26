@@ -562,6 +562,10 @@ impl RequestBody {
 /// IMPORTANT: The same point-in-time ID should be used for all slices.
 /// If different PIT IDs are used, slices can overlap and miss documents.
 /// This situation can occur because, by default, the splitting criterion is based on Lucene document IDs, which are not stable across changes to the index.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

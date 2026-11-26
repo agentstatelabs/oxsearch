@@ -424,6 +424,10 @@ impl
 /// no successfully rethrottled tasks — that is, no entries under `nodes` (returned with the default
 /// `group_by=nodes` in stack) or under `tasks` (returned in serverless, or in stack with
 /// `group_by=none` or `group_by=parents`).
+///
+/// **Availability:** Elasticsearch 2.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

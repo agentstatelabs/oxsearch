@@ -262,6 +262,10 @@ impl RequestBody {
 /// By default, the pipeline definitions that are currently in the system are used.
 /// However, you can supply substitute pipeline definitions in the body of the request.
 /// These will be used in place of the pipeline definitions that are already in the system. This can be used to replace existing pipeline definitions or to create new ones. The pipeline substitutions are used only within this request.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-simulate-ingest)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

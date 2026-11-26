@@ -99,6 +99,8 @@ impl RequestBody {
 /// Run a knn search.
 ///
 /// NOTE: The kNN search API has been replaced by the `knn` option in the search API.
+///
+/// **Availability:** Elasticsearch 8.0.0 and later; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -4,6 +4,10 @@
 /// Clear the archived repositories metering.
 ///
 /// Clear the archived repositories metering information in the cluster.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-nodes-clear-repositories-metering-archive)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

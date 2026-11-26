@@ -417,6 +417,10 @@ impl LifecycleExplainUnmanaged {}
 /// For data streams, the API retrieves the current lifecycle status for the stream's backing indices.
 ///
 /// The response indicates when the index entered each lifecycle state, provides the definition of the running phase, and information about any failures.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-explain-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

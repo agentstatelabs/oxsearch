@@ -139,6 +139,10 @@ impl<'de> ::serde::Deserialize<'de> for MigrationStatus {
 ///
 /// TIP: This API is designed for indirect use by the Upgrade Assistant.
 /// You are strongly recommended to use the Upgrade Assistant.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-migration-get-feature-upgrade-status)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

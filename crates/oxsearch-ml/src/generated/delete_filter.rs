@@ -5,6 +5,10 @@
 ///
 /// If an anomaly detection job references the filter, you cannot delete the
 /// filter. You must update or delete the job before you can delete the filter.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-filter)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

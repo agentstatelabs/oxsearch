@@ -34,6 +34,10 @@ impl DataStreamWithLifecycle {
 /// Get data stream lifecycles.
 ///
 /// Get the data stream lifecycle configuration of one or more data streams.
+///
+/// **Availability:** Elasticsearch 8.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-data-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

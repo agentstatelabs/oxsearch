@@ -28,6 +28,10 @@ impl AnalyticsAcknowledgeResponseBase {
 impl AnalyticsAcknowledgeResponseBase {}
 
 /// Create a behavioral analytics collection.
+///
+/// **Availability:** Elasticsearch 8.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-put-behavioral-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

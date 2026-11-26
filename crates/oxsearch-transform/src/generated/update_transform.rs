@@ -112,6 +112,10 @@ impl RequestBody {
 /// privileges for the source indices. You must also have `index` and `read` privileges for the destination index. When
 /// Elasticsearch security features are enabled, the transform remembers which roles the user who updated it had at the
 /// time of update and runs with those privileges.
+///
+/// **Availability:** Elasticsearch 7.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-update-transform)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

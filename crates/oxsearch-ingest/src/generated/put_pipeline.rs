@@ -100,6 +100,10 @@ impl RequestBody {
 /// Create or update a pipeline.
 ///
 /// Changes made using this API take effect immediately.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/manage-data/ingest/transform-enrich/ingest-pipelines)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

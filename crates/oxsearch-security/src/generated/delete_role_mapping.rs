@@ -6,6 +6,10 @@
 /// Role mappings define which roles are assigned to each user.
 /// The role mapping APIs are generally the preferred way to manage role mappings rather than using role mapping files.
 /// The delete role mappings API cannot remove role mappings that are defined in role mapping files.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-delete-role-mapping)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

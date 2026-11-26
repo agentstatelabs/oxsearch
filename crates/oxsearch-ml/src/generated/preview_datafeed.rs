@@ -52,6 +52,10 @@ impl RequestBody {
 /// called the API. However, when the datafeed starts it uses the roles of the last user that created or updated the
 /// datafeed. To get a preview that accurately reflects the behavior of the datafeed, use the appropriate credentials.
 /// You can also use secondary authorization headers to supply the credentials.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-preview-datafeed)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

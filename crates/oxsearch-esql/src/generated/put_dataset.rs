@@ -70,6 +70,10 @@ impl RequestBody {
 /// Creates or replaces a dataset that references a data source in ES|QL data federation.
 /// Dataset names participate in the index namespace and must follow index or alias naming rules.
 /// Returns `404` if the referenced data source does not exist.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-put-dataset)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

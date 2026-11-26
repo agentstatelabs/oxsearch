@@ -87,8 +87,23 @@ specification it's generated from.
   documents back through the bulk loader; `transfer` copies documents to
   another index or cluster. Samples (`--every`), limits, gzip, and progress
   through oxtel. Credentials come from the environment.
+- **Elasticsearch 8.19.** The reqwest transport asks the cluster to answer
+  as Elasticsearch 9 does (`compatible-with=9` on `Accept` and
+  `Content-Type`), which 8.19 understands, and CI runs the integration tests
+  against 8.19 as well as 9.5. `Builder::compatible_with(None)` sends plain
+  JSON media types instead. `SPECIFICATION_VERSION` and `MAJOR_VERSION` say
+  what the code is generated for.
+- **Availability in the docs.** Each endpoint's request type says since which
+  Elasticsearch version it's there and whether Elastic Cloud Serverless has
+  it, and links Elasticsearch's documentation. `docs/coverage.md` counts the
+  endpoints on Serverless and lists those newer than 8.19.
 
 ### Changed
+- Requests sent by the reqwest transport carry Elasticsearch's own media
+  types, `application/vnd.elasticsearch+json; compatible-with=9` (and the
+  NDJSON one for bulk and multi-search), where they carried
+  `application/json`. Elasticsearch 9 treats them the same; for a proxy that
+  doesn't, `compatible_with(None)` restores the plain ones.
 - The front crate's default features include `transport-reqwest`, the HTTP
   transport on reqwest with rustls, so the quick start builds with
   `features = ["derive"]` (DESIGN.md, question 5). With a transport of your

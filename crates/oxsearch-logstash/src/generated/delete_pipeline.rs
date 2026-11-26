@@ -5,6 +5,10 @@
 ///
 /// Delete a pipeline that is used for Logstash Central Management.
 /// If the request succeeds, you receive an empty response with an appropriate status code.
+///
+/// **Availability:** Elasticsearch 7.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-logstash-delete-pipeline)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -111,6 +111,10 @@ impl RequestBody {}
 ///
 /// NOTE: The user profile feature is designed only for use by Kibana and Elastic's Observability, Enterprise Search, and Elastic Security solutions. Individual users and external applications should not call this API directly.
 /// Elastic reserves the right to change or remove this feature in future releases without prior notice.
+///
+/// **Availability:** Elasticsearch 8.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-has-privileges-user-profile)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

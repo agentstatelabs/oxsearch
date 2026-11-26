@@ -7,6 +7,10 @@
 ///
 /// NOTE: This API is currently intended for internal use only by Kibana.
 /// Kibana uses this API internally to configure itself for communications with an Elasticsearch cluster that already has security features enabled.
+///
+/// **Availability:** Elasticsearch 8.0.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-enroll-kibana)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

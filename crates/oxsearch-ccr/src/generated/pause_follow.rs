@@ -7,6 +7,10 @@
 /// The follower index will not fetch any additional operations from the leader index.
 /// You can resume following with the resume follower API.
 /// You can pause and resume a follower index to change the configuration of the following task.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-pause-follow)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

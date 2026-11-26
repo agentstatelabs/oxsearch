@@ -57,6 +57,10 @@ impl RequestBody {
 /// To verify the deployment status, use the get trained model statistics API.
 /// Look for `"state": "fully_allocated"` in the response and ensure that the `"allocation_count"` matches the `"target_allocation_count"`.
 /// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+///
+/// **Availability:** Elasticsearch 8.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-elser)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

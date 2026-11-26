@@ -8,6 +8,10 @@
 /// get information for all datafeeds by using `_all`, by specifying `*` as the
 /// `<feed_id>`, or by omitting the `<feed_id>`.
 /// This API returns a maximum of 10,000 datafeeds.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-datafeeds)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

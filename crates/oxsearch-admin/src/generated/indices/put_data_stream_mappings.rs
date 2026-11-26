@@ -6,6 +6,10 @@
 /// This API can be used to override mappings on specific data streams. These overrides will take precedence over what
 /// is specified in the template that the data stream matches. The mapping change is only applied to new write indices
 /// that are created during rollover after this API is called. No indices are changed by this API.
+///
+/// **Availability:** Elasticsearch 9.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-data-stream-mappings)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

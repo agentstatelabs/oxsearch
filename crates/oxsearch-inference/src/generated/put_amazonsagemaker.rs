@@ -58,6 +58,10 @@ impl RequestBody {
 /// Create an Amazon SageMaker inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `amazon_sagemaker` service.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-amazonsagemaker)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

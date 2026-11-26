@@ -4,6 +4,10 @@
 /// Delete data stream options.
 ///
 /// Removes the data stream options from a data stream.
+///
+/// **Availability:** Elasticsearch 8.19.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete-data-stream-options)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

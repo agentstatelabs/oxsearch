@@ -7,6 +7,10 @@
 /// All users can use this API, but only to determine their own privileges.
 /// To check the privileges of other users, you must use the run as feature.
 /// To check whether a user has a specific list of privileges, use the has privileges API.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-user-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

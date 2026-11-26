@@ -54,6 +54,10 @@ impl RequestBody {
 /// Update a filter.
 ///
 /// Updates the description of a filter, adds items, or removes items from the list.
+///
+/// **Availability:** Elasticsearch 6.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-update-filter)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

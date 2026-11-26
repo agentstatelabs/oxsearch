@@ -81,6 +81,10 @@ impl RequestBody {
 ///
 /// IMPORTANT: This API does NOT terminate the Elasticsearch process.
 /// Monitor the node shutdown status to determine when it is safe to stop Elasticsearch.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-shutdown-put-node)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

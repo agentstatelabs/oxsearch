@@ -50,6 +50,10 @@ impl RequestBody {
 /// If there are any mapping conflicts, the job fails to start.
 /// If the destination index exists, it is used as is. You can therefore set up
 /// the destination index in advance with custom settings and mappings.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-start-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

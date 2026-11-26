@@ -5,6 +5,10 @@
 ///
 /// Remove a query ruleset and its associated data.
 /// This is a destructive action that is not recoverable.
+///
+/// **Availability:** Elasticsearch 8.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-delete-ruleset)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

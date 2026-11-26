@@ -44,6 +44,10 @@
 //!   ID.
 //! - **Compression** (`gzip`, behind the `gzip` feature): request bodies
 //!   are compressed, and responses may be.
+//! - **Compatibility** (`compatible_with`, on by default): requests ask the
+//!   cluster to answer as the Elasticsearch major oxsearch is generated
+//!   for, through `compatible-with` in the `Accept` and `Content-Type`
+//!   headers. That's what lets this release talk to Elasticsearch 8.19.
 //!
 //! Timeouts, proxies and certificates are the `reqwest::Client`'s: build
 //! one and pass it with `client`.
@@ -80,6 +84,7 @@ struct Settings {
     sniff_every: Option<Duration>,
     sniff_on_failure: bool,
     gzip: bool,
+    compatible_with: Option<u8>,
 }
 
 struct State {
@@ -132,6 +137,7 @@ impl ReqwestTransport {
                 sniff_every: None,
                 sniff_on_failure: false,
                 gzip: false,
+                compatible_with: Some(oxsearch_core::MAJOR_VERSION),
             },
             rest: (Duration::from_secs(60), Duration::from_secs(30 * 60)),
         }
@@ -167,12 +173,36 @@ impl ReqwestTransport {
         if let Some(auth) = &settings.auth {
             builder = builder.header(reqwest::header::AUTHORIZATION, auth.header());
         }
+        // Elasticsearch takes `compatible-with` on both headers or neither.
+        let asks = |name: &reqwest::header::HeaderName| {
+            request
+                .headers
+                .iter()
+                .any(|(n, _)| n.eq_ignore_ascii_case(name.as_str()))
+        };
+        if let Some(version) = settings.compatible_with
+            && !asks(&reqwest::header::ACCEPT)
+        {
+            builder = builder.header(
+                reqwest::header::ACCEPT,
+                format!("application/vnd.elasticsearch+json; compatible-with={version}"),
+            );
+        }
         for (name, value) in &request.headers {
             builder = builder.header(name.as_str(), value.as_str());
         }
         if let (Some(content), Some(body)) = (&request.body, body) {
+            let content_type = match (settings.compatible_with, content.content_type()) {
+                (Some(version), "application/x-ndjson") => {
+                    format!("application/vnd.elasticsearch+x-ndjson; compatible-with={version}")
+                }
+                (Some(version), "application/json") => {
+                    format!("application/vnd.elasticsearch+json; compatible-with={version}")
+                }
+                (_, plain) => plain.to_owned(),
+            };
             builder = builder
-                .header(reqwest::header::CONTENT_TYPE, content.content_type())
+                .header(reqwest::header::CONTENT_TYPE, content_type)
                 .body(body.clone());
             if settings.gzip {
                 builder = builder.header(reqwest::header::CONTENT_ENCODING, "gzip");
@@ -441,6 +471,17 @@ impl Builder {
     #[cfg(feature = "gzip")]
     pub fn gzip(mut self, gzip: bool) -> Builder {
         self.settings.gzip = gzip;
+        self
+    }
+
+    /// The Elasticsearch major version requests ask the cluster to answer
+    /// as: by default the one oxsearch is generated for,
+    /// [`oxsearch_core::MAJOR_VERSION`]. The last minor of the major before
+    /// understands it, so a client for 9 works with Elasticsearch 8.19.
+    /// `None` sends plain JSON media types, for a proxy or service that
+    /// refuses Elasticsearch's own.
+    pub fn compatible_with(mut self, major: Option<u8>) -> Builder {
+        self.settings.compatible_with = major;
         self
     }
 

@@ -52,6 +52,10 @@ impl ComponentTemplate {}
 ///
 /// IMPORTANT: CAT APIs are only intended for human consumption using the command line or Kibana console.
 /// They are not intended for use by applications. For application consumption, use the get component template API.
+///
+/// **Availability:** Elasticsearch 5.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-component-templates)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

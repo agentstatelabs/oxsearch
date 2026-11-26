@@ -4,6 +4,10 @@
 /// Get an enrich policy.
 ///
 /// Returns information about an enrich policy.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-enrich-get-policy)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

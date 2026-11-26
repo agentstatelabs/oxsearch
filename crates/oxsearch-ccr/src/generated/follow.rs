@@ -165,6 +165,10 @@ impl RequestBody {
 ///
 /// Create a cross-cluster replication follower index that follows a specific leader index.
 /// When the API returns, the follower index exists and cross-cluster replication starts replicating operations from the leader index to the follower index.
+///
+/// **Availability:** Elasticsearch 6.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-follow)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {
