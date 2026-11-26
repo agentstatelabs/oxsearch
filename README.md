@@ -6,7 +6,7 @@ A typed Rust client for Elasticsearch, generated from the Elasticsearch specific
 
 ## Quick start
 
-Semantic search over your own documents, with `features = ["derive", "transport-reqwest"]`. `semantic_text` embeds with the cluster's default ELSER model, which needs a license above Basic, such as a trial; on Basic, the [RAG example](crates/oxsearch/examples/rag.rs) uses your own embeddings and fuses on the client instead.
+Semantic search over your own documents, with `features = ["derive"]`. The default features include the HTTP transport, on reqwest with rustls; with a transport of your own, set `default-features = false`. `semantic_text` embeds with the cluster's default ELSER model, which needs a license above Basic, such as a trial; on Basic, the [RAG example](crates/oxsearch/examples/rag.rs) uses your own embeddings and fuses on the client instead.
 
 ```rust
 use oxsearch::document::{Document, Indexes};
@@ -128,7 +128,7 @@ scripts/es-fixture.sh down
 With the fixture up, the examples run against it:
 
 ```bash
-cargo run -p oxsearch --example rag --features admin,transport-reqwest
+cargo run -p oxsearch --example rag --features admin
 ```
 
 ## License
