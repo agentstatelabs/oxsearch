@@ -10,9 +10,9 @@ use oxsearch::admin::indices::{
 use oxsearch::admin::nodes;
 use oxsearch::mapping::{KeywordProperty, Property, TextProperty, TypeMapping};
 use oxsearch::shapes::IndexMap;
-use oxsearch::{ClusterInfoTarget, Error, HealthStatus, Method, OpType, Refresh};
+use oxsearch::{ClusterInfoTarget, Error, HealthStatus, OpType, Refresh};
 use oxsearch_docs::index;
-use oxsearch_integration::{TestClient, TestIndex, client, has};
+use oxsearch_integration::{TestClient, TestIndex, client};
 use serde_json::{Value, json};
 
 /// A mapping with a text and a keyword field.
@@ -429,24 +429,13 @@ async fn index_life() {
         matches!(&blocked, Err(Error::Elasticsearch(e)) if e.error_type() == Some("cluster_block_exception")),
         "{blocked:?}"
     );
-    if has(9, 1, "Removing an index block") {
-        client
-            .send(&indices::remove_block::Request::new(
-                name,
-                IndicesBlockOptions::Write,
-            ))
-            .await
-            .unwrap();
-    } else {
-        client
-            .send_raw(
-                Method::Put,
-                &format!("/{name}/_settings"),
-                Some(&json!({"index.blocks.write": false})),
-            )
-            .await
-            .unwrap();
-    }
+    client
+        .send(&indices::remove_block::Request::new(
+            name,
+            IndicesBlockOptions::Write,
+        ))
+        .await
+        .unwrap();
     client
         .send(&indices::close::Request::new(name))
         .await

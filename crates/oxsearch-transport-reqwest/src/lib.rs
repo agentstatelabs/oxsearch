@@ -47,8 +47,7 @@
 //! - **Compatibility** (`compatible_with`, off by default): requests ask a
 //!   newer cluster to answer as an older Elasticsearch major does, through
 //!   `compatible-with` in the `Accept` and `Content-Type` headers. Without
-//!   it, requests carry plain JSON media types, which Elasticsearch 8.19
-//!   and 9 both read.
+//!   it, requests carry plain JSON media types.
 //!
 //! Timeouts, proxies and certificates are the `reqwest::Client`'s: build
 //! one and pass it with `client`.
@@ -479,9 +478,8 @@ impl Builder {
     /// `compatible-with` in the `Accept` and `Content-Type` headers: for a
     /// server newer than the major oxsearch is generated for,
     /// [`oxsearch_core::MAJOR_VERSION`]. Off by default: requests carry
-    /// plain JSON media types, which every supported version reads.
-    /// Elasticsearch 8.19 refuses `compatible-with=9`, since a server can
-    /// only answer as its own major or an older one.
+    /// plain JSON media types. A server answers only as its own major or an
+    /// older one, and refuses a newer major.
     pub fn compatible_with(mut self, major: Option<u8>) -> Builder {
         self.settings.compatible_with = major;
         self

@@ -151,46 +151,6 @@ jobs:
         if: failure()
         run: docker logs otelcol 2>&1 | tail -100
 
-  # The integration tests against the oldest Elasticsearch oxsearch
-  # supports, the last 8.x minor, which takes requests for 9 through
-  # compatibility headers (DESIGN.md, question 3). Tests of what 8.19
-  # doesn't have skip, saying so.
-  integration-floor:
-    name: integration 8.19 (${{ matrix.license }})
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        license: [basic, trial]
-    env:
-      OXSEARCH_TEST_LICENSE: ${{ matrix.license }}
-      ELASTICSEARCH_VERSION: "8.19.26"
-      OXSEARCH_TEST_VERSION: "8.19.26"
-    steps:
-      - uses: actions/checkout@v7
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Build the integration tests
-        run: cargo test -p oxsearch-integration --no-run
-      - name: Start Elasticsearch ${{ env.ELASTICSEARCH_VERSION }} on the ${{ matrix.license }} license
-        run: scripts/es-fixture.sh up "${OXSEARCH_TEST_LICENSE}"
-      # The telemetry test needs a Collector, which the 9.x jobs run.
-      - name: Integration tests
-        env:
-          OXSEARCH_COVERAGE: ${{ github.workspace }}/target/coverage.txt
-        run: cargo test -p oxsearch-integration --no-fail-fast -- --ignored --skip a_search_reaches_the_collector
-      - name: Endpoint coverage
-        if: always()
-        run: cargo run -q -p xtask -- coverage target/coverage.txt >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: coverage-8.19-${{ matrix.license }}
-          path: target/coverage.txt
-          if-no-files-found: ignore
-      - name: Elasticsearch logs
-        if: failure()
-        run: scripts/es-fixture.sh logs | tail -200
-
   # The security tests, against Elasticsearch with security on (see
   # scripts/es-fixture.sh): once on the Basic license, once on a trial. The
   # elastic user's password is made for each run.

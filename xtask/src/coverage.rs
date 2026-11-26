@@ -12,10 +12,6 @@ use crate::graph::Graph;
 use crate::placement::Placement;
 use crate::spec::model::{Endpoint, Visibility};
 
-/// The oldest Elasticsearch this release supports, through compatibility
-/// headers: the last minor of the major before the specification's.
-pub const FLOOR: (u32, u32) = (8, 19);
-
 /// Whether Elastic Cloud Serverless offers an endpoint to everyone.
 fn on_serverless(endpoint: &Endpoint) -> bool {
     endpoint
@@ -23,12 +19,6 @@ fn on_serverless(endpoint: &Endpoint) -> bool {
         .serverless
         .as_ref()
         .is_some_and(|a| !matches!(a.visibility, Some(Visibility::Private)))
-}
-
-/// The major version an endpoint appeared in, if the specification says.
-fn since_major(endpoint: &Endpoint) -> Option<u32> {
-    let since = endpoint.availability.stack.as_ref()?.since.as_deref()?;
-    since.split('.').next()?.parse().ok()
 }
 
 /// What a single-node fixture can't give an area's tests, by crate.
@@ -124,10 +114,8 @@ pub fn report(
         }
     }
     let mut by_crate: BTreeMap<&str, (Vec<&str>, Vec<&str>)> = BTreeMap::new();
-    // By crate: the endpoints serverless lacks, and those newer than the
-    // last minor of the major before.
+    // By crate: the endpoints serverless lacks.
     let mut not_serverless: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
-    let mut newer: BTreeMap<&str, Vec<&str>> = BTreeMap::new();
     for g in &generated {
         let entry = by_crate.entry(g.krate).or_default();
         if tested.contains(g.name) {
@@ -137,9 +125,6 @@ pub fn report(
         }
         if !on_serverless(g.endpoint) && g.endpoint.availability.stack.is_some() {
             not_serverless.entry(g.krate).or_default().push(g.name);
-        }
-        if since_major(g.endpoint).is_some_and(|major| major > FLOOR.0) {
-            newer.entry(g.krate).or_default().push(g.name);
         }
     }
     let mut out = String::from(
@@ -186,14 +171,6 @@ pub fn report(
         }
         if !no.is_empty() {
             out.push_str(&format!("Not tested yet: {}.\n\n", list(no)));
-        }
-        if let Some(names) = newer.get(krate) {
-            out.push_str(&format!(
-                "Newer than Elasticsearch {}.{}: {}.\n\n",
-                FLOOR.0,
-                FLOOR.1,
-                list(names)
-            ));
         }
         if let Some(names) = not_serverless.get(krate) {
             out.push_str(&format!(

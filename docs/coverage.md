@@ -66,8 +66,6 @@ Tested: `inference.delete`, `inference.get`, `inference.inference`, `inference.p
 
 Not tested yet: `inference.chat_completion_unified`, `inference.completion`, `inference.delete_region_policy`, `inference.embedding`, `inference.get_region_policy`, `inference.put_ai21`, `inference.put_alibabacloud`, `inference.put_amazonbedrock`, `inference.put_amazonsagemaker`, `inference.put_anthropic`, `inference.put_azureaistudio`, `inference.put_azureopenai`, `inference.put_cohere`, `inference.put_contextualai`, `inference.put_custom`, `inference.put_deepseek`, `inference.put_elasticsearch`, `inference.put_elser`, `inference.put_fireworksai`, `inference.put_googleaistudio`, `inference.put_googlevertexai`, `inference.put_groq`, `inference.put_hugging_face`, `inference.put_jinaai`, `inference.put_llama`, `inference.put_mistral`, `inference.put_nvidia`, `inference.put_openai`, `inference.put_openshift_ai`, `inference.put_region_policy`, `inference.put_voyageai`, `inference.put_watsonx`, `inference.stream_completion`, `inference.text_embedding`, `inference.update`.
 
-Newer than Elasticsearch 8.19: `inference.delete_region_policy`, `inference.embedding`, `inference.get_region_policy`, `inference.put_ai21`, `inference.put_amazonsagemaker`, `inference.put_contextualai`, `inference.put_deepseek`, `inference.put_fireworksai`, `inference.put_groq`, `inference.put_llama`, `inference.put_nvidia`, `inference.put_openshift_ai`, `inference.put_region_policy`.
-
 
 ## `oxsearch-search`
 
@@ -82,8 +80,6 @@ Not on Elastic Cloud Serverless: `knn_search`, `search_shards`.
 
 Tested: `bulk`, `cancel_reindex`, `create`, `delete`, `delete_by_query`, `delete_by_query_rethrottle`, `exists`, `exists_source`, `get`, `get_reindex`, `get_source`, `index`, `list_reindex`, `mget`, `mtermvectors`, `reindex`, `reindex_rethrottle`, `termvectors`, `update`, `update_by_query`, `update_by_query_rethrottle`.
 
-Newer than Elasticsearch 8.19: `cancel_reindex`, `get_reindex`, `list_reindex`.
-
 Not on Elastic Cloud Serverless: `delete_by_query_rethrottle`, `update_by_query_rethrottle`.
 
 
@@ -93,8 +89,6 @@ Tested: `cluster.allocation_explain`, `cluster.delete_component_template`, `clus
 
 Not tested yet: `capabilities`, `cluster.delete_voting_config_exclusions`, `cluster.post_voting_config_exclusions`, `cluster.reroute`, `delete_script`, `get_script`, `get_script_context`, `get_script_languages`, `health_report`, `indices.cancel_migrate_reindex`, `indices.create_from`, `indices.delete_data_lifecycle`, `indices.delete_data_stream_options`, `indices.delete_template`, `indices.disk_usage`, `indices.downsample`, `indices.exists_template`, `indices.explain_data_lifecycle`, `indices.field_usage_stats`, `indices.get_data_lifecycle`, `indices.get_data_lifecycle_stats`, `indices.get_data_stream_mappings`, `indices.get_data_stream_options`, `indices.get_data_stream_settings`, `indices.get_migrate_reindex_status`, `indices.get_template`, `indices.migrate_reindex`, `indices.migrate_to_data_stream`, `indices.modify_data_stream`, `indices.promote_data_stream`, `indices.put_data_lifecycle`, `indices.put_data_stream_mappings`, `indices.put_data_stream_options`, `indices.put_data_stream_settings`, `indices.put_template`, `indices.reload_search_analyzers`, `indices.resolve_cluster`, `indices.shrink`, `indices.simulate_template`, `indices.split`, `nodes.clear_repositories_metering_archive`, `nodes.get_repositories_metering_info`, `put_script`, `scripts_painless_execute`.
 
-Newer than Elasticsearch 8.19: `indices.get_data_stream_mappings`, `indices.get_data_stream_settings`, `indices.put_data_stream_mappings`, `indices.put_data_stream_settings`, `indices.remove_block`.
-
 Not on Elastic Cloud Serverless: `capabilities`, `cluster.allocation_explain`, `cluster.delete_voting_config_exclusions`, `cluster.get_settings`, `cluster.health`, `cluster.pending_tasks`, `cluster.post_voting_config_exclusions`, `cluster.put_settings`, `cluster.remote_info`, `cluster.reroute`, `cluster.state`, `cluster.stats`, `get_script_context`, `get_script_languages`, `health_report`, `indices.clear_cache`, `indices.clone`, `indices.close`, `indices.data_streams_stats`, `indices.delete_data_lifecycle`, `indices.delete_data_stream_options`, `indices.delete_template`, `indices.disk_usage`, `indices.downsample`, `indices.exists_template`, `indices.field_usage_stats`, `indices.flush`, `indices.forcemerge`, `indices.get_data_lifecycle_stats`, `indices.get_field_mapping`, `indices.get_template`, `indices.migrate_reindex`, `indices.open`, `indices.promote_data_stream`, `indices.put_template`, `indices.recovery`, `indices.reload_search_analyzers`, `indices.resolve_cluster`, `indices.segments`, `indices.shard_stores`, `indices.shrink`, `indices.split`, `indices.stats`, `nodes.clear_repositories_metering_archive`, `nodes.get_repositories_metering_info`, `nodes.hot_threads`, `nodes.info`, `nodes.reload_secure_settings`, `nodes.stats`, `nodes.usage`.
 
 
@@ -103,8 +97,6 @@ Not on Elastic Cloud Serverless: `capabilities`, `cluster.allocation_explain`, `
 Tested: `esql.async_query`, `esql.async_query_delete`, `esql.async_query_get`, `esql.query`.
 
 Not tested yet: `esql.async_query_stop`, `esql.delete_data_source`, `esql.delete_dataset`, `esql.delete_view`, `esql.get_data_source`, `esql.get_dataset`, `esql.get_query`, `esql.get_view`, `esql.list_queries`, `esql.put_data_source`, `esql.put_dataset`, `esql.put_view`.
-
-Newer than Elasticsearch 8.19: `esql.delete_view`, `esql.get_query`, `esql.get_view`, `esql.list_queries`, `esql.put_view`.
 
 Not on Elastic Cloud Serverless: `esql.async_query`, `esql.async_query_delete`, `esql.async_query_get`, `esql.async_query_stop`, `esql.delete_data_source`, `esql.delete_dataset`, `esql.get_data_source`, `esql.get_dataset`, `esql.put_data_source`, `esql.put_dataset`.
 
@@ -222,8 +214,6 @@ Not on Elastic Cloud Serverless: `cat.allocation`, `cat.circuit_breaker`, `cat.f
 ## `oxsearch-security`
 
 Tested: `encryption.reset`, `security.activate_user_profile`, `security.authenticate`, `security.bulk_delete_role`, `security.bulk_put_role`, `security.bulk_update_api_keys`, `security.change_password`, `security.clear_api_key_cache`, `security.clear_cached_privileges`, `security.clear_cached_realms`, `security.clear_cached_roles`, `security.clear_cached_service_tokens`, `security.clone_api_key`, `security.create_api_key`, `security.create_cross_cluster_api_key`, `security.create_service_token`, `security.delegate_pki`, `security.delete_privileges`, `security.delete_role`, `security.delete_role_mapping`, `security.delete_service_token`, `security.delete_user`, `security.disable_user`, `security.disable_user_profile`, `security.enable_user`, `security.enable_user_profile`, `security.enroll_kibana`, `security.enroll_node`, `security.get_api_key`, `security.get_builtin_privileges`, `security.get_privileges`, `security.get_role`, `security.get_role_mapping`, `security.get_service_accounts`, `security.get_service_credentials`, `security.get_settings`, `security.get_stats`, `security.get_token`, `security.get_user`, `security.get_user_privileges`, `security.get_user_profile`, `security.grant_api_key`, `security.has_privileges`, `security.has_privileges_user_profile`, `security.invalidate_api_key`, `security.invalidate_token`, `security.oidc_authenticate`, `security.oidc_logout`, `security.oidc_prepare_authentication`, `security.put_privileges`, `security.put_role`, `security.put_role_mapping`, `security.put_user`, `security.query_api_keys`, `security.query_role`, `security.query_user`, `security.saml_authenticate`, `security.saml_complete_logout`, `security.saml_invalidate`, `security.saml_logout`, `security.saml_prepare_authentication`, `security.saml_service_provider_metadata`, `security.suggest_user_profiles`, `security.update_api_key`, `security.update_cross_cluster_api_key`, `security.update_settings`, `security.update_user_profile_data`, `ssl.certificates`.
-
-Newer than Elasticsearch 8.19: `encryption.reset`, `security.clone_api_key`, `security.get_stats`.
 
 Not on Elastic Cloud Serverless: `encryption.reset`, `security.activate_user_profile`, `security.bulk_delete_role`, `security.bulk_put_role`, `security.bulk_update_api_keys`, `security.change_password`, `security.clear_api_key_cache`, `security.clear_cached_privileges`, `security.clear_cached_realms`, `security.clear_cached_roles`, `security.clear_cached_service_tokens`, `security.clone_api_key`, `security.create_cross_cluster_api_key`, `security.delegate_pki`, `security.delete_privileges`, `security.delete_role_mapping`, `security.delete_user`, `security.disable_user`, `security.disable_user_profile`, `security.enable_user`, `security.enable_user_profile`, `security.enroll_kibana`, `security.enroll_node`, `security.get_privileges`, `security.get_role_mapping`, `security.get_service_accounts`, `security.get_service_credentials`, `security.get_settings`, `security.get_stats`, `security.get_token`, `security.get_user`, `security.get_user_privileges`, `security.get_user_profile`, `security.grant_api_key`, `security.has_privileges_user_profile`, `security.invalidate_token`, `security.oidc_authenticate`, `security.oidc_logout`, `security.oidc_prepare_authentication`, `security.put_privileges`, `security.put_role_mapping`, `security.put_user`, `security.query_user`, `security.saml_authenticate`, `security.saml_complete_logout`, `security.saml_invalidate`, `security.saml_logout`, `security.saml_prepare_authentication`, `security.saml_service_provider_metadata`, `security.suggest_user_profiles`, `security.update_cross_cluster_api_key`, `security.update_settings`, `security.update_user_profile_data`, `ssl.certificates`.
 
@@ -364,8 +354,6 @@ Only Elastic Cloud Serverless has these, so the fixture can't test them.
 ## `oxsearch-streams`
 
 Tested: `streams.logs_disable`, `streams.logs_enable`, `streams.status`.
-
-Newer than Elasticsearch 8.19: `streams.logs_disable`, `streams.logs_enable`, `streams.status`.
 
 Not on Elastic Cloud Serverless: `streams.logs_disable`, `streams.logs_enable`, `streams.status`.
 

@@ -2,7 +2,7 @@
 //! and the stream turned on and off again.
 
 use oxsearch::streams::{StreamType, logs_disable, logs_enable, status};
-use oxsearch_integration::{TestClient, client, has};
+use oxsearch_integration::{TestClient, client};
 
 /// Whether the logs stream is on.
 async fn enabled(client: &TestClient) -> Option<bool> {
@@ -13,9 +13,6 @@ async fn enabled(client: &TestClient) -> Option<bool> {
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
 async fn logs() {
-    if !has(9, 1, "Streams") {
-        return;
-    }
     let client = client();
     assert_eq!(enabled(&client).await, Some(false));
     let on = client

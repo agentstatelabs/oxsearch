@@ -87,18 +87,18 @@ specification it's generated from.
   documents back through the bulk loader; `transfer` copies documents to
   another index or cluster. Samples (`--every`), limits, gzip, and progress
   through oxtel. Credentials come from the environment.
-- **Elasticsearch 8.19.** CI runs the integration tests against 8.19 as well
-  as 9.5; what 8.19 doesn't have, it refuses, and the tests of it skip.
-  `Builder::compatible_with(Some(9))` asks a newer server to answer as
-  Elasticsearch 9 does (`compatible-with` on `Accept` and `Content-Type`);
-  off by default, since 8.19 refuses it. `SPECIFICATION_VERSION` and
+- `transport_reqwest::Builder::compatible_with(Some(9))` asks a newer
+  Elasticsearch to answer as 9 does (`compatible-with` on `Accept` and
+  `Content-Type`); off by default. `SPECIFICATION_VERSION` and
   `MAJOR_VERSION` say what the code is generated for.
 - **Availability in the docs.** Each endpoint's request type says since which
   Elasticsearch version it's there and whether Elastic Cloud Serverless has
   it, and links Elasticsearch's documentation. `docs/coverage.md` counts the
-  endpoints on Serverless and lists those newer than 8.19.
+  endpoints on Serverless and lists those it lacks.
 
 ### Changed
+- The integration tests run against Elasticsearch 9.5.7, the latest 9.5 patch,
+  where they ran against 9.5.5.
 - The front crate's default features include `transport-reqwest`, the HTTP
   transport on reqwest with rustls, so the quick start builds with
   `features = ["derive"]` (DESIGN.md, question 5). With a transport of your
