@@ -1,6 +1,8 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "xtask", "integration"]
+# Its own workspace, with the official client: see bench/Cargo.toml.
+exclude = ["bench"]
 
 [workspace.package]
 version = "0.2.0"

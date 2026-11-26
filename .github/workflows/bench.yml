@@ -1,0 +1,45 @@
+name: Benchmarks
+
+# oxsearch against the official elasticsearch crate (bench/RESULTS.md):
+# request overhead and serde throughput with criterion, and bulk
+# throughput against the Elasticsearch fixture. A shared runner's numbers
+# vary from run to run; compare the two clients within a run.
+on:
+  pull_request:
+    paths:
+      - "bench/**"
+      - ".github/workflows/bench.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build the benchmarks
+        run: cargo build --release --manifest-path bench/Cargo.toml --benches --bins
+      - name: Start Elasticsearch on the Basic license
+        run: scripts/es-fixture.sh up basic
+      - name: Bulk throughput
+        run: |
+          cargo run -q --release --manifest-path bench/Cargo.toml --bin bulk | tee bulk.md
+          { echo "## Bulk throughput"; cat bulk.md; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Request overhead and serde throughput
+        run: |
+          cargo bench --manifest-path bench/Cargo.toml -- --noplot | tee criterion.txt
+          { echo '## Criterion'; echo '```'; grep -E 'time:|thrpt:|^[a-z]' criterion.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: bench-results
+          path: |
+            bulk.md
+            criterion.txt
+          if-no-files-found: ignore
