@@ -38,6 +38,10 @@ services:
       ES_JAVA_OPTS: -Xms1g -Xmx1g
     ports:
       - "127.0.0.1:${OXSEARCH_TEST_PORT:-9200}:9200"
+    # The inference tests run a mock of a provider's API on the machine
+    # that runs them, and Elasticsearch calls it at this name.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     healthcheck:
       test: ["CMD-SHELL", "curl -fs -u \"elastic:$$ELASTIC_PASSWORD\" 'http://localhost:9200/_cluster/health?wait_for_status=yellow&timeout=1s' >/dev/null"]
       interval: 2s

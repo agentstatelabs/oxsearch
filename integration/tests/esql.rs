@@ -4,7 +4,11 @@
 
 use oxsearch::Error;
 use oxsearch::document::{Document, Indexes};
-use oxsearch::esql::{Esql, EsqlResult, Expr, Fuse, async_query, async_query_delete, col};
+use oxsearch::esql::{
+    Esql, EsqlResult, Expr, Fuse, async_query, async_query_delete, async_query_stop, col,
+    delete_data_source, delete_dataset, delete_view, get_data_source, get_dataset, get_query,
+    get_view, list_queries, put_data_source, put_dataset, put_view, query,
+};
 use oxsearch::mapping::{
     DateProperty, IntegerNumberProperty, KeywordProperty, ObjectProperty, Property, TextProperty,
     TypeMapping,
@@ -12,7 +16,7 @@ use oxsearch::mapping::{
 use oxsearch::shapes::IndexMap;
 use oxsearch::{Duration, Refresh};
 use oxsearch_docs::index;
-use oxsearch_integration::{License, TestClient, TestIndex, client};
+use oxsearch_integration::{License, TestClient, TestIndex, client, understood};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
@@ -376,6 +380,137 @@ async fn async_queries() {
         .send(&async_query_delete::Request::new(id.as_str()))
         .await
         .unwrap();
+    test.delete(&client).await;
+}
+
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn stopped_and_running_queries() {
+    let client = client();
+    let test = books(&client).await;
+
+    // Kept on completion, so it stops by its id: one that has finished
+    // stops at once, with its results.
+    let started = client
+        .send(
+            &async_query::Request::new().body(
+                Esql::from_index(test.name())
+                    .keep(["title"])
+                    .async_body()
+                    .wait_for_completion_timeout(Duration::String("10s".into()))
+                    .keep_on_completion(true),
+            ),
+        )
+        .await
+        .unwrap();
+    let id = started.id.clone().expect("a kept query's id");
+    let stopped = client
+        .send(&async_query_stop::Request::new(id.as_str()))
+        .await
+        .unwrap();
+    assert_eq!(stopped.values.len(), 4, "{stopped:?}");
+    assert_eq!(stopped.is_partial, Some(false));
+    client
+        .send(&async_query_delete::Request::new(id.as_str()))
+        .await
+        .unwrap();
+
+    // The queries running now, and one by an id no query has, which
+    // Elasticsearch reads and refuses.
+    let running = client.send(&list_queries::Request::new()).await.unwrap();
+    assert!(
+        running.queries.values().all(|q| q.query.is_some()),
+        "{running:?}"
+    );
+    let missing = client
+        .send(&get_query::Request::new("oxsearch-missing:1"))
+        .await;
+    match missing {
+        Err(e) => assert!(understood(&e), "{e}"),
+        Ok(found) => panic!("a query no one ran: {found:?}"),
+    }
+    test.delete(&client).await;
+}
+
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn views_and_data_sources() {
+    let client = client();
+    let test = books(&client).await;
+
+    // A view: a query under a name, read FROM like an index.
+    let view = format!("{}-recent", test.name());
+    client
+        .send(
+            &put_view::Request::new(view.as_str()).body(put_view::RequestBody::new(format!(
+                "FROM {} | WHERE year >= 2021 | KEEP title, year",
+                test.name()
+            ))),
+        )
+        .await
+        .unwrap();
+    let read = client
+        .send(&get_view::Request::new().name(view.as_str()))
+        .await
+        .unwrap();
+    assert_eq!(
+        read.views[0].name.as_deref(),
+        Some(view.as_str()),
+        "{read:?}"
+    );
+    let recent = client
+        .send(
+            &query::Request::new()
+                .body(query::RequestBody::new(format!("FROM {view} | SORT year"))),
+        )
+        .await
+        .unwrap();
+    assert_eq!(recent.values.len(), 3, "{recent:?}");
+    client
+        .send(&delete_view::Request::new(view.as_str()))
+        .await
+        .unwrap();
+
+    // Data sources and the datasets in them, which the fixture can't
+    // reach: Elasticsearch reads each request and refuses or answers.
+    let source = format!("{}-source", test.name());
+    let dataset = format!("{}-dataset", test.name());
+    let results = [
+        client
+            .send(
+                &put_data_source::Request::new(source.as_str())
+                    .body(put_data_source::RequestBody::new("s3")),
+            )
+            .await
+            .map(drop),
+        client
+            .send(&get_data_source::Request::new())
+            .await
+            .map(drop),
+        client
+            .send(
+                &put_dataset::Request::new(dataset.as_str()).body(put_dataset::RequestBody::new(
+                    source.as_str(),
+                    "s3://oxsearch-missing/books/*.parquet",
+                )),
+            )
+            .await
+            .map(drop),
+        client.send(&get_dataset::Request::new()).await.map(drop),
+        client
+            .send(&delete_dataset::Request::new(dataset.as_str()))
+            .await
+            .map(drop),
+        client
+            .send(&delete_data_source::Request::new(source.as_str()))
+            .await
+            .map(drop),
+    ];
+    for result in results {
+        if let Err(e) = result {
+            assert!(understood(&e), "{e}");
+        }
+    }
     test.delete(&client).await;
 }
 
