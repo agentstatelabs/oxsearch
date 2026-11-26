@@ -283,7 +283,7 @@ Elasticsearch's free Basic license includes kNN and the standard, knn, pinned an
 - Integration tests per API area against Elasticsearch in Docker, on Basic and trial licenses.
 - A published coverage report: endpoints generated, endpoints with integration tests, by area.
 - A compile-time budget for the default feature set, measured with `cargo build --timings` in CI (`docs/compile-time.md`). A clean build takes 13.8 s on a 14-core Mac.
-- Benchmarks against the official crate for request overhead and bulk throughput (Phase 2).
+- Benchmarks against the official crate for request overhead, serde throughput and bulk throughput, with their method and results in [`bench/RESULTS.md`](bench/RESULTS.md). On a search, the request path is within 1–4% of the official client's (a laptop and a CI runner), and reading the complete typed response costs 5–6 µs more than a hand-written struct of the hits. Bulk throughput is level.
 - The reference demo (section 7) running on a real cluster.
 
 ## 7. Reference demo

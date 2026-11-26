@@ -91,6 +91,10 @@ specification it's generated from.
   Elasticsearch to answer as 9 does (`compatible-with` on `Accept` and
   `Content-Type`); off by default. `SPECIFICATION_VERSION` and
   `MAJOR_VERSION` say what the code is generated for.
+- **Benchmarks** against the official `elasticsearch` crate (`bench/`, a
+  workspace of its own, not published): request overhead, serde throughput
+  for large responses and bulk throughput, with their method and results in
+  `bench/RESULTS.md`, and a workflow that runs them.
 - **Availability in the docs.** Each endpoint's request type says since which
   Elasticsearch version it's there and whether Elastic Cloud Serverless has
   it, and links Elasticsearch's documentation. `docs/coverage.md` counts the

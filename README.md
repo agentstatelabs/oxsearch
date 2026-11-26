@@ -75,7 +75,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **A `rig` vector store** ([`oxsearch-rig`](crates/oxsearch-rig)).
 - **Escape hatches** for what isn't covered yet: your own `Endpoint`, `Raw` variants and `Client::send_raw` ([example](crates/oxsearch/examples/escape_hatches.rs)).
 
-[docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise.
+[docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise. [bench/RESULTS.md](bench/RESULTS.md) compares oxsearch with the official `elasticsearch` crate: request overhead, reading large responses, and bulk throughput.
 
 ## Versions
 
