@@ -9,8 +9,10 @@
 //! ```
 //!
 //! `OXSEARCH_BENCH_DOCS` (200,000), `OXSEARCH_BENCH_BATCH` (1,000),
-//! `OXSEARCH_BENCH_CONCURRENCY` (4) and `OXSEARCH_BENCH_RUNS` (3) change the
-//! defaults. The clients take turns, and swap who goes first each run.
+//! `OXSEARCH_BENCH_CONCURRENCY` (4) and `OXSEARCH_BENCH_RUNS` (5) change the
+//! defaults. Each client loads once first, untimed, while the cluster and
+//! the connections warm up. Then the clients take turns, and swap who goes
+//! first each run.
 
 use std::error::Error;
 use std::sync::Arc;
@@ -156,7 +158,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         batch: setting("OXSEARCH_BENCH_BATCH", 1_000),
         concurrency: setting("OXSEARCH_BENCH_CONCURRENCY", 4),
     };
-    let runs = setting("OXSEARCH_BENCH_RUNS", 3).max(1);
+    let runs = setting("OXSEARCH_BENCH_RUNS", 5).max(1);
     let ours = oxsearch::Client::new(ReqwestTransport::new(&url)?);
     let theirs = Elasticsearch::new(Transport::single_node(&url)?);
     let bytes: usize = (0..load.docs as u64)
@@ -164,6 +166,14 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .sum();
     let version = ours.send_raw(Method::Get, "/", None).await?["version"]["number"].clone();
 
+    for contender in [Contender::Oxsearch, Contender::Official] {
+        fresh_index(&ours).await?;
+        match contender {
+            Contender::Oxsearch => with_oxsearch(&ours, &load).await?,
+            Contender::Official => with_official(&theirs, &load).await?,
+        }
+        eprintln!("warm-up: {contender:?}");
+    }
     let mut seconds = [Vec::new(), Vec::new()];
     for run in 0..runs {
         let order = if run % 2 == 0 {
@@ -194,7 +204,7 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         .await;
 
     println!(
-        "Elasticsearch {version}: {} documents ({:.1} MB of JSON), batches of {}, {} in flight, median of {runs} runs.\n",
+        "Elasticsearch {version}: {} documents ({:.1} MB of JSON), batches of {}, {} in flight, median of {runs} runs after a warm-up.\n",
         load.docs,
         bytes as f64 / 1e6,
         load.batch,

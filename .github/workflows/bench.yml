@@ -33,7 +33,7 @@ jobs:
           { echo "## Bulk throughput"; cat bulk.md; } >> "$GITHUB_STEP_SUMMARY"
       - name: Request overhead and serde throughput
         run: |
-          cargo bench --manifest-path bench/Cargo.toml -- --noplot | tee criterion.txt
+          cargo bench --manifest-path bench/Cargo.toml --bench overhead --bench decode -- --noplot | tee criterion.txt
           { echo '## Criterion'; echo '```'; grep -E 'time:|thrpt:|^[a-z]' criterion.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v7
         if: always()
