@@ -91,8 +91,11 @@ jobs:
 
   # The integration tests, against Elasticsearch in Docker (see
   # scripts/es-fixture.sh): once on the Basic license, once on a trial.
+  # A hung request fails the job, instead of holding it for GitHub's six
+  # hours: the tests and examples take under 10 minutes, the build included.
   integration:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
@@ -124,6 +127,7 @@ jobs:
           OXSEARCH_COVERAGE: ${{ github.workspace }}/target/coverage.txt
         run: cargo test -p oxsearch-integration --no-fail-fast -- --ignored
       - name: The examples run
+        timeout-minutes: 10
         env:
           OXSEARCH_URL: http://127.0.0.1:9200
         run: |
@@ -156,6 +160,7 @@ jobs:
   # elastic user's password is made for each run.
   integration-security:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
