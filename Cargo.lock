@@ -1373,7 +1373,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "futures-core",
  "futures-util",
@@ -1433,7 +1433,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-admin"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -1447,7 +1447,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-aggs"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-aggs",
@@ -1461,7 +1461,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-analysis"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-analysis",
@@ -1473,7 +1473,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-async-search"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-aggs",
@@ -1488,7 +1488,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-autoscaling"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-autoscaling",
@@ -1500,7 +1500,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-cat"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-cat",
@@ -1514,7 +1514,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-ccr"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -1527,7 +1527,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-cli"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "clap",
  "flate2",
@@ -1543,7 +1543,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-connector"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-connector",
@@ -1555,7 +1555,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-core"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "metrics",
@@ -1572,7 +1572,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-dangling-indices"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1584,7 +1584,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-derive"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1593,7 +1593,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-docs"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1607,7 +1607,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-enrich"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1620,7 +1620,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-eql"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1634,7 +1634,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-esql"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "arrow-array",
  "arrow-ipc",
@@ -1648,7 +1648,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-features"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1660,7 +1660,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-fleet"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-aggs",
@@ -1675,7 +1675,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-graph"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1687,7 +1687,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-ilm"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1699,7 +1699,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-inference"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1711,7 +1711,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-ingest"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1748,7 +1748,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-license"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1760,7 +1760,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-logstash"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1772,7 +1772,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-mapping"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-analysis",
@@ -1785,7 +1785,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-migration"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1797,7 +1797,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-ml"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-aggs",
@@ -1812,7 +1812,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-profiling"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1824,7 +1824,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-project"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1836,7 +1836,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-query-rules"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1848,7 +1848,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-rig"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "oxsearch-core",
  "oxsearch-docs",
@@ -1860,7 +1860,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-rollup"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-aggs",
@@ -1874,7 +1874,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-search"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1887,7 +1887,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-search-application"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1900,7 +1900,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-searchable-snapshots"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1912,7 +1912,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-security"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -1927,7 +1927,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-shutdown"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1939,7 +1939,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-simulate"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -1954,7 +1954,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-slm"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -1967,7 +1967,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-snapshot"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -1980,7 +1980,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-sql"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-aggs",
@@ -1995,7 +1995,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-streams"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -2007,7 +2007,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-synonyms"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -2020,7 +2020,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-tasks"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -2032,7 +2032,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-text-structure"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",
@@ -2046,7 +2046,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-transform"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -2062,7 +2062,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-transport-reqwest"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "bytes",
  "flate2",
@@ -2076,7 +2076,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-watcher"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-admin",
@@ -2090,7 +2090,7 @@ dependencies = [
 
 [[package]]
 name = "oxsearch-xpack"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "indexmap",
  "oxsearch-core",

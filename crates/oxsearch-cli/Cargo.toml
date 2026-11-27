@@ -18,7 +18,7 @@ name = "oxsearch"
 path = "src/main.rs"
 
 [dependencies]
-oxsearch = { path = "../oxsearch", version = "0.2.0", features = ["helpers"] }
+oxsearch = { path = "../oxsearch", version = "0.3.0", features = ["helpers"] }
 clap = { version = "4.6", features = ["derive", "env"] }
 flate2 = "1.1"
 futures-util = { version = "0.3.31", default-features = false, features = ["std"] }

@@ -14,7 +14,7 @@ oxsearch needs Rust 1.95 or newer, and Elasticsearch 9.
 
    <Example file="crates/oxsearch/examples/quickstart.rs" doc="toml" />
 
-   `derive` turns on the typed document layer and its derive macro. `transport-reqwest`, the HTTP transport, is one of the default features from the release after 0.2; naming it does no harm.
+   `derive` turns on the typed document layer and its derive macro. The default features include the HTTP transport, on reqwest with rustls; with a transport of your own, set `default-features = false`.
 
 2. **Start Elasticsearch.** Any cluster of Elasticsearch 9 will do. In the repository, the test fixture is one node in Docker:
 

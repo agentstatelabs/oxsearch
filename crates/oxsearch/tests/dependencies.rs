@@ -101,7 +101,8 @@ fn the_examples_name_what_they_need() {
 
         let oxsearch = entry("oxsearch");
         assert!(
-            oxsearch.contains(&format!("version = \"{minor}\"")),
+            *oxsearch == format!("oxsearch = \"{minor}\"")
+                || oxsearch.contains(&format!("version = \"{minor}\"")),
             "examples/{name}.rs lists another oxsearch than {minor}: {oxsearch}"
         );
         let listed = array(oxsearch, "features");

@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, security, transforms, rollups, and the cluster operations: cross-cluster replication, searchable snapshots, dangling indices, autoscaling, node shutdown, migration, feature states, ingest simulation and text structure; and connectors, Fleet, Logstash, graph, profiling, serverless projects and streams. That's every endpoint the specification offers for code generation, 597 of them, tested against its own examples where it has them, and the integration tests send 516 of them to Elasticsearch 9, on the Basic license and a trial. See [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.3.** The generated crates cover every endpoint the specification offers for code generation, 597 of them: search, documents, mappings, analysis, inference, aggregations, ES|QL and the administration APIs, and every other area, from ingest pipelines, snapshots and SQL to machine learning, Watcher, security, transforms, the cat APIs and the cluster operations. They're tested against the specification's own examples where it has them, and the integration tests send 516 of them to Elasticsearch 9, on the Basic license and a trial. See [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -84,7 +84,7 @@ oxsearch's versions are its own, 0.N while its API settles. Each release is gene
 
 | oxsearch | Specification branch (commit) | Tested against |
 |---|---|---|
-| Next | 9.5 (`84bf510a`) | Elasticsearch 9.5.7 |
+| 0.3 | 9.5 (`84bf510a`) | Elasticsearch 9.5.7 |
 | 0.2 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 | 0.1 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 
@@ -112,7 +112,8 @@ Every API is generated whatever the license; a request for a feature the cluster
 | ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, snapshot lifecycle policies, ILM, transforms, rollups, administration | ✓ | ✓ |
 | ES\|QL `FUSE` | | ✓ |
 | Cross-cluster replication, searchable snapshots, autoscaling | | ✓ |
-| Node shutdown, dangling indices, migration, feature states, ingest simulation, text structure | ✓ | ✓ |
+| Node shutdown, dangling indices, migration, feature states, ingest simulation, text structure, connectors, Fleet, Logstash, streams | ✓ | ✓ |
+| Graph exploration, and Universal Profiling, which also needs its own data | | ✓ |
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |
 
 Elastic's subscription matrix is the authority, and it has moved between releases.
