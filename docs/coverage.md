@@ -6,11 +6,11 @@ The endpoints generated in each crate, and those the integration tests send to E
 |---|---:|---:|---:|
 | `oxsearch-core` | 2 | 2 | 2 (100%) |
 | `oxsearch-tasks` | 3 | 1 | 3 (100%) |
-| `oxsearch-inference` | 41 | 41 | 6 (14%) |
+| `oxsearch-inference` | 41 | 41 | 26 (63%) |
 | `oxsearch-search` | 17 | 15 | 15 (88%) |
 | `oxsearch-docs` | 21 | 19 | 21 (100%) |
 | `oxsearch-admin` | 102 | 52 | 58 (56%) |
-| `oxsearch-esql` | 16 | 6 | 4 (25%) |
+| `oxsearch-esql` | 16 | 6 | 16 (100%) |
 | `oxsearch-ingest` | 12 | 5 | 8 (66%) |
 | `oxsearch-license` | 7 | 1 | 3 (42%) |
 | `oxsearch-query-rules` | 8 | 8 | 8 (100%) |
@@ -22,7 +22,7 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-sql` | 6 | 6 | 6 (100%) |
 | `oxsearch-search-application` | 10 | 8 | 6 (60%) |
 | `oxsearch-enrich` | 5 | 4 | 5 (100%) |
-| `oxsearch-ml` | 73 | 53 | 73 (100%) |
+| `oxsearch-ml` | 73 | 53 | 72 (98%) |
 | `oxsearch-watcher` | 13 | 0 | 13 (100%) |
 | `oxsearch-slm` | 9 | 0 | 9 (100%) |
 | `oxsearch-xpack` | 3 | 0 | 3 (100%) |
@@ -46,7 +46,7 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-profiling` | 4 | 0 | 4 (100%) |
 | `oxsearch-project` | 6 | 6 | 0 (0%) |
 | `oxsearch-streams` | 3 | 0 | 3 (100%) |
-| all | 597 | 304 | 485 (81%) |
+| all | 597 | 304 | 516 (86%) |
 
 ## `oxsearch-core`
 
@@ -62,9 +62,11 @@ Not on Elastic Cloud Serverless: `tasks.cancel`, `tasks.list`.
 
 ## `oxsearch-inference`
 
-Tested: `inference.delete`, `inference.get`, `inference.inference`, `inference.put`, `inference.rerank`, `inference.sparse_embedding`.
+Tested: `inference.chat_completion_unified`, `inference.completion`, `inference.delete`, `inference.delete_region_policy`, `inference.embedding`, `inference.get`, `inference.get_region_policy`, `inference.inference`, `inference.put`, `inference.put_alibabacloud`, `inference.put_custom`, `inference.put_deepseek`, `inference.put_elasticsearch`, `inference.put_elser`, `inference.put_fireworksai`, `inference.put_hugging_face`, `inference.put_llama`, `inference.put_nvidia`, `inference.put_openai`, `inference.put_openshift_ai`, `inference.put_region_policy`, `inference.rerank`, `inference.sparse_embedding`, `inference.stream_completion`, `inference.text_embedding`, `inference.update`.
 
-Not tested yet: `inference.chat_completion_unified`, `inference.completion`, `inference.delete_region_policy`, `inference.embedding`, `inference.get_region_policy`, `inference.put_ai21`, `inference.put_alibabacloud`, `inference.put_amazonbedrock`, `inference.put_amazonsagemaker`, `inference.put_anthropic`, `inference.put_azureaistudio`, `inference.put_azureopenai`, `inference.put_cohere`, `inference.put_contextualai`, `inference.put_custom`, `inference.put_deepseek`, `inference.put_elasticsearch`, `inference.put_elser`, `inference.put_fireworksai`, `inference.put_googleaistudio`, `inference.put_googlevertexai`, `inference.put_groq`, `inference.put_hugging_face`, `inference.put_jinaai`, `inference.put_llama`, `inference.put_mistral`, `inference.put_nvidia`, `inference.put_openai`, `inference.put_openshift_ai`, `inference.put_region_policy`, `inference.put_voyageai`, `inference.put_watsonx`, `inference.stream_completion`, `inference.text_embedding`, `inference.update`.
+Not tested yet: `inference.put_ai21`, `inference.put_amazonbedrock`, `inference.put_amazonsagemaker`, `inference.put_anthropic`, `inference.put_azureaistudio`, `inference.put_azureopenai`, `inference.put_cohere`, `inference.put_contextualai`, `inference.put_googleaistudio`, `inference.put_googlevertexai`, `inference.put_groq`, `inference.put_jinaai`, `inference.put_mistral`, `inference.put_voyageai`, `inference.put_watsonx`.
+
+Calls to a provider go to a mock service on the CI runner, which the fixture reaches as `host.docker.internal`: OpenAI, and the providers that take a URL and a key. The other providers aren't tested, since each calls its own cloud or needs its credentials, so testing them needs an account with each and sends the requests to them. Creating an endpoint needs a license above Basic, so on Basic the tests check the refusal.
 
 
 ## `oxsearch-search`
@@ -94,11 +96,11 @@ Not on Elastic Cloud Serverless: `capabilities`, `cluster.allocation_explain`, `
 
 ## `oxsearch-esql`
 
-Tested: `esql.async_query`, `esql.async_query_delete`, `esql.async_query_get`, `esql.query`.
-
-Not tested yet: `esql.async_query_stop`, `esql.delete_data_source`, `esql.delete_dataset`, `esql.delete_view`, `esql.get_data_source`, `esql.get_dataset`, `esql.get_query`, `esql.get_view`, `esql.list_queries`, `esql.put_data_source`, `esql.put_dataset`, `esql.put_view`.
+Tested: `esql.async_query`, `esql.async_query_delete`, `esql.async_query_get`, `esql.async_query_stop`, `esql.delete_data_source`, `esql.delete_dataset`, `esql.delete_view`, `esql.get_data_source`, `esql.get_dataset`, `esql.get_query`, `esql.get_view`, `esql.list_queries`, `esql.put_data_source`, `esql.put_dataset`, `esql.put_view`, `esql.query`.
 
 Not on Elastic Cloud Serverless: `esql.async_query`, `esql.async_query_delete`, `esql.async_query_get`, `esql.async_query_stop`, `esql.delete_data_source`, `esql.delete_dataset`, `esql.get_data_source`, `esql.get_dataset`, `esql.put_data_source`, `esql.put_dataset`.
+
+Data sources and datasets point at storage the fixture can't reach, so those calls are checked for an answer or a refusal Elasticsearch understood. Stopping an async query is tested on one that has finished, and getting a running query by an id no query has.
 
 
 ## `oxsearch-ingest`
@@ -178,7 +180,9 @@ Not on Elastic Cloud Serverless: `enrich.stats`.
 
 ## `oxsearch-ml`
 
-Tested: `ml.clear_trained_model_deployment_cache`, `ml.close_job`, `ml.delete_calendar`, `ml.delete_calendar_event`, `ml.delete_calendar_job`, `ml.delete_data_frame_analytics`, `ml.delete_datafeed`, `ml.delete_expired_data`, `ml.delete_filter`, `ml.delete_forecast`, `ml.delete_job`, `ml.delete_model_snapshot`, `ml.delete_trained_model`, `ml.delete_trained_model_alias`, `ml.estimate_model_memory`, `ml.evaluate_data_frame`, `ml.explain_data_frame_analytics`, `ml.flush_job`, `ml.forecast`, `ml.get_buckets`, `ml.get_calendar_events`, `ml.get_calendars`, `ml.get_categories`, `ml.get_data_frame_analytics`, `ml.get_data_frame_analytics_stats`, `ml.get_datafeed_stats`, `ml.get_datafeeds`, `ml.get_filters`, `ml.get_influencers`, `ml.get_job_stats`, `ml.get_jobs`, `ml.get_memory_stats`, `ml.get_model_snapshot_upgrade_stats`, `ml.get_model_snapshots`, `ml.get_overall_buckets`, `ml.get_records`, `ml.get_trained_models`, `ml.get_trained_models_stats`, `ml.infer_trained_model`, `ml.info`, `ml.open_job`, `ml.post_calendar_events`, `ml.post_data`, `ml.preview_data_frame_analytics`, `ml.preview_datafeed`, `ml.put_calendar`, `ml.put_calendar_job`, `ml.put_data_frame_analytics`, `ml.put_datafeed`, `ml.put_filter`, `ml.put_job`, `ml.put_trained_model`, `ml.put_trained_model_alias`, `ml.put_trained_model_definition_part`, `ml.put_trained_model_vocabulary`, `ml.reset_job`, `ml.revert_model_snapshot`, `ml.set_upgrade_mode`, `ml.start_data_frame_analytics`, `ml.start_datafeed`, `ml.start_trained_model_deployment`, `ml.stop_data_frame_analytics`, `ml.stop_datafeed`, `ml.stop_trained_model_deployment`, `ml.update_data_frame_analytics`, `ml.update_datafeed`, `ml.update_filter`, `ml.update_job`, `ml.update_model_snapshot`, `ml.update_trained_model_deployment`, `ml.upgrade_job_snapshot`, `ml.validate`, `ml.validate_detector`.
+Tested: `ml.clear_trained_model_deployment_cache`, `ml.close_job`, `ml.delete_calendar`, `ml.delete_calendar_event`, `ml.delete_calendar_job`, `ml.delete_data_frame_analytics`, `ml.delete_datafeed`, `ml.delete_expired_data`, `ml.delete_filter`, `ml.delete_forecast`, `ml.delete_job`, `ml.delete_trained_model`, `ml.delete_trained_model_alias`, `ml.estimate_model_memory`, `ml.evaluate_data_frame`, `ml.explain_data_frame_analytics`, `ml.flush_job`, `ml.forecast`, `ml.get_buckets`, `ml.get_calendar_events`, `ml.get_calendars`, `ml.get_categories`, `ml.get_data_frame_analytics`, `ml.get_data_frame_analytics_stats`, `ml.get_datafeed_stats`, `ml.get_datafeeds`, `ml.get_filters`, `ml.get_influencers`, `ml.get_job_stats`, `ml.get_jobs`, `ml.get_memory_stats`, `ml.get_model_snapshot_upgrade_stats`, `ml.get_model_snapshots`, `ml.get_overall_buckets`, `ml.get_records`, `ml.get_trained_models`, `ml.get_trained_models_stats`, `ml.infer_trained_model`, `ml.info`, `ml.open_job`, `ml.post_calendar_events`, `ml.post_data`, `ml.preview_data_frame_analytics`, `ml.preview_datafeed`, `ml.put_calendar`, `ml.put_calendar_job`, `ml.put_data_frame_analytics`, `ml.put_datafeed`, `ml.put_filter`, `ml.put_job`, `ml.put_trained_model`, `ml.put_trained_model_alias`, `ml.put_trained_model_definition_part`, `ml.put_trained_model_vocabulary`, `ml.reset_job`, `ml.revert_model_snapshot`, `ml.set_upgrade_mode`, `ml.start_data_frame_analytics`, `ml.start_datafeed`, `ml.start_trained_model_deployment`, `ml.stop_data_frame_analytics`, `ml.stop_datafeed`, `ml.stop_trained_model_deployment`, `ml.update_data_frame_analytics`, `ml.update_datafeed`, `ml.update_filter`, `ml.update_job`, `ml.update_model_snapshot`, `ml.update_trained_model_deployment`, `ml.upgrade_job_snapshot`, `ml.validate`, `ml.validate_detector`.
+
+Not tested yet: `ml.delete_model_snapshot`.
 
 Not on Elastic Cloud Serverless: `ml.clear_trained_model_deployment_cache`, `ml.delete_expired_data`, `ml.delete_forecast`, `ml.delete_model_snapshot`, `ml.explain_data_frame_analytics`, `ml.get_buckets`, `ml.get_categories`, `ml.get_influencers`, `ml.get_memory_stats`, `ml.get_model_snapshot_upgrade_stats`, `ml.get_model_snapshots`, `ml.get_records`, `ml.info`, `ml.post_data`, `ml.revert_model_snapshot`, `ml.set_upgrade_mode`, `ml.update_model_snapshot`, `ml.upgrade_job_snapshot`, `ml.validate`, `ml.validate_detector`.
 

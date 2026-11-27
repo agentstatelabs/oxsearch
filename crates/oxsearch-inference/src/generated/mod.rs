@@ -3678,7 +3678,8 @@ pub struct ElasticsearchServiceSettings {
     /// The inference process is a compute-bound process; `threads_per_allocations` must not exceed the number of available allocated processors per node.
     /// The value must be a power of 2.
     /// The maximum value is 32.
-    pub num_threads: i32,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub num_threads: ::core::option::Option<i32>,
     /// Available only for the `rerank` task type using the Elastic reranker model.
     /// Controls the strategy used for processing long documents during inference.
     ///
@@ -3699,16 +3700,13 @@ pub struct ElasticsearchServiceSettings {
 
 impl ElasticsearchServiceSettings {
     /// A `ElasticsearchServiceSettings` with its required properties set.
-    pub fn new(
-        model_id: impl ::core::convert::Into<::std::string::String>,
-        num_threads: i32,
-    ) -> Self {
+    pub fn new(model_id: impl ::core::convert::Into<::std::string::String>) -> Self {
         Self {
             adaptive_allocations: ::core::option::Option::None,
             deployment_id: ::core::option::Option::None,
             model_id: model_id.into(),
             num_allocations: ::core::option::Option::None,
-            num_threads: num_threads.into(),
+            num_threads: ::core::option::Option::None,
             long_document_strategy: ::core::option::Option::None,
             max_chunks_per_doc: ::core::option::Option::None,
         }
@@ -3735,6 +3733,11 @@ impl ElasticsearchServiceSettings {
     /// Sets `num_allocations`.
     pub fn num_allocations(mut self, value: i32) -> Self {
         self.num_allocations = ::core::option::Option::Some(value.into());
+        self
+    }
+    /// Sets `num_threads`.
+    pub fn num_threads(mut self, value: i32) -> Self {
+        self.num_threads = ::core::option::Option::Some(value.into());
         self
     }
     /// Sets `long_document_strategy`.

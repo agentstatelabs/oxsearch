@@ -1,0 +1,30 @@
+[package]
+name = "oxsearch-bench"
+description = "Benchmarks comparing oxsearch with the official elasticsearch crate"
+version = "0.0.0"
+edition = "2024"
+license = "Apache-2.0"
+publish = false
+
+# A workspace of its own, so the official client and criterion stay out of
+# the main build, its CI and its lockfile.
+[workspace]
+
+[dependencies]
+oxsearch = { path = "../crates/oxsearch", features = ["helpers"] }
+elasticsearch = { version = "=9.1.0-alpha.1", default-features = false, features = ["rustls-tls"] }
+futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+tokio = { version = "1.53", features = ["rt-multi-thread", "macros", "net", "io-util", "sync", "time"] }
+
+[dev-dependencies]
+criterion = { version = "0.8", features = ["async_tokio"] }
+
+[[bench]]
+name = "overhead"
+harness = false
+
+[[bench]]
+name = "decode"
+harness = false

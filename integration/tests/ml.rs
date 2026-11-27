@@ -380,13 +380,17 @@ async fn anomaly_detection() {
         reverted.model.and_then(|m| m.snapshot_id).as_deref(),
         Some(oldest.as_str())
     );
-    if newest != oldest {
-        send(
-            &client,
-            &delete_model_snapshot::Request::new(job.as_str(), newest.as_str()),
-        )
-        .await
-        .unwrap();
+    // The newest snapshot, if the job wrote two. With one, it's the active
+    // snapshot, which Elasticsearch reads the request for and won't delete.
+    let deleted = send(
+        &client,
+        &delete_model_snapshot::Request::new(job.as_str(), newest.as_str()),
+    )
+    .await;
+    match deleted {
+        Ok(_) => assert_ne!(newest, oldest, "deleted the active snapshot"),
+        Err(e) if newest == oldest => assert!(understood(&e), "{e}"),
+        Err(e) => panic!("{e}"),
     }
 
     // The forecast finished with the first run; delete it.

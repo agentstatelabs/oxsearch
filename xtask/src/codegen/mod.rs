@@ -452,11 +452,16 @@ fn check_reserved(ir: &ir::Ir<'_>) -> Result<(), Error> {
     Ok(())
 }
 
-/// Whether an endpoint answers in plain text only, such as
-/// `nodes.hot_threads`, rather than JSON.
+/// Whether an endpoint answers in text only, rather than JSON: plain text,
+/// such as `nodes.hot_threads`, or server-sent events.
 pub fn text_response(endpoint: &Endpoint) -> bool {
     let types = &endpoint.response_media_type;
-    types.iter().any(|t| t == "text/plain") && !types.iter().any(|t| t == "application/json")
+    // Server-sent events too, as the streaming inference endpoints send:
+    // the events, read as the text they are.
+    types
+        .iter()
+        .any(|t| t == "text/plain" || t == "text/event-stream")
+        && !types.iter().any(|t| t == "application/json")
 }
 
 /// The endpoint modules to put behind the `beta` or `experimental` feature:

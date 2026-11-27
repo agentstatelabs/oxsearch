@@ -348,14 +348,36 @@ fn respelled(declaring: &TypeName, property: &str) -> Option<&'static str> {
     }
 }
 
-/// A response the specification gives none of Elasticsearch's properties,
-/// read as JSON.
-fn untyped(response: &TypeName) -> bool {
+/// A request or response body the specification types as Elasticsearch
+/// doesn't take or send it, read and written as JSON.
+fn untyped(body: &TypeName) -> bool {
     matches!(
-        (response.namespace.as_str(), response.name.as_str()),
+        (body.namespace.as_str(), body.name.as_str()),
         // `{"profiling", "resource_management", "resources"}`, which the
         // specification types as `{"operation_mode"}`.
         ("profiling.status", "Response")
+        // Only what changes: the specification types it as a whole endpoint,
+        // whose required `service` Elasticsearch refuses in an update.
+        | ("inference.update", "Request")
+    )
+}
+
+/// A property the specification marks required that Elasticsearch doesn't
+/// always take, by the declaring type's namespace and name.
+fn relaxed(declaring: &TypeName, property: &str) -> bool {
+    matches!(
+        (
+            declaring.namespace.as_str(),
+            declaring.name.as_str(),
+            property,
+        ),
+        // Refused with `deployment_id`, which names a deployment that has
+        // its threads already.
+        (
+            "inference._types",
+            "ElasticsearchServiceSettings",
+            "num_threads"
+        )
     )
 }
 
@@ -610,6 +632,7 @@ impl<'g> Ir<'g> {
                 let query = fields(query, self)?;
                 let body = match &t.body {
                     Body::NoBody {} => None,
+                    _ if untyped(&t.name) => Some(Ty::Json),
                     Body::Value { value, .. } => Some(self.ty(
                         &Ctx {
                             field: "body",
@@ -778,8 +801,8 @@ impl<'g> Ir<'g> {
             wire: wire.to_owned(),
             ident: unique(used, ident),
             ty,
-            required: p.required,
-            optional: !p.required,
+            required: p.required && !relaxed(declaring, &p.name),
+            optional: !p.required || relaxed(declaring, &p.name),
             defaulted: false,
             doc: p.description.clone(),
             aliases,

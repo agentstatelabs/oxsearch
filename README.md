@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, security, transforms, rollups, and the cluster operations: cross-cluster replication, searchable snapshots, dangling indices, autoscaling, node shutdown, migration, feature states, ingest simulation and text structure; and connectors, Fleet, Logstash, graph, profiling, serverless projects and streams. That's every endpoint the specification offers for code generation, 597 of them, tested against its own examples where it has them, and the integration tests send 485 of them to Elasticsearch 9, on the Basic license and a trial. See [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, security, transforms, rollups, and the cluster operations: cross-cluster replication, searchable snapshots, dangling indices, autoscaling, node shutdown, migration, feature states, ingest simulation and text structure; and connectors, Fleet, Logstash, graph, profiling, serverless projects and streams. That's every endpoint the specification offers for code generation, 597 of them, tested against its own examples where it has them, and the integration tests send 516 of them to Elasticsearch 9, on the Basic license and a trial. See [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -75,7 +75,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **A `rig` vector store** ([`oxsearch-rig`](crates/oxsearch-rig)).
 - **Escape hatches** for what isn't covered yet: your own `Endpoint`, `Raw` variants and `Client::send_raw` ([example](crates/oxsearch/examples/escape_hatches.rs)).
 
-[docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise.
+[docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise. [bench/RESULTS.md](bench/RESULTS.md) compares oxsearch with the official `elasticsearch` crate: request overhead, reading large responses, and bulk throughput.
 
 ## Versions
 
