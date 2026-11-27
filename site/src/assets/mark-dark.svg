@@ -1,5 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 24" role="img" aria-label="oxsearch">
-  <circle cx="10" cy="10" r="7" fill="none" stroke="#f5f5f4" stroke-width="3.5"/>
-  <path d="M15 15 L20 20" stroke="#f5f5f4" stroke-width="3.5" stroke-linecap="round"/>
-  <path d="M29 5 L42 19 M42 5 L29 19" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39 24" role="img" aria-label="oxsearch">
+  <circle cx="10" cy="12" r="7" fill="none" stroke="#f5f5f4" stroke-width="3.5"/>
+  <path d="M23 5 L36 19 M36 5 L23 19" stroke="#22d3ee" stroke-width="3.5" stroke-linecap="round"/>
 </svg>
