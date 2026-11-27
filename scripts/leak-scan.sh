@@ -136,8 +136,10 @@ done
 # --- tracked-file guard: some leaks are file-TYPE, not content -------------
 # The content scan cannot catch a committed SQLite DB, keystore, or private
 # key. Fail closed if any sensitive file type is tracked (example/sample envs
-# are exempt). Only meaningful for tree/HEAD scans.
-tracked_bad="$(git ls-files 2>/dev/null | grep -Ei '\.(db|sqlite3?|db-wal|db-shm|pem|key|p12|pfx|keystore)$|\.db\.bak|(^|/)id_rsa|(^|/)\.env$|credential' | grep -viE '\.env\.(example|sample|template)' || true)"
+# are exempt). Rust source is exempt too: a module named after the API it
+# calls (oxsearch-security's get_service_credentials, say) is code, and the
+# content scan above still reads it. Only meaningful for tree/HEAD scans.
+tracked_bad="$(git ls-files 2>/dev/null | grep -Ei '\.(db|sqlite3?|db-wal|db-shm|pem|key|p12|pfx|keystore)$|\.db\.bak|(^|/)id_rsa|(^|/)\.env$|credential' | grep -viE '\.env\.(example|sample|template)' | grep -v '\.rs$' || true)"
 if [ -n "$tracked_bad" ]; then
   while IFS= read -r f; do
     [ -z "$f" ] && continue

@@ -88,10 +88,13 @@ impl Emitter<'_> {
             }
             _ => return,
         };
-        // A bare generic parameter would overlap every other conversion.
+        // A bare generic parameter would overlap every other conversion, and
+        // a variant that holds the union itself, such as a role mapping
+        // rule's `except`, would overlap `From<T> for T`.
+        let own = |ty: &Ty| matches!(ty, Ty::Named { target, .. } if self.ir.item_of.get(target) == Some(&self.id));
         let convertible: Vec<(&str, &Ty, String)> = members
             .into_iter()
-            .filter(|(_, ty)| !matches!(ty, Ty::Unit | Ty::Param(_)))
+            .filter(|(_, ty)| !matches!(ty, Ty::Unit | Ty::Param(_)) && !own(ty))
             .map(|(variant, ty)| (variant, ty, self.canonical(ty)))
             .collect();
         let mut counts: BTreeMap<&str, usize> = BTreeMap::new();

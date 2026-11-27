@@ -27,7 +27,8 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-slm` | 9 | 9 (100%) |
 | `oxsearch-xpack` | 2 | 2 (100%) |
 | `oxsearch-cat` | 27 | 27 (100%) |
-| all | 413 | 307 (74%) |
+| `oxsearch-security` | 66 | 66 (100%) |
+| all | 479 | 373 (77%) |
 
 ## `oxsearch-core`
 
@@ -150,4 +151,9 @@ Tested: `xpack.info`, `xpack.usage`.
 ## `oxsearch-cat`
 
 Tested: `cat.aliases`, `cat.allocation`, `cat.circuit_breaker`, `cat.component_templates`, `cat.count`, `cat.fielddata`, `cat.health`, `cat.help`, `cat.indices`, `cat.master`, `cat.ml_data_frame_analytics`, `cat.ml_datafeeds`, `cat.ml_jobs`, `cat.ml_trained_models`, `cat.nodeattrs`, `cat.nodes`, `cat.pending_tasks`, `cat.plugins`, `cat.recovery`, `cat.repositories`, `cat.segments`, `cat.shards`, `cat.snapshots`, `cat.tasks`, `cat.templates`, `cat.thread_pool`, `cat.transforms`.
+
+
+## `oxsearch-security`
+
+Tested: `security.activate_user_profile`, `security.authenticate`, `security.bulk_delete_role`, `security.bulk_put_role`, `security.bulk_update_api_keys`, `security.change_password`, `security.clear_api_key_cache`, `security.clear_cached_privileges`, `security.clear_cached_realms`, `security.clear_cached_roles`, `security.clear_cached_service_tokens`, `security.clone_api_key`, `security.create_api_key`, `security.create_cross_cluster_api_key`, `security.create_service_token`, `security.delegate_pki`, `security.delete_privileges`, `security.delete_role`, `security.delete_role_mapping`, `security.delete_service_token`, `security.delete_user`, `security.disable_user`, `security.disable_user_profile`, `security.enable_user`, `security.enable_user_profile`, `security.enroll_kibana`, `security.enroll_node`, `security.get_api_key`, `security.get_builtin_privileges`, `security.get_privileges`, `security.get_role`, `security.get_role_mapping`, `security.get_service_accounts`, `security.get_service_credentials`, `security.get_settings`, `security.get_stats`, `security.get_token`, `security.get_user`, `security.get_user_privileges`, `security.get_user_profile`, `security.grant_api_key`, `security.has_privileges`, `security.has_privileges_user_profile`, `security.invalidate_api_key`, `security.invalidate_token`, `security.oidc_authenticate`, `security.oidc_logout`, `security.oidc_prepare_authentication`, `security.put_privileges`, `security.put_role`, `security.put_role_mapping`, `security.put_user`, `security.query_api_keys`, `security.query_role`, `security.query_user`, `security.saml_authenticate`, `security.saml_complete_logout`, `security.saml_invalidate`, `security.saml_logout`, `security.saml_prepare_authentication`, `security.saml_service_provider_metadata`, `security.suggest_user_profiles`, `security.update_api_key`, `security.update_cross_cluster_api_key`, `security.update_settings`, `security.update_user_profile_data`.
 

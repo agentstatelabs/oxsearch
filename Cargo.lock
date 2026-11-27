@@ -1267,6 +1267,7 @@ dependencies = [
  "oxsearch-query-rules",
  "oxsearch-search",
  "oxsearch-search-application",
+ "oxsearch-security",
  "oxsearch-slm",
  "oxsearch-snapshot",
  "oxsearch-sql",
@@ -1575,6 +1576,21 @@ dependencies = [
  "oxsearch-core",
  "oxsearch-search",
  "oxsearch-search-application",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-security"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-admin",
+ "oxsearch-aggs",
+ "oxsearch-core",
+ "oxsearch-security",
+ "oxsearch-xpack",
  "serde",
  "serde_json",
  "serde_path_to_error",

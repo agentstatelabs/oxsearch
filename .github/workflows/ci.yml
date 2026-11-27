@@ -142,3 +142,38 @@ jobs:
       - name: Collector logs
         if: failure()
         run: docker logs otelcol 2>&1 | tail -100
+
+  # The security tests, against Elasticsearch with security on (see
+  # scripts/es-fixture.sh): once on the Basic license, once on a trial. The
+  # elastic user's password is made for each run.
+  integration-security:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        license: [basic, trial]
+    env:
+      OXSEARCH_TEST_LICENSE: ${{ matrix.license }}
+      OXSEARCH_TEST_SECURITY: "true"
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build the security tests
+        run: cargo test -p oxsearch-integration --test security --no-run
+      - name: A password for the elastic user
+        run: |
+          password="$(openssl rand -hex 16)"
+          echo "::add-mask::${password}"
+          echo "OXSEARCH_TEST_PASSWORD=${password}" >> "$GITHUB_ENV"
+      - name: Start Elasticsearch with security on, on the ${{ matrix.license }} license
+        run: scripts/es-fixture.sh up "${OXSEARCH_TEST_LICENSE}"
+      - name: Security tests
+        env:
+          OXSEARCH_COVERAGE: ${{ github.workspace }}/target/coverage.txt
+        run: cargo test -p oxsearch-integration --test security -- --ignored
+      - name: Endpoint coverage
+        if: always()
+        run: cargo run -q -p xtask -- coverage target/coverage.txt >> "$GITHUB_STEP_SUMMARY"
+      - name: Elasticsearch logs
+        if: failure()
+        run: scripts/es-fixture.sh logs | tail -200
