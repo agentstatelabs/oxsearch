@@ -30,7 +30,16 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-security` | 66 | 66 (100%) |
 | `oxsearch-transform` | 13 | 13 (100%) |
 | `oxsearch-rollup` | 8 | 8 (100%) |
-| all | 500 | 394 (78%) |
+| `oxsearch-ccr` | 13 | 13 (100%) |
+| `oxsearch-searchable-snapshots` | 4 | 4 (100%) |
+| `oxsearch-dangling-indices` | 3 | 3 (100%) |
+| `oxsearch-autoscaling` | 4 | 4 (100%) |
+| `oxsearch-shutdown` | 3 | 3 (100%) |
+| `oxsearch-migration` | 3 | 3 (100%) |
+| `oxsearch-features` | 2 | 2 (100%) |
+| `oxsearch-simulate` | 1 | 1 (100%) |
+| `oxsearch-text-structure` | 4 | 4 (100%) |
+| all | 537 | 431 (80%) |
 
 ## `oxsearch-core`
 
@@ -168,4 +177,59 @@ Tested: `transform.delete_transform`, `transform.get_node_stats`, `transform.get
 ## `oxsearch-rollup`
 
 Tested: `rollup.delete_job`, `rollup.get_jobs`, `rollup.get_rollup_caps`, `rollup.get_rollup_index_caps`, `rollup.put_job`, `rollup.rollup_search`, `rollup.start_job`, `rollup.stop_job`.
+
+
+## `oxsearch-ccr`
+
+Tested: `ccr.delete_auto_follow_pattern`, `ccr.follow`, `ccr.follow_info`, `ccr.follow_stats`, `ccr.forget_follower`, `ccr.get_auto_follow_pattern`, `ccr.pause_auto_follow_pattern`, `ccr.pause_follow`, `ccr.put_auto_follow_pattern`, `ccr.resume_auto_follow_pattern`, `ccr.resume_follow`, `ccr.stats`, `ccr.unfollow`.
+
+Tested on the trial only. The fixture follows its own indices, through a remote cluster that points back at its node; following another cluster isn't tested.
+
+
+## `oxsearch-searchable-snapshots`
+
+Tested: `searchable_snapshots.cache_stats`, `searchable_snapshots.clear_cache`, `searchable_snapshots.mount`, `searchable_snapshots.stats`.
+
+Mounting is tested on the trial only, as a full copy: the fixture's node has no shared cache, so its cache statistics count no regions.
+
+
+## `oxsearch-dangling-indices`
+
+Tested: `dangling_indices.delete_dangling_index`, `dangling_indices.import_dangling_index`, `dangling_indices.list_dangling_indices`.
+
+A single node can't leave an index dangling, so the import and the delete are tested on a UUID no node has, which Elasticsearch refuses.
+
+
+## `oxsearch-autoscaling`
+
+Tested: `autoscaling.delete_autoscaling_policy`, `autoscaling.get_autoscaling_capacity`, `autoscaling.get_autoscaling_policy`, `autoscaling.put_autoscaling_policy`.
+
+Tested on the trial only.
+
+
+## `oxsearch-shutdown`
+
+Tested: `shutdown.delete_node`, `shutdown.get_node`, `shutdown.put_node`.
+
+
+## `oxsearch-migration`
+
+Tested: `migration.deprecations`, `migration.get_feature_upgrade_status`, `migration.post_feature_upgrade`.
+
+A cluster on the current version has no system features to upgrade, so the upgrade asked for is declined.
+
+
+## `oxsearch-features`
+
+Tested: `features.get_features`, `features.reset_features`.
+
+
+## `oxsearch-simulate`
+
+Tested: `simulate.ingest`.
+
+
+## `oxsearch-text-structure`
+
+Tested: `text_structure.find_field_structure`, `text_structure.find_message_structure`, `text_structure.find_structure`, `text_structure.test_grok_pattern`.
 

@@ -1,0 +1,7 @@
+4 exact, 0 normalized, 2 failing
+autoscaling.delete_autoscaling_policy response DeleteAutoscalingPolicyResponseExample1: exact
+autoscaling.get_autoscaling_capacity response GetAutoscalingCapacityResponseExample1: fails: not JSON: key must be a string at line 2 column 3
+autoscaling.get_autoscaling_policy response GetAutoscalingPolicyResponseExample1: fails: not JSON: expected value at line 2 column 13
+autoscaling.put_autoscaling_policy request PutAutoscalingPolicyRequestExample1: exact
+autoscaling.put_autoscaling_policy request PutAutoscalingPolicyRequestExample2: exact
+autoscaling.put_autoscaling_policy response PutAutoscalingPolicyResponseExample1: exact

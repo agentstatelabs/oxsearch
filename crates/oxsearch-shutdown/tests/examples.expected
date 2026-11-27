@@ -1,0 +1,4 @@
+2 exact, 1 normalized, 0 failing
+shutdown.delete_node response ShutdownDeleteNodeResponseExample1: exact
+shutdown.get_node response ShutdownGetNodeResponseExample1: normalized at /nodes/0/allocation_delay (dropped)
+shutdown.put_node request ShutdownPutNodeRequestExample1: exact

@@ -22,10 +22,15 @@
 //! schedule and act on it), `xpack` (the cluster's features and their
 //! usage), `cat` (the cat APIs' tables as typed rows), `security` (users,
 //! roles, API keys, tokens and single sign-on), `transform` (pivot and
-//! latest transforms), `rollup` (rollup jobs, deprecated upstream),
-//! `license`, `analysis` and `tasks`. `document` adds the typed document
-//! layer and `derive` its derive macro, and `helpers` the point-in-time scan
-//! and the bulk loader.
+//! latest transforms), `rollup` (rollup jobs, deprecated upstream), `ccr`
+//! (cross-cluster replication), `searchable-snapshots`, `dangling-indices`,
+//! `autoscaling` and `shutdown` (node shutdown; both meant for Elastic's
+//! orchestrators), `migration` (deprecations and system feature upgrades),
+//! `features` (feature states, and resetting them), `simulate` (ingest
+//! simulation), `text-structure` (finding the structure of log text, and
+//! testing grok patterns), `license`, `analysis` and `tasks`. `document`
+//! adds the typed document layer and `derive` its derive macro, and
+//! `helpers` the point-in-time scan and the bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -87,8 +92,14 @@ pub use oxsearch_aggs as aggs;
 pub use oxsearch_analysis as analysis;
 #[cfg(feature = "async-search")]
 pub use oxsearch_async_search as async_search;
+#[cfg(feature = "autoscaling")]
+pub use oxsearch_autoscaling as autoscaling;
 #[cfg(feature = "cat")]
 pub use oxsearch_cat as cat;
+#[cfg(feature = "ccr")]
+pub use oxsearch_ccr as ccr;
+#[cfg(feature = "dangling-indices")]
+pub use oxsearch_dangling_indices as dangling_indices;
 #[cfg(feature = "derive")]
 pub use oxsearch_derive as derive;
 #[cfg(feature = "docs")]
@@ -99,6 +110,8 @@ pub use oxsearch_enrich as enrich;
 pub use oxsearch_eql as eql;
 #[cfg(feature = "esql")]
 pub use oxsearch_esql as esql;
+#[cfg(feature = "features")]
+pub use oxsearch_features as features;
 #[cfg(feature = "ilm")]
 pub use oxsearch_ilm as ilm;
 #[cfg(feature = "inference")]
@@ -109,6 +122,8 @@ pub use oxsearch_ingest as ingest;
 pub use oxsearch_license as license;
 #[cfg(feature = "mapping")]
 pub use oxsearch_mapping as mapping;
+#[cfg(feature = "migration")]
+pub use oxsearch_migration as migration;
 #[cfg(feature = "ml")]
 pub use oxsearch_ml as ml;
 #[cfg(feature = "query-rules")]
@@ -121,8 +136,14 @@ pub use oxsearch_search as search;
 pub use oxsearch_search::fusion;
 #[cfg(feature = "search-application")]
 pub use oxsearch_search_application as search_application;
+#[cfg(feature = "searchable-snapshots")]
+pub use oxsearch_searchable_snapshots as searchable_snapshots;
 #[cfg(feature = "security")]
 pub use oxsearch_security as security;
+#[cfg(feature = "shutdown")]
+pub use oxsearch_shutdown as shutdown;
+#[cfg(feature = "simulate")]
+pub use oxsearch_simulate as simulate;
 #[cfg(feature = "slm")]
 pub use oxsearch_slm as slm;
 #[cfg(feature = "snapshot")]
@@ -133,6 +154,8 @@ pub use oxsearch_sql as sql;
 pub use oxsearch_synonyms as synonyms;
 #[cfg(feature = "tasks")]
 pub use oxsearch_tasks as tasks;
+#[cfg(feature = "text-structure")]
+pub use oxsearch_text_structure as text_structure;
 #[cfg(feature = "transform")]
 pub use oxsearch_transform as transform;
 #[cfg(feature = "transport-reqwest")]
