@@ -59,11 +59,11 @@ const LIMITS: &[(&str, &str)] = &[
     (
         "inference",
         "Calls to a provider go to a mock service on the CI runner, which the fixture reaches \
-         as `host.docker.internal`: OpenAI, and the providers that take a URL. Providers that \
-         only call their own cloud (Amazon Bedrock and SageMaker, Anthropic, Azure, Cohere, \
-         Google, Mistral, watsonx and others) aren't tested, since that needs an account with \
-         each and sends the requests to them. Creating an endpoint needs a license above Basic, \
-         so on Basic the tests check the refusal.",
+         as `host.docker.internal`: OpenAI, and the providers that take a URL and a key. The \
+         other providers aren't tested, since each calls its own cloud or needs its \
+         credentials, so testing them needs an account with each and sends the requests to \
+         them. Creating an endpoint needs a license above Basic, so on Basic the tests check \
+         the refusal.",
     ),
     (
         "esql",
