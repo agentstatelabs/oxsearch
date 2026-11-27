@@ -153,6 +153,18 @@ required-features = ["transport-reqwest"]
 name = "quickstart"
 required-features = ["derive", "transport-reqwest"]
 
+[[example]]
+name = "analytics"
+required-features = ["admin", "aggs", "esql", "transport-reqwest"]
+
+[[example]]
+name = "transport"
+required-features = ["transport-reqwest"]
+
+[[example]]
+name = "documents"
+required-features = ["derive", "transport-reqwest"]
+
 [package.metadata.docs.rs]
 # Document the APIs behind features too.
 all-features = true

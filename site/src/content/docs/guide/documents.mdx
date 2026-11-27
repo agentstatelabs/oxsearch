@@ -1,0 +1,49 @@
+---
+title: Your own document types
+description: Mappings from a struct, typed field handles, and an index that reads, writes and searches your own type.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Example from '../../../components/Example.astro';
+
+The typed document layer, `oxsearch::document`, makes a struct of your own the document type: its fields define the index's mapping, its field handles build queries that suit each field, and an `Index<T>` reads, writes and searches it. The `derive` feature turns it on, with its derive macro.
+
+<Example file="crates/oxsearch/examples/documents.rs" doc="toml" />
+
+## The type
+
+<Example file="crates/oxsearch/examples/documents.rs" region="type" />
+
+Field attributes choose a field's mapped type: `#[keyword]`, `#[text]`, `#[date]`, `#[semantic_text(inference_id = "…")]`, `#[dense_vector(dims = …, similarity = "…", element_type = "…")]` and `#[sparse_vector]`. Without one, the Rust type decides: strings are `text`, numbers and booleans their own types, date and time types `date`, and a struct that derives `Document` an object.
+
+`#[id]` marks the field that gives a document's id, and `#[routing]` the one that gives its routing. serde's `rename`, `rename_all` and `skip` are followed, so the mapping names fields as they are stored.
+
+## Writing
+
+<Example file="crates/oxsearch/examples/documents.rs" region="write" />
+
+`client.index::<Article>()` is the index the type names. `ensure_mapping` creates it with the type's mapping if it doesn't exist, adds the fields an existing one lacks, and reports fields mapped differently, which it never changes. A new index for a type with vector fields keeps the vectors in the sources it returns, so documents read back whole.
+
+`refresh(Refresh::WaitFor)` makes each write wait until searches can see it; leave it off for throughput.
+
+## Reading
+
+<Example file="crates/oxsearch/examples/documents.rs" region="read" />
+
+A document reads back with its id and its version, `Versioned<Article>`. `put_versioned` writes one back only if nobody changed it in the meantime; if somebody did, it fails with `Error::Conflict`.
+
+## Searching
+
+<Example file="crates/oxsearch/examples/documents.rs" region="search" />
+
+Each field has a handle, `Article::TAGS`, `Article::EMBEDDING`, typed by its mapping, which offers only the queries that suit it: `term` and `terms` on a keyword field, `r#match` and `match_phrase` on text, `semantic` on `semantic_text`, `knn` on a dense vector. A query on the wrong kind of field doesn't compile.
+
+`search` takes a retriever, or a query wrapped in `Retriever::standard`, and returns the best ten hits with their sources read as the type. `search_request` sends any search request, and `fuse` [fuses retrievers](/guide/ai-search/), on the client when the cluster's license doesn't include server-side fusion.
+
+## Deleting
+
+<Example file="crates/oxsearch/examples/documents.rs" region="delete" />
+
+<Aside>
+	The document layer isn't an ORM: there are no relations, lazy loading or transactions. Under it are the generated requests, which you can always use instead.
+</Aside>

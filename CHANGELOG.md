@@ -99,6 +99,14 @@ specification it's generated from.
   Elasticsearch version it's there and whether Elastic Cloud Serverless has
   it, and links Elasticsearch's documentation. `docs/coverage.md` counts the
   endpoints on Serverless and lists those it lacks.
+- Three more examples, which CI runs against Elasticsearch: `documents`
+  (the typed document layer on any license), `analytics` (aggregations
+  and ES|QL) and `transport` (several nodes, retries and credentials).
+  Each example's documentation lists the dependencies it needs, which a
+  test keeps true.
+- The site, oxsearch.agentstatelabs.com (`site/`), with its code drawn from
+  the examples and its coverage, license and version tables from the
+  repository's own files.
 
 ### Changed
 - The integration tests run against Elasticsearch 9.5.7, the latest 9.5 patch,

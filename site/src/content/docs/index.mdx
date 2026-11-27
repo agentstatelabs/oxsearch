@@ -1,0 +1,59 @@
+---
+title: oxsearch
+description: A typed Rust client for Elasticsearch, generated from its specification, with typed AI search.
+template: splash
+hero:
+  title: Elasticsearch, typed, for Rust
+  tagline: A client generated from Elasticsearch's own specification, so every request and response is a Rust type. Typed AI search, a document layer for your own types, and a way out wherever the types don't reach yet.
+  image:
+    alt: ''
+    dark: ../../assets/mark-dark.svg
+    light: ../../assets/mark-light.svg
+  actions:
+    - text: Get started
+      link: start/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/agentstatelabs/oxsearch
+      icon: external
+      variant: minimal
+---
+
+import { Aside, Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+import Example from '../../components/Example.astro';
+
+## Semantic search in a dozen lines
+
+<Example file="crates/oxsearch/examples/quickstart.rs" />
+
+A struct is the document type. `#[derive(Document)]` builds its index mapping, `semantic_text` included, and gives it field handles: `Passage::TEXT.semantic(…)` is a semantic query on that field, and a field of the wrong type offers no such query. The search reads hits back as `Passage`.
+
+## Why oxsearch
+
+<CardGrid>
+	<Card title="Generated from the specification" icon="seti:rust">
+		Every type and endpoint comes from the Elasticsearch specification, pinned to one commit, and is never edited by hand. CI generates the code again and fails if it differs. Each area is its own crate behind a feature, so an application compiles only what it uses.
+	</Card>
+	<Card title="Typed AI search" icon="magnifier">
+		Retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings and the inference API, as types. Where the cluster's license doesn't include server-side fusion, `oxsearch::fusion` fuses on the client.
+	</Card>
+	<Card title="A way out everywhere" icon="random">
+		Your own endpoints go through the same client. A query, retriever or value the types don't know is a `Raw` variant, and `Client::send_raw` sends anything at all.
+	</Card>
+	<Card title="Tested against Elasticsearch" icon="approve-check">
+		Each endpoint is checked against the specification's own examples, and an area counts as supported only once the integration tests run it against Elasticsearch, on the Basic license and a trial.
+	</Card>
+</CardGrid>
+
+## Where to go next
+
+<CardGrid>
+	<LinkCard title="Get started" description="Dependencies, a cluster to try it on, and the code above, step by step." href="/start/" />
+	<LinkCard title="Your own document types" description="Mappings from a struct, typed field handles, and an index that reads and writes your type." href="/guide/documents/" />
+	<LinkCard title="AI search" description="Keyword and vector search fused with RRF, on the server or on the client." href="/guide/ai-search/" />
+	<LinkCard title="Endpoint coverage" description="Every endpoint generated so far, and which ones the integration tests run." href="/reference/coverage/" />
+</CardGrid>
+
+<Aside>
+	oxsearch is at 0.2, and early. Its API will change before 1.0; the changelog says how with each release.
+</Aside>

@@ -10,6 +10,16 @@
 //! cargo run -p oxsearch --example rag --features admin
 //! ```
 //!
+//! Its dependencies, in an application of your own:
+//!
+//! ```toml
+//! [dependencies]
+//! oxsearch = { version = "0.2", features = ["admin", "transport-reqwest"] }
+//! serde = { version = "1", features = ["derive"] }
+//! serde_json = "1"
+//! tokio = { version = "1", features = ["macros", "rt"] }
+//! ```
+//!
 //! On the Basic license, which doesn't include server-side RRF, the fusion
 //! runs on the client instead. The embeddings are a toy stand-in for an
 //! embedding model, so the example needs nothing but Elasticsearch.
@@ -76,8 +86,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let url = std::env::var("OXSEARCH_URL").unwrap_or_else(|_| "http://localhost:9200".to_owned());
     let client = Client::new(ReqwestTransport::new(&url)?);
 
-    // The mapping, from the generated types. Creating an index isn't in the
-    // first slice's crates yet, so it goes through the raw call.
+    // The mapping, from the generated types, and the index created with it.
+    // ANCHOR: mapping
     let mut properties = IndexMap::new();
     properties.insert("text".to_owned(), Property::Text(TextProperty::new()));
     properties.insert(
@@ -97,6 +107,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     client
         .send(&create::Request::new(INDEX).body(create::RequestBody::new().mappings(mapping)))
         .await?;
+    // ANCHOR_END: mapping
 
     // Index the passages in one bulk request.
     let passages = [
@@ -117,6 +128,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             "operations",
         ),
     ];
+    // ANCHOR: bulk
     let mut lines: Vec<bulk::RequestBody<Passage>> = Vec::new();
     for (n, (text, topic)) in passages.iter().enumerate() {
         lines.push(bulk::RequestBody::OperationContainer(
@@ -134,7 +146,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         .send(&bulk::Request::new().refresh(Refresh::True).body(lines))
         .await?;
     println!("indexed {} passages", indexed.items.len());
+    // ANCHOR_END: bulk
 
+    // ANCHOR: retrieve
     // Retrieve for a question: a keyword match and nearest neighbours,
     // fused with RRF, on the server if its license includes it.
     let question = "How do vector indexes find nearest neighbours?";
@@ -159,6 +173,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
             );
         }
     }
+    // ANCHOR_END: retrieve
 
     // Count the passages by topic.
     let count = search::Request::new().index(INDEX).body(

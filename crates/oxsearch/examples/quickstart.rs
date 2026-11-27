@@ -6,6 +6,15 @@
 //! scripts/es-fixture.sh up trial
 //! cargo run -p oxsearch --example quickstart --features derive
 //! ```
+//!
+//! Its dependencies, in an application of your own:
+//!
+//! ```toml
+//! [dependencies]
+//! oxsearch = { version = "0.2", features = ["derive", "transport-reqwest"] }
+//! serde = { version = "1", features = ["derive"] }
+//! tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+//! ```
 
 use oxsearch::document::{Document, Indexes};
 use oxsearch::transport_reqwest::ReqwestTransport;
