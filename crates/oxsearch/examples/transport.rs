@@ -15,7 +15,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! oxsearch = { version = "0.2", features = ["transport-reqwest"] }
+//! oxsearch = "0.3"
 //! tokio = { version = "1", features = ["macros", "rt"] }
 //! ```
 

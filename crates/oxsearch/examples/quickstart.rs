@@ -11,7 +11,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! oxsearch = { version = "0.2", features = ["derive", "transport-reqwest"] }
+//! oxsearch = { version = "0.3", features = ["derive"] }
 //! serde = { version = "1", features = ["derive"] }
 //! tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 //! ```

@@ -7,6 +7,20 @@ specification it's generated from.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-11-27
+
+The third release, generated from the same specification branch as 0.1 and
+0.2, 9.5 (commit `84bf510a`), and tested against Elasticsearch 9.5.7 on the
+Basic license and a trial. It generates the rest of the specification, from
+machine learning, Watcher and security to transforms, the cat APIs and the
+cluster operations, each its own crate behind a feature of its name: all
+597 endpoints the specification offers for code generation, 516 of them
+integration-tested. It also completes the typed document layer with
+updates, bulk writes and routing, adds the `oxsearch` command for import
+and export, and turns the reqwest transport on by default. Some 0.2 code
+needs changes to build against it: several entries under **Fixed** change
+a field's type or a function's arguments. Rust 1.95 or newer.
+
 ### Added
 - **Machine learning** (`oxsearch-ml`, the `ml` feature), generated from
   the specification: anomaly detection jobs, their datafeeds, results,
@@ -322,6 +336,7 @@ on top. Rust 1.95 or newer.
 - [docs/coverage.md](docs/coverage.md) lists which generated endpoints the
   integration tests exercise.
 
-[Unreleased]: https://github.com/agentstatelabs/oxsearch/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/agentstatelabs/oxsearch/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/agentstatelabs/oxsearch/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/agentstatelabs/oxsearch/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/agentstatelabs/oxsearch/releases/tag/v0.1.0

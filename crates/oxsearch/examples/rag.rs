@@ -14,7 +14,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! oxsearch = { version = "0.2", features = ["admin", "transport-reqwest"] }
+//! oxsearch = { version = "0.3", features = ["admin"] }
 //! serde = { version = "1", features = ["derive"] }
 //! serde_json = "1"
 //! tokio = { version = "1", features = ["macros", "rt"] }
