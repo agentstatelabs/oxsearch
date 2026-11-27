@@ -1265,6 +1265,7 @@ dependencies = [
  "oxsearch-mapping",
  "oxsearch-ml",
  "oxsearch-query-rules",
+ "oxsearch-rollup",
  "oxsearch-search",
  "oxsearch-search-application",
  "oxsearch-security",
@@ -1273,6 +1274,7 @@ dependencies = [
  "oxsearch-sql",
  "oxsearch-synonyms",
  "oxsearch-tasks",
+ "oxsearch-transform",
  "oxsearch-transport-reqwest",
  "oxsearch-watcher",
  "oxsearch-xpack",
@@ -1556,6 +1558,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "oxsearch-rollup"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-aggs",
+ "oxsearch-core",
+ "oxsearch-rollup",
+ "oxsearch-search",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
 name = "oxsearch-search"
 version = "0.2.0"
 dependencies = [
@@ -1657,6 +1673,22 @@ dependencies = [
  "indexmap",
  "oxsearch-core",
  "oxsearch-tasks",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-transform"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-admin",
+ "oxsearch-aggs",
+ "oxsearch-core",
+ "oxsearch-mapping",
+ "oxsearch-ml",
+ "oxsearch-transform",
  "serde",
  "serde_json",
  "serde_path_to_error",

@@ -81,13 +81,15 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-xpack` | the build, the license and the features it makes available, and each feature's usage | 87 |
 | `oxsearch-cat` | the cat APIs' tables, as typed rows from their JSON form | 131 |
 | `oxsearch-security` | users, roles, role mappings, privileges, API keys, tokens, service accounts, user profiles and single sign-on | 218 |
-| `oxsearch-transform`, … | one crate per API area, named with hyphens (`query_rules` is `oxsearch-query-rules`) | the rest of about 2,900 API types |
+| `oxsearch-transform` | pivot and latest transforms, their previews, statistics and upgrade mode | 48 |
+| `oxsearch-rollup` | rollup jobs, their capabilities and rollup search, deprecated upstream | 33 |
+| `oxsearch-ccr`, `oxsearch-fleet`, … | one crate per API area, named with hyphens (`query_rules` is `oxsearch-query-rules`) | the rest of about 2,900 API types |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |
 | `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
-The default features are the AI-search set, search, docs, mapping and inference, and the HTTP transport, transport-reqwest; `default-features = false` leaves the transport out for those who bring their own. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "ml", "watcher", "slm", "xpack", "cat", "security", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
+The default features are the AI-search set, search, docs, mapping and inference, and the HTTP transport, transport-reqwest; `default-features = false` leaves the transport out for those who bring their own. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "ml", "watcher", "slm", "xpack", "cat", "security", "transform", "rollup", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
 
 **Why crates and not only feature flags:** Cargo compiles crates in parallel and caches each one separately; feature flags inside one huge crate get neither benefit.
 
