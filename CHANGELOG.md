@@ -23,6 +23,9 @@ specification it's generated from.
   generated from the specification: policies that take snapshots on a
   schedule and expire old ones, run now, their statistics and retention,
   and the service stopped and started. It runs on any license.
+- **X-Pack information and usage** (`oxsearch-xpack`, the `xpack` feature),
+  generated from the specification: the cluster's build, its license and
+  the features it makes available, and each feature's usage statistics.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP

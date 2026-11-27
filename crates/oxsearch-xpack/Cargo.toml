@@ -1,0 +1,46 @@
+[package]
+name = "oxsearch-xpack"
+description = "X-Pack information and usage for oxsearch, generated from the Elasticsearch specification: the build, the license and the features available, and how much each is used"
+readme = "../../README.md"
+keywords = ["elasticsearch", "search", "client", "license"]
+categories = ["api-bindings", "database"]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+authors.workspace = true
+include = ["src/**", "Cargo.toml", "LICENSE"]
+
+[lib]
+# The generated documentation quotes Elasticsearch's own, which isn't Rust.
+doctest = false
+
+[features]
+# Endpoints Elasticsearch marks beta or experimental: they may change or go
+# away in any Elasticsearch release.
+beta = []
+experimental = []
+
+[dependencies]
+indexmap = { version = "2.14", features = ["serde"] }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.149"
+oxsearch-core = { path = "../oxsearch-core", version = "0.2.0" }
+oxsearch-license = { path = "../oxsearch-license", version = "0.2.0" }
+oxsearch-ml = { path = "../oxsearch-ml", version = "0.2.0" }
+oxsearch-slm = { path = "../oxsearch-slm", version = "0.2.0" }
+
+[dev-dependencies]
+# The tests cover the endpoints behind features too.
+oxsearch-xpack = { path = ".", features = ["beta", "experimental"] }
+# The generated example tests report where an example doesn't fit.
+serde_path_to_error = "0.1.20"
+
+[package.metadata.docs.rs]
+# Document the endpoints behind features too.
+all-features = true
+
+[lints]
+workspace = true
