@@ -20,9 +20,9 @@
 //! (enrich policies), `ml` (machine learning: anomaly detection, data frame
 //! analytics and trained models), `watcher` (watches that run a search on a
 //! schedule and act on it), `xpack` (the cluster's features and their
-//! usage), `license`, `analysis` and `tasks`. `document` adds the typed
-//! document layer and `derive` its derive macro, and `helpers` the
-//! point-in-time scan and the bulk loader.
+//! usage), `cat` (the cat APIs' tables as typed rows), `license`, `analysis`
+//! and `tasks`. `document` adds the typed document layer and `derive` its
+//! derive macro, and `helpers` the point-in-time scan and the bulk loader.
 //!
 //! The [`Client`] sends the generated requests over a [`Transport`], such as
 //! the one in `transport-reqwest`. [`Query`] and [`Retriever`] build the
@@ -84,6 +84,8 @@ pub use oxsearch_aggs as aggs;
 pub use oxsearch_analysis as analysis;
 #[cfg(feature = "async-search")]
 pub use oxsearch_async_search as async_search;
+#[cfg(feature = "cat")]
+pub use oxsearch_cat as cat;
 #[cfg(feature = "derive")]
 pub use oxsearch_derive as derive;
 #[cfg(feature = "docs")]

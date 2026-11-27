@@ -1,0 +1,38 @@
+26 exact, 9 normalized, 2 failing
+cat.aliases response CatAliasesResponseExample1: exact
+cat.allocation response CatAllocationResponseExample1: exact
+cat.circuit_breaker response CatCircuitBreakerResponseExample1: exact
+cat.component_templates response CatComponentTemplatesResponseExample1: normalized at /1/version (dropped)
+cat.count response CatCountResponseExample1: exact
+cat.count response CatCountResponseExample2: exact
+cat.fielddata response CatFielddataResponseExample1: exact
+cat.fielddata response CatFielddataResponseExample2: exact
+cat.health response CatHealthResponseExample1: exact
+cat.indices response CatIndicesResponseExample1: exact
+cat.master response CatMasterResponseExample1: exact
+cat.ml_data_frame_analytics response CatDataframeanalyticsResponseExample1: exact
+cat.ml_datafeeds response CatDatafeedsResponseExample1: exact
+cat.ml_jobs response CatJobsResponseExample1: normalized at /0/dpr (dropped)
+cat.ml_trained_models response CatTrainedModelsResponseExample1: exact
+cat.nodeattrs response CatNodeAttributesResponseExample1: exact
+cat.nodeattrs response CatNodeAttributesResponseExample2: normalized at /0/name (dropped)
+cat.nodes response CatNodesResponseExample1: normalized at /0/load_15m (dropped)
+cat.nodes response CatNodesResponseExample2: normalized at /0/m (dropped)
+cat.pending_tasks response CatPendingTasksResponseExample1: exact
+cat.plugins response CatPluginsResponseExample1: fails: not JSON: key must be a string at line 3 column 81
+cat.recovery response CatRecoveryResponseExample1: exact
+cat.recovery response CatRecoveryResponseExample2: fails: not JSON: trailing comma at line 14 column 3
+cat.recovery response CatRecoveryResponseExample3: normalized at /0/b (dropped)
+cat.repositories response CatRepositoriesResponseExample1: exact
+cat.segments response CatSegmentsResponseExample1: exact
+cat.shards response CatShardsResponseExample1: exact
+cat.shards response CatShardsResponseExample2: exact
+cat.shards response CatShardsResponseExample3: exact
+cat.shards response CatShardsResponseExample4: exact
+cat.shards response CatShardsResponseExample5: exact
+cat.snapshots response CatSnapshotsResponseExample1: exact
+cat.tasks response CatTasksResponseExample1: exact
+cat.templates response CatTemplatesResponseExample1: normalized at /0/version (dropped)
+cat.thread_pool response CatThreadPoolResponseExample1: exact
+cat.thread_pool response CatThreadPoolResponseExample2: normalized at /0/id (dropped)
+cat.transforms response CatTransformsResponseExample1: normalized at /0/changes_last_detection_time (dropped)

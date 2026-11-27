@@ -26,7 +26,8 @@ The endpoints generated in each crate, and those the integration tests send to E
 | `oxsearch-watcher` | 13 | 13 (100%) |
 | `oxsearch-slm` | 9 | 9 (100%) |
 | `oxsearch-xpack` | 2 | 2 (100%) |
-| all | 386 | 280 (72%) |
+| `oxsearch-cat` | 27 | 27 (100%) |
+| all | 413 | 307 (74%) |
 
 ## `oxsearch-core`
 
@@ -144,4 +145,9 @@ Tested: `slm.delete_lifecycle`, `slm.execute_lifecycle`, `slm.execute_retention`
 ## `oxsearch-xpack`
 
 Tested: `xpack.info`, `xpack.usage`.
+
+
+## `oxsearch-cat`
+
+Tested: `cat.aliases`, `cat.allocation`, `cat.circuit_breaker`, `cat.component_templates`, `cat.count`, `cat.fielddata`, `cat.health`, `cat.help`, `cat.indices`, `cat.master`, `cat.ml_data_frame_analytics`, `cat.ml_datafeeds`, `cat.ml_jobs`, `cat.ml_trained_models`, `cat.nodeattrs`, `cat.nodes`, `cat.pending_tasks`, `cat.plugins`, `cat.recovery`, `cat.repositories`, `cat.segments`, `cat.shards`, `cat.snapshots`, `cat.tasks`, `cat.templates`, `cat.thread_pool`, `cat.transforms`.
 
