@@ -73,6 +73,8 @@ extern crate self as oxsearch;
 mod generated;
 pub use generated::*;
 
+#[cfg(any(feature = "document", feature = "helpers"))]
+mod batch;
 #[cfg(feature = "document")]
 pub mod document;
 #[cfg(feature = "helpers")]

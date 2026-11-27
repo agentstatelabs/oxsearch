@@ -67,7 +67,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **The cat APIs** (`oxsearch::cat`, the `cat` feature): the compact tables of indices, nodes, shards, allocation, tasks, snapshots and the rest, read as typed rows from their JSON form.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
-- **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.
+- **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, changes part of it with a patch or a script, and sends bulk writes; `Versioned<T>` makes a write conditional on what was read; and field handles offer only the queries that suit each field.
 - **Helpers** (`oxsearch::helpers`): a point-in-time scan and a bulk loader with backpressure.
 - **Transport layers**: several nodes with failover, retries, sniffing, credentials (basic, bearer, API key, Elastic Cloud) and gzip.
 - **Telemetry** through `tracing` and `metrics`, following the OpenTelemetry conventions for Elasticsearch, for [oxtel](https://github.com/agentstatelabs/oxtel) or any other exporter.
