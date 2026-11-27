@@ -1,0 +1,3 @@
+2 exact, 0 normalized, 0 failing
+logstash.get_pipeline response LogstashGetPipelineResponseExample1: exact
+logstash.put_pipeline request LogstashPutPipelineRequestExample1: exact

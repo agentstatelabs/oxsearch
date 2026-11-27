@@ -55,6 +55,13 @@ migration = ["dep:oxsearch-migration"]
 features = ["dep:oxsearch-features"]
 simulate = ["dep:oxsearch-simulate"]
 text-structure = ["dep:oxsearch-text-structure"]
+connector = ["dep:oxsearch-connector"]
+fleet = ["dep:oxsearch-fleet"]
+logstash = ["dep:oxsearch-logstash"]
+graph = ["dep:oxsearch-graph"]
+profiling = ["dep:oxsearch-profiling"]
+project = ["dep:oxsearch-project"]
+streams = ["dep:oxsearch-streams"]
 analysis = ["dep:oxsearch-analysis"]
 tasks = ["dep:oxsearch-tasks"]
 # The typed document layer, `oxsearch::document`, which creates and maps
@@ -68,8 +75,8 @@ helpers = ["search", "docs", "dep:tokio", "dep:futures-core", "dep:futures-util"
 transport-reqwest = ["dep:oxsearch-transport-reqwest"]
 # Endpoints Elasticsearch marks beta or experimental, in the areas enabled:
 # they may change or go away in any Elasticsearch release.
-beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta", "oxsearch-license?/beta", "oxsearch-query-rules?/beta", "oxsearch-synonyms?/beta", "oxsearch-snapshot?/beta", "oxsearch-ilm?/beta", "oxsearch-async-search?/beta", "oxsearch-eql?/beta", "oxsearch-sql?/beta", "oxsearch-search-application?/beta", "oxsearch-enrich?/beta", "oxsearch-ml?/beta", "oxsearch-watcher?/beta", "oxsearch-slm?/beta", "oxsearch-xpack?/beta", "oxsearch-cat?/beta", "oxsearch-security?/beta", "oxsearch-transform?/beta", "oxsearch-rollup?/beta", "oxsearch-ccr?/beta", "oxsearch-searchable-snapshots?/beta", "oxsearch-dangling-indices?/beta", "oxsearch-autoscaling?/beta", "oxsearch-shutdown?/beta", "oxsearch-migration?/beta", "oxsearch-features?/beta", "oxsearch-simulate?/beta", "oxsearch-text-structure?/beta"]
-experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental", "oxsearch-async-search?/experimental", "oxsearch-eql?/experimental", "oxsearch-sql?/experimental", "oxsearch-search-application?/experimental", "oxsearch-enrich?/experimental", "oxsearch-ml?/experimental", "oxsearch-watcher?/experimental", "oxsearch-slm?/experimental", "oxsearch-xpack?/experimental", "oxsearch-cat?/experimental", "oxsearch-security?/experimental", "oxsearch-transform?/experimental", "oxsearch-rollup?/experimental", "oxsearch-ccr?/experimental", "oxsearch-searchable-snapshots?/experimental", "oxsearch-dangling-indices?/experimental", "oxsearch-autoscaling?/experimental", "oxsearch-shutdown?/experimental", "oxsearch-migration?/experimental", "oxsearch-features?/experimental", "oxsearch-simulate?/experimental", "oxsearch-text-structure?/experimental"]
+beta = ["oxsearch-core/beta", "oxsearch-analysis?/beta", "oxsearch-mapping?/beta", "oxsearch-tasks?/beta", "oxsearch-inference?/beta", "oxsearch-search?/beta", "oxsearch-docs?/beta", "oxsearch-aggs?/beta", "oxsearch-admin?/beta", "oxsearch-esql?/beta", "oxsearch-ingest?/beta", "oxsearch-license?/beta", "oxsearch-query-rules?/beta", "oxsearch-synonyms?/beta", "oxsearch-snapshot?/beta", "oxsearch-ilm?/beta", "oxsearch-async-search?/beta", "oxsearch-eql?/beta", "oxsearch-sql?/beta", "oxsearch-search-application?/beta", "oxsearch-enrich?/beta", "oxsearch-ml?/beta", "oxsearch-watcher?/beta", "oxsearch-slm?/beta", "oxsearch-xpack?/beta", "oxsearch-cat?/beta", "oxsearch-security?/beta", "oxsearch-transform?/beta", "oxsearch-rollup?/beta", "oxsearch-ccr?/beta", "oxsearch-searchable-snapshots?/beta", "oxsearch-dangling-indices?/beta", "oxsearch-autoscaling?/beta", "oxsearch-shutdown?/beta", "oxsearch-migration?/beta", "oxsearch-features?/beta", "oxsearch-simulate?/beta", "oxsearch-text-structure?/beta", "oxsearch-connector?/beta", "oxsearch-fleet?/beta", "oxsearch-logstash?/beta", "oxsearch-graph?/beta", "oxsearch-profiling?/beta", "oxsearch-project?/beta", "oxsearch-streams?/beta"]
+experimental = ["oxsearch-core/experimental", "oxsearch-analysis?/experimental", "oxsearch-mapping?/experimental", "oxsearch-tasks?/experimental", "oxsearch-inference?/experimental", "oxsearch-search?/experimental", "oxsearch-docs?/experimental", "oxsearch-aggs?/experimental", "oxsearch-admin?/experimental", "oxsearch-esql?/experimental", "oxsearch-ingest?/experimental", "oxsearch-license?/experimental", "oxsearch-query-rules?/experimental", "oxsearch-synonyms?/experimental", "oxsearch-snapshot?/experimental", "oxsearch-ilm?/experimental", "oxsearch-async-search?/experimental", "oxsearch-eql?/experimental", "oxsearch-sql?/experimental", "oxsearch-search-application?/experimental", "oxsearch-enrich?/experimental", "oxsearch-ml?/experimental", "oxsearch-watcher?/experimental", "oxsearch-slm?/experimental", "oxsearch-xpack?/experimental", "oxsearch-cat?/experimental", "oxsearch-security?/experimental", "oxsearch-transform?/experimental", "oxsearch-rollup?/experimental", "oxsearch-ccr?/experimental", "oxsearch-searchable-snapshots?/experimental", "oxsearch-dangling-indices?/experimental", "oxsearch-autoscaling?/experimental", "oxsearch-shutdown?/experimental", "oxsearch-migration?/experimental", "oxsearch-features?/experimental", "oxsearch-simulate?/experimental", "oxsearch-text-structure?/experimental", "oxsearch-connector?/experimental", "oxsearch-fleet?/experimental", "oxsearch-logstash?/experimental", "oxsearch-graph?/experimental", "oxsearch-profiling?/experimental", "oxsearch-project?/experimental", "oxsearch-streams?/experimental"]
 
 [dependencies]
 oxsearch-core = { path = "../oxsearch-core", version = "0.2.0" }
@@ -110,6 +117,13 @@ oxsearch-migration = { path = "../oxsearch-migration", version = "0.2.0", option
 oxsearch-features = { path = "../oxsearch-features", version = "0.2.0", optional = true }
 oxsearch-simulate = { path = "../oxsearch-simulate", version = "0.2.0", optional = true }
 oxsearch-text-structure = { path = "../oxsearch-text-structure", version = "0.2.0", optional = true }
+oxsearch-connector = { path = "../oxsearch-connector", version = "0.2.0", optional = true }
+oxsearch-fleet = { path = "../oxsearch-fleet", version = "0.2.0", optional = true }
+oxsearch-logstash = { path = "../oxsearch-logstash", version = "0.2.0", optional = true }
+oxsearch-graph = { path = "../oxsearch-graph", version = "0.2.0", optional = true }
+oxsearch-profiling = { path = "../oxsearch-profiling", version = "0.2.0", optional = true }
+oxsearch-project = { path = "../oxsearch-project", version = "0.2.0", optional = true }
+oxsearch-streams = { path = "../oxsearch-streams", version = "0.2.0", optional = true }
 oxsearch-derive = { path = "../oxsearch-derive", version = "0.2.0", optional = true }
 oxsearch-transport-reqwest = { path = "../oxsearch-transport-reqwest", version = "0.2.0", optional = true }
 serde = "1.0.228"

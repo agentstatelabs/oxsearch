@@ -78,9 +78,9 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-ml` | machine learning: anomaly detection jobs and datafeeds, data frame analytics, trained models and their deployments | 356 |
 | `oxsearch-watcher` | watches: an input on a schedule, a condition and actions; and the Watcher service | 133 |
 | `oxsearch-slm` | snapshot lifecycle policies: snapshots on a schedule, kept for a while | 26 |
-| `oxsearch-xpack` | the build, the license and the features it makes available, and each feature's usage | 87 |
+| `oxsearch-xpack` | the build, the license and the features it makes available, each feature's usage, and monitoring's bulk request | 89 |
 | `oxsearch-cat` | the cat APIs' tables, as typed rows from their JSON form | 131 |
-| `oxsearch-security` | users, roles, role mappings, privileges, API keys, tokens, service accounts, user profiles and single sign-on | 218 |
+| `oxsearch-security` | users, roles, role mappings, privileges, API keys, tokens, service accounts, user profiles, single sign-on, TLS certificates and the encryption key | 223 |
 | `oxsearch-transform` | pivot and latest transforms, their previews, statistics and upgrade mode | 48 |
 | `oxsearch-rollup` | rollup jobs, their capabilities and rollup search, deprecated upstream | 33 |
 | `oxsearch-ccr` | cross-cluster replication: follower indices, auto-follow patterns and their statistics | 37 |
@@ -88,13 +88,16 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-dangling-indices`, `oxsearch-autoscaling`, `oxsearch-shutdown` | dangling indices; autoscaling policies and the capacity they call for; node shutdown. Elasticsearch meant the last two for its orchestrators | 34 |
 | `oxsearch-migration`, `oxsearch-features` | deprecations and system feature upgrades; feature states, and resetting them | 17 |
 | `oxsearch-simulate`, `oxsearch-text-structure` | ingest simulation against an index's pipelines and mapping; the structure of log text, and grok pattern tests | 20 |
-| `oxsearch-fleet`, `oxsearch-connector`, … | one crate per API area, named with hyphens (`query_rules` is `oxsearch-query-rules`) | the rest of about 2,900 API types |
+| `oxsearch-connector` | content connectors, their configuration, filtering and scheduling, sync jobs and secrets | 105 |
+| `oxsearch-fleet`, `oxsearch-logstash`, `oxsearch-streams` | global checkpoints, the searches that wait for them, and Fleet's secrets; Logstash's centrally managed pipelines; named streams | 30 |
+| `oxsearch-graph`, `oxsearch-profiling` | terms that go together, explored from a query; Universal Profiling, which Elasticsearch meant for Kibana | 18 |
+| `oxsearch-project` | serverless projects' tags and routing expressions, which a self-managed cluster refuses | 17 |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |
 | `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
-The default features are the AI-search set, search, docs, mapping and inference, and the HTTP transport, transport-reqwest; `default-features = false` leaves the transport out for those who bring their own. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "ml", "watcher", "slm", "xpack", "cat", "security", "transform", "rollup", "ccr", "searchable-snapshots", "dangling-indices", "autoscaling", "shutdown", "migration", "features", "simulate", "text-structure", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
+The default features are the AI-search set, search, docs, mapping and inference, and the HTTP transport, transport-reqwest; `default-features = false` leaves the transport out for those who bring their own. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "ml", "watcher", "slm", "xpack", "cat", "security", "transform", "rollup", "ccr", "searchable-snapshots", "dangling-indices", "autoscaling", "shutdown", "migration", "features", "simulate", "text-structure", "connector", "fleet", "logstash", "graph", "profiling", "project", "streams", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
 
 **Why crates and not only feature flags:** Cargo compiles crates in parallel and caches each one separately; feature flags inside one huge crate get neither benefit.
 

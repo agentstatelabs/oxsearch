@@ -1,8 +1,9 @@
 //! Security against Elasticsearch with security on: native users, roles,
 //! role mappings and application privileges; API keys, cross-cluster API
 //! keys and tokens; service accounts; user profiles; the security index's
-//! settings and the nodes' statistics; and single sign-on, which the
-//! fixture has no realms for, so its calls are read and refused.
+//! settings and the nodes' statistics; the TLS certificates, of which the
+//! fixture has none; and single sign-on, which it has no realms for, so its
+//! calls are read and refused.
 //!
 //! The fixture turns security off unless asked; these tests skip when it's
 //! off. `oxsearch_integration`'s documentation says how to turn it on.
@@ -21,7 +22,7 @@ use oxsearch::security::{
     has_privileges_user_profile, invalidate_api_key, invalidate_token, oidc_authenticate,
     oidc_logout, oidc_prepare_authentication, put_privileges, put_role, put_role_mapping, put_user,
     query_api_keys, query_role, query_user, saml_authenticate, saml_complete_logout,
-    saml_invalidate, saml_logout, saml_prepare_authentication, saml_service_provider_metadata,
+    saml_invalidate, saml_logout, saml_prepare_authentication, saml_service_provider_metadata, ssl,
     suggest_user_profiles, update_api_key, update_cross_cluster_api_key, update_settings,
     update_user_profile_data,
 };
@@ -730,4 +731,17 @@ async fn single_sign_on_without_realms() {
         .await
         .unwrap();
     assert!(health["status"].is_string());
+}
+
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn certificates() {
+    let Some(client) = secured_client() else {
+        return;
+    };
+    let certificates = client
+        .send(&ssl::certificates::Request::new())
+        .await
+        .unwrap();
+    assert!(certificates.is_empty(), "{certificates:?}");
 }

@@ -21,8 +21,9 @@ const LIMITS: &[(&str, &str)] = &[
     ),
     (
         "searchable_snapshots",
-        "Mounting is tested on the trial only, as a full copy: the fixture's node has no \
-         shared cache, so its cache statistics count no regions.",
+        "Mounting, the mounted index's statistics and clearing its cache are tested on the \
+         trial only, and the mount as a full copy: the fixture's node has no shared cache, \
+         so its cache statistics count no regions.",
     ),
     (
         "dangling_indices",
@@ -30,6 +31,21 @@ const LIMITS: &[(&str, &str)] = &[
          tested on a UUID no node has, which Elasticsearch refuses.",
     ),
     ("autoscaling", "Tested on the trial only."),
+    (
+        "fleet",
+        "The specification gives the multi-search a `wait_for_checkpoints` URL parameter, \
+         which Elasticsearch refuses.",
+    ),
+    ("graph", "Tested on the trial only."),
+    (
+        "profiling",
+        "The queries need a license above Basic and indices the fixture doesn't have, so \
+         they're refused on both licenses.",
+    ),
+    (
+        "project",
+        "Only Elastic Cloud Serverless has these, so the fixture can't test them.",
+    ),
     (
         "migration",
         "A cluster on the current version has no system features to upgrade, so the \

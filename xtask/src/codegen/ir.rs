@@ -307,6 +307,9 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
         // How many times Watcher ran an action, which the specification
         // types as a duration.
         ("xpack.usage", "WatcherActionTotals", "total") => Some(Ty::Prim("i64")),
+        // A number when Kibana wrote the pipeline, as the specification's
+        // own example has it, and a string when its type was followed.
+        ("logstash._types", "PipelineMetadata", "version") => Some(Ty::Json),
         // A multi-valued column's cell is an array, which a field value
         // isn't.
         ("esql._types", "EsqlResult", "values") => {
@@ -339,8 +342,21 @@ fn respelled(declaring: &TypeName, property: &str) -> Option<&'static str> {
         ("shutdown.get_node", "NodeShutdownStatus", "shutdown_startedmillis") => {
             Some("shutdown_started_millis")
         }
+        // Fleet's multi-search answers as the multi-search does.
+        ("fleet.msearch", "Response", "docs") => Some("responses"),
         _ => None,
     }
+}
+
+/// A response the specification gives none of Elasticsearch's properties,
+/// read as JSON.
+fn untyped(response: &TypeName) -> bool {
+    matches!(
+        (response.namespace.as_str(), response.name.as_str()),
+        // `{"profiling", "resource_management", "resources"}`, which the
+        // specification types as `{"operation_mode"}`.
+        ("profiling.status", "Response")
+    )
 }
 
 /// An enum Elasticsearch writes in upper case, though the specification
@@ -367,6 +383,12 @@ fn retargeted(declaring: &TypeName, property: &str) -> Option<(&'static str, &'s
         // make the reindex source's required index optional.
         ("transform.update_transform", "Response", "source") => {
             Some(("transform._types", "Source"))
+        }
+        // The index Fleet's searches and checkpoints read, by its name or an
+        // alias's: both are strings, which a union of the two can't tell
+        // apart, and the other APIs take as one.
+        ("fleet.global_checkpoints" | "fleet.msearch" | "fleet.search", "Request", "index") => {
+            Some(("_types", "IndexName"))
         }
         _ => None,
     }
@@ -668,6 +690,7 @@ impl<'g> Ir<'g> {
                     _ if self.text.contains(&i) => {
                         ItemKind::Newtype(Ty::Prim("::std::string::String"))
                     }
+                    _ if untyped(&t.name) => ItemKind::Newtype(Ty::Json),
                     Body::Value { value, .. } => ItemKind::Newtype(self.ty(
                         &Ctx {
                             field: "body",

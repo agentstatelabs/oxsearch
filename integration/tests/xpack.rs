@@ -1,11 +1,12 @@
 //! X-Pack information and usage against Elasticsearch, on Basic and on a
 //! trial: the build, the license and which features it makes available,
 //! and the statistics of each feature, after the other tests have used
-//! them.
+//! them; and a monitoring document sent as Kibana would.
 
 use oxsearch::license::LicenseType;
-use oxsearch::xpack::{info, usage};
+use oxsearch::xpack::{info, monitoring, usage};
 use oxsearch_integration::{License, client};
+use serde_json::json;
 
 #[tokio::test]
 #[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
@@ -36,4 +37,21 @@ async fn information_and_usage() {
     let ml = usage.ml.as_ref().expect("machine learning's usage");
     assert_eq!(ml.available, Some(license == LicenseType::Trial));
     assert!(usage.slm.is_some() && usage.watcher.is_some(), "{usage:?}");
+}
+
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn monitored() {
+    let client = client();
+    // A monitoring document's action names its type, which a bulk request's
+    // no longer does, so it's written as JSON.
+    let lines: Vec<monitoring::bulk::RequestBody> = vec![
+        monitoring::bulk::RequestBody::TDocument(json!({"index": {"_type": "kibana_stats"}})),
+        monitoring::bulk::RequestBody::TDocument(json!({"kibana_stats": {"requests": 1}})),
+    ];
+    let sent = client
+        .send(&monitoring::bulk::Request::new("kibana", "7", "10s").body(lines))
+        .await
+        .unwrap();
+    assert_eq!(sent.errors, Some(false), "{sent:?}");
 }

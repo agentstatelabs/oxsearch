@@ -164,13 +164,19 @@ const DOCS_ENDPOINTS: &[&str] = &[
 const CORE_ENDPOINTS: &[&str] = &["info", "ping"];
 
 /// Namespaces that share a crate with others, by their first part. Every
-/// other namespace is a crate of its own, named after its first part.
+/// other namespace is a crate of its own, named after its first part. The
+/// areas of two or three types go with a neighbour: the cluster's TLS
+/// certificates and encryption key with security, and monitoring's bulk
+/// request with X-Pack, whose API it was.
 const SHARED_AREAS: &[(&str, &str)] = &[
     ("_internal", "admin"),
     ("_spec_utils", "core"),
     ("cluster", "admin"),
+    ("encryption", "security"),
     ("indices", "admin"),
+    ("monitoring", "xpack"),
     ("nodes", "admin"),
+    ("ssl", "security"),
 ];
 
 /// A type's home crate: where its namespace puts it, before placement moves
