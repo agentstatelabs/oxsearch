@@ -81,6 +81,12 @@ specification it's generated from.
   which reads, deletes, updates and searches with a routing, as writes do
   from a `#[routing]` field. `Script::inline` and `Script::param` build a
   script, and `Fusion::routing` fuses the searches of one shard.
+- **`oxsearch-cli`**, the `oxsearch` command: `export` writes an index to
+  NDJSON over a sliced point in time, one record per line with each
+  document's index, id and routing; `import` writes records or plain
+  documents back through the bulk loader; `transfer` copies documents to
+  another index or cluster. Samples (`--every`), limits, gzip, and progress
+  through oxtel. Credentials come from the environment.
 
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
@@ -104,6 +110,9 @@ specification it's generated from.
   deep, reading a watch in a debug build ran out of a 2 MiB thread's stack.
   The generated example tests run on a thread with a larger stack for the
   same reason.
+- `helpers::Scan` reads each page with `allow_partial_search_results=false`,
+  so a page some shards couldn't answer ends the stream with an error,
+  where it came back with those shards' documents missing.
 - `oxsearch_ingest::PipelineConfig`, which text structure's responses
   carry too, takes missing `processors` as empty, as other response types
   do.
