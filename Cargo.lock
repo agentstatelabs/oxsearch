@@ -1262,6 +1262,7 @@ dependencies = [
  "oxsearch-ingest",
  "oxsearch-license",
  "oxsearch-mapping",
+ "oxsearch-ml",
  "oxsearch-query-rules",
  "oxsearch-search",
  "oxsearch-search-application",
@@ -1491,6 +1492,21 @@ dependencies = [
  "oxsearch-analysis",
  "oxsearch-core",
  "oxsearch-mapping",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
+]
+
+[[package]]
+name = "oxsearch-ml"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-aggs",
+ "oxsearch-analysis",
+ "oxsearch-core",
+ "oxsearch-mapping",
+ "oxsearch-ml",
  "serde",
  "serde_json",
  "serde_path_to_error",

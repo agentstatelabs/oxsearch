@@ -185,10 +185,10 @@ impl TestIndex {
 }
 
 /// A call to one of Elastic's models, sent again while the model is still
-/// deploying. On first use, a model can take longer to start than the 30 s
-/// Elasticsearch waits for it (408), and the deployment goes on meanwhile; a
-/// call during that time can be refused because the deployment is already
-/// starting (409).
+/// downloading or deploying. On first use, a model can take longer to start
+/// than the 30 s Elasticsearch waits for it (408), and the deployment goes
+/// on meanwhile; a call during that time can be refused because the model
+/// is still downloading (408) or the deployment is already starting (409).
 pub async fn deployed<T, F>(mut call: impl FnMut() -> F) -> T
 where
     F: std::future::Future<Output = Result<T, oxsearch_core::Error>>,
@@ -201,6 +201,18 @@ where
             Err(Error::Elasticsearch(e))
                 if e.error_type() == Some("model_deployment_timeout_exception") =>
             {
+                e
+            }
+            // The model is still downloading, the first time it's used.
+            Err(Error::Elasticsearch(e))
+                if e.status == 408
+                    && e.causes().any(|c| {
+                        c.reason
+                            .as_deref()
+                            .is_some_and(|r| r.contains("download task is currently running"))
+                    }) =>
+            {
+                tokio::time::sleep(std::time::Duration::from_secs(5)).await;
                 e
             }
             Err(Error::Conflict(e))

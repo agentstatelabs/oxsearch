@@ -4774,16 +4774,20 @@ impl NestedSortValue {
 #[non_exhaustive]
 pub struct NodeAttributes {
     /// Lists node attributes.
+    #[serde(default = "::core::default::Default::default")]
     pub attributes: ::indexmap::IndexMap<::std::string::String, ::std::string::String>,
     /// The ephemeral ID of the node.
-    pub ephemeral_id: crate::Id,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub ephemeral_id: ::core::option::Option<crate::Id>,
     /// The unique identifier of the node.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub id: ::core::option::Option<crate::NodeId>,
     /// The unique identifier of the node.
-    pub name: crate::NodeName,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<crate::NodeName>,
     /// The host and port where transport HTTP connections are accepted.
-    pub transport_address: crate::TransportAddress,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub transport_address: ::core::option::Option<crate::TransportAddress>,
 }
 
 impl NodeAttributes {
@@ -4798,10 +4802,10 @@ impl NodeAttributes {
     ) -> Self {
         Self {
             attributes: attributes.into(),
-            ephemeral_id: ephemeral_id.into(),
+            ephemeral_id: ::core::option::Option::Some(ephemeral_id.into()),
             id: ::core::option::Option::None,
-            name: name.into(),
-            transport_address: transport_address.into(),
+            name: ::core::option::Option::Some(name.into()),
+            transport_address: ::core::option::Option::Some(transport_address.into()),
         }
     }
 }

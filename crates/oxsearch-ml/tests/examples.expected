@@ -1,0 +1,56 @@
+44 exact, 8 normalized, 3 failing
+ml.clear_trained_model_deployment_cache response MlClearTrainedModelDeploymentCacheResponseExample1: exact
+ml.close_job response MlCloseJobResponseExample1: exact
+ml.delete_calendar response MlDeleteCalendarResponseExample1: exact
+ml.delete_calendar_event response MlDeleteCalendarEventResponseExample1: exact
+ml.delete_calendar_job response MlDeleteCalendarJobResponseExample1: exact
+ml.delete_data_frame_analytics response MlDeleteDataFrameAnalyticsResponseExample1: exact
+ml.delete_datafeed response MlDeleteDatafeedResponseExample1: exact
+ml.delete_expired_data response MlDeleteExpiredDataResponseExample1: exact
+ml.delete_filter response MlDeleteFilterResponseExample1: exact
+ml.delete_forecast response MlDeleteForecastResponseExample1: exact
+ml.delete_job response MlDeleteJobResponseExample1: exact
+ml.delete_job response MlDeleteJobResponseExample2: normalized at /task (dropped)
+ml.delete_model_snapshot response MlDeleteModelSnapshotResponseExample1: exact
+ml.delete_trained_model response MlDeleteTrainedModelResponseExample1: exact
+ml.delete_trained_model_alias response MlDeleteTrainedModelAliasResponseExample1: exact
+ml.estimate_model_memory request MlEstimateModelMemoryRequestExample1: exact
+ml.estimate_model_memory response MlEstimateModelMemoryResponseExample1: exact
+ml.evaluate_data_frame request MlEvaluateDataFrameRequestExample1: exact
+ml.evaluate_data_frame request MlEvaluateDataFrameRequestExample2: exact
+ml.evaluate_data_frame request MlEvaluateDataFrameRequestExample3: exact
+ml.evaluate_data_frame request MlEvaluateDataFrameRequestExample4: normalized at /evaluation/regression/metrics/msle/offset
+ml.evaluate_data_frame request MlEvaluateDataFrameRequestExample5: normalized at /query/term/ml.is_training
+ml.evaluate_data_frame response MlEvaluateDataFrameResponseExample1: exact
+ml.evaluate_data_frame response MlEvaluateDataFrameResponseExample2: exact
+ml.evaluate_data_frame response MlEvaluateDataFrameResponseExample3: normalized at /outlier_detection/precision/0.75
+ml.explain_data_frame_analytics request MlExplainDataFrameAnalyticsRequestExample1: exact
+ml.explain_data_frame_analytics response MlExplainDataFrameAnalyticsResponseExample1: normalized at /field_selection/0/field (dropped)
+ml.flush_job request MlFlushJobExample1: exact
+ml.forecast request MlForecastExample1: exact
+ml.get_buckets request MlGetBucketsExample1: normalized at /anomaly_score
+ml.get_categories request MlGetCategoriesExample1: exact
+ml.get_model_snapshots request MlGetModelSnapshotsExample1: exact
+ml.get_overall_buckets request MlGetOverallBucketsExample1: normalized at /overall_score
+ml.get_records request MlGetRecordsExample1: exact
+ml.infer_trained_model request MlInferTrainedModelExample1: exact
+ml.open_job request MlOpenJobRequestExample1: exact
+ml.open_job response MlOpenJobResponseExample1: exact
+ml.post_calendar_events request MlPostCalendarEventsExample1: exact
+ml.preview_data_frame_analytics request MlPreviewDataFrameAnalyticsExample1: exact
+ml.put_data_frame_analytics request MlPutDataFrameAnalyticsExample1: normalized at /analysis/regression/training_percent
+ml.put_datafeed request MlPutDatafeedExample1: exact
+ml.put_filter request MlPutFilterExample1: exact
+ml.put_job request MlPutJobRequestExample1: exact
+ml.put_job response MlPutJobResponseExample1: exact
+ml.put_trained_model_definition_part request MlPutTrainedModelDefinitionPartExample1: exact
+ml.put_trained_model_vocabulary request MlPutTrainedModelVocabularyExample1: fails: not JSON: trailing comma at line 5 column 3
+ml.revert_model_snapshot request MlRevertModelSnapshotExample1: exact
+ml.start_datafeed request MlStartDatafeedExample1: exact
+ml.stop_datafeed request MlStopDatafeedExample1: exact
+ml.update_data_frame_analytics request MlUpdateDataFrameAnalyticsExample1: exact
+ml.update_datafeed request MlUpdateDatafeedExample1: exact
+ml.update_filter request MlUpdateFilterExample1: exact
+ml.update_job request MlUpdateJobExample1: fails: reading detectors: invalid type: map, expected a sequence
+ml.update_model_snapshot request MlUpdateModelSnapshotExample1: fails: not JSON: expected value at line 1 column 1
+ml.update_trained_model_deployment request MlUpdateTrainedModelDeploymentExample1: exact

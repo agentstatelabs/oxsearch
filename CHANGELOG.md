@@ -7,6 +7,14 @@ specification it's generated from.
 
 ## [Unreleased]
 
+### Added
+- **Machine learning** (`oxsearch-ml`, the `ml` feature), generated from
+  the specification: anomaly detection jobs, their datafeeds, results,
+  forecasts and model snapshots; calendars and filters; data frame
+  analytics; and trained models, imported, inferred with and deployed.
+  Machine learning needs a license above Basic, and the integration tests
+  run it on a trial.
+
 ### Changed
 - The front crate's default features include `transport-reqwest`, the HTTP
   transport on reqwest with rustls, so the quick start builds with
@@ -14,6 +22,14 @@ specification it's generated from.
   own, set `default-features = false` and name the areas you use. A clean
   build of the default features still takes 37 s on CI, within the 60 s
   budget (docs/compile-time.md).
+
+### Fixed
+- Byte counts the specification types as 32-bit integers read as `i64`, as
+  the others do: a node's memory outgrows 32 bits. `cache_size_in_bytes`
+  in `admin::nodes::info` changes type with them.
+- `oxsearch_core::NodeAttributes`, which machine learning's responses
+  carry too, takes a missing name, ephemeral ID or transport address as
+  `None`, as other response types do; the three fields are `Option`s.
 
 ## [0.2.0] - 2026-10-20
 
