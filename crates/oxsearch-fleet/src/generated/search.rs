@@ -400,6 +400,10 @@ impl RequestBody {
 ///
 /// The purpose of the Fleet search API is to provide an API where the search will be run only
 /// after the provided checkpoint has been processed and is visible for searches inside of Elasticsearch.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-fleet-search)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -5,6 +5,10 @@
 ///
 /// Get information about tasks currently running in the cluster.
 /// IMPORTANT: cat APIs are only intended for human consumption using the command line or Kibana console. They are not intended for use by applications. For application consumption, use the task management API.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-tasks)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

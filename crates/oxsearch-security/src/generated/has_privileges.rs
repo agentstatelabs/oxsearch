@@ -130,6 +130,10 @@ impl RequestBody {
 /// Determine whether the specified user has a specified list of privileges.
 /// All users can use this API, but only to determine their own privileges.
 /// To check the privileges of other users, you must use the run as feature.
+///
+/// **Availability:** Elasticsearch 6.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-has-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

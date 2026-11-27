@@ -72,6 +72,10 @@ impl<'de> ::serde::Deserialize<'de> for IndexingJobState {
 /// NOTE: This API returns only active (both `STARTED` and `STOPPED`) jobs.
 /// If a job was created, ran for a while, then was deleted, the API does not return any details about it.
 /// For details about a historical rollup job, the rollup capabilities API may be more useful.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rollup-get-jobs)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

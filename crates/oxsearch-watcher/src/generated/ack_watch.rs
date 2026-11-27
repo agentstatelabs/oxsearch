@@ -13,6 +13,10 @@
 /// Acknowledging an action throttles further executions of that action until its `ack.state` is reset to `awaits_successful_execution`.
 /// This happens when the condition of the watch is not met (the condition evaluates to false).
 /// To demonstrate how throttling works in practice and how it can be configured for individual actions within a watch, refer to External documentation.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-ack-watch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

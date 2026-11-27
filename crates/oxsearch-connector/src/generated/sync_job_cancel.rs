@@ -5,6 +5,10 @@
 ///
 /// Cancel a connector sync job, which sets the status to cancelling and updates `cancellation_requested_at` to the current time.
 /// The connector service is then responsible for setting the status of connector sync jobs to cancelled.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-sync-job-cancel)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

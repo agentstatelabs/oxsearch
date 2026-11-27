@@ -6,6 +6,10 @@
 /// Get information about the index templates in a cluster.
 /// You can use index templates to apply index settings and field mappings to new indices at creation.
 /// IMPORTANT: cat APIs are only intended for human consumption using the command line or Kibana console. They are not intended for use by applications. For application consumption, use the get index template API.
+///
+/// **Availability:** Elasticsearch 5.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-templates)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

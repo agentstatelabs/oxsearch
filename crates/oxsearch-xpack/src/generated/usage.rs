@@ -2048,6 +2048,10 @@ impl RealmCache {}
 ///
 /// Get information about the features that are currently enabled and available under the current license.
 /// The API also provides some usage statistics.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-xpack)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

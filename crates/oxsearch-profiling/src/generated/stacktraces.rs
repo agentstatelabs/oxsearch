@@ -2,6 +2,10 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// Extracts raw stacktrace information from Universal Profiling.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/guide/en/observability/current/universal-profiling.html)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

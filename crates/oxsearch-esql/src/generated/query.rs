@@ -159,6 +159,10 @@ impl RequestBody {
 /// Run an ES|QL query.
 ///
 /// Get search results for an ES|QL (Elasticsearch query language) query.
+///
+/// **Availability:** Elasticsearch 8.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/explore-analyze/query-filter/languages/esql-rest)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

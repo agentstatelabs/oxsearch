@@ -4,6 +4,10 @@
 /// Clear cluster voting config exclusions.
 ///
 /// Remove master-eligible nodes from the voting configuration exclusion list.
+///
+/// **Availability:** Elasticsearch 7.0.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-post-voting-config-exclusions)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

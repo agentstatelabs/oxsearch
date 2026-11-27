@@ -167,6 +167,10 @@ impl RequestBody {
 /// If the destination index does not exist, it is created automatically when you start the job.
 ///
 /// If you supply only a subset of the regression or classification parameters, hyperparameter optimization occurs. It determines a value for each of the undefined parameters.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

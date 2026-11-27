@@ -24,6 +24,10 @@ impl RequestBody {}
 /// The `keep_alive` parameter tells Elasticsearch how long it should persist.
 /// A point in time is automatically closed when the `keep_alive` period has elapsed.
 /// However, keeping points in time has a cost; close them as soon as they are no longer required for search requests.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-open-point-in-time)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

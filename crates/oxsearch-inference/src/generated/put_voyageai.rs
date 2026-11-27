@@ -59,6 +59,10 @@ impl RequestBody {
 /// Create an inference endpoint to perform an inference task with the `voyageai` service.
 ///
 /// Avoid creating multiple endpoints for the same model unless required, as each endpoint consumes significant resources.
+///
+/// **Availability:** Elasticsearch 8.19.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-voyageai)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

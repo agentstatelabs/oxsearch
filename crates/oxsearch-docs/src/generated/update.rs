@@ -131,6 +131,10 @@ impl<TPartialDocument, TDocument> RequestBody<TPartialDocument, TDocument> {
 /// The `_source` field must be enabled to use this API.
 /// In addition to `_source`, you can access the following variables through the `ctx` map: `_index`, `_type`, `_id`, `_version`, `_routing`, and `_now` (the current timestamp).
 /// For usage examples such as partial updates, upserts, and scripted updates, see the External documentation.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-update)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TDocument = ::serde_json::Value, TPartialDocument = ::serde_json::Value> {

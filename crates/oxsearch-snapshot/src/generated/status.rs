@@ -24,6 +24,10 @@
 ///
 /// Depending on the latency of your storage, such requests can take an extremely long time to return results.
 /// These requests can also tax machine resources and, when using cloud storage, incur high processing costs.
+///
+/// **Availability:** Elasticsearch 7.8.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-status)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

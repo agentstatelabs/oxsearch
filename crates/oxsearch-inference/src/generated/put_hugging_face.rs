@@ -92,6 +92,10 @@ impl RequestBody {
 ///
 /// * `bge-reranker-base`
 /// * `jina-reranker-v1-turbo-en-GGUF`
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-hugging-face)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

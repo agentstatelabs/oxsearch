@@ -5,6 +5,10 @@
 ///
 /// Retrieve the results of a previously submitted asynchronous search request.
 /// If the Elasticsearch security features are enabled, access to the results of a specific async search is restricted to the user or API key that submitted it.
+///
+/// **Availability:** Elasticsearch 7.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

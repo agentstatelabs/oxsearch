@@ -5,6 +5,10 @@
 ///
 /// Create a pipeline that is used for Logstash Central Management.
 /// If the specified pipeline exists, it is replaced.
+///
+/// **Availability:** Elasticsearch 7.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-logstash-put-pipeline)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

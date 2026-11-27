@@ -27,6 +27,8 @@ impl RequestBody {
 }
 
 /// Creates a secret for a Connector.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

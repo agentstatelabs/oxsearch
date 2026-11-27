@@ -5,6 +5,10 @@
 ///
 /// Evict privileges from the native application privilege cache.
 /// The cache is also automatically cleared for applications that have their privileges updated.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-clear-cached-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

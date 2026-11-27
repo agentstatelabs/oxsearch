@@ -869,6 +869,10 @@ impl<TDocument, TPartialDocument>
 ///
 /// You might want to disable the refresh interval temporarily to improve indexing throughput for large bulk requests.
 /// Refer to the linked documentation for step-by-step instructions using the index settings API.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-bulk)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TDocument = ::serde_json::Value, TPartialDocument = ::serde_json::Value> {

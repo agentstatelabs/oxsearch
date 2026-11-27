@@ -6,6 +6,10 @@
 /// Resume a cross-cluster replication auto-follow pattern that was paused.
 /// The auto-follow pattern will resume configuring following indices for newly created indices that match its patterns on the remote cluster.
 /// Remote indices created while the pattern was paused will also be followed unless they have been deleted or closed in the interim.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-resume-auto-follow-pattern)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

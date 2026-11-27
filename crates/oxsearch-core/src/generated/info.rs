@@ -5,6 +5,10 @@
 ///
 /// Get basic build, version, and cluster information.
 /// ::: In Serverless, `version.number` always reports the next target Elasticsearch release version at the time of the request. Serverless does not track to a traditional release versioning model; it is continuously updated. The version number is provided to maintain compatibility with existing clients, but it is not meaningful for assessing feature availability. Clients should detect a Serverless environment by checking for `build_flavor: serverless`.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-info)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

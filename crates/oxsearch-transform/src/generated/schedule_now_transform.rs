@@ -8,6 +8,10 @@
 /// without waiting for the configured frequency interval. After the API is called,
 /// the transform will be processed again at `now + frequency` unless the API
 /// is called again in the meantime.
+///
+/// **Availability:** Elasticsearch 8.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-schedule-now-transform)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

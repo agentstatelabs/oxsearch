@@ -15,6 +15,10 @@
 /// indices, though stopping jobs is not a requirement in that case.
 /// You can see the current value for the upgrade_mode setting by using the get
 /// machine learning info API.
+///
+/// **Availability:** Elasticsearch 6.7.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-set-upgrade-mode)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

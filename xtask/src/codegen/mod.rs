@@ -13,7 +13,7 @@ use crate::Error;
 use crate::graph::Graph;
 use crate::placement::{self, Placement};
 use crate::spec::Pin;
-use crate::spec::model::{Endpoint, Stability};
+use crate::spec::model::{Availability, Endpoint, Stability, Visibility};
 
 /// The crates generated so far: the first slice (DESIGN.md §8) and the
 /// foundation crates it depends on.
@@ -89,6 +89,80 @@ pub struct Generated {
     pub ungated: Vec<String>,
 }
 
+/// The core's constants for the specification's version: its minor and its
+/// major.
+fn versions(pin: &Pin) -> Result<String, Error> {
+    let major: u8 = pin
+        .branch
+        .split('.')
+        .next()
+        .and_then(|major| major.parse().ok())
+        .ok_or_else(|| format!("the pinned branch {} isn't a version", pin.branch))?;
+    Ok(format!(
+        "/// The Elasticsearch minor this code is generated for: the specification's\n\
+         /// branch.\n\
+         pub const SPECIFICATION_VERSION: &str = \"{}\";\n\n\
+         /// Its major version, which a transport can ask a newer server to\n\
+         /// answer as (`compatible-with`).\n\
+         pub const MAJOR_VERSION: u8 = {major};\n\n",
+        pin.branch
+    ))
+}
+
+/// Adds each endpoint's availability, and a link to its documentation, to
+/// its request's docs.
+fn annotate(ir: &mut ir::Ir<'_>, endpoints: &[Endpoint]) {
+    for endpoint in endpoints {
+        let Some(&item) = endpoint
+            .request
+            .as_ref()
+            .and_then(|r| ir.graph.find(r))
+            .and_then(|t| ir.item_of.get(&t))
+        else {
+            continue;
+        };
+        let mut note = format!("**Availability:** {}", availability(endpoint));
+        // The specification marks links it doesn't have yet with `TODO`.
+        if let Some(url) = endpoint
+            .doc_url
+            .as_ref()
+            .filter(|u| !u.is_empty() && !u.contains("TODO"))
+        {
+            note.push_str(&format!("\n\n[Elasticsearch's documentation]({url})"));
+        }
+        let doc = &mut ir.items[item].doc;
+        *doc = Some(match doc.take() {
+            Some(doc) if !doc.trim().is_empty() => format!("{}\n\n{note}", doc.trim_end()),
+            _ => note,
+        });
+    }
+}
+
+/// Where an endpoint is: since which Elasticsearch version, and whether on
+/// Elastic Cloud Serverless.
+fn availability(endpoint: &Endpoint) -> String {
+    let public = |a: &Availability| !matches!(a.visibility, Some(Visibility::Private));
+    let serverless = endpoint.availability.serverless.as_ref();
+    let Some(stack) = endpoint.availability.stack.as_ref() else {
+        return "Elastic Cloud Serverless only; a self-managed cluster refuses it.".to_owned();
+    };
+    let since = stack.since.as_deref();
+    let mut text = match since {
+        Some(since) => format!("Elasticsearch {since} and later"),
+        None => "Elasticsearch".to_owned(),
+    };
+    text.push_str(match (serverless, since) {
+        (Some(s), Some(_)) if public(s) => ", and Elastic Cloud Serverless.",
+        (Some(s), None) if public(s) => " and Elastic Cloud Serverless.",
+        (Some(_), _) => "; on Elastic Cloud Serverless, for Elastic's own use only.",
+        (None, _) => "; not on Elastic Cloud Serverless.",
+    });
+    if !public(stack) {
+        text.push_str(" Elasticsearch meant it for its own components, not for direct use.");
+    }
+    text
+}
+
 /// Generates the crates in [`CRATES`].
 pub fn generate(
     graph: &Graph<'_>,
@@ -101,7 +175,8 @@ pub fn generate(
         .filter(|e| text_response(e))
         .filter_map(|e| e.response.as_ref().and_then(|r| graph.find(r)))
         .collect();
-    let ir = ir::Ir::build(graph, placement, CRATES, text)?;
+    let mut ir = ir::Ir::build(graph, placement, CRATES, text)?;
+    annotate(&mut ir, endpoints);
     check_reserved(&ir)?;
     let mut modules = emit::emit(&ir);
     for endpoint in endpoints.iter().filter(|e| !e.codegen_exclude) {
@@ -165,6 +240,9 @@ pub fn generate(
             if path.is_empty() {
                 source.push_str(ALLOW);
                 source.push_str("\n\n");
+                if *krate == "core" {
+                    source.push_str(&versions(pin)?);
+                }
             }
             for child in &children {
                 let mut child_path = path.clone();

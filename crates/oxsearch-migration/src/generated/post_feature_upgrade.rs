@@ -27,6 +27,10 @@ impl MigrationFeature {}
 /// Some functionality might be temporarily unavailable during the migration process.
 ///
 /// TIP: The API is designed for indirect use by the Upgrade Assistant. We strongly recommend you use the Upgrade Assistant.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-migration-get-feature-upgrade-status)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

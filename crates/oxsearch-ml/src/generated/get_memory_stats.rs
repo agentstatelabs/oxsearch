@@ -288,6 +288,10 @@ impl Memory {}
 ///
 /// Get information about how machine learning jobs and trained models are using memory,
 /// on each node, both within the JVM heap, and natively, outside of the JVM.
+///
+/// **Availability:** Elasticsearch 8.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-memory-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

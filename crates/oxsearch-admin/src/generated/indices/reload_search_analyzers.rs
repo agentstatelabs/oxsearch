@@ -73,6 +73,10 @@ impl ReloadResult {}
 /// As a result, the total shard count returned by the API can differ from the number of index shards.
 /// Because reloading affects every node with an index shard, it is important to update the synonym file on every data node in the cluster--including nodes that don't contain a shard replica--before using this API.
 /// This ensures the synonym file is updated everywhere in the cluster in case shards are relocated in the future.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-reload-search-analyzers)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

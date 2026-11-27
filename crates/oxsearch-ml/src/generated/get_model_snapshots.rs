@@ -63,6 +63,10 @@ impl RequestBody {
 }
 
 /// Get model snapshots info.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-model-snapshots)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

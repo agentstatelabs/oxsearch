@@ -269,6 +269,10 @@ impl NativeCodeInformation {}
 /// * Build information including the build number and timestamp.
 /// * License information about the currently installed license.
 /// * Feature information for the features that are currently enabled and available under the current license.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-info)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

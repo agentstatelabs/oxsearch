@@ -7,6 +7,10 @@
 /// For data streams, the API retrieves field mappings for the stream’s backing indices.
 ///
 /// This API is useful if you don't need a complete mapping or if an index mapping contains a large number of fields.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-mapping)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

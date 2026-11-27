@@ -98,6 +98,10 @@ impl RequestBody {
 /// - Set the parameter `owner=true`.
 /// - Or, set both `username` and `realm_name` to match the user's identity.
 /// - Or, if the request is issued by an API key, that is to say an API key invalidates itself, specify its ID in the `ids` field.
+///
+/// **Availability:** Elasticsearch 6.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-invalidate-api-key)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

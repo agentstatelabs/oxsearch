@@ -39,6 +39,10 @@ impl DanglingIndex {}
 /// For example, this can happen if you delete more than `cluster.indices.tombstones.size` indices while an Elasticsearch node is offline.
 ///
 /// Use this API to list dangling indices, which you can then import or delete.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-dangling-indices-list-dangling-indices)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

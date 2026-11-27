@@ -104,6 +104,10 @@ pub type ClusterStateMetrics =
 /// Its format is not subject to the same compatibility guarantees as other more stable APIs and may change from version to version.
 /// Do not query this API using external monitoring tools.
 /// Instead, obtain the information you require using other more stable cluster APIs.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-state)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

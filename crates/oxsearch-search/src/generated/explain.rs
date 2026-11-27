@@ -95,6 +95,10 @@ impl RequestBody {
 ///
 /// Get information about why a specific document matches, or doesn't match, a query.
 /// It computes a score explanation for a query and a specific document.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-explain)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

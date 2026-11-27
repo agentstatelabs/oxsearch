@@ -81,6 +81,10 @@ impl CertificateInformation {
 /// NOTE: When a PKCS#11 token is configured as the truststore of the JRE, the API returns all the certificates that are included in the PKCS#11 token irrespective of whether these are used in the Elasticsearch TLS configuration.
 ///
 /// If Elasticsearch is configured to use a keystore or truststore, the API output includes all certificates in that store, even though some of the certificates might not be in active use within the cluster.
+///
+/// **Availability:** Elasticsearch 6.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ssl-certificates)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

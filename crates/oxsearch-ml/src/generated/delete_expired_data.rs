@@ -47,6 +47,10 @@ impl RequestBody {
 /// wildcard expression. You can delete expired data for all anomaly detection
 /// jobs by using `_all`, by specifying `*` as the `<job_id>`, or by omitting the
 /// `<job_id>`.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-expired-data)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

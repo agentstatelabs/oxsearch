@@ -64,6 +64,10 @@ impl RequestBody {
 }
 
 /// Get calendar configuration info.
+///
+/// **Availability:** Elasticsearch 6.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-calendars)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

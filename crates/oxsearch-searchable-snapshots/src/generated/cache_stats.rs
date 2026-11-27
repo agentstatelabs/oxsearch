@@ -22,6 +22,10 @@ impl Node {}
 /// Get cache statistics.
 ///
 /// Get statistics about the shared cache for partially mounted indices.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-searchable-snapshots-cache-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

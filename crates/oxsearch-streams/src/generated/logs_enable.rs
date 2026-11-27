@@ -9,6 +9,8 @@
 /// existing indices or data streams that match the pattern `<name>|<name>.*` for the enabled stream
 /// type name. If those indices or data streams exist, a `409 - Conflict` response and error is
 /// returned.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later; not on Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -121,6 +121,10 @@ impl RequestBody {
 /// Multiple index templates can potentially match an index, in this case, both the settings and mappings are merged into the final configuration of the index.
 /// The order of the merging can be controlled using the order parameter, with lower order being applied first, and higher orders overriding them.
 /// NOTE: Multiple matching templates with the same order value will result in a non-deterministic merging order.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

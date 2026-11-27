@@ -60,6 +60,10 @@ impl RequestBody {
 /// error occurs if you try to create a forecast for a job that has an
 /// `over_field_name` in its configuration. Forcasts predict future behavior
 /// based on historical data.
+///
+/// **Availability:** Elasticsearch 6.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-forecast)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

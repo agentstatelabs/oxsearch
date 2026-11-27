@@ -41,6 +41,10 @@ impl RequestBody {}
 /// If the phase and action are specified, the index will move to the first step of the specified action in the specified phase.
 /// Only actions specified in the ILM policy are considered valid.
 /// An index cannot move to a step that is not part of its policy.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-move-to-step)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

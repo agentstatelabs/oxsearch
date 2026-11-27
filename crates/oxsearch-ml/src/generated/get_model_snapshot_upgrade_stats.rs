@@ -2,6 +2,10 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// Get anomaly detection job model snapshot upgrade usage info.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-model-snapshot-upgrade-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

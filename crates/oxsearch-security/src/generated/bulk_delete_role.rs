@@ -24,6 +24,10 @@ impl RequestBody {}
 ///
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The bulk delete roles API cannot delete roles that are defined in roles files.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-bulk-delete-role)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -89,6 +89,10 @@ impl RequestBody {
 ///
 /// The API keys are created by the Elasticsearch API key service, which is automatically enabled.
 /// To configure or turn off the API key service, refer to API key service setting documentation.
+///
+/// **Availability:** Elasticsearch 6.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-create-api-key)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -112,6 +112,10 @@ impl ExecutingPolicy {}
 /// Get enrich stats.
 ///
 /// Returns enrich coordinator statistics and information about enrich policies that are currently executing.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-enrich-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

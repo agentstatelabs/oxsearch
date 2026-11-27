@@ -21,6 +21,10 @@ impl RequestBody {
 impl RequestBody {}
 
 /// Add scheduled events to the calendar.
+///
+/// **Availability:** Elasticsearch 6.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-post-calendar-events)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

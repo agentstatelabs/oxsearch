@@ -48,6 +48,10 @@ impl RequestBody {
 /// Change passwords.
 ///
 /// Change the passwords of users in the native realm and built-in users.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-change-password)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

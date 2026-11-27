@@ -103,6 +103,10 @@ impl LicenseInformation {
 /// >info
 /// > If the master node is generating a new cluster state, the get license API may return a `404 Not Found` response.
 /// > If you receive an unexpected 404 response after cluster startup, wait a short period and retry the request.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-license-get)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

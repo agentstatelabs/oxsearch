@@ -41,6 +41,10 @@ impl RequestBody {
 ///
 /// Resolve the names and/or index patterns for indices, aliases, and data streams.
 /// Multiple patterns and remote clusters are supported.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-resolve-index)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -86,8 +86,8 @@ pub mod helpers;
 pub use oxsearch_core;
 pub use oxsearch_core::{
     AggsBody, Body, Client, ElasticsearchError, Endpoint, Error, HttpRequest, HttpResponse,
-    LicenseError, Method, Query, RawAggs, Retriever, Route, RowError, Transport, TransportError,
-    shapes,
+    LicenseError, MAJOR_VERSION, Method, Query, RawAggs, Retriever, Route, RowError,
+    SPECIFICATION_VERSION, Transport, TransportError, shapes,
 };
 pub use oxsearch_core::{auth, telemetry};
 

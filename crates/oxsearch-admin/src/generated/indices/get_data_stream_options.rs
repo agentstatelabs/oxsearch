@@ -34,6 +34,10 @@ impl DataStreamWithOptions {
 /// Get data stream options.
 ///
 /// Get the data stream options configuration of one or more data streams.
+///
+/// **Availability:** Elasticsearch 8.19.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get-data-stream-options)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

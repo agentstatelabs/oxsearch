@@ -76,6 +76,10 @@ impl RequestBody {
 /// Get all registered watches in a paginated manner and optionally filter watches by a query.
 ///
 /// Note that only the `_id` and `metadata.*` fields are queryable or sortable.
+///
+/// **Availability:** Elasticsearch 7.11.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-query-watches)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

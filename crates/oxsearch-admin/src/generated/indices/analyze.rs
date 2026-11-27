@@ -355,6 +355,10 @@ impl RequestBody {
 /// The `index.analyze.max_token_count` setting enables you to limit the number of tokens that can be produced.
 /// If more than this limit of tokens gets generated, an error occurs.
 /// The `_analyze` endpoint without a specified index will always use `10000` as its limit.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-analyze)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

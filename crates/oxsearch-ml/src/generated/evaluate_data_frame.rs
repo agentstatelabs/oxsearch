@@ -567,6 +567,10 @@ impl RequestBody {
 /// of machine learning features. This has been designed for use on indexes
 /// created by data frame analytics. Evaluation requires both a ground truth
 /// field and an analytics result field to be present.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-evaluate-data-frame)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

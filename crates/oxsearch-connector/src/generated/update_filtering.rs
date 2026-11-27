@@ -56,6 +56,10 @@ impl RequestBody {
 /// Update the draft filtering configuration of a connector and marks the draft validation state as edited.
 /// The filtering draft is activated once validated by the running Elastic connector service.
 /// The filtering property is used to configure sync rules (both basic and advanced) for a connector.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-filtering)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

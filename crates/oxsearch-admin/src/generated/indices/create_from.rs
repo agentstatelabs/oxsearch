@@ -53,6 +53,10 @@ impl CreateFrom {
 /// Create an index from a source index.
 ///
 /// Copy the mappings and settings from the source index to a destination index while allowing request settings and mappings to override the source values.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-create-from)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

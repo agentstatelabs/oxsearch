@@ -4,6 +4,10 @@
 /// Delete data stream lifecycles.
 ///
 /// Removes the data stream lifecycle from a data stream, rendering it not managed by the data stream lifecycle.
+///
+/// **Availability:** Elasticsearch 8.11.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete-data-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

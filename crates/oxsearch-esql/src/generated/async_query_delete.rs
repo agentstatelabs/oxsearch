@@ -10,6 +10,10 @@
 ///
 /// * The authenticated user that submitted the original query request
 /// * Users with the `cancel_task` cluster privilege
+///
+/// **Availability:** Elasticsearch 8.13.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-async-query-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

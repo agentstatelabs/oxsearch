@@ -138,6 +138,10 @@ impl<TDocument, TPartialDocument>
 /// Send monitoring data.
 ///
 /// This API is used by the monitoring features to send monitoring data.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TDocument = ::serde_json::Value, TPartialDocument = ::serde_json::Value> {

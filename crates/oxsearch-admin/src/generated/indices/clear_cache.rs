@@ -9,6 +9,10 @@
 /// By default, the clear cache API clears all caches.
 /// To clear only specific caches, use the `fielddata`, `query`, or `request` parameters.
 /// To clear the cache only of specific fields, use the `fields` parameter.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-clear-cache)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

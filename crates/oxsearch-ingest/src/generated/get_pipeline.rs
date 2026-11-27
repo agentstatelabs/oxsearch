@@ -5,6 +5,10 @@
 ///
 /// Get information about one or more ingest pipelines.
 /// This API returns a local reference of the pipeline.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ingest-get-pipeline)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -29,6 +29,10 @@ impl AddIndicesBlockStatus {}
 ///
 /// Add an index block to an index.
 /// Index blocks limit the operations allowed on an index by blocking specific operation types.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-add-block)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

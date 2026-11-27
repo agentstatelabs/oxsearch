@@ -118,6 +118,10 @@ impl RequestBody {
 ///
 /// When using the run watch API, the authorization data of the user that called the API will be used as a base, instead of the information who stored the watch.
 /// Refer to the external documentation for examples of watch execution requests, including existing, customized, and inline watches.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-execute-watch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

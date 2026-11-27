@@ -11,6 +11,10 @@
 /// You must then re-submit the API request with the `acknowledge` parameter set to `true`.
 ///
 /// To check the status of your basic license, use the get basic license API.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-license-post-start-basic)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

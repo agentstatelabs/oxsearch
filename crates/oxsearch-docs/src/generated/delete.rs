@@ -40,6 +40,10 @@
 ///
 /// The delete operation gets hashed into a specific shard ID.
 /// It then gets redirected into the primary shard within that ID group and replicated (if needed) to shard replicas within that ID group.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -11,6 +11,10 @@
 ///
 /// 1. Does this index have associated rollup data somewhere in the cluster?
 /// 2. If yes to the first question, what fields were rolled up, what aggregations can be performed, and where does the data live?
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rollup-get-rollup-caps)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

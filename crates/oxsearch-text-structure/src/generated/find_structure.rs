@@ -79,6 +79,10 @@ impl<'de> ::serde::Deserialize<'de> for FindStructureFormat {
 ///
 /// All this information can be calculated by the structure finder with no guidance.
 /// However, you can optionally override some of the decisions about the text structure by specifying one or more query parameters.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-text-structure-find-structure)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TJsonDocument = ::serde_json::Value> {

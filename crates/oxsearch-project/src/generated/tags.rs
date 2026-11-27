@@ -77,6 +77,10 @@ impl RequestBody {
 /// Get tags.
 ///
 /// Get the tags that are defined for the project.
+///
+/// **Availability:** Elastic Cloud Serverless only; a self-managed cluster refuses it.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch-serverless/operation/operation-project-tags)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -2,6 +2,10 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// Get snapshot repository information.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-get-repository)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

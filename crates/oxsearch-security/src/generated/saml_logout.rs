@@ -44,6 +44,10 @@ impl RequestBody {
 ///
 /// This API invalidates the tokens that were generated for a user by the SAML authenticate API.
 /// If the SAML realm in Elasticsearch is configured accordingly and the SAML IdP supports this, the Elasticsearch response contains a URL to redirect the user to the IdP that contains a SAML logout request (starting an SP-initiated SAML Single Logout).
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-saml-logout)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

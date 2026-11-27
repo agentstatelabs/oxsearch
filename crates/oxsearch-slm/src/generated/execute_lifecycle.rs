@@ -5,6 +5,10 @@
 ///
 /// Immediately create a snapshot according to the snapshot lifecycle policy without waiting for the scheduled time.
 /// The snapshot policy is normally applied according to its schedule, but you might want to manually run a policy before performing an upgrade or other maintenance.
+///
+/// **Availability:** Elasticsearch 7.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-slm-execute-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

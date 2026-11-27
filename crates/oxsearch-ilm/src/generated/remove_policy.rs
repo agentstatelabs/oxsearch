@@ -5,6 +5,10 @@
 ///
 /// Remove the assigned lifecycle policies from an index or a data stream's backing indices.
 /// It also stops managing the indices.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-remove-policy)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

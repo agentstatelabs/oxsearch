@@ -180,6 +180,10 @@ impl RequestBody {
 /// Use the `stored_fields` attribute to specify the set of stored fields you want to retrieve.
 /// Any requested fields that are not stored are ignored.
 /// You can include the `stored_fields` query parameter in the request URI to specify the defaults to use when there are no per-document instructions.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-mget)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

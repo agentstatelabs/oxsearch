@@ -9,6 +9,10 @@
 ///
 /// The cache for service account tokens backed by the `.security` index is cleared automatically on state changes of the security index.
 /// The cache for tokens backed by the `service_tokens` file is cleared automatically on file changes.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-clear-cached-service-tokens)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

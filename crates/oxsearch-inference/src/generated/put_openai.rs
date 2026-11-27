@@ -57,6 +57,10 @@ impl RequestBody {
 /// Create an OpenAI inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `openai` service or `openai` compatible APIs.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-openai)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

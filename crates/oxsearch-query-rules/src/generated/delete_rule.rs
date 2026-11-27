@@ -5,6 +5,10 @@
 ///
 /// Delete a query rule within a query ruleset.
 /// This is a destructive action that is only recoverable by re-adding the same rule with the create or update query rule API.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-delete-rule)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -37,6 +37,10 @@ impl RequestBody {
 ///
 /// Generate and run an Elasticsearch query that uses the specified query parameteter and the search template associated with the search application or default template.
 /// Unspecified template parameters are assigned their default values if applicable.
+///
+/// **Availability:** Elasticsearch 8.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-search)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

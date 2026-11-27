@@ -61,6 +61,10 @@ pub type Features = ::oxsearch_core::shapes::OneOrMany<crate::indices::get::Feat
 ///
 /// Get information about one or more indices. For data streams, the API returns information about the
 /// stream’s backing indices.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-get)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -79,6 +79,10 @@ impl RequestBody {
 /// to continue analyzing data. A close operation additionally prunes and
 /// persists the model state to disk and the job must be opened again before
 /// analyzing further data.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-flush-job)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -5,6 +5,10 @@
 ///
 /// This API always returns basic metrics.
 /// You retrieve more metrics by using the metric parameter.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

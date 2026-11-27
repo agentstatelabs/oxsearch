@@ -12,6 +12,14 @@
     rustdoc::all
 )]
 
+/// The Elasticsearch minor this code is generated for: the specification's
+/// branch.
+pub const SPECIFICATION_VERSION: &str = "9.5";
+
+/// Its major version, which a transport can ask a newer server to
+/// answer as (`compatible-with`).
+pub const MAJOR_VERSION: u8 = 9;
+
 pub mod aggregations;
 pub mod analysis;
 pub mod bulk;

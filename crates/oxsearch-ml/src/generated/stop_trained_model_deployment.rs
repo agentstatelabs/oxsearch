@@ -50,6 +50,10 @@ impl RequestBody {
 }
 
 /// Stop a trained model deployment.
+///
+/// **Availability:** Elasticsearch 8.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-stop-trained-model-deployment)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

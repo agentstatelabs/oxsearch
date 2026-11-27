@@ -48,6 +48,10 @@ impl AuthenticateApiKey {
 /// Include the user information in a [basic auth header](https://en.wikipedia.org/wiki/Basic_access_authentication).
 /// A successful call returns a JSON structure that shows user information such as their username, the roles that are assigned to the user, any assigned metadata, and information about the realms that authenticated and authorized the user.
 /// If the user cannot be authenticated, this API returns a 401 status code.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-authenticate)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

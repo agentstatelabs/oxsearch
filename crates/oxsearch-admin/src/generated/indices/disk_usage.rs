@@ -12,6 +12,10 @@
 /// The stored size of the `_id` field is likely underestimated while the `_source` field is overestimated.
 ///
 /// For usage examples see the External documentation or refer to [Analyze the index disk usage example](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/index-disk-usage) for an example.
+///
+/// **Availability:** Elasticsearch 7.15.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-disk-usage)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

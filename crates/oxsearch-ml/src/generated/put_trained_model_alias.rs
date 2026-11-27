@@ -19,6 +19,10 @@
 /// If you use this API to update an alias and there are very few input fields in
 /// common between the old and new trained models for the model alias, the API
 /// returns a warning.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-trained-model-alias)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

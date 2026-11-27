@@ -51,6 +51,10 @@ impl RequestBody {
 /// `index.routing.allocation.include.*` and `index.routing.allocation.require.*`.
 /// Modification of `index.routing.allocation.include._tier_preference` is an exception and is not allowed as the
 /// Watcher shards must always be in the `data_content` tier.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-update-settings)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

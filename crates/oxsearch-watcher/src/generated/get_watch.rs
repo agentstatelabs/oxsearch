@@ -2,6 +2,10 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// Get a watch.
+///
+/// **Availability:** Elasticsearch 5.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-watcher-get-watch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

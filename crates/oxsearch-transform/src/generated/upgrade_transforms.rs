@@ -16,6 +16,10 @@
 ///
 /// To ensure continuous transforms remain running during a major version upgrade of the cluster – for example, from 7.16 to 8.0 – it is recommended to upgrade transforms before upgrading the cluster.
 /// You may want to perform a recent cluster backup prior to the upgrade.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-upgrade-transforms)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

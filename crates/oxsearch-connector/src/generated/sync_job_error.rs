@@ -26,6 +26,10 @@ impl RequestBody {}
 ///
 /// To sync data using self-managed connectors, you need to deploy the Elastic connector service on your own infrastructure.
 /// This service runs automatically on Elastic Cloud for Elastic managed connectors.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-sync-job-error)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

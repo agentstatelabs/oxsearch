@@ -113,6 +113,10 @@ impl RequestBody {
 ///
 /// By default a template is evaluated to produce a single string that is the name of the role which should be assigned to the user.
 /// If the format of the template is set to "json" then the template is expected to produce a JSON string or an array of JSON strings for the role names.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-put-role-mapping)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -9,6 +9,10 @@
 /// first tries to delete the datafeed. This behavior is equivalent to calling
 /// the delete datafeed API with the same timeout and force parameters as the
 /// delete job request.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-job)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

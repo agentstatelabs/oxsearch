@@ -118,6 +118,10 @@ impl RequestBody {
 /// Add and update users in the native realm.
 /// A password is required for adding a new user but is optional when updating an existing user.
 /// To change a user's password without updating any other fields, use the change password API.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-put-user)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

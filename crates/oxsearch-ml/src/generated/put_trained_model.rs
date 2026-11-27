@@ -488,6 +488,10 @@ impl RequestBody {
 /// Create a trained model.
 ///
 /// Enable you to supply a trained model that is not created by data frame analytics.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-put-trained-model)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

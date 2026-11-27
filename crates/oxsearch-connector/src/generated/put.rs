@@ -73,6 +73,10 @@ impl RequestBody {
 }
 
 /// Create or update a connector.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-put)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

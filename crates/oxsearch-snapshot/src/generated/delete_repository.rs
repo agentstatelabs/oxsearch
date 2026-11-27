@@ -5,6 +5,10 @@
 ///
 /// When a repository is unregistered, Elasticsearch removes only the reference to the location where the repository is storing the snapshots.
 /// The snapshots themselves are left untouched and in place.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-delete-repository)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

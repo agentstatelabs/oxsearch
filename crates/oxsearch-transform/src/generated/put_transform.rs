@@ -135,6 +135,10 @@ impl RequestBody {
 /// `.transform-internal*` indices using the Elasticsearch index API. If Elasticsearch security features are enabled, do
 /// not give users any privileges on `.transform-internal*` indices. If you used transforms prior to 7.5, also do not
 /// give users any privileges on `.data-frame-internal*` indices.
+///
+/// **Availability:** Elasticsearch 7.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-put-transform)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

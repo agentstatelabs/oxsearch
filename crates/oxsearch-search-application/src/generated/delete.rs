@@ -4,6 +4,10 @@
 /// Delete a search application.
 ///
 /// Remove a search application and its associated alias. Indices attached to the search application are not removed.
+///
+/// **Availability:** Elasticsearch 8.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-application-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

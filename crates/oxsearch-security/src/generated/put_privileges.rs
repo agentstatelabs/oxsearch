@@ -68,6 +68,10 @@ impl Actions {
 /// Privilege names must begin with a lowercase ASCII letter and must contain only ASCII letters and digits along with the characters `_`, `-`, and `.`.
 ///
 /// Action names can contain any number of printable ASCII characters and must contain at least one of the following characters: `/`, `*`, `:`.
+///
+/// **Availability:** Elasticsearch 6.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-put-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

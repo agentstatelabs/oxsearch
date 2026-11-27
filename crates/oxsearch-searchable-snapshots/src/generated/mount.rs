@@ -94,6 +94,10 @@ impl RequestBody {
 /// Mount a snapshot as a searchable snapshot index.
 /// Do not use this API for snapshots managed by index lifecycle management (ILM).
 /// Manually mounting ILM-managed snapshots can interfere with ILM processes.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-searchable-snapshots-mount)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

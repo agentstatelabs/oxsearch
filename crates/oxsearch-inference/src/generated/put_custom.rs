@@ -97,6 +97,10 @@ impl RequestBody {
 /// * `${query}` refers to the query field used specifically for reranking tasks.
 /// * `${top_n}` refers to the `top_n` field available when performing rerank requests.
 /// * `${return_documents}` refers to the `return_documents` field available when performing rerank requests.
+///
+/// **Availability:** Elasticsearch 8.19.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-custom)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

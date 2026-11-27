@@ -8,6 +8,10 @@
 ///
 /// * The user or API key that submitted the original async search request.
 /// * Users that have the `monitor` cluster privilege or greater privileges.
+///
+/// **Availability:** Elasticsearch 7.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -4,6 +4,8 @@
 /// Disable a named stream.
 ///
 /// Turn off the named stream feature for this cluster.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later; not on Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

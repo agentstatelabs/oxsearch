@@ -14,6 +14,10 @@
 /// ```
 /// The parameter blocks the API call from returning until either the job has moved to STOPPED or the specified time has elapsed.
 /// If the specified time elapses without the job moving to STOPPED, a timeout exception occurs.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rollup-stop-job)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

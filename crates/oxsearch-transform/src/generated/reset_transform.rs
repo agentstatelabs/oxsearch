@@ -5,6 +5,10 @@
 ///
 /// Before you can reset it, you must stop it; alternatively, use the `force` query parameter.
 /// If the destination index was created by the transform, it is deleted.
+///
+/// **Availability:** Elasticsearch 8.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-reset-transform)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

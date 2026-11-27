@@ -84,6 +84,10 @@ impl IndicesPrivilegesRead {
 /// Get roles in the native realm.
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The get roles API cannot retrieve roles that are defined in roles files.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-role)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

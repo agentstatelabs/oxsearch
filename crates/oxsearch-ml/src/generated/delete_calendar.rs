@@ -4,6 +4,10 @@
 /// Delete a calendar.
 ///
 /// Remove all scheduled events from a calendar, then delete it.
+///
+/// **Availability:** Elasticsearch 6.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-calendar)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -103,6 +103,10 @@ impl RequestBody {
 /// greater than its default), the `overall_score` is the maximum
 /// `overall_score` of the overall buckets that have a span equal to the
 /// jobs' largest bucket span.
+///
+/// **Availability:** Elasticsearch 6.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-get-overall-buckets)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -7,6 +7,10 @@
 ///
 /// The SAML 2.0 specification provides a mechanism for Service Providers to describe their capabilities and configuration using a metadata file.
 /// This API generates Service Provider metadata based on the configuration of a SAML realm in Elasticsearch.
+///
+/// **Availability:** Elasticsearch 7.11.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-saml-service-provider-metadata)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

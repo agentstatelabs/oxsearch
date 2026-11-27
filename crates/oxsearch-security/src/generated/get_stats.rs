@@ -4,6 +4,10 @@
 /// Get security stats.
 ///
 /// Gather security usage statistics from all node(s) within the cluster.
+///
+/// **Availability:** Elasticsearch 9.2.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

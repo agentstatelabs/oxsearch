@@ -234,6 +234,10 @@ impl RequestBody {
 /// For data streams, the API returns field capabilities among the stream’s backing indices.
 /// It returns runtime fields like any other field.
 /// For example, a runtime field with a type of keyword is returned the same as any other field that belongs to the `keyword` family.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-field-caps)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -36,6 +36,10 @@ impl RequestBody {
 /// one-off, then it might be appropriate to reset the model state to a time
 /// before this event. For example, you might consider reverting to a saved
 /// snapshot after Black Friday or a critical system failure.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-revert-model-snapshot)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

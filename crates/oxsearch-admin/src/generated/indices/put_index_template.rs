@@ -259,6 +259,10 @@ impl RequestBody {
 /// This recursive merging strategy applies not only to field mappings, but also root options like `dynamic_templates` and `meta`.
 /// If an earlier component contains a `dynamic_templates` block, then by default new `dynamic_templates` entries are appended onto the end.
 /// If an entry already exists with the same key, then it is overwritten by the new definition.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-index-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

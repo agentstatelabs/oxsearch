@@ -7,6 +7,10 @@
 ///
 /// * The `read_security` cluster privilege (or a greater privilege such as `manage_security` or `all`).
 /// * The "Manage Application Privileges" global privilege for the application being referenced in the request.
+///
+/// **Availability:** Elasticsearch 6.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -30,6 +30,10 @@ impl IndexCapabilities {}
 ///
 /// * What jobs are stored in an index (or indices specified via a pattern)?
 /// * What target indices were rolled up, what fields were used in those rollups, and what aggregations can be performed on each job?
+///
+/// **Availability:** Elasticsearch 6.4.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-rollup-get-rollup-index-caps)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

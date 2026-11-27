@@ -2266,6 +2266,10 @@ impl IndicesRecord {
 ///
 /// CAT APIs are only intended for human consumption using the command line or Kibana console.
 /// They are not intended for use by applications. For application consumption, use an index endpoint.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cat-indices)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

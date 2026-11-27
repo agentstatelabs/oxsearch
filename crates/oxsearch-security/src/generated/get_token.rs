@@ -283,6 +283,10 @@ impl RequestBody {
 /// The tokens returned by the get token API have a finite period of time for which they are valid and after that time period, they can no longer be used.
 /// That time period is defined by the `xpack.security.authc.token.timeout` setting.
 /// If you want to invalidate a token immediately, you can do so by using the invalidate token API.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-token)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

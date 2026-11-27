@@ -77,6 +77,10 @@ impl RequestBody {
 /// NOTE: While all parameters are optional, at least one of them is required.
 /// More specifically, either one of `token` or `refresh_token` parameters is required.
 /// If none of these two are specified, then `realm_name` and/or `username` need to be specified.
+///
+/// **Availability:** Elasticsearch 5.5.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-invalidate-token)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

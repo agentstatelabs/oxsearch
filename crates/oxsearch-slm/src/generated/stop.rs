@@ -10,6 +10,10 @@
 ///
 /// The API returns a response as soon as the request is acknowledged, but the plugin might continue to run until in-progress operations complete and it can be safely stopped.
 /// Use the get snapshot lifecycle management status API to see if SLM is running.
+///
+/// **Availability:** Elasticsearch 7.6.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-slm-stop)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

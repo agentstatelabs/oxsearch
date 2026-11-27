@@ -70,6 +70,10 @@ impl RequestBody {
 /// Update data stream lifecycles.
 ///
 /// Update the data stream lifecycle of the specified data streams.
+///
+/// **Availability:** Elasticsearch 8.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-data-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -58,6 +58,10 @@ impl DataStreamsStatsItem {
 /// Get data stream stats.
 ///
 /// Get statistics for one or more data streams.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-data-streams-stats-1)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

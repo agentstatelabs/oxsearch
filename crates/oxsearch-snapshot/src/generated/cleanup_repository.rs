@@ -28,6 +28,10 @@ impl CleanupRepositoryResults {}
 /// Clean up the snapshot repository.
 ///
 /// Trigger the review of the contents of a snapshot repository and delete any stale data not referenced by existing snapshots.
+///
+/// **Availability:** Elasticsearch 7.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-cleanup-repository)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

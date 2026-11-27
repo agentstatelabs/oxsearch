@@ -232,6 +232,10 @@ impl<'de> ::serde::Deserialize<'de> for FollowerIndexStatus {
 ///
 /// Get information about all cross-cluster replication follower indices.
 /// For example, the results include follower index names, leader index names, replication options, and whether the follower indices are active or paused.
+///
+/// **Availability:** Elasticsearch 6.7.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-follow-info)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

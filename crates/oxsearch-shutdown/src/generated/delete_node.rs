@@ -11,6 +11,10 @@
 /// Direct use is not supported.
 ///
 /// If the operator privileges feature is enabled, you must be an operator to use this API.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-shutdown-delete-node)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

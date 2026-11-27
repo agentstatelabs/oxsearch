@@ -19,6 +19,10 @@
 /// You can migrate an index by creating a new index that does not contain the token filter with the synonyms set, and use the reindex API in order to copy over the index data.
 /// Once finished, you can delete the index.
 /// When the synonyms set is not used in analyzers, you will be able to delete it.
+///
+/// **Availability:** Elasticsearch 8.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-delete-synonym)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

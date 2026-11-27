@@ -67,6 +67,8 @@ impl RequestBody {
 /// This is intended for applications (such as Kibana) that need to
 /// create API keys on behalf of a user using an existing API key credential,
 /// since derived API keys (API keys created by API keys) are not otherwise supported.
+///
+/// **Availability:** Elasticsearch 9.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

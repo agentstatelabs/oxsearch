@@ -53,6 +53,10 @@ impl RequestBody {
 /// Creates or replaces a named, type-specific data source configuration for ES|QL data federation.
 /// Datasets reference data source configurations to access external data. Names must be lowercase
 /// and follow index or alias naming rules.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-put-data-source)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -69,6 +69,10 @@ impl RequestBody {
 ///
 /// A data frame analytics job can be started and stopped multiple times
 /// throughout its lifecycle.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-stop-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

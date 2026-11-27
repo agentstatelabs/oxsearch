@@ -17,6 +17,10 @@
 /// Elasticsearch security features are enabled, the transform remembers which roles the user that created it had at the
 /// time of creation and uses those same roles. If those roles do not have the required privileges on the source and
 /// destination indices, the transform fails when it attempts unauthorized operations.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-start-transform)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

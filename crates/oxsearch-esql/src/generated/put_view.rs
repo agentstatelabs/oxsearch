@@ -21,6 +21,8 @@ impl RequestBody {
 impl RequestBody {}
 
 /// Create or update an ES|QL view.
+///
+/// **Availability:** Elasticsearch 9.4.0 and later, and Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

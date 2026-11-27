@@ -20,6 +20,10 @@
 ///
 /// NOTE: Voting exclusions are required only when you remove at least half of the master-eligible nodes from a cluster in a short time period.
 /// They are not required when removing master-ineligible nodes or when removing fewer than half of the master-eligible nodes.
+///
+/// **Availability:** Elasticsearch 7.0.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-post-voting-config-exclusions)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

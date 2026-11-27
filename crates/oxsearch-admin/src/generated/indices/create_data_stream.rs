@@ -4,6 +4,10 @@
 /// Create a data stream.
 ///
 /// You must have a matching index template with data stream enabled.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-create-data-stream)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

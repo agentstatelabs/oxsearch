@@ -77,6 +77,10 @@ impl RequestBody {
 /// Connectors are Elasticsearch integrations that bring content from third-party data sources, which can be deployed on Elastic Cloud or hosted on your own infrastructure.
 /// Elastic managed connectors (Native connectors) are a managed service on Elastic Cloud.
 /// Self-managed connectors (Connector clients) are self-managed on your infrastructure.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-put)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -4,6 +4,8 @@
 /// Delete an ES|QL view.
 ///
 /// Deletes a stored ES|QL view.
+///
+/// **Availability:** Elasticsearch 9.4.0 and later, and Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -6,6 +6,10 @@
 /// Delete roles in the native realm.
 /// The role management APIs are generally the preferred way to manage roles, rather than using file-based role management.
 /// The delete roles API cannot remove roles that are defined in roles files.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-delete-role)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

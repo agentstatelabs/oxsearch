@@ -2,6 +2,8 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// This API is a diagnostics API and the output should not be relied upon for building applications.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

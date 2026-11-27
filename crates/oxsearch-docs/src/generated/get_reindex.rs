@@ -19,6 +19,8 @@
 ///   "status": 404
 /// }
 /// ```
+///
+/// **Availability:** Elasticsearch 9.5.0 and later, and Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

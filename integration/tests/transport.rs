@@ -1,5 +1,6 @@
 //! The reqwest transport's layers against Elasticsearch: failover past a
-//! node that's down, and sniffing the cluster's own node list.
+//! node that's down, sniffing the cluster's own node list, and asking to be
+//! answered as Elasticsearch 9 does.
 
 use std::time::Duration;
 
@@ -53,4 +54,20 @@ async fn sniffs_the_cluster() {
         .trim_end_matches('/')
         .to_owned();
     assert_eq!(transport.nodes(), [format!("http://127.0.0.1:{port}")]);
+}
+
+#[tokio::test]
+#[ignore = "needs the Elasticsearch fixture: scripts/es-fixture.sh up"]
+async fn compatibility_headers() {
+    // Asked to answer as the major oxsearch is generated for, which it is.
+    let transport = ReqwestTransport::builder()
+        .node(url())
+        .compatible_with(Some(oxsearch_core::MAJOR_VERSION))
+        .build()
+        .unwrap();
+    let answered = Client::new(transport)
+        .send(&info::Request::new())
+        .await
+        .unwrap();
+    assert!(answered.version.is_some());
 }

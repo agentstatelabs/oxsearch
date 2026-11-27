@@ -38,6 +38,10 @@
 ///
 /// The response exposes implementation details of the analysis which may change from version to version.
 /// The response body format is therefore not considered stable and may be different in newer versions.
+///
+/// **Availability:** Elasticsearch 8.16.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-repository-verify-integrity)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

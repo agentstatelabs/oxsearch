@@ -72,6 +72,10 @@ impl RequestBody {
 /// Render a search template.
 ///
 /// Render a search template as a search request body.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-render-search-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -4,6 +4,10 @@
 /// Delete an unreferenced trained model.
 ///
 /// The request deletes a trained inference model that is not referenced by an ingest pipeline.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-trained-model)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

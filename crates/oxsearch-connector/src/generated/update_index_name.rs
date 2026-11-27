@@ -26,6 +26,10 @@ impl RequestBody {}
 /// Update the connector index name.
 ///
 /// Update the `index_name` field of a connector, specifying the index where the data ingested by the connector is stored.
+///
+/// **Availability:** Elasticsearch 8.12.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-connector-update-index-name)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

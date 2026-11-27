@@ -437,6 +437,10 @@ impl RequestBody {
 ///
 /// By default, Elasticsearch does not allow you to store an async search response larger than 10Mb and an attempt to do this results in an error.
 /// The maximum allowed size for a stored async search response can be set by changing the `search.max_async_search_response_size` cluster level setting.
+///
+/// **Availability:** Elasticsearch 7.7.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-async-search-submit)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -172,6 +172,10 @@ impl AutoscalingResources {}
 /// The response contains decider-specific information you can use to diagnose how and why autoscaling determined a certain capacity was required.
 /// This information is provided for diagnosis only.
 /// Do not use this information to make autoscaling decisions.
+///
+/// **Availability:** Elasticsearch 7.11.0 and later; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-autoscaling-get-autoscaling-capacity)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

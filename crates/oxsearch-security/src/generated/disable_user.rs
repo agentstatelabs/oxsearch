@@ -6,6 +6,10 @@
 /// Disable users in the native realm.
 /// By default, when you create users, they are enabled.
 /// You can use this API to revoke a user's access to Elasticsearch.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-disable-user)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

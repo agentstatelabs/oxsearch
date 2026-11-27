@@ -312,6 +312,10 @@ impl RequestBody {
 /// Elasticsearch uses the H3 resolution that is closest to the corresponding geotile density.
 ///
 /// Learn how to use the vector tile search API with practical examples in the [Vector tile search examples](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/vector-tile-search) guide.
+///
+/// **Availability:** Elasticsearch 7.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search-mvt)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

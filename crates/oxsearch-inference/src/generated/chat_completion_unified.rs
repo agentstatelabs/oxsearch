@@ -10,6 +10,10 @@
 /// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
 /// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
 /// To determine whether a given inference service supports this task type, please see the page for that service.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-unified-inference)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

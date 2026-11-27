@@ -4,6 +4,10 @@
 /// Get CAT help.
 ///
 /// Get help for the CAT APIs.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-cat)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

@@ -4,6 +4,10 @@
 /// Get policy information.
 ///
 /// Get snapshot lifecycle policy definitions and information about the latest snapshot attempts.
+///
+/// **Availability:** Elasticsearch 7.4.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-slm-get-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -119,6 +119,10 @@ impl RequestBody {
 /// It returns a maximum of 100 results. The calculations are based on all the current data in the source index. It also
 /// generates a list of mappings and settings for the destination index. These values are determined based on the field
 /// types of the source index and the transform aggregations.
+///
+/// **Availability:** Elasticsearch 7.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-preview-transform)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

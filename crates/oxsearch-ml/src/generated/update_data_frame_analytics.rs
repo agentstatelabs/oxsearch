@@ -66,6 +66,10 @@ impl RequestBody {
 }
 
 /// Update a data frame analytics job.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-update-data-frame-analytics)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

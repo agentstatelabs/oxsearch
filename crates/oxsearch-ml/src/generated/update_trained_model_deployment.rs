@@ -48,6 +48,10 @@ impl RequestBody {
 }
 
 /// Update a trained model deployment.
+///
+/// **Availability:** Elasticsearch 8.6.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-update-trained-model-deployment)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

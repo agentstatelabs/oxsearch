@@ -4,6 +4,10 @@
 /// Get the ILM status.
 ///
 /// Get the current index lifecycle management status.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-get-status)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

@@ -145,6 +145,10 @@ impl RequestBody {}
 /// Update data streams.
 ///
 /// Performs one or more data stream modification actions in a single atomic operation.
+///
+/// **Availability:** Elasticsearch 7.16.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-modify-data-stream)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

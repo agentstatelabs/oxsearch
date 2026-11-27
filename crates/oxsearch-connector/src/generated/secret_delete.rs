@@ -2,6 +2,8 @@
 // 84bf510a907bae62ffe29af35f516af287a79eab. Don't edit it: change the generator.
 
 /// Deletes a connector secret.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

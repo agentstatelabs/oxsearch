@@ -415,6 +415,10 @@ impl ReadSummaryInfo {}
 /// If an operation fails due to contention, Elasticsearch retries the operation until it succeeds.
 /// Most of the compare-and-exchange operations performed by repository analysis atomically increment a counter which is represented as an 8-byte blob.
 /// Some operations also verify the behavior on small blobs with sizes other than 8 bytes.
+///
+/// **Availability:** Elasticsearch 7.12.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-repository-analyze)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

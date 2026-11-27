@@ -10,6 +10,10 @@
 /// You can resume auto-following with the resume auto-follow pattern API.
 /// When it resumes, the auto-follow pattern is active again and automatically configures follower indices for newly created indices on the remote cluster that match its patterns.
 /// Remote indices that were created while the pattern was paused will also be followed, unless they have been deleted or closed in the interim.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-pause-auto-follow-pattern)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

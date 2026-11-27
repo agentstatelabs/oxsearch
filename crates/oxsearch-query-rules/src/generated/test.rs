@@ -54,6 +54,10 @@ impl RequestBody {}
 /// Test a query ruleset.
 ///
 /// Evaluate match criteria against a query ruleset to identify the rules that would match that criteria.
+///
+/// **Availability:** Elasticsearch 8.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-test)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

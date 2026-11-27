@@ -12,6 +12,10 @@
 ///
 /// The features listed by this API are a combination of built-in features and features defined by plugins.
 /// In order for a feature state to be listed in this API and recognized as a valid feature state by the create snapshot API, the plugin that defines that feature must be installed on the master node.
+///
+/// **Availability:** Elasticsearch 7.12.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-features-get-features)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

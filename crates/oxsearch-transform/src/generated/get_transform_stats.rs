@@ -156,6 +156,10 @@ impl Checkpointing {
 /// Get transform stats.
 ///
 /// Get usage information for transforms.
+///
+/// **Availability:** Elasticsearch 7.5.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-transform-get-transform-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -6,6 +6,10 @@
 /// Get a list of service accounts that match the provided path parameters.
 ///
 /// NOTE: Currently, only the `elastic/fleet-server` service account is available.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-service-accounts)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

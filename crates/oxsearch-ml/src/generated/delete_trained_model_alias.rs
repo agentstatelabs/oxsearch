@@ -6,6 +6,10 @@
 /// This API deletes an existing model alias that refers to a trained model. If
 /// the model alias is missing or refers to a model other than the one identified
 /// by the `model_id`, this API returns an error.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-delete-trained-model-alias)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

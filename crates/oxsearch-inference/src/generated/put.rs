@@ -32,6 +32,10 @@
 /// * OpenShift AI (`chat_completion`, `completion`, `rerank`, `text_embedding`)
 /// * VoyageAI (`rerank`, `text_embedding`)
 /// * Watsonx (`chat_completion`, `completion`, `rerank`, `text_embedding`)
+///
+/// **Availability:** Elasticsearch 8.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

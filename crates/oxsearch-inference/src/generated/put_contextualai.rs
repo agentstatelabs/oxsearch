@@ -45,6 +45,10 @@ impl RequestBody {
 /// Create an inference endpoint to perform an inference task with the `contexualai` service.
 ///
 /// To review the available `rerank` models, refer to <https://docs.contextual.ai/api-reference/rerank/rerank#body-model>.
+///
+/// **Availability:** Elasticsearch 9.2.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-contextualai)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

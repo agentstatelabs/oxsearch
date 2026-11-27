@@ -7,6 +7,10 @@
 /// it had just been created.
 /// It is not currently possible to reset multiple jobs using wildcards or a
 /// comma separated list.
+///
+/// **Availability:** Elasticsearch 7.14.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-reset-job)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

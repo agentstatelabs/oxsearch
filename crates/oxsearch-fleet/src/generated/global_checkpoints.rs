@@ -5,6 +5,10 @@
 ///
 /// Get the current global checkpoints for an index.
 /// This API is designed for internal use by the Fleet server project.
+///
+/// **Availability:** Elasticsearch 7.13.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-fleet)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -35,6 +35,10 @@ impl RequestBody {
 /// Start a trained model deployment.
 ///
 /// It allocates the model to every machine learning node.
+///
+/// **Availability:** Elasticsearch 8.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-start-trained-model-deployment)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -42,6 +42,10 @@ impl RequestBody {}
 ///
 /// If the structure finder produces unexpected results, specify the `explain` query parameter and an explanation will appear in the response.
 /// It helps determine why the returned structure was chosen.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-text-structure-find-message-structure)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

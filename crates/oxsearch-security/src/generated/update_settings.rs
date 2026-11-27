@@ -65,6 +65,10 @@ impl RequestBody {
 ///
 /// If a specific index is not in use on the system and settings are provided for it, the request will be rejected.
 /// This API does not yet support configuring the settings for indices before they are in use.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-update-settings)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

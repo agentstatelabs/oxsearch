@@ -4,6 +4,10 @@
 /// Get builtin privileges.
 ///
 /// Get the list of cluster privileges and index privileges that are available in this version of Elasticsearch.
+///
+/// **Availability:** Elasticsearch 7.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-get-builtin-privileges)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

@@ -35,6 +35,10 @@ impl RequestBody {
 /// When you open an existing job, the most recent model state is automatically
 /// loaded. The job is ready to resume its analysis from where it left off, once
 /// new data is received.
+///
+/// **Availability:** Elasticsearch 5.4.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ml-open-job)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

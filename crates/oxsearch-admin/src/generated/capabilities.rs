@@ -20,6 +20,10 @@ impl FailedNodeException {
 impl FailedNodeException {}
 
 /// Checks if the specified combination of method, API, parameters, and arbitrary capabilities are supported.
+///
+/// **Availability:** Elasticsearch; not on Elastic Cloud Serverless. Elasticsearch meant it for its own components, not for direct use.
+///
+/// [Elasticsearch's documentation](https://github.com/elastic/elasticsearch/blob/main/rest-api-spec/src/yamlRestTest/resources/rest-api-spec/test/README.asciidoc#require-or-skip-api-capabilities)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

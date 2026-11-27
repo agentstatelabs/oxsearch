@@ -75,6 +75,10 @@ impl RequestBody {
 ///
 /// NOTE: This API does not stop replication by a following index. If you use this API with a follower index that is still actively following, the following index will add back retention leases on the leader.
 /// The only purpose of this API is to handle the case of failure to remove the following retention leases after the unfollow API is invoked.
+///
+/// **Availability:** Elasticsearch 6.7.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ccr-forget-follower)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

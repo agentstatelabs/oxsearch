@@ -218,6 +218,10 @@ impl RequestBody {
 /// If applicable, it also returns expiration information for the API key in milliseconds.
 ///
 /// By default, API keys never expire. You can specify expiration information when you create the API keys.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-security-grant-api-key)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

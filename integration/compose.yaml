@@ -7,7 +7,7 @@ name: oxsearch-fixture
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION:-9.5.5}
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION:-9.5.7}
     environment:
       discovery.type: single-node
       # The tests talk plain HTTP with no credentials, unless

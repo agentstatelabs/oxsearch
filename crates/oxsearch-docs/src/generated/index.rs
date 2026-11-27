@@ -121,6 +121,10 @@
 ///
 /// A nice side effect is that there is no need to maintain strict ordering of async indexing operations run as a result of changes to a source database, as long as version numbers from the source database are used.
 /// Even the simple case of updating the Elasticsearch index using data from a database is simplified if external versioning is used, as only the latest version will be used if the index operations arrive out of order.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TDocument = ::serde_json::Value> {
