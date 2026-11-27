@@ -124,6 +124,18 @@ specification it's generated from.
   deep, reading a watch in a debug build ran out of a 2 MiB thread's stack.
   The generated example tests run on a thread with a larger stack for the
   same reason.
+- The streaming inference endpoints, `stream_completion` and
+  `chat_completion_unified`, answer with server-sent events, which their
+  responses tried to read as JSON. Their response is now the events, as a
+  `String`.
+- `inference::update::Request::body` takes JSON: only what changes, such as
+  `{"service_settings": {"api_key": …}}`. It took a whole
+  `InferenceEndpoint`, whose required `service` Elasticsearch refuses in an
+  update, so the typed call could never succeed. Elasticsearch also needs
+  the task type, from `task_type` or the body's `task_type`.
+- `inference::ElasticsearchServiceSettings::new` takes only the model:
+  `num_threads` is optional, since Elasticsearch refuses it with
+  `deployment_id`.
 - `helpers::Scan` reads each page with `allow_partial_search_results=false`,
   so a page some shards couldn't answer ends the stream with an error,
   where it came back with those shards' documents missing.

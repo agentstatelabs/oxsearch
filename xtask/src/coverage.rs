@@ -2,8 +2,9 @@
 //! the integration tests send to Elasticsearch.
 //!
 //! The integration tests record each request's method and path in the
-//! files `OXSEARCH_COVERAGE` names, one line each; this matches them
-//! against the specification's URL templates.
+//! files `OXSEARCH_COVERAGE` names, one line each, followed by the
+//! endpoint's name when the client knew it. A request without a name is
+//! matched against the specification's URL templates.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -56,6 +57,22 @@ const LIMITS: &[(&str, &str)] = &[
         "Only Elastic Cloud Serverless has these, so the fixture can't test them.",
     ),
     (
+        "inference",
+        "Calls to a provider go to a mock service on the CI runner, which the fixture reaches \
+         as `host.docker.internal`: OpenAI, and the providers that take a URL and a key. The \
+         other providers aren't tested, since each calls its own cloud or needs its \
+         credentials, so testing them needs an account with each and sends the requests to \
+         them. Creating an endpoint needs a license above Basic, so on Basic the tests check \
+         the refusal.",
+    ),
+    (
+        "esql",
+        "Data sources and datasets point at storage the fixture can't reach, so those calls \
+         are checked for an answer or a refusal Elasticsearch understood. Stopping an async \
+         query is tested on one that has finished, and getting a running query by an id no \
+         query has.",
+    ),
+    (
         "migration",
         "A cluster on the current version has no system features to upgrade, so the \
          upgrade asked for is declined.",
@@ -101,10 +118,15 @@ pub fn report(
     let mut tested: BTreeSet<&str> = BTreeSet::new();
     let mut elsewhere: BTreeSet<&str> = BTreeSet::new();
     for line in recorded {
-        let Some((method, path)) = line.trim().split_once(' ') else {
+        let mut fields = line.split_whitespace();
+        let (Some(method), Some(path)) = (fields.next(), fields.next()) else {
             continue;
         };
-        let Some(name) = best_match(&every, method, path) else {
+        let named = fields
+            .next()
+            .and_then(|name| every.iter().find(|g| g.name == name))
+            .map(|g| g.name);
+        let Some(name) = named.or_else(|| best_match(&every, method, path)) else {
             continue;
         };
         if generated.iter().any(|g| g.name == name) {
@@ -202,11 +224,11 @@ fn list(names: &[&str]) -> String {
         .join(", ")
 }
 
-/// The endpoint a request was for: of the URL templates its method and
-/// path fit, the one with the most fixed segments. Endpoints that share a
-/// template, such as the inference API's general `put` and its
-/// provider-specific ones, go to the first in the specification's order,
-/// the general one.
+/// The endpoint a request without a name was for: of the URL templates
+/// its method and path fit, the one with the most fixed segments.
+/// Endpoints that share a template, such as the inference API's general
+/// `put` and its provider-specific ones, go to the first in the
+/// specification's order, the general one.
 fn best_match<'a>(generated: &[Generated<'a>], method: &str, path: &str) -> Option<&'a str> {
     let path = path.split('?').next().unwrap_or(path);
     let mut best: Option<(usize, &'a str)> = None;
