@@ -40,6 +40,7 @@ pub const CRATES: &[&str] = &[
     "search_application",
     "enrich",
     "ml",
+    "watcher",
 ];
 
 /// An area's package, and its directory under `crates`: `query_rules` is

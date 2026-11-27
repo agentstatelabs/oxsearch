@@ -18,6 +18,7 @@
 //! policies), `async-search`, `eql`, `sql`, `search-application` (search
 //! templates behind a name), `enrich` (enrich policies), `ml` (machine
 //! learning: anomaly detection, data frame analytics and trained models),
+//! `watcher` (watches that run a search on a schedule and act on it),
 //! `license`, `analysis` and `tasks`. `document` adds the typed document layer and
 //! `derive` its derive macro, and `helpers` the point-in-time scan and the
 //! bulk loader.
@@ -122,3 +123,5 @@ pub use oxsearch_synonyms as synonyms;
 pub use oxsearch_tasks as tasks;
 #[cfg(feature = "transport-reqwest")]
 pub use oxsearch_transport_reqwest as transport_reqwest;
+#[cfg(feature = "watcher")]
+pub use oxsearch_watcher as watcher;

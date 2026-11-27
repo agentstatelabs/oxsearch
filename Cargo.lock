@@ -1271,6 +1271,7 @@ dependencies = [
  "oxsearch-synonyms",
  "oxsearch-tasks",
  "oxsearch-transport-reqwest",
+ "oxsearch-watcher",
  "serde",
  "serde_json",
  "tokio",
@@ -1627,6 +1628,20 @@ dependencies = [
  "serde_json",
  "tokio",
  "tracing",
+]
+
+[[package]]
+name = "oxsearch-watcher"
+version = "0.2.0"
+dependencies = [
+ "indexmap",
+ "oxsearch-admin",
+ "oxsearch-core",
+ "oxsearch-search",
+ "oxsearch-watcher",
+ "serde",
+ "serde_json",
+ "serde_path_to_error",
 ]
 
 [[package]]
