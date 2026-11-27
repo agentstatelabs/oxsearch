@@ -19,9 +19,9 @@ use oxsearch::inference::{
     CustomTaskType, DeepSeekServiceSettings, DeepSeekServiceType, ElasticsearchServiceSettings,
     ElasticsearchServiceType, ElasticsearchTaskType, ElserServiceSettings, ElserServiceType,
     ElserTaskType, FireworksAIServiceSettings, FireworksAIServiceType, FireworksAITaskType,
-    HuggingFaceServiceSettings, HuggingFaceServiceType, HuggingFaceTaskType, InferenceEndpoint,
-    LlamaServiceSettings, LlamaServiceType, LlamaTaskType, Message, NvidiaServiceSettings,
-    NvidiaServiceType, NvidiaTaskType, OpenAIServiceSettings, OpenAIServiceType, OpenAITaskType,
+    HuggingFaceServiceSettings, HuggingFaceServiceType, HuggingFaceTaskType, LlamaServiceSettings,
+    LlamaServiceType, LlamaTaskType, Message, NvidiaServiceSettings, NvidiaServiceType,
+    NvidiaTaskType, OpenAIServiceSettings, OpenAIServiceType, OpenAITaskType,
     OpenShiftAiServiceSettings, OpenShiftAiServiceType, OpenShiftAiTaskType, RegionPolicy,
     RequestChatCompletion, RequestEmbedding, TaskTypeDeepSeek, chat_completion_unified, completion,
     delete, delete_region_policy, embedding, get, get_region_policy, inference, put_alibabacloud,
@@ -260,10 +260,8 @@ async fn openai_through_a_mock() {
     );
     let updated = client
         .send(
-            &update::Request::new(embed.as_str()).body(InferenceEndpoint::new(
-                "openai",
-                json!({"api_key": "rotated-key"}),
-            )),
+            &update::Request::new(embed.as_str())
+                .body(json!({"service_settings": {"api_key": "rotated-key"}})),
         )
         .await
         .unwrap();
@@ -543,7 +541,7 @@ async fn elasticsearch_service() {
             &put_elasticsearch::Request::new(ElasticsearchTaskType::SparseEmbedding, ours.as_str())
                 .body(put_elasticsearch::RequestBody::new(
                     ElasticsearchServiceType::Elasticsearch,
-                    ElasticsearchServiceSettings::new(model, 1)
+                    ElasticsearchServiceSettings::new(model)
                         .deployment_id(".elser-2-elasticsearch"),
                 )),
         )

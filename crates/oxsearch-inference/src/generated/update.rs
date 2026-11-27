@@ -25,7 +25,7 @@ pub struct Request {
     /// The default depends on the task type: 120s for `completion` and `chat_completion`, and 30s for all other task types.
     pub timeout: ::core::option::Option<::oxsearch_core::Duration>,
     /// The body.
-    pub body: ::core::option::Option<crate::InferenceEndpoint>,
+    pub body: ::core::option::Option<::serde_json::Value>,
 }
 
 impl Request {
@@ -52,7 +52,7 @@ impl Request {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: impl ::core::convert::Into<crate::InferenceEndpoint>) -> Self {
+    pub fn body(mut self, value: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         self.body = ::core::option::Option::Some(value.into());
         self
     }

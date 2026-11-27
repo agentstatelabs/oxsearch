@@ -2535,7 +2535,7 @@ fn examples() -> ::std::vec::Vec<Example> {
         ),
         (
             "inference.update request InferenceUpdateExample1",
-            check::<::oxsearch_inference::InferenceEndpoint>,
+            check::<::serde_json::Value>,
             r#"{
  "service_settings": {
    "api_key": "<API_KEY>"
