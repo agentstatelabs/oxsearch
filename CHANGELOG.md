@@ -131,7 +131,8 @@ specification it's generated from.
 - `inference::update::Request::body` takes JSON: only what changes, such as
   `{"service_settings": {"api_key": …}}`. It took a whole
   `InferenceEndpoint`, whose required `service` Elasticsearch refuses in an
-  update, so the typed call could never succeed.
+  update, so the typed call could never succeed. Elasticsearch also needs
+  the task type, from `task_type` or the body's `task_type`.
 - `inference::ElasticsearchServiceSettings::new` takes only the model:
   `num_threads` is optional, since Elasticsearch refuses it with
   `deployment_id`.

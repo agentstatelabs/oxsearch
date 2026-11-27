@@ -23,11 +23,11 @@ use oxsearch::inference::{
     LlamaServiceType, LlamaTaskType, Message, NvidiaServiceSettings, NvidiaServiceType,
     NvidiaTaskType, OpenAIServiceSettings, OpenAIServiceType, OpenAITaskType,
     OpenShiftAiServiceSettings, OpenShiftAiServiceType, OpenShiftAiTaskType, RegionPolicy,
-    RequestChatCompletion, RequestEmbedding, TaskTypeDeepSeek, chat_completion_unified, completion,
-    delete, delete_region_policy, embedding, get, get_region_policy, inference, put_alibabacloud,
-    put_custom, put_deepseek, put_elasticsearch, put_elser, put_fireworksai, put_hugging_face,
-    put_llama, put_nvidia, put_openai, put_openshift_ai, put_region_policy, sparse_embedding,
-    stream_completion, text_embedding, update,
+    RequestChatCompletion, RequestEmbedding, TaskType, TaskTypeDeepSeek, chat_completion_unified,
+    completion, delete, delete_region_policy, embedding, get, get_region_policy, inference,
+    put_alibabacloud, put_custom, put_deepseek, put_elasticsearch, put_elser, put_fireworksai,
+    put_hugging_face, put_llama, put_nvidia, put_openai, put_openshift_ai, put_region_policy,
+    sparse_embedding, stream_completion, text_embedding, update,
 };
 use oxsearch::shapes::IndexMap;
 use oxsearch_integration::{License, TestClient, TestIndex, client, deployed, understood};
@@ -261,6 +261,7 @@ async fn openai_through_a_mock() {
     let updated = client
         .send(
             &update::Request::new(embed.as_str())
+                .task_type(TaskType::TextEmbedding)
                 .body(json!({"service_settings": {"api_key": "rotated-key"}})),
         )
         .await
