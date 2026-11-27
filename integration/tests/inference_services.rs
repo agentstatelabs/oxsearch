@@ -11,6 +11,7 @@
 //! deployment the default endpoint uses, on a trial. And the region policy.
 
 use std::sync::{Arc, Mutex};
+use std::time::Duration;
 
 use oxsearch::Error;
 use oxsearch::inference::{
@@ -267,17 +268,36 @@ async fn openai_through_a_mock() {
         .await
         .unwrap();
     assert_eq!(updated.inference_id.as_deref(), Some(embed.as_str()));
-    client
-        .send(&text_embedding::Request::new(embed.as_str()).body(texts()))
-        .await
-        .unwrap();
-    let last_key = mock
-        .seen
-        .lock()
-        .unwrap()
-        .last()
-        .map(|(_, key, _)| key.clone());
-    assert_eq!(last_key.as_deref(), Some("Bearer rotated-key"));
+    // The service may get the new key a moment after the update answers,
+    // as Elasticsearch refreshes what it keeps of the endpoint.
+    let mut last_key = None;
+    for _ in 0..20 {
+        client
+            .send(&text_embedding::Request::new(embed.as_str()).body(texts()))
+            .await
+            .unwrap();
+        last_key = mock
+            .seen
+            .lock()
+            .unwrap()
+            .last()
+            .map(|(_, key, _)| key.clone());
+        if last_key.as_deref() == Some("Bearer rotated-key") {
+            break;
+        }
+        tokio::time::sleep(Duration::from_millis(500)).await;
+    }
+    // In words, since CI masks the keys in its logs.
+    let seen = match last_key.as_deref() {
+        Some("Bearer rotated-key") => "the new key",
+        Some("Bearer test-key") => "the first key",
+        Some(_) => "another key",
+        None => "no key",
+    };
+    assert_eq!(
+        seen, "the new key",
+        "the service still got {seen} after 10 s"
+    );
 
     // A completion, and the same streamed.
     let complete = name("openai-complete");
