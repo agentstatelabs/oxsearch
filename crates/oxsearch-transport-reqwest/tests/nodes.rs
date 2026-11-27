@@ -157,6 +157,42 @@ async fn sends_credentials_and_headers() {
 }
 
 #[tokio::test]
+async fn compatibility_on_both_headers_when_asked() {
+    let server = Server::start(|_, _| (200, "{}".into())).await;
+    let lines = || Body::ndjson([serde_json::json!({"index": {}}), serde_json::json!({})]).unwrap();
+    for compatible_with in [None, Some(9)] {
+        let transport = ReqwestTransport::builder()
+            .node(&server.url)
+            .compatible_with(compatible_with)
+            .build()
+            .unwrap();
+        transport
+            .send(HttpRequest::new(Method::Post, "/_bulk", Some(lines())))
+            .await
+            .unwrap();
+        let json = Body::json(&serde_json::json!({})).unwrap();
+        transport
+            .send(HttpRequest::new(Method::Post, "/_search", Some(json)))
+            .await
+            .unwrap();
+    }
+    let seen = server.seen();
+    // Plain media types, and reqwest's own default Accept.
+    assert_eq!(seen[0].header("content-type"), Some("application/x-ndjson"));
+    assert_eq!(seen[0].header("accept"), Some("*/*"));
+    assert_eq!(seen[1].header("content-type"), Some("application/json"));
+    // Elasticsearch takes `compatible-with` on both headers or neither.
+    let json = "application/vnd.elasticsearch+json; compatible-with=9";
+    assert_eq!(
+        seen[2].header("content-type"),
+        Some("application/vnd.elasticsearch+x-ndjson; compatible-with=9")
+    );
+    assert_eq!(seen[2].header("accept"), Some(json));
+    assert_eq!(seen[3].header("content-type"), Some(json));
+    assert_eq!(seen[3].header("accept"), Some(json));
+}
+
+#[tokio::test]
 async fn sends_once_unless_asked() {
     let transport = ReqwestTransport::new(&closed()).unwrap();
     assert!(transport.send(get("/")).await.is_err());

@@ -31,6 +31,10 @@ impl RequestBody {}
 /// This is equivalent to invoking the reload search analyzers API for all indices that use the synonyms set.
 ///
 /// For practical examples of how to create or update a synonyms set, refer to the External documentation.
+///
+/// **Availability:** Elasticsearch 8.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-synonyms-put-synonym)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

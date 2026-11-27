@@ -13,6 +13,10 @@
 /// If successful, the request removes the alias and creates a data stream with the same name.
 /// The indices for the alias become hidden backing indices for the stream.
 /// The write index for the alias becomes the write index for the stream.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-migrate-to-data-stream)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

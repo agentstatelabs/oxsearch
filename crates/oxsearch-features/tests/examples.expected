@@ -1,0 +1,3 @@
+2 exact, 0 normalized, 0 failing
+features.get_features response GetFeaturesResponseExample1: exact
+features.reset_features response ResetFeaturesResponseExample1: exact

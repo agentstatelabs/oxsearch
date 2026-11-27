@@ -4,6 +4,10 @@
 /// Delete an inference endpoint.
 ///
 /// This API requires the manage_inference cluster privilege (the built-in `inference_admin` role grants this privilege).
+///
+/// **Availability:** Elasticsearch 8.11.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

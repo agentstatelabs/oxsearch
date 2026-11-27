@@ -315,6 +315,10 @@ impl<TDocument> RequestBody<TDocument> {
 /// By default, when requesting term vectors of artificial documents, a shard to get the statistics from is randomly selected.
 /// Use `routing` only to hit a particular shard.
 /// Refer to the linked documentation for detailed examples of how to use this API.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-termvectors)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TDocument = ::serde_json::Value> {

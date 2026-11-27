@@ -7,18 +7,19 @@ license.workspace = true
 publish = false
 
 [dependencies]
-oxsearch = { path = "../crates/oxsearch", features = ["admin", "analysis", "async-search", "derive", "enrich", "eql", "esql", "esql-arrow", "helpers", "ingest", "ilm", "license", "query-rules", "search-application", "snapshot", "sql", "synonyms", "tasks", "aggs", "beta", "experimental"] }
+oxsearch = { path = "../crates/oxsearch", features = ["admin", "analysis", "async-search", "derive", "enrich", "eql", "esql", "esql-arrow", "helpers", "ingest", "ilm", "license", "query-rules", "search-application", "snapshot", "sql", "synonyms", "tasks", "aggs", "beta", "experimental", "ml", "watcher", "slm", "xpack", "cat", "security", "transform", "rollup", "ccr", "searchable-snapshots", "dangling-indices", "autoscaling", "shutdown", "migration", "features", "simulate", "text-structure", "connector", "fleet", "logstash", "graph", "profiling", "project", "streams"] }
 oxsearch-rig = { path = "../crates/oxsearch-rig" }
 rig-core = { version = "0.44", default-features = false }
 oxsearch-core = { path = "../crates/oxsearch-core" }
 oxsearch-docs = { path = "../crates/oxsearch-docs" }
+oxsearch-cli = { path = "../crates/oxsearch-cli" }
 oxsearch-inference = { path = "../crates/oxsearch-inference" }
 oxsearch-mapping = { path = "../crates/oxsearch-mapping" }
 oxsearch-search = { path = "../crates/oxsearch-search" }
 oxsearch-transport-reqwest = { path = "../crates/oxsearch-transport-reqwest", default-features = false }
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1"
-tokio = { version = "1.53", features = ["macros", "rt", "time"] }
+tokio = { version = "1.53", features = ["macros", "rt", "sync", "time"] }
 futures-util = { version = "0.3.31", default-features = false, features = ["std"] }
 # The telemetry test exports through oxtel to an OpenTelemetry Collector.
 metrics = "0.24"

@@ -60,6 +60,10 @@ impl RequestBody {
 ///
 /// To review the available `rerank` models, refer to <https://jina.ai/reranker>.
 /// To review the available `embedding` and `text_embedding` models, refer to <https://jina.ai/embeddings/>.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-jinaai)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

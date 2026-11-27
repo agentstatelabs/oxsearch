@@ -75,13 +75,29 @@ Elasticsearch publishes a machine-readable specification of its whole API: `elas
 | `oxsearch-async-search`, `oxsearch-eql`, `oxsearch-sql` | searches run in the background; event and sequence queries; SQL queries and cursors | 41 |
 | `oxsearch-search-application` | search templates and their indices behind one name | 27 |
 | `oxsearch-enrich` | enrich policies the ingest pipeline's enrich processor uses | 18 |
-| `oxsearch-security`, `oxsearch-ml`, `oxsearch-transform`, … | one crate per API area, named with hyphens (`query_rules` is `oxsearch-query-rules`) | the rest of about 2,900 API types |
+| `oxsearch-ml` | machine learning: anomaly detection jobs and datafeeds, data frame analytics, trained models and their deployments | 356 |
+| `oxsearch-watcher` | watches: an input on a schedule, a condition and actions; and the Watcher service | 133 |
+| `oxsearch-slm` | snapshot lifecycle policies: snapshots on a schedule, kept for a while | 26 |
+| `oxsearch-xpack` | the build, the license and the features it makes available, each feature's usage, and monitoring's bulk request | 89 |
+| `oxsearch-cat` | the cat APIs' tables, as typed rows from their JSON form | 131 |
+| `oxsearch-security` | users, roles, role mappings, privileges, API keys, tokens, service accounts, user profiles, single sign-on, TLS certificates and the encryption key | 223 |
+| `oxsearch-transform` | pivot and latest transforms, their previews, statistics and upgrade mode | 48 |
+| `oxsearch-rollup` | rollup jobs, their capabilities and rollup search, deprecated upstream | 33 |
+| `oxsearch-ccr` | cross-cluster replication: follower indices, auto-follow patterns and their statistics | 37 |
+| `oxsearch-searchable-snapshots` | indices mounted from a snapshot, their statistics, and the shared cache | 13 |
+| `oxsearch-dangling-indices`, `oxsearch-autoscaling`, `oxsearch-shutdown` | dangling indices; autoscaling policies and the capacity they call for; node shutdown. Elasticsearch meant the last two for its orchestrators | 34 |
+| `oxsearch-migration`, `oxsearch-features` | deprecations and system feature upgrades; feature states, and resetting them | 17 |
+| `oxsearch-simulate`, `oxsearch-text-structure` | ingest simulation against an index's pipelines and mapping; the structure of log text, and grok pattern tests | 20 |
+| `oxsearch-connector` | content connectors, their configuration, filtering and scheduling, sync jobs and secrets | 105 |
+| `oxsearch-fleet`, `oxsearch-logstash`, `oxsearch-streams` | global checkpoints, the searches that wait for them, and Fleet's secrets; Logstash's centrally managed pipelines; named streams | 30 |
+| `oxsearch-graph`, `oxsearch-profiling` | terms that go together, explored from a query; Universal Profiling, which Elasticsearch meant for Kibana | 18 |
+| `oxsearch-project` | serverless projects' tags and routing expressions, which a self-managed cluster refuses | 17 |
 | `oxsearch-transport-reqwest` | the default HTTP transport | – |
 | `oxsearch-derive` | derive macros for the typed document layer | – |
 | `oxsearch-rig` | `rig` vector-store integration: `ElasticsearchIndex` implements rig 0.44's `VectorStoreIndex` (kNN with a rig embedding model, or a `semantic_text` field Elasticsearch embeds; hybrid with a keyword match through `oxsearch::fusion`) and `InsertDocuments`; rig filters become Elasticsearch queries | – |
 | `oxsearch` | front crate that re-exports the rest behind feature flags | – |
 
-The default features are the AI-search set, search, docs, mapping and inference, and the HTTP transport, transport-reqwest; `default-features = false` leaves the transport out for those who bring their own. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
+The default features are the AI-search set, search, docs, mapping and inference, and the HTTP transport, transport-reqwest; `default-features = false` leaves the transport out for those who bring their own. `features = ["aggs", "esql", "admin", "ingest", "query-rules", "synonyms", "snapshot", "ilm", "async-search", "eql", "sql", "search-application", "enrich", "ml", "watcher", "slm", "xpack", "cat", "security", "transform", "rollup", "ccr", "searchable-snapshots", "dangling-indices", "autoscaling", "shutdown", "migration", "features", "simulate", "text-structure", "connector", "fleet", "logstash", "graph", "profiling", "project", "streams", "license", "analysis", "tasks"]` adds more, and `document` the typed document layer, which creates and maps indices through `admin`. Libraries depend on the specific crates they need.
 
 **Why crates and not only feature flags:** Cargo compiles crates in parallel and caches each one separately; feature flags inside one huge crate get neither benefit.
 
@@ -113,7 +129,7 @@ The default features are the AI-search set, search, docs, mapping and inference,
   - **Enums** (390) all get a `Raw(String)` variant, not only the 27 the specification marks open, so a value added in a later Elasticsearch minor doesn't break reading a response (decided with the user, 2026-10-14).
   - **Recursive types** are boxed where a loop of references closes (`spec/placement.md` counts them per crate).
 - **Round-trip tests from the specification's own request and response examples**, so every generated type is exercised. Each crate's `tests/examples.expected` records every example's outcome, and the test fails when one changes. On 9.5, of the 258 examples for the first slice's endpoints, 217 are written back exactly as read and 23 in an equivalent form (a shorthand expanded, a `null` left out, a `float` rounded, a missing array or map written as empty, or a property the specification doesn't define dropped). The other 18 fail because the specification and its own examples disagree: 11 use another type than the specification says (such as `slice.id: 0` for a string id), 6 requests leave out a property the specification marks required, and one isn't valid JSON.
-- **Availability becomes features and docs.** Beta and experimental endpoints sit behind `beta` and `experimental` features (24 and 72 endpoints on 9.5; 5 in the first slice, all experimental). The generator gates an endpoint's module when nothing outside it uses its types, and says which it couldn't; each crate's tests turn both features on. Stack and serverless availability appear in the docs. Endpoints the specification excludes from code generation are skipped.
+- **Availability becomes features and docs.** Each endpoint's documentation says since which Elasticsearch version it's there, whether Elastic Cloud Serverless has it, and links Elasticsearch's own page; the coverage report counts the endpoints on Serverless and lists those it lacks. An endpoint only Serverless has is gated by its stability there. Beta and experimental endpoints sit behind `beta` and `experimental` features (24 and 72 endpoints on 9.5; 5 in the first slice, all experimental). The generator gates an endpoint's module when nothing outside it uses its types, and says which it couldn't; each crate's tests turn both features on. Stack and serverless availability appear in the docs. Endpoints the specification excludes from code generation are skipped.
 - **Docs come from the specification's descriptions and links.**
 
 ### 4.3 Seams
@@ -181,14 +197,17 @@ let hits = articles                         // Vec<Hit<Article>>
     .await?;
 ```
 
-Built in Phase 1 (`oxsearch::document`, behind the `derive` feature for the macro):
+Built in Phases 1 and 2 (`oxsearch::document`, behind the `derive` feature for the macro):
 
 - **The mapping is defined by the struct.** Field attributes choose mapped types (`#[keyword]`, `#[text]`, `#[date]`, `#[semantic_text(inference_id = …)]`, `#[dense_vector(dims = …, similarity = …, element_type = …)]`, `#[sparse_vector]`), and Rust types give defaults through the `Mapped` trait: strings are `text`, numbers and booleans their own types, date and time types `date`, and a struct deriving `Document` an object. serde's `rename`, `rename_all` and `skip` are followed; `flatten` and generic documents are refused for now.
   - `ensure_mapping()` creates the index, adds the fields the live mapping lacks, and reports fields mapped differently (by type, or by `dims`, `similarity`, `element_type` or `inference_id`). It never applies a changed type, because Elasticsearch can't change a mapped type in place.
   - Elasticsearch 9 leaves vectors out of the `_source` it returns. A new index for a type with vector fields sets `index.mapping.exclude_source_vectors: false`, so documents read back whole.
 - **Typed field handles** offer only the queries that suit the field's mapped type: `semantic()` on `semantic_text`, `term()` on `keyword`, `range()` on dates (date math) and numbers (Rust ranges: `Product::PRICE.range(10.0..20.0)`), `knn()` on `dense_vector`, `r#match()` on `text`. An object's handle reaches its fields: `Article::AUTHOR.field(Author::NAME)`. A query also works wherever a retriever does, as a standard retriever.
 - **`Index<T>`** puts (with the id and routing from `#[id]` and `#[routing]`), gets, gets many, deletes, searches into `Vec<Hit<T>>`, and fuses (`oxsearch::fusion`), with an optional refresh policy for writes.
-- **`Versioned<T>`** carries the sequence number and primary term for optimistic concurrency; `put_versioned` fails with `Error::Conflict` when the document changed since it was read.
+- **`Versioned<T>`** carries the sequence number and primary term for optimistic concurrency; `put_versioned` and `delete_versioned` fail with `Error::Conflict` when the document changed since it was read. It remembers the routing it was read with, so a document goes back where it was.
+- **Updates** change part of a document: `update(id, Patch::new().set(Article::VIEWS, 41))` sets fields through their handles (a nested object's field inside it), and `update(id, Script::inline(…).param(…))` runs a script. `Update` adds an upsert, retries on conflict and a condition on the version. A missing document is `None`; what the update did is a `Change` (created, updated, unchanged, deleted).
+- **Bulk writes**: `index.bulk()` collects puts, creates, updates and deletes, conditional on a `Versioned<T>` or not, and sends them in one request. Each succeeds or fails on its own, in order, with conflicts as `Error::Conflict`. Loading a lot of documents stays `BulkLoader`'s job (§4.7).
+- **Routing**: writes take it from the document's `#[routing]` field. A read or delete by id has no document to take it from, so `Index::routed` sets it for those, and for updates, searches and `fuse`. New indices don't set `_routing.required`, which would refuse reads that work today.
 - **ES|QL rows map into structs** by column name. `Index<T>::esql()` starts a query `FROM` the index, and `Esql::fetch` reads its rows as `T` or any other type: a dotted column (`author.name`) fills a nested struct, a single value a `Vec` field, since ES|QL writes a multi-valued field with one value as a plain value. A row that doesn't fit fails with `Error::Row`, which names the row and the column.
 - **Left out:** SQL emulation, relations between indices (ES|QL's `LOOKUP JOIN` does that on the server), lazy loading, change tracking, transactions, a unit of work.
 
@@ -199,6 +218,7 @@ Both are in `oxsearch::helpers`, behind the `helpers` feature, which brings in T
 - **Point-in-time stream** (`Scan`). An async stream of `Hit<T>` over point-in-time and `search_after`, sorted by `_shard_doc`.
   - It splits into slices for parallel reads, merged as pages arrive.
   - It renews a short keep-alive with each page and always uses the latest point-in-time id. It ends at the first empty page (no exact total needed) and closes the point-in-time when it finishes or fails. A stream dropped early leaves the point-in-time to expire.
+  - A page some shards couldn't answer is an error (`allow_partial_search_results=false`), never a page with documents missing.
 - **Bulk-loading helper** (`BulkLoader`). `start()` returns a sender and a stream of results.
   - Bounded channels give backpressure: `send` waits while the loader is behind, and the loader waits while results aren't read. Actions are written to NDJSON as they're sent, so documents needn't be `Send`.
   - It has a concurrency limit and flushes by action count, bytes and interval.
@@ -231,6 +251,23 @@ Built in Phase 1 (`oxsearch_core::telemetry`):
 - **Metrics.** `db.client.operation.duration` (seconds) is recorded by operation, with `error.type` and the status on failure; `telemetry::describe_metrics` gives its unit. The helpers record `oxsearch.bulk.{queued,in_flight}` gauges, `oxsearch.bulk.{actions,bytes,requests}` and `oxsearch.scan.{pages,documents}` counters.
 - **Tests.** Field names follow the literal-then-check pattern of oxtel-sql: the `tracing` macros need literals, and a test checks them against `oxtel-semconv`'s constants. `integration/tests/collector.rs` exports a search's span and duration through oxtel to a real OpenTelemetry Collector, and checks what it decoded. CI's integration jobs run it.
 
+### 4.9 The command line
+
+`oxsearch-cli` installs `oxsearch`, which moves documents in bulk where reindex can't: to and from files, in samples, and between clusters that can't reach each other.
+
+- **Export** reads over a sliced point in time (`Scan`) and writes NDJSON from one writer thread. A line is a record, `{"_index", "_id", "_routing", "_source"}`, so an import puts each document back where it was. `--plain` writes bare documents.
+- **Import** reads NDJSON, gzip or not, and writes it through `BulkLoader`: records to their own index or `--index`, plain documents with ids from `--id-field`.
+- **Transfer** streams a scan of one cluster into a bulk loader for another, or for another index of the same one.
+- `--every N` keeps one document in N and `--limit N` at most N; `--slices`, `--concurrency`, `--page-size` and `--batch-size` set the threads and the block sizes.
+- Documents pass through as the JSON they are (`serde_json`'s `RawValue`), never parsed into a structure and written again.
+
+It follows what elasticstore's import and export taught:
+- Nothing fails silently. A partial page is an error. So is a malformed line, at its number. A refused document is counted and reported, and fails the exit status.
+- An export never overwrites a file. Credentials come from the environment and never reach a log.
+- One owner per resource: a single writer, one reader feeding the loader through bounded channels, and the loader's or the reader's first error ending the run.
+
+Progress goes to oxtel: logs to standard error, and the scan's, the loader's and the command's own metrics over OTLP when it's configured.
+
 ## 5. Licenses
 
 Elasticsearch's free Basic license includes kNN and the standard, knn, pinned and rescorer retrievers. Server-side RRF, linear, rule and rerank retrievers, and Elastic's managed inference, need a paid license or a trial. (Elastic's subscription matrix should be checked against each release; the tiers have moved before.)
@@ -246,7 +283,7 @@ Elasticsearch's free Basic license includes kNN and the standard, knn, pinned an
 - Integration tests per API area against Elasticsearch in Docker, on Basic and trial licenses.
 - A published coverage report: endpoints generated, endpoints with integration tests, by area.
 - A compile-time budget for the default feature set, measured with `cargo build --timings` in CI (`docs/compile-time.md`). A clean build takes 13.8 s on a 14-core Mac.
-- Benchmarks against the official crate for request overhead and bulk throughput (Phase 2).
+- Benchmarks against the official crate for request overhead, serde throughput and bulk throughput, with their method and results in [`bench/RESULTS.md`](bench/RESULTS.md). On a search, the request path is within 1–4% of the official client's (a laptop and a CI runner), and reading the complete typed response costs 5–6 µs more than a hand-written struct of the hits. Bulk throughput is level.
 - The reference demo (section 7) running on a real cluster.
 
 ## 7. Reference demo
@@ -283,7 +320,7 @@ A Rust retrieval service built on oxsearch, behind an existing Java RAG applicat
 
 1. ~~**Version numbers.**~~ Decided: 0.N, with the specification branch each release is generated from recorded in the README and the changelog (the user, 2026-10-15). 0.1 and 0.2 are generated from the 9.5 branch.
 2. ~~**The specification model.** Reuse `clients_schema` from the specification repository, or read `schema.json` with our own model?~~ Decided in Phase 0: our own model (§4.2).
-3. ~~**The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?~~ Decided: 8.19, through compatibility headers (the user, 2026-10-20). Phase 2's version matrix builds it and tests it against an 8.19 fixture. Until then requests send plain media types, and only Elasticsearch 9 is tested.
+3. ~~**The oldest supported Elasticsearch.** 9.0, or 8.19 through compatibility headers?~~ Decided: 8.19, through compatibility headers (the user, 2026-10-20). Then dropped: Elasticsearch 8.19.26 refuses `compatible-with=9` ("Accept version must be either version 8 or 7"), because a server answers only as its own major or an older one, and the user decided against an 8.19 floor (2026-11-26). Each release targets the Elasticsearch minor it's generated from, 9.5 now, and is tested against it. Requests carry plain JSON media types; `compatible_with(Some(9))` in the reqwest transport asks a newer server to answer as 9.
 4. ~~**Serverless.** Generate a serverless profile from `schema-serverless.json`, or only document availability?~~ Decided: document availability only, in the docs and the coverage report, with no generated profile (the user, 2026-10-29).
 5. ~~**MSRV**~~ Decided: Rust 1.95 for the whole workspace, which `rig-core` 0.44 needs for `oxsearch-rig` (the user, 2026-10-15; it was 1.94, oxtel's). Whether `oxsearch-transport-reqwest` is on by default was left open: with reqwest's rustls (aws-lc-rs), the transport adds about 15 s to a clean build, more than all the generated crates of the first slice together. Decided: on by default, and users who bring their own transport opt out with `default-features = false` (the user, 2026-10-29).
 6. ~~**Required properties in responses.** Read strictly, or tolerate a missing one?~~ Decided: tolerate (§4.2).

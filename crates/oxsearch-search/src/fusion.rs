@@ -59,6 +59,7 @@ pub struct Fusion {
     rank_window_size: Option<i32>,
     size: i32,
     body: SearchRequestBody,
+    routing: Option<String>,
 }
 
 /// Fused hits, and where they were fused.
@@ -117,6 +118,7 @@ impl Fusion {
             rank_window_size: None,
             size: SIZE,
             body: SearchRequestBody::new(),
+            routing: None,
         }
     }
 
@@ -158,6 +160,12 @@ impl Fusion {
     /// search or a sort, which a retriever replaces.
     pub fn body(mut self, body: SearchRequestBody) -> Fusion {
         self.body = body;
+        self
+    }
+
+    /// Searches only the shard this routing names.
+    pub fn routing(mut self, routing: impl Into<String>) -> Fusion {
+        self.routing = Some(routing.into());
         self
     }
 
@@ -223,7 +231,11 @@ impl Fusion {
         for (retriever, _) in &self.retrievers {
             let mut body = self.body.clone();
             body.aggregations = None;
-            items.push(RequestItem::Header(MultisearchHeader::new()));
+            let mut header = MultisearchHeader::new();
+            if let Some(routing) = &self.routing {
+                header = header.routing(routing.clone());
+            }
+            items.push(RequestItem::Header(header));
             items.push(RequestItem::Body(
                 body.retriever(retriever.clone()).size(self.window()),
             ));
@@ -263,9 +275,12 @@ impl Fusion {
         // multi-search's.
         let body = serde_json::to_value(&self.body).map_err(Error::Encode)?;
         let body: search::RequestBody = serde_json::from_value(body).map_err(Error::Encode)?;
-        let request = search::Request::new()
+        let mut request = search::Request::new()
             .index(index)
             .body(body.retriever(self.retriever()).size(self.size));
+        if let Some(routing) = &self.routing {
+            request = request.routing(routing.clone());
+        }
         let response: search::Response<TDocument, RawAggs> = client.send_as(&request).await?;
         Ok(response.into_results())
     }

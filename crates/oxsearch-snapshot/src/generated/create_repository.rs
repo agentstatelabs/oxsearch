@@ -9,6 +9,10 @@
 ///
 /// Several options for this API can be specified using a query parameter or a request body parameter.
 /// If both parameters are specified, only the query parameter is used.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create-repository)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

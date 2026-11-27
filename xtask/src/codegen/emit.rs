@@ -88,10 +88,13 @@ impl Emitter<'_> {
             }
             _ => return,
         };
-        // A bare generic parameter would overlap every other conversion.
+        // A bare generic parameter would overlap every other conversion, and
+        // a variant that holds the union itself, such as a role mapping
+        // rule's `except`, would overlap `From<T> for T`.
+        let own = |ty: &Ty| matches!(ty, Ty::Named { target, .. } if self.ir.item_of.get(target) == Some(&self.id));
         let convertible: Vec<(&str, &Ty, String)> = members
             .into_iter()
-            .filter(|(_, ty)| !matches!(ty, Ty::Unit | Ty::Param(_)))
+            .filter(|(_, ty)| !matches!(ty, Ty::Unit | Ty::Param(_)) && !own(ty))
             .map(|(variant, ty)| (variant, ty, self.canonical(ty)))
             .collect();
         let mut counts: BTreeMap<&str, usize> = BTreeMap::new();
@@ -1235,11 +1238,18 @@ impl Emitter<'_> {
             out,
             "    pub fn from_known(value: &str) -> {OPTION}<Self> {{\n        match value {{"
         );
+        // The specification gives some aliases to two members, such as the
+        // cat columns' `mdcc`: the first member keeps it.
+        let mut seen = std::collections::HashSet::new();
         for m in members {
             let names: Vec<String> = std::iter::once(&m.wire)
                 .chain(&m.aliases)
+                .filter(|n| seen.insert(n.as_str()))
                 .map(|n| string(n))
                 .collect();
+            if names.is_empty() {
+                continue;
+            }
             let _ = writeln!(
                 out,
                 "            {} => {OPTION}::Some(Self::{}),",
@@ -2062,10 +2072,18 @@ impl Emitter<'_> {
             out,
             "    fn query(&self) -> {RESULT}<::std::vec::Vec<(&'static str, ::std::string::String)>, {CORE}::Error> {{"
         );
-        if r.query.is_empty() {
+        if r.query.is_empty() && r.fixed.is_empty() {
             let _ = writeln!(out, "        {RESULT}::Ok(::std::vec::Vec::new())");
         } else {
             out.push_str("        let mut query = ::std::vec::Vec::new();\n");
+            for (name, value) in &r.fixed {
+                let _ = writeln!(
+                    out,
+                    "        query.push(({}, ::std::borrow::ToOwned::to_owned({})));",
+                    string(name),
+                    string(value)
+                );
+            }
             for f in &r.query {
                 let name = string(&f.wire);
                 if f.optional {

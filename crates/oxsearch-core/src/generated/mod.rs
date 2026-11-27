@@ -12,6 +12,14 @@
     rustdoc::all
 )]
 
+/// The Elasticsearch minor this code is generated for: the specification's
+/// branch.
+pub const SPECIFICATION_VERSION: &str = "9.5";
+
+/// Its major version, which a transport can ask a newer server to
+/// answer as (`compatible-with`).
+pub const MAJOR_VERSION: u8 = 9;
+
 pub mod aggregations;
 pub mod analysis;
 pub mod bulk;
@@ -4774,16 +4782,20 @@ impl NestedSortValue {
 #[non_exhaustive]
 pub struct NodeAttributes {
     /// Lists node attributes.
+    #[serde(default = "::core::default::Default::default")]
     pub attributes: ::indexmap::IndexMap<::std::string::String, ::std::string::String>,
     /// The ephemeral ID of the node.
-    pub ephemeral_id: crate::Id,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub ephemeral_id: ::core::option::Option<crate::Id>,
     /// The unique identifier of the node.
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub id: ::core::option::Option<crate::NodeId>,
     /// The unique identifier of the node.
-    pub name: crate::NodeName,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub name: ::core::option::Option<crate::NodeName>,
     /// The host and port where transport HTTP connections are accepted.
-    pub transport_address: crate::TransportAddress,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub transport_address: ::core::option::Option<crate::TransportAddress>,
 }
 
 impl NodeAttributes {
@@ -4798,10 +4810,10 @@ impl NodeAttributes {
     ) -> Self {
         Self {
             attributes: attributes.into(),
-            ephemeral_id: ephemeral_id.into(),
+            ephemeral_id: ::core::option::Option::Some(ephemeral_id.into()),
             id: ::core::option::Option::None,
-            name: name.into(),
-            transport_address: transport_address.into(),
+            name: ::core::option::Option::Some(name.into()),
+            transport_address: ::core::option::Option::Some(transport_address.into()),
         }
     }
 }
@@ -7863,7 +7875,8 @@ impl SearchStats {
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[non_exhaustive]
 pub struct SearchTransform {
-    pub request: ::serde_json::Value,
+    #[serde(skip_serializing_if = "::core::option::Option::is_none")]
+    pub request: ::core::option::Option<::serde_json::Value>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub timeout: ::core::option::Option<crate::Duration>,
 }
@@ -7872,7 +7885,7 @@ impl SearchTransform {
     /// A `SearchTransform` with its required properties set.
     pub fn new(request: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         Self {
-            request: request.into(),
+            request: ::core::option::Option::Some(request.into()),
             timeout: ::core::option::Option::None,
         }
     }

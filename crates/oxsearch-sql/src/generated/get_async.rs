@@ -6,6 +6,10 @@
 /// Get the current status and available results for an async SQL search or stored synchronous SQL search.
 ///
 /// If the Elasticsearch security features are enabled, only the user who first submitted the SQL search can retrieve the search using this API.
+///
+/// **Availability:** Elasticsearch 7.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-get-async)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -381,6 +381,10 @@ impl MultisearchHeader {
 /// IMPORTANT: The final line of data must end with a newline character `\n`.
 /// Each newline character may be preceded by a carriage return `\r`.
 /// When sending requests to this endpoint the `Content-Type` header should be set to `application/x-ndjson`.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-msearch)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

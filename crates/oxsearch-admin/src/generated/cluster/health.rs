@@ -230,6 +230,10 @@ impl IndexHealthStats {
 ///
 /// One of the main benefits of the API is the ability to wait until the cluster reaches a certain high watermark health level.
 /// The cluster status is controlled by the worst index status.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-health)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

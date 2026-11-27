@@ -81,6 +81,10 @@ impl IndexSettingResults {
 /// is specified in the template that the data stream matches. To prevent your data stream from getting into an invalid state,
 /// only certain settings are allowed. If possible, the setting change is applied to all
 /// backing indices. Otherwise, it will be applied when the data stream is next rolled over.
+///
+/// **Availability:** Elasticsearch 9.1.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-put-data-stream-settings)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

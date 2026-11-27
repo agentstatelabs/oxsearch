@@ -281,6 +281,10 @@ impl RequestBody {
 /// Additionally, dry runs, checking disk space, and fetching index recovery information can help address the root cause.
 ///
 /// Refer to the linked documentation for examples of how to reindex documents.
+///
+/// **Availability:** Elasticsearch 2.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-reindex)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

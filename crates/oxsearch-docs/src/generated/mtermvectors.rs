@@ -200,6 +200,10 @@ impl RequestBody {
 ///
 /// You can also use `mtermvectors` to generate term vectors for artificial documents provided in the body of the request.
 /// The mapping used is determined by the specified `_index`.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-mtermvectors)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

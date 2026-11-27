@@ -9,6 +9,10 @@
 /// You cannot delete the current write index of a data stream.
 /// To delete the index, you must roll over the data stream so a new write index is created.
 /// You can then use the delete index API to delete the previous write index.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

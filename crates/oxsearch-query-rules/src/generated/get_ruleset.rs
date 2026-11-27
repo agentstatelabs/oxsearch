@@ -4,6 +4,10 @@
 /// Get a query ruleset.
 ///
 /// Get details about a query ruleset.
+///
+/// **Availability:** Elasticsearch 8.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-get-ruleset)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

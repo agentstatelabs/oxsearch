@@ -1,7 +1,7 @@
 // Rust code and dependency lists on the site come from files in the
 // repository, never from the pages themselves: the examples are compiled
-// and run in CI, and each example's dependency lists are built by
-// `cargo run -p xtask -- check-examples`. A page names a file and,
+// and run in CI, and `crates/oxsearch/tests/dependencies.rs` keeps each
+// example's dependency lists true. A page names a file and,
 // optionally, a part of it; anything missing fails the build.
 
 import { readFileSync } from 'node:fs';

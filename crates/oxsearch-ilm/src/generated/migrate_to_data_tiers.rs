@@ -55,6 +55,10 @@ impl RequestBody {
 ///
 /// ILM must be stopped before performing the migration.
 /// Use the stop ILM and get ILM status APIs to wait until the reported operation mode is `STOPPED`.
+///
+/// **Availability:** Elasticsearch 7.14.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-migrate-to-data-tiers)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

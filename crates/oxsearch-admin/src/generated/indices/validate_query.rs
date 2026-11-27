@@ -84,6 +84,10 @@ impl RequestBody {
 /// Validate a query.
 ///
 /// Validates a query without running it.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-validate-query)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

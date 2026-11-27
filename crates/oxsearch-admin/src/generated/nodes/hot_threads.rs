@@ -5,6 +5,10 @@
 ///
 /// Get a breakdown of the hot threads on each selected node in the cluster.
 /// The output is plain text with a breakdown of the top hot threads for each node.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-nodes-hot-threads)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

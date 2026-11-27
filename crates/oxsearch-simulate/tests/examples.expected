@@ -1,0 +1,8 @@
+3 exact, 4 normalized, 0 failing
+simulate.ingest request SimulateIngestRequestExample1: exact
+simulate.ingest request SimulateIngestRequestExample2: exact
+simulate.ingest request SimulateIngestRequestExample3: exact
+simulate.ingest request SimulateIngestRequestExample4: normalized at /component_template_substitutions/my-component-template/template/mappings/dynamic
+simulate.ingest response SimulateIngestResponseExample1: normalized at /docs/0/_id (dropped)
+simulate.ingest response SimulateIngestResponseExample2: normalized at /docs/0/_id (dropped)
+simulate.ingest response SimulateIngestResponseExample3: normalized at /docs/0/doc/effective_mapping/_doc (dropped)

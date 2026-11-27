@@ -83,6 +83,10 @@ impl RequestBody {
 ///
 /// You cannot directly apply a component template to a data stream or index.
 /// To be applied, a component template must be included in an index template's `composed_of` list.
+///
+/// **Availability:** Elasticsearch 7.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-put-component-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

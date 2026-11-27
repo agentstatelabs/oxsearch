@@ -117,6 +117,10 @@ impl RequestBody {
 /// Create a snapshot.
 ///
 /// Take a snapshot of a cluster or of data streams and indices.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-create)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

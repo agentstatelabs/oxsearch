@@ -7,6 +7,8 @@
 /// under their original task ID, so callers do not see duplicates across the relocation chain.
 ///
 /// If the API returns a HTTP status of `200 OK`, but `node_failures` or `task_failures` are non-empty in the body, the listing is not a complete authoritative listing and may be missing tasks.
+///
+/// **Availability:** Elasticsearch 9.5.0 and later, and Elastic Cloud Serverless.
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

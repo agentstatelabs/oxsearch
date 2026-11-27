@@ -8,6 +8,10 @@
 /// IMPORTANT: The inference APIs enable you to use certain services, such as built-in machine learning models (ELSER, E5), models uploaded through Eland, Cohere, OpenAI, Azure, Google AI Studio, Google Vertex AI, Anthropic, Watsonx.ai, or Hugging Face.
 /// For built-in models and models uploaded through Eland, the inference APIs offer an alternative way to use and manage trained models.
 /// However, if you do not plan to use the inference APIs to use these models or if you want to use non-NLP models, use the machine learning trained model APIs.
+///
+/// **Availability:** Elasticsearch 8.17.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-update)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {
@@ -21,7 +25,7 @@ pub struct Request {
     /// The default depends on the task type: 120s for `completion` and `chat_completion`, and 30s for all other task types.
     pub timeout: ::core::option::Option<::oxsearch_core::Duration>,
     /// The body.
-    pub body: ::core::option::Option<crate::InferenceEndpoint>,
+    pub body: ::core::option::Option<::serde_json::Value>,
 }
 
 impl Request {
@@ -48,7 +52,7 @@ impl Request {
         self
     }
     /// Sets `body`.
-    pub fn body(mut self, value: impl ::core::convert::Into<crate::InferenceEndpoint>) -> Self {
+    pub fn body(mut self, value: impl ::core::convert::Into<::serde_json::Value>) -> Self {
         self.body = ::core::option::Option::Some(value.into());
         self
     }

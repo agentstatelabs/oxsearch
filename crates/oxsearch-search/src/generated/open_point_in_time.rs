@@ -86,6 +86,10 @@ impl RequestBody {
 /// Ensure that your nodes have sufficient heap space if you have many open point-in-times on an index that is subject to ongoing deletes or updates.
 /// Note that a point-in-time doesn't prevent its associated indices from being deleted.
 /// You can check how many point-in-times (that is, search contexts) are open with the nodes stats API.
+///
+/// **Availability:** Elasticsearch 7.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-open-point-in-time)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

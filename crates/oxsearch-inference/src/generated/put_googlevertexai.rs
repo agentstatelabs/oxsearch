@@ -57,6 +57,10 @@ impl RequestBody {
 /// Create a Google Vertex AI inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `googlevertexai` service.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-googlevertexai)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

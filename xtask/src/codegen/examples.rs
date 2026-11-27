@@ -335,6 +335,17 @@ fn first_difference(a: &::serde_json::Value, b: &::serde_json::Value, at: &str) 
 
 #[test]
 fn examples_round_trip() {
+    // Reading the largest types, such as a watch, takes more stack in a
+    // debug build than a test thread's 2 MiB.
+    ::std::thread::Builder::new()
+        .stack_size(64 << 20)
+        .spawn(round_trip_every_example)
+        .expect("a thread for the examples")
+        .join()
+        .unwrap_or_else(|panic| ::std::panic::resume_unwind(panic));
+}
+
+fn round_trip_every_example() {
     let mut record = ::std::string::String::new();
     let mut counts = [0usize; 3];
     for (name, check, text) in examples() {

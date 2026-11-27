@@ -1,0 +1,8 @@
+6 exact, 1 normalized, 0 failing
+slm.execute_lifecycle response ExecuteSnapshotLifecycleResponseExample1: exact
+slm.get_lifecycle response GetSnapshotLifecycleResponseExample1: normalized at /daily-snapshots/stats/snapshot_deletion_failures (dropped)
+slm.get_stats response GetSnapshotLifecycleManagementStatsResponseExample1: exact
+slm.get_status response GetSnapshotLifecycleManagementStatusResponseExample1: exact
+slm.put_lifecycle request PutSnapshotLifecycleRequestExample1 copy: exact
+slm.put_lifecycle request PutSnapshotLifecycleRequestExample2: exact
+slm.start response StartSnapshotLifecycleManagementResponseExample1: exact

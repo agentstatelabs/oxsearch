@@ -25,6 +25,10 @@ impl CompactNodeInfo {}
 /// Verify a snapshot repository.
 ///
 /// Check for common misconfigurations in a snapshot repository.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-snapshot-verify-repository)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

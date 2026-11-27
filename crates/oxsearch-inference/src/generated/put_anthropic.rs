@@ -43,6 +43,10 @@ impl RequestBody {
 /// Create an Anthropic inference endpoint.
 ///
 /// Create an inference endpoint to perform an inference task with the `anthropic` service.
+///
+/// **Availability:** Elasticsearch 8.16.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-put-anthropic)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

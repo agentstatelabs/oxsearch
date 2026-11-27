@@ -73,6 +73,10 @@
 /// It is important to note that this setting greatly reduces the chances of the write operation not writing to the requisite number of shard copies, but it does not completely eliminate the possibility, because this check occurs before the write operation starts.
 /// After the write operation is underway, it is still possible for replication to fail on any number of shard copies but still succeed on the primary.
 /// The `_shards` section of the API response reveals the number of shard copies on which replication succeeded and failed.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-create)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request<TDocument = ::serde_json::Value> {

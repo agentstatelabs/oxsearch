@@ -36,6 +36,10 @@ impl RequestBody {
 ///
 /// Run an ingest pipeline against a set of provided documents.
 /// You can either specify an existing pipeline to use with the provided documents or supply a pipeline definition in the body of the request.
+///
+/// **Availability:** Elasticsearch 5.0.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ingest-simulate)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

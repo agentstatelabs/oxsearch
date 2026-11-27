@@ -15,6 +15,10 @@
 /// NOTE: Only indices in a time series data stream are supported.
 /// Neither field nor document level security can be defined on the source index.
 /// The source index must be read-only (`index.blocks.write: true`).
+///
+/// **Availability:** Elasticsearch 8.7.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-downsample)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

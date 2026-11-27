@@ -129,6 +129,10 @@ impl InvertedIndex {}
 ///
 /// The response body reports the per-shard usage count of the data structures that back the fields in the index.
 /// A given request will increment each count by a maximum value of 1, even if the request accesses the same field multiple times.
+///
+/// **Availability:** Elasticsearch 7.15.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-field-usage-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

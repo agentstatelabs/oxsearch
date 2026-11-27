@@ -1,0 +1,3 @@
+1 exact, 0 normalized, 1 failing
+xpack.info response XPackInfoResponseExample1: exact
+xpack.usage response XPackUsageResponseExample1: fails: not JSON: key must be a string at line 149 column 7

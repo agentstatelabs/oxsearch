@@ -6,6 +6,10 @@
 /// The provided <index-template> may contain multiple template names separated by a comma. If multiple template
 /// names are specified then there is no wildcard support and the provided names should match completely with
 /// existing templates.
+///
+/// **Availability:** Elasticsearch 7.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-delete-index-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

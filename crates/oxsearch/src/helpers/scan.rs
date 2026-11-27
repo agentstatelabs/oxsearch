@@ -28,6 +28,9 @@ use serde::de::DeserializeOwned;
 /// at the first empty page, so no exact total is needed, and the point in
 /// time is closed when the stream ends. A stream dropped before its end
 /// leaves the point in time to expire after its keep-alive.
+///
+/// A page some shards couldn't answer ends the stream with an error, rather
+/// than coming back with their documents missing.
 #[derive(Clone, Debug)]
 pub struct Scan {
     index: String,
@@ -217,7 +220,11 @@ impl Scan {
                 if let Some(after) = after {
                     body = body.search_after(after);
                 }
-                let request = search::Request::new().body(body);
+                // A page some shards couldn't answer is an error, not a
+                // page with documents missing.
+                let request = search::Request::new()
+                    .allow_partial_search_results(false)
+                    .body(body);
                 let response: search::Response<T> = client.send_as(&request).await?;
                 let pit = response.pit_id.clone().unwrap_or(pit);
                 let hits = response.into_results();

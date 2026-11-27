@@ -2,7 +2,7 @@
 
 A typed Rust client for Elasticsearch, generated from the Elasticsearch specification, with typed AI search: retrievers, `semantic`, `knn` and `sparse_vector` queries, `semantic_text` mappings, the inference API, and a typed document layer.
 
-**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API: 289 endpoints, tested against the specification's own examples, and 183 of them against Elasticsearch 9 on the Basic license and a trial. Security, machine learning, transforms and the other areas come next; see [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
+**Status: 0.2.** The generated crates cover search, documents, mappings, analysis, inference, tasks, aggregations, ES|QL, administration, ingest pipelines, enrich policies, query rules, synonyms, search applications, async search, EQL, SQL, snapshots, index lifecycle management and the license API. On `main` for the next release: machine learning, Watcher, snapshot lifecycle management, X-Pack information and usage, the cat APIs, security, transforms, rollups, and the cluster operations: cross-cluster replication, searchable snapshots, dangling indices, autoscaling, node shutdown, migration, feature states, ingest simulation and text structure; and connectors, Fleet, Logstash, graph, profiling, serverless projects and streams. That's every endpoint the specification offers for code generation, 597 of them, tested against its own examples where it has them, and the integration tests send 516 of them to Elasticsearch 9, on the Basic license and a trial. See [DESIGN.md](DESIGN.md) for the plan and [CHANGELOG.md](CHANGELOG.md) for what's in each release.
 
 ## Quick start
 
@@ -56,17 +56,26 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 - **Ingest pipelines** (`oxsearch::ingest`, the `ingest` feature): pipelines built from typed processors (`SetProcessor::new("indexed_by").value(…).into()`), simulated, or run as documents are indexed, including the inference processor that embeds text at index time.
 - **Search relevance**: query rules that pin documents for matching queries (`oxsearch::query_rules`, the `query-rules` feature) and synonym sets that analyzers read and update without reindexing (`oxsearch::synonyms`, the `synonyms` feature).
 - **More ways to query**: async search, EQL and SQL (`oxsearch::async_search`, `oxsearch::eql`, `oxsearch::sql`), search applications (`oxsearch::search_application`) and enrich policies (`oxsearch::enrich`), each behind the feature of its name.
-- **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
+- **Operations**: snapshots (`oxsearch::snapshot`, the `snapshot` feature), snapshot lifecycle policies that take them on a schedule (`oxsearch::slm`, the `slm` feature) and index lifecycle policies (`oxsearch::ilm`, the `ilm` feature).
+- **Machine learning** (`oxsearch::ml`, the `ml` feature): anomaly detection jobs with their datafeeds, results, forecasts and model snapshots; calendars and filters; data frame analytics; and trained models, imported, inferred with and deployed.
+- **Alerting** (`oxsearch::watcher`, the `watcher` feature): watches that run an input, such as a search, on a schedule, test a condition and act, put, run, acknowledged, activated and deactivated, and the Watcher service itself.
+- **Security** (`oxsearch::security`, the `security` feature): native users, roles and role mappings, application privileges, API keys and cross-cluster API keys, tokens, service accounts and user profiles; and single sign-on through SAML, OpenID Connect and PKI.
+- **Transforms** (`oxsearch::transform`, the `transform` feature): pivot and latest transforms that summarize one index into another, previewed, run once or continuously, scheduled now, stopped, reset and upgraded; and **rollups** (`oxsearch::rollup`, the `rollup` feature), which Elasticsearch deprecates in favour of downsampling and takes new jobs for only in a cluster that already has rollup indices.
+- **Cluster operations**: cross-cluster replication (`oxsearch::ccr`), searchable snapshots (`oxsearch::searchable_snapshots`), dangling indices (`oxsearch::dangling_indices`), node shutdown and autoscaling (`oxsearch::shutdown`, `oxsearch::autoscaling`), deprecations and system feature upgrades (`oxsearch::migration`), and feature states (`oxsearch::features`), each behind the feature of its name with hyphens (`searchable-snapshots`); and, for data on its way in, ingest simulation against an index's pipelines and mapping (`oxsearch::simulate`) and the structure of log text (`oxsearch::text_structure`).
+- **Elastic's other products**: content connectors and their sync jobs (`oxsearch::connector`), Fleet's checkpoints and searches (`oxsearch::fleet`), Logstash's centrally managed pipelines (`oxsearch::logstash`), graph exploration (`oxsearch::graph`), Universal Profiling (`oxsearch::profiling`), named streams (`oxsearch::streams`) and, on Elastic Cloud Serverless only, projects' tags and routing (`oxsearch::project`), each behind the feature of its name.
+- **What the cluster offers** (`oxsearch::xpack`, the `xpack` feature): its build, its license and which features it makes available, and how much each is used.
+- **The cat APIs** (`oxsearch::cat`, the `cat` feature): the compact tables of indices, nodes, shards, allocation, tasks, snapshots and the rest, read as typed rows from their JSON form.
 - **Administration** (`oxsearch::admin`, the `admin` feature): indices, their mappings, settings, aliases, templates and data streams; the cluster's health, settings and state; and nodes' information and statistics.
 - **Query and retriever builders**: `Query::r#match`, `Query::semantic`, `Retriever::knn`, `Retriever::rrf`, …; and **fusion on the client** (`oxsearch::fusion`) when the license doesn't include the `rrf` and `linear` retrievers.
-- **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, and field handles offer only the queries that suit each field.
+- **A typed document layer** (`oxsearch::document`, the `document` feature, which `derive` implies): `#[derive(Document)]` maps a struct, `Index<T>` reads and writes it, changes part of it with a patch or a script, and sends bulk writes; `Versioned<T>` makes a write conditional on what was read; and field handles offer only the queries that suit each field.
 - **Helpers** (`oxsearch::helpers`): a point-in-time scan and a bulk loader with backpressure.
+- **A command line** (`oxsearch-cli`, `cargo install oxsearch-cli`): `oxsearch export`, `import` and `transfer` move documents to and from NDJSON files and between clusters, with their ids and routing, in slices, samples and limits.
 - **Transport layers**: several nodes with failover, retries, sniffing, credentials (basic, bearer, API key, Elastic Cloud) and gzip.
 - **Telemetry** through `tracing` and `metrics`, following the OpenTelemetry conventions for Elasticsearch, for [oxtel](https://github.com/agentstatelabs/oxtel) or any other exporter.
 - **A `rig` vector store** ([`oxsearch-rig`](crates/oxsearch-rig)).
 - **Escape hatches** for what isn't covered yet: your own `Endpoint`, `Raw` variants and `Client::send_raw` ([example](crates/oxsearch/examples/escape_hatches.rs)).
 
-[docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise.
+[docs/coverage.md](docs/coverage.md) lists the endpoints generated and those the integration tests exercise. [bench/RESULTS.md](bench/RESULTS.md) compares oxsearch with the official `elasticsearch` crate: request overhead, reading large responses, and bulk throughput.
 
 ## Versions
 
@@ -75,10 +84,11 @@ oxsearch's versions are its own, 0.N while its API settles. Each release is gene
 
 | oxsearch | Specification branch (commit) | Tested against |
 |---|---|---|
+| Next | 9.5 (`84bf510a`) | Elasticsearch 9.5.7 |
 | 0.2 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 | 0.1 | 9.5 (`84bf510a`) | Elasticsearch 9.5.5 |
 
-Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch.
+Elasticsearch 9 servers of other minors understand it too, for what both have; a newer server's additions read as `Raw` values until a release generated from its branch. Each endpoint's documentation says since which version it's there, and whether Elastic Cloud Serverless has it.
 <!-- ANCHOR_END: versions -->
 
 ## Licenses of Elasticsearch features
@@ -94,8 +104,15 @@ Every API is generated whatever the license; a request for a feature the cluster
 | `rrf` and `linear` retrievers (server-side fusion) | | ✓ |
 | `rule` and `text_similarity_reranker` retrievers | | ✓ |
 | `semantic_text` with ELSER, and other machine learning models, including the ingest inference processor | | ✓ |
-| ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, ILM, administration | ✓ | ✓ |
+| Machine learning: anomaly detection, data frame analytics, trained models and their deployments | | ✓ |
+| Machine learning: validating a detector, and filters | ✓ | ✓ |
+| Watcher | | ✓ |
+| Security: users, roles, role mappings, application privileges, API keys, service accounts, user profiles | ✓ | ✓ |
+| Security: tokens; single sign-on through SAML, OpenID Connect and PKI | | ✓ |
+| ES\|QL, aggregations, async search, EQL, SQL, ingest pipelines, enrich, synonyms, snapshots, snapshot lifecycle policies, ILM, transforms, rollups, administration | ✓ | ✓ |
 | ES\|QL `FUSE` | | ✓ |
+| Cross-cluster replication, searchable snapshots, autoscaling | | ✓ |
+| Node shutdown, dangling indices, migration, feature states, ingest simulation, text structure | ✓ | ✓ |
 | Query rules (Enterprise) and search applications (Platinum) | | ✓ |
 
 Elastic's subscription matrix is the authority, and it has moved between releases.
@@ -127,6 +144,14 @@ The integration tests run against Elasticsearch in Docker, on the Basic license 
 scripts/es-fixture.sh up trial
 OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration -- --ignored
 scripts/es-fixture.sh down
+```
+
+The security tests need security on, and skip otherwise; the fixture turns it on, with a password for the `elastic` user, like this:
+
+```bash
+export OXSEARCH_TEST_SECURITY=true OXSEARCH_TEST_PASSWORD=$(openssl rand -hex 16)
+scripts/es-fixture.sh up trial
+OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration --test security -- --ignored
 ```
 
 With the fixture up, the examples run against it:

@@ -53,6 +53,10 @@ impl DatabaseConfigurationMetadata {
 }
 
 /// Get IP geolocation database configurations.
+///
+/// **Availability:** Elasticsearch 8.15.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ingest-get-ip-location-database)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

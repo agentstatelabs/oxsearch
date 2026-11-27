@@ -4,6 +4,10 @@
 /// Ping the cluster.
 ///
 /// Get information about whether the cluster is running.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-cluster)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {}

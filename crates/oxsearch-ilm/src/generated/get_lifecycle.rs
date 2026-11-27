@@ -30,6 +30,10 @@ impl Lifecycle {
 impl Lifecycle {}
 
 /// Get lifecycle policies.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-get-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

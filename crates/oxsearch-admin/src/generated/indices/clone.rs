@@ -95,6 +95,10 @@ impl RequestBody {
 /// **Wait for active shards**
 ///
 /// Because the clone operation creates a new index to clone the shards to, the wait for active shards setting on index creation applies to the clone index action as well.
+///
+/// **Availability:** Elasticsearch 7.4.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-clone)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

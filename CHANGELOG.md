@@ -8,6 +8,97 @@ specification it's generated from.
 ## [Unreleased]
 
 ### Added
+- **Machine learning** (`oxsearch-ml`, the `ml` feature), generated from
+  the specification: anomaly detection jobs, their datafeeds, results,
+  forecasts and model snapshots; calendars and filters; data frame
+  analytics; and trained models, imported, inferred with and deployed.
+  Machine learning needs a license above Basic, and the integration tests
+  run it on a trial.
+- **Watcher** (`oxsearch-watcher`, the `watcher` feature), generated from
+  the specification: watches that run an input, such as a search, on a
+  schedule, test a condition and act, put, run, acknowledged, activated
+  and deactivated, found by a query; and the Watcher service's settings,
+  statistics, start and stop. Watcher needs a license above Basic.
+- **Snapshot lifecycle management** (`oxsearch-slm`, the `slm` feature),
+  generated from the specification: policies that take snapshots on a
+  schedule and expire old ones, run now, their statistics and retention,
+  and the service stopped and started. It runs on any license.
+- **Security** (`oxsearch-security`, the `security` feature), generated
+  from the specification: native users, roles and role mappings,
+  application privileges, API keys and cross-cluster API keys, tokens,
+  service accounts, user profiles, the security index's settings, and
+  single sign-on through SAML, OpenID Connect and PKI. The integration
+  tests run it against Elasticsearch with security on, on Basic and on a
+  trial: the test fixture turns security on with
+  `OXSEARCH_TEST_SECURITY=true` and the `elastic` user's password in
+  `OXSEARCH_TEST_PASSWORD`, and CI has a job for it.
+- **X-Pack information and usage** (`oxsearch-xpack`, the `xpack` feature),
+  generated from the specification: the cluster's build, its license and
+  the features it makes available, and each feature's usage statistics.
+- **The cat APIs** (`oxsearch-cat`, the `cat` feature), generated from the
+  specification: every table, from indices, nodes and shards to tasks,
+  snapshots and machine learning's jobs, read as typed rows. The requests
+  always ask for the JSON form (`format=json`); the list of tables, which
+  is text whatever the format, reads as a `String`.
+- **Transforms** (`oxsearch-transform`, the `transform` feature), generated
+  from the specification: pivot and latest transforms that summarize one
+  index into another, previewed, run once or continuously, scheduled now,
+  stopped, reset and upgraded; their statistics; and upgrade mode. They run
+  on any license.
+- **Rollups** (`oxsearch-rollup`, the `rollup` feature), generated from the
+  specification: rollup jobs, their capabilities, and search across rollup
+  indices. Elasticsearch deprecates rollups in favour of downsampling, and
+  takes a new rollup job only in a cluster that already has a rollup index.
+- **The cluster operations**, generated from the specification, each
+  behind the feature of its name: cross-cluster replication
+  (`oxsearch-ccr`), follower indices and auto-follow patterns; searchable
+  snapshots (`oxsearch-searchable-snapshots`), indices mounted from a
+  snapshot; dangling indices (`oxsearch-dangling-indices`); autoscaling
+  policies and node shutdown (`oxsearch-autoscaling`, `oxsearch-shutdown`),
+  which Elasticsearch meant for its orchestrators; deprecations and system
+  feature upgrades (`oxsearch-migration`); feature states and their reset
+  (`oxsearch-features`); ingest simulation against an index's pipelines
+  and mapping (`oxsearch-simulate`); and the structure of log text, with
+  grok pattern tests (`oxsearch-text-structure`). Replication, searchable
+  snapshots and autoscaling need a license above Basic.
+- **The rest of the specification's areas**, each behind the feature of its
+  name: content connectors with their sync jobs and secrets
+  (`oxsearch-connector`); Fleet's global checkpoints, searches and secrets
+  (`oxsearch-fleet`); Logstash's centrally managed pipelines
+  (`oxsearch-logstash`); graph exploration (`oxsearch-graph`), which needs
+  a license above Basic; Universal Profiling (`oxsearch-profiling`); named
+  streams (`oxsearch-streams`); and serverless projects' tags and routing
+  (`oxsearch-project`), which only Elastic Cloud Serverless has. The
+  smallest areas are modules of a neighbour: `security::ssl` (the cluster's
+  TLS certificates), `security::encryption` (its encryption key) and
+  `xpack::monitoring` (monitoring's bulk request). Every endpoint the
+  specification offers for code generation now has a typed request.
+- **The rest of the typed document layer**: `Index::update` changes part of
+  a document with a `Patch` of its fields or a script, with upserts,
+  retries on conflict and a condition on the version; `Index::bulk` sends
+  several writes in one request, each with its own outcome, conditional on
+  a `Versioned<T>` or not; `Index::delete_versioned`; and `Index::routed`,
+  which reads, deletes, updates and searches with a routing, as writes do
+  from a `#[routing]` field. `Script::inline` and `Script::param` build a
+  script, and `Fusion::routing` fuses the searches of one shard.
+- **`oxsearch-cli`**, the `oxsearch` command: `export` writes an index to
+  NDJSON over a sliced point in time, one record per line with each
+  document's index, id and routing; `import` writes records or plain
+  documents back through the bulk loader; `transfer` copies documents to
+  another index or cluster. Samples (`--every`), limits, gzip, and progress
+  through oxtel. Credentials come from the environment.
+- `transport_reqwest::Builder::compatible_with(Some(9))` asks a newer
+  Elasticsearch to answer as 9 does (`compatible-with` on `Accept` and
+  `Content-Type`); off by default. `SPECIFICATION_VERSION` and
+  `MAJOR_VERSION` say what the code is generated for.
+- **Benchmarks** against the official `elasticsearch` crate (`bench/`, a
+  workspace of its own, not published): request overhead, serde throughput
+  for large responses and bulk throughput, with their method and results in
+  `bench/RESULTS.md`, and a workflow that runs them.
+- **Availability in the docs.** Each endpoint's request type says since which
+  Elasticsearch version it's there and whether Elastic Cloud Serverless has
+  it, and links Elasticsearch's documentation. `docs/coverage.md` counts the
+  endpoints on Serverless and lists those it lacks.
 - Three more examples, which CI runs against Elasticsearch: `documents`
   (the typed document layer on any license), `analytics` (aggregations
   and ES|QL) and `transport` (several nodes, retries and credentials).
@@ -18,12 +109,47 @@ specification it's generated from.
   repository's own files.
 
 ### Changed
+- The integration tests run against Elasticsearch 9.5.7, the latest 9.5 patch,
+  where they ran against 9.5.5.
 - The front crate's default features include `transport-reqwest`, the HTTP
   transport on reqwest with rustls, so the quick start builds with
   `features = ["derive"]` (DESIGN.md, question 5). With a transport of your
   own, set `default-features = false` and name the areas you use. A clean
   build of the default features still takes 37 s on CI, within the 60 s
   budget (docs/compile-time.md).
+
+### Fixed
+- Byte counts the specification types as 32-bit integers read as `i64`, as
+  the others do: a node's memory outgrows 32 bits. `cache_size_in_bytes`
+  in `admin::nodes::info` changes type with them.
+- `oxsearch_core::NodeAttributes`, which machine learning's responses
+  carry too, takes a missing name, ephemeral ID or transport address as
+  `None`, as other response types do; the three fields are `Option`s.
+- `oxsearch_core::SearchTransform`, which a watch's response carries, takes
+  a missing `request` as `None` by the same rule.
+- A whole search request's body inside another area's type, such as a
+  watch's search input, is boxed: at 11 KB, held by value several types
+  deep, reading a watch in a debug build ran out of a 2 MiB thread's stack.
+  The generated example tests run on a thread with a larger stack for the
+  same reason.
+- The streaming inference endpoints, `stream_completion` and
+  `chat_completion_unified`, answer with server-sent events, which their
+  responses tried to read as JSON. Their response is now the events, as a
+  `String`.
+- `inference::update::Request::body` takes JSON: only what changes, such as
+  `{"service_settings": {"api_key": …}}`. It took a whole
+  `InferenceEndpoint`, whose required `service` Elasticsearch refuses in an
+  update, so the typed call could never succeed. Elasticsearch also needs
+  the task type, from `task_type` or the body's `task_type`.
+- `inference::ElasticsearchServiceSettings::new` takes only the model:
+  `num_threads` is optional, since Elasticsearch refuses it with
+  `deployment_id`.
+- `helpers::Scan` reads each page with `allow_partial_search_results=false`,
+  so a page some shards couldn't answer ends the stream with an error,
+  where it came back with those shards' documents missing.
+- `oxsearch_ingest::PipelineConfig`, which text structure's responses
+  carry too, takes missing `processors` as empty, as other response types
+  do.
 
 ## [0.2.0] - 2026-10-20
 

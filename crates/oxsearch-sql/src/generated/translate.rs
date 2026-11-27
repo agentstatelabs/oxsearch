@@ -58,6 +58,10 @@ impl RequestBody {
 ///
 /// Translate an SQL search into a search API request containing Query DSL.
 /// It accepts the same request body parameters as the SQL search API, excluding `cursor`.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-translate)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -12,7 +12,14 @@
 //!
 //! `OXSEARCH_TEST_URL` (default `http://127.0.0.1:9200`) is where the cluster
 //! is, and `OXSEARCH_TEST_LICENSE` (`basic`, the default, or `trial`) is the
-//! license the tests expect it to run.
+//! license the tests expect it to run. The security tests need a cluster
+//! with security on, and skip otherwise:
+//!
+//! ```text
+//! export OXSEARCH_TEST_SECURITY=true OXSEARCH_TEST_PASSWORD=$(openssl rand -hex 16)
+//! scripts/es-fixture.sh up trial
+//! OXSEARCH_TEST_LICENSE=trial cargo test -p oxsearch-integration --test security -- --ignored
+//! ```
 
 pub mod fixtures;
 
@@ -32,9 +39,72 @@ pub type TestClient = Client<Recorded<ReqwestTransport>>;
 
 /// A transport that records each request's method and path in the file
 /// `OXSEARCH_COVERAGE` names, for the coverage report
-/// (`cargo run -p xtask -- coverage`).
+/// (`cargo run -p xtask -- coverage`), and the endpoint it was for when the
+/// client named it. Endpoints that share a URL, such as the inference API's
+/// `put` and its provider-specific ones, are told apart only by the name.
 #[derive(Clone, Debug)]
 pub struct Recorded<T>(pub T);
+
+/// The endpoint a client span is for, from its `otel.name`.
+struct EndpointName(String);
+
+/// Keeps each client span's endpoint, for [`Recorded`] to read.
+struct EndpointNames;
+
+impl<S> tracing_subscriber::Layer<S> for EndpointNames
+where
+    S: tracing::Subscriber + for<'a> tracing_subscriber::registry::LookupSpan<'a>,
+{
+    fn on_new_span(
+        &self,
+        attrs: &tracing::span::Attributes<'_>,
+        id: &tracing::span::Id,
+        ctx: tracing_subscriber::layer::Context<'_, S>,
+    ) {
+        struct Visit(Option<String>);
+        impl tracing::field::Visit for Visit {
+            fn record_str(&mut self, field: &tracing::field::Field, value: &str) {
+                if field.name() == "otel.name" {
+                    self.0 = Some(value.to_owned());
+                }
+            }
+            fn record_debug(&mut self, _: &tracing::field::Field, _: &dyn std::fmt::Debug) {}
+        }
+        if attrs.metadata().target() != "oxsearch" {
+            return;
+        }
+        let mut visit = Visit(None);
+        attrs.record(&mut visit);
+        if let (Some(name), Some(span)) = (visit.0, ctx.span(id)) {
+            span.extensions_mut().insert(EndpointName(name));
+        }
+    }
+}
+
+/// Collects the client spans' endpoints, unless something else already
+/// collects this process's spans.
+fn name_endpoints() {
+    use tracing_subscriber::layer::SubscriberExt;
+    static ONCE: std::sync::Once = std::sync::Once::new();
+    ONCE.call_once(|| {
+        let subscriber = tracing_subscriber::registry().with(EndpointNames);
+        let _ = tracing::subscriber::set_global_default(subscriber);
+    });
+}
+
+/// The endpoint the current client span is for, if the client named one.
+fn endpoint_name() -> Option<String> {
+    use tracing_subscriber::registry::LookupSpan;
+    tracing::Span::current()
+        .with_subscriber(|(id, dispatch)| {
+            let registry = dispatch.downcast_ref::<tracing_subscriber::Registry>()?;
+            let span = registry.span(id)?;
+            let name = span.extensions().get::<EndpointName>()?.0.clone();
+            Some(name)
+        })
+        .flatten()
+        .filter(|name| name != "elasticsearch")
+}
 
 impl<T: oxsearch_core::Transport> oxsearch_core::Transport for Recorded<T> {
     async fn send(
@@ -44,7 +114,10 @@ impl<T: oxsearch_core::Transport> oxsearch_core::Transport for Recorded<T> {
         if let Some(file) = std::env::var_os("OXSEARCH_COVERAGE") {
             use std::io::Write;
             let path = request.path_and_query.split('?').next().unwrap_or_default();
-            let line = format!("{} {path}\n", request.method.as_str());
+            let line = match endpoint_name() {
+                Some(name) => format!("{} {path} {name}\n", request.method.as_str()),
+                None => format!("{} {path}\n", request.method.as_str()),
+            };
             if let Ok(mut file) = std::fs::OpenOptions::new()
                 .create(true)
                 .append(true)
@@ -88,13 +161,33 @@ impl License {
 }
 
 /// A client for the cluster at `OXSEARCH_TEST_URL`, or
-/// `http://127.0.0.1:9200`.
+/// `http://127.0.0.1:9200`, as the elastic user when security is on.
 pub fn client() -> TestClient {
+    name_endpoints();
     let url =
         std::env::var("OXSEARCH_TEST_URL").unwrap_or_else(|_| "http://127.0.0.1:9200".to_owned());
+    let mut transport = ReqwestTransport::builder().node(url);
+    if let Some(password) = password() {
+        transport = transport.auth(oxsearch_core::auth::Auth::basic("elastic", password));
+    }
     Client::new(Recorded(
-        ReqwestTransport::new(&url).expect("OXSEARCH_TEST_URL is an http URL"),
+        transport.build().expect("OXSEARCH_TEST_URL is an http URL"),
     ))
+}
+
+/// Whether the cluster runs with security on (`OXSEARCH_TEST_SECURITY`,
+/// which `scripts/es-fixture.sh` reads too). The security tests need it;
+/// the others run either way.
+pub fn secured() -> bool {
+    std::env::var("OXSEARCH_TEST_SECURITY").as_deref() == Ok("true")
+}
+
+/// The elastic user's password, `OXSEARCH_TEST_PASSWORD`, when security is
+/// on.
+pub fn password() -> Option<String> {
+    std::env::var("OXSEARCH_TEST_PASSWORD")
+        .ok()
+        .filter(|p| secured() && !p.is_empty())
 }
 
 /// A document the tests index: text, a keyword, a dense vector and sparse
@@ -185,10 +278,12 @@ impl TestIndex {
 }
 
 /// A call to one of Elastic's models, sent again while the model is still
-/// deploying. On first use, a model can take longer to start than the 30 s
-/// Elasticsearch waits for it (408), and the deployment goes on meanwhile; a
-/// call during that time can be refused because the deployment is already
-/// starting (409).
+/// downloading or deploying. On first use, a model can take longer to start
+/// than the 30 s Elasticsearch waits for it (408), and the deployment goes
+/// on meanwhile; a call during that time can be refused because the model
+/// is still downloading (408) or the deployment is already starting (409).
+/// A cluster's first call can also find the index of endpoints still being
+/// made (500).
 pub async fn deployed<T, F>(mut call: impl FnMut() -> F) -> T
 where
     F: std::future::Future<Output = Result<T, oxsearch_core::Error>>,
@@ -201,6 +296,30 @@ where
             Err(Error::Elasticsearch(e))
                 if e.error_type() == Some("model_deployment_timeout_exception") =>
             {
+                e
+            }
+            // The model is still downloading, the first time it's used.
+            Err(Error::Elasticsearch(e))
+                if e.status == 408
+                    && e.causes().any(|c| {
+                        c.reason
+                            .as_deref()
+                            .is_some_and(|r| r.contains("download task is currently running"))
+                    }) =>
+            {
+                tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+                e
+            }
+            // Elasticsearch is making the index it keeps the endpoints in,
+            // which the first inference call of a cluster does.
+            Err(Error::Elasticsearch(e))
+                if e.causes().any(|c| {
+                    c.reason
+                        .as_deref()
+                        .is_some_and(|r| r.contains("missing shards") && r.contains("[.inference]"))
+                }) =>
+            {
+                tokio::time::sleep(std::time::Duration::from_secs(1)).await;
                 e
             }
             Err(Error::Conflict(e))
@@ -234,5 +353,28 @@ pub fn understood(error: &Error) -> bool {
             )
         ),
         _ => false,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn names_the_endpoint_a_client_span_is_for() {
+        name_endpoints();
+        assert_eq!(endpoint_name(), None);
+        let span = tracing::info_span!(
+            target: "oxsearch",
+            "elasticsearch request",
+            otel.name = "inference.put_openai"
+        );
+        let entered = span.enter();
+        assert_eq!(endpoint_name().as_deref(), Some("inference.put_openai"));
+        drop(entered);
+        // The escape hatches' requests have no endpoint.
+        let raw = tracing::info_span!(target: "oxsearch", "elasticsearch request", otel.name = "elasticsearch");
+        let _entered = raw.enter();
+        assert_eq!(endpoint_name(), None);
     }
 }

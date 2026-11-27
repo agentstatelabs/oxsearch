@@ -433,6 +433,10 @@ impl MappingStats {
 ///
 /// NOTE: When moving to another node, the shard-level statistics for a shard are cleared.
 /// Although the shard is no longer part of the node, that node retains any node-level statistics to which the shard contributed.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-indices-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

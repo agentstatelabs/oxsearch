@@ -223,6 +223,10 @@ impl RequestBody {
 ///
 /// Returns search results for an Event Query Language (EQL) query.
 /// EQL assumes each document in a data stream or index corresponds to an event.
+///
+/// **Availability:** Elasticsearch 7.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-eql-search)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

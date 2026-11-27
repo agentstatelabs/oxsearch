@@ -1,0 +1,10 @@
+7 exact, 2 normalized, 0 failing
+rollup.delete_job response DeleteRollupJobResponseExample1: exact
+rollup.get_jobs response GetRollupJobResponseExample1: exact
+rollup.get_rollup_caps response GetRollupCapabilitiesResponseExample1: normalized at /sensor-*/rollup_jobs/0/fields/timestamp/0/delay (dropped)
+rollup.get_rollup_index_caps response GetRollupIndexCapabilitiesResponseExample1: normalized at /sensor_rollup/rollup_jobs/0/fields/timestamp/0/delay (dropped)
+rollup.put_job request CreateRollupJobRequestExample1: exact
+rollup.put_job response CreateRollupJobResponseExample1: exact
+rollup.rollup_search request RollupSearchRequestExample1: exact
+rollup.rollup_search response RollupSearchResponseExample1: exact
+rollup.start_job response StartRollupJobResponseExample1: exact

@@ -194,6 +194,10 @@ impl RequestBody {
 /// The API uses several _contexts_, which control how scripts are run, what variables are available at runtime, and what the return type is.
 ///
 /// Each context requires a script, but additional parameters depend on the context you're using for that script.
+///
+/// **Availability:** Elasticsearch 6.3.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/reference/scripting-languages/painless/painless-api-examples)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

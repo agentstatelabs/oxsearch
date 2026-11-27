@@ -128,6 +128,10 @@ pub type NodeStatsMetrics =
 ///
 /// Get statistics for nodes in a cluster.
 /// By default, all stats are returned. You can limit the returned information by using metrics.
+///
+/// **Availability:** Elasticsearch; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-nodes-stats)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

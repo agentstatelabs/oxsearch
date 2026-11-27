@@ -4,6 +4,10 @@
 /// Get cluster info.
 ///
 /// Returns basic information about the cluster.
+///
+/// **Availability:** Elasticsearch 8.9.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-info)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

@@ -227,6 +227,9 @@ pub struct Request {
     pub query: Vec<Field>,
     /// The body, if it has one.
     pub body: Option<Ty>,
+    /// Query parameters always sent, by name: `format=json` for the cat
+    /// APIs, whose rows are read from their JSON form.
+    pub fixed: Vec<(&'static str, &'static str)>,
 }
 
 /// Where a specification type lives in Rust.
@@ -290,12 +293,136 @@ fn corrected(declaring: &TypeName, property: &str) -> Option<Ty> {
         ("nodes.info", "NodeInfoXpackMl", "use_auto_machine_memory_percent") => {
             Some(Ty::Prim("::std::string::String"))
         }
+        // Times in milliseconds since the Epoch, which outgrow an `integer`
+        // (`1700168400000`).
+        ("ml.flush_job", "Response", "last_finalized_bucket_end")
+        | ("ml._types", "ModelSnapshot", "latest_record_time_stamp" | "latest_result_time_stamp") => {
+            Some(Ty::Prim("i64"))
+        }
+        // The capacity autoscaling calls for, in bytes, which outgrows an
+        // `integer` past 2 GiB.
+        ("autoscaling.get_autoscaling_capacity", "AutoscalingResources", "storage" | "memory") => {
+            Some(Ty::Prim("i64"))
+        }
+        // How many times Watcher ran an action, which the specification
+        // types as a duration.
+        ("xpack.usage", "WatcherActionTotals", "total") => Some(Ty::Prim("i64")),
+        // A number when Kibana wrote the pipeline, as the specification's
+        // own example has it, and a string when its type was followed.
+        ("logstash._types", "PipelineMetadata", "version") => Some(Ty::Json),
         // A multi-valued column's cell is an array, which a field value
         // isn't.
         ("esql._types", "EsqlResult", "values") => {
             Some(Ty::Vec(Box::new(Ty::Vec(Box::new(Ty::Json)))))
         }
+        // Each feature reset and how that went, `{"feature_name": "security",
+        // "status": "SUCCESS"}`, which the specification types as the
+        // features listed, `{"name", "description"}`: no type in it fits.
+        ("features.reset_features", "Response", "features") => Some(Ty::Vec(Box::new(Ty::Json))),
+        // A numeric field's statistics, which are doubles: a mean like
+        // `387.0833333333333`, and a double field's bounds.
+        (
+            "text_structure._types",
+            "FieldStat",
+            "mean_value" | "median_value" | "max_value" | "min_value",
+        ) => Some(Ty::Prim("f64")),
         _ => None,
+    }
+}
+
+/// The name Elasticsearch writes for a property the specification
+/// misspells, by the declaring type's namespace and name.
+fn respelled(declaring: &TypeName, property: &str) -> Option<&'static str> {
+    match (
+        declaring.namespace.as_str(),
+        declaring.name.as_str(),
+        property,
+    ) {
+        // When the node's shutdown was asked for.
+        ("shutdown.get_node", "NodeShutdownStatus", "shutdown_startedmillis") => {
+            Some("shutdown_started_millis")
+        }
+        // Fleet's multi-search answers as the multi-search does.
+        ("fleet.msearch", "Response", "docs") => Some("responses"),
+        _ => None,
+    }
+}
+
+/// A request or response body the specification types as Elasticsearch
+/// doesn't take or send it, read and written as JSON.
+fn untyped(body: &TypeName) -> bool {
+    matches!(
+        (body.namespace.as_str(), body.name.as_str()),
+        // `{"profiling", "resource_management", "resources"}`, which the
+        // specification types as `{"operation_mode"}`.
+        ("profiling.status", "Response")
+        // Only what changes: the specification types it as a whole endpoint,
+        // whose required `service` Elasticsearch refuses in an update.
+        | ("inference.update", "Request")
+    )
+}
+
+/// A property the specification marks required that Elasticsearch doesn't
+/// always take, by the declaring type's namespace and name.
+fn relaxed(declaring: &TypeName, property: &str) -> bool {
+    matches!(
+        (
+            declaring.namespace.as_str(),
+            declaring.name.as_str(),
+            property,
+        ),
+        // Refused with `deployment_id`, which names a deployment that has
+        // its threads already.
+        (
+            "inference._types",
+            "ElasticsearchServiceSettings",
+            "num_threads"
+        )
+    )
+}
+
+/// An enum Elasticsearch writes in upper case, though the specification
+/// lists its values in lower case: each member reads either way, and is
+/// written as listed, which Elasticsearch takes too.
+fn upper_cased(name: &TypeName) -> bool {
+    matches!(
+        (name.namespace.as_str(), name.name.as_str()),
+        // A node shutdown's type and progress, `RESTART` and `IN_PROGRESS`.
+        ("shutdown.get_node", "ShutdownStatus" | "ShutdownType")
+    )
+}
+
+/// A property the specification types as another area's type where its own
+/// area has the right one, by the type's namespace and name.
+fn retargeted(declaring: &TypeName, property: &str) -> Option<(&'static str, &'static str)> {
+    match (
+        declaring.namespace.as_str(),
+        declaring.name.as_str(),
+        property,
+    ) {
+        // The transform's source, as `transform.get_transform` returns it,
+        // rather than a reindex request's: reading it from a response would
+        // make the reindex source's required index optional.
+        ("transform.update_transform", "Response", "source") => {
+            Some(("transform._types", "Source"))
+        }
+        // The index Fleet's searches and checkpoints read, by its name or an
+        // alias's: both are strings, which a union of the two can't tell
+        // apart, and the other APIs take as one.
+        ("fleet.global_checkpoints" | "fleet.msearch" | "fleet.search", "Request", "index") => {
+            Some(("_types", "IndexName"))
+        }
+        _ => None,
+    }
+}
+
+/// A byte count the specification types as an `integer`: generated as an
+/// `i64`, as most byte counts are, since a node's memory outgrows 32 bits
+/// (`ml.get_memory_stats` reports 8 GB as `8317267968`).
+fn widened(property: &str, ty: Ty) -> Ty {
+    match ty {
+        Ty::Prim("i32") if property.ends_with("_in_bytes") => Ty::Prim("i64"),
+        ty => ty,
     }
 }
 
@@ -385,7 +512,34 @@ impl<'g> Ir<'g> {
         ir.propagate(AGGREGATIONS);
         ir.tolerate_responses();
         ir.choose_boxes();
+        ir.box_search_bodies();
         Ok(ir)
+    }
+
+    /// Boxes a whole search request's body where another area's type holds
+    /// it, such as a watch's search input. It's 11 KB, and held by value
+    /// five types deep, reading a watch in a debug build takes more than a
+    /// 2 MiB thread's stack. The search crate's own types hold it by value,
+    /// as they always have.
+    fn box_search_bodies(&mut self) {
+        let name = TypeName {
+            namespace: "_global.search._types".to_owned(),
+            name: "SearchRequestBody".to_owned(),
+        };
+        let Some(&body) = self.graph.find(&name).and_then(|i| self.item_of.get(&i)) else {
+            return;
+        };
+        let home = self.items[body].krate.clone();
+        for (from, out) in self.by_value().into_iter().enumerate() {
+            if self.items[from].krate == home {
+                continue;
+            }
+            for (to, position) in out {
+                if to == body {
+                    self.boxed.insert((from, to, position));
+                }
+            }
+        }
     }
 
     fn location(&self, i: usize) -> &Location {
@@ -410,6 +564,7 @@ impl<'g> Ir<'g> {
             },
             TypeDefinition::Enum(t) => {
                 let mut used = BTreeSet::new();
+                let upper = upper_cased(&t.name);
                 let members = t
                     .members
                     .iter()
@@ -418,10 +573,14 @@ impl<'g> Ir<'g> {
                         if ident == "Raw" {
                             ident = "RawValue".to_owned();
                         }
+                        let mut aliases = m.aliases.clone();
+                        if upper {
+                            aliases.push(m.name.to_uppercase());
+                        }
                         EnumMember {
                             ident: unique(&mut used, ident),
                             wire: m.name.clone(),
-                            aliases: m.aliases.clone(),
+                            aliases,
                             doc: m.description.clone(),
                         }
                     })
@@ -473,6 +632,7 @@ impl<'g> Ir<'g> {
                 let query = fields(query, self)?;
                 let body = match &t.body {
                     Body::NoBody {} => None,
+                    _ if untyped(&t.name) => Some(Ty::Json),
                     Body::Value { value, .. } => Some(self.ty(
                         &Ctx {
                             field: "body",
@@ -522,7 +682,20 @@ impl<'g> Ir<'g> {
                     ident: location.ident,
                     doc: t.description.clone(),
                     generics: t.generics.iter().map(|g| g.name.clone()).collect(),
-                    kind: ItemKind::Request(Request { path, query, body }),
+                    kind: ItemKind::Request(Request {
+                        path,
+                        query,
+                        body,
+                        fixed: if t
+                            .attached_behaviors
+                            .iter()
+                            .any(|b| b == "CommonCatQueryParameters")
+                        {
+                            vec![("format", "json")]
+                        } else {
+                            Vec::new()
+                        },
+                    }),
                 }
             }
             TypeDefinition::Response(t) => {
@@ -540,6 +713,7 @@ impl<'g> Ir<'g> {
                     _ if self.text.contains(&i) => {
                         ItemKind::Newtype(Ty::Prim("::std::string::String"))
                     }
+                    _ if untyped(&t.name) => ItemKind::Newtype(Ty::Json),
                     Body::Value { value, .. } => ItemKind::Newtype(self.ty(
                         &Ctx {
                             field: "body",
@@ -592,7 +766,16 @@ impl<'g> Ir<'g> {
         p: &Property,
         names: &mut FieldNames,
     ) -> Result<Field, Error> {
-        let mut ident = snake(&p.name);
+        let declaring = self.graph.name(ctx.declaring);
+        // A misspelt property goes by the name Elasticsearch writes, and
+        // reads the specification's too.
+        let respelt = respelled(declaring, &p.name);
+        let wire = respelt.unwrap_or(&p.name);
+        let mut aliases = p.aliases.clone();
+        if respelt.is_some() {
+            aliases.push(p.name.clone());
+        }
+        let mut ident = snake(wire);
         // An underscore property whose plain name another one takes keeps
         // its underscore, whichever comes first: `_nodes` beside `nodes`.
         if p.name.starts_with('_') && (names.plain.contains(&ident) || names.used.contains(&ident))
@@ -600,19 +783,29 @@ impl<'g> Ir<'g> {
             ident = format!("_{ident}");
         }
         let used = &mut names.used;
-        let ty = match corrected(self.graph.name(ctx.declaring), &p.name) {
-            Some(ty) => ty,
-            None => self.ty(ctx, &p.value)?,
+        let retarget = retargeted(declaring, &p.name).and_then(|(namespace, name)| {
+            self.graph.find(&TypeName {
+                namespace: namespace.to_owned(),
+                name: name.to_owned(),
+            })
+        });
+        let ty = match (corrected(declaring, &p.name), retarget) {
+            (Some(ty), _) => ty,
+            (None, Some(target)) => Ty::Named {
+                target,
+                args: Vec::new(),
+            },
+            (None, None) => widened(&p.name, self.ty(ctx, &p.value)?),
         };
         Ok(Field {
-            wire: p.name.clone(),
+            wire: wire.to_owned(),
             ident: unique(used, ident),
             ty,
-            required: p.required,
-            optional: !p.required,
+            required: p.required && !relaxed(declaring, &p.name),
+            optional: !p.required || relaxed(declaring, &p.name),
             defaulted: false,
             doc: p.description.clone(),
-            aliases: p.aliases.clone(),
+            aliases,
         })
     }
 

@@ -4,6 +4,10 @@
 /// Delete a lifecycle policy.
 ///
 /// You cannot delete policies that are currently in use. If the policy is being used to manage any indices, the request fails and returns an error.
+///
+/// **Availability:** Elasticsearch 6.6.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-ilm-delete-lifecycle)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

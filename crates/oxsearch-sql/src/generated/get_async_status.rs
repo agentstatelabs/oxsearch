@@ -4,6 +4,10 @@
 /// Get the async SQL search status.
 ///
 /// Get the current status of an async SQL search or a stored synchronous SQL search.
+///
+/// **Availability:** Elasticsearch 7.15.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-sql-get-async-status)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

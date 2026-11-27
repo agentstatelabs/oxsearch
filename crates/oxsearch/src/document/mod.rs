@@ -37,14 +37,31 @@
 //! date and time types `date`, and a struct that derives `Document` an
 //! object. `#[id]` and `#[routing]` mark the fields that give a document's
 //! id and routing. serde's `rename`, `rename_all` and `skip` are followed.
+//!
+//! [`Index::update`] changes part of a document, with a [`Patch`] of its
+//! fields or a script, and [`Index::bulk`] sends several writes in one
+//! request:
+//!
+//! ```ignore
+//! articles.update("1", Patch::new().set(Article::DRAFT, false)).await?;
+//! let report = articles.bulk().put_all(&new).delete("9").send().await?;
+//! ```
+//!
+//! A document with a `#[routing]` field lives on the shard its routing
+//! names. Writes take the routing from the document; reads and deletes by
+//! id, which have none, take it from [`Index::routed`].
 
+mod bulk;
 mod field;
 mod index;
+mod update;
 
+pub use bulk::{Bulk, BulkReport};
 pub use field::{Field, kind};
 pub use index::{Drift, Index, Indexes, MappingReport, Version, Versioned, Written};
 #[cfg(feature = "derive")]
 pub use oxsearch_derive::Document;
+pub use update::{Applied, Change, Patch, Update};
 
 use oxsearch_core::shapes::IndexMap;
 use oxsearch_mapping::{

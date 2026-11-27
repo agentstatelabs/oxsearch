@@ -30,6 +30,10 @@ impl RequestBody {}
 /// It is advised to use one or the other in query rulesets, to avoid errors.
 /// Additionally, pinned queries have a maximum limit of 100 pinned hits.
 /// If multiple matching rules pin more than 100 documents, only the first 100 documents are pinned in the order they are specified in the ruleset.
+///
+/// **Availability:** Elasticsearch 8.10.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-query-rules-put-ruleset)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

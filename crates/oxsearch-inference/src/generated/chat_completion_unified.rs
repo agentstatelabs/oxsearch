@@ -10,6 +10,10 @@
 /// The Chat completion inference API and the Stream inference API differ in their response structure and capabilities.
 /// The Chat completion inference API provides more comprehensive customization options through more fields and function calling support.
 /// To determine whether a given inference service supports this task type, please see the page for that service.
+///
+/// **Availability:** Elasticsearch 8.18.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-inference-unified-inference)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {
@@ -49,17 +53,17 @@ impl Request {
 
 #[derive(Clone, Debug, PartialEq, ::serde::Serialize, ::serde::Deserialize)]
 #[serde(transparent)]
-pub struct Response(pub ::oxsearch_core::StreamResult);
+pub struct Response(pub ::std::string::String);
 
 impl ::core::ops::Deref for Response {
-    type Target = ::oxsearch_core::StreamResult;
-    fn deref(&self) -> &::oxsearch_core::StreamResult {
+    type Target = ::std::string::String;
+    fn deref(&self) -> &::std::string::String {
         &self.0
     }
 }
 
 impl ::core::ops::DerefMut for Response {
-    fn deref_mut(&mut self) -> &mut ::oxsearch_core::StreamResult {
+    fn deref_mut(&mut self) -> &mut ::std::string::String {
         &mut self.0
     }
 }
@@ -110,5 +114,9 @@ impl ::oxsearch_core::Endpoint for Request {
             .as_ref()
             .map(|body| ::oxsearch_core::__private::json_body(body))
             .transpose()
+    }
+
+    fn text_response(&self) -> bool {
+        true
     }
 }

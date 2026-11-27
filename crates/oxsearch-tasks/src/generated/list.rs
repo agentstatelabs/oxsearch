@@ -65,6 +65,10 @@
 /// In this example, `X-Opaque-Id: 123456` is the ID as a part of the response header.
 /// The `X-Opaque-Id` in the task `headers` is the ID for the task that was initiated by the REST request.
 /// The `X-Opaque-Id` in the children `headers` is the child task of the task that was initiated by the REST request.
+///
+/// **Availability:** Elasticsearch 2.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/group/endpoint-tasks)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

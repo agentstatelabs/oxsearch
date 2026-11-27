@@ -846,7 +846,7 @@ pub struct NodeInfoOSCPU {
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub cache_size: ::core::option::Option<::std::string::String>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
-    pub cache_size_in_bytes: ::core::option::Option<i32>,
+    pub cache_size_in_bytes: ::core::option::Option<i64>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
     pub cores_per_socket: ::core::option::Option<i32>,
     #[serde(skip_serializing_if = "::core::option::Option::is_none")]
@@ -865,7 +865,7 @@ impl NodeInfoOSCPU {
     /// A `NodeInfoOSCPU` with its required properties set.
     pub fn new(
         cache_size: impl ::core::convert::Into<::std::string::String>,
-        cache_size_in_bytes: i32,
+        cache_size_in_bytes: i64,
         cores_per_socket: i32,
         mhz: i32,
         model: impl ::core::convert::Into<::std::string::String>,
@@ -3052,6 +3052,10 @@ impl RemoveClusterServer {}
 /// Get node information.
 ///
 /// By default, the API returns all attributes and core settings for cluster nodes.
+///
+/// **Availability:** Elasticsearch 1.3.0 and later; on Elastic Cloud Serverless, for Elastic's own use only.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-nodes-info)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

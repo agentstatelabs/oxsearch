@@ -201,6 +201,10 @@ impl RequestBody {
 /// Asynchronously run an ES|QL (Elasticsearch query language) query, monitor its progress, and retrieve results when they become available.
 ///
 /// The API accepts the same parameters and request body as the synchronous query API, along with additional async related properties.
+///
+/// **Availability:** Elasticsearch 8.13.0 and later; not on Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-esql-async-query)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

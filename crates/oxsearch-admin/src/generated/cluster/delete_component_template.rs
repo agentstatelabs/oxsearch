@@ -4,6 +4,10 @@
 /// Delete component templates.
 ///
 /// Component templates are building blocks for constructing index templates that specify index mappings, settings, and aliases.
+///
+/// **Availability:** Elasticsearch 7.8.0 and later, and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-cluster-put-component-template)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {

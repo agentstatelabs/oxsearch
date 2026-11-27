@@ -135,6 +135,10 @@ impl RequestBody {
 /// The operation is broadcast across all shards.
 /// For each shard ID group, a replica is chosen and the search is run against it.
 /// This means that replicas increase the scalability of the count.
+///
+/// **Availability:** Elasticsearch and Elastic Cloud Serverless.
+///
+/// [Elasticsearch's documentation](https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-count)
 #[derive(Clone, Debug, PartialEq)]
 #[non_exhaustive]
 pub struct Request {
